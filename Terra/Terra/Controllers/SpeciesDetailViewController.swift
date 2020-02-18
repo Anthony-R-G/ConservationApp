@@ -14,6 +14,24 @@ class SpeciesDetailViewController: UIViewController {
     var currentSpeciesNarrative: SpeciesNarrative!
     
     
+    lazy var basicInfoView: UIView = {
+        let view = UIView()
+        
+        return view
+    }()
+    
+    
+    lazy var conservationStatusLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Threatened"
+        label.textAlignment = .center
+        label.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        label.backgroundColor = #colorLiteral(red: 0.6787196398, green: 0.2409698367, blue: 0.261569947, alpha: 0.8461579623)
+        label.layer.cornerRadius = 10
+        label.clipsToBounds = true
+        return label
+    }()
+    
     lazy var speciesCommonNameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 55)
@@ -27,12 +45,40 @@ class SpeciesDetailViewController: UIViewController {
     lazy var speciesScientificNameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 17)
-        label.text = "- Loxodonta africana"
+        label.text = "— Loxodonta africana"
         label.textColor = .white
         label.backgroundColor = .clear
         return label
     }()
     
+    lazy var numbersStackView: UIStackView = {
+          let stackView = UIStackView(arrangedSubviews: [numbersLabel, numbersInfoLabel])
+          stackView.alignment = .fill
+          stackView.distribution = .equalSpacing
+          stackView.spacing = 2
+          stackView.axis = .vertical
+          return stackView
+      }()
+    
+    lazy var numbersLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        label.text = "Numbers"
+        label.textAlignment = .left
+        label.font = UIFont.systemFont(ofSize: 18)
+        return label
+    }()
+    
+    lazy var numbersInfoLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        label.text = "~400,000"
+        label.textAlignment = .left
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        return label
+        
+    }()
+
     
     lazy var speciesPopulationNarrativeTextView: UITextView = {
         let tv = UITextView()
@@ -215,10 +261,6 @@ class SpeciesDetailViewController: UIViewController {
         return label
     }()
     
-    
-    
-    
-    
     private func setUpUI(){
         speciesCommonNameLabel.text = currentSpecies.main_common_name
         speciesPopulationNarrativeTextView.text = currentSpeciesNarrative.population.withoutHtml
@@ -248,6 +290,11 @@ class SpeciesDetailViewController: UIViewController {
         backgroundImage.image = #imageLiteral(resourceName: "elephantDetailVC")
         backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
         self.view.insertSubview(backgroundImage, at: 0)
+        
+        let backgroundOverlay = GradientView(frame: UIScreen.main.bounds)
+        backgroundOverlay.startColor = .clear
+        backgroundOverlay.endColor = #colorLiteral(red: 0.06859237701, green: 0.08213501424, blue: 0.2409383953, alpha: 0.8456228596)
+        self.view.insertSubview(backgroundOverlay, at: 1)
     }
 }
 
@@ -258,9 +305,11 @@ extension SpeciesDetailViewController {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         
-        [speciesCommonNameLabel, speciesScientificNameLabel ,kingdomLabel, kingdomInfoLabel, summaryView].forEach{contentView.addSubview($0)}
+        [basicInfoView, summaryView].forEach{contentView.addSubview($0)}
         
-        [speciesCommonNameLabel, speciesPopulationNarrativeTextView, kingdomStackView, summaryView, summaryTitleLabel, speciesScientificNameLabel, taxonomyTitleLabel, classStackView, familyStackView, phylumStackView, orderStackView, genusStackView].forEach{$0.translatesAutoresizingMaskIntoConstraints = false}
+        [basicInfoView, speciesCommonNameLabel, speciesPopulationNarrativeTextView, kingdomStackView, summaryView, summaryTitleLabel, speciesScientificNameLabel, taxonomyTitleLabel, classStackView, familyStackView, phylumStackView, orderStackView, genusStackView, conservationStatusLabel, numbersStackView].forEach{$0.translatesAutoresizingMaskIntoConstraints = false}
+        
+        [speciesCommonNameLabel, speciesScientificNameLabel, conservationStatusLabel, numbersStackView].forEach{basicInfoView.addSubview($0)}
         
         [summaryTitleLabel, speciesPopulationNarrativeTextView, taxonomyTitleLabel, kingdomStackView, classStackView, familyStackView, phylumStackView, orderStackView, genusStackView].forEach{summaryView.addSubview($0)}
         
@@ -276,6 +325,38 @@ extension SpeciesDetailViewController {
         setPhylumStackViewConstraints()
         setOrderStackViewConstraints()
         setGenusStackViewConstraints()
+        setConservationStatusLabelConstraints()
+        setBasicInfoViewConstraints()
+        setNumbersStackConstraints()
+    }
+    
+    private func setBasicInfoViewConstraints() {
+        NSLayoutConstraint.activate([
+            basicInfoView.leadingAnchor.constraint(equalTo: summaryView.leadingAnchor),
+            basicInfoView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            basicInfoView.heightAnchor.constraint(equalToConstant: 450),
+            basicInfoView.widthAnchor.constraint(equalToConstant: 350)
+            
+        ])
+    }
+    
+    private func setConservationStatusLabelConstraints() {
+        NSLayoutConstraint.activate([
+            conservationStatusLabel.leadingAnchor.constraint(equalTo: speciesCommonNameLabel.leadingAnchor),
+            conservationStatusLabel.bottomAnchor.constraint(equalTo: speciesCommonNameLabel.topAnchor, constant: -10),
+            conservationStatusLabel.heightAnchor.constraint(equalToConstant: 30),
+            conservationStatusLabel.widthAnchor.constraint(equalToConstant: 120)
+        ])
+    }
+    
+    private func setNumbersStackConstraints(){
+        NSLayoutConstraint.activate([
+            numbersStackView.topAnchor.constraint(equalTo: speciesScientificNameLabel.bottomAnchor, constant: 15),
+            numbersStackView.leadingAnchor.constraint(equalTo: summaryView.leadingAnchor),
+            numbersStackView.heightAnchor.constraint(equalToConstant: 50),
+            numbersStackView.widthAnchor.constraint(equalToConstant: 150)
+        
+        ])
     }
     
     private func setSummaryViewConstraints(){
@@ -308,7 +389,7 @@ extension SpeciesDetailViewController {
     private func setSpeciesCommonNameLabelConstraints(){
         NSLayoutConstraint.activate([
             speciesCommonNameLabel.leadingAnchor.constraint(equalTo: summaryView.leadingAnchor),
-            speciesCommonNameLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: 0),
+            speciesCommonNameLabel.centerYAnchor.constraint(equalTo: basicInfoView.centerYAnchor, constant: 0),
             speciesCommonNameLabel.widthAnchor.constraint(equalToConstant: 300),
             speciesCommonNameLabel.heightAnchor.constraint(equalToConstant: 170)
         ])
@@ -440,6 +521,6 @@ extension SpeciesDetailViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offset = scrollView.contentOffset.y
         let scale = min(max(1.0 - offset / 200.0, 0.7), 1.0)
-        speciesCommonNameLabel.transform = CGAffineTransform(scaleX: scale, y: scale)
+        basicInfoView.transform = CGAffineTransform(scaleX: scale, y: scale)
     }
 }
