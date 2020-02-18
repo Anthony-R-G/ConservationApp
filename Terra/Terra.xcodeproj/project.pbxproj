@@ -3,19 +3,27 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		19776F61E160979180B663A6 /* Pods_Terra.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE42C1881D1D06662F3B9FCB /* Pods_Terra.framework */; };
+		1B62D350359E3EC3E7DCD905 /* Pods_TerraTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7A593764653FD2CA6FCF609 /* Pods_TerraTests.framework */; };
+		97452E4623E1E6C7005636E0 /* SpeciesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97452E4523E1E6C7005636E0 /* SpeciesCollectionViewCell.swift */; };
+		97452E4823E1EEE9005636E0 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97452E4723E1EEE9005636E0 /* GradientView.swift */; };
+		978E5CF223FB5CBC007BCD25 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 978E5CF123FB5CBC007BCD25 /* GoogleService-Info.plist */; };
+		979492E623F465BF00B636A4 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979492E523F465BF00B636A4 /* Secrets.swift */; };
+		979492EE23F46AE500B636A4 /* SpeciesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979492ED23F46AE500B636A4 /* SpeciesData.swift */; };
+		979492F023F46DBF00B636A4 /* Firebase in Resources */ = {isa = PBXBuildFile; fileRef = 979492EF23F46DBF00B636A4 /* Firebase */; };
 		979C191423DE43E900651B2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979C191323DE43E900651B2B /* AppDelegate.swift */; };
 		979C191623DE43E900651B2B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979C191523DE43E900651B2B /* SceneDelegate.swift */; };
 		979C191823DE43E900651B2B /* SpeciesDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979C191723DE43E900651B2B /* SpeciesDetailViewController.swift */; };
-		979C191B23DE43E900651B2B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 979C191923DE43E900651B2B /* Main.storyboard */; };
 		979C191D23DE43EF00651B2B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 979C191C23DE43EF00651B2B /* Assets.xcassets */; };
 		979C192023DE43EF00651B2B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 979C191E23DE43EF00651B2B /* LaunchScreen.storyboard */; };
 		979C192B23DE43EF00651B2B /* TerraTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979C192A23DE43EF00651B2B /* TerraTests.swift */; };
 		979C193623DE799600651B2B /* SpeciesInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979C193523DE799600651B2B /* SpeciesInfo.swift */; };
 		97BF745023DE870F0058F2D7 /* SpeciesNarrative.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BF744F23DE870F0058F2D7 /* SpeciesNarrative.swift */; };
+		97BF745323DF42F90058F2D7 /* SpeciesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BF745223DF42F90058F2D7 /* SpeciesListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,11 +37,19 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		42D0D51BD52A7CAD33C1E43E /* Pods-Terra.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Terra.debug.xcconfig"; path = "Target Support Files/Pods-Terra/Pods-Terra.debug.xcconfig"; sourceTree = "<group>"; };
+		92CD523210206FB0D28007E5 /* Pods-TerraTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TerraTests.debug.xcconfig"; path = "Target Support Files/Pods-TerraTests/Pods-TerraTests.debug.xcconfig"; sourceTree = "<group>"; };
+		94CD7C78C9210265A4DBE952 /* Pods-Terra.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Terra.release.xcconfig"; path = "Target Support Files/Pods-Terra/Pods-Terra.release.xcconfig"; sourceTree = "<group>"; };
+		97452E4523E1E6C7005636E0 /* SpeciesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesCollectionViewCell.swift; sourceTree = "<group>"; };
+		97452E4723E1EEE9005636E0 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		978E5CF123FB5CBC007BCD25 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		979492E523F465BF00B636A4 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
+		979492ED23F46AE500B636A4 /* SpeciesData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesData.swift; sourceTree = "<group>"; };
+		979492EF23F46DBF00B636A4 /* Firebase */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Firebase; sourceTree = "<group>"; };
 		979C191023DE43E900651B2B /* Terra.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Terra.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		979C191323DE43E900651B2B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		979C191523DE43E900651B2B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		979C191723DE43E900651B2B /* SpeciesDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesDetailViewController.swift; sourceTree = "<group>"; };
-		979C191A23DE43E900651B2B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		979C191C23DE43EF00651B2B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		979C191F23DE43EF00651B2B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		979C192123DE43EF00651B2B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -42,6 +58,10 @@
 		979C192C23DE43EF00651B2B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		979C193523DE799600651B2B /* SpeciesInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesInfo.swift; sourceTree = "<group>"; };
 		97BF744F23DE870F0058F2D7 /* SpeciesNarrative.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesNarrative.swift; sourceTree = "<group>"; };
+		97BF745223DF42F90058F2D7 /* SpeciesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesListViewController.swift; sourceTree = "<group>"; };
+		B8F91504C32E7A6A00F78D89 /* Pods-TerraTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TerraTests.release.xcconfig"; path = "Target Support Files/Pods-TerraTests/Pods-TerraTests.release.xcconfig"; sourceTree = "<group>"; };
+		C7A593764653FD2CA6FCF609 /* Pods_TerraTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TerraTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE42C1881D1D06662F3B9FCB /* Pods_Terra.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Terra.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19776F61E160979180B663A6 /* Pods_Terra.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,18 +77,49 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B62D350359E3EC3E7DCD905 /* Pods_TerraTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		430479B2C24205F0CF6AC46C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CE42C1881D1D06662F3B9FCB /* Pods_Terra.framework */,
+				C7A593764653FD2CA6FCF609 /* Pods_TerraTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		97452E4423E1E6A9005636E0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				97452E4523E1E6C7005636E0 /* SpeciesCollectionViewCell.swift */,
+				97452E4723E1EEE9005636E0 /* GradientView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		979492EC23F46ACE00B636A4 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				979C193523DE799600651B2B /* SpeciesInfo.swift */,
+				97BF744F23DE870F0058F2D7 /* SpeciesNarrative.swift */,
+				979492ED23F46AE500B636A4 /* SpeciesData.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		979C190723DE43E900651B2B = {
 			isa = PBXGroup;
 			children = (
 				979C191223DE43E900651B2B /* Terra */,
 				979C192923DE43EF00651B2B /* TerraTests */,
 				979C191123DE43E900651B2B /* Products */,
+				A579569CDD33F6897BA63C97 /* Pods */,
+				430479B2C24205F0CF6AC46C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -83,15 +135,17 @@
 		979C191223DE43E900651B2B /* Terra */ = {
 			isa = PBXGroup;
 			children = (
-				979C193523DE799600651B2B /* SpeciesInfo.swift */,
-				97BF744F23DE870F0058F2D7 /* SpeciesNarrative.swift */,
+				979492EF23F46DBF00B636A4 /* Firebase */,
+				97452E4423E1E6A9005636E0 /* Views */,
+				979492EC23F46ACE00B636A4 /* Models */,
 				979C191323DE43E900651B2B /* AppDelegate.swift */,
 				979C191523DE43E900651B2B /* SceneDelegate.swift */,
-				979C191723DE43E900651B2B /* SpeciesDetailViewController.swift */,
-				979C191923DE43E900651B2B /* Main.storyboard */,
+				97BF745123DF42CC0058F2D7 /* Controllers */,
 				979C191C23DE43EF00651B2B /* Assets.xcassets */,
 				979C191E23DE43EF00651B2B /* LaunchScreen.storyboard */,
+				978E5CF123FB5CBC007BCD25 /* GoogleService-Info.plist */,
 				979C192123DE43EF00651B2B /* Info.plist */,
+				979492E523F465BF00B636A4 /* Secrets.swift */,
 			);
 			path = Terra;
 			sourceTree = "<group>";
@@ -105,6 +159,26 @@
 			path = TerraTests;
 			sourceTree = "<group>";
 		};
+		97BF745123DF42CC0058F2D7 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				979C191723DE43E900651B2B /* SpeciesDetailViewController.swift */,
+				97BF745223DF42F90058F2D7 /* SpeciesListViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		A579569CDD33F6897BA63C97 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				42D0D51BD52A7CAD33C1E43E /* Pods-Terra.debug.xcconfig */,
+				94CD7C78C9210265A4DBE952 /* Pods-Terra.release.xcconfig */,
+				92CD523210206FB0D28007E5 /* Pods-TerraTests.debug.xcconfig */,
+				B8F91504C32E7A6A00F78D89 /* Pods-TerraTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -112,9 +186,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 979C192F23DE43EF00651B2B /* Build configuration list for PBXNativeTarget "Terra" */;
 			buildPhases = (
+				044B1FC076761B2A3B48DFAB /* [CP] Check Pods Manifest.lock */,
 				979C190C23DE43E900651B2B /* Sources */,
 				979C190D23DE43E900651B2B /* Frameworks */,
 				979C190E23DE43E900651B2B /* Resources */,
+				6C6914D806A68B8C1818F529 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -129,6 +205,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 979C193223DE43EF00651B2B /* Build configuration list for PBXNativeTarget "TerraTests" */;
 			buildPhases = (
+				08CCC0FB3D8583416AD7C025 /* [CP] Check Pods Manifest.lock */,
 				979C192223DE43EF00651B2B /* Sources */,
 				979C192323DE43EF00651B2B /* Frameworks */,
 				979C192423DE43EF00651B2B /* Resources */,
@@ -187,8 +264,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				979C192023DE43EF00651B2B /* LaunchScreen.storyboard in Resources */,
+				978E5CF223FB5CBC007BCD25 /* GoogleService-Info.plist in Resources */,
 				979C191D23DE43EF00651B2B /* Assets.xcassets in Resources */,
-				979C191B23DE43E900651B2B /* Main.storyboard in Resources */,
+				979492F023F46DBF00B636A4 /* Firebase in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,15 +279,84 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		044B1FC076761B2A3B48DFAB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Terra-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		08CCC0FB3D8583416AD7C025 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TerraTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6C6914D806A68B8C1818F529 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Terra/Pods-Terra-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Terra/Pods-Terra-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Terra/Pods-Terra-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		979C190C23DE43E900651B2B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				979C191823DE43E900651B2B /* SpeciesDetailViewController.swift in Sources */,
+				979492E623F465BF00B636A4 /* Secrets.swift in Sources */,
+				97452E4623E1E6C7005636E0 /* SpeciesCollectionViewCell.swift in Sources */,
 				979C191423DE43E900651B2B /* AppDelegate.swift in Sources */,
 				97BF745023DE870F0058F2D7 /* SpeciesNarrative.swift in Sources */,
+				979492EE23F46AE500B636A4 /* SpeciesData.swift in Sources */,
+				97BF745323DF42F90058F2D7 /* SpeciesListViewController.swift in Sources */,
 				979C191623DE43E900651B2B /* SceneDelegate.swift in Sources */,
+				97452E4823E1EEE9005636E0 /* GradientView.swift in Sources */,
 				979C193623DE799600651B2B /* SpeciesInfo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -233,14 +380,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		979C191923DE43E900651B2B /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				979C191A23DE43E900651B2B /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		979C191E23DE43EF00651B2B /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -368,6 +507,7 @@
 		};
 		979C193023DE43EF00651B2B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 42D0D51BD52A7CAD33C1E43E /* Pods-Terra.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -386,6 +526,7 @@
 		};
 		979C193123DE43EF00651B2B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 94CD7C78C9210265A4DBE952 /* Pods-Terra.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -404,6 +545,7 @@
 		};
 		979C193323DE43EF00651B2B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 92CD523210206FB0D28007E5 /* Pods-TerraTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -426,6 +568,7 @@
 		};
 		979C193423DE43EF00651B2B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B8F91504C32E7A6A00F78D89 /* Pods-TerraTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
