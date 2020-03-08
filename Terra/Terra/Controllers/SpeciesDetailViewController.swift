@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class SpeciesDetailViewController: UIViewController {
     
@@ -264,6 +265,17 @@ class SpeciesDetailViewController: UIViewController {
         return label
     }()
     
+    private func showWebBrowser(link: URL){
+           let config = SFSafariViewController.Configuration()
+           config.entersReaderIfAvailable = true
+           let safariVC = SFSafariViewController(url: link, configuration: config)
+           present(safariVC, animated: true)
+       }
+    
+//    private func eventLinkButtonPressed(_ sender: UIButton) {
+//         showWebBrowser(link: URL(string: currentSpecies.donationLink)!)
+//    }
+    
     override var prefersStatusBarHidden: Bool {
         return true
     }
@@ -285,7 +297,6 @@ class SpeciesDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .darkGray
-        currentSpecies = Species.detailTestData
         setUpUIFromSpecies()
         setConstraints()
         

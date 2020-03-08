@@ -22,8 +22,9 @@ class SpeciesListViewController: UIViewController {
     }()
     
     
-    var testData = ["Elephant", "Lion", "Gorilla", "XYZ"]
-    var testImages: [UIImage] = [#imageLiteral(resourceName: "elephantCellImage"),#imageLiteral(resourceName: "lionCellImage"),#imageLiteral(resourceName: "gorillaCellImage"),#imageLiteral(resourceName: "leopardCellImage")]
+    let animalData = Species.listTestData
+    
+    
      lazy var myView: UIView = UILabel()
     
     
@@ -57,16 +58,16 @@ extension SpeciesListViewController {
 
 extension SpeciesListViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return testData.count
+        return animalData.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let speciesCell = collectionView.dequeueReusableCell(withReuseIdentifier: "speciesCell", for: indexPath) as! SpeciesCollectionViewCell
-        let specificItem = testData[indexPath.row]
-        let specificImage = testImages[indexPath.row]
+        let specificAnimal = animalData[indexPath.row]
+      
         
-        speciesCell.speciesNameLabel.text = specificItem
-        speciesCell.speciesImage.image = specificImage 
+        speciesCell.speciesNameLabel.text = specificAnimal.commonName
+        speciesCell.speciesImage.image = specificAnimal.collectionViewImage
         
         return speciesCell
     }
@@ -76,9 +77,11 @@ extension SpeciesListViewController: UICollectionViewDataSource, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let specificItem = testData[indexPath.row]
+        let specificAnimal = animalData[indexPath.row]
+        let detailVC = SpeciesDetailViewController()
+        detailVC.currentSpecies = specificAnimal
+        self.present(detailVC, animated: true, completion: nil)
         
-        print("You've selected \(specificItem) at row \(indexPath.row)")
     }
     
 }
