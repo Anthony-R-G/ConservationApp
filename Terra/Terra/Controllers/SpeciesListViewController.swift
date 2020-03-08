@@ -24,11 +24,14 @@ class SpeciesListViewController: UIViewController {
     
     var testData = ["Elephant", "Lion", "Gorilla", "XYZ"]
     var testImages: [UIImage] = [#imageLiteral(resourceName: "elephantCellImage"),#imageLiteral(resourceName: "lionCellImage"),#imageLiteral(resourceName: "gorillaCellImage"),#imageLiteral(resourceName: "leopardCellImage")]
+     lazy var myView: UIView = UILabel()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = #colorLiteral(red: 0.9988102317, green: 0.9860382676, blue: 0.9007986188, alpha: 1)
         setConstraints()
+          print(self.view.frame)
         
     }
 }

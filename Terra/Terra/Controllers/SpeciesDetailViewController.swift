@@ -17,7 +17,7 @@ class SpeciesDetailViewController: UIViewController {
     
     lazy var basicInfoView: UIView = {
         let view = UIView()
-        view.backgroundColor = .clear
+//        view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.4877193921)
         return view
     }()
     
@@ -76,13 +76,24 @@ class SpeciesDetailViewController: UIViewController {
         
     }()
     
-    lazy var speciesPopulationNarrativeTextView: UITextView = {
-        let tv = UITextView()
+//    lazy var speciesPopulationNarrativeTextView: UITextView = {
+//        let tv = UITextView()
+//        tv.isEditable = false
+//        tv.textColor = #colorLiteral(red: 0.3074202836, green: 0.3078328371, blue: 0.416093111, alpha: 1)
+//        tv.backgroundColor = .clear
+//
+//        tv.textAlignment = .left
+//        return tv
+//    }()
+    
+    lazy var summaryTextView: UITextView = {
+       let tv = UITextView()
         tv.isEditable = false
         tv.textColor = #colorLiteral(red: 0.3074202836, green: 0.3078328371, blue: 0.416093111, alpha: 1)
-        tv.backgroundColor = .clear
         tv.font = UIFont.systemFont(ofSize: 17)
+        tv.backgroundColor = .clear
         tv.textAlignment = .left
+        
         return tv
     }()
     
@@ -260,8 +271,7 @@ class SpeciesDetailViewController: UIViewController {
     private func setUpUIFromSpecies(){
         speciesCommonNameLabel.text = currentSpecies.commonName
         speciesScientificNameLabel.text = "— \(currentSpecies.scientificName)"
-        
-        speciesPopulationNarrativeTextView.text = currentSpecies.populationNarrative.withoutHtml
+        summaryTextView.text = currentSpecies.habitat
         kingdomInfoLabel.text = currentSpecies.kingdom
         classInfoLabel.text = currentSpecies.classTaxonomy
         familyInfoLabel.text = currentSpecies.family
@@ -279,7 +289,7 @@ class SpeciesDetailViewController: UIViewController {
         setUpUIFromSpecies()
         setConstraints()
         
-//        scrollView.delegate = self
+        scrollView.delegate = self
         
         scrollView.contentSize = CGSize(width: view.frame.width, height: view.frame.height + 600)
         
@@ -292,9 +302,9 @@ class SpeciesDetailViewController: UIViewController {
         backgroundOverlay.startColor = .clear
         backgroundOverlay.endColor = #colorLiteral(red: 0.06859237701, green: 0.08213501424, blue: 0.2409383953, alpha: 0.8456228596)
         self.view.insertSubview(backgroundOverlay, at: 1)
-//
-//        self.view.insertSubview(basicInfoView, at: 2)ya
-//        self.view.insertSubview(summaryView, at: 3)
+        summaryView.layer.zPosition = 1
+        basicInfoView.layer.zPosition = 0
+   
     }
 }
 
@@ -307,15 +317,15 @@ extension SpeciesDetailViewController {
         
         [basicInfoView, summaryView].forEach{contentView.addSubview($0)}
         
-        [basicInfoView, speciesCommonNameLabel, speciesPopulationNarrativeTextView, kingdomStackView, summaryView, summaryTitleLabel, speciesScientificNameLabel, taxonomyTitleLabel, classStackView, familyStackView, phylumStackView, orderStackView, genusStackView, conservationStatusLabel, numbersStackView].forEach{$0.translatesAutoresizingMaskIntoConstraints = false}
+        [basicInfoView, speciesCommonNameLabel, kingdomStackView, summaryView, summaryTitleLabel, speciesScientificNameLabel, taxonomyTitleLabel, classStackView, familyStackView, phylumStackView, orderStackView, genusStackView, conservationStatusLabel, numbersStackView, summaryTextView].forEach{$0.translatesAutoresizingMaskIntoConstraints = false}
         
         [speciesCommonNameLabel, speciesScientificNameLabel, conservationStatusLabel, numbersStackView].forEach{basicInfoView.addSubview($0)}
         
-        [summaryTitleLabel, speciesPopulationNarrativeTextView, taxonomyTitleLabel, kingdomStackView, classStackView, familyStackView, phylumStackView, orderStackView, genusStackView].forEach{summaryView.addSubview($0)}
+        [summaryTitleLabel, taxonomyTitleLabel, kingdomStackView, classStackView, familyStackView, phylumStackView, orderStackView, genusStackView, summaryTextView].forEach{summaryView.addSubview($0)}
         
         setSpeciesCommonNameLabelConstraints()
-        setSpeciesPopulationTextViewConstraints()
         setSummaryViewConstraints()
+        setSummaryTextViewConstraints()
         setSummaryTitleLabelConstraints()
         setSpeciesScientificNameLabelConstraints()
         setTaxonomyTitleLabelConstraints()
@@ -328,18 +338,27 @@ extension SpeciesDetailViewController {
         setConservationStatusLabelConstraints()
         setBasicInfoViewConstraints()
         setNumbersStackConstraints()
+        
     }
     
     
     private func setBasicInfoViewConstraints() {
         NSLayoutConstraint.activate([
             basicInfoView.leadingAnchor.constraint(equalTo: summaryView.leadingAnchor),
-            basicInfoView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             basicInfoView.heightAnchor.constraint(equalToConstant: 400),
-            basicInfoView.widthAnchor.constraint(equalToConstant: 380)
+            basicInfoView.widthAnchor.constraint(equalToConstant: 380),
+            basicInfoView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: 150)
         ])
     }
     
+    private func setSummaryTextViewConstraints(){
+        NSLayoutConstraint.activate([
+        summaryTextView.topAnchor.constraint(equalTo: summaryTitleLabel.bottomAnchor, constant: 10),
+        summaryTextView.leadingAnchor.constraint(equalTo: summaryTitleLabel.leadingAnchor),
+        summaryTextView.widthAnchor.constraint(equalToConstant: 300),
+        summaryTextView.bottomAnchor.constraint(equalTo: taxonomyTitleLabel.topAnchor, constant: -20)
+        ])
+    }
     
     private func setConservationStatusLabelConstraints() {
         NSLayoutConstraint.activate([
@@ -366,7 +385,7 @@ extension SpeciesDetailViewController {
             summaryView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 20),
             summaryView.heightAnchor.constraint(equalToConstant: 700),
             summaryView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.97),
-            summaryView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: 630)
+            summaryView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: 700)
         ])
     }
     
@@ -384,7 +403,7 @@ extension SpeciesDetailViewController {
     private func setTaxonomyTitleLabelConstraints(){
         NSLayoutConstraint.activate([
             taxonomyTitleLabel.leadingAnchor.constraint(equalTo: summaryView.leadingAnchor, constant: 30),
-            taxonomyTitleLabel.topAnchor.constraint(equalTo: speciesPopulationNarrativeTextView.bottomAnchor, constant: 30),
+            taxonomyTitleLabel.centerYAnchor.constraint(equalTo: summaryView.centerYAnchor),
             taxonomyTitleLabel.heightAnchor.constraint(equalTo: summaryTitleLabel.heightAnchor),
             taxonomyTitleLabel.widthAnchor.constraint(equalTo: summaryTitleLabel.widthAnchor)
         ])
@@ -411,14 +430,14 @@ extension SpeciesDetailViewController {
     }
     
     
-    private func setSpeciesPopulationTextViewConstraints(){
-        NSLayoutConstraint.activate([
-            speciesPopulationNarrativeTextView.leadingAnchor.constraint(equalTo: summaryTitleLabel.leadingAnchor, constant: -5),
-            speciesPopulationNarrativeTextView.topAnchor.constraint(equalTo: summaryTitleLabel.bottomAnchor, constant: 20),
-            speciesPopulationNarrativeTextView.heightAnchor.constraint(equalToConstant: 170),
-            speciesPopulationNarrativeTextView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20)
-        ])
-    }
+//    private func setSpeciesPopulationTextViewConstraints(){
+//        NSLayoutConstraint.activate([
+//            speciesPopulationNarrativeTextView.leadingAnchor.constraint(equalTo: summaryTitleLabel.leadingAnchor),
+//            speciesPopulationNarrativeTextView.topAnchor.constraint(equalTo: summaryTitleLabel.bottomAnchor, constant: 20),
+//            speciesPopulationNarrativeTextView.heightAnchor.constraint(equalToConstant: 170),
+//            speciesPopulationNarrativeTextView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
+//        ])
+//    }
     
     
     private func setKingdomStackViewConstraints(){
@@ -512,38 +531,23 @@ extension SpeciesDetailViewController {
 }
 
 
-extension String {
-    public var withoutHtml: String {
-        guard let data = self.data(using: .utf8) else {
-            return self
+extension SpeciesDetailViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offset = scrollView.contentOffset.y
+        //        if(offset > 500){
+        //            print(offset)
+        //            self.basicInfoView.frame = CGRect(x: 0, y: offset , width: self.view.bounds.size.width, height: 100)
+        //        }else{
+        //            self.basicInfoView.frame = CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: 100)
+        //        }
+        print(offset)
+        if offset >= 350 {
+            print("Pin it now")
+            self.basicInfoView.frame = CGRect(x: 50, y: offset - 50, width: self.basicInfoView.bounds.size.width, height: self.basicInfoView.bounds.size.height)
         }
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         
-        let options: [NSAttributedString.DocumentReadingOptionKey: Any] = [
-            .documentType: NSAttributedString.DocumentType.html,
-            .characterEncoding: String.Encoding.utf8.rawValue
-        ]
-        
-        guard let attributedString = try? NSAttributedString(data: data, options: options, documentAttributes: nil) else {
-            return self
-        }
-        
-        return attributedString.string
     }
 }
-//
-//extension SpeciesDetailViewController: UIScrollViewDelegate {
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        let offset = scrollView.contentOffset.y
-//        let scale = min(max(1.0 - offset / 200.0, 0.7), 1.0)
-//
-//        basicInfoView.transform = CGAffineTransform(scaleX: scale, y: scale)
-//        print("X: \(basicInfoView.frame.origin.x), Y: \(basicInfoView.frame.size)")
-//
-//    }
-//
-//    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-//        NSLayoutConstraint.activate([
-//            basicInfoView.topAnchor.constraint(equalTo: view.topAnchor, constant: -50),
-//        ])
-//    }
-//}
