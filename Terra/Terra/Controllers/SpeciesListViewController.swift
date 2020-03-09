@@ -13,8 +13,9 @@ class SpeciesListViewController: UIViewController {
     lazy var speciesCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 5)
         let collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 0), collectionViewLayout: layout)
-        collectionView.backgroundColor = .red
+        collectionView.backgroundColor = .clear
         collectionView.register(SpeciesCollectionViewCell.self, forCellWithReuseIdentifier: "speciesCell")
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -28,11 +29,13 @@ class SpeciesListViewController: UIViewController {
      lazy var myView: UIView = UILabel()
     
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = #colorLiteral(red: 0.9988102317, green: 0.9860382676, blue: 0.9007986188, alpha: 1)
+        view.backgroundColor = #colorLiteral(red: 0.1046695188, green: 0.09944508225, blue: 0.2029559612, alpha: 1)
         setConstraints()
-          print(self.view.frame)
         
     }
 }
@@ -49,7 +52,7 @@ extension SpeciesListViewController {
     private func setSpeciesCollectionViewConstraints(){
         NSLayoutConstraint.activate([
             speciesCollectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            speciesCollectionView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            speciesCollectionView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 80),
             speciesCollectionView.widthAnchor.constraint(equalTo: view.widthAnchor),
             speciesCollectionView.heightAnchor.constraint(equalToConstant: 400)
         ])
@@ -81,7 +84,10 @@ extension SpeciesListViewController: UICollectionViewDataSource, UICollectionVie
         let detailVC = SpeciesDetailViewController()
         detailVC.currentSpecies = specificAnimal
         self.present(detailVC, animated: true, completion: nil)
-        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 20
     }
     
 }

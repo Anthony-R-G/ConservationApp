@@ -13,8 +13,8 @@ class SpeciesCollectionViewCell: UICollectionViewCell {
     lazy var speciesNameLabel: UILabel = {
         let label = UILabel()
         label.adjustsFontSizeToFitWidth = true
-        label.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        label.font = UIFont.systemFont(ofSize: 20)
+        label.textColor = .white
+        label.font = UIFont.boldSystemFont(ofSize: 23)
         label.textAlignment = .center
         return label
     }()
@@ -36,8 +36,11 @@ class SpeciesCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         self.layer.cornerRadius = 10
         self.layer.masksToBounds = true
-        backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        backgroundColor = #colorLiteral(red: 0.8971922994, green: 0.4322043657, blue: 0.1033880934, alpha: 1)
         setConstraints()
+        speciesImage.layer.zPosition = 0
+        speciesNameLabel.layer.zPosition = 1
+        
     }
     
     required init?(coder: NSCoder) {
