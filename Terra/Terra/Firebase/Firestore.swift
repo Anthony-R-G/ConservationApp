@@ -1,5 +1,5 @@
 //
-//  FirestoreService.swift
+//  Firestore.swift
 //  Terra
 //
 //  Created by Anthony Gonzalez on 7/13/20.
@@ -7,6 +7,7 @@
 //
 
 import Foundation
+
 import FirebaseFirestore
 
 class FirestoreService {

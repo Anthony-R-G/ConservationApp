@@ -10,7 +10,7 @@
 		19776F61E160979180B663A6 /* Pods_Terra.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE42C1881D1D06662F3B9FCB /* Pods_Terra.framework */; };
 		1B62D350359E3EC3E7DCD905 /* Pods_TerraTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7A593764653FD2CA6FCF609 /* Pods_TerraTests.framework */; };
 		9711D8F724BD199700C2E6F1 /* Species.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9711D8F624BD199700C2E6F1 /* Species.swift */; };
-		9711D8FA24BD19F500C2E6F1 /* FirestoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9711D8F924BD19F500C2E6F1 /* FirestoreService.swift */; };
+		9711D8FC24BD42C800C2E6F1 /* Firestore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9711D8FB24BD42C800C2E6F1 /* Firestore.swift */; };
 		97452E4623E1E6C7005636E0 /* SpeciesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97452E4523E1E6C7005636E0 /* SpeciesCollectionViewCell.swift */; };
 		97452E4823E1EEE9005636E0 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97452E4723E1EEE9005636E0 /* GradientView.swift */; };
 		978E5CF223FB5CBC007BCD25 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 978E5CF123FB5CBC007BCD25 /* GoogleService-Info.plist */; };
@@ -40,7 +40,7 @@
 		92CD523210206FB0D28007E5 /* Pods-TerraTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TerraTests.debug.xcconfig"; path = "Target Support Files/Pods-TerraTests/Pods-TerraTests.debug.xcconfig"; sourceTree = "<group>"; };
 		94CD7C78C9210265A4DBE952 /* Pods-Terra.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Terra.release.xcconfig"; path = "Target Support Files/Pods-Terra/Pods-Terra.release.xcconfig"; sourceTree = "<group>"; };
 		9711D8F624BD199700C2E6F1 /* Species.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Species.swift; sourceTree = "<group>"; };
-		9711D8F924BD19F500C2E6F1 /* FirestoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreService.swift; sourceTree = "<group>"; };
+		9711D8FB24BD42C800C2E6F1 /* Firestore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Firestore.swift; sourceTree = "<group>"; };
 		97452E4523E1E6C7005636E0 /* SpeciesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesCollectionViewCell.swift; sourceTree = "<group>"; };
 		97452E4723E1EEE9005636E0 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		978E5CF123FB5CBC007BCD25 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -94,7 +94,7 @@
 		9711D8F824BD19B900C2E6F1 /* Firebase */ = {
 			isa = PBXGroup;
 			children = (
-				9711D8F924BD19F500C2E6F1 /* FirestoreService.swift */,
+				9711D8FB24BD42C800C2E6F1 /* Firestore.swift */,
 			);
 			path = Firebase;
 			sourceTree = "<group>";
@@ -353,9 +353,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				979C191823DE43E900651B2B /* SpeciesDetailViewController.swift in Sources */,
+				9711D8FC24BD42C800C2E6F1 /* Firestore.swift in Sources */,
 				9711D8F724BD199700C2E6F1 /* Species.swift in Sources */,
 				97B68CD424BBB0AC005B8AB8 /* BasicInfoView.swift in Sources */,
-				9711D8FA24BD19F500C2E6F1 /* FirestoreService.swift in Sources */,
 				97B68CD624BBBE6C005B8AB8 /* DetailInfoOverlay.swift in Sources */,
 				97452E4623E1E6C7005636E0 /* SpeciesCollectionViewCell.swift in Sources */,
 				979C191423DE43E900651B2B /* AppDelegate.swift in Sources */,
