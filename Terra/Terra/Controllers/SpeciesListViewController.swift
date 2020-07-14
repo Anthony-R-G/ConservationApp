@@ -13,6 +13,7 @@ class SpeciesListViewController: UIViewController {
     lazy var speciesCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
+        
         layout.sectionInset = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 5)
         let collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 0), collectionViewLayout: layout)
         collectionView.backgroundColor = .clear
@@ -23,20 +24,36 @@ class SpeciesListViewController: UIViewController {
     }()
     
     
-    let animalData = Species.listTestData
+    var animalData = [Species]() {
+        didSet {
+            speciesCollectionView.reloadData()
+            dump(animalData)
+        }
+    }
     
-    
-     lazy var myView: UIView = UILabel()
+    func loadSpeciesDataFromFirebase() {
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            FirestoreService.manager.getAllSpeciesData() { (result) in
+                switch result {
+                case .success(let speciesData):
+                    self?.animalData = speciesData
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+        }
+    }
     
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = #colorLiteral(red: 0.1046695188, green: 0.09944508225, blue: 0.2029559612, alpha: 1)
         setConstraints()
-        
+        loadSpeciesDataFromFirebase()
     }
 }
 
@@ -66,18 +83,17 @@ extension SpeciesListViewController: UICollectionViewDataSource, UICollectionVie
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let speciesCell = collectionView.dequeueReusableCell(withReuseIdentifier: "speciesCell", for: indexPath) as! SpeciesCollectionViewCell
+        
         let specificAnimal = animalData[indexPath.row]
-      
-        
-        speciesCell.speciesNameLabel.text = specificAnimal.commonName
-        speciesCell.speciesImage.image = specificAnimal.collectionViewImage
-        
+        speciesCell.configureCell(from: specificAnimal)
         return speciesCell
     }
+    
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 250, height: 390)
     }
+    
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let specificAnimal = animalData[indexPath.row]

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class SpeciesCollectionViewCell: UICollectionViewCell {
     
@@ -30,7 +31,13 @@ class SpeciesCollectionViewCell: UICollectionViewCell {
         return gv
     }()
     
-    
+    func configureCell(from species: Species) {
+        speciesNameLabel.text = species.commonName
+        let imageURL = URL(string: species.cellImage)
+        speciesImage.kf.setImage(with: imageURL)
+        speciesImage.kf.indicatorType = .activity
+        backgroundColor = species.marineSystem == true ? #colorLiteral(red: 0.2312238216, green: 0.3822638988, blue: 0.7663728595, alpha: 1) : #colorLiteral(red: 0.8971922994, green: 0.4322043657, blue: 0.1033880934, alpha: 1)
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -40,7 +47,6 @@ class SpeciesCollectionViewCell: UICollectionViewCell {
         setConstraints()
         speciesImage.layer.zPosition = 0
         speciesNameLabel.layer.zPosition = 1
-        
     }
     
     required init?(coder: NSCoder) {
@@ -59,7 +65,16 @@ extension SpeciesCollectionViewCell {
         setSpeciesNameLabelConstraints()
     }
     
- 
+    private func setSpeciesNameLabelConstraints(){
+        NSLayoutConstraint.activate([
+            speciesNameLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            speciesNameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -40),
+            speciesNameLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.85),
+            speciesNameLabel.heightAnchor.constraint(equalToConstant: 50)
+            
+        ])
+    }
+    
     private func setSpeciesImageConstraints() {
         NSLayoutConstraint.activate([
             speciesImage.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
@@ -68,15 +83,4 @@ extension SpeciesCollectionViewCell {
             speciesImage.widthAnchor.constraint(equalTo: contentView.widthAnchor)
         ])
     }
-    
-    private func setSpeciesNameLabelConstraints(){
-        NSLayoutConstraint.activate([
-            speciesNameLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            speciesNameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -40),
-            speciesNameLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.85),
-            speciesNameLabel.heightAnchor.constraint(equalToConstant: 50)
-        
-        ])
-    }
-    
 }
