@@ -10,15 +10,41 @@ import UIKit
 
 class SpeciesListViewController: UIViewController {
     
-    lazy var speciesCollectionView: UICollectionView = {
-        Utilities.makeCollectionView(view: self.view)
+    lazy var terraTitleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Terra"
+        label.font = UIFont.boldSystemFont(ofSize: 30)
+        label.textColor = .white
+        label.textAlignment = .left
+        return label
+    }()
+    
+    lazy var subtitleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Protect the earth's biodiversity"
+        label.font = UIFont.systemFont(ofSize: 18)
+        label.textColor = #colorLiteral(red: 0.6699403524, green: 0.6602986455, blue: 0.7864833474, alpha: 1)
+        label.textAlignment = .left
+        return label
+    }()
+    
+    lazy var criticalSpeciesCV: UICollectionView = {
+        Utilities.makeCollectionView(parentView: self.view)
+    }()
+    
+    lazy var endangeredSpeciesCV: UICollectionView = {
+        Utilities.makeCollectionView(parentView: self.view)
+    }()
+    
+    lazy var vulnerableSpeciesCV: UICollectionView = {
+        Utilities.makeCollectionView(parentView: self.view)
     }()
     
     
     var animalData = [Species]() {
         didSet {
             filteredCriticalSpecies = filterSpecies(by: .critical)
-            speciesCollectionView.reloadData()
+            criticalSpeciesCV.reloadData()
         }
     }
     
@@ -47,6 +73,12 @@ class SpeciesListViewController: UIViewController {
             }
         }
     }
+    
+    private func setDatasourceAndDelegates() {
+        let collectionViews = [criticalSpeciesCV, endangeredSpeciesCV, vulnerableSpeciesCV]
+        collectionViews.forEach { $0.dataSource = self }
+        collectionViews.forEach { $0.delegate = self }
+    }
 
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -58,31 +90,52 @@ class SpeciesListViewController: UIViewController {
         view.backgroundColor = #colorLiteral(red: 0.1046695188, green: 0.09944508225, blue: 0.2029559612, alpha: 1)
         setConstraints()
         loadSpeciesDataFromFirebase()
-        speciesCollectionView.delegate = self
-        speciesCollectionView.dataSource = self
+        setDatasourceAndDelegates()
     }
 }
 
+//MARK: -- Constraints
 extension SpeciesListViewController {
     private func setConstraints(){
-        [speciesCollectionView].forEach{view.addSubview($0)}
-        [speciesCollectionView].forEach{$0.translatesAutoresizingMaskIntoConstraints = false}
+        let UIElements = [terraTitleLabel, subtitleLabel, criticalSpeciesCV]
+        UIElements.forEach{ view.addSubview($0) }
+        UIElements.forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
         
-        setSpeciesCollectionViewConstraints()
-        
+        setTerraTitleLabelConstraints()
+        setSubtitleLabelConstraints()
+        setCriticalSpeciesCVConstraints()
     }
     
-    private func setSpeciesCollectionViewConstraints(){
+    private func setTerraTitleLabelConstraints() {
         NSLayoutConstraint.activate([
-            speciesCollectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            speciesCollectionView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 80),
-            speciesCollectionView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            speciesCollectionView.heightAnchor.constraint(equalToConstant: 400)
+            terraTitleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 80),
+            terraTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            terraTitleLabel.heightAnchor.constraint(equalToConstant: 25),
+            terraTitleLabel.widthAnchor.constraint(equalToConstant: 100)
+        ])
+    }
+    
+    private func setSubtitleLabelConstraints() {
+        NSLayoutConstraint.activate([
+            subtitleLabel.topAnchor.constraint(equalTo: terraTitleLabel.bottomAnchor, constant: 20),
+            subtitleLabel.leadingAnchor.constraint(equalTo: terraTitleLabel.leadingAnchor),
+            subtitleLabel.heightAnchor.constraint(equalToConstant: 20),
+            subtitleLabel.widthAnchor.constraint(equalToConstant: 300)
+        ])
+    }
+    
+    private func setCriticalSpeciesCVConstraints() {
+        NSLayoutConstraint.activate([
+            criticalSpeciesCV.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            criticalSpeciesCV.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 80),
+            criticalSpeciesCV.widthAnchor.constraint(equalTo: view.widthAnchor),
+            criticalSpeciesCV.heightAnchor.constraint(equalToConstant: 310)
         ])
     }
 }
 
-extension SpeciesListViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+//MARK: -- CollectionView Methods
+extension SpeciesListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return filteredCriticalSpecies.count
     }
@@ -94,8 +147,9 @@ extension SpeciesListViewController: UICollectionViewDataSource, UICollectionVie
         speciesCell.configureCell(from: specificAnimal)
         return speciesCell
     }
-    
-    
+}
+ 
+extension SpeciesListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 250, height: 300)
     }
