@@ -99,11 +99,18 @@
 			path = Firebase;
 			sourceTree = "<group>";
 		};
+		9711D8FD24BD469B00C2E6F1 /* Third Party Code */ = {
+			isa = PBXGroup;
+			children = (
+				97452E4723E1EEE9005636E0 /* GradientView.swift */,
+			);
+			path = "Third Party Code";
+			sourceTree = "<group>";
+		};
 		97452E4423E1E6A9005636E0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				97452E4523E1E6C7005636E0 /* SpeciesCollectionViewCell.swift */,
-				97452E4723E1EEE9005636E0 /* GradientView.swift */,
 				97B68CD324BBB0AC005B8AB8 /* BasicInfoView.swift */,
 				97B68CD524BBBE6C005B8AB8 /* DetailInfoOverlay.swift */,
 			);
@@ -141,6 +148,7 @@
 		979C191223DE43E900651B2B /* Terra */ = {
 			isa = PBXGroup;
 			children = (
+				9711D8FD24BD469B00C2E6F1 /* Third Party Code */,
 				9711D8F824BD19B900C2E6F1 /* Firebase */,
 				97452E4423E1E6A9005636E0 /* Views */,
 				979492EC23F46ACE00B636A4 /* Models */,

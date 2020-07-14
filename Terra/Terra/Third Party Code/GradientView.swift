@@ -1,11 +1,3 @@
-//
-//  GradientView.swift
-//  Terra
-//
-//  Created by Anthony Gonzalez on 1/29/20.
-//  Copyright © 2020 Antnee. All rights reserved.
-//
-
 import Foundation
 import UIKit
 
