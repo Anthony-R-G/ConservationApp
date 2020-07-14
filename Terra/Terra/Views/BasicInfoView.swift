@@ -61,7 +61,6 @@ class BasicInfoView: UIView {
         label.textAlignment = .left
         label.font = UIFont.boldSystemFont(ofSize: 16)
         return label
-        
     }()
     
     lazy var heightStackView: UIStackView = {
@@ -129,7 +128,6 @@ class BasicInfoView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setConstraints()
-        
     }
     
     required init?(coder: NSCoder) {

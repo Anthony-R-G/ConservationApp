@@ -25,14 +25,13 @@ struct Species {
     let populationTrend: String
     let populationNumbers: String
     let conservationStatus: String
-    let marineSystem: Bool
-    let freshwaterSystem: Bool
-    let terrestrialSystem: Bool
+    let habitatSystem: HabitatSystem
     let donationLink: String
     let weight: String
     let height: String
     let cellImage: String
     let detailImage: String
+    
     
     init? (from dict: [String: Any]) {
         guard let commonName = dict["commonName"] as? String,
@@ -50,14 +49,13 @@ struct Species {
             let populationTrend = dict["populationTrend"] as? String,
             let populationNumbers = dict["populationNumbers"] as? String,
             let conservationStatus = dict["conservationStatus"] as? String,
-            let marineSystem = dict["marineSystem"] as? Bool,
-            let freshwaterSystem = dict["freshwaterSystem"] as? Bool,
-            let terrestrialSystem = dict["terrestrialSystem"] as? Bool,
             let donationLink = dict["donationLink"] as? String,
             let weight = dict["weight"] as? String,
             let height = dict["height"] as? String,
             let cellImage = dict["cellImage"] as? String,
-            let detailImage = dict["detailImage"] as? String else { return nil }
+            let detailImage = dict["detailImage"] as? String,
+            let habitatSystemString = dict["habitatSystem"] as? String else { return nil }
+        
         
         self.commonName = commonName
         self.scientificName = scientificName
@@ -74,13 +72,11 @@ struct Species {
         self.populationTrend = populationTrend
         self.populationNumbers = populationNumbers
         self.conservationStatus = conservationStatus
-        self.marineSystem = marineSystem
-        self.freshwaterSystem = freshwaterSystem
-        self.terrestrialSystem = terrestrialSystem
         self.donationLink = donationLink
         self.weight = weight
         self.height = height
         self.cellImage = cellImage
         self.detailImage = detailImage
+        self.habitatSystem = HabitatSystem(rawValue: habitatSystemString)!
     }
 }
