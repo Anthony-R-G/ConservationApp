@@ -11,27 +11,31 @@ import UIKit
 class SpeciesListViewController: UIViewController {
     
     lazy var speciesCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 5)
-        let collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 0), collectionViewLayout: layout)
-        collectionView.backgroundColor = .clear
-        collectionView.register(SpeciesCollectionViewCell.self, forCellWithReuseIdentifier: "speciesCell")
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        return collectionView
+        Utilities.makeCollectionView(view: self.view)
     }()
     
     
     var animalData = [Species]() {
         didSet {
+            filteredCriticalSpecies = filterSpecies(by: .critical)
             speciesCollectionView.reloadData()
-            dump(animalData)
         }
     }
     
-    func loadSpeciesDataFromFirebase() {
+    var filteredCriticalSpecies = [Species]()
+    
+    var filteredEndangeredSpecies = [Species]()
+    
+    var filteredVulnerableSpecies = [Species]()
+    
+    
+    private func filterSpecies(by status: ConservationStatus) -> [Species] {
+        let filteredSpecies = animalData.filter { $0.conservationStatus == status }
+        return filteredSpecies
+    }
+    
+    
+    private func loadSpeciesDataFromFirebase() {
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             FirestoreService.manager.getAllSpeciesData() { (result) in
                 switch result {
@@ -43,7 +47,7 @@ class SpeciesListViewController: UIViewController {
             }
         }
     }
-    
+
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -54,6 +58,8 @@ class SpeciesListViewController: UIViewController {
         view.backgroundColor = #colorLiteral(red: 0.1046695188, green: 0.09944508225, blue: 0.2029559612, alpha: 1)
         setConstraints()
         loadSpeciesDataFromFirebase()
+        speciesCollectionView.delegate = self
+        speciesCollectionView.dataSource = self
     }
 }
 
@@ -78,25 +84,25 @@ extension SpeciesListViewController {
 
 extension SpeciesListViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return animalData.count
+        return filteredCriticalSpecies.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let speciesCell = collectionView.dequeueReusableCell(withReuseIdentifier: "speciesCell", for: indexPath) as! SpeciesCollectionViewCell
         
-        let specificAnimal = animalData[indexPath.row]
+        let specificAnimal = filteredCriticalSpecies[indexPath.row]
         speciesCell.configureCell(from: specificAnimal)
         return speciesCell
     }
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 250, height: 390)
+        return CGSize(width: 250, height: 300)
     }
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let specificAnimal = animalData[indexPath.row]
+        let specificAnimal = filteredCriticalSpecies[indexPath.row]
         let detailVC = SpeciesDetailViewController()
         detailVC.currentSpecies = specificAnimal
         self.present(detailVC, animated: true, completion: nil)

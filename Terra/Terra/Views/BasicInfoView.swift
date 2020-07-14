@@ -120,7 +120,7 @@ class BasicInfoView: UIView {
         speciesCommonNameLabel.text = species.commonName
         speciesScientificNameLabel.text = "— \(species.scientificName)"
         numbersInfoLabel.text = species.populationNumbers
-        conservationStatusLabel.text = species.conservationStatus
+        conservationStatusLabel.text = species.conservationStatus.rawValue
         weightInfoLabel.text = species.weight
         heightInfoLabel.text = species.height
     }
