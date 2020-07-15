@@ -2,6 +2,7 @@
 
 ## Introduction
 Note: Still a WIP!
+
 Terra is an iOS application that seeks to educate people on the wide variety of endangered species. Using data sourced from organizations such as the IUCN, the goal of Terra is to teach individuals the importance of these endangered animals and give them the option to donate to relevant conservations.
 
 Terra is an iOS application meant to educate people on the biodiversity in the world and the importance of conserving it. Data is packaged from multiple sources, among which include the IUCN and WWF. This is to ensure that information is accurate and up-to-date.
