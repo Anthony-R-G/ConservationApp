@@ -22,8 +22,26 @@ class SpeciesListViewController: UIViewController {
     lazy var subtitleLabel: UILabel = {
         let label = UILabel()
         label.text = "Protect the earth's biodiversity"
-        label.font = UIFont.systemFont(ofSize: 18)
+        label.font = UIFont.systemFont(ofSize: 20)
         label.textColor = #colorLiteral(red: 0.6699403524, green: 0.6602986455, blue: 0.7864833474, alpha: 1)
+        label.textAlignment = .left
+        return label
+    }()
+    
+    lazy var criticalSpeciesLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Critically Endangered"
+        label.font = UIFont.systemFont(ofSize: 21)
+        label.textColor = .white
+        label.textAlignment = .left
+        return label
+    }()
+    
+    lazy var vulnerableSpeciesLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Vulnerable"
+        label.font = UIFont.systemFont(ofSize: 23)
+        label.textColor = .white
         label.textAlignment = .left
         return label
     }()
@@ -44,15 +62,28 @@ class SpeciesListViewController: UIViewController {
     var animalData = [Species]() {
         didSet {
             filteredCriticalSpecies = filterSpecies(by: .critical)
+            filteredEndangeredSpecies = filterSpecies(by: .endangered)
+            filteredVulnerableSpecies = filterSpecies(by: .vulnerable)
+        }
+    }
+    
+    var filteredCriticalSpecies = [Species]() {
+        didSet {
             criticalSpeciesCV.reloadData()
         }
     }
     
-    var filteredCriticalSpecies = [Species]()
+    var filteredEndangeredSpecies = [Species]() {
+        didSet {
+            endangeredSpeciesCV.reloadData()
+        }
+    }
     
-    var filteredEndangeredSpecies = [Species]()
-    
-    var filteredVulnerableSpecies = [Species]()
+    var filteredVulnerableSpecies = [Species]() {
+        didSet {
+            vulnerableSpeciesCV.reloadData()
+        }
+    }
     
     
     private func filterSpecies(by status: ConservationStatus) -> [Species] {
@@ -79,7 +110,7 @@ class SpeciesListViewController: UIViewController {
         collectionViews.forEach { $0.dataSource = self }
         collectionViews.forEach { $0.delegate = self }
     }
-
+    
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -97,19 +128,22 @@ class SpeciesListViewController: UIViewController {
 //MARK: -- Constraints
 extension SpeciesListViewController {
     private func setConstraints(){
-        let UIElements = [terraTitleLabel, subtitleLabel, criticalSpeciesCV]
+        let UIElements = [terraTitleLabel, subtitleLabel, criticalSpeciesLabel, criticalSpeciesCV, vulnerableSpeciesLabel, vulnerableSpeciesCV]
         UIElements.forEach{ view.addSubview($0) }
         UIElements.forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
         
         setTerraTitleLabelConstraints()
         setSubtitleLabelConstraints()
+        setCriticalSpeciesLabelConstraints()
         setCriticalSpeciesCVConstraints()
+        setVulnerableSpeciesLabelConstraints()
+        setVulnerableSpeciesCVConstraints()
     }
     
     private func setTerraTitleLabelConstraints() {
         NSLayoutConstraint.activate([
             terraTitleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 80),
-            terraTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            terraTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
             terraTitleLabel.heightAnchor.constraint(equalToConstant: 25),
             terraTitleLabel.widthAnchor.constraint(equalToConstant: 100)
         ])
@@ -124,12 +158,40 @@ extension SpeciesListViewController {
         ])
     }
     
+    private func setCriticalSpeciesLabelConstraints() {
+        NSLayoutConstraint.activate([
+            criticalSpeciesLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+            criticalSpeciesLabel.bottomAnchor.constraint(equalTo: criticalSpeciesCV.topAnchor, constant: -10),
+            criticalSpeciesLabel.heightAnchor.constraint(equalToConstant: 30),
+            criticalSpeciesLabel.widthAnchor.constraint(equalToConstant: 300)
+        ])
+    }
+    
     private func setCriticalSpeciesCVConstraints() {
         NSLayoutConstraint.activate([
             criticalSpeciesCV.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            criticalSpeciesCV.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 80),
             criticalSpeciesCV.widthAnchor.constraint(equalTo: view.widthAnchor),
-            criticalSpeciesCV.heightAnchor.constraint(equalToConstant: 310)
+            criticalSpeciesCV.heightAnchor.constraint(equalToConstant: 235),
+            criticalSpeciesCV.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20)
+        ])
+    }
+    
+    private func setVulnerableSpeciesLabelConstraints() {
+        NSLayoutConstraint.activate([
+        vulnerableSpeciesLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+        vulnerableSpeciesLabel.bottomAnchor.constraint(equalTo: vulnerableSpeciesCV.topAnchor, constant: -10),
+        vulnerableSpeciesLabel.heightAnchor.constraint(equalToConstant: 30),
+        vulnerableSpeciesLabel.widthAnchor.constraint(equalToConstant: 300)
+        
+        ])
+    }
+    
+    private func setVulnerableSpeciesCVConstraints() {
+        NSLayoutConstraint.activate([
+            vulnerableSpeciesCV.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            vulnerableSpeciesCV.widthAnchor.constraint(equalTo: view.widthAnchor),
+            vulnerableSpeciesCV.heightAnchor.constraint(equalToConstant: 235),
+            vulnerableSpeciesCV.bottomAnchor.constraint(equalTo: criticalSpeciesLabel.topAnchor, constant: -30)
         ])
     }
 }
@@ -137,26 +199,50 @@ extension SpeciesListViewController {
 //MARK: -- CollectionView Methods
 extension SpeciesListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return filteredCriticalSpecies.count
+        switch collectionView {
+        case criticalSpeciesCV: return filteredCriticalSpecies.count
+        case vulnerableSpeciesCV: return filteredVulnerableSpecies.count
+        default: return 0
+        }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let speciesCell = collectionView.dequeueReusableCell(withReuseIdentifier: "speciesCell", for: indexPath) as! SpeciesCollectionViewCell
         
-        let specificAnimal = filteredCriticalSpecies[indexPath.row]
-        speciesCell.configureCell(from: specificAnimal)
-        return speciesCell
+        switch collectionView {
+            
+        case criticalSpeciesCV:
+            let specificAnimal = filteredCriticalSpecies[indexPath.row]
+            speciesCell.configureCell(from: specificAnimal)
+            return speciesCell
+            
+        case vulnerableSpeciesCV:
+            let specificAnimal = filteredVulnerableSpecies[indexPath.row]
+            speciesCell.configureCell(from: specificAnimal)
+            return speciesCell
+            
+        default: return UICollectionViewCell()
+            
+        }
     }
 }
- 
+
 extension SpeciesListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 250, height: 300)
+        return CGSize(width: 290, height: 230)
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let specificAnimal = filteredCriticalSpecies[indexPath.row]
+        var specificAnimal = Species(from: [:])
+        
+        switch collectionView {
+        case criticalSpeciesCV: specificAnimal = filteredCriticalSpecies[indexPath.row]
+            
+        case vulnerableSpeciesCV: specificAnimal = filteredVulnerableSpecies[indexPath.row]
+        default: ()
+        }
+        
         let detailVC = SpeciesDetailViewController()
         detailVC.currentSpecies = specificAnimal
         self.present(detailVC, animated: true, completion: nil)

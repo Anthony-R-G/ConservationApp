@@ -17,7 +17,7 @@ class Utilities {
         
         layout.sectionInset = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 5)
         let collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: parentView.frame.width, height: 0), collectionViewLayout: layout)
-        collectionView.backgroundColor = .red
+        collectionView.backgroundColor = .clear
         collectionView.register(SpeciesCollectionViewCell.self, forCellWithReuseIdentifier: "speciesCell")
         return collectionView
     }
