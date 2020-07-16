@@ -17,7 +17,7 @@ class SpeciesListViewController: UIViewController {
     lazy var terraTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "Terra"
-        label.font = UIFont.boldSystemFont(ofSize: 30)
+        label.font = UIFont(name: "Roboto-Bold", size: 30)
         label.textColor = #colorLiteral(red: 0.9257398248, green: 1, blue: 0.7623538375, alpha: 1)
         label.textAlignment = .left
         return label
@@ -26,7 +26,7 @@ class SpeciesListViewController: UIViewController {
     lazy var subtitleLabel: UILabel = {
         let label = UILabel()
         label.text = "Protect the earth's biodiversity"
-        label.font = UIFont.systemFont(ofSize: 20)
+        label.font = UIFont(name: "Roboto-Medium", size: 20)
         label.textColor = #colorLiteral(red: 0.6699403524, green: 0.6602986455, blue: 0.7864833474, alpha: 1)
         label.textAlignment = .left
         return label
@@ -35,7 +35,7 @@ class SpeciesListViewController: UIViewController {
     lazy var criticalSpeciesLabel: UILabel = {
         let label = UILabel()
         label.text = "Critically Endangered"
-        label.font = UIFont.systemFont(ofSize: 21)
+        label.font = UIFont(name: "Roboto-Medium", size: 21)
         label.textColor = .white
         label.textAlignment = .left
         return label
@@ -44,7 +44,7 @@ class SpeciesListViewController: UIViewController {
     lazy var vulnerableSpeciesLabel: UILabel = {
         let label = UILabel()
         label.text = "Vulnerable"
-        label.font = UIFont.systemFont(ofSize: 21)
+        label.font = UIFont(name: "Roboto-Medium", size: 21)
         label.textColor = .white
         label.textAlignment = .left
         return label
@@ -53,22 +53,22 @@ class SpeciesListViewController: UIViewController {
     lazy var endangeredSpeciesLabel: UILabel = {
         let label = UILabel()
         label.text = "Endangered"
-        label.font = UIFont.systemFont(ofSize: 21)
+        label.font = UIFont(name: "Roboto-Medium", size: 21)
         label.textColor = .white
         label.textAlignment = .left
         return label
     }()
     
     lazy var criticalSpeciesCV: UICollectionView = {
-        Utilities.makeCollectionView(parentView: self.view)
+        Utilities.makeCollectionView(superView: self.view)
     }()
     
     lazy var endangeredSpeciesCV: UICollectionView = {
-        Utilities.makeCollectionView(parentView: self.view)
+        Utilities.makeCollectionView(superView: self.view)
     }()
     
     lazy var vulnerableSpeciesCV: UICollectionView = {
-        Utilities.makeCollectionView(parentView: self.view)
+        Utilities.makeCollectionView(superView: self.view)
     }()
     
     
@@ -133,7 +133,6 @@ class SpeciesListViewController: UIViewController {
         super.viewDidLayoutSubviews()
         setScrollViewConstraints()
         setContentViewConstraints()
-        scrollView.updateContentView()
     }
     
     override func viewDidLoad() {
@@ -142,27 +141,30 @@ class SpeciesListViewController: UIViewController {
         setConstraints()
         loadSpeciesDataFromFirebase()
         setDatasourceAndDelegates()
+       
         
         scrollView.delegate = self
-//        scrollView.contentSize = CGSize(width: view.frame.width, height: view.frame.height + 600)
+        scrollView.contentSize = CGSize(width: view.frame.width, height: view.frame.height + 300)
+       
+        
     }
 }
 
 //MARK: -- Constraints
 extension SpeciesListViewController {
     private func setConstraints(){
-        view.addSubview(terraTitleLabel)
-        view.addSubview(subtitleLabel)
-        view.addSubview(scrollView)
+        
+        let parentViewUIElements = [scrollView, terraTitleLabel, subtitleLabel]
+        parentViewUIElements.forEach { view.addSubview($0) }
+        parentViewUIElements.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
+        
         scrollView.addSubview(contentView)
-        terraTitleLabel.translatesAutoresizingMaskIntoConstraints = false
-        subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        contentView.translatesAutoresizingMaskIntoConstraints = false
         
         
-        
-        let UIElements = [criticalSpeciesLabel, criticalSpeciesCV, endangeredSpeciesLabel, endangeredSpeciesCV, vulnerableSpeciesLabel, vulnerableSpeciesCV]
-        UIElements.forEach{ contentView.addSubview($0) }
-        UIElements.forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
+        let contentViewUIElements = [criticalSpeciesLabel, criticalSpeciesCV, endangeredSpeciesLabel, endangeredSpeciesCV, vulnerableSpeciesLabel, vulnerableSpeciesCV]
+        contentViewUIElements.forEach{ contentView.addSubview($0) }
+        contentViewUIElements.forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
         
         setTerraTitleLabelConstraints()
         setSubtitleLabelConstraints()
@@ -249,7 +251,6 @@ extension SpeciesListViewController {
     
     private func setScrollViewConstraints(){
         scrollView.backgroundColor = .clear
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -260,7 +261,6 @@ extension SpeciesListViewController {
     
     private func setContentViewConstraints() {
         contentView.backgroundColor = .clear
-        contentView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             contentView.heightAnchor.constraint(equalTo: scrollView.heightAnchor),
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
@@ -268,8 +268,6 @@ extension SpeciesListViewController {
             contentView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor)
         ])
     }
-    
-    
 }
 
 //MARK: -- CollectionView Methods

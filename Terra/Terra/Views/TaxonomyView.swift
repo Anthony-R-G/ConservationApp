@@ -1,23 +1,21 @@
 //
-//  DetailInfoOverlay.swift
+//  TaxonomyView.swift
 //  Terra
 //
-//  Created by Anthony Gonzalez on 7/12/20.
+//  Created by Anthony Gonzalez on 7/15/20.
 //  Copyright © 2020 Antnee. All rights reserved.
 //
 
 import UIKit
 
-class DetailInfoOverlay: UIView {
+class TaxonomyView: UIView {
     
-    lazy var summaryTextView: UITextView = {
-        let tv = UITextView()
-        tv.isEditable = false
-        tv.textColor = #colorLiteral(red: 0.3074202836, green: 0.3078328371, blue: 0.416093111, alpha: 1)
-        tv.font = UIFont.systemFont(ofSize: 17)
-        tv.backgroundColor = .clear
-        tv.textAlignment = .left
-        return tv
+    lazy var taxonomyTitleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Taxonomy"
+        label.font = UIFont.boldSystemFont(ofSize: 25)
+        label.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        return label
     }()
     
     lazy var kingdomStackView: UIStackView = {
@@ -31,16 +29,16 @@ class DetailInfoOverlay: UIView {
     
     lazy var kingdomLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.font = UIFont(name: "Roboto-Medium", size: 14)
         label.text = "Kingdom"
-        label.textColor = #colorLiteral(red: 0.3479366601, green: 0.3600047827, blue: 0.429291755, alpha: 1)
+        label.textColor = #colorLiteral(red: 0.6117030382, green: 0.6117962003, blue: 0.6116904616, alpha: 1)
         return label
     }()
     
     lazy var kingdomInfoLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 18)
-        label.textColor = #colorLiteral(red: 0.006244339049, green: 0, blue: 0.1978868842, alpha: 1)
+        label.font = UIFont(name: "Roboto-Bold", size: 18)
+        label.textColor = #colorLiteral(red: 1, green: 0.9833787084, blue: 0.8849565387, alpha: 1)
         return label
     }()
     
@@ -55,16 +53,16 @@ class DetailInfoOverlay: UIView {
     
     lazy var classLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.font = UIFont(name: "Roboto-Medium", size: 14)
         label.text = "Class"
-        label.textColor = #colorLiteral(red: 0.3479366601, green: 0.3600047827, blue: 0.429291755, alpha: 1)
+        label.textColor = #colorLiteral(red: 0.6117030382, green: 0.6117962003, blue: 0.6116904616, alpha: 1)
         return label
     }()
     
     lazy var classInfoLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 18)
-        label.textColor = #colorLiteral(red: 0.006244339049, green: 0, blue: 0.1978868842, alpha: 1)
+        label.font = UIFont(name: "Roboto-Bold", size: 18)
+        label.textColor = #colorLiteral(red: 1, green: 0.9833787084, blue: 0.8849565387, alpha: 1)
         return label
     }()
     
@@ -79,16 +77,16 @@ class DetailInfoOverlay: UIView {
     
     lazy var familyLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.font = UIFont(name: "Roboto-Medium", size: 14)
         label.text = "Family"
-        label.textColor = #colorLiteral(red: 0.3479366601, green: 0.3600047827, blue: 0.429291755, alpha: 1)
+        label.textColor = #colorLiteral(red: 0.6117030382, green: 0.6117962003, blue: 0.6116904616, alpha: 1)
         return label
     }()
     
     lazy var familyInfoLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 18)
-        label.textColor = #colorLiteral(red: 0.006244339049, green: 0, blue: 0.1978868842, alpha: 1)
+        label.font = UIFont(name: "Roboto-Bold", size: 18)
+        label.textColor = #colorLiteral(red: 1, green: 0.9833787084, blue: 0.8849565387, alpha: 1)
         return label
     }()
     
@@ -103,16 +101,16 @@ class DetailInfoOverlay: UIView {
     
     lazy var phylumLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.font = UIFont(name: "Roboto-Medium", size: 14)
         label.text = "Phylum"
-        label.textColor = #colorLiteral(red: 0.3479366601, green: 0.3600047827, blue: 0.429291755, alpha: 1)
+        label.textColor = #colorLiteral(red: 0.6117030382, green: 0.6117962003, blue: 0.6116904616, alpha: 1)
         return label
     }()
     
     lazy var phylumInfoLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 18)
-        label.textColor = #colorLiteral(red: 0.006244339049, green: 0, blue: 0.1978868842, alpha: 1)
+        label.font = UIFont(name: "Roboto-Bold", size: 18)
+        label.textColor = #colorLiteral(red: 1, green: 0.9833787084, blue: 0.8849565387, alpha: 1)
         return label
     }()
     
@@ -127,16 +125,16 @@ class DetailInfoOverlay: UIView {
     
     lazy var orderLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.font = UIFont(name: "Roboto-Medium", size: 14)
         label.text = "Order"
-        label.textColor = #colorLiteral(red: 0.3479366601, green: 0.3600047827, blue: 0.429291755, alpha: 1)
+        label.textColor = #colorLiteral(red: 0.6117030382, green: 0.6117962003, blue: 0.6116904616, alpha: 1)
         return label
     }()
     
     lazy var orderInfoLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 18)
-        label.textColor = #colorLiteral(red: 0.006244339049, green: 0, blue: 0.1978868842, alpha: 1)
+        label.font = UIFont(name: "Roboto-Bold", size: 18)
+        label.textColor = #colorLiteral(red: 1, green: 0.9833787084, blue: 0.8849565387, alpha: 1)
         return label
     }()
     
@@ -151,38 +149,21 @@ class DetailInfoOverlay: UIView {
     
     lazy var genusLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.font = UIFont(name: "Roboto-Medium", size: 14)
         label.text = "Genus"
-        label.textColor = #colorLiteral(red: 0.3479366601, green: 0.3600047827, blue: 0.429291755, alpha: 1)
+        label.textColor = #colorLiteral(red: 0.6117030382, green: 0.6117962003, blue: 0.6116904616, alpha: 1)
         return label
     }()
     
     lazy var genusInfoLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 18)
-        label.textColor = #colorLiteral(red: 0.006244339049, green: 0, blue: 0.1978868842, alpha: 1)
+        label.font = UIFont(name: "Roboto-Bold", size: 18)
+        label.textColor = #colorLiteral(red: 1, green: 0.9833787084, blue: 0.8849565387, alpha: 1)
         return label
     }()
     
     
-    lazy var summaryTitleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Summary"
-        label.font = UIFont.boldSystemFont(ofSize: 22)
-        label.textColor = #colorLiteral(red: 0.006244339049, green: 0, blue: 0.1978868842, alpha: 1)
-        return label
-    }()
-    
-    lazy var taxonomyTitleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Taxonomy"
-        label.font = UIFont.boldSystemFont(ofSize: 22)
-        label.textColor = #colorLiteral(red: 0.006244339049, green: 0, blue: 0.1978868842, alpha: 1)
-        return label
-    }()
-    
-    func setUIFromSpecies(species: Species) {
-        summaryTextView.text = species.habitat
+    public func setUIFromSpecies(species: Species) {
         kingdomInfoLabel.text = species.kingdom
         classInfoLabel.text = species.classTaxonomy
         familyInfoLabel.text = species.family
@@ -193,8 +174,8 @@ class DetailInfoOverlay: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.backgroundColor = .clear
         setConstraints()
-        self.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.9025845462)
         self.layer.cornerRadius = 10
     }
     
@@ -203,43 +184,37 @@ class DetailInfoOverlay: UIView {
     }
 }
 
-//Constraints
-extension DetailInfoOverlay {
+extension TaxonomyView {
     
-    private func setSummaryTitleLabelConstraints(){
-           NSLayoutConstraint.activate([
-               summaryTitleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 30),
-               summaryTitleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 40),
-               summaryTitleLabel.heightAnchor.constraint(equalToConstant: 30),
-               summaryTitleLabel.widthAnchor.constraint(equalToConstant: 130)
-           ])
-       }
-    
-    private func setSummaryTextViewConstraints(){
-        NSLayoutConstraint.activate([
-            summaryTextView.topAnchor.constraint(equalTo: summaryTitleLabel.bottomAnchor, constant: 10),
-            summaryTextView.leadingAnchor.constraint(equalTo: summaryTitleLabel.leadingAnchor),
-            summaryTextView.widthAnchor.constraint(equalToConstant: 300),
-            summaryTextView.bottomAnchor.constraint(equalTo: taxonomyTitleLabel.topAnchor, constant: -20)
-        ])
+    private func setConstraints() {
+        let UIElements =  [taxonomyTitleLabel, kingdomStackView, classStackView, familyStackView, phylumStackView, orderStackView, genusStackView]
+        
+        UIElements.forEach{ self.addSubview($0) }
+        UIElements.forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
+        
+        setTaxonomyTitleLabelConstraints()
+        setKingdomStackViewConstraints()
+        setClassStackViewConstraints()
+        setFamilyStackViewConstraints()
+        setPhylumStackViewConstraints()
+        setOrderStackViewConstraints()
+        setGenusStackViewConstraints()
     }
-    
-   
     
     
     private func setTaxonomyTitleLabelConstraints(){
         NSLayoutConstraint.activate([
             taxonomyTitleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 30),
-            taxonomyTitleLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            taxonomyTitleLabel.heightAnchor.constraint(equalTo: summaryTitleLabel.heightAnchor),
-            taxonomyTitleLabel.widthAnchor.constraint(equalTo: summaryTitleLabel.widthAnchor)
+            taxonomyTitleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 30),
+            taxonomyTitleLabel.heightAnchor.constraint(equalToConstant: 40),
+            taxonomyTitleLabel.widthAnchor.constraint(equalToConstant: 200)
         ])
     }
     
     
     private func setKingdomStackViewConstraints(){
         NSLayoutConstraint.activate([
-            kingdomStackView.leadingAnchor.constraint(equalTo: summaryTitleLabel.leadingAnchor),
+            kingdomStackView.leadingAnchor.constraint(equalTo: taxonomyTitleLabel.leadingAnchor),
             kingdomStackView.topAnchor.constraint(equalTo: taxonomyTitleLabel.bottomAnchor, constant: 30),
             kingdomStackView.heightAnchor.constraint(equalToConstant: 50),
             kingdomStackView.widthAnchor.constraint(equalToConstant: 150)
@@ -295,22 +270,5 @@ extension DetailInfoOverlay {
             genusStackView.widthAnchor.constraint(equalTo: kingdomStackView.widthAnchor)
         ])
     }
-    
-    
-    private func setConstraints() {
-        let UIElements =  [summaryTitleLabel, taxonomyTitleLabel, kingdomStackView, classStackView, familyStackView, phylumStackView, orderStackView, genusStackView, summaryTextView]
-        
-        UIElements.forEach{ self.addSubview($0) }
-        UIElements.forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
-        
-        setSummaryTitleLabelConstraints()
-        setSummaryTextViewConstraints()
-        setTaxonomyTitleLabelConstraints()
-        setKingdomStackViewConstraints()
-        setClassStackViewConstraints()
-        setFamilyStackViewConstraints()
-        setPhylumStackViewConstraints()
-        setOrderStackViewConstraints()
-        setGenusStackViewConstraints()
-    }
 }
+

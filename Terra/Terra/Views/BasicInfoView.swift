@@ -11,6 +11,7 @@ import UIKit
 class BasicInfoView: UIView {
     lazy var conservationStatusLabel: UILabel = {
         let label = UILabel()
+        label.font = UIFont(name: "Roboto-Light", size: 17)
         label.textAlignment = .center
         label.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         label.backgroundColor = #colorLiteral(red: 0.6787196398, green: 0.2409698367, blue: 0.261569947, alpha: 0.8461579623)
@@ -21,7 +22,7 @@ class BasicInfoView: UIView {
     
     lazy var speciesCommonNameLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 55)
+        label.font = UIFont(name: "Roboto-Bold", size: 55)
         label.textAlignment = .left
         label.numberOfLines = 2
         label.adjustsFontSizeToFitWidth = true
@@ -31,7 +32,7 @@ class BasicInfoView: UIView {
     
     lazy var speciesScientificNameLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 17)
+        label.font = UIFont(name: "Roboto-Light", size: 17)
         label.textColor = .white
         label.backgroundColor = .clear
         return label
@@ -51,7 +52,7 @@ class BasicInfoView: UIView {
         label.textColor = .white
         label.text = "Weight"
         label.textAlignment = .left
-        label.font = UIFont.systemFont(ofSize: 18)
+        label.font = UIFont(name: "Roboto-Medium", size: 18)
         return label
     }()
     
@@ -59,7 +60,7 @@ class BasicInfoView: UIView {
         let label = UILabel()
         label.textColor = .white
         label.textAlignment = .left
-        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.font = UIFont(name: "Roboto-Medium", size: 16)
         return label
     }()
     
@@ -77,7 +78,7 @@ class BasicInfoView: UIView {
         label.textColor = .white
         label.text = "Height"
         label.textAlignment = .left
-        label.font = UIFont.systemFont(ofSize: 18)
+        label.font = UIFont(name: "Roboto-Medium", size: 18)
         return label
     }()
     
@@ -85,7 +86,7 @@ class BasicInfoView: UIView {
         let label = UILabel()
         label.textColor = .white
         label.textAlignment = .left
-        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.font = UIFont(name: "Roboto-Medium", size: 16)
         return label
     }()
     
@@ -103,7 +104,7 @@ class BasicInfoView: UIView {
         label.textColor = .white
         label.text = "Numbers"
         label.textAlignment = .left
-        label.font = UIFont.systemFont(ofSize: 18)
+        label.font = UIFont(name: "Roboto-Medium", size: 18)
         return label
     }()
     
@@ -111,7 +112,7 @@ class BasicInfoView: UIView {
         let label = UILabel()
         label.textColor = .white
         label.textAlignment = .left
-        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.font = UIFont(name: "Roboto-Medium", size: 16)
         return label
         
     }()
@@ -128,6 +129,7 @@ class BasicInfoView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setConstraints()
+        backgroundColor = .clear
     }
     
     required init?(coder: NSCoder) {

@@ -15,7 +15,7 @@ class SpeciesCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.adjustsFontSizeToFitWidth = true
         label.textColor = .white
-        label.font = UIFont.boldSystemFont(ofSize: 23)
+        label.font = UIFont(name: "Roboto-Bold", size: 23)
         label.textAlignment = .left
         return label
     }()
@@ -42,7 +42,7 @@ class SpeciesCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.layer.cornerRadius = 10
+        self.layer.cornerRadius = 39
         self.layer.masksToBounds = true
         setConstraints()
         
