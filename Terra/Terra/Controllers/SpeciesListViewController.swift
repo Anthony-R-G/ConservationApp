@@ -26,7 +26,7 @@ class SpeciesListViewController: UIViewController {
     lazy var subtitleLabel: UILabel = {
         let label = UILabel()
         label.text = "Protect the earth's biodiversity"
-        label.font = UIFont(name: "Roboto-Medium", size: 20)
+        label.font = UIFont(name: "Roboto-Light", size: 20)
         label.textColor = #colorLiteral(red: 0.6699403524, green: 0.6602986455, blue: 0.7864833474, alpha: 1)
         label.textAlignment = .left
         return label

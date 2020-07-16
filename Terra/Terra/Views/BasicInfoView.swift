@@ -11,7 +11,7 @@ import UIKit
 class BasicInfoView: UIView {
     lazy var conservationStatusLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "Roboto-Light", size: 17)
+        label.font = UIFont(name: "Roboto-Medium", size: 17)
         label.textAlignment = .center
         label.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         label.backgroundColor = #colorLiteral(red: 0.6787196398, green: 0.2409698367, blue: 0.261569947, alpha: 0.8461579623)
@@ -143,7 +143,7 @@ extension BasicInfoView {
     
     private func setConservationStatusLabelConstraints() {
         NSLayoutConstraint.activate([
-            conservationStatusLabel.leadingAnchor.constraint(equalTo: speciesCommonNameLabel.leadingAnchor),
+            conservationStatusLabel.leadingAnchor.constraint(equalTo: speciesCommonNameLabel.leadingAnchor, constant: 5),
             conservationStatusLabel.bottomAnchor.constraint(equalTo: speciesCommonNameLabel.topAnchor, constant: -10),
             conservationStatusLabel.heightAnchor.constraint(equalToConstant: 30),
             conservationStatusLabel.widthAnchor.constraint(equalToConstant: 120)

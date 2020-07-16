@@ -87,7 +87,7 @@ extension SpeciesDetailViewController {
     
     private func setBasicInfoViewConstraints() {
         NSLayoutConstraint.activate([
-            basicInfoView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 25),
+            basicInfoView.leadingAnchor.constraint(equalTo: taxonomyView.leadingAnchor),
             basicInfoView.heightAnchor.constraint(equalToConstant: 400),
             basicInfoView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             basicInfoView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: 150)
