@@ -11,8 +11,6 @@ import UIKit
 class SpeciesListViewController: UIViewController {
     
     var scrollView = UIScrollView()
-    var contentView = UIView()
-    
     
     lazy var terraTitleLabel: UILabel = {
         let label = UILabel()
