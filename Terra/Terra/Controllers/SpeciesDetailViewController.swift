@@ -17,7 +17,7 @@ class SpeciesDetailViewController: UIViewController {
     var contentView = UIView()
     
     var basicInfoView = BasicInfoView()
-    var detailInfoOverlayView = DetailInfoOverlay()
+    var taxonomyView = TaxonomyView()
     
     
     private func showWebBrowser(link: URL){
@@ -37,7 +37,7 @@ class SpeciesDetailViewController: UIViewController {
     
     private func setViewsData(){
         basicInfoView.setUIFromSpecies(species: currentSpecies)
-        detailInfoOverlayView.setUIFromSpecies(species: currentSpecies)
+        taxonomyView.setUIFromSpecies(species: currentSpecies)
     }
     
     private func setBackground() {
@@ -59,12 +59,13 @@ class SpeciesDetailViewController: UIViewController {
         setViewsData()
         setConstraints()
         setBackground()
+        taxonomyView.addBlurToView()
         
         scrollView.delegate = self
         scrollView.contentSize = CGSize(width: view.frame.width, height: view.frame.height + 600)
         
         basicInfoView.layer.zPosition = 0
-        detailInfoOverlayView.layer.zPosition = 1
+        taxonomyView.layer.zPosition = 1
     }
 }
 
@@ -75,37 +76,37 @@ extension SpeciesDetailViewController {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         
-        [basicInfoView, detailInfoOverlayView].forEach{ contentView.addSubview($0) }
+        [basicInfoView, taxonomyView].forEach{ contentView.addSubview($0) }
         
-        [basicInfoView, detailInfoOverlayView].forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
+        [basicInfoView, taxonomyView, contentView, scrollView].forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
         
         setBasicInfoViewConstraints()
-        setDetailInfoOverlayConstraints()
+        setTaxonomyViewConstraints()
     }
     
     
     private func setBasicInfoViewConstraints() {
         NSLayoutConstraint.activate([
-            basicInfoView.leadingAnchor.constraint(equalTo: detailInfoOverlayView.leadingAnchor),
+            basicInfoView.leadingAnchor.constraint(equalTo: taxonomyView.leadingAnchor),
             basicInfoView.heightAnchor.constraint(equalToConstant: 400),
-            basicInfoView.widthAnchor.constraint(equalToConstant: 380),
+            basicInfoView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             basicInfoView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: 150)
         ])
     }
     
-    private func setDetailInfoOverlayConstraints(){
+    private func setTaxonomyViewConstraints(){
         NSLayoutConstraint.activate([
-            detailInfoOverlayView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 20),
-            detailInfoOverlayView.heightAnchor.constraint(equalToConstant: 700),
-            detailInfoOverlayView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.97),
-            detailInfoOverlayView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: 700)
+            taxonomyView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            taxonomyView.topAnchor.constraint(equalTo: basicInfoView.bottomAnchor),
+            taxonomyView.widthAnchor.constraint(equalToConstant: 375),
+            taxonomyView.heightAnchor.constraint(equalToConstant: 420)
+            
         ])
     }
     
     
     private func setScrollViewConstraints(){
         scrollView.backgroundColor = .clear
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -117,7 +118,6 @@ extension SpeciesDetailViewController {
     
     private func setContentViewConstraints() {
         contentView.backgroundColor = .clear
-        contentView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             contentView.heightAnchor.constraint(equalTo: scrollView.heightAnchor),
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
@@ -136,18 +136,12 @@ extension SpeciesDetailViewController {
 
 extension SpeciesDetailViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let offset = scrollView.contentOffset.y
-        //        if(offset > 500){
-        //            print(offset)
-        //            self.basicInfoView.frame = CGRect(x: 0, y: offset , width: self.view.bounds.size.width, height: 100)
-        //        }else{
-        //            self.basicInfoView.frame = CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: 100)
-        //        }
-        print(offset)
-        if offset >= 350 {
-            print("Pin it now")
-            self.basicInfoView.frame = CGRect(x: 50, y: offset - 50, width: self.basicInfoView.bounds.size.width, height: self.basicInfoView.bounds.size.height)
-        }
+//        let offset = scrollView.contentOffset.y
+//        print(offset)
+//        if offset >= 350 {
+//            print("Pin it now")
+//            self.basicInfoView.frame = CGRect(x: 50, y: offset - 50, width: self.basicInfoView.bounds.size.width, height: self.basicInfoView.bounds.size.height)
+//        }
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
