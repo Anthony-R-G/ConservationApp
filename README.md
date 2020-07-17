@@ -12,7 +12,7 @@ One principle behind the app is keeping the design clean and visually appealing.
 ## Technologies 
 Written in Swift using UIKIt
 
-Firebase 
+Firebase is used as the backend. Writing to Firebase is managed via a [separate helper app](https://github.com/Anthony-R-G/Terra-Data-Upload-Helper).
 
 Coming:
 
