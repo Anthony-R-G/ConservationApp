@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		19776F61E160979180B663A6 /* Pods_Terra.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE42C1881D1D06662F3B9FCB /* Pods_Terra.framework */; };
 		1B62D350359E3EC3E7DCD905 /* Pods_TerraTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7A593764653FD2CA6FCF609 /* Pods_TerraTests.framework */; };
+		970B172524C2699E007F32E0 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970B172424C2699E007F32E0 /* DetailViewController.swift */; };
 		9711D8F724BD199700C2E6F1 /* Species.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9711D8F624BD199700C2E6F1 /* Species.swift */; };
 		9711D8FC24BD42C800C2E6F1 /* Firestore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9711D8FB24BD42C800C2E6F1 /* Firestore.swift */; };
 		9711D91F24BD63B000C2E6F1 /* HabitatSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9711D91E24BD63B000C2E6F1 /* HabitatSystem.swift */; };
@@ -47,6 +48,7 @@
 		42D0D51BD52A7CAD33C1E43E /* Pods-Terra.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Terra.debug.xcconfig"; path = "Target Support Files/Pods-Terra/Pods-Terra.debug.xcconfig"; sourceTree = "<group>"; };
 		92CD523210206FB0D28007E5 /* Pods-TerraTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TerraTests.debug.xcconfig"; path = "Target Support Files/Pods-TerraTests/Pods-TerraTests.debug.xcconfig"; sourceTree = "<group>"; };
 		94CD7C78C9210265A4DBE952 /* Pods-Terra.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Terra.release.xcconfig"; path = "Target Support Files/Pods-Terra/Pods-Terra.release.xcconfig"; sourceTree = "<group>"; };
+		970B172424C2699E007F32E0 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		9711D8F624BD199700C2E6F1 /* Species.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Species.swift; sourceTree = "<group>"; };
 		9711D8FB24BD42C800C2E6F1 /* Firestore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Firestore.swift; sourceTree = "<group>"; };
 		9711D91E24BD63B000C2E6F1 /* HabitatSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitatSystem.swift; sourceTree = "<group>"; };
@@ -209,6 +211,7 @@
 			children = (
 				97BF745223DF42F90058F2D7 /* SpeciesListViewController.swift */,
 				979C191723DE43E900651B2B /* SpeciesDetailViewController.swift */,
+				970B172424C2699E007F32E0 /* DetailViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -402,6 +405,7 @@
 				97E9450424BE10C800550824 /* ConservationStatus.swift in Sources */,
 				9735688F24BFDC8900D17F19 /* TaxonomyView.swift in Sources */,
 				9711D8F724BD199700C2E6F1 /* Species.swift in Sources */,
+				970B172524C2699E007F32E0 /* DetailViewController.swift in Sources */,
 				97FEAEAC24BE5FCC005BAEFE /* Utilities.swift in Sources */,
 				97B68CD424BBB0AC005B8AB8 /* BasicInfoView.swift in Sources */,
 				9711D91F24BD63B000C2E6F1 /* HabitatSystem.swift in Sources */,

@@ -310,7 +310,7 @@ extension SpeciesListViewController: UICollectionViewDelegateFlowLayout {
         default: ()
         }
         
-        let detailVC = SpeciesDetailViewController()
+        let detailVC = DetailViewController()
         detailVC.currentSpecies = specificAnimal
         self.present(detailVC, animated: true, completion: nil)
     }

@@ -9,7 +9,7 @@
 import UIKit
 
 class BasicInfoView: UIView {
-    lazy var conservationStatusLabel: UILabel = {
+    private lazy var conservationStatusLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Roboto-Medium", size: 17)
         label.textAlignment = .center
@@ -20,17 +20,18 @@ class BasicInfoView: UIView {
         return label
     }()
     
-    lazy var speciesCommonNameLabel: UILabel = {
+     private lazy var speciesCommonNameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Roboto-Bold", size: 55)
         label.textAlignment = .left
         label.numberOfLines = 2
+        label.backgroundColor = .purple
         label.adjustsFontSizeToFitWidth = true
         label.textColor = .white
         return label
     }()
     
-    lazy var speciesScientificNameLabel: UILabel = {
+    private lazy var speciesScientificNameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Roboto-Light", size: 17)
         label.textColor = .white
@@ -38,7 +39,7 @@ class BasicInfoView: UIView {
         return label
     }()
     
-    lazy var weightStackView: UIStackView = {
+    private lazy var weightStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [weightLabel, weightInfoLabel])
         stackView.alignment = .fill
         stackView.distribution = .equalSpacing
@@ -47,7 +48,7 @@ class BasicInfoView: UIView {
         return stackView
     }()
     
-    lazy var weightLabel: UILabel = {
+    private lazy var weightLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
         label.text = "Weight"
@@ -56,7 +57,7 @@ class BasicInfoView: UIView {
         return label
     }()
     
-    lazy var weightInfoLabel: UILabel = {
+    private lazy var weightInfoLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
         label.textAlignment = .left
@@ -64,7 +65,7 @@ class BasicInfoView: UIView {
         return label
     }()
     
-    lazy var heightStackView: UIStackView = {
+    private lazy var heightStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [heightLabel, heightInfoLabel])
         stackView.alignment = .fill
         stackView.distribution = .equalSpacing
@@ -73,7 +74,7 @@ class BasicInfoView: UIView {
         return stackView
     }()
     
-    lazy var heightLabel: UILabel = {
+    private lazy var heightLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
         label.text = "Height"
@@ -82,7 +83,7 @@ class BasicInfoView: UIView {
         return label
     }()
     
-    lazy var heightInfoLabel: UILabel = {
+    private lazy var heightInfoLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
         label.textAlignment = .left
@@ -90,7 +91,7 @@ class BasicInfoView: UIView {
         return label
     }()
     
-    lazy var numbersStackView: UIStackView = {
+    private lazy var numbersStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [numbersLabel, numbersInfoLabel])
         stackView.alignment = .fill
         stackView.distribution = .equalSpacing
@@ -99,7 +100,7 @@ class BasicInfoView: UIView {
         return stackView
     }()
     
-    lazy var numbersLabel: UILabel = {
+    private lazy var numbersLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
         label.text = "Numbers"
@@ -108,7 +109,7 @@ class BasicInfoView: UIView {
         return label
     }()
     
-    lazy var numbersInfoLabel: UILabel = {
+    private lazy var numbersInfoLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
         label.textAlignment = .left
@@ -117,7 +118,7 @@ class BasicInfoView: UIView {
         
     }()
     
-    func setUIFromSpecies(species: Species) {
+    public func setUIFromSpecies(species: Species) {
         speciesCommonNameLabel.text = species.commonName
         speciesScientificNameLabel.text = "— \(species.scientificName)"
         numbersInfoLabel.text = species.populationNumbers
@@ -129,7 +130,7 @@ class BasicInfoView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setConstraints()
-        backgroundColor = .clear
+        backgroundColor = .purple
     }
     
     required init?(coder: NSCoder) {
@@ -140,6 +141,20 @@ class BasicInfoView: UIView {
 
 //Constraints
 extension BasicInfoView {
+    
+    private func setConstraints() {
+//          let UIElements = [speciesCommonNameLabel, speciesScientificNameLabel, conservationStatusLabel, numbersStackView, weightStackView, heightStackView]
+        let UIElements = [speciesCommonNameLabel]
+          UIElements.forEach{ self.addSubview($0) }
+          UIElements.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
+          
+//          setConservationStatusLabelConstraints()
+          setSpeciesCommonNameLabelConstraints()
+//          setSpeciesScientificNameLabelConstraints()
+//          setNumbersStackConstraints()
+//          setWeightStackConstraints()
+//          setHeightStackConstraints()
+      }
     
     private func setConservationStatusLabelConstraints() {
         NSLayoutConstraint.activate([
@@ -156,7 +171,7 @@ extension BasicInfoView {
             speciesCommonNameLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             speciesCommonNameLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0),
             speciesCommonNameLabel.widthAnchor.constraint(equalToConstant: 300),
-            speciesCommonNameLabel.heightAnchor.constraint(equalToConstant: 145)
+            speciesCommonNameLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.8)
         ])
     }
     
@@ -194,19 +209,5 @@ extension BasicInfoView {
             heightStackView.heightAnchor.constraint(equalTo: numbersStackView.heightAnchor),
             heightStackView.widthAnchor.constraint(equalTo: numbersStackView.widthAnchor)
         ])
-    }
-    
-    
-    private func setConstraints() {
-        let UIElements = [speciesCommonNameLabel, speciesScientificNameLabel, conservationStatusLabel, numbersStackView, weightStackView, heightStackView]
-        UIElements.forEach{ self.addSubview($0) }
-        UIElements.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
-        
-        setConservationStatusLabelConstraints()
-        setSpeciesCommonNameLabelConstraints()
-        setSpeciesScientificNameLabelConstraints()
-        setNumbersStackConstraints()
-        setWeightStackConstraints()
-        setHeightStackConstraints()
     }
 }
