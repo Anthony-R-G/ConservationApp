@@ -9,9 +9,9 @@
 import UIKit
 import Kingfisher
 
-class SpeciesCollectionViewCell: UICollectionViewCell {
+final class SpeciesCollectionViewCell: UICollectionViewCell {
     
-    lazy var speciesNameLabel: UILabel = {
+   private lazy var speciesNameLabel: UILabel = {
         let label = UILabel()
         label.adjustsFontSizeToFitWidth = true
         label.textColor = .white
@@ -20,22 +20,22 @@ class SpeciesCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    lazy var speciesImage: UIImageView = {
+   private lazy var backgroundImage: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
         return iv
     }()
     
-    lazy var textShadow: GradientView = {
+    private lazy var textShadow: GradientView = {
         let gv = GradientView()
         return gv
     }()
     
-    func configureCell(from species: Species) {
+    public func configureCell(from species: Species) {
         speciesNameLabel.text = species.commonName
         let imageURL = URL(string: species.cellImage)
-        speciesImage.kf.setImage(with: imageURL)
-        speciesImage.kf.indicatorType = .activity
+        backgroundImage.kf.setImage(with: imageURL)
+        backgroundImage.kf.indicatorType = .activity
         backgroundColor = species.habitatSystem == .marine ? #colorLiteral(red: 0.2312238216, green: 0.3822638988, blue: 0.7663728595, alpha: 1) : #colorLiteral(red: 0.8971922994, green: 0.4322043657, blue: 0.1033880934, alpha: 1)
     }
     
@@ -51,7 +51,7 @@ class SpeciesCollectionViewCell: UICollectionViewCell {
         let backgroundOverlay = GradientView(frame: self.contentView.bounds)
         backgroundOverlay.startColor = .clear
         backgroundOverlay.endColor = #colorLiteral(red: 0.06859237701, green: 0.08213501424, blue: 0.2409383953, alpha: 0.6547784675)
-        self.insertSubview(speciesImage, at: 0)
+        self.insertSubview(backgroundImage, at: 0)
         self.insertSubview(backgroundOverlay, at: 1)
     }
     
@@ -64,8 +64,8 @@ class SpeciesCollectionViewCell: UICollectionViewCell {
 extension SpeciesCollectionViewCell {
     
     private func setConstraints(){
-        [speciesNameLabel, speciesImage].forEach{addSubview($0)}
-        [speciesNameLabel, speciesImage].forEach{$0.translatesAutoresizingMaskIntoConstraints = false }
+        [speciesNameLabel, backgroundImage].forEach{addSubview($0)}
+        [speciesNameLabel, backgroundImage].forEach{$0.translatesAutoresizingMaskIntoConstraints = false }
         
         setSpeciesImageConstraints()
         setSpeciesNameLabelConstraints()
@@ -83,10 +83,10 @@ extension SpeciesCollectionViewCell {
     
     private func setSpeciesImageConstraints() {
         NSLayoutConstraint.activate([
-            speciesImage.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            speciesImage.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            speciesImage.heightAnchor.constraint(equalTo: contentView.heightAnchor),
-            speciesImage.widthAnchor.constraint(equalTo: contentView.widthAnchor)
+            backgroundImage.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            backgroundImage.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            backgroundImage.heightAnchor.constraint(equalTo: contentView.heightAnchor),
+            backgroundImage.widthAnchor.constraint(equalTo: contentView.widthAnchor)
         ])
     }
 }

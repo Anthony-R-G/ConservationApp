@@ -1,173 +1,150 @@
 //
-//  ViewController.swift
+//  DetailViewController.swift
 //  Terra
 //
-//  Created by Anthony Gonzalez on 1/26/20.
+//  Created by Anthony Gonzalez on 7/17/20.
 //  Copyright © 2020 Antnee. All rights reserved.
 //
 
 import UIKit
-import SafariServices
-import Kingfisher
 
-class SpeciesDetailViewController: UIViewController {
+class DetailViewController: UIViewController {
     
-    var currentSpecies: Species!
+    //MARK: -- UI Element Initialization
+    private lazy var scrollView: UIScrollView = {
+        let sv = UIScrollView()
+        return sv
+    }()
     
-    var scrollView = UIScrollView()
-//    var contentView = UIView()
+    private lazy var backgroundImageView: UIImageView = {
+        let iv = UIImageView()
+        iv.translatesAutoresizingMaskIntoConstraints = false
+        iv.contentMode = UIView.ContentMode.scaleAspectFill
+        self.view.insertSubview(iv, at: 0)
+        return iv
+    }()
     
-    var basicInfoView = BasicInfoView()
-//    var basicInfoViewisPinnedToTop = false
-//    var taxonomyView = TaxonomyView()
+    private lazy var backgroundGradientOverlay: GradientView = {
+        let gv = GradientView()
+        gv.translatesAutoresizingMaskIntoConstraints = false
+        gv.startColor = .clear
+        gv.endColor = #colorLiteral(red: 0.06859237701, green: 0.08213501424, blue: 0.2409383953, alpha: 0.8456228596)
+        self.view.insertSubview(gv, at: 1)
+        return gv
+    }()
     
     
-    //    private func showWebBrowser(link: URL){
-    //        let config = SFSafariViewController.Configuration()
-    //        config.entersReaderIfAvailable = true
-    //        let safariVC = SFSafariViewController(url: link, configuration: config)
-    //        present(safariVC, animated: true)
-    //    }
+    private lazy var basicInfoView: BasicInfoView = {
+        let biv = BasicInfoView()
+        biv.backgroundColor = .black
+        var frame = biv.frame
+        frame.size.height = 375
+        biv.frame = frame
+        return biv
+    }()
     
-    //    private func eventLinkButtonPressed(_ sender: UIButton) {
-    //         showWebBrowser(link: URL(string: currentSpecies.donationLink)!)
-    //    }
+    private lazy var basicInfoViewHeightConstraint: NSLayoutConstraint = {
+        return basicInfoView.heightAnchor.constraint(equalToConstant: basicInfoView.frame.height)
+    }()
     
-//    override var prefersStatusBarHidden: Bool {
-//        return true
-//    }
+    //MARK: -- Property Initialization
+    public var currentSpecies: Species!
     
-    private func setViewsData(){
+    private func setUIFromSpecies() {
         basicInfoView.setViewElementsFromSpeciesData(species: currentSpecies)
-//        taxonomyView.setUIFromSpecies(species: currentSpecies)
     }
     
     private func setBackground() {
-        view.backgroundColor = .darkGray
-        let backgroundImageView = UIImageView(frame: UIScreen.main.bounds)
         let imageURL = URL(string: currentSpecies!.detailImage)
-        backgroundImageView.kf.setImage(
-            with: imageURL,
-            placeholder: nil,
-            options: [
-                .scaleFactor(UIScreen.main.scale),
-                .transition(.fade(5)),
-                .cacheOriginalImage
-            ])
-        {
-            result in
-            switch result {
-            case .success( _): ()
-            //                print("Task done for: \(value.source.url?.absoluteString ?? "")")
-            case .failure( _): ()
-                //                print("Job failed: \(error.localizedDescription)")
-            }
-        }
-        backgroundImageView.contentMode = UIView.ContentMode.scaleAspectFill
-        self.view.insertSubview(backgroundImageView, at: 0)
-        
-        let backgroundOverlay = GradientView(frame: UIScreen.main.bounds)
-        backgroundOverlay.startColor = .clear
-        backgroundOverlay.endColor = #colorLiteral(red: 0.06859237701, green: 0.08213501424, blue: 0.2409383953, alpha: 0.8456228596)
-        self.view.insertSubview(backgroundOverlay, at: 1)
+        backgroundImageView.kf.setImage(with: imageURL)
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .red
-        setViewsData()
-        setConstraints()
-//        setBackground()
-//        taxonomyView.addBlurToView()
-        
+    private func setDelegates() {
         scrollView.delegate = self
-        scrollView.contentSize = CGSize(width: view.frame.width, height: view.frame.height + 600)
-        
-//        basicInfoView.layer.zPosition = 1
-//        taxonomyView.layer.zPosition = 0
-        
     }
-}
-
-
-//MARK: -- Constraints
-extension SpeciesDetailViewController {
-    private func setConstraints() {
-        view.addSubview(scrollView)
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-//        scrollView.addSubview(contentView)
-        
-        [basicInfoView].forEach{ scrollView.addSubview($0) }
-        basicInfoView.translatesAutoresizingMaskIntoConstraints = false
-        
-//        [basicInfoView, contentView, scrollView].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
-        
-        setBasicInfoViewConstraints()
-//        setTaxonomyViewConstraints()
-    }
-    
-    private func setScrollViewConstraints(){
-           scrollView.backgroundColor = .blue
-           NSLayoutConstraint.activate([
-               scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-               scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-               scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-               scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-           ])
-       }
-    
-    
-    private func setBasicInfoViewConstraints() {
-        NSLayoutConstraint.activate([
-            basicInfoView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 20),
-            basicInfoView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            basicInfoView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor, constant: 150),
-            basicInfoView.heightAnchor.constraint(equalToConstant: 375)
-        ])
-    }
-    
-//    private func setTaxonomyViewConstraints(){
-//        NSLayoutConstraint.activate([
-//            taxonomyView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            taxonomyView.topAnchor.constraint(equalTo: basicInfoView.bottomAnchor),
-//            taxonomyView.widthAnchor.constraint(equalToConstant: 375),
-//            taxonomyView.heightAnchor.constraint(equalToConstant: 420)
-//
-//        ])
-//    }
-    
-    
-//    private func setContentViewConstraints() {
-//        contentView.backgroundColor = .clear
-//        NSLayoutConstraint.activate([
-//            contentView.heightAnchor.constraint(equalTo: scrollView.heightAnchor),
-//            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-//            contentView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
-//            contentView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor)
-//        ])
-//    }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         setScrollViewConstraints()
-//        setContentViewConstraints()
+        
+        scrollView.contentSize = CGSize(width: view.frame.width, height: view.frame.height + 600)
+    }
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .gray
+        
+        addSubviews()
+        setConstraints()
+        setDelegates()
+        
+        setUIFromSpecies()
+        setBackground()
+        
     }
 }
 
-
-extension SpeciesDetailViewController: UIScrollViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        let initialFrame = CGRect(x: 19.666666666666657 , y: 371.0, width: 394.3333333333333, height: 400.0)
-        let y = 375 - (scrollView.contentOffset.y)
-        let h = max(100, y)
+//MARK: -- Extension to Add Subviews & Constraints
+extension DetailViewController {
+    private func addSubviews() {
+        view.addSubview(scrollView)
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
         
-//        print(offset)
-//        if offset >= 370 {
-//            basicInfoViewisPinnedToTop = true
-//            self.basicInfoView.frame = CGRect(x: self.basicInfoView.frame.minX, y: offset - 50, width: self.basicInfoView.bounds.size.width, height: self.basicInfoView.bounds.size.height)
-//        } else if offset == 0 && basicInfoViewisPinnedToTop == true {
-//            basicInfoViewisPinnedToTop = false
-//            self.basicInfoView.frame = initialFrame
-//        }
+        scrollView.addSubview(basicInfoView)
+        basicInfoView.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    private func setConstraints() {
+        setBackgroundImageViewConstraints()
+        setBackgroundGradientOverlayConstraints()
+        setBasicInfoViewConstraints()
+    }
+    
+    private func setScrollViewConstraints() {
+        scrollView.backgroundColor = .clear
+        NSLayoutConstraint.activate([
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+    }
+    
+    private func setBackgroundGradientOverlayConstraints() {
+        NSLayoutConstraint.activate([
+            backgroundGradientOverlay.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            backgroundGradientOverlay.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            backgroundGradientOverlay.widthAnchor.constraint(equalTo: view.widthAnchor),
+            backgroundGradientOverlay.heightAnchor.constraint(equalTo: view.heightAnchor)
+        ])
+    }
+    
+    private func setBasicInfoViewConstraints() {
+        NSLayoutConstraint.activate([
+            basicInfoView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 20),
+            basicInfoView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            basicInfoView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor, constant: 150),
+            basicInfoViewHeightConstraint
+        ])
+    }
+    
+    private func setBackgroundImageViewConstraints() {
+        NSLayoutConstraint.activate([
+            backgroundImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            backgroundImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            backgroundImageView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            backgroundImageView.heightAnchor.constraint(equalTo: view.heightAnchor)
+        ])
+    }
+}
+
+extension DetailViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        let y = 375 - (scrollView.contentOffset.y)
+        let height = max(150, y)
+        
+        basicInfoViewHeightConstraint.constant = height
     }
 }
