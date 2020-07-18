@@ -20,14 +20,16 @@ class BasicInfoView: UIView {
         return label
     }()
     
-     private lazy var speciesCommonNameLabel: UILabel = {
+    private lazy var speciesCommonNameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Roboto-Bold", size: 55)
-        label.textAlignment = .left
-        label.numberOfLines = 2
-        label.backgroundColor = .purple
-        label.adjustsFontSizeToFitWidth = true
         label.textColor = .white
+        label.textAlignment = .left
+        label.minimumScaleFactor = 0.5
+        label.numberOfLines = 0
+        label.backgroundColor = .orange
+        label.adjustsFontSizeToFitWidth = true
+        label.sizeToFit()
         return label
     }()
     
@@ -35,7 +37,9 @@ class BasicInfoView: UIView {
         let label = UILabel()
         label.font = UIFont(name: "Roboto-Light", size: 17)
         label.textColor = .white
-        label.backgroundColor = .clear
+        label.textAlignment = .left
+        label.backgroundColor = .purple
+        label.adjustsFontSizeToFitWidth = true
         return label
     }()
     
@@ -118,11 +122,11 @@ class BasicInfoView: UIView {
         
     }()
     
-    public func setUIFromSpecies(species: Species) {
+    public func setViewElementsFromSpeciesData(species: Species) {
+        conservationStatusLabel.text = species.conservationStatus.rawValue
         speciesCommonNameLabel.text = species.commonName
         speciesScientificNameLabel.text = "— \(species.scientificName)"
         numbersInfoLabel.text = species.populationNumbers
-        conservationStatusLabel.text = species.conservationStatus.rawValue
         weightInfoLabel.text = species.weight
         heightInfoLabel.text = species.height
     }
@@ -143,18 +147,18 @@ class BasicInfoView: UIView {
 extension BasicInfoView {
     
     private func setConstraints() {
-//          let UIElements = [speciesCommonNameLabel, speciesScientificNameLabel, conservationStatusLabel, numbersStackView, weightStackView, heightStackView]
-        let UIElements = [speciesCommonNameLabel]
-          UIElements.forEach{ self.addSubview($0) }
-          UIElements.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
-          
-//          setConservationStatusLabelConstraints()
-          setSpeciesCommonNameLabelConstraints()
-//          setSpeciesScientificNameLabelConstraints()
-//          setNumbersStackConstraints()
-//          setWeightStackConstraints()
-//          setHeightStackConstraints()
-      }
+        //          let UIElements = [speciesCommonNameLabel, speciesScientificNameLabel, conservationStatusLabel, numbersStackView, weightStackView, heightStackView]
+        let UIElements = [speciesCommonNameLabel, speciesScientificNameLabel]
+        UIElements.forEach { self.addSubview($0) }
+        UIElements.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
+        
+        //          setConservationStatusLabelConstraints()
+        setSpeciesCommonNameLabelConstraints()
+        setSpeciesScientificNameLabelConstraints()
+        //          setNumbersStackConstraints()
+        //          setWeightStackConstraints()
+        //          setHeightStackConstraints()
+    }
     
     private func setConservationStatusLabelConstraints() {
         NSLayoutConstraint.activate([
@@ -170,8 +174,8 @@ extension BasicInfoView {
         NSLayoutConstraint.activate([
             speciesCommonNameLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             speciesCommonNameLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0),
-            speciesCommonNameLabel.widthAnchor.constraint(equalToConstant: 300),
-            speciesCommonNameLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.8)
+            speciesCommonNameLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.7),
+            speciesCommonNameLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.6)
         ])
     }
     
@@ -179,8 +183,8 @@ extension BasicInfoView {
         NSLayoutConstraint.activate([
             speciesScientificNameLabel.topAnchor.constraint(equalTo: speciesCommonNameLabel.bottomAnchor),
             speciesScientificNameLabel.leadingAnchor.constraint(equalTo: speciesCommonNameLabel.leadingAnchor),
-            speciesScientificNameLabel.heightAnchor.constraint(equalToConstant: 30),
-            speciesScientificNameLabel.widthAnchor.constraint(equalToConstant: 300)
+            speciesScientificNameLabel.heightAnchor.constraint(equalTo: speciesCommonNameLabel.heightAnchor, multiplier: 0.4),
+            speciesScientificNameLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.5)
         ])
     }
     

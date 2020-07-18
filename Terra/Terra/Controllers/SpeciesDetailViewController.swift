@@ -38,7 +38,7 @@ class SpeciesDetailViewController: UIViewController {
 //    }
     
     private func setViewsData(){
-        basicInfoView.setUIFromSpecies(species: currentSpecies)
+        basicInfoView.setViewElementsFromSpeciesData(species: currentSpecies)
 //        taxonomyView.setUIFromSpecies(species: currentSpecies)
     }
     

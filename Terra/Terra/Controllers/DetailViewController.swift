@@ -11,7 +11,7 @@ import UIKit
 class DetailViewController: UIViewController {
     
     //MARK: -- UI Element Initialization
-   private lazy var scrollView: UIScrollView = {
+    private lazy var scrollView: UIScrollView = {
         let sv = UIScrollView()
         return sv
     }()
@@ -36,6 +36,7 @@ class DetailViewController: UIViewController {
     
     private lazy var basicInfoView: BasicInfoView = {
         let biv = BasicInfoView()
+        biv.backgroundColor = .black
         var frame = biv.frame
         frame.size.height = 375
         biv.frame = frame
@@ -50,7 +51,7 @@ class DetailViewController: UIViewController {
     public var currentSpecies: Species!
     
     private func setUIFromSpecies() {
-        basicInfoView.setUIFromSpecies(species: currentSpecies)
+        basicInfoView.setViewElementsFromSpeciesData(species: currentSpecies)
     }
     
     private func setBackground() {
@@ -111,19 +112,19 @@ extension DetailViewController {
     }
     
     private func setBackgroundGradientOverlayConstraints() {
-           NSLayoutConstraint.activate([
-               backgroundGradientOverlay.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-               backgroundGradientOverlay.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-               backgroundGradientOverlay.widthAnchor.constraint(equalTo: view.widthAnchor),
-               backgroundGradientOverlay.heightAnchor.constraint(equalTo: view.heightAnchor)
-           ])
-       }
+        NSLayoutConstraint.activate([
+            backgroundGradientOverlay.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            backgroundGradientOverlay.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            backgroundGradientOverlay.widthAnchor.constraint(equalTo: view.widthAnchor),
+            backgroundGradientOverlay.heightAnchor.constraint(equalTo: view.heightAnchor)
+        ])
+    }
     
     private func setBasicInfoViewConstraints() {
         NSLayoutConstraint.activate([
-            basicInfoView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-            basicInfoView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            basicInfoView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor),
+            basicInfoView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 20),
+            basicInfoView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            basicInfoView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor, constant: 150),
             basicInfoViewHeightConstraint
         ])
     }
@@ -143,7 +144,7 @@ extension DetailViewController: UIScrollViewDelegate {
         
         let y = 375 - (scrollView.contentOffset.y)
         let height = max(150, y)
-        print(height)
+        
         basicInfoViewHeightConstraint.constant = height
     }
 }
