@@ -35,30 +35,42 @@ class DetailViewController: UIViewController {
     }()
     
     
-    private lazy var basicInfoView: BasicInfoView = {
-        let biv = BasicInfoView()
-        var frame = biv.frame
+    private lazy var headerNameView: HeaderNameView = {
+        let hiv = HeaderNameView()
+        var frame = hiv.frame
         frame.size.height = 275
-        biv.frame = frame
-        biv.backgroundColor = .black
-        return biv
+        hiv.frame = frame
+        hiv.backgroundColor = .black
+        return hiv
     }()
     
-    private lazy var basicInfoViewHeightConstraint: NSLayoutConstraint = {
-        return basicInfoView.heightAnchor.constraint(equalToConstant: basicInfoView.frame.height)
+    private lazy var subheaderInfoView: SubheaderInfoView = {
+        let siv = SubheaderInfoView()
+        var frame = siv.frame
+        frame.size.height = 80
+        siv.frame = frame
+        siv.backgroundColor = .red
+        return siv
     }()
     
-    private lazy var basicInfoViewTopAnchorConstraint: NSLayoutConstraint = {
-        return basicInfoView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 500)
+    private lazy var headerNameViewHeightConstraint: NSLayoutConstraint = {
+        return headerNameView.heightAnchor.constraint(equalToConstant: headerNameView.frame.height)
+    }()
+    
+    private lazy var headerNameViewTopAnchorConstraint: NSLayoutConstraint = {
+        return headerNameView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 450)
+    }()
+    
+    private lazy var subheaderInfoViewHeightConstraint: NSLayoutConstraint = {
+        return subheaderInfoView.heightAnchor.constraint(equalToConstant: subheaderInfoView.frame.height)
     }()
     
     //MARK: -- Property Initialization
     public var currentSpecies: Species!
     
-    var basicInfoViewisPinnedToTop = false
-    
     private func setUIFromSpecies() {
-        basicInfoView.setViewElementsFromSpeciesData(species: currentSpecies)
+        headerNameView.setViewElementsFromSpeciesData(species: currentSpecies)
+        subheaderInfoView.setViewElementsFromSpeciesData(species: currentSpecies)
     }
     
     private func setBackground() {
@@ -97,14 +109,17 @@ extension DetailViewController {
         view.addSubview(scrollView)
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         
-        scrollView.addSubview(basicInfoView)
-        basicInfoView.translatesAutoresizingMaskIntoConstraints = false
+        
+        let UIElements = [headerNameView, subheaderInfoView]
+        UIElements.forEach{ scrollView.addSubview($0) }
+        UIElements.forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
     }
     
     private func setConstraints() {
         setBackgroundImageViewConstraints()
         setBackgroundGradientOverlayConstraints()
-        setBasicInfoViewConstraints()
+        setHeaderInfoViewConstraints()
+        setSubheaderInfoViewConstraints()
     }
     
     private func setScrollViewConstraints() {
@@ -114,6 +129,14 @@ extension DetailViewController {
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             scrollView.topAnchor.constraint(equalTo: view.topAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+    }
+    private func setBackgroundImageViewConstraints() {
+        NSLayoutConstraint.activate([
+            backgroundImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            backgroundImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            backgroundImageView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            backgroundImageView.heightAnchor.constraint(equalTo: view.heightAnchor)
         ])
     }
     
@@ -126,21 +149,21 @@ extension DetailViewController {
         ])
     }
     
-    private func setBasicInfoViewConstraints() {
+    private func setHeaderInfoViewConstraints() {
         NSLayoutConstraint.activate([
-            basicInfoView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 20),
-            basicInfoView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-            basicInfoViewTopAnchorConstraint,
-            basicInfoViewHeightConstraint
+            headerNameView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 20),
+            headerNameView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            headerNameViewTopAnchorConstraint,
+            headerNameViewHeightConstraint
         ])
     }
     
-    private func setBackgroundImageViewConstraints() {
+    private func setSubheaderInfoViewConstraints() {
         NSLayoutConstraint.activate([
-            backgroundImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            backgroundImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            backgroundImageView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            backgroundImageView.heightAnchor.constraint(equalTo: view.heightAnchor)
+            subheaderInfoView.leadingAnchor.constraint(equalTo: headerNameView.leadingAnchor),
+            subheaderInfoView.trailingAnchor.constraint(equalTo: headerNameView.trailingAnchor),
+            subheaderInfoView.topAnchor.constraint(equalTo: headerNameView.bottomAnchor, constant: 20),
+            subheaderInfoViewHeightConstraint
         ])
     }
 }
@@ -150,16 +173,19 @@ extension DetailViewController: UIScrollViewDelegate {
         let offset = scrollView.contentOffset.y
         
         let y = 275 - (offset)
-        let height = max(150, y)
-        basicInfoViewHeightConstraint.constant = height
-        
+        let hnvHeight = max(150, y)
+        headerNameViewHeightConstraint.constant = hnvHeight
         
         let alphaOffset = (offset/1300)
         let alpha = max(0, alphaOffset)
         backgroundGradientOverlay.startColor = #colorLiteral(red: 0.06859237701, green: 0.08213501424, blue: 0.2409383953, alpha: Float(alpha))
         
         let topAnchorConstant = 400 - offset
-        let topAnchor = max(0, topAnchorConstant)
-        basicInfoViewTopAnchorConstraint.constant = topAnchor
+        let topAnchor = max(50, topAnchorConstant)
+        headerNameViewTopAnchorConstraint.constant = topAnchor
+        
+        let y2 = 80 - (offset)
+        let sivHeight = max(50, y2)
+        subheaderInfoViewHeightConstraint.constant = sivHeight
     }
 }

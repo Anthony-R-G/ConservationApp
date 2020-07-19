@@ -17,7 +17,7 @@ class SpeciesDetailViewController: UIViewController {
     var scrollView = UIScrollView()
 //    var contentView = UIView()
     
-    var basicInfoView = BasicInfoView()
+    var basicInfoView = HeaderNameView()
     var basicInfoViewisPinnedToTop = false
 //    var taxonomyView = TaxonomyView()
     
