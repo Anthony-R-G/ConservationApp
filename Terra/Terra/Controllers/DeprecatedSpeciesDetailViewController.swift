@@ -18,7 +18,7 @@ class SpeciesDetailViewController: UIViewController {
 //    var contentView = UIView()
     
     var basicInfoView = BasicInfoView()
-//    var basicInfoViewisPinnedToTop = false
+    var basicInfoViewisPinnedToTop = false
 //    var taxonomyView = TaxonomyView()
     
     
@@ -157,17 +157,15 @@ extension SpeciesDetailViewController {
 
 extension SpeciesDetailViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        let initialFrame = CGRect(x: 19.666666666666657 , y: 371.0, width: 394.3333333333333, height: 400.0)
-        let y = 375 - (scrollView.contentOffset.y)
-        let h = max(100, y)
-        
-//        print(offset)
-//        if offset >= 370 {
-//            basicInfoViewisPinnedToTop = true
-//            self.basicInfoView.frame = CGRect(x: self.basicInfoView.frame.minX, y: offset - 50, width: self.basicInfoView.bounds.size.width, height: self.basicInfoView.bounds.size.height)
-//        } else if offset == 0 && basicInfoViewisPinnedToTop == true {
-//            basicInfoViewisPinnedToTop = false
-//            self.basicInfoView.frame = initialFrame
-//        }
+        let offset = scrollView.contentOffset.y
+        let initialFrame = CGRect(x: 19.666666666666657 , y: 371.0, width: 394.3333333333333, height: 400.0)
+        print(offset)
+        if offset >= 370 {
+            basicInfoViewisPinnedToTop = true
+            self.basicInfoView.frame = CGRect(x: self.basicInfoView.frame.minX, y: offset - 50, width: self.basicInfoView.bounds.size.width, height: self.basicInfoView.bounds.size.height)
+        } else if offset == 0 && basicInfoViewisPinnedToTop == true {
+            basicInfoViewisPinnedToTop = false
+            self.basicInfoView.frame = initialFrame
+        }
     }
 }

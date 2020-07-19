@@ -38,8 +38,9 @@ class DetailViewController: UIViewController {
     private lazy var basicInfoView: BasicInfoView = {
         let biv = BasicInfoView()
         var frame = biv.frame
-        frame.size.height = 375
+        frame.size.height = 275
         biv.frame = frame
+        biv.backgroundColor = .black
         return biv
     }()
     
@@ -47,8 +48,14 @@ class DetailViewController: UIViewController {
         return basicInfoView.heightAnchor.constraint(equalToConstant: basicInfoView.frame.height)
     }()
     
+    private lazy var basicInfoViewTopAnchorConstraint: NSLayoutConstraint = {
+        return basicInfoView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 500)
+    }()
+    
     //MARK: -- Property Initialization
     public var currentSpecies: Species!
+    
+    var basicInfoViewisPinnedToTop = false
     
     private func setUIFromSpecies() {
         basicInfoView.setViewElementsFromSpeciesData(species: currentSpecies)
@@ -66,7 +73,6 @@ class DetailViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         setScrollViewConstraints()
-        
         scrollView.contentSize = CGSize(width: view.frame.width, height: view.frame.height + 600)
     }
     
@@ -124,7 +130,7 @@ extension DetailViewController {
         NSLayoutConstraint.activate([
             basicInfoView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 20),
             basicInfoView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-            basicInfoView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor, constant: 150),
+            basicInfoViewTopAnchorConstraint,
             basicInfoViewHeightConstraint
         ])
     }
@@ -141,16 +147,19 @@ extension DetailViewController {
 
 extension DetailViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offset = scrollView.contentOffset.y
         
-        let y = 375 - (scrollView.contentOffset.y)
+        let y = 275 - (offset)
         let height = max(150, y)
-        
         basicInfoViewHeightConstraint.constant = height
         
         
-        let offset = ((scrollView.contentOffset.y)/1300)
-        let alpha = max(0, offset)
+        let alphaOffset = (offset/1300)
+        let alpha = max(0, alphaOffset)
+        backgroundGradientOverlay.startColor = #colorLiteral(red: 0.06859237701, green: 0.08213501424, blue: 0.2409383953, alpha: Float(alpha))
         
-        backgroundGradientOverlay.startColor = UIColor(red: 0.06859237701, green: 0.08213501424, blue: 0.2409383953, alpha: alpha)
+        let topAnchorConstant = 400 - offset
+        let topAnchor = max(0, topAnchorConstant)
+        basicInfoViewTopAnchorConstraint.constant = topAnchor
     }
 }
