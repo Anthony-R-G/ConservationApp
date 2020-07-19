@@ -27,10 +27,10 @@ final class BasicInfoView: UIView {
         label.textAlignment = .left
         label.minimumScaleFactor = 0.5
         label.numberOfLines = 0
-        label.backgroundColor = .orange
+        label.backgroundColor = .clear
         label.adjustsFontSizeToFitWidth = true
-//        let maxLabelWidth: CGFloat = 100
-//        let neededSize = label.sizeThatFits(CGSize(width: maxLabelWidth, height: CGFloat.greatestFiniteMagnitude))
+        //        let maxLabelWidth: CGFloat = 100
+        //        let neededSize = label.sizeThatFits(CGSize(width: maxLabelWidth, height: CGFloat.greatestFiniteMagnitude))
         label.sizeToFit()
         return label
     }()
@@ -40,17 +40,46 @@ final class BasicInfoView: UIView {
         label.font = UIFont(name: "Roboto-Light", size: 17)
         label.textColor = .white
         label.textAlignment = .left
-        label.backgroundColor = .purple
+        label.backgroundColor = .clear
         label.adjustsFontSizeToFitWidth = true
         label.sizeToFit()
         return label
     }()
     
+    private lazy var numbersStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [numbersLabel, numbersInfoLabel])
+        stackView.alignment = .fill
+        stackView.distribution = .fillProportionally
+        stackView.spacing = 1
+        stackView.axis = .vertical
+        return stackView
+    }()
+    
+    private lazy var numbersLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        label.text = "Numbers"
+        label.textAlignment = .left
+        label.font = UIFont(name: "Roboto-Medium", size: 18)
+        label.backgroundColor = .clear
+        return label
+    }()
+    
+    private lazy var numbersInfoLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        label.textAlignment = .left
+        label.font = UIFont(name: "Roboto-Medium", size: 16)
+        label.backgroundColor = .clear
+        return label
+        
+    }()
+    
     private lazy var weightStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [weightLabel, weightInfoLabel])
         stackView.alignment = .fill
-        stackView.distribution = .equalSpacing
-        stackView.spacing = 2
+        stackView.distribution = .fillProportionally
+        stackView.spacing = 1
         stackView.axis = .vertical
         return stackView
     }()
@@ -75,8 +104,8 @@ final class BasicInfoView: UIView {
     private lazy var heightStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [heightLabel, heightInfoLabel])
         stackView.alignment = .fill
-        stackView.distribution = .equalSpacing
-        stackView.spacing = 2
+        stackView.distribution = .fillProportionally
+        stackView.spacing = 1
         stackView.axis = .vertical
         return stackView
     }()
@@ -98,34 +127,7 @@ final class BasicInfoView: UIView {
         return label
     }()
     
-    private lazy var numbersStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [numbersLabel, numbersInfoLabel])
-        stackView.alignment = .fill
-        stackView.distribution = .fillProportionally
-        stackView.spacing = 1
-        stackView.axis = .vertical
-        return stackView
-    }()
     
-    private lazy var numbersLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .white
-        label.text = "Numbers"
-        label.textAlignment = .left
-        label.font = UIFont(name: "Roboto-Medium", size: 18)
-        label.backgroundColor = .red
-        return label
-    }()
-    
-    private lazy var numbersInfoLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .white
-        label.textAlignment = .left
-        label.font = UIFont(name: "Roboto-Medium", size: 16)
-        label.backgroundColor = .brown
-        return label
-        
-    }()
     
     public func setViewElementsFromSpeciesData(species: Species) {
         conservationStatusLabel.text = species.conservationStatus.rawValue
@@ -138,8 +140,9 @@ final class BasicInfoView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        addSubviews()
         setConstraints()
-        backgroundColor = .purple
+        backgroundColor = .clear
     }
     
     required init?(coder: NSCoder) {
@@ -151,18 +154,20 @@ final class BasicInfoView: UIView {
 //Constraints
 extension BasicInfoView {
     
-    private func setConstraints() {
-  
-        let UIElements = [speciesCommonNameLabel, speciesScientificNameLabel, numbersStackView]
+    private func addSubviews() {
+        let UIElements = [speciesCommonNameLabel, speciesScientificNameLabel, numbersStackView, weightStackView, heightStackView]
         UIElements.forEach { self.addSubview($0) }
         UIElements.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
+    }
+    private func setConstraints() {
+        
         
         //          setConservationStatusLabelConstraints()
         setSpeciesCommonNameLabelConstraints()
         setSpeciesScientificNameLabelConstraints()
-                  setNumbersStackConstraints()
-        //          setWeightStackConstraints()
-        //          setHeightStackConstraints()
+        setNumbersStackConstraints()
+        setWeightStackConstraints()
+        setHeightStackConstraints()
     }
     
     private func setConservationStatusLabelConstraints() {
@@ -180,7 +185,7 @@ extension BasicInfoView {
             speciesCommonNameLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             speciesCommonNameLabel.topAnchor.constraint(equalTo: self.topAnchor),
             speciesCommonNameLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.7),
-            speciesCommonNameLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.4)
+            speciesCommonNameLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.3)
         ])
     }
     
@@ -188,7 +193,7 @@ extension BasicInfoView {
         NSLayoutConstraint.activate([
             speciesScientificNameLabel.topAnchor.constraint(equalTo: speciesCommonNameLabel.bottomAnchor),
             speciesScientificNameLabel.leadingAnchor.constraint(equalTo: speciesCommonNameLabel.leadingAnchor),
-            speciesScientificNameLabel.heightAnchor.constraint(equalTo: speciesCommonNameLabel.heightAnchor, multiplier: 0.3),
+            speciesScientificNameLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.3),
             speciesScientificNameLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.6)
         ])
     }
@@ -198,7 +203,7 @@ extension BasicInfoView {
             numbersStackView.topAnchor.constraint(equalTo: speciesScientificNameLabel.bottomAnchor, constant: 15),
             numbersStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             numbersStackView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.3 ),
-            numbersStackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.6)
+            numbersStackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.3)
         ])
     }
     

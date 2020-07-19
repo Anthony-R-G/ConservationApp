@@ -123,7 +123,6 @@ final class SpeciesListViewController: UIViewController {
         scrollView.delegate = self
     }
     
-    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -207,7 +206,6 @@ extension SpeciesListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 20
     }
-    
 }
 
 //MARK: --ScrollView Methods
@@ -216,7 +214,6 @@ extension UIScrollView {
         contentSize.height = subviews.sorted(by: { $0.frame.maxY < $1.frame.maxY }).last?.frame.maxY ?? contentSize.height
     }
 }
-
 
 //MARK: -- Adding subviews/constraints
 extension SpeciesListViewController {

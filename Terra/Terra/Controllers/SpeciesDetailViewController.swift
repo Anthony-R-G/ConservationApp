@@ -27,7 +27,8 @@ class DetailViewController: UIViewController {
     private lazy var backgroundGradientOverlay: GradientView = {
         let gv = GradientView()
         gv.translatesAutoresizingMaskIntoConstraints = false
-        gv.startColor = .clear
+        
+        gv.startColor = #colorLiteral(red: 0.06859237701, green: 0.08213501424, blue: 0.2409383953, alpha: 0.0)
         gv.endColor = #colorLiteral(red: 0.06859237701, green: 0.08213501424, blue: 0.2409383953, alpha: 0.8456228596)
         self.view.insertSubview(gv, at: 1)
         return gv
@@ -36,7 +37,6 @@ class DetailViewController: UIViewController {
     
     private lazy var basicInfoView: BasicInfoView = {
         let biv = BasicInfoView()
-        biv.backgroundColor = .black
         var frame = biv.frame
         frame.size.height = 375
         biv.frame = frame
@@ -146,5 +146,11 @@ extension DetailViewController: UIScrollViewDelegate {
         let height = max(150, y)
         
         basicInfoViewHeightConstraint.constant = height
+        
+        
+        let offset = ((scrollView.contentOffset.y)/1300)
+        let alpha = max(0, offset)
+        
+        backgroundGradientOverlay.startColor = UIColor(red: 0.06859237701, green: 0.08213501424, blue: 0.2409383953, alpha: alpha)
     }
 }
