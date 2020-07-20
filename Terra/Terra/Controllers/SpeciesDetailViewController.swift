@@ -83,7 +83,7 @@ final class SpeciesDetailViewController: UIViewController {
     
     //MARK: -- Methods
     
-    private func setUIFromSpecies() {
+    private func setViewElementsFromSpeciesData() {
         headerNameView.setViewElementsFromSpeciesData(species: currentSpecies)
         subheaderInfoView.setViewElementsFromSpeciesData(species: currentSpecies)
         taxonomyView.setViewElementsFromSpeciesData(species: currentSpecies)
@@ -124,7 +124,7 @@ final class SpeciesDetailViewController: UIViewController {
         setConstraints()
         setDelegates()
         
-        setUIFromSpecies()
+        setViewElementsFromSpeciesData()
         setBackground()
     }
 }
