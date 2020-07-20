@@ -51,9 +51,15 @@ final class SpeciesDetailViewController: UIViewController {
         return siv
     }()
     
-    private lazy var infoOptionPanelView: InfoOptionPanelView = {
-        let iopv = InfoOptionPanelView()
-        return iopv
+//    private lazy var infoOptionPanelView: InfoOptionPanelView = {
+//        let iopv = InfoOptionPanelView()
+//        return iopv
+//    }()
+    
+    private lazy var customTabBarPanel: CustomizedTabBar = {
+        let ctb = CustomizedTabBar()
+        ctb.layer.cornerRadius = 39
+       return ctb
     }()
     
     private lazy var taxonomyView: TaxonomyView = {
@@ -97,7 +103,7 @@ final class SpeciesDetailViewController: UIViewController {
     
     private func setDelegates() {
         scrollView.delegate = self
-        infoOptionPanelView.delegate = self
+//        infoOptionPanelView.delegate = self
     }
     
     private func showWebBrowser(link: URL){
@@ -168,7 +174,7 @@ extension SpeciesDetailViewController {
         view.addSubview(scrollView)
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         
-        let UIElements = [headerNameView, subheaderInfoView, infoOptionPanelView ,taxonomyView, infoOptionPanelView]
+        let UIElements = [headerNameView, subheaderInfoView, taxonomyView, customTabBarPanel]
         UIElements.forEach{ scrollView.addSubview($0) }
         UIElements.forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
     }
@@ -178,9 +184,9 @@ extension SpeciesDetailViewController {
         setBackgroundGradientOverlayConstraints()
         setHeaderInfoViewConstraints()
         setSubheaderInfoViewConstraints()
-        setInfoOptionPanelViewConstraints()
         setTaxonomyViewConstraints()
-        setInfoOptionPanelViewConstraints()
+//        setInfoOptionPanelViewConstraints()
+        setCustomTabBarPanelViewConstraints()
     }
     
     private func setScrollViewConstraints() {
@@ -229,14 +235,23 @@ extension SpeciesDetailViewController {
         ])
     }
     
-    private func setInfoOptionPanelViewConstraints() {
-        NSLayoutConstraint.activate([
-            infoOptionPanelView.leadingAnchor.constraint(equalTo: taxonomyView.leadingAnchor),
-            infoOptionPanelView.trailingAnchor.constraint(equalTo: taxonomyView.trailingAnchor),
-            infoOptionPanelView.heightAnchor.constraint(equalToConstant: 70),
-            infoOptionPanelView.topAnchor.constraint(equalTo: taxonomyView.bottomAnchor, constant: 80)
-        ])
-    }
+//    private func setInfoOptionPanelViewConstraints() {
+//        NSLayoutConstraint.activate([
+//            infoOptionPanelView.leadingAnchor.constraint(equalTo: taxonomyView.leadingAnchor),
+//            infoOptionPanelView.trailingAnchor.constraint(equalTo: taxonomyView.trailingAnchor),
+//            infoOptionPanelView.heightAnchor.constraint(equalToConstant: 70),
+//            infoOptionPanelView.topAnchor.constraint(equalTo: taxonomyView.bottomAnchor, constant: 80)
+//        ])
+//    }
+    
+    private func setCustomTabBarPanelViewConstraints() {
+          NSLayoutConstraint.activate([
+              customTabBarPanel.leadingAnchor.constraint(equalTo: taxonomyView.leadingAnchor),
+              customTabBarPanel.trailingAnchor.constraint(equalTo: taxonomyView.trailingAnchor),
+              customTabBarPanel.heightAnchor.constraint(equalToConstant: 70),
+              customTabBarPanel.topAnchor.constraint(equalTo: taxonomyView.bottomAnchor, constant: 100)
+          ])
+      }
     
     private func setTaxonomyViewConstraints() {
         NSLayoutConstraint.activate([
