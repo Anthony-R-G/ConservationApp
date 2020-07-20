@@ -135,16 +135,16 @@ extension SpeciesDetailViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offset = scrollView.contentOffset.y
         
-        let y = 275 - (offset)
-        let hnvHeight = max(150, y)
-        headerNameViewHeightConstraint.constant = hnvHeight
-        
-        let alphaOffset = (offset/1300)
+        let alphaOffset = (offset/1200)
         let alpha = max(0, alphaOffset)
         backgroundGradientOverlay.startColor = #colorLiteral(red: 0.06859237701, green: 0.08213501424, blue: 0.2409383953, alpha: Float(alpha))
         
+        let y = 275 - (offset)
+        let hnvHeight = max(120, y)
+        headerNameViewHeightConstraint.constant = hnvHeight
+        
         let headerTopAnchorConstantOffset = 400 - offset
-        let headerTopAnchor = max(50, headerTopAnchorConstantOffset)
+        let headerTopAnchor = max(40, headerTopAnchorConstantOffset)
         headerNameViewTopAnchorConstraint.constant = headerTopAnchor
         
         let y2 = 80 - (offset)
@@ -152,7 +152,7 @@ extension SpeciesDetailViewController: UIScrollViewDelegate {
         subheaderInfoViewHeightConstraint.constant = sivHeight
         
         let taxonomyViewTopAnchorConstantOffset = 300 - offset
-        let taxonomyTopAnchor = max(30, taxonomyViewTopAnchorConstantOffset)
+        let taxonomyTopAnchor = max(100, taxonomyViewTopAnchorConstantOffset)
         taxonomyViewTopAnchorConstraint.constant = taxonomyTopAnchor
     }
 }
