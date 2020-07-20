@@ -12,13 +12,13 @@ import UIKit
 class CustomizedTabBar: UITabBar {
 
     private var shapeLayer: CALayer?
-
+    
     private func addShape() {
         let shapeLayer = CAShapeLayer()
         shapeLayer.path = createPath()
         shapeLayer.strokeColor = UIColor.lightGray.cgColor
-        shapeLayer.fillColor = UIColor.white.cgColor
-        shapeLayer.lineWidth = 1.0
+        shapeLayer.fillColor = #colorLiteral(red: 0.2843379378, green: 0.2826535106, blue: 0.2856364548, alpha: 0.6942690497)
+        shapeLayer.lineWidth = 0.0
 
         if let oldShapeLayer = self.shapeLayer {
             self.layer.replaceSublayer(oldShapeLayer, with: shapeLayer)
@@ -83,3 +83,4 @@ extension CGFloat {
     var degreesToRadians: CGFloat { return self * .pi / 180 }
     var radiansToDegrees: CGFloat { return self * 180 / .pi }
 }
+

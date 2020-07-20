@@ -15,10 +15,15 @@ class InfoOptionPanelView: UIView {
     lazy var donateButton: UIButton = {
         let button = UIButton()
         button.setTitle("Donate", for: .normal)
-        button.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 20)
+        button.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 14)
         button.backgroundColor = .orange
         button.showsTouchWhenHighlighted = true
-        button.layer.cornerRadius = 30
+        var frame = button.frame
+        frame.size.width = 50
+        frame.size.height = 50
+        button.frame = frame
+        button.layer.cornerRadius = button.frame.width / 2
+        button.clipsToBounds = true
         button.addTarget(self, action: #selector(donateButtonPressed), for: .touchUpInside)
         return button
     }()
@@ -26,6 +31,8 @@ class InfoOptionPanelView: UIView {
     //MARK: -- Properties
     
     var delegate: InfoOptionPanelDelegate?
+    
+    private var shapeLayer: CALayer?
     
     //MARK: -- Methods
     
@@ -36,19 +43,17 @@ class InfoOptionPanelView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.addBlurToView()
-        self.layer.cornerRadius = 39
-        addSubviews()
-        setConstraints()
+        //        self.addBlurToView()
+        self.layer.cornerRadius = 25
         
+//        addSubviews()
+//        setConstraints()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }
-
 //MARK: -- Adding Subviews & Constraints
 
 extension InfoOptionPanelView {
@@ -65,10 +70,76 @@ extension InfoOptionPanelView {
     
     private func setDonateButtonConstraints() {
         NSLayoutConstraint.activate([
-            donateButton.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            donateButton.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            donateButton.heightAnchor.constraint(equalTo: self.heightAnchor),
-            donateButton.centerYAnchor.constraint(equalTo: self.centerYAnchor)
+            donateButton.widthAnchor.constraint(equalToConstant: donateButton.frame.width),
+            donateButton.heightAnchor.constraint(equalToConstant: donateButton.frame.height),
+            donateButton.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            donateButton.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -20)
         ])
     }
 }
+
+//MARK: -- Custom Drawing
+extension InfoOptionPanelView {
+    private func addShape() {
+        let shapeLayer = CAShapeLayer()
+        shapeLayer.path = createPath()
+        shapeLayer.strokeColor = UIColor.lightGray.cgColor
+        shapeLayer.fillColor = #colorLiteral(red: 0.2843379378, green: 0.2826535106, blue: 0.2856364548, alpha: 0.6942690497)
+        shapeLayer.lineWidth = 0.0
+        
+        if let oldShapeLayer = self.shapeLayer {
+            self.layer.replaceSublayer(oldShapeLayer, with: shapeLayer)
+        } else {
+            self.layer.insertSublayer(shapeLayer, at: 0)
+        }
+        
+        self.shapeLayer = shapeLayer
+    }
+    
+    override func draw(_ rect: CGRect) {
+        self.addShape()
+    }
+    
+    func createPath() -> CGPath {
+        
+        let height: CGFloat = 37.0
+        let path = UIBezierPath()
+        let centerWidth = self.frame.width / 2
+        
+        path.move(to: CGPoint(x: 0, y: 0)) // start top left
+        path.addLine(to: CGPoint(x: (centerWidth - height * 2), y: 0)) // the beginning of the trough
+        
+        // first curve down
+        path.addCurve(to: CGPoint(x: centerWidth, y: height),
+                      controlPoint1: CGPoint(x: (centerWidth - 40), y: 0), controlPoint2: CGPoint(x: centerWidth - 45, y: height))
+        // second curve up
+        path.addCurve(to: CGPoint(x: (centerWidth + height * 2), y: 0),
+                      controlPoint1: CGPoint(x: centerWidth + 45, y: height), controlPoint2: CGPoint(x: (centerWidth + 40), y: 0))
+        
+        // complete the rect
+        path.addLine(to: CGPoint(x: self.frame.width, y: 0))
+        path.addLine(to: CGPoint(x: self.frame.width, y: self.frame.height))
+        path.addLine(to: CGPoint(x: 0, y: self.frame.height))
+        path.close()
+        
+        return path.cgPath
+    }
+    
+
+    func createPathCircle() -> CGPath {
+        
+        let radius: CGFloat = 37.0
+        let path = UIBezierPath()
+        let centerWidth = self.frame.width / 2
+        
+        path.move(to: CGPoint(x: 0, y: 0))
+        path.addLine(to: CGPoint(x: (centerWidth - radius * 2), y: 0))
+        path.addArc(withCenter: CGPoint(x: centerWidth, y: 0), radius: radius, startAngle: CGFloat(180).degreesToRadians, endAngle: CGFloat(0).degreesToRadians, clockwise: false)
+        path.addLine(to: CGPoint(x: self.frame.width, y: 0))
+        path.addLine(to: CGPoint(x: self.frame.width, y: self.frame.height))
+        path.addLine(to: CGPoint(x: 0, y: self.frame.height))
+        path.close()
+        return path.cgPath
+    }
+}
+

@@ -51,16 +51,35 @@ final class SpeciesDetailViewController: UIViewController {
         return siv
     }()
     
-//    private lazy var infoOptionPanelView: InfoOptionPanelView = {
-//        let iopv = InfoOptionPanelView()
-//        return iopv
-//    }()
-    
-    private lazy var customTabBarPanel: CustomizedTabBar = {
-        let ctb = CustomizedTabBar()
-        ctb.layer.cornerRadius = 39
-       return ctb
+    private lazy var infoOptionPanelView: InfoOptionPanelView = {
+        let iopv = InfoOptionPanelView()
+        iopv.clipsToBounds = true
+        return iopv
     }()
+    
+    private lazy var donateButton: UIButton = {
+        let button = UIButton()
+           button.setTitle("Donate", for: .normal)
+           button.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 14)
+           button.backgroundColor = #colorLiteral(red: 1, green: 0.2914688587, blue: 0.3886995912, alpha: 0.7972763271)
+           button.showsTouchWhenHighlighted = true
+           var frame = button.frame
+           frame.size.width = 80
+           frame.size.height = 80
+           button.frame = frame
+           button.layer.cornerRadius = button.frame.width / 2
+           button.clipsToBounds = true
+           button.addTarget(self, action: #selector(donateButtonPressed), for: .touchUpInside)
+        return button
+    }()
+    
+//    private lazy var customTabBarPanel: CustomizedTabBar = {
+//        let ctb = CustomizedTabBar()
+//        ctb.layer.cornerRadius = 25
+//        ctb.clipsToBounds = true
+//
+//       return ctb
+//    }()
     
     private lazy var taxonomyView: TaxonomyView = {
         let tv = TaxonomyView()
@@ -163,7 +182,7 @@ extension SpeciesDetailViewController: UIScrollViewDelegate {
 
 //MARK: -- Custom Delegate Implementation
 extension SpeciesDetailViewController: InfoOptionPanelDelegate {
-    func donateButtonPressed() {
+    @objc func donateButtonPressed() {
         showWebBrowser(link: URL(string: currentSpecies.donationLink)!)
     }
 }
@@ -174,7 +193,7 @@ extension SpeciesDetailViewController {
         view.addSubview(scrollView)
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         
-        let UIElements = [headerNameView, subheaderInfoView, taxonomyView, customTabBarPanel]
+        let UIElements = [headerNameView, subheaderInfoView, taxonomyView, infoOptionPanelView, donateButton]
         UIElements.forEach{ scrollView.addSubview($0) }
         UIElements.forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
     }
@@ -185,8 +204,8 @@ extension SpeciesDetailViewController {
         setHeaderInfoViewConstraints()
         setSubheaderInfoViewConstraints()
         setTaxonomyViewConstraints()
-//        setInfoOptionPanelViewConstraints()
-        setCustomTabBarPanelViewConstraints()
+        setInfoOptionPanelViewConstraints()
+        setDonateButtonConstraints()
     }
     
     private func setScrollViewConstraints() {
@@ -235,21 +254,21 @@ extension SpeciesDetailViewController {
         ])
     }
     
-//    private func setInfoOptionPanelViewConstraints() {
-//        NSLayoutConstraint.activate([
-//            infoOptionPanelView.leadingAnchor.constraint(equalTo: taxonomyView.leadingAnchor),
-//            infoOptionPanelView.trailingAnchor.constraint(equalTo: taxonomyView.trailingAnchor),
-//            infoOptionPanelView.heightAnchor.constraint(equalToConstant: 70),
-//            infoOptionPanelView.topAnchor.constraint(equalTo: taxonomyView.bottomAnchor, constant: 80)
-//        ])
-//    }
+    private func setInfoOptionPanelViewConstraints() {
+        NSLayoutConstraint.activate([
+            infoOptionPanelView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            infoOptionPanelView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            infoOptionPanelView.heightAnchor.constraint(equalToConstant: 70),
+            infoOptionPanelView.topAnchor.constraint(equalTo: taxonomyView.bottomAnchor, constant: 100)
+        ])
+    }
     
-    private func setCustomTabBarPanelViewConstraints() {
+    private func setDonateButtonConstraints() {
           NSLayoutConstraint.activate([
-              customTabBarPanel.leadingAnchor.constraint(equalTo: taxonomyView.leadingAnchor),
-              customTabBarPanel.trailingAnchor.constraint(equalTo: taxonomyView.trailingAnchor),
-              customTabBarPanel.heightAnchor.constraint(equalToConstant: 70),
-              customTabBarPanel.topAnchor.constraint(equalTo: taxonomyView.bottomAnchor, constant: 100)
+              donateButton.widthAnchor.constraint(equalToConstant: donateButton.frame.width),
+              donateButton.heightAnchor.constraint(equalToConstant: donateButton.frame.height),
+              donateButton.centerXAnchor.constraint(equalTo: infoOptionPanelView.centerXAnchor),
+              donateButton.bottomAnchor.constraint(equalTo: infoOptionPanelView.topAnchor, constant: 30)
           ])
       }
     
