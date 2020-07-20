@@ -22,9 +22,6 @@ class InfoOptionPanelView: UIView {
     
     //MARK: -- Methods
     
-    
-    
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.layer.cornerRadius = 25

@@ -120,7 +120,8 @@ final class SpeciesDetailViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         setScrollViewConstraints()
-        scrollView.updateContentView()
+        //This is hardcoded for now. Need to adjust for diff device sizes in future without having extra scroll space.
+        scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.view.frame.height + 350)
     }
     
     
