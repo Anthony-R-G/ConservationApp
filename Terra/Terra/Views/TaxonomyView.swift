@@ -178,8 +178,10 @@ final class TaxonomyView: UIView {
         super.init(frame: frame)
         self.backgroundColor = .clear
         self.layer.cornerRadius = 10
+        self.addBlurToView()
         addSubviews()
         setConstraints()
+        
     }
     
     required init?(coder: NSCoder) {

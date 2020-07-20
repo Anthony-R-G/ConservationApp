@@ -35,7 +35,6 @@ final class SpeciesDetailViewController: UIViewController {
         return gv
     }()
     
-    
     private lazy var headerNameView: HeaderNameView = {
         let hiv = HeaderNameView()
         var frame = hiv.frame
@@ -52,9 +51,13 @@ final class SpeciesDetailViewController: UIViewController {
         return siv
     }()
     
+    private lazy var infoOptionPanelView: InfoOptionPanelView = {
+        let iopv = InfoOptionPanelView()
+        return iopv
+    }()
+    
     private lazy var taxonomyView: TaxonomyView = {
         let tv = TaxonomyView()
-        tv.addBlurToView()
         return tv
     }()
     
@@ -63,7 +66,7 @@ final class SpeciesDetailViewController: UIViewController {
     }()
     
     private lazy var headerNameViewTopAnchorConstraint: NSLayoutConstraint = {
-        return headerNameView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 450)
+        return headerNameView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 400)
     }()
     
     private lazy var subheaderInfoViewHeightConstraint: NSLayoutConstraint = {
@@ -110,7 +113,7 @@ final class SpeciesDetailViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         setScrollViewConstraints()
-        scrollView.contentSize = CGSize(width: view.frame.width, height: view.frame.height + 600)
+        scrollView.updateContentView()
     }
     
     
@@ -155,13 +158,20 @@ extension SpeciesDetailViewController: UIScrollViewDelegate {
     }
 }
 
+//MARK: -- Custom Delegate Implementation
+extension SpeciesDetailViewController: InfoOptionPanelDelegate {
+    func donateButtonPressed() {
+        print("Omg u pressed me!!!")
+    }
+}
+
 //MARK: -- Adding Subviews & Constraints
 extension SpeciesDetailViewController {
     private func addSubviews() {
         view.addSubview(scrollView)
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         
-        let UIElements = [headerNameView, subheaderInfoView, taxonomyView]
+        let UIElements = [headerNameView, subheaderInfoView, infoOptionPanelView ,taxonomyView, infoOptionPanelView]
         UIElements.forEach{ scrollView.addSubview($0) }
         UIElements.forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
     }
@@ -171,7 +181,9 @@ extension SpeciesDetailViewController {
         setBackgroundGradientOverlayConstraints()
         setHeaderInfoViewConstraints()
         setSubheaderInfoViewConstraints()
+        setInfoOptionPanelViewConstraints()
         setTaxonomyViewConstraints()
+        setInfoOptionPanelViewConstraints()
     }
     
     private func setScrollViewConstraints() {
@@ -220,7 +232,16 @@ extension SpeciesDetailViewController {
         ])
     }
     
-    private func setTaxonomyViewConstraints(){
+    private func setInfoOptionPanelViewConstraints() {
+        NSLayoutConstraint.activate([
+            infoOptionPanelView.leadingAnchor.constraint(equalTo: taxonomyView.leadingAnchor),
+            infoOptionPanelView.trailingAnchor.constraint(equalTo: taxonomyView.trailingAnchor),
+            infoOptionPanelView.heightAnchor.constraint(equalToConstant: 70),
+            infoOptionPanelView.topAnchor.constraint(equalTo: taxonomyView.bottomAnchor, constant: 80)
+        ])
+    }
+    
+    private func setTaxonomyViewConstraints() {
         NSLayoutConstraint.activate([
             taxonomyView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
             taxonomyView.widthAnchor.constraint(equalToConstant: 375),
