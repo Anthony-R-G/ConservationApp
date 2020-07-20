@@ -92,7 +92,7 @@ class SpeciesOverviewView: UIView {
         btn.setTitleColor(#colorLiteral(red: 0, green: 0.1362192035, blue: 0.1518113911, alpha: 1), for: .normal)
         btn.layer.cornerRadius = 10
         btn.layer.maskedCorners = [.layerMinXMinYCorner]
-        btn.backgroundColor = #colorLiteral(red: 0.9310950637, green: 0.5894679427, blue: 0.5347439647, alpha: 1)
+        btn.backgroundColor = #colorLiteral(red: 0.9798273444, green: 0.6242600083, blue: 0.5739037395, alpha: 0.9131260702)
         return btn
     }()
     
@@ -180,7 +180,7 @@ extension SpeciesOverviewView {
     private func setHeightInfoLabelConstraints() {
         NSLayoutConstraint.activate([
             heightInfoLabel.topAnchor.constraint(equalTo: heightTitleLabel.bottomAnchor, constant: 5),
-            heightInfoLabel.leadingAnchor.constraint(equalTo: infoBarView.leadingAnchor, constant: 10),
+            heightInfoLabel.leadingAnchor.constraint(equalTo: infoBarView.leadingAnchor, constant: 15),
             heightInfoLabel.heightAnchor.constraint(equalToConstant: 30),
             heightInfoLabel.widthAnchor.constraint(equalToConstant: 80)
         ])
@@ -198,7 +198,7 @@ extension SpeciesOverviewView {
     private func setWeightInfoLabelConstraints() {
         NSLayoutConstraint.activate([
             weightInfoLabel.topAnchor.constraint(equalTo: heightInfoLabel.topAnchor),
-            weightInfoLabel.leadingAnchor.constraint(equalTo: heightInfoLabel.trailingAnchor, constant: 20),
+            weightInfoLabel.leadingAnchor.constraint(equalTo: heightInfoLabel.trailingAnchor, constant: 15),
             weightInfoLabel.heightAnchor.constraint(equalTo: heightInfoLabel.heightAnchor),
             weightInfoLabel.widthAnchor.constraint(equalToConstant: 100)
         ])
@@ -216,7 +216,7 @@ extension SpeciesOverviewView {
        private func setDietInfoLabelConstraints() {
            NSLayoutConstraint.activate([
                dietInfoLabel.topAnchor.constraint(equalTo: heightInfoLabel.topAnchor),
-               dietInfoLabel.leadingAnchor.constraint(equalTo: weightInfoLabel.trailingAnchor, constant: 10),
+               dietInfoLabel.trailingAnchor.constraint(equalTo: infoBarView.trailingAnchor, constant: -15),
                dietInfoLabel.heightAnchor.constraint(equalTo: heightInfoLabel.heightAnchor),
                dietInfoLabel.widthAnchor.constraint(equalToConstant: 100)
            ])
@@ -235,8 +235,8 @@ extension SpeciesOverviewView {
         NSLayoutConstraint.activate([
             readMoreButton.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             readMoreButton.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            readMoreButton.heightAnchor.constraint(equalToConstant: 60),
-            readMoreButton.widthAnchor.constraint(equalToConstant: 150)
+            readMoreButton.heightAnchor.constraint(equalToConstant: 50),
+            readMoreButton.widthAnchor.constraint(equalToConstant: 140)
         ])
     }
 }

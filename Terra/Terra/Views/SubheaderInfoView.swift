@@ -81,8 +81,8 @@ final class SubheaderInfoView: UIView {
     public func setViewElementsFromSpeciesData(species: Species) {
         numbersInfoLabel.text = species.populationNumbers
         numbersTrendInfoLabel.text = species.populationTrend.rawValue
+        numbersTrendInfoLabel.textColor = species.populationTrend == .recovering ?  #colorLiteral(red: 0.7970843911, green: 1, blue: 0.5273691416, alpha: 1) : #colorLiteral(red: 1, green: 0.5084088445, blue: 0.5854002237, alpha: 1)
         lastAssessedInfoLabel.text = species.assessmentDate
-      
     }
     
     override init(frame: CGRect) {

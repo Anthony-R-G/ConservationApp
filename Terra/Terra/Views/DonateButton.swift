@@ -15,8 +15,8 @@ class DonateButton: UIButton {
     
     private lazy var backgroundGradientOverlay: GradientView = {
         let gv = GradientView()
-        gv.startColor = #colorLiteral(red: 1, green: 0.2914688587, blue: 0.3886995912, alpha: 0.8012628425)
-        gv.endColor = #colorLiteral(red: 0.5421239734, green: 0.1666001081, blue: 0.2197911441, alpha: 0.807229238)
+        gv.startColor = #colorLiteral(red: 1, green: 0.2914688587, blue: 0.3886995912, alpha: 0.9019156678)
+        gv.endColor = #colorLiteral(red: 0.5421239734, green: 0.1666001081, blue: 0.2197911441, alpha: 0.8952536387)
         gv.diagonalMode = true
         gv.translatesAutoresizingMaskIntoConstraints = false
         gv.isUserInteractionEnabled = false
@@ -71,7 +71,7 @@ class DonateButton: UIButton {
         self.layer.cornerRadius = self.frame.width / 2
         self.clipsToBounds = true
         self.layer.borderColor = UIColor.lightGray.cgColor
-        self.layer.borderWidth = 0.5
+        self.layer.borderWidth = 0.0
         
 //        setShadow()
     }
