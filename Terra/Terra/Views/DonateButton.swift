@@ -8,9 +8,30 @@
 
 import UIKit
 
+@IBDesignable
 class DonateButton: UIButton {
     
     //MARK: -- UI Element Initialization
+    
+    private lazy var backgroundGradientOverlay: GradientView = {
+        let gv = GradientView()
+        gv.startColor = #colorLiteral(red: 1, green: 0.2914688587, blue: 0.3886995912, alpha: 0.8012628425)
+        gv.endColor = #colorLiteral(red: 0.5421239734, green: 0.1666001081, blue: 0.2197911441, alpha: 0.807229238)
+        gv.diagonalMode = true
+        gv.translatesAutoresizingMaskIntoConstraints = false
+        gv.isUserInteractionEnabled = false
+        self.insertSubview(gv, at: 0)
+        return gv
+    }()
+    
+    private lazy var glyphImage: UIImageView = {
+        let iv = UIImageView()
+        iv.isUserInteractionEnabled = false
+        iv.image = #imageLiteral(resourceName: "donateButtonGlyph")
+        iv.backgroundColor = .clear
+        return iv
+    }()
+    
     private lazy var donateLabel: UILabel = {
         let label = UILabel()
         label.text = "Donate"
@@ -21,36 +42,39 @@ class DonateButton: UIButton {
         return label
     }()
     
-    private lazy var backgroundGradientOverlay: GradientView = {
-        let gv = GradientView()
-        gv.startColor = #colorLiteral(red: 1, green: 0.2884941101, blue: 0.4681258202, alpha: 0.8975545805)
-        gv.endColor = #colorLiteral(red: 0.9966140389, green: 0.3340439796, blue: 0.6428459883, alpha: 0.8956817209)
-        gv.diagonalMode = true
-        gv.translatesAutoresizingMaskIntoConstraints = false
-        gv.isUserInteractionEnabled = false
-        self.insertSubview(gv, at: 0)
-        return gv
-    }()
     
+    //MARK: -- Properties
     var delegate: InfoOptionPanelDelegate?
     
     
+    //MARK: -- Methods
     @objc func buttonIsPressed() {
         delegate?.donateButtonPressed()
     }
-    
     
     private func setBehavior() {
         self.addTarget(self, action: #selector(buttonIsPressed), for: .touchUpInside)
         self.isUserInteractionEnabled = true
     }
     
+    private func setShadow() {
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOffset = CGSize(width: 0.0, height: 6.0)
+        layer.shadowRadius = 8
+        layer.shadowOpacity = 0.5
+        clipsToBounds = true
+        layer.masksToBounds = false
+    }
+    
     private func setAppearance() {
         self.showsTouchWhenHighlighted = true
         self.layer.cornerRadius = self.frame.width / 2
         self.clipsToBounds = true
+        self.layer.borderColor = UIColor.lightGray.cgColor
+        self.layer.borderWidth = 0.5
+        
+//        setShadow()
     }
-    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -68,18 +92,18 @@ class DonateButton: UIButton {
     }
 }
 
-
 //MARK: -- Adding Subviews & Constraints
 extension DonateButton {
     
     private func addSubviews() {
-        let UIElements = [donateLabel]
+        let UIElements = [glyphImage, donateLabel]
         UIElements.forEach { self.addSubview( $0 ) }
         UIElements.forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
     }
     
     private func setConstraints() {
         setBackgroundGradientOverlayConstraints()
+        setGlyphImageConstraints()
         setDonateLabelConstraints()
     }
     
@@ -92,10 +116,19 @@ extension DonateButton {
         ])
     }
     
+    private func setGlyphImageConstraints() {
+        NSLayoutConstraint.activate([
+            glyphImage.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            glyphImage.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -10),
+            glyphImage.widthAnchor.constraint(equalToConstant: 40),
+            glyphImage.heightAnchor.constraint(equalToConstant: 40)
+        ])
+    }
+    
     private func setDonateLabelConstraints() {
         NSLayoutConstraint.activate([
             donateLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            donateLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            donateLabel.topAnchor.constraint(equalTo: glyphImage.bottomAnchor, constant: -15),
             donateLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.8),
             donateLabel.heightAnchor.constraint(equalToConstant: 50)
         ])
