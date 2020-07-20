@@ -14,6 +14,7 @@
 		9711D8FC24BD42C800C2E6F1 /* FirestoresService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9711D8FB24BD42C800C2E6F1 /* FirestoresService.swift */; };
 		9711D91F24BD63B000C2E6F1 /* HabitatSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9711D91E24BD63B000C2E6F1 /* HabitatSystem.swift */; };
 		971FD0CD24C6112E003ED029 /* DonateButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971FD0CC24C6112E003ED029 /* DonateButton.swift */; };
+		971FD0D024C61AD3003ED029 /* CGFloatExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971FD0CF24C61AD3003ED029 /* CGFloatExtensions.swift */; };
 		972BBF7724C01FA900B6F7C0 /* PSORoundedVisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972BBF7624C01FA900B6F7C0 /* PSORoundedVisualEffectView.swift */; };
 		972BBF7924C0204600B6F7C0 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972BBF7824C0204600B6F7C0 /* UIViewExtensions.swift */; };
 		972BBF7E24C026CD00B6F7C0 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 972BBF7B24C0256F00B6F7C0 /* Roboto-Bold.ttf */; };
@@ -33,7 +34,6 @@
 		97BF745323DF42F90058F2D7 /* SpeciesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BF745223DF42F90058F2D7 /* SpeciesListViewController.swift */; };
 		97E9450424BE10C800550824 /* ConservationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E9450324BE10C800550824 /* ConservationStatus.swift */; };
 		97F0CCA924C56F5C00C581D3 /* UIScrollViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F0CCA824C56F5C00C581D3 /* UIScrollViewExtensions.swift */; };
-		97F0CCAB24C5835500C581D3 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F0CCAA24C5835500C581D3 /* CustomTabBar.swift */; };
 		97F7B42624C562A9007AEE97 /* InfoOptionPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F7B42524C562A9007AEE97 /* InfoOptionPanelView.swift */; };
 		97F7B42824C56886007AEE97 /* InfoOptionPanelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F7B42724C56886007AEE97 /* InfoOptionPanelDelegate.swift */; };
 		97FEAEAC24BE5FCC005BAEFE /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97FEAEAB24BE5FCC005BAEFE /* Utilities.swift */; };
@@ -58,6 +58,7 @@
 		9711D8FB24BD42C800C2E6F1 /* FirestoresService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoresService.swift; sourceTree = "<group>"; };
 		9711D91E24BD63B000C2E6F1 /* HabitatSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitatSystem.swift; sourceTree = "<group>"; };
 		971FD0CC24C6112E003ED029 /* DonateButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonateButton.swift; sourceTree = "<group>"; };
+		971FD0CF24C61AD3003ED029 /* CGFloatExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloatExtensions.swift; sourceTree = "<group>"; };
 		972BBF7624C01FA900B6F7C0 /* PSORoundedVisualEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSORoundedVisualEffectView.swift; sourceTree = "<group>"; };
 		972BBF7824C0204600B6F7C0 /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		972BBF7B24C0256F00B6F7C0 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
@@ -81,7 +82,6 @@
 		97BF745223DF42F90058F2D7 /* SpeciesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesListViewController.swift; sourceTree = "<group>"; };
 		97E9450324BE10C800550824 /* ConservationStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConservationStatus.swift; sourceTree = "<group>"; };
 		97F0CCA824C56F5C00C581D3 /* UIScrollViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScrollViewExtensions.swift; sourceTree = "<group>"; };
-		97F0CCAA24C5835500C581D3 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 		97F7B42524C562A9007AEE97 /* InfoOptionPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoOptionPanelView.swift; sourceTree = "<group>"; };
 		97F7B42724C56886007AEE97 /* InfoOptionPanelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoOptionPanelDelegate.swift; sourceTree = "<group>"; };
 		97FEAEAB24BE5FCC005BAEFE /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
@@ -130,11 +130,20 @@
 		9711D8FD24BD469B00C2E6F1 /* Third Party Code */ = {
 			isa = PBXGroup;
 			children = (
-				97F0CCAA24C5835500C581D3 /* CustomTabBar.swift */,
 				97452E4723E1EEE9005636E0 /* GradientView.swift */,
 				972BBF7624C01FA900B6F7C0 /* PSORoundedVisualEffectView.swift */,
 			);
 			path = "Third Party Code";
+			sourceTree = "<group>";
+		};
+		971FD0CE24C61ABE003ED029 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				971FD0CF24C61AD3003ED029 /* CGFloatExtensions.swift */,
+				97F0CCA824C56F5C00C581D3 /* UIScrollViewExtensions.swift */,
+				972BBF7824C0204600B6F7C0 /* UIViewExtensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		972BBF7A24C0256400B6F7C0 /* Fonts */ = {
@@ -154,8 +163,8 @@
 				97B68CD324BBB0AC005B8AB8 /* HeaderNameView.swift */,
 				9767D04B24C3EA9200384FCD /* SubheaderInfoView.swift */,
 				97F7B42524C562A9007AEE97 /* InfoOptionPanelView.swift */,
-				9735688E24BFDC8900D17F19 /* TaxonomyView.swift */,
 				971FD0CC24C6112E003ED029 /* DonateButton.swift */,
+				9735688E24BFDC8900D17F19 /* TaxonomyView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -166,8 +175,7 @@
 				9711D8F624BD199700C2E6F1 /* Species.swift */,
 				9711D91E24BD63B000C2E6F1 /* HabitatSystem.swift */,
 				97E9450324BE10C800550824 /* ConservationStatus.swift */,
-				972BBF7824C0204600B6F7C0 /* UIViewExtensions.swift */,
-				97F0CCA824C56F5C00C581D3 /* UIScrollViewExtensions.swift */,
+				97F7B42724C56886007AEE97 /* InfoOptionPanelDelegate.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -196,12 +204,12 @@
 			isa = PBXGroup;
 			children = (
 				97FEAEAB24BE5FCC005BAEFE /* Utilities.swift */,
-				97F7B42724C56886007AEE97 /* InfoOptionPanelDelegate.swift */,
 				972BBF7A24C0256400B6F7C0 /* Fonts */,
 				979492EC23F46ACE00B636A4 /* Models */,
 				97452E4423E1E6A9005636E0 /* Views */,
 				97BF745123DF42CC0058F2D7 /* Controllers */,
 				9711D8F824BD19B900C2E6F1 /* Firebase */,
+				971FD0CE24C61ABE003ED029 /* Extensions */,
 				9711D8FD24BD469B00C2E6F1 /* Third Party Code */,
 				979C191C23DE43EF00651B2B /* Assets.xcassets */,
 				979C191323DE43E900651B2B /* AppDelegate.swift */,
@@ -430,10 +438,10 @@
 				979C191423DE43E900651B2B /* AppDelegate.swift in Sources */,
 				9767D04C24C3EA9200384FCD /* SubheaderInfoView.swift in Sources */,
 				97BF745323DF42F90058F2D7 /* SpeciesListViewController.swift in Sources */,
-				97F0CCAB24C5835500C581D3 /* CustomTabBar.swift in Sources */,
 				979C191623DE43E900651B2B /* SceneDelegate.swift in Sources */,
 				97452E4823E1EEE9005636E0 /* GradientView.swift in Sources */,
 				97F0CCA924C56F5C00C581D3 /* UIScrollViewExtensions.swift in Sources */,
+				971FD0D024C61AD3003ED029 /* CGFloatExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

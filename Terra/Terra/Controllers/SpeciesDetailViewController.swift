@@ -57,27 +57,12 @@ final class SpeciesDetailViewController: UIViewController {
         return iopv
     }()
     
-    private lazy var donateButton: UIButton = {
-        let btn = UIButton()
-        btn.setTitle("Donate", for: .normal)
-        btn.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 14)
-        btn.backgroundColor = .clear
-        btn.showsTouchWhenHighlighted = true
+    private lazy var donateButton: DonateButton = {
+        let btn = DonateButton()
         var frame = btn.frame
         frame.size.width = 80
         frame.size.height = 80
         btn.frame = frame
-        btn.layer.cornerRadius = btn.frame.width / 2
-        btn.clipsToBounds = true
-        btn.addTarget(self, action: #selector(donateButtonPressed), for: .touchUpInside)
-       
-        
-        let gv = GradientView(frame: btn.frame)
-        gv.startColor = #colorLiteral(red: 1, green: 0.2884941101, blue: 0.4681258202, alpha: 0.8975545805)
-        gv.endColor = #colorLiteral(red: 0.9966140389, green: 0.3340439796, blue: 0.6428459883, alpha: 0.8956817209)
-        gv.diagonalMode = true
-        btn.insertSubview(gv, at: 0)
-        
         return btn
     }()
     
@@ -122,7 +107,7 @@ final class SpeciesDetailViewController: UIViewController {
     
     private func setDelegates() {
         scrollView.delegate = self
-        //        infoOptionPanelView.delegate = self
+        donateButton.delegate = self
     }
     
     private func showWebBrowser(link: URL){
@@ -182,7 +167,7 @@ extension SpeciesDetailViewController: UIScrollViewDelegate {
 
 //MARK: -- Custom Delegate Implementation
 extension SpeciesDetailViewController: InfoOptionPanelDelegate {
-    @objc func donateButtonPressed() {
+    func donateButtonPressed() {
         showWebBrowser(link: URL(string: currentSpecies.donationLink)!)
     }
 }

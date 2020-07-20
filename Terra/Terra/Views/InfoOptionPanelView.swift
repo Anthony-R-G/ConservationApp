@@ -12,21 +12,7 @@ class InfoOptionPanelView: UIView {
     
     //MARK: -- UI Element Initialization
     
-    lazy var donateButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Donate", for: .normal)
-        button.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 14)
-        button.backgroundColor = .orange
-        button.showsTouchWhenHighlighted = true
-        var frame = button.frame
-        frame.size.width = 50
-        frame.size.height = 50
-        button.frame = frame
-        button.layer.cornerRadius = button.frame.width / 2
-        button.clipsToBounds = true
-        button.addTarget(self, action: #selector(donateButtonPressed), for: .touchUpInside)
-        return button
-    }()
+
     
     //MARK: -- Properties
     
@@ -36,14 +22,11 @@ class InfoOptionPanelView: UIView {
     
     //MARK: -- Methods
     
-    @objc func donateButtonPressed() {
-        delegate?.donateButtonPressed()
-    }
+    
     
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        //        self.addBlurToView()
         self.layer.cornerRadius = 25
         
 //        addSubviews()
@@ -59,23 +42,15 @@ class InfoOptionPanelView: UIView {
 extension InfoOptionPanelView {
     
     private func addSubviews() {
-        let UIElements = [donateButton]
-        UIElements.forEach { self.addSubview($0) }
-        UIElements.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
+//        let UIElements = [donateButton]
+//        UIElements.forEach { self.addSubview($0) }
+//        UIElements.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
     }
     
     private func setConstraints() {
-        setDonateButtonConstraints()
+        
     }
     
-    private func setDonateButtonConstraints() {
-        NSLayoutConstraint.activate([
-            donateButton.widthAnchor.constraint(equalToConstant: donateButton.frame.width),
-            donateButton.heightAnchor.constraint(equalToConstant: donateButton.frame.height),
-            donateButton.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            donateButton.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -20)
-        ])
-    }
 }
 
 //MARK: -- Custom Drawing
