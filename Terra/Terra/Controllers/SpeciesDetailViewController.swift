@@ -143,8 +143,8 @@ extension SpeciesDetailViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offset = scrollView.contentOffset.y
         
-        let alphaOffset = (offset/1100)
-        let alpha = max(0, alphaOffset)
+        let alphaOffset = (offset/1200)
+        let alpha = max(0, min(alphaOffset, 0.30))
         backgroundGradientOverlay.startColor = #colorLiteral(red: 0.06859237701, green: 0.08213501424, blue: 0.2409383953, alpha: Float(alpha))
         
         let y = 275 - (offset)
