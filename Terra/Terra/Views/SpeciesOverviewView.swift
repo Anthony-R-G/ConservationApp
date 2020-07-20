@@ -106,7 +106,8 @@ class SpeciesOverviewView: UIView {
     
     private func setAppearance() {
         self.backgroundColor = .clear
-        self.layer.cornerRadius = 10
+        self.layer.cornerRadius = 39
+        self.clipsToBounds = true
         self.addBlurToView()
     }
     

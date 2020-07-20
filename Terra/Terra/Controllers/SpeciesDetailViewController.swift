@@ -68,6 +68,7 @@ final class SpeciesDetailViewController: UIViewController {
     
     private lazy var speciesOverviewView: SpeciesOverviewView = {
         let sov = SpeciesOverviewView()
+
         return sov
     }()
     
