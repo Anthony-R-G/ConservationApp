@@ -90,7 +90,7 @@ class SpeciesOverviewView: UIView {
         summaryTextView.text = species.populationSummary
         heightInfoLabel.text = species.height
         weightInfoLabel.text = species.weight
-        dietInfoLabel.text = species.diet
+        dietInfoLabel.text = species.diet.rawValue
     }
     
     private func setAppearance() {
@@ -120,7 +120,7 @@ extension SpeciesOverviewView {
         UIElements.forEach{ self.addSubview($0) }
         UIElements.forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
         
-        let infoBarElements = [heightTitleLabel, heightInfoLabel, weightTitleLabel, weightInfoLabel]
+        let infoBarElements = [heightTitleLabel, heightInfoLabel, weightTitleLabel, weightInfoLabel, dietTitleLabel, dietInfoLabel]
         infoBarElements.forEach { infoBarView.addSubview($0) }
         infoBarElements.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
     }
@@ -132,6 +132,8 @@ extension SpeciesOverviewView {
         setHeightInfoLabelConstraints()
         setWeightTitleLabelConstraints()
         setWeightInfoLabelConstraints()
+        setDietTitleLabelConstraints()
+        setDietInfoLabelConstraints()
         setSummaryTextViewConstraints()
     }
     
@@ -183,7 +185,7 @@ extension SpeciesOverviewView {
     private func setWeightInfoLabelConstraints() {
         NSLayoutConstraint.activate([
             weightInfoLabel.topAnchor.constraint(equalTo: heightInfoLabel.topAnchor),
-            weightInfoLabel.leadingAnchor.constraint(equalTo: heightInfoLabel.trailingAnchor, constant: 30),
+            weightInfoLabel.leadingAnchor.constraint(equalTo: heightInfoLabel.trailingAnchor, constant: 20),
             weightInfoLabel.heightAnchor.constraint(equalTo: heightInfoLabel.heightAnchor),
             weightInfoLabel.widthAnchor.constraint(equalToConstant: 100)
         ])
@@ -192,7 +194,7 @@ extension SpeciesOverviewView {
     private func setDietTitleLabelConstraints() {
            NSLayoutConstraint.activate([
                dietTitleLabel.topAnchor.constraint(equalTo: heightTitleLabel.topAnchor),
-               dietTitleLabel.centerXAnchor.constraint(equalTo: weightInfoLabel.centerXAnchor),
+               dietTitleLabel.centerXAnchor.constraint(equalTo: dietInfoLabel.centerXAnchor),
                dietTitleLabel.heightAnchor.constraint(equalTo: heightTitleLabel.heightAnchor),
                dietTitleLabel.widthAnchor.constraint(equalTo: heightTitleLabel.widthAnchor)
            ])
@@ -201,7 +203,7 @@ extension SpeciesOverviewView {
        private func setDietInfoLabelConstraints() {
            NSLayoutConstraint.activate([
                dietInfoLabel.topAnchor.constraint(equalTo: heightInfoLabel.topAnchor),
-               dietInfoLabel.leadingAnchor.constraint(equalTo: heightInfoLabel.trailingAnchor, constant: 30),
+               dietInfoLabel.leadingAnchor.constraint(equalTo: weightInfoLabel.trailingAnchor, constant: 10),
                dietInfoLabel.heightAnchor.constraint(equalTo: heightInfoLabel.heightAnchor),
                dietInfoLabel.widthAnchor.constraint(equalToConstant: 100)
            ])
