@@ -72,6 +72,10 @@ final class SpeciesDetailViewController: UIViewController {
         return subheaderInfoView.heightAnchor.constraint(equalToConstant: subheaderInfoView.frame.height)
     }()
     
+    private lazy var taxonomyViewTopAnchorConstraint: NSLayoutConstraint = {
+        return taxonomyView.topAnchor.constraint(equalTo: headerNameView.bottomAnchor, constant: 80)
+    }()
+    
     //MARK: -- Properties
     
     public var currentSpecies: Species!
@@ -139,13 +143,17 @@ extension SpeciesDetailViewController: UIScrollViewDelegate {
         let alpha = max(0, alphaOffset)
         backgroundGradientOverlay.startColor = #colorLiteral(red: 0.06859237701, green: 0.08213501424, blue: 0.2409383953, alpha: Float(alpha))
         
-        let topAnchorConstant = 400 - offset
-        let topAnchor = max(50, topAnchorConstant)
-        headerNameViewTopAnchorConstraint.constant = topAnchor
+        let headerTopAnchorConstantOffset = 400 - offset
+        let headerTopAnchor = max(50, headerTopAnchorConstantOffset)
+        headerNameViewTopAnchorConstraint.constant = headerTopAnchor
         
         let y2 = 80 - (offset)
         let sivHeight = max(50, y2)
         subheaderInfoViewHeightConstraint.constant = sivHeight
+        
+        let taxonomyViewTopAnchorConstantOffset = 300 - offset
+        let taxonomyTopAnchor = max(30, taxonomyViewTopAnchorConstantOffset)
+        taxonomyViewTopAnchorConstraint.constant = taxonomyTopAnchor
     }
 }
 
@@ -217,9 +225,9 @@ extension SpeciesDetailViewController {
     private func setTaxonomyViewConstraints(){
         NSLayoutConstraint.activate([
             taxonomyView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
-            taxonomyView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor),
             taxonomyView.widthAnchor.constraint(equalToConstant: 375),
-            taxonomyView.heightAnchor.constraint(equalToConstant: 420)
+            taxonomyView.heightAnchor.constraint(equalToConstant: 420),
+            taxonomyViewTopAnchorConstraint
         ])
     }
 }

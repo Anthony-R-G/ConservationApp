@@ -12,7 +12,7 @@ final class SpeciesListViewController: UIViewController {
     
     //MARK: -- UI Element Initialization
     
-    lazy var scrollView: UIScrollView = {
+    private lazy var scrollView: UIScrollView = {
         let sv = UIScrollView()
         return sv
     }()
