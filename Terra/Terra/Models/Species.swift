@@ -29,6 +29,7 @@ public struct Species {
     let donationLink: String
     let weight: String
     let height: String
+    let diet: Diet
     let cellImage: String
     let detailImage: String
     
@@ -53,6 +54,7 @@ public struct Species {
             let donationLink = dict["donationLink"] as? String,
             let weight = dict["weight"] as? String,
             let height = dict["height"] as? String,
+            let dietString = dict["diet"] as? String,
             let cellImage = dict["cellImage"] as? String,
             let detailImage = dict["detailImage"] as? String else { return nil }
         
@@ -76,6 +78,7 @@ public struct Species {
         self.donationLink = donationLink
         self.weight = weight
         self.height = height
+        self.diet = Diet(rawValue: dietString)!
         self.cellImage = cellImage
         self.detailImage = detailImage
     }

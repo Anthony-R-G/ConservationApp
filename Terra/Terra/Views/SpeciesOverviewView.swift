@@ -90,6 +90,7 @@ class SpeciesOverviewView: UIView {
         summaryTextView.text = species.populationSummary
         heightInfoLabel.text = species.height
         weightInfoLabel.text = species.weight
+        dietInfoLabel.text = species.diet
     }
     
     private func setAppearance() {
@@ -187,6 +188,24 @@ extension SpeciesOverviewView {
             weightInfoLabel.widthAnchor.constraint(equalToConstant: 100)
         ])
     }
+    
+    private func setDietTitleLabelConstraints() {
+           NSLayoutConstraint.activate([
+               dietTitleLabel.topAnchor.constraint(equalTo: heightTitleLabel.topAnchor),
+               dietTitleLabel.centerXAnchor.constraint(equalTo: weightInfoLabel.centerXAnchor),
+               dietTitleLabel.heightAnchor.constraint(equalTo: heightTitleLabel.heightAnchor),
+               dietTitleLabel.widthAnchor.constraint(equalTo: heightTitleLabel.widthAnchor)
+           ])
+       }
+       
+       private func setDietInfoLabelConstraints() {
+           NSLayoutConstraint.activate([
+               dietInfoLabel.topAnchor.constraint(equalTo: heightInfoLabel.topAnchor),
+               dietInfoLabel.leadingAnchor.constraint(equalTo: heightInfoLabel.trailingAnchor, constant: 30),
+               dietInfoLabel.heightAnchor.constraint(equalTo: heightInfoLabel.heightAnchor),
+               dietInfoLabel.widthAnchor.constraint(equalToConstant: 100)
+           ])
+       }
     
     private func setSummaryTextViewConstraints() {
         NSLayoutConstraint.activate([
