@@ -87,6 +87,12 @@ class SpeciesOverviewView: UIView {
     
     private lazy var readMoreButton: UIButton = {
         let btn = UIButton()
+        btn.titleLabel?.font = UIFont(name: "Roboto-Medium", size: 20)
+        btn.setTitle("Read More", for: .normal)
+        btn.setTitleColor(#colorLiteral(red: 0, green: 0.1362192035, blue: 0.1518113911, alpha: 1), for: .normal)
+        btn.layer.cornerRadius = 10
+        btn.layer.maskedCorners = [.layerMinXMinYCorner]
+        btn.backgroundColor = #colorLiteral(red: 0.9310950637, green: 0.5894679427, blue: 0.5347439647, alpha: 1)
         return btn
     }()
     
@@ -111,6 +117,8 @@ class SpeciesOverviewView: UIView {
         setConstraints()
     }
     
+    
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -121,7 +129,7 @@ class SpeciesOverviewView: UIView {
 extension SpeciesOverviewView {
     
     private func addSubviews() {
-        let UIElements =  [overviewTitleLabel, infoBarView, summaryTextView]
+        let UIElements =  [overviewTitleLabel, infoBarView, summaryTextView, readMoreButton]
         UIElements.forEach{ self.addSubview($0) }
         UIElements.forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
         
@@ -140,6 +148,7 @@ extension SpeciesOverviewView {
         setDietTitleLabelConstraints()
         setDietInfoLabelConstraints()
         setSummaryTextViewConstraints()
+        setReadMoreButtonConstraints()
     }
     
     private func setOverviewTitleLabelConstraints() {
@@ -220,6 +229,15 @@ extension SpeciesOverviewView {
             summaryTextView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             summaryTextView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -40),
             summaryTextView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.9)
+        ])
+    }
+    
+    private func setReadMoreButtonConstraints() {
+        NSLayoutConstraint.activate([
+            readMoreButton.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            readMoreButton.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            readMoreButton.heightAnchor.constraint(equalToConstant: 60),
+            readMoreButton.widthAnchor.constraint(equalToConstant: 120)
         ])
     }
 }
