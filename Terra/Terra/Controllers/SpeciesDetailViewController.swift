@@ -66,8 +66,8 @@ final class SpeciesDetailViewController: UIViewController {
         return btn
     }()
     
-    private lazy var taxonomyView: TaxonomyView = {
-        let tv = TaxonomyView()
+    private lazy var taxonomyView: SpeciesTaxonomyView = {
+        let tv = SpeciesTaxonomyView()
         return tv
     }()
     

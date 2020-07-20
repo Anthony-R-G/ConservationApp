@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class TaxonomyView: UIView {
+final class SpeciesTaxonomyView: UIView {
     
     //MARK: -- UI Element Initialization
     private lazy var taxonomyTitleLabel: UILabel = {
@@ -181,7 +181,6 @@ final class TaxonomyView: UIView {
         self.addBlurToView()
         addSubviews()
         setConstraints()
-        
     }
     
     required init?(coder: NSCoder) {
@@ -190,7 +189,7 @@ final class TaxonomyView: UIView {
 }
 
 //MARK: -- Adding Subviews & Constraints
-extension TaxonomyView {
+extension SpeciesTaxonomyView {
     
     private func addSubviews() {
         let UIElements =  [taxonomyTitleLabel, kingdomStackView, classStackView, familyStackView, phylumStackView, orderStackView, genusStackView]

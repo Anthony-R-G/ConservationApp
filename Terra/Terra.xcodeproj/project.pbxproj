@@ -15,12 +15,13 @@
 		9711D91F24BD63B000C2E6F1 /* HabitatSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9711D91E24BD63B000C2E6F1 /* HabitatSystem.swift */; };
 		971FD0CD24C6112E003ED029 /* DonateButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971FD0CC24C6112E003ED029 /* DonateButton.swift */; };
 		971FD0D024C61AD3003ED029 /* CGFloatExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971FD0CF24C61AD3003ED029 /* CGFloatExtensions.swift */; };
+		972897CF24C633F6004AEF5E /* SpeciesOverviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972897CE24C633F6004AEF5E /* SpeciesOverviewView.swift */; };
 		972BBF7724C01FA900B6F7C0 /* PSORoundedVisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972BBF7624C01FA900B6F7C0 /* PSORoundedVisualEffectView.swift */; };
 		972BBF7924C0204600B6F7C0 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972BBF7824C0204600B6F7C0 /* UIViewExtensions.swift */; };
 		972BBF7E24C026CD00B6F7C0 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 972BBF7B24C0256F00B6F7C0 /* Roboto-Bold.ttf */; };
 		972BBF7F24C026CF00B6F7C0 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 972BBF7C24C0257600B6F7C0 /* Roboto-Medium.ttf */; };
 		972BBF8024C026D100B6F7C0 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 972BBF7D24C0257B00B6F7C0 /* Roboto-Light.ttf */; };
-		9735688F24BFDC8900D17F19 /* TaxonomyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9735688E24BFDC8900D17F19 /* TaxonomyView.swift */; };
+		9735688F24BFDC8900D17F19 /* SpeciesTaxonomyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9735688E24BFDC8900D17F19 /* SpeciesTaxonomyView.swift */; };
 		97452E4623E1E6C7005636E0 /* SpeciesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97452E4523E1E6C7005636E0 /* SpeciesCollectionViewCell.swift */; };
 		97452E4823E1EEE9005636E0 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97452E4723E1EEE9005636E0 /* GradientView.swift */; };
 		9767D04C24C3EA9200384FCD /* SubheaderInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9767D04B24C3EA9200384FCD /* SubheaderInfoView.swift */; };
@@ -59,12 +60,13 @@
 		9711D91E24BD63B000C2E6F1 /* HabitatSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitatSystem.swift; sourceTree = "<group>"; };
 		971FD0CC24C6112E003ED029 /* DonateButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonateButton.swift; sourceTree = "<group>"; };
 		971FD0CF24C61AD3003ED029 /* CGFloatExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloatExtensions.swift; sourceTree = "<group>"; };
+		972897CE24C633F6004AEF5E /* SpeciesOverviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesOverviewView.swift; sourceTree = "<group>"; };
 		972BBF7624C01FA900B6F7C0 /* PSORoundedVisualEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSORoundedVisualEffectView.swift; sourceTree = "<group>"; };
 		972BBF7824C0204600B6F7C0 /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		972BBF7B24C0256F00B6F7C0 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		972BBF7C24C0257600B6F7C0 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		972BBF7D24C0257B00B6F7C0 /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
-		9735688E24BFDC8900D17F19 /* TaxonomyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxonomyView.swift; sourceTree = "<group>"; };
+		9735688E24BFDC8900D17F19 /* SpeciesTaxonomyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesTaxonomyView.swift; sourceTree = "<group>"; };
 		97452E4523E1E6C7005636E0 /* SpeciesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesCollectionViewCell.swift; sourceTree = "<group>"; };
 		97452E4723E1EEE9005636E0 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		9767D04B24C3EA9200384FCD /* SubheaderInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubheaderInfoView.swift; sourceTree = "<group>"; };
@@ -164,7 +166,8 @@
 				9767D04B24C3EA9200384FCD /* SubheaderInfoView.swift */,
 				97F7B42524C562A9007AEE97 /* InfoOptionPanelView.swift */,
 				971FD0CC24C6112E003ED029 /* DonateButton.swift */,
-				9735688E24BFDC8900D17F19 /* TaxonomyView.swift */,
+				972897CE24C633F6004AEF5E /* SpeciesOverviewView.swift */,
+				9735688E24BFDC8900D17F19 /* SpeciesTaxonomyView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -427,12 +430,13 @@
 				972BBF7724C01FA900B6F7C0 /* PSORoundedVisualEffectView.swift in Sources */,
 				97E9450424BE10C800550824 /* ConservationStatus.swift in Sources */,
 				97F7B42824C56886007AEE97 /* InfoOptionPanelDelegate.swift in Sources */,
-				9735688F24BFDC8900D17F19 /* TaxonomyView.swift in Sources */,
+				9735688F24BFDC8900D17F19 /* SpeciesTaxonomyView.swift in Sources */,
 				9711D8F724BD199700C2E6F1 /* Species.swift in Sources */,
 				970B172524C2699E007F32E0 /* SpeciesDetailViewController.swift in Sources */,
 				97FEAEAC24BE5FCC005BAEFE /* Utilities.swift in Sources */,
 				97B68CD424BBB0AC005B8AB8 /* HeaderNameView.swift in Sources */,
 				9711D91F24BD63B000C2E6F1 /* HabitatSystem.swift in Sources */,
+				972897CF24C633F6004AEF5E /* SpeciesOverviewView.swift in Sources */,
 				97F7B42624C562A9007AEE97 /* InfoOptionPanelView.swift in Sources */,
 				97452E4623E1E6C7005636E0 /* SpeciesCollectionViewCell.swift in Sources */,
 				979C191423DE43E900651B2B /* AppDelegate.swift in Sources */,
