@@ -85,6 +85,11 @@ class SpeciesOverviewView: UIView {
         return label
     }()
     
+    private lazy var readMoreButton: UIButton = {
+        let btn = UIButton()
+        return btn
+    }()
+    
     //MARK: -- Methods
     public func setViewElementsFromSpeciesData(species: Species) {
         summaryTextView.text = species.populationSummary
@@ -140,7 +145,7 @@ extension SpeciesOverviewView {
     private func setOverviewTitleLabelConstraints() {
         NSLayoutConstraint.activate([
             overviewTitleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 25),
-            overviewTitleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 20),
+            overviewTitleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 15),
             overviewTitleLabel.heightAnchor.constraint(equalToConstant: 40),
             overviewTitleLabel.widthAnchor.constraint(equalToConstant: 200)
         ])
@@ -148,7 +153,7 @@ extension SpeciesOverviewView {
     
     private func setInfoBarConstraints() {
         NSLayoutConstraint.activate([
-            infoBarView.topAnchor.constraint(equalTo: overviewTitleLabel.bottomAnchor, constant: 20),
+            infoBarView.topAnchor.constraint(equalTo: overviewTitleLabel.bottomAnchor, constant: 15),
             infoBarView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             infoBarView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.18),
             infoBarView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.9)
@@ -211,9 +216,9 @@ extension SpeciesOverviewView {
     
     private func setSummaryTextViewConstraints() {
         NSLayoutConstraint.activate([
-            summaryTextView.topAnchor.constraint(equalTo: infoBarView.bottomAnchor, constant: 20),
+            summaryTextView.topAnchor.constraint(equalTo: infoBarView.bottomAnchor, constant: 15),
             summaryTextView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            summaryTextView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -20),
+            summaryTextView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -40),
             summaryTextView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.9)
         ])
     }
