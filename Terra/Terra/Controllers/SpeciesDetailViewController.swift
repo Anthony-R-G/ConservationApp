@@ -73,7 +73,7 @@ final class SpeciesDetailViewController: UIViewController {
     }()
     
     private lazy var taxonomyViewTopAnchorConstraint: NSLayoutConstraint = {
-        return taxonomyView.topAnchor.constraint(equalTo: headerNameView.bottomAnchor, constant: 80)
+        return taxonomyView.topAnchor.constraint(equalTo: headerNameView.bottomAnchor, constant: 300)
     }()
     
     //MARK: -- Properties
