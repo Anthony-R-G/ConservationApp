@@ -70,10 +70,7 @@ final class SpeciesDetailViewController: UIViewController {
         btn.layer.cornerRadius = btn.frame.width / 2
         btn.clipsToBounds = true
         btn.addTarget(self, action: #selector(donateButtonPressed), for: .touchUpInside)
-        let origImage = UIImage(named: "donateIcon")
-        let tintedImage = origImage?.withRenderingMode(.alwaysTemplate)
-        btn.setImage(tintedImage, for: .normal)
-        btn.tintColor = .yellow
+       
         
         let gv = GradientView(frame: btn.frame)
         gv.startColor = #colorLiteral(red: 1, green: 0.2884941101, blue: 0.4681258202, alpha: 0.8975545805)
