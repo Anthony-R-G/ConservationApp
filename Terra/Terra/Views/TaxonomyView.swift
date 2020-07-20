@@ -13,8 +13,8 @@ final class TaxonomyView: UIView {
     //MARK: -- UI Element Initialization
     private lazy var taxonomyTitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Taxonomy"
-        label.font = UIFont.boldSystemFont(ofSize: 25)
+        label.text = "TAXONOMY"
+        label.font = UIFont.boldSystemFont(ofSize: 28)
         label.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         return label
     }()
@@ -165,7 +165,7 @@ final class TaxonomyView: UIView {
     
     
     //MARK: -- Methods
-    public func setUIFromSpecies(species: Species) {
+    public func setViewElementsFromSpeciesData(species: Species) {
         kingdomInfoLabel.text = species.kingdom
         classInfoLabel.text = species.classTaxonomy
         familyInfoLabel.text = species.family
@@ -187,6 +187,7 @@ final class TaxonomyView: UIView {
     }
 }
 
+//MARK: -- Adding Subviews & Constraints
 extension TaxonomyView {
     
     private func addSubviews() {

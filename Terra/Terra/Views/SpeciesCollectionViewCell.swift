@@ -10,8 +10,9 @@ import UIKit
 import Kingfisher
 
 final class SpeciesCollectionViewCell: UICollectionViewCell {
+    //MARK: -- UI Element Initialization
     
-   private lazy var speciesNameLabel: UILabel = {
+    private lazy var speciesNameLabel: UILabel = {
         let label = UILabel()
         label.adjustsFontSizeToFitWidth = true
         label.textColor = .white
@@ -20,7 +21,7 @@ final class SpeciesCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-   private lazy var backgroundImage: UIImageView = {
+    private lazy var backgroundImage: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
         return iv
@@ -30,6 +31,8 @@ final class SpeciesCollectionViewCell: UICollectionViewCell {
         let gv = GradientView()
         return gv
     }()
+    
+    //MARK: -- Methods
     
     public func configureCell(from species: Species) {
         speciesNameLabel.text = species.commonName
@@ -60,18 +63,20 @@ final class SpeciesCollectionViewCell: UICollectionViewCell {
     }
 }
 
-//MARK: -- Constraints
+//MARK: -- Adding Subviews & Constraints
+
 extension SpeciesCollectionViewCell {
-    
-    private func setConstraints(){
+    private func addSubviews() {
         [speciesNameLabel, backgroundImage].forEach{addSubview($0)}
         [speciesNameLabel, backgroundImage].forEach{$0.translatesAutoresizingMaskIntoConstraints = false }
-        
+    }
+    
+    private func setConstraints() {
         setSpeciesImageConstraints()
         setSpeciesNameLabelConstraints()
     }
     
-    private func setSpeciesNameLabelConstraints(){
+    private func setSpeciesNameLabelConstraints() {
         NSLayoutConstraint.activate([
             speciesNameLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             speciesNameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -30),

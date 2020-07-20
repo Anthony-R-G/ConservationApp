@@ -25,7 +25,6 @@
 		978E5CF223FB5CBC007BCD25 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 978E5CF123FB5CBC007BCD25 /* GoogleService-Info.plist */; };
 		979C191423DE43E900651B2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979C191323DE43E900651B2B /* AppDelegate.swift */; };
 		979C191623DE43E900651B2B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979C191523DE43E900651B2B /* SceneDelegate.swift */; };
-		979C191823DE43E900651B2B /* DeprecatedSpeciesDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979C191723DE43E900651B2B /* DeprecatedSpeciesDetailViewController.swift */; };
 		979C191D23DE43EF00651B2B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 979C191C23DE43EF00651B2B /* Assets.xcassets */; };
 		979C192023DE43EF00651B2B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 979C191E23DE43EF00651B2B /* LaunchScreen.storyboard */; };
 		979C192B23DE43EF00651B2B /* TerraTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979C192A23DE43EF00651B2B /* TerraTests.swift */; };
@@ -66,7 +65,6 @@
 		979C191023DE43E900651B2B /* Terra.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Terra.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		979C191323DE43E900651B2B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		979C191523DE43E900651B2B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		979C191723DE43E900651B2B /* DeprecatedSpeciesDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeprecatedSpeciesDetailViewController.swift; sourceTree = "<group>"; };
 		979C191C23DE43EF00651B2B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		979C191F23DE43EF00651B2B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		979C192123DE43EF00651B2B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -214,7 +212,6 @@
 			children = (
 				97BF745223DF42F90058F2D7 /* SpeciesListViewController.swift */,
 				970B172424C2699E007F32E0 /* SpeciesDetailViewController.swift */,
-				979C191723DE43E900651B2B /* DeprecatedSpeciesDetailViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -401,7 +398,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				979C191823DE43E900651B2B /* DeprecatedSpeciesDetailViewController.swift in Sources */,
 				972BBF7924C0204600B6F7C0 /* UIViewExtensions.swift in Sources */,
 				9711D8FC24BD42C800C2E6F1 /* Firestore.swift in Sources */,
 				972BBF7724C01FA900B6F7C0 /* PSORoundedVisualEffectView.swift in Sources */,

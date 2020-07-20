@@ -9,23 +9,14 @@
 import UIKit
 
 final class SubheaderInfoView: UIView {
+    //MARK: -- UI Element Initialization
     
-    //    private lazy var numbersStackView: UIStackView = {
-    //        let stackView = UIStackView(arrangedSubviews: [numbersLabel, numbersInfoLabel])
-    //        stackView.alignment = .fill
-    //        stackView.distribution = .fillEqually
-    //        stackView.spacing = 2
-    //        stackView.axis = .vertical
-    //        return stackView
-    //    }()
-    
-    private lazy var numbersLabel: UILabel = {
+    private lazy var numbersTitleLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
         label.text = "Numbers"
         label.textAlignment = .left
         label.font = UIFont(name: "Roboto-Light", size: 16)
-        label.backgroundColor = .blue
         label.adjustsFontSizeToFitWidth = true
         label.sizeToFit()
         return label
@@ -40,24 +31,16 @@ final class SubheaderInfoView: UIView {
         label.adjustsFontSizeToFitWidth = true
         label.sizeToFit()
         return label
-        
     }()
     
-    private lazy var weightStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [weightLabel, weightInfoLabel])
-        stackView.alignment = .fill
-        stackView.distribution = .fillProportionally
-        stackView.spacing = 1
-        stackView.axis = .vertical
-        return stackView
-    }()
-    
-    private lazy var weightLabel: UILabel = {
+    private lazy var weightTitleLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
         label.text = "Weight"
         label.textAlignment = .left
-        label.font = UIFont(name: "Roboto-Medium", size: 18)
+        label.font = UIFont(name: "Roboto-Light", size: 16)
+        label.adjustsFontSizeToFitWidth = true
+        label.sizeToFit()
         return label
     }()
     
@@ -65,25 +48,21 @@ final class SubheaderInfoView: UIView {
         let label = UILabel()
         label.textColor = .white
         label.textAlignment = .left
-        label.font = UIFont(name: "Roboto-Medium", size: 16)
+        label.font = UIFont(name: "Roboto-Medium", size: 18)
+        label.backgroundColor = .clear
+        label.adjustsFontSizeToFitWidth = true
+        label.sizeToFit()
         return label
     }()
     
-    private lazy var heightStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [heightLabel, heightInfoLabel])
-        stackView.alignment = .fill
-        stackView.distribution = .fillProportionally
-        stackView.spacing = 1
-        stackView.axis = .vertical
-        return stackView
-    }()
-    
-    private lazy var heightLabel: UILabel = {
+    private lazy var heightTitleLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
-        label.text = "Height"
+        label.text = "Weight"
         label.textAlignment = .left
-        label.font = UIFont(name: "Roboto-Medium", size: 18)
+        label.font = UIFont(name: "Roboto-Light", size: 16)
+        label.adjustsFontSizeToFitWidth = true
+        label.sizeToFit()
         return label
     }()
     
@@ -91,10 +70,14 @@ final class SubheaderInfoView: UIView {
         let label = UILabel()
         label.textColor = .white
         label.textAlignment = .left
-        label.font = UIFont(name: "Roboto-Medium", size: 16)
+        label.font = UIFont(name: "Roboto-Medium", size: 18)
+        label.backgroundColor = .clear
+        label.adjustsFontSizeToFitWidth = true
+        label.sizeToFit()
         return label
     }()
     
+    //MARK: -- Methods
     public func setViewElementsFromSpeciesData(species: Species) {
         numbersInfoLabel.text = species.populationNumbers
         weightInfoLabel.text = species.weight
@@ -105,7 +88,6 @@ final class SubheaderInfoView: UIView {
         super.init(frame: frame)
         addSubviews()
         setConstraints()
-        backgroundColor = .clear
     }
     
     required init?(coder: NSCoder) {
@@ -113,67 +95,76 @@ final class SubheaderInfoView: UIView {
     }
 }
 
+//MARK: -- Adding Subviews & Constraints
+
 extension SubheaderInfoView {
     
     private func addSubviews() {
-        //        let UIElements = [numbersStackView, weightStackView, heightStackView]
-        //        UIElements.forEach { self.addSubview($0) }
-        //        UIElements.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
-        let UIElements = [numbersLabel, numbersInfoLabel]
+        let UIElements = [numbersTitleLabel, numbersInfoLabel, weightTitleLabel, weightInfoLabel, heightTitleLabel, heightInfoLabel]
         UIElements.forEach { self.addSubview($0) }
         UIElements.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
     }
+    
     private func setConstraints() {
+        setNumbersTitleLabelConstraints()
         setNumbersInfoLabelConstraints()
-        setNumbersLabelConstraints()
-        //        setNumbersStackConstraints()
-        //        setWeightStackConstraints()
-        //        setHeightStackConstraints()
+        setWeightTitleLabelConstraints()
+        setWeightInfoLabelConstraints()
+        setHeightTitleLabelConstraints()
+        setHeightInfoLabelConstraints()
     }
     
-    private func setNumbersLabelConstraints() {
+    private func setNumbersTitleLabelConstraints() {
         NSLayoutConstraint.activate([
-            numbersLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            numbersLabel.topAnchor.constraint(equalTo: self.topAnchor),
-            numbersLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.5),
-            numbersLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.3)
+            numbersTitleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            numbersTitleLabel.topAnchor.constraint(equalTo: self.topAnchor),
+            numbersTitleLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.5),
+            numbersTitleLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.25)
         ])
     }
     
     private func setNumbersInfoLabelConstraints() {
         NSLayoutConstraint.activate([
-            numbersInfoLabel.leadingAnchor.constraint(equalTo: numbersLabel.leadingAnchor),
+            numbersInfoLabel.leadingAnchor.constraint(equalTo: numbersTitleLabel.leadingAnchor),
             numbersInfoLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.5),
-            numbersInfoLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.3),
+            numbersInfoLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.25),
             numbersInfoLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 10)
         ])
     }
     
+    private func setWeightTitleLabelConstraints() {
+        NSLayoutConstraint.activate([
+            weightTitleLabel.leadingAnchor.constraint(equalTo: numbersTitleLabel.trailingAnchor, constant: 20),
+            weightTitleLabel.topAnchor.constraint(equalTo: numbersTitleLabel.topAnchor),
+            weightTitleLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.5),
+            weightTitleLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.25)
+        ])
+    }
     
-//    private func setNumbersStackConstraints() {
-//        NSLayoutConstraint.activate([
-//            numbersStackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 15),
-//            numbersStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-//            numbersStackView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.3 ),
-//            numbersStackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.3)
-//        ])
-//    }
-    //
-    //    private func setWeightStackConstraints() {
-    //        NSLayoutConstraint.activate([
-    //            weightStackView.topAnchor.constraint(equalTo: numbersStackView.topAnchor),
-    //            weightStackView.leadingAnchor.constraint(equalTo: numbersStackView.trailingAnchor, constant: 25),
-    //            weightStackView.heightAnchor.constraint(equalTo: numbersStackView.heightAnchor),
-    //            weightStackView.widthAnchor.constraint(equalTo: numbersStackView.widthAnchor)
-    //        ])
-    //    }
-    //
-    //    private func setHeightStackConstraints() {
-    //        NSLayoutConstraint.activate([
-    //            heightStackView.topAnchor.constraint(equalTo: numbersStackView.topAnchor),
-    //            heightStackView.leadingAnchor.constraint(equalTo: weightStackView.trailingAnchor, constant: 25),
-    //            heightStackView.heightAnchor.constraint(equalTo: numbersStackView.heightAnchor),
-    //            heightStackView.widthAnchor.constraint(equalTo: numbersStackView.widthAnchor)
-    //        ])
-    //    }
+    private func setWeightInfoLabelConstraints() {
+        NSLayoutConstraint.activate([
+            weightInfoLabel.leadingAnchor.constraint(equalTo: weightTitleLabel.leadingAnchor),
+            weightInfoLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.5),
+            weightInfoLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.25),
+            weightInfoLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 10)
+        ])
+    }
+    
+    private func setHeightTitleLabelConstraints() {
+        NSLayoutConstraint.activate([
+            heightTitleLabel.leadingAnchor.constraint(equalTo: weightTitleLabel.trailingAnchor, constant: 20),
+            heightTitleLabel.topAnchor.constraint(equalTo: numbersTitleLabel.topAnchor),
+            heightTitleLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.5),
+            heightTitleLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.25)
+        ])
+    }
+    
+    private func setHeightInfoLabelConstraints() {
+        NSLayoutConstraint.activate([
+            heightInfoLabel.leadingAnchor.constraint(equalTo: self.heightTitleLabel.leadingAnchor),
+            heightInfoLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.5),
+            heightInfoLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.25),
+            heightInfoLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 10)
+        ])
+    }
 }

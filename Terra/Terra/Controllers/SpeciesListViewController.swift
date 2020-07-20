@@ -10,7 +10,12 @@ import UIKit
 
 final class SpeciesListViewController: UIViewController {
     
-    var scrollView = UIScrollView()
+    //MARK: -- UI Element Initialization
+    
+    lazy var scrollView: UIScrollView = {
+        let sv = UIScrollView()
+        return sv
+    }()
     
     private lazy var terraTitleLabel: UILabel = {
         let label = UILabel()
@@ -69,6 +74,7 @@ final class SpeciesListViewController: UIViewController {
         Utilities.makeCollectionView(superView: self.view)
     }()
     
+    //MARK: -- Properties
     
     private var animalData = [Species]() {
         didSet {
@@ -96,6 +102,7 @@ final class SpeciesListViewController: UIViewController {
         }
     }
     
+    //MARK: -- Methods
     
     private func filterSpecies(by status: ConservationStatus) -> [Species] {
         let filteredSpecies = animalData.filter { $0.conservationStatus == status }
@@ -143,7 +150,7 @@ final class SpeciesListViewController: UIViewController {
     }
 }
 
-//MARK: -- CollectionView Methods
+//MARK: -- CollectionView DataSource Methods
 extension SpeciesListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView {
@@ -180,6 +187,7 @@ extension SpeciesListViewController: UICollectionViewDataSource {
     }
 }
 
+//MARK: -- CollectionView Delegate Methods
 extension SpeciesListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 290, height: 230)
@@ -198,7 +206,7 @@ extension SpeciesListViewController: UICollectionViewDelegateFlowLayout {
         default: ()
         }
         
-        let detailVC = DetailViewController()
+        let detailVC = SpeciesDetailViewController()
         detailVC.currentSpecies = specificAnimal
         self.present(detailVC, animated: true, completion: nil)
     }
@@ -209,13 +217,14 @@ extension SpeciesListViewController: UICollectionViewDelegateFlowLayout {
 }
 
 //MARK: --ScrollView Methods
+
 extension UIScrollView {
     func updateContentView() {
         contentSize.height = subviews.sorted(by: { $0.frame.maxY < $1.frame.maxY }).last?.frame.maxY ?? contentSize.height
     }
 }
 
-//MARK: -- Adding subviews/constraints
+//MARK: -- Adding Subviews & Constraints
 extension SpeciesListViewController {
     
     private func addSubviews() {

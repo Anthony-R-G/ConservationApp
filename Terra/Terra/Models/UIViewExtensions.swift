@@ -9,7 +9,6 @@
 import UIKit
 
 extension UIView {
-    
     func addBlurToView() {
         var blurEffect: UIBlurEffect!
         blurEffect = UIBlurEffect(style: .systemUltraThinMaterialDark)

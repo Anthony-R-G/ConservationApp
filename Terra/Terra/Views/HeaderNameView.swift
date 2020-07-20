@@ -9,6 +9,8 @@
 import UIKit
 
 final class HeaderNameView: UIView {
+    //MARK: -- UI Element Initialization
+    
     private lazy var conservationStatusLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Roboto-Medium", size: 17)
@@ -28,7 +30,6 @@ final class HeaderNameView: UIView {
         label.textColor = .white
         label.textAlignment = .left
         label.numberOfLines = 2
-        label.backgroundColor = .clear
         label.adjustsFontSizeToFitWidth = true
         label.sizeToFit()
         return label
@@ -40,14 +41,13 @@ final class HeaderNameView: UIView {
         label.textColor = .white
         label.textAlignment = .left
         label.numberOfLines = 0
-        label.backgroundColor = .red
         label.adjustsFontSizeToFitWidth = true
         let neededSize = label.sizeThatFits(CGSize(width: self.frame.size.width, height: CGFloat.greatestFiniteMagnitude))
         label.sizeToFit()
         return label
     }()
     
-   
+    //MARK: -- Methods
     public func setViewElementsFromSpeciesData(species: Species) {
         conservationStatusLabel.text = species.conservationStatus.rawValue
         speciesCommonNameLabel.text = species.commonName
@@ -67,7 +67,8 @@ final class HeaderNameView: UIView {
     
 }
 
-//Constraints
+//MARK: -- Adding Subviews & Constraints
+
 extension HeaderNameView {
     
     private func addSubviews() {

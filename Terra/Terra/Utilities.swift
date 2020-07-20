@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 
 class Utilities {
-    
     static func makeCollectionView(superView: UIView) -> UICollectionView {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -21,6 +20,5 @@ class Utilities {
         collectionView.register(SpeciesCollectionViewCell.self, forCellWithReuseIdentifier: "speciesCell")
         return collectionView
     }
-    
 }
 

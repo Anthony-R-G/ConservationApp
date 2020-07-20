@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import SafariServices
 
-class DetailViewController: UIViewController {
+final class SpeciesDetailViewController: UIViewController {
     
     //MARK: -- UI Element Initialization
+    
     private lazy var scrollView: UIScrollView = {
         let sv = UIScrollView()
         return sv
@@ -27,7 +29,6 @@ class DetailViewController: UIViewController {
     private lazy var backgroundGradientOverlay: GradientView = {
         let gv = GradientView()
         gv.translatesAutoresizingMaskIntoConstraints = false
-        
         gv.startColor = #colorLiteral(red: 0.06859237701, green: 0.08213501424, blue: 0.2409383953, alpha: 0.0)
         gv.endColor = #colorLiteral(red: 0.06859237701, green: 0.08213501424, blue: 0.2409383953, alpha: 0.8456228596)
         self.view.insertSubview(gv, at: 1)
@@ -40,7 +41,7 @@ class DetailViewController: UIViewController {
         var frame = hiv.frame
         frame.size.height = 275
         hiv.frame = frame
-        hiv.backgroundColor = .black
+        //        hiv.backgroundColor = .black
         return hiv
     }()
     
@@ -49,8 +50,14 @@ class DetailViewController: UIViewController {
         var frame = siv.frame
         frame.size.height = 80
         siv.frame = frame
-        siv.backgroundColor = .red
+        //        siv.backgroundColor = .red
         return siv
+    }()
+    
+    private lazy var taxonomyView: TaxonomyView = {
+        let tv = TaxonomyView()
+        tv.addBlurToView()
+        return tv
     }()
     
     private lazy var headerNameViewHeightConstraint: NSLayoutConstraint = {
@@ -65,12 +72,17 @@ class DetailViewController: UIViewController {
         return subheaderInfoView.heightAnchor.constraint(equalToConstant: subheaderInfoView.frame.height)
     }()
     
-    //MARK: -- Property Initialization
+    //MARK: -- Properties
+    
     public var currentSpecies: Species!
+    
+    
+    //MARK: -- Methods
     
     private func setUIFromSpecies() {
         headerNameView.setViewElementsFromSpeciesData(species: currentSpecies)
         subheaderInfoView.setViewElementsFromSpeciesData(species: currentSpecies)
+        taxonomyView.setViewElementsFromSpeciesData(species: currentSpecies)
     }
     
     private func setBackground() {
@@ -80,6 +92,17 @@ class DetailViewController: UIViewController {
     
     private func setDelegates() {
         scrollView.delegate = self
+    }
+    
+    private func showWebBrowser(link: URL){
+        let config = SFSafariViewController.Configuration()
+        config.entersReaderIfAvailable = true
+        let safariVC = SFSafariViewController(url: link, configuration: config)
+        present(safariVC, animated: true)
+    }
+    
+    private func donateButtonPressed(_ sender: UIButton) {
+        showWebBrowser(link: URL(string: currentSpecies.donationLink)!)
     }
     
     override func viewDidLayoutSubviews() {
@@ -99,18 +122,40 @@ class DetailViewController: UIViewController {
         
         setUIFromSpecies()
         setBackground()
-        
     }
 }
 
-//MARK: -- Extension to Add Subviews & Constraints
-extension DetailViewController {
+//MARK: -- ScrollView Methods
+
+extension SpeciesDetailViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offset = scrollView.contentOffset.y
+        
+        let y = 275 - (offset)
+        let hnvHeight = max(150, y)
+        headerNameViewHeightConstraint.constant = hnvHeight
+        
+        let alphaOffset = (offset/1300)
+        let alpha = max(0, alphaOffset)
+        backgroundGradientOverlay.startColor = #colorLiteral(red: 0.06859237701, green: 0.08213501424, blue: 0.2409383953, alpha: Float(alpha))
+        
+        let topAnchorConstant = 400 - offset
+        let topAnchor = max(50, topAnchorConstant)
+        headerNameViewTopAnchorConstraint.constant = topAnchor
+        
+        let y2 = 80 - (offset)
+        let sivHeight = max(50, y2)
+        subheaderInfoViewHeightConstraint.constant = sivHeight
+    }
+}
+
+//MARK: -- Adding Subviews & Constraints
+extension SpeciesDetailViewController {
     private func addSubviews() {
         view.addSubview(scrollView)
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         
-        
-        let UIElements = [headerNameView, subheaderInfoView]
+        let UIElements = [headerNameView, subheaderInfoView, taxonomyView]
         UIElements.forEach{ scrollView.addSubview($0) }
         UIElements.forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
     }
@@ -120,6 +165,7 @@ extension DetailViewController {
         setBackgroundGradientOverlayConstraints()
         setHeaderInfoViewConstraints()
         setSubheaderInfoViewConstraints()
+        setTaxonomyViewConstraints()
     }
     
     private func setScrollViewConstraints() {
@@ -131,6 +177,7 @@ extension DetailViewController {
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
+    
     private func setBackgroundImageViewConstraints() {
         NSLayoutConstraint.activate([
             backgroundImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -166,26 +213,13 @@ extension DetailViewController {
             subheaderInfoViewHeightConstraint
         ])
     }
-}
-
-extension DetailViewController: UIScrollViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let offset = scrollView.contentOffset.y
-        
-        let y = 275 - (offset)
-        let hnvHeight = max(150, y)
-        headerNameViewHeightConstraint.constant = hnvHeight
-        
-        let alphaOffset = (offset/1300)
-        let alpha = max(0, alphaOffset)
-        backgroundGradientOverlay.startColor = #colorLiteral(red: 0.06859237701, green: 0.08213501424, blue: 0.2409383953, alpha: Float(alpha))
-        
-        let topAnchorConstant = 400 - offset
-        let topAnchor = max(50, topAnchorConstant)
-        headerNameViewTopAnchorConstraint.constant = topAnchor
-        
-        let y2 = 80 - (offset)
-        let sivHeight = max(50, y2)
-        subheaderInfoViewHeightConstraint.constant = sivHeight
+    
+    private func setTaxonomyViewConstraints(){
+        NSLayoutConstraint.activate([
+            taxonomyView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+            taxonomyView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor),
+            taxonomyView.widthAnchor.constraint(equalToConstant: 375),
+            taxonomyView.heightAnchor.constraint(equalToConstant: 420)
+        ])
     }
 }
