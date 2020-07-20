@@ -147,16 +147,16 @@ extension SpeciesDetailViewController: UIScrollViewDelegate {
         let alpha = max(0, min(alphaOffset, 0.30))
         backgroundGradientOverlay.startColor = #colorLiteral(red: 0.06859237701, green: 0.08213501424, blue: 0.2409383953, alpha: Float(alpha))
         
-        let y = 275 - (offset)
-        let hnvHeight = max(110, y)
+        let hnvOffset = 275 - (offset)
+        let hnvHeight = max(110, hnvOffset)
         headerNameViewHeightConstraint.constant = hnvHeight
         
         let headerTopAnchorConstantOffset = 400 - offset
         let headerTopAnchor = max(35, headerTopAnchorConstantOffset)
         headerNameViewTopAnchorConstraint.constant = headerTopAnchor
         
-        let y2 = 80 - (offset)
-        let sivHeight = max(50, y2)
+        let sivOffset = 80 - (offset)
+        let sivHeight = max(50, sivOffset)
         subheaderInfoViewHeightConstraint.constant = sivHeight
         
         let taxonomyViewTopAnchorConstantOffset = 300 - offset
