@@ -86,7 +86,7 @@ extension HeaderNameView {
         NSLayoutConstraint.activate([
             conservationStatusLabel.leadingAnchor.constraint(equalTo: speciesCommonNameLabel.leadingAnchor, constant: 5),
             conservationStatusLabel.bottomAnchor.constraint(equalTo: speciesCommonNameLabel.topAnchor, constant: -10),
-            conservationStatusLabel.heightAnchor.constraint(equalToConstant: 30),
+            conservationStatusLabel.heightAnchor.constraint(equalToConstant: 25),
             conservationStatusLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.3),
             
         ])

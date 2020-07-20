@@ -41,7 +41,6 @@ final class SpeciesDetailViewController: UIViewController {
         var frame = hiv.frame
         frame.size.height = 275
         hiv.frame = frame
-        //        hiv.backgroundColor = .black
         return hiv
     }()
     
@@ -50,7 +49,6 @@ final class SpeciesDetailViewController: UIViewController {
         var frame = siv.frame
         frame.size.height = 80
         siv.frame = frame
-        //        siv.backgroundColor = .red
         return siv
     }()
     
@@ -140,11 +138,11 @@ extension SpeciesDetailViewController: UIScrollViewDelegate {
         backgroundGradientOverlay.startColor = #colorLiteral(red: 0.06859237701, green: 0.08213501424, blue: 0.2409383953, alpha: Float(alpha))
         
         let y = 275 - (offset)
-        let hnvHeight = max(120, y)
+        let hnvHeight = max(110, y)
         headerNameViewHeightConstraint.constant = hnvHeight
         
         let headerTopAnchorConstantOffset = 400 - offset
-        let headerTopAnchor = max(40, headerTopAnchorConstantOffset)
+        let headerTopAnchor = max(35, headerTopAnchorConstantOffset)
         headerNameViewTopAnchorConstraint.constant = headerTopAnchor
         
         let y2 = 80 - (offset)
