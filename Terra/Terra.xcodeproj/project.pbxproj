@@ -11,7 +11,7 @@
 		1B62D350359E3EC3E7DCD905 /* Pods_TerraTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7A593764653FD2CA6FCF609 /* Pods_TerraTests.framework */; };
 		970B172524C2699E007F32E0 /* SpeciesDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970B172424C2699E007F32E0 /* SpeciesDetailViewController.swift */; };
 		9711D8F724BD199700C2E6F1 /* Species.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9711D8F624BD199700C2E6F1 /* Species.swift */; };
-		9711D8FC24BD42C800C2E6F1 /* Firestore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9711D8FB24BD42C800C2E6F1 /* Firestore.swift */; };
+		9711D8FC24BD42C800C2E6F1 /* FirestoresService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9711D8FB24BD42C800C2E6F1 /* FirestoresService.swift */; };
 		9711D91F24BD63B000C2E6F1 /* HabitatSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9711D91E24BD63B000C2E6F1 /* HabitatSystem.swift */; };
 		972BBF7724C01FA900B6F7C0 /* PSORoundedVisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972BBF7624C01FA900B6F7C0 /* PSORoundedVisualEffectView.swift */; };
 		972BBF7924C0204600B6F7C0 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972BBF7824C0204600B6F7C0 /* UIViewExtensions.swift */; };
@@ -53,7 +53,7 @@
 		94CD7C78C9210265A4DBE952 /* Pods-Terra.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Terra.release.xcconfig"; path = "Target Support Files/Pods-Terra/Pods-Terra.release.xcconfig"; sourceTree = "<group>"; };
 		970B172424C2699E007F32E0 /* SpeciesDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesDetailViewController.swift; sourceTree = "<group>"; };
 		9711D8F624BD199700C2E6F1 /* Species.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Species.swift; sourceTree = "<group>"; };
-		9711D8FB24BD42C800C2E6F1 /* Firestore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Firestore.swift; sourceTree = "<group>"; };
+		9711D8FB24BD42C800C2E6F1 /* FirestoresService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoresService.swift; sourceTree = "<group>"; };
 		9711D91E24BD63B000C2E6F1 /* HabitatSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitatSystem.swift; sourceTree = "<group>"; };
 		972BBF7624C01FA900B6F7C0 /* PSORoundedVisualEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSORoundedVisualEffectView.swift; sourceTree = "<group>"; };
 		972BBF7824C0204600B6F7C0 /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
@@ -118,7 +118,7 @@
 		9711D8F824BD19B900C2E6F1 /* Firebase */ = {
 			isa = PBXGroup;
 			children = (
-				9711D8FB24BD42C800C2E6F1 /* Firestore.swift */,
+				9711D8FB24BD42C800C2E6F1 /* FirestoresService.swift */,
 			);
 			path = Firebase;
 			sourceTree = "<group>";
@@ -408,7 +408,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				972BBF7924C0204600B6F7C0 /* UIViewExtensions.swift in Sources */,
-				9711D8FC24BD42C800C2E6F1 /* Firestore.swift in Sources */,
+				9711D8FC24BD42C800C2E6F1 /* FirestoresService.swift in Sources */,
 				972BBF7724C01FA900B6F7C0 /* PSORoundedVisualEffectView.swift in Sources */,
 				97E9450424BE10C800550824 /* ConservationStatus.swift in Sources */,
 				97F7B42824C56886007AEE97 /* InfoOptionPanelDelegate.swift in Sources */,
