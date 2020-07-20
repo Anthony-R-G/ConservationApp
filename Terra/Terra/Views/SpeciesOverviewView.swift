@@ -61,14 +61,29 @@ class SpeciesOverviewView: UIView {
     }()
     
     private lazy var weightInfoLabel: UILabel = {
-           let label = UILabel()
-           label.textColor = .white
-           label.textAlignment = .center
-           label.font = UIFont(name: "Roboto-Medium", size: 18)
-          return label
-       }()
+        let label = UILabel()
+        label.textColor = .white
+        label.textAlignment = .center
+        label.font = UIFont(name: "Roboto-Medium", size: 18)
+        return label
+    }()
     
+    private lazy var dietTitleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Diet"
+        label.textColor = #colorLiteral(red: 0.8390320539, green: 0.8525128961, blue: 0.8612788916, alpha: 0.7811162243)
+        label.textAlignment = .center
+        label.font = UIFont(name: "Roboto-Light", size: 15)
+        return label
+    }()
     
+    private lazy var dietInfoLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        label.textAlignment = .center
+        label.font = UIFont(name: "Roboto-Medium", size: 18)
+        return label
+    }()
     
     //MARK: -- Methods
     public func setViewElementsFromSpeciesData(species: Species) {
@@ -156,22 +171,22 @@ extension SpeciesOverviewView {
     }
     
     private func setWeightTitleLabelConstraints() {
-         NSLayoutConstraint.activate([
+        NSLayoutConstraint.activate([
             weightTitleLabel.topAnchor.constraint(equalTo: heightTitleLabel.topAnchor),
-             weightTitleLabel.centerXAnchor.constraint(equalTo: weightInfoLabel.centerXAnchor),
-             weightTitleLabel.heightAnchor.constraint(equalTo: heightTitleLabel.heightAnchor),
-             weightTitleLabel.widthAnchor.constraint(equalTo: heightTitleLabel.widthAnchor)
-         ])
-     }
-     
-     private func setWeightInfoLabelConstraints() {
-         NSLayoutConstraint.activate([
+            weightTitleLabel.centerXAnchor.constraint(equalTo: weightInfoLabel.centerXAnchor),
+            weightTitleLabel.heightAnchor.constraint(equalTo: heightTitleLabel.heightAnchor),
+            weightTitleLabel.widthAnchor.constraint(equalTo: heightTitleLabel.widthAnchor)
+        ])
+    }
+    
+    private func setWeightInfoLabelConstraints() {
+        NSLayoutConstraint.activate([
             weightInfoLabel.topAnchor.constraint(equalTo: heightInfoLabel.topAnchor),
             weightInfoLabel.leadingAnchor.constraint(equalTo: heightInfoLabel.trailingAnchor, constant: 30),
             weightInfoLabel.heightAnchor.constraint(equalTo: heightInfoLabel.heightAnchor),
             weightInfoLabel.widthAnchor.constraint(equalToConstant: 100)
-         ])
-     }
+        ])
+    }
     
     private func setSummaryTextViewConstraints() {
         NSLayoutConstraint.activate([
