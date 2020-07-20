@@ -21,7 +21,7 @@ CoreLocation (for determining your position relative to a species habitat range)
 ARKit (some animals will have the option to "View in AR" which will bring up a 3D model that can be placed and manipulated using iPhone's rear camera.)
 
 ## Screenshots
-List of animals species, separated by Red List conservation levels:
+List of animal species, separated by Red List conservation levels:
 
 ![Example 1](https://i.imgur.com/QJb4S1d.png)
 
