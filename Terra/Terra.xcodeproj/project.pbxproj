@@ -31,6 +31,7 @@
 		97B68CD424BBB0AC005B8AB8 /* HeaderNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B68CD324BBB0AC005B8AB8 /* HeaderNameView.swift */; };
 		97BF745323DF42F90058F2D7 /* SpeciesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BF745223DF42F90058F2D7 /* SpeciesListViewController.swift */; };
 		97E9450424BE10C800550824 /* ConservationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E9450324BE10C800550824 /* ConservationStatus.swift */; };
+		97F7B42624C562A9007AEE97 /* InfoOptionPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F7B42524C562A9007AEE97 /* InfoOptionPanelView.swift */; };
 		97FEAEAC24BE5FCC005BAEFE /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97FEAEAB24BE5FCC005BAEFE /* Utilities.swift */; };
 /* End PBXBuildFile section */
 
@@ -74,6 +75,7 @@
 		97B68CD324BBB0AC005B8AB8 /* HeaderNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderNameView.swift; sourceTree = "<group>"; };
 		97BF745223DF42F90058F2D7 /* SpeciesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesListViewController.swift; sourceTree = "<group>"; };
 		97E9450324BE10C800550824 /* ConservationStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConservationStatus.swift; sourceTree = "<group>"; };
+		97F7B42524C562A9007AEE97 /* InfoOptionPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoOptionPanelView.swift; sourceTree = "<group>"; };
 		97FEAEAB24BE5FCC005BAEFE /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		B8F91504C32E7A6A00F78D89 /* Pods-TerraTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TerraTests.release.xcconfig"; path = "Target Support Files/Pods-TerraTests/Pods-TerraTests.release.xcconfig"; sourceTree = "<group>"; };
 		C7A593764653FD2CA6FCF609 /* Pods_TerraTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TerraTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -143,6 +145,7 @@
 				97B68CD324BBB0AC005B8AB8 /* HeaderNameView.swift */,
 				9767D04B24C3EA9200384FCD /* SubheaderInfoView.swift */,
 				9735688E24BFDC8900D17F19 /* TaxonomyView.swift */,
+				97F7B42524C562A9007AEE97 /* InfoOptionPanelView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -408,6 +411,7 @@
 				97FEAEAC24BE5FCC005BAEFE /* Utilities.swift in Sources */,
 				97B68CD424BBB0AC005B8AB8 /* HeaderNameView.swift in Sources */,
 				9711D91F24BD63B000C2E6F1 /* HabitatSystem.swift in Sources */,
+				97F7B42624C562A9007AEE97 /* InfoOptionPanelView.swift in Sources */,
 				97452E4623E1E6C7005636E0 /* SpeciesCollectionViewCell.swift in Sources */,
 				979C191423DE43E900651B2B /* AppDelegate.swift in Sources */,
 				9767D04C24C3EA9200384FCD /* SubheaderInfoView.swift in Sources */,
