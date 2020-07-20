@@ -58,28 +58,31 @@ final class SpeciesDetailViewController: UIViewController {
     }()
     
     private lazy var donateButton: UIButton = {
-        let button = UIButton()
-           button.setTitle("Donate", for: .normal)
-           button.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 14)
-           button.backgroundColor = #colorLiteral(red: 1, green: 0.2914688587, blue: 0.3886995912, alpha: 0.7972763271)
-           button.showsTouchWhenHighlighted = true
-           var frame = button.frame
-           frame.size.width = 80
-           frame.size.height = 80
-           button.frame = frame
-           button.layer.cornerRadius = button.frame.width / 2
-           button.clipsToBounds = true
-           button.addTarget(self, action: #selector(donateButtonPressed), for: .touchUpInside)
-        return button
+        let btn = UIButton()
+        btn.setTitle("Donate", for: .normal)
+        btn.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 14)
+        btn.backgroundColor = .clear
+        btn.showsTouchWhenHighlighted = true
+        var frame = btn.frame
+        frame.size.width = 80
+        frame.size.height = 80
+        btn.frame = frame
+        btn.layer.cornerRadius = btn.frame.width / 2
+        btn.clipsToBounds = true
+        btn.addTarget(self, action: #selector(donateButtonPressed), for: .touchUpInside)
+        let origImage = UIImage(named: "donateIcon")
+        let tintedImage = origImage?.withRenderingMode(.alwaysTemplate)
+        btn.setImage(tintedImage, for: .normal)
+        btn.tintColor = .yellow
+        
+        let gv = GradientView(frame: btn.frame)
+        gv.startColor = #colorLiteral(red: 1, green: 0.2884941101, blue: 0.4681258202, alpha: 0.8975545805)
+        gv.endColor = #colorLiteral(red: 0.9966140389, green: 0.3340439796, blue: 0.6428459883, alpha: 0.8956817209)
+        gv.diagonalMode = true
+        btn.insertSubview(gv, at: 0)
+        
+        return btn
     }()
-    
-//    private lazy var customTabBarPanel: CustomizedTabBar = {
-//        let ctb = CustomizedTabBar()
-//        ctb.layer.cornerRadius = 25
-//        ctb.clipsToBounds = true
-//
-//       return ctb
-//    }()
     
     private lazy var taxonomyView: TaxonomyView = {
         let tv = TaxonomyView()
@@ -122,7 +125,7 @@ final class SpeciesDetailViewController: UIViewController {
     
     private func setDelegates() {
         scrollView.delegate = self
-//        infoOptionPanelView.delegate = self
+        //        infoOptionPanelView.delegate = self
     }
     
     private func showWebBrowser(link: URL){
@@ -158,7 +161,7 @@ extension SpeciesDetailViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offset = scrollView.contentOffset.y
         
-        let alphaOffset = (offset/1200)
+        let alphaOffset = (offset/1100)
         let alpha = max(0, alphaOffset)
         backgroundGradientOverlay.startColor = #colorLiteral(red: 0.06859237701, green: 0.08213501424, blue: 0.2409383953, alpha: Float(alpha))
         
@@ -264,13 +267,13 @@ extension SpeciesDetailViewController {
     }
     
     private func setDonateButtonConstraints() {
-          NSLayoutConstraint.activate([
-              donateButton.widthAnchor.constraint(equalToConstant: donateButton.frame.width),
-              donateButton.heightAnchor.constraint(equalToConstant: donateButton.frame.height),
-              donateButton.centerXAnchor.constraint(equalTo: infoOptionPanelView.centerXAnchor),
-              donateButton.bottomAnchor.constraint(equalTo: infoOptionPanelView.topAnchor, constant: 30)
-          ])
-      }
+        NSLayoutConstraint.activate([
+            donateButton.widthAnchor.constraint(equalToConstant: donateButton.frame.width),
+            donateButton.heightAnchor.constraint(equalToConstant: donateButton.frame.height),
+            donateButton.centerXAnchor.constraint(equalTo: infoOptionPanelView.centerXAnchor),
+            donateButton.bottomAnchor.constraint(equalTo: infoOptionPanelView.topAnchor, constant: 30)
+        ])
+    }
     
     private func setTaxonomyViewConstraints() {
         NSLayoutConstraint.activate([
