@@ -23,7 +23,7 @@ public struct Species {
     let habitatSystem: HabitatSystem
     let threats: String
     let populationSummary: String
-    let populationTrend: String
+    let populationTrend: PopulationTrend
     let populationNumbers: String
     var conservationStatus: ConservationStatus
     let donationLink: String
@@ -48,7 +48,7 @@ public struct Species {
             let habitatSystemString = dict["habitatSystem"] as? String,
             let threats = dict["threats"] as? String,
             let populationSummary = dict["populationSummary"] as? String,
-            let populationTrend = dict["populationTrend"] as? String,
+            let populationTrendString = dict["populationTrend"] as? String,
             let populationNumbers = dict["populationNumbers"] as? String,
             let conservationStatusString = dict["conservationStatus"] as? String,
             let donationLink = dict["donationLink"] as? String,
@@ -72,7 +72,7 @@ public struct Species {
         self.habitatSystem = HabitatSystem(rawValue: habitatSystemString)!
         self.threats = threats
         self.populationSummary = populationSummary
-        self.populationTrend = populationTrend
+        self.populationTrend = PopulationTrend(rawValue: populationTrendString)!
         self.populationNumbers = populationNumbers
         self.conservationStatus = ConservationStatus(rawValue: conservationStatusString)!
         self.donationLink = donationLink

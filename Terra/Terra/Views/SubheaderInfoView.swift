@@ -80,8 +80,9 @@ final class SubheaderInfoView: UIView {
     //MARK: -- Methods
     public func setViewElementsFromSpeciesData(species: Species) {
         numbersInfoLabel.text = species.populationNumbers
-        numbersTrendInfoLabel.text = species.populationTrend
+        numbersTrendInfoLabel.text = species.populationTrend.rawValue
         lastAssessedInfoLabel.text = species.assessmentDate
+      
     }
     
     override init(frame: CGRect) {

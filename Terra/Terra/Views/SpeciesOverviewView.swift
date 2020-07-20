@@ -118,8 +118,6 @@ class SpeciesOverviewView: UIView {
         setConstraints()
     }
     
-    
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -238,7 +236,7 @@ extension SpeciesOverviewView {
             readMoreButton.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             readMoreButton.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             readMoreButton.heightAnchor.constraint(equalToConstant: 60),
-            readMoreButton.widthAnchor.constraint(equalToConstant: 120)
+            readMoreButton.widthAnchor.constraint(equalToConstant: 150)
         ])
     }
 }
