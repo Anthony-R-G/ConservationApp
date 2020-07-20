@@ -8,17 +8,18 @@
 
 import UIKit
 
-class TaxonomyView: UIView {
+final class TaxonomyView: UIView {
     
-    lazy var taxonomyTitleLabel: UILabel = {
+    //MARK: -- UI Element Initialization
+    private lazy var taxonomyTitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Taxonomy"
-        label.font = UIFont.boldSystemFont(ofSize: 25)
+        label.text = "TAXONOMY"
+        label.font = UIFont.boldSystemFont(ofSize: 28)
         label.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         return label
     }()
     
-    lazy var kingdomStackView: UIStackView = {
+    private lazy var kingdomStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [kingdomLabel, kingdomInfoLabel])
         stackView.alignment = .fill
         stackView.distribution = .equalSpacing
@@ -27,7 +28,7 @@ class TaxonomyView: UIView {
         return stackView
     }()
     
-    lazy var kingdomLabel: UILabel = {
+    private lazy var kingdomLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Roboto-Medium", size: 14)
         label.text = "Kingdom"
@@ -35,14 +36,14 @@ class TaxonomyView: UIView {
         return label
     }()
     
-    lazy var kingdomInfoLabel: UILabel = {
+    private lazy var kingdomInfoLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Roboto-Bold", size: 18)
         label.textColor = #colorLiteral(red: 1, green: 0.9833787084, blue: 0.8849565387, alpha: 1)
         return label
     }()
     
-    lazy var classStackView: UIStackView = {
+   private lazy var classStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [classLabel, classInfoLabel])
         stackView.alignment = .fill
         stackView.distribution = .equalSpacing
@@ -51,7 +52,7 @@ class TaxonomyView: UIView {
         return stackView
     }()
     
-    lazy var classLabel: UILabel = {
+    private lazy var classLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Roboto-Medium", size: 14)
         label.text = "Class"
@@ -59,14 +60,14 @@ class TaxonomyView: UIView {
         return label
     }()
     
-    lazy var classInfoLabel: UILabel = {
+    private lazy var classInfoLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Roboto-Bold", size: 18)
         label.textColor = #colorLiteral(red: 1, green: 0.9833787084, blue: 0.8849565387, alpha: 1)
         return label
     }()
     
-    lazy var familyStackView: UIStackView = {
+    private lazy var familyStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [familyLabel, familyInfoLabel])
         stackView.alignment = .fill
         stackView.distribution = .equalSpacing
@@ -75,7 +76,7 @@ class TaxonomyView: UIView {
         return stackView
     }()
     
-    lazy var familyLabel: UILabel = {
+    private lazy var familyLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Roboto-Medium", size: 14)
         label.text = "Family"
@@ -83,14 +84,14 @@ class TaxonomyView: UIView {
         return label
     }()
     
-    lazy var familyInfoLabel: UILabel = {
+    private lazy var familyInfoLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Roboto-Bold", size: 18)
         label.textColor = #colorLiteral(red: 1, green: 0.9833787084, blue: 0.8849565387, alpha: 1)
         return label
     }()
     
-    lazy var phylumStackView: UIStackView = {
+    private lazy var phylumStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [phylumLabel, phylumInfoLabel])
         stackView.alignment = .fill
         stackView.distribution = .equalSpacing
@@ -99,7 +100,7 @@ class TaxonomyView: UIView {
         return stackView
     }()
     
-    lazy var phylumLabel: UILabel = {
+    private lazy var phylumLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Roboto-Medium", size: 14)
         label.text = "Phylum"
@@ -107,14 +108,14 @@ class TaxonomyView: UIView {
         return label
     }()
     
-    lazy var phylumInfoLabel: UILabel = {
+    private lazy var phylumInfoLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Roboto-Bold", size: 18)
         label.textColor = #colorLiteral(red: 1, green: 0.9833787084, blue: 0.8849565387, alpha: 1)
         return label
     }()
     
-    lazy var orderStackView: UIStackView = {
+    private lazy var orderStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [orderLabel, orderInfoLabel])
         stackView.alignment = .fill
         stackView.distribution = .equalSpacing
@@ -123,7 +124,7 @@ class TaxonomyView: UIView {
         return stackView
     }()
     
-    lazy var orderLabel: UILabel = {
+    private lazy var orderLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Roboto-Medium", size: 14)
         label.text = "Order"
@@ -131,14 +132,14 @@ class TaxonomyView: UIView {
         return label
     }()
     
-    lazy var orderInfoLabel: UILabel = {
+    private lazy var orderInfoLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Roboto-Bold", size: 18)
         label.textColor = #colorLiteral(red: 1, green: 0.9833787084, blue: 0.8849565387, alpha: 1)
         return label
     }()
     
-    lazy var genusStackView: UIStackView = {
+    private lazy var genusStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [genusLabel, genusInfoLabel])
         stackView.alignment = .fill
         stackView.distribution = .equalSpacing
@@ -147,7 +148,7 @@ class TaxonomyView: UIView {
         return stackView
     }()
     
-    lazy var genusLabel: UILabel = {
+    private lazy var genusLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Roboto-Medium", size: 14)
         label.text = "Genus"
@@ -155,7 +156,7 @@ class TaxonomyView: UIView {
         return label
     }()
     
-    lazy var genusInfoLabel: UILabel = {
+    private lazy var genusInfoLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Roboto-Bold", size: 18)
         label.textColor = #colorLiteral(red: 1, green: 0.9833787084, blue: 0.8849565387, alpha: 1)
@@ -163,7 +164,8 @@ class TaxonomyView: UIView {
     }()
     
     
-    public func setUIFromSpecies(species: Species) {
+    //MARK: -- Methods
+    public func setViewElementsFromSpeciesData(species: Species) {
         kingdomInfoLabel.text = species.kingdom
         classInfoLabel.text = species.classTaxonomy
         familyInfoLabel.text = species.family
@@ -175,8 +177,9 @@ class TaxonomyView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .clear
-        setConstraints()
         self.layer.cornerRadius = 10
+        addSubviews()
+        setConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -184,14 +187,17 @@ class TaxonomyView: UIView {
     }
 }
 
+//MARK: -- Adding Subviews & Constraints
 extension TaxonomyView {
     
-    private func setConstraints() {
+    private func addSubviews() {
         let UIElements =  [taxonomyTitleLabel, kingdomStackView, classStackView, familyStackView, phylumStackView, orderStackView, genusStackView]
         
         UIElements.forEach{ self.addSubview($0) }
         UIElements.forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
-        
+    }
+    
+    private func setConstraints() {
         setTaxonomyTitleLabelConstraints()
         setKingdomStackViewConstraints()
         setClassStackViewConstraints()

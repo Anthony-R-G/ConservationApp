@@ -9,7 +9,7 @@
 import Foundation
 import FirebaseFirestore
 
-struct Species {
+public struct Species {
     let commonName: String
     let scientificName: String
     let assessmentDate: String
