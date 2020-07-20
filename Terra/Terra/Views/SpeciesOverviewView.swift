@@ -29,29 +29,51 @@ class SpeciesOverviewView: UIView {
     
     private lazy var infoBarView: UIView = {
         let view = UIView()
-        view.backgroundColor = #colorLiteral(red: 0.2275088131, green: 0.2261628211, blue: 0.2285476327, alpha: 0.7836312072)
-        view.layer.cornerRadius = 25
+        view.backgroundColor = #colorLiteral(red: 0.517944634, green: 0.5203455091, blue: 0.5262002945, alpha: 0.5)
+        view.layer.cornerRadius = 10
         return view
     }()
     
     private lazy var heightTitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Weight"
-        label.textColor = #colorLiteral(red: 0.7416954637, green: 0.7451297045, blue: 0.7535179257, alpha: 1)
+        label.text = "Height"
+        label.textColor = #colorLiteral(red: 0.8390320539, green: 0.8525128961, blue: 0.8612788916, alpha: 0.7811162243)
         label.textAlignment = .center
-        label.font = UIFont(name: "Roboto-Light", size: 16)
+        label.font = UIFont(name: "Roboto-Light", size: 15)
         return label
     }()
     
     private lazy var heightInfoLabel: UILabel = {
         let label = UILabel()
-       return label
+        label.textColor = .white
+        label.textAlignment = .center
+        label.font = UIFont(name: "Roboto-Medium", size: 18)
+        return label
     }()
+    
+    private lazy var weightTitleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Weight"
+        label.textColor = #colorLiteral(red: 0.8390320539, green: 0.8525128961, blue: 0.8612788916, alpha: 0.7811162243)
+        label.textAlignment = .center
+        label.font = UIFont(name: "Roboto-Light", size: 15)
+        return label
+    }()
+    
+    private lazy var weightInfoLabel: UILabel = {
+           let label = UILabel()
+           label.textColor = .white
+           label.textAlignment = .center
+           label.font = UIFont(name: "Roboto-Medium", size: 18)
+          return label
+       }()
+    
     
     
     //MARK: -- Methods
     public func setViewElementsFromSpeciesData(species: Species) {
         summaryTextView.text = species.populationSummary
+        heightInfoLabel.text = species.height
     }
     
     private func setAppearance() {
@@ -90,6 +112,7 @@ extension SpeciesOverviewView {
         setOverviewTitleLabelConstraints()
         setInfoBarConstraints()
         setHeightTitleLabelConstraints()
+        setHeightInfoLabelConstraints()
         setSummaryTextViewConstraints()
     }
     
@@ -106,7 +129,7 @@ extension SpeciesOverviewView {
         NSLayoutConstraint.activate([
             infoBarView.topAnchor.constraint(equalTo: overviewTitleLabel.bottomAnchor, constant: 20),
             infoBarView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            infoBarView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.2),
+            infoBarView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.18),
             infoBarView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.9)
         ])
     }
@@ -114,9 +137,18 @@ extension SpeciesOverviewView {
     private func setHeightTitleLabelConstraints() {
         NSLayoutConstraint.activate([
             heightTitleLabel.topAnchor.constraint(equalTo: infoBarView.topAnchor, constant: 10),
-            heightTitleLabel.leadingAnchor.constraint(equalTo: infoBarView.leadingAnchor, constant: 10),
-            heightTitleLabel.heightAnchor.constraint(equalToConstant: 30),
+            heightTitleLabel.centerXAnchor.constraint(equalTo: heightInfoLabel.centerXAnchor),
+            heightTitleLabel.heightAnchor.constraint(equalToConstant: 20),
             heightTitleLabel.widthAnchor.constraint(equalToConstant: 70)
+        ])
+    }
+    
+    private func setHeightInfoLabelConstraints() {
+        NSLayoutConstraint.activate([
+            heightInfoLabel.topAnchor.constraint(equalTo: heightTitleLabel.bottomAnchor, constant: 10),
+            heightInfoLabel.leadingAnchor.constraint(equalTo: infoBarView.leadingAnchor, constant: 10),
+            heightInfoLabel.heightAnchor.constraint(equalToConstant: 30),
+            heightInfoLabel.widthAnchor.constraint(equalToConstant: 70)
         ])
     }
     
