@@ -253,7 +253,6 @@ extension SpeciesListViewController {
         ])
     }
     
-    
     private func setTerraTitleLabelConstraints() {
         NSLayoutConstraint.activate([
             terraTitleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 80),

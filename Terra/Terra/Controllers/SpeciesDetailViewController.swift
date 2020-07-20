@@ -97,6 +97,7 @@ final class SpeciesDetailViewController: UIViewController {
     
     private func setDelegates() {
         scrollView.delegate = self
+        infoOptionPanelView.delegate = self
     }
     
     private func showWebBrowser(link: URL){
@@ -104,10 +105,6 @@ final class SpeciesDetailViewController: UIViewController {
         config.entersReaderIfAvailable = true
         let safariVC = SFSafariViewController(url: link, configuration: config)
         present(safariVC, animated: true)
-    }
-    
-    private func donateButtonPressed(_ sender: UIButton) {
-        showWebBrowser(link: URL(string: currentSpecies.donationLink)!)
     }
     
     override func viewDidLayoutSubviews() {
@@ -161,7 +158,7 @@ extension SpeciesDetailViewController: UIScrollViewDelegate {
 //MARK: -- Custom Delegate Implementation
 extension SpeciesDetailViewController: InfoOptionPanelDelegate {
     func donateButtonPressed() {
-        print("Omg u pressed me!!!")
+        showWebBrowser(link: URL(string: currentSpecies.donationLink)!)
     }
 }
 
