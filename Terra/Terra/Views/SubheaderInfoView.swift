@@ -33,10 +33,10 @@ final class SubheaderInfoView: UIView {
         return label
     }()
     
-    private lazy var weightTitleLabel: UILabel = {
+    private lazy var numbersTrendLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
-        label.text = "Weight"
+        label.text = "Trend"
         label.textAlignment = .left
         label.font = UIFont(name: "Roboto-Light", size: 16)
         label.adjustsFontSizeToFitWidth = true
@@ -44,7 +44,7 @@ final class SubheaderInfoView: UIView {
         return label
     }()
     
-    private lazy var weightInfoLabel: UILabel = {
+    private lazy var numbersTrendInfoLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
         label.textAlignment = .left
@@ -55,10 +55,10 @@ final class SubheaderInfoView: UIView {
         return label
     }()
     
-    private lazy var heightTitleLabel: UILabel = {
+    private lazy var lastAssessedTitleLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
-        label.text = "Weight"
+        label.text = "Last Assessed"
         label.textAlignment = .left
         label.font = UIFont(name: "Roboto-Light", size: 16)
         label.adjustsFontSizeToFitWidth = true
@@ -66,7 +66,7 @@ final class SubheaderInfoView: UIView {
         return label
     }()
     
-    private lazy var heightInfoLabel: UILabel = {
+    private lazy var lastAssessedInfoLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
         label.textAlignment = .left
@@ -80,8 +80,8 @@ final class SubheaderInfoView: UIView {
     //MARK: -- Methods
     public func setViewElementsFromSpeciesData(species: Species) {
         numbersInfoLabel.text = species.populationNumbers
-        weightInfoLabel.text = species.weight
-        heightInfoLabel.text = species.height
+        numbersTrendInfoLabel.text = species.populationTrend
+        lastAssessedInfoLabel.text = species.assessmentDate
     }
     
     override init(frame: CGRect) {
@@ -100,7 +100,7 @@ final class SubheaderInfoView: UIView {
 extension SubheaderInfoView {
     
     private func addSubviews() {
-        let UIElements = [numbersTitleLabel, numbersInfoLabel, weightTitleLabel, weightInfoLabel, heightTitleLabel, heightInfoLabel]
+        let UIElements = [numbersTitleLabel, numbersInfoLabel, numbersTrendLabel, numbersTrendInfoLabel, lastAssessedTitleLabel, lastAssessedInfoLabel]
         UIElements.forEach { self.addSubview($0) }
         UIElements.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
     }
@@ -134,37 +134,37 @@ extension SubheaderInfoView {
     
     private func setWeightTitleLabelConstraints() {
         NSLayoutConstraint.activate([
-            weightTitleLabel.leadingAnchor.constraint(equalTo: numbersTitleLabel.trailingAnchor, constant: 20),
-            weightTitleLabel.topAnchor.constraint(equalTo: numbersTitleLabel.topAnchor),
-            weightTitleLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.5),
-            weightTitleLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.25)
+            numbersTrendLabel.leadingAnchor.constraint(equalTo: numbersTitleLabel.trailingAnchor, constant: 20),
+            numbersTrendLabel.topAnchor.constraint(equalTo: numbersTitleLabel.topAnchor),
+            numbersTrendLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.5),
+            numbersTrendLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.25)
         ])
     }
     
     private func setWeightInfoLabelConstraints() {
         NSLayoutConstraint.activate([
-            weightInfoLabel.leadingAnchor.constraint(equalTo: weightTitleLabel.leadingAnchor),
-            weightInfoLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.5),
-            weightInfoLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.25),
-            weightInfoLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 10)
+            numbersTrendInfoLabel.leadingAnchor.constraint(equalTo: numbersTrendLabel.leadingAnchor),
+            numbersTrendInfoLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.5),
+            numbersTrendInfoLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.25),
+            numbersTrendInfoLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 10)
         ])
     }
     
     private func setHeightTitleLabelConstraints() {
         NSLayoutConstraint.activate([
-            heightTitleLabel.leadingAnchor.constraint(equalTo: weightTitleLabel.trailingAnchor, constant: 20),
-            heightTitleLabel.topAnchor.constraint(equalTo: numbersTitleLabel.topAnchor),
-            heightTitleLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.5),
-            heightTitleLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.25)
+            lastAssessedTitleLabel.leadingAnchor.constraint(equalTo: numbersTrendLabel.trailingAnchor, constant: 20),
+            lastAssessedTitleLabel.topAnchor.constraint(equalTo: numbersTitleLabel.topAnchor),
+            lastAssessedTitleLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.5),
+            lastAssessedTitleLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.25)
         ])
     }
     
     private func setHeightInfoLabelConstraints() {
         NSLayoutConstraint.activate([
-            heightInfoLabel.leadingAnchor.constraint(equalTo: self.heightTitleLabel.leadingAnchor),
-            heightInfoLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.5),
-            heightInfoLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.25),
-            heightInfoLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 10)
+            lastAssessedInfoLabel.leadingAnchor.constraint(equalTo: self.lastAssessedTitleLabel.leadingAnchor),
+            lastAssessedInfoLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.5),
+            lastAssessedInfoLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.25),
+            lastAssessedInfoLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 10)
         ])
     }
 }
