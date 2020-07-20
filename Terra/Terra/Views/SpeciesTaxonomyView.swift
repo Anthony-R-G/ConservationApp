@@ -14,7 +14,7 @@ final class SpeciesTaxonomyView: UIView {
     private lazy var taxonomyTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "TAXONOMY"
-        label.font = UIFont.boldSystemFont(ofSize: 28)
+        label.font = UIFont(name: "Roboto-Bold", size: 28)
         label.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         return label
     }()

@@ -66,9 +66,9 @@ final class SpeciesDetailViewController: UIViewController {
         return btn
     }()
     
-    private lazy var taxonomyView: SpeciesTaxonomyView = {
-        let tv = SpeciesTaxonomyView()
-        return tv
+    private lazy var speciesOverviewView: SpeciesOverviewView = {
+        let sov = SpeciesOverviewView()
+        return sov
     }()
     
     private lazy var headerNameViewHeightConstraint: NSLayoutConstraint = {
@@ -83,8 +83,8 @@ final class SpeciesDetailViewController: UIViewController {
         return subheaderInfoView.heightAnchor.constraint(equalToConstant: subheaderInfoView.frame.height)
     }()
     
-    private lazy var taxonomyViewTopAnchorConstraint: NSLayoutConstraint = {
-        return taxonomyView.topAnchor.constraint(equalTo: headerNameView.bottomAnchor, constant: 300)
+    private lazy var speciesOverviewViewTopAnchorConstraint: NSLayoutConstraint = {
+        return speciesOverviewView.topAnchor.constraint(equalTo: headerNameView.bottomAnchor, constant: 300)
     }()
     
     //MARK: -- Properties
@@ -97,7 +97,7 @@ final class SpeciesDetailViewController: UIViewController {
     private func setViewElementsFromSpeciesData() {
         headerNameView.setViewElementsFromSpeciesData(species: currentSpecies)
         subheaderInfoView.setViewElementsFromSpeciesData(species: currentSpecies)
-        taxonomyView.setViewElementsFromSpeciesData(species: currentSpecies)
+        speciesOverviewView.setViewElementsFromSpeciesData(species: currentSpecies)
     }
     
     private func setBackground() {
@@ -160,9 +160,9 @@ extension SpeciesDetailViewController: UIScrollViewDelegate {
         let sivHeight = max(50, sivOffset)
         subheaderInfoViewHeightConstraint.constant = sivHeight
         
-        let taxonomyViewTopAnchorConstantOffset = 300 - offset
-        let taxonomyTopAnchor = max(100, taxonomyViewTopAnchorConstantOffset)
-        taxonomyViewTopAnchorConstraint.constant = taxonomyTopAnchor
+        let overviewViewTopAnchorConstantOffset = 300 - offset
+        let overviewViewTopAnchor = max(100, overviewViewTopAnchorConstantOffset)
+        speciesOverviewViewTopAnchorConstraint.constant = overviewViewTopAnchor
     }
 }
 
@@ -179,7 +179,7 @@ extension SpeciesDetailViewController {
         view.addSubview(scrollView)
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         
-        let UIElements = [headerNameView, subheaderInfoView, taxonomyView, infoOptionPanelView, donateButton]
+        let UIElements = [headerNameView, subheaderInfoView, speciesOverviewView, infoOptionPanelView, donateButton]
         UIElements.forEach{ scrollView.addSubview($0) }
         UIElements.forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
     }
@@ -189,7 +189,7 @@ extension SpeciesDetailViewController {
         setBackgroundGradientOverlayConstraints()
         setHeaderInfoViewConstraints()
         setSubheaderInfoViewConstraints()
-        setTaxonomyViewConstraints()
+        setSpeciesOverviewViewConstraints()
         setInfoOptionPanelViewConstraints()
         setDonateButtonConstraints()
     }
@@ -245,7 +245,7 @@ extension SpeciesDetailViewController {
             infoOptionPanelView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             infoOptionPanelView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
             infoOptionPanelView.heightAnchor.constraint(equalToConstant: 70),
-            infoOptionPanelView.topAnchor.constraint(equalTo: taxonomyView.bottomAnchor, constant: 100)
+            infoOptionPanelView.topAnchor.constraint(equalTo: speciesOverviewView.bottomAnchor, constant: 100)
         ])
     }
     
@@ -258,12 +258,12 @@ extension SpeciesDetailViewController {
         ])
     }
     
-    private func setTaxonomyViewConstraints() {
+    private func setSpeciesOverviewViewConstraints() {
         NSLayoutConstraint.activate([
-            taxonomyView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
-            taxonomyView.widthAnchor.constraint(equalToConstant: 375),
-            taxonomyView.heightAnchor.constraint(equalToConstant: 420),
-            taxonomyViewTopAnchorConstraint
+            speciesOverviewView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+            speciesOverviewView.widthAnchor.constraint(equalToConstant: 375),
+            speciesOverviewView.heightAnchor.constraint(equalToConstant: 420),
+            speciesOverviewViewTopAnchorConstraint
         ])
     }
 }
