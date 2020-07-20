@@ -10,43 +10,49 @@ import UIKit
 import Kingfisher
 
 class SpeciesCollectionViewCell: UICollectionViewCell {
+    //MARK: -- UI Element Initialization
     
-    lazy var speciesNameLabel: UILabel = {
+    private lazy var speciesNameLabel: UILabel = {
         let label = UILabel()
         label.adjustsFontSizeToFitWidth = true
         label.textColor = .white
-        label.font = UIFont.boldSystemFont(ofSize: 23)
-        label.textAlignment = .center
+        label.font = UIFont(name: "Roboto-Bold", size: 23)
+        label.textAlignment = .left
         return label
     }()
     
-    lazy var speciesImage: UIImageView = {
+    private lazy var backgroundImage: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
+        self.insertSubview(iv, at: 0)
         return iv
     }()
     
-    lazy var textShadow: GradientView = {
+    private lazy var backgroundGradientOverlay: GradientView = {
         let gv = GradientView()
+        gv.startColor = .clear
+        gv.endColor = #colorLiteral(red: 0.06859237701, green: 0.08213501424, blue: 0.2409383953, alpha: 0.6547784675)
+        self.insertSubview(gv, at: 1)
         return gv
     }()
     
-    func configureCell(from species: Species) {
+    //MARK: -- Methods
+    
+    public func configureCell(from species: Species) {
         speciesNameLabel.text = species.commonName
         let imageURL = URL(string: species.cellImage)
-        speciesImage.kf.setImage(with: imageURL)
-        speciesImage.kf.indicatorType = .activity
-        backgroundColor = species.marineSystem == true ? #colorLiteral(red: 0.2312238216, green: 0.3822638988, blue: 0.7663728595, alpha: 1) : #colorLiteral(red: 0.8971922994, green: 0.4322043657, blue: 0.1033880934, alpha: 1)
+        backgroundImage.kf.setImage(with: imageURL)
+        backgroundImage.kf.indicatorType = .activity
+        
+        backgroundColor = species.habitatSystem == .marine ? #colorLiteral(red: 0.2312238216, green: 0.3822638988, blue: 0.7663728595, alpha: 1) : #colorLiteral(red: 0.8971922994, green: 0.4322043657, blue: 0.1033880934, alpha: 1)
+        self.layer.cornerRadius = 39
+        self.layer.masksToBounds = true
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.layer.cornerRadius = 10
-        self.layer.masksToBounds = true
-        backgroundColor = #colorLiteral(red: 0.8971922994, green: 0.4322043657, blue: 0.1033880934, alpha: 1)
+        addSubviews()
         setConstraints()
-        speciesImage.layer.zPosition = 0
-        speciesNameLabel.layer.zPosition = 1
     }
     
     required init?(coder: NSCoder) {
@@ -54,33 +60,47 @@ class SpeciesCollectionViewCell: UICollectionViewCell {
     }
 }
 
-//MARK: -- Constraints
+//MARK: -- Adding Subviews & Constraints
+
 extension SpeciesCollectionViewCell {
+    private func addSubviews() {
+        let UIElements = [backgroundImage, backgroundGradientOverlay, speciesNameLabel]
+        UIElements.forEach{ self.contentView.addSubview($0) }
+        UIElements.forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
+    }
     
-    private func setConstraints(){
-        [speciesNameLabel, speciesImage].forEach{addSubview($0)}
-        [speciesNameLabel, speciesImage].forEach{$0.translatesAutoresizingMaskIntoConstraints = false }
-        
-        setSpeciesImageConstraints()
+    private func setConstraints() {
+        setBackgroundImageConstraints()
+        setBackgroundGradientOverlayConstraints()
         setSpeciesNameLabelConstraints()
+    }
+    
+    private func setBackgroundImageConstraints() {
+          NSLayoutConstraint.activate([
+              backgroundImage.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+              backgroundImage.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+              backgroundImage.heightAnchor.constraint(equalTo: contentView.heightAnchor),
+              backgroundImage.widthAnchor.constraint(equalTo: contentView.widthAnchor)
+          ])
+      }
+    
+    private func setBackgroundGradientOverlayConstraints() {
+        NSLayoutConstraint.activate([
+            backgroundGradientOverlay.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            backgroundGradientOverlay.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            backgroundGradientOverlay.widthAnchor.constraint(equalTo: contentView.widthAnchor),
+            backgroundGradientOverlay.heightAnchor.constraint(equalTo: contentView.heightAnchor)
+        ])
     }
     
     private func setSpeciesNameLabelConstraints(){
         NSLayoutConstraint.activate([
             speciesNameLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            speciesNameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -40),
+            speciesNameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -30),
             speciesNameLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.85),
             speciesNameLabel.heightAnchor.constraint(equalToConstant: 50)
-            
         ])
     }
     
-    private func setSpeciesImageConstraints() {
-        NSLayoutConstraint.activate([
-            speciesImage.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            speciesImage.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            speciesImage.heightAnchor.constraint(equalTo: contentView.heightAnchor),
-            speciesImage.widthAnchor.constraint(equalTo: contentView.widthAnchor)
-        ])
-    }
+  
 }
