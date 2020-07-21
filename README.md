@@ -27,9 +27,20 @@ List of animal species, separated by Red List conservation levels:
 
 ![Example 1](https://i.imgur.com/QJb4S1d.png)
 
-Tapping any one cell will bring up a new page with more information about the animal:
+Tapping any one cell will transition to a new page where the species you've selected is put at the forefront:
 
-![Example 2](https://i.imgur.com/2FBgKyC.png)
+![Example 2](https://i.imgur.com/OukfgKR.png)
 
 
-![Example 3](https://i.imgur.com/rO4OsTG.png)
+![Example 3](https://i.imgur.com/kN93X9n.png)
+
+
+Scrolling up on this page will bring up detailed information about the species:
+
+![Example 4](https://i.imgur.com/x6T5a9l.png)
+
+You can show your support for animal conservation efforts by clicking on the donate button. This will redirect you in-app to the relevant conservation for that specific animal. 
+
+![Example 5](https://i.imgur.com/XABKk0Q.png)
+
+![Example 6](https://i.imgur.com/o26bLy6.png)
