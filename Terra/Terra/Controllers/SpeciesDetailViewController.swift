@@ -68,7 +68,7 @@ final class SpeciesDetailViewController: UIViewController {
     
     private lazy var speciesOverviewView: SpeciesOverviewView = {
         let sov = SpeciesOverviewView()
-
+        
         return sov
     }()
     
@@ -109,6 +109,7 @@ final class SpeciesDetailViewController: UIViewController {
     private func setDelegates() {
         scrollView.delegate = self
         donateButton.delegate = self
+        infoOptionPanelView.delegate = self
     }
     
     private func showWebBrowser(link: URL){
@@ -147,7 +148,6 @@ extension SpeciesDetailViewController: UIScrollViewDelegate {
         
         let alphaOffset = (offset/400)
         let alpha = max(0, min(alphaOffset, 0.34))
-        print(alphaOffset, alpha)
         backgroundGradientOverlay.startColor = #colorLiteral(red: 0.06859237701, green: 0.08213501424, blue: 0.2409383953, alpha: Float(alpha))
         
         let hnvOffset = 275 - (offset)
@@ -169,10 +169,35 @@ extension SpeciesDetailViewController: UIScrollViewDelegate {
 }
 
 //MARK: -- Custom Delegate Implementation
-extension SpeciesDetailViewController: InfoOptionPanelDelegate {
+extension SpeciesDetailViewController: DonateButtonDelegate {
     func donateButtonPressed() {
         showWebBrowser(link: URL(string: currentSpecies.donationLink)!)
     }
+}
+
+extension SpeciesDetailViewController: InfoOptionPanelDelegate {
+    
+    func overviewButtonPressed(_ sender: UIButton) {
+        sender.isSelected = true
+        print("Show overview")
+    }
+    
+    func threatsButtonPressed(_ sender: UIButton) {
+        sender.isSelected = true
+        print("Show threats")
+    }
+    
+    func habitatButtonPressed(_ sender: UIButton) {
+        sender.isSelected = true
+        print("Show habitat")
+    }
+    
+    func galleryButtonPressed(_ sender: UIButton) {
+        sender.isSelected = true
+        print("Show gallery")
+    }
+    
+    
 }
 
 //MARK: -- Adding Subviews & Constraints
@@ -246,7 +271,7 @@ extension SpeciesDetailViewController {
         NSLayoutConstraint.activate([
             infoOptionPanelView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             infoOptionPanelView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            infoOptionPanelView.heightAnchor.constraint(equalToConstant: 70),
+            infoOptionPanelView.heightAnchor.constraint(equalToConstant: 80),
             infoOptionPanelView.topAnchor.constraint(equalTo: speciesOverviewView.bottomAnchor, constant: 100)
         ])
     }

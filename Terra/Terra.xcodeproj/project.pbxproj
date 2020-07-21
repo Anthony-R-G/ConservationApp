@@ -35,10 +35,11 @@
 		97B68CD424BBB0AC005B8AB8 /* HeaderNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B68CD324BBB0AC005B8AB8 /* HeaderNameView.swift */; };
 		97BF745323DF42F90058F2D7 /* SpeciesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BF745223DF42F90058F2D7 /* SpeciesListViewController.swift */; };
 		97D9E24B24C6470700524000 /* Diet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D9E24A24C6470600524000 /* Diet.swift */; };
+		97DD101D24C69EB000A21DF4 /* InfoOptionPanelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DD101C24C69EB000A21DF4 /* InfoOptionPanelDelegate.swift */; };
 		97E9450424BE10C800550824 /* ConservationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E9450324BE10C800550824 /* ConservationStatus.swift */; };
 		97F0CCA924C56F5C00C581D3 /* UIScrollViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F0CCA824C56F5C00C581D3 /* UIScrollViewExtensions.swift */; };
 		97F7B42624C562A9007AEE97 /* InfoOptionPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F7B42524C562A9007AEE97 /* InfoOptionPanelView.swift */; };
-		97F7B42824C56886007AEE97 /* InfoOptionPanelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F7B42724C56886007AEE97 /* InfoOptionPanelDelegate.swift */; };
+		97F7B42824C56886007AEE97 /* donateButtonDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F7B42724C56886007AEE97 /* donateButtonDelegate.swift */; };
 		97FEAEAC24BE5FCC005BAEFE /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97FEAEAB24BE5FCC005BAEFE /* Utilities.swift */; };
 /* End PBXBuildFile section */
 
@@ -86,10 +87,11 @@
 		97B68CD324BBB0AC005B8AB8 /* HeaderNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderNameView.swift; sourceTree = "<group>"; };
 		97BF745223DF42F90058F2D7 /* SpeciesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesListViewController.swift; sourceTree = "<group>"; };
 		97D9E24A24C6470600524000 /* Diet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diet.swift; sourceTree = "<group>"; };
+		97DD101C24C69EB000A21DF4 /* InfoOptionPanelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoOptionPanelDelegate.swift; sourceTree = "<group>"; };
 		97E9450324BE10C800550824 /* ConservationStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConservationStatus.swift; sourceTree = "<group>"; };
 		97F0CCA824C56F5C00C581D3 /* UIScrollViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScrollViewExtensions.swift; sourceTree = "<group>"; };
 		97F7B42524C562A9007AEE97 /* InfoOptionPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoOptionPanelView.swift; sourceTree = "<group>"; };
-		97F7B42724C56886007AEE97 /* InfoOptionPanelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoOptionPanelDelegate.swift; sourceTree = "<group>"; };
+		97F7B42724C56886007AEE97 /* donateButtonDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = donateButtonDelegate.swift; sourceTree = "<group>"; };
 		97FEAEAB24BE5FCC005BAEFE /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		B8F91504C32E7A6A00F78D89 /* Pods-TerraTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TerraTests.release.xcconfig"; path = "Target Support Files/Pods-TerraTests/Pods-TerraTests.release.xcconfig"; sourceTree = "<group>"; };
 		C7A593764653FD2CA6FCF609 /* Pods_TerraTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TerraTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -184,7 +186,8 @@
 				97E9450324BE10C800550824 /* ConservationStatus.swift */,
 				97D9E24A24C6470600524000 /* Diet.swift */,
 				974CC98324C64F0E00E4EF85 /* PopulationTrend.swift */,
-				97F7B42724C56886007AEE97 /* InfoOptionPanelDelegate.swift */,
+				97F7B42724C56886007AEE97 /* donateButtonDelegate.swift */,
+				97DD101C24C69EB000A21DF4 /* InfoOptionPanelDelegate.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -435,7 +438,7 @@
 				971FD0CD24C6112E003ED029 /* DonateButton.swift in Sources */,
 				972BBF7724C01FA900B6F7C0 /* PSORoundedVisualEffectView.swift in Sources */,
 				97E9450424BE10C800550824 /* ConservationStatus.swift in Sources */,
-				97F7B42824C56886007AEE97 /* InfoOptionPanelDelegate.swift in Sources */,
+				97F7B42824C56886007AEE97 /* donateButtonDelegate.swift in Sources */,
 				9735688F24BFDC8900D17F19 /* SpeciesTaxonomyView.swift in Sources */,
 				9711D8F724BD199700C2E6F1 /* Species.swift in Sources */,
 				974CC98424C64F0F00E4EF85 /* PopulationTrend.swift in Sources */,
@@ -453,6 +456,7 @@
 				979C191623DE43E900651B2B /* SceneDelegate.swift in Sources */,
 				97452E4823E1EEE9005636E0 /* GradientView.swift in Sources */,
 				97F0CCA924C56F5C00C581D3 /* UIScrollViewExtensions.swift in Sources */,
+				97DD101D24C69EB000A21DF4 /* InfoOptionPanelDelegate.swift in Sources */,
 				971FD0D024C61AD3003ED029 /* CGFloatExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

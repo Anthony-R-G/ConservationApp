@@ -11,8 +11,45 @@ import UIKit
 class InfoOptionPanelView: UIView {
     
     //MARK: -- UI Element Initialization
+    lazy var overviewButton: UIButton = {
+        let btn = UIButton()
+        btn.setTitle("Overview", for: .normal)
+        btn.titleLabel?.font = UIFont(name: "Roboto-Medium", size: 13)
+        btn.setTitleColor(.white, for: .normal)
+        btn.setTitleColor(#colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1), for: .selected)
+        btn.addTarget(self, action: #selector(overviewButtonPressed), for: .touchUpInside)
+        return btn
+    }()
     
-
+    lazy var threatsButton: UIButton = {
+        let btn = UIButton()
+        btn.setTitle("Threats", for: .normal)
+        btn.titleLabel?.font = UIFont(name: "Roboto-Medium", size: 13)
+        btn.setTitleColor(.white, for: .normal)
+        btn.setTitleColor(#colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1), for: .selected)
+        btn.addTarget(self, action: #selector(threatsButtonPressed), for: .touchUpInside)
+        return btn
+    }()
+    
+    lazy var habitatButton: UIButton = {
+        let btn = UIButton()
+        btn.setTitle("Habitat", for: .normal)
+        btn.titleLabel?.font = UIFont(name: "Roboto-Medium", size: 13)
+        btn.setTitleColor(.white, for: .normal)
+        btn.setTitleColor(#colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1), for: .selected)
+        btn.addTarget(self, action: #selector(threatsButtonPressed), for: .touchUpInside)
+        return btn
+    }()
+    
+    lazy var galleryButton: UIButton = {
+        let btn = UIButton()
+        btn.setTitle("Gallery", for: .normal)
+        btn.titleLabel?.font = UIFont(name: "Roboto-Medium", size: 13)
+        btn.setTitleColor(.white, for: .normal)
+        btn.setTitleColor(#colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1), for: .selected)
+        btn.addTarget(self, action: #selector(threatsButtonPressed), for: .touchUpInside)
+        return btn
+    }()
     
     //MARK: -- Properties
     
@@ -22,12 +59,19 @@ class InfoOptionPanelView: UIView {
     
     //MARK: -- Methods
     
+    @objc func overviewButtonPressed() {
+        delegate?.overviewButtonPressed(overviewButton)
+    }
+    
+    @objc func threatsButtonPressed() {
+        delegate?.threatsButtonPressed(threatsButton)
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.layer.cornerRadius = 25
-        
-//        addSubviews()
-//        setConstraints()
+        addSubviews()
+        setConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -39,15 +83,53 @@ class InfoOptionPanelView: UIView {
 extension InfoOptionPanelView {
     
     private func addSubviews() {
-//        let UIElements = [donateButton]
-//        UIElements.forEach { self.addSubview($0) }
-//        UIElements.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
+        let UIElements = [overviewButton, threatsButton, habitatButton, galleryButton]
+        UIElements.forEach { self.addSubview($0) }
+        UIElements.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
     }
     
     private func setConstraints() {
-        
+        setOverviewButtonConstraints()
+        setThreatsButtonConstraints()
+        setHabitatButtonConstraints()
+        setGalleryButtonConstraints()
     }
     
+    private func setOverviewButtonConstraints() {
+        NSLayoutConstraint.activate([
+            overviewButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 18),
+            overviewButton.widthAnchor.constraint(equalToConstant: 60),
+            overviewButton.heightAnchor.constraint(equalToConstant: 20),
+            overviewButton.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 5)
+        ])
+    }
+    
+    private func setThreatsButtonConstraints() {
+        NSLayoutConstraint.activate([
+            threatsButton.leadingAnchor.constraint(equalTo: overviewButton.trailingAnchor, constant: 18),
+            threatsButton.widthAnchor.constraint(equalToConstant: 60),
+            threatsButton.heightAnchor.constraint(equalToConstant: 20),
+            threatsButton.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 5)
+        ])
+    }
+    
+    private func setHabitatButtonConstraints() {
+        NSLayoutConstraint.activate([
+            habitatButton.trailingAnchor.constraint(equalTo: galleryButton.leadingAnchor, constant: -18),
+            habitatButton.widthAnchor.constraint(equalToConstant: 60),
+            habitatButton.heightAnchor.constraint(equalToConstant: 20),
+            habitatButton.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 5)
+        ])
+    }
+    
+    private func setGalleryButtonConstraints() {
+        NSLayoutConstraint.activate([
+            galleryButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -18),
+            galleryButton.widthAnchor.constraint(equalToConstant: 60),
+            galleryButton.heightAnchor.constraint(equalToConstant: 20),
+            galleryButton.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 5)
+        ])
+    }
 }
 
 //MARK: -- Custom Drawing

@@ -7,8 +7,11 @@
 //
 
 import Foundation
+import UIKit
 
 protocol InfoOptionPanelDelegate {
-    
-    func donateButtonPressed()
+    func overviewButtonPressed(_ sender: UIButton)
+    func threatsButtonPressed(_ sender: UIButton)
+    func habitatButtonPressed(_ sender: UIButton)
+    func galleryButtonPressed(_ sender: UIButton)
 }
