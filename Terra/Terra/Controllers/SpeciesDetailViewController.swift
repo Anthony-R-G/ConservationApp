@@ -186,9 +186,6 @@ extension SpeciesDetailViewController: InfoOptionPanelDelegate {
     
     func threatsButtonPressed(_ sender: UIButton) {
         sender.isSelected = true
-        UIView.animate(withDuration: 1) {
-            self.speciesOverviewView.transform = CGAffineTransform(translationX: -300, y: 0)
-        }
     }
     
     func habitatButtonPressed(_ sender: UIButton) {
