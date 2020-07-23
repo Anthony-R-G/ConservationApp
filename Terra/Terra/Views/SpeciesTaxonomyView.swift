@@ -8,13 +8,13 @@
 
 import UIKit
 
-final class TaxonomyView: UIView {
+final class SpeciesTaxonomyView: UIView {
     
     //MARK: -- UI Element Initialization
     private lazy var taxonomyTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "TAXONOMY"
-        label.font = UIFont.boldSystemFont(ofSize: 28)
+        label.font = UIFont(name: "Roboto-Bold", size: 28)
         label.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         return label
     }()
@@ -178,6 +178,7 @@ final class TaxonomyView: UIView {
         super.init(frame: frame)
         self.backgroundColor = .clear
         self.layer.cornerRadius = 10
+        self.addBlurToView()
         addSubviews()
         setConstraints()
     }
@@ -188,7 +189,7 @@ final class TaxonomyView: UIView {
 }
 
 //MARK: -- Adding Subviews & Constraints
-extension TaxonomyView {
+extension SpeciesTaxonomyView {
     
     private func addSubviews() {
         let UIElements =  [taxonomyTitleLabel, kingdomStackView, classStackView, familyStackView, phylumStackView, orderStackView, genusStackView]
