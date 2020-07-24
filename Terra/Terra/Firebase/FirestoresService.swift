@@ -7,8 +7,7 @@
 //
 
 import Foundation
-
-#import "Firebase/Firebase.h"
+import FirebaseFirestore
 
 class FirestoreService {
     static let manager = FirestoreService()
