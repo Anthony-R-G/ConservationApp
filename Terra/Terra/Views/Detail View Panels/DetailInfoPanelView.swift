@@ -1,5 +1,5 @@
 //
-//  SpeciesThreatsView.swift
+//  DetailInfoPanelView.swift
 //  Terra
 //
 //  Created by Anthony Gonzalez on 7/24/20.
@@ -8,18 +8,19 @@
 
 import UIKit
 
-final class SpeciesThreatsView: UIView {
+class DetailInfoPanelView: UIView {
+    
     //MARK: -- UI Element Initialization
     
-    private lazy var threatsTitleLabel: UILabel = {
+    public lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "THREATS"
+        label.text = "TITLE"
         label.font = UIFont(name: "Roboto-Bold", size: 28)
         label.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         return label
     }()
     
-    private lazy var summaryTextView: UITextView = {
+    public lazy var bodyTextView: UITextView = {
         let tv = UITextView()
         tv.font = UIFont(name: "Roboto-Light", size: 17)
         tv.textColor = #colorLiteral(red: 1, green: 0.9833787084, blue: 0.8849565387, alpha: 1)
@@ -35,16 +36,16 @@ final class SpeciesThreatsView: UIView {
         return view
     }()
     
-    private lazy var heightTitleLabel: UILabel = {
+    private lazy var infoBarTitleLabelA: UILabel = {
         let label = UILabel()
-        label.text = " "
+        label.text = "Title Label A"
         label.textColor = #colorLiteral(red: 0.8390320539, green: 0.8525128961, blue: 0.8612788916, alpha: 0.7811162243)
         label.textAlignment = .center
         label.font = UIFont(name: "Roboto-Light", size: 15)
         return label
     }()
     
-    private lazy var heightInfoLabel: UILabel = {
+    public lazy var infoBarDataLabelA: UILabel = {
         let label = UILabel()
         label.textColor = .white
         label.textAlignment = .center
@@ -52,16 +53,16 @@ final class SpeciesThreatsView: UIView {
         return label
     }()
     
-    private lazy var weightTitleLabel: UILabel = {
+    private lazy var infoBarTitleLabelB: UILabel = {
         let label = UILabel()
-        label.text = " "
+        label.text = "Title Label B"
         label.textColor = #colorLiteral(red: 0.8390320539, green: 0.8525128961, blue: 0.8612788916, alpha: 0.7811162243)
         label.textAlignment = .center
         label.font = UIFont(name: "Roboto-Light", size: 15)
         return label
     }()
     
-    private lazy var weightInfoLabel: UILabel = {
+    public lazy var infoBarDataLabelB: UILabel = {
         let label = UILabel()
         label.textColor = .white
         label.textAlignment = .center
@@ -69,7 +70,7 @@ final class SpeciesThreatsView: UIView {
         return label
     }()
     
-    private lazy var dietTitleLabel: UILabel = {
+    private lazy var infoBarTitleLabelC: UILabel = {
         let label = UILabel()
         label.text = " "
         label.textColor = #colorLiteral(red: 0.8390320539, green: 0.8525128961, blue: 0.8612788916, alpha: 0.7811162243)
@@ -78,7 +79,7 @@ final class SpeciesThreatsView: UIView {
         return label
     }()
     
-    private lazy var dietInfoLabel: UILabel = {
+    public lazy var infoBarDataLabelC: UILabel = {
         let label = UILabel()
         label.textColor = .white
         label.textAlignment = .center
@@ -98,9 +99,15 @@ final class SpeciesThreatsView: UIView {
     }()
     
     //MARK: -- Methods
-    public func setViewElementsFromSpeciesData(species: Species) {
-        summaryTextView.text = species.threats
+    
+    public func configureSpecificViewInfo (titleLabelStr: String, infoBarTitleLabelAStr: String, infoBarTitleLabelBStr: String, infoBarTitleLabelCStr: String) {
+        titleLabel.text = titleLabelStr.uppercased()
+        infoBarTitleLabelA.text = infoBarTitleLabelAStr.capitalized
+        infoBarTitleLabelB.text = infoBarTitleLabelBStr.capitalized
+        infoBarTitleLabelC.text = infoBarTitleLabelCStr.capitalized
     }
+    
+    public func setViewElementsFromSpeciesData(species: Species) {}
     
     private func setAppearance() {
         self.backgroundColor = .clear
@@ -124,14 +131,14 @@ final class SpeciesThreatsView: UIView {
 
 
 //MARK: -- Adding Subviews & Constraints
-extension SpeciesThreatsView {
+extension DetailInfoPanelView {
     
     private func addSubviews() {
-        let UIElements =  [threatsTitleLabel, infoBarView, summaryTextView, readMoreButton]
+        let UIElements =  [titleLabel, infoBarView, bodyTextView, readMoreButton]
         UIElements.forEach{ self.addSubview($0) }
         UIElements.forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
         
-        let infoBarElements = [heightTitleLabel, heightInfoLabel, weightTitleLabel, weightInfoLabel, dietTitleLabel, dietInfoLabel]
+        let infoBarElements = [infoBarTitleLabelA, infoBarDataLabelA, infoBarTitleLabelB, infoBarDataLabelB, infoBarTitleLabelC, infoBarDataLabelC]
         infoBarElements.forEach { infoBarView.addSubview($0) }
         infoBarElements.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
     }
@@ -139,94 +146,98 @@ extension SpeciesThreatsView {
     private func setConstraints() {
         setOverviewTitleLabelConstraints()
         setInfoBarConstraints()
-        setHeightTitleLabelConstraints()
-        setHeightInfoLabelConstraints()
-        setWeightTitleLabelConstraints()
-        setWeightInfoLabelConstraints()
-        setDietTitleLabelConstraints()
-        setDietInfoLabelConstraints()
-        setSummaryTextViewConstraints()
+        
+        setInfoBarTitleLabelAConstraints()
+        setInfoBarDataLabelAConstraints()
+        
+        setInfoBarTitleLabelBConstraints()
+        setInfoBarDataLabelBConstraints()
+        
+        setInfoBarTitleLabelCConstraints()
+        setInfoBarDataLabelCConstraints()
+        
+        setBodyTextViewConstraints()
         setReadMoreButtonConstraints()
     }
     
     private func setOverviewTitleLabelConstraints() {
         NSLayoutConstraint.activate([
-            threatsTitleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 25),
-            threatsTitleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 15),
-            threatsTitleLabel.heightAnchor.constraint(equalToConstant: 40),
-            threatsTitleLabel.widthAnchor.constraint(equalToConstant: 200)
+            titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 25),
+            titleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 15),
+            titleLabel.heightAnchor.constraint(equalToConstant: 40),
+            titleLabel.widthAnchor.constraint(equalToConstant: 200)
         ])
     }
     
     private func setInfoBarConstraints() {
         NSLayoutConstraint.activate([
-            infoBarView.topAnchor.constraint(equalTo: threatsTitleLabel.bottomAnchor, constant: 15),
+            infoBarView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 15),
             infoBarView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             infoBarView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.18),
             infoBarView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.9)
         ])
     }
     
-    private func setHeightTitleLabelConstraints() {
+    private func setInfoBarTitleLabelAConstraints() {
         NSLayoutConstraint.activate([
-            heightTitleLabel.topAnchor.constraint(equalTo: infoBarView.topAnchor, constant: 10),
-            heightTitleLabel.centerXAnchor.constraint(equalTo: heightInfoLabel.centerXAnchor),
-            heightTitleLabel.heightAnchor.constraint(equalToConstant: 20),
-            heightTitleLabel.widthAnchor.constraint(equalToConstant: 70)
+            infoBarTitleLabelA.topAnchor.constraint(equalTo: infoBarView.topAnchor, constant: 10),
+            infoBarTitleLabelA.centerXAnchor.constraint(equalTo: infoBarDataLabelA.centerXAnchor),
+            infoBarTitleLabelA.heightAnchor.constraint(equalToConstant: 20),
+            infoBarTitleLabelA.widthAnchor.constraint(equalToConstant: 70)
         ])
     }
     
-    private func setHeightInfoLabelConstraints() {
+    private func setInfoBarDataLabelAConstraints() {
         NSLayoutConstraint.activate([
-            heightInfoLabel.topAnchor.constraint(equalTo: heightTitleLabel.bottomAnchor, constant: 5),
-            heightInfoLabel.leadingAnchor.constraint(equalTo: infoBarView.leadingAnchor, constant: 15),
-            heightInfoLabel.heightAnchor.constraint(equalToConstant: 30),
-            heightInfoLabel.widthAnchor.constraint(equalToConstant: 80)
+            infoBarDataLabelA.topAnchor.constraint(equalTo: infoBarTitleLabelA.bottomAnchor, constant: 5),
+            infoBarDataLabelA.leadingAnchor.constraint(equalTo: infoBarView.leadingAnchor, constant: 15),
+            infoBarDataLabelA.heightAnchor.constraint(equalToConstant: 30),
+            infoBarDataLabelA.widthAnchor.constraint(equalToConstant: 80)
         ])
     }
     
-    private func setWeightTitleLabelConstraints() {
+    private func setInfoBarTitleLabelBConstraints() {
         NSLayoutConstraint.activate([
-            weightTitleLabel.topAnchor.constraint(equalTo: heightTitleLabel.topAnchor),
-            weightTitleLabel.centerXAnchor.constraint(equalTo: weightInfoLabel.centerXAnchor),
-            weightTitleLabel.heightAnchor.constraint(equalTo: heightTitleLabel.heightAnchor),
-            weightTitleLabel.widthAnchor.constraint(equalTo: heightTitleLabel.widthAnchor)
+            infoBarTitleLabelB.topAnchor.constraint(equalTo: infoBarTitleLabelA.topAnchor),
+            infoBarTitleLabelB.centerXAnchor.constraint(equalTo: infoBarDataLabelB.centerXAnchor),
+            infoBarTitleLabelB.heightAnchor.constraint(equalTo: infoBarTitleLabelA.heightAnchor),
+            infoBarTitleLabelB.widthAnchor.constraint(equalTo: infoBarTitleLabelA.widthAnchor)
         ])
     }
     
-    private func setWeightInfoLabelConstraints() {
+    private func setInfoBarDataLabelBConstraints() {
         NSLayoutConstraint.activate([
-            weightInfoLabel.topAnchor.constraint(equalTo: heightInfoLabel.topAnchor),
-            weightInfoLabel.leadingAnchor.constraint(equalTo: heightInfoLabel.trailingAnchor, constant: 15),
-            weightInfoLabel.heightAnchor.constraint(equalTo: heightInfoLabel.heightAnchor),
-            weightInfoLabel.widthAnchor.constraint(equalToConstant: 100)
+            infoBarDataLabelB.topAnchor.constraint(equalTo: infoBarDataLabelA.topAnchor),
+            infoBarDataLabelB.leadingAnchor.constraint(equalTo: infoBarDataLabelA.trailingAnchor, constant: 15),
+            infoBarDataLabelB.heightAnchor.constraint(equalTo: infoBarDataLabelA.heightAnchor),
+            infoBarDataLabelB.widthAnchor.constraint(equalToConstant: 100)
         ])
     }
     
-    private func setDietTitleLabelConstraints() {
+    private func setInfoBarTitleLabelCConstraints() {
         NSLayoutConstraint.activate([
-            dietTitleLabel.topAnchor.constraint(equalTo: heightTitleLabel.topAnchor),
-            dietTitleLabel.centerXAnchor.constraint(equalTo: dietInfoLabel.centerXAnchor),
-            dietTitleLabel.heightAnchor.constraint(equalTo: heightTitleLabel.heightAnchor),
-            dietTitleLabel.widthAnchor.constraint(equalTo: heightTitleLabel.widthAnchor)
+            infoBarTitleLabelC.topAnchor.constraint(equalTo: infoBarTitleLabelA.topAnchor),
+            infoBarTitleLabelC.centerXAnchor.constraint(equalTo: infoBarDataLabelC.centerXAnchor),
+            infoBarTitleLabelC.heightAnchor.constraint(equalTo: infoBarTitleLabelA.heightAnchor),
+            infoBarTitleLabelC.widthAnchor.constraint(equalTo: infoBarTitleLabelA.widthAnchor)
         ])
     }
     
-    private func setDietInfoLabelConstraints() {
+    private func setInfoBarDataLabelCConstraints() {
         NSLayoutConstraint.activate([
-            dietInfoLabel.topAnchor.constraint(equalTo: heightInfoLabel.topAnchor),
-            dietInfoLabel.trailingAnchor.constraint(equalTo: infoBarView.trailingAnchor, constant: -15),
-            dietInfoLabel.heightAnchor.constraint(equalTo: heightInfoLabel.heightAnchor),
-            dietInfoLabel.widthAnchor.constraint(equalToConstant: 100)
+            infoBarDataLabelC.topAnchor.constraint(equalTo: infoBarDataLabelA.topAnchor),
+            infoBarDataLabelC.trailingAnchor.constraint(equalTo: infoBarView.trailingAnchor, constant: -15),
+            infoBarDataLabelC.heightAnchor.constraint(equalTo: infoBarDataLabelA.heightAnchor),
+            infoBarDataLabelC.widthAnchor.constraint(equalToConstant: 100)
         ])
     }
     
-    private func setSummaryTextViewConstraints() {
+    private func setBodyTextViewConstraints() {
         NSLayoutConstraint.activate([
-            summaryTextView.topAnchor.constraint(equalTo: infoBarView.bottomAnchor, constant: 15),
-            summaryTextView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            summaryTextView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -40),
-            summaryTextView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.9)
+            bodyTextView.topAnchor.constraint(equalTo: infoBarView.bottomAnchor, constant: 15),
+            bodyTextView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            bodyTextView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -40),
+            bodyTextView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.9)
         ])
     }
     
