@@ -77,6 +77,11 @@ final class SpeciesDetailViewController: UIViewController {
         return sov
     }()
     
+    private lazy var speciesThreatsView: SpeciesThreatsView = {
+        let stv = SpeciesThreatsView()
+        return stv
+    }()
+    
     private lazy var headerNameViewHeightConstraint: NSLayoutConstraint = {
         return headerNameView.heightAnchor.constraint(equalToConstant: headerNameView.frame.height)
     }()
@@ -130,6 +135,7 @@ final class SpeciesDetailViewController: UIViewController {
         super.viewDidLayoutSubviews()
         setVerticalScrollViewConstraints()
         setHorizontalScrollViewConstraints()
+        
         //This is hardcoded for now. Need to adjust for diff device sizes in future without having extra scroll space.
         verticalScrollView.contentSize = CGSize(width: self.view.frame.width, height: self.view.frame.height + 350)
         horizontalScrollView.contentSize = CGSize(width: self.view.frame.width + 500, height: 300)
@@ -217,7 +223,7 @@ extension SpeciesDetailViewController {
         verticalScrollViewUIElements.forEach{ verticalScrollView.addSubview($0) }
         verticalScrollViewUIElements.forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
         
-        let horizontalScrollViewUIElements = [speciesOverviewView]
+        let horizontalScrollViewUIElements = [speciesOverviewView, speciesThreatsView]
         horizontalScrollViewUIElements.forEach{ horizontalScrollView.addSubview($0) }
         horizontalScrollViewUIElements.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
     }
@@ -228,6 +234,7 @@ extension SpeciesDetailViewController {
         setHeaderInfoViewConstraints()
         setSubheaderInfoViewConstraints()
         setSpeciesOverviewViewConstraints()
+        setSpeciesThreatsViewConstraints()
         setInfoOptionPanelViewConstraints()
         setDonateButtonConstraints()
     }
@@ -309,9 +316,18 @@ extension SpeciesDetailViewController {
     private func setSpeciesOverviewViewConstraints() {
         NSLayoutConstraint.activate([
             speciesOverviewView.centerYAnchor.constraint(equalTo: horizontalScrollView.centerYAnchor),
-            speciesOverviewView.leadingAnchor.constraint(equalTo: horizontalScrollView.leadingAnchor, constant: 18),
+            speciesOverviewView.leadingAnchor.constraint(equalTo: horizontalScrollView.leadingAnchor, constant: 20),
             speciesOverviewView.widthAnchor.constraint(equalToConstant: 375),
             speciesOverviewView.heightAnchor.constraint(equalToConstant: 420),
         ])
     }
+    
+    private func setSpeciesThreatsViewConstraints() {
+           NSLayoutConstraint.activate([
+               speciesThreatsView.centerYAnchor.constraint(equalTo: horizontalScrollView.centerYAnchor),
+               speciesThreatsView.leadingAnchor.constraint(equalTo: speciesOverviewView.trailingAnchor, constant: 40),
+               speciesThreatsView.widthAnchor.constraint(equalToConstant: 375),
+               speciesThreatsView.heightAnchor.constraint(equalToConstant: 420),
+           ])
+       }
 }

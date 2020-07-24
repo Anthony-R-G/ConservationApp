@@ -1,18 +1,19 @@
 //
-//  SpeciesOverviewView.swift
+//  SpeciesThreatsView.swift
 //  Terra
 //
-//  Created by Anthony Gonzalez on 7/20/20.
+//  Created by Anthony Gonzalez on 7/24/20.
 //  Copyright © 2020 Antnee. All rights reserved.
 //
 
 import UIKit
 
-final class SpeciesOverviewView: UIView {
+final class SpeciesThreatsView: UIView {
     //MARK: -- UI Element Initialization
-    private lazy var overviewTitleLabel: UILabel = {
+    
+    private lazy var threatsTitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "OVERVIEW"
+        label.text = "THREATS"
         label.font = UIFont(name: "Roboto-Bold", size: 28)
         label.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         return label
@@ -36,7 +37,7 @@ final class SpeciesOverviewView: UIView {
     
     private lazy var heightTitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Height"
+        label.text = " "
         label.textColor = #colorLiteral(red: 0.8390320539, green: 0.8525128961, blue: 0.8612788916, alpha: 0.7811162243)
         label.textAlignment = .center
         label.font = UIFont(name: "Roboto-Light", size: 15)
@@ -53,7 +54,7 @@ final class SpeciesOverviewView: UIView {
     
     private lazy var weightTitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Weight"
+        label.text = " "
         label.textColor = #colorLiteral(red: 0.8390320539, green: 0.8525128961, blue: 0.8612788916, alpha: 0.7811162243)
         label.textAlignment = .center
         label.font = UIFont(name: "Roboto-Light", size: 15)
@@ -70,7 +71,7 @@ final class SpeciesOverviewView: UIView {
     
     private lazy var dietTitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Diet"
+        label.text = " "
         label.textColor = #colorLiteral(red: 0.8390320539, green: 0.8525128961, blue: 0.8612788916, alpha: 0.7811162243)
         label.textAlignment = .center
         label.font = UIFont(name: "Roboto-Light", size: 15)
@@ -98,10 +99,7 @@ final class SpeciesOverviewView: UIView {
     
     //MARK: -- Methods
     public func setViewElementsFromSpeciesData(species: Species) {
-        summaryTextView.text = species.populationSummary
-        heightInfoLabel.text = species.height
-        weightInfoLabel.text = species.weight
-        dietInfoLabel.text = species.diet.rawValue
+        summaryTextView.text = species.threats
     }
     
     private func setAppearance() {
@@ -124,11 +122,12 @@ final class SpeciesOverviewView: UIView {
 }
 
 
+
 //MARK: -- Adding Subviews & Constraints
-extension SpeciesOverviewView {
+extension SpeciesThreatsView {
     
     private func addSubviews() {
-        let UIElements =  [overviewTitleLabel, infoBarView, summaryTextView, readMoreButton]
+        let UIElements =  [threatsTitleLabel, infoBarView, summaryTextView, readMoreButton]
         UIElements.forEach{ self.addSubview($0) }
         UIElements.forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
         
@@ -152,16 +151,16 @@ extension SpeciesOverviewView {
     
     private func setOverviewTitleLabelConstraints() {
         NSLayoutConstraint.activate([
-            overviewTitleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 25),
-            overviewTitleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 15),
-            overviewTitleLabel.heightAnchor.constraint(equalToConstant: 40),
-            overviewTitleLabel.widthAnchor.constraint(equalToConstant: 200)
+            threatsTitleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 25),
+            threatsTitleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 15),
+            threatsTitleLabel.heightAnchor.constraint(equalToConstant: 40),
+            threatsTitleLabel.widthAnchor.constraint(equalToConstant: 200)
         ])
     }
     
     private func setInfoBarConstraints() {
         NSLayoutConstraint.activate([
-            infoBarView.topAnchor.constraint(equalTo: overviewTitleLabel.bottomAnchor, constant: 15),
+            infoBarView.topAnchor.constraint(equalTo: threatsTitleLabel.bottomAnchor, constant: 15),
             infoBarView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             infoBarView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.18),
             infoBarView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.9)
@@ -205,22 +204,22 @@ extension SpeciesOverviewView {
     }
     
     private func setDietTitleLabelConstraints() {
-           NSLayoutConstraint.activate([
-               dietTitleLabel.topAnchor.constraint(equalTo: heightTitleLabel.topAnchor),
-               dietTitleLabel.centerXAnchor.constraint(equalTo: dietInfoLabel.centerXAnchor),
-               dietTitleLabel.heightAnchor.constraint(equalTo: heightTitleLabel.heightAnchor),
-               dietTitleLabel.widthAnchor.constraint(equalTo: heightTitleLabel.widthAnchor)
-           ])
-       }
-       
-       private func setDietInfoLabelConstraints() {
-           NSLayoutConstraint.activate([
-               dietInfoLabel.topAnchor.constraint(equalTo: heightInfoLabel.topAnchor),
-               dietInfoLabel.trailingAnchor.constraint(equalTo: infoBarView.trailingAnchor, constant: -15),
-               dietInfoLabel.heightAnchor.constraint(equalTo: heightInfoLabel.heightAnchor),
-               dietInfoLabel.widthAnchor.constraint(equalToConstant: 100)
-           ])
-       }
+        NSLayoutConstraint.activate([
+            dietTitleLabel.topAnchor.constraint(equalTo: heightTitleLabel.topAnchor),
+            dietTitleLabel.centerXAnchor.constraint(equalTo: dietInfoLabel.centerXAnchor),
+            dietTitleLabel.heightAnchor.constraint(equalTo: heightTitleLabel.heightAnchor),
+            dietTitleLabel.widthAnchor.constraint(equalTo: heightTitleLabel.widthAnchor)
+        ])
+    }
+    
+    private func setDietInfoLabelConstraints() {
+        NSLayoutConstraint.activate([
+            dietInfoLabel.topAnchor.constraint(equalTo: heightInfoLabel.topAnchor),
+            dietInfoLabel.trailingAnchor.constraint(equalTo: infoBarView.trailingAnchor, constant: -15),
+            dietInfoLabel.heightAnchor.constraint(equalTo: heightInfoLabel.heightAnchor),
+            dietInfoLabel.widthAnchor.constraint(equalToConstant: 100)
+        ])
+    }
     
     private func setSummaryTextViewConstraints() {
         NSLayoutConstraint.activate([
@@ -240,4 +239,3 @@ extension SpeciesOverviewView {
         ])
     }
 }
-

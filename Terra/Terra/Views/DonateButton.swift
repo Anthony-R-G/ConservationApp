@@ -44,7 +44,7 @@ class DonateButton: UIButton {
     
     
     //MARK: -- Properties
-    var delegate: DonateButtonDelegate?
+    weak var delegate: DonateButtonDelegate?
     
     
     //MARK: -- Methods

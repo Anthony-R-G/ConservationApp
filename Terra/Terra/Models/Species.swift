@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import FirebaseFirestore
 
 public struct Species {
     let commonName: String
