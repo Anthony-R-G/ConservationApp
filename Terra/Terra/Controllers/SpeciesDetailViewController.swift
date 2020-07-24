@@ -20,6 +20,7 @@ final class SpeciesDetailViewController: UIViewController {
     
     private lazy var horizontalScrollView: UIScrollView = {
         let sv = UIScrollView()
+        sv.isPagingEnabled = true
         return sv
     }()
     
