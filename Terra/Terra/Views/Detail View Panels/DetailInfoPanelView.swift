@@ -9,17 +9,18 @@
 import UIKit
 
 class DetailInfoPanelView: UIView {
+    
     //MARK: -- UI Element Initialization
     
-    private lazy var titleLabel: UILabel = {
+    public lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "HABITAT"
+        label.text = "TITLE"
         label.font = UIFont(name: "Roboto-Bold", size: 28)
         label.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         return label
     }()
     
-    private lazy var bodyTextView: UITextView = {
+    public lazy var bodyTextView: UITextView = {
         let tv = UITextView()
         tv.font = UIFont(name: "Roboto-Light", size: 17)
         tv.textColor = #colorLiteral(red: 1, green: 0.9833787084, blue: 0.8849565387, alpha: 1)
@@ -44,7 +45,7 @@ class DetailInfoPanelView: UIView {
         return label
     }()
     
-    private lazy var infoBarDataLabelA: UILabel = {
+    public lazy var infoBarDataLabelA: UILabel = {
         let label = UILabel()
         label.textColor = .white
         label.textAlignment = .center
@@ -61,7 +62,7 @@ class DetailInfoPanelView: UIView {
         return label
     }()
     
-    private lazy var infoBarDataLabelB: UILabel = {
+    public lazy var infoBarDataLabelB: UILabel = {
         let label = UILabel()
         label.textColor = .white
         label.textAlignment = .center
@@ -78,7 +79,7 @@ class DetailInfoPanelView: UIView {
         return label
     }()
     
-    private lazy var infoBarDataLabelC: UILabel = {
+    public lazy var infoBarDataLabelC: UILabel = {
         let label = UILabel()
         label.textColor = .white
         label.textAlignment = .center
@@ -98,9 +99,15 @@ class DetailInfoPanelView: UIView {
     }()
     
     //MARK: -- Methods
-    public func setViewElementsFromSpeciesData(species: Species) {
-        
+    
+    public func configureSpecificViewInfo (titleLabelStr: String, infoBarTitleLabelAStr: String, infoBarTitleLabelBStr: String, infoBarTitleLabelCStr: String) {
+        titleLabel.text = titleLabelStr.uppercased()
+        infoBarTitleLabelA.text = infoBarTitleLabelAStr.capitalized
+        infoBarTitleLabelB.text = infoBarTitleLabelBStr.capitalized
+        infoBarTitleLabelC.text = infoBarTitleLabelCStr.capitalized
     }
+    
+    public func setViewElementsFromSpeciesData(species: Species) {}
     
     private func setAppearance() {
         self.backgroundColor = .clear
