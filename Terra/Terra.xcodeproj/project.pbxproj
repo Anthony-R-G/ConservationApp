@@ -16,6 +16,13 @@
 		971FD0CD24C6112E003ED029 /* DonateButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971FD0CC24C6112E003ED029 /* DonateButton.swift */; };
 		971FD0D024C61AD3003ED029 /* CGFloatExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971FD0CF24C61AD3003ED029 /* CGFloatExtensions.swift */; };
 		972897CF24C633F6004AEF5E /* SpeciesOverviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972897CE24C633F6004AEF5E /* SpeciesOverviewView.swift */; };
+		972A614E24C94AE500A59AB6 /* Pods_Terra.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE42C1881D1D06662F3B9FCB /* Pods_Terra.framework */; };
+		972A615024C94C6800A59AB6 /* Species.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9711D8F624BD199700C2E6F1 /* Species.swift */; };
+		972A615124C94C6A00A59AB6 /* HabitatSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9711D91E24BD63B000C2E6F1 /* HabitatSystem.swift */; };
+		972A615224C94C6C00A59AB6 /* ConservationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E9450324BE10C800550824 /* ConservationStatus.swift */; };
+		972A615324C94C6E00A59AB6 /* Diet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D9E24A24C6470600524000 /* Diet.swift */; };
+		972A615424C94C7000A59AB6 /* PopulationTrend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974CC98324C64F0E00E4EF85 /* PopulationTrend.swift */; };
+		972A615724C94C7A00A59AB6 /* FirestoresService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9711D8FB24BD42C800C2E6F1 /* FirestoresService.swift */; };
 		972BBF7724C01FA900B6F7C0 /* PSORoundedVisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972BBF7624C01FA900B6F7C0 /* PSORoundedVisualEffectView.swift */; };
 		972BBF7924C0204600B6F7C0 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972BBF7824C0204600B6F7C0 /* UIViewExtensions.swift */; };
 		972BBF7E24C026CD00B6F7C0 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 972BBF7B24C0256F00B6F7C0 /* Roboto-Bold.ttf */; };
@@ -112,6 +119,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B62D350359E3EC3E7DCD905 /* Pods_TerraTests.framework in Frameworks */,
+				972A614E24C94AE500A59AB6 /* Pods_Terra.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -465,6 +473,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				972A615724C94C7A00A59AB6 /* FirestoresService.swift in Sources */,
+				972A615024C94C6800A59AB6 /* Species.swift in Sources */,
+				972A615324C94C6E00A59AB6 /* Diet.swift in Sources */,
+				972A615424C94C7000A59AB6 /* PopulationTrend.swift in Sources */,
+				972A615124C94C6A00A59AB6 /* HabitatSystem.swift in Sources */,
+				972A615224C94C6C00A59AB6 /* ConservationStatus.swift in Sources */,
 				979C192B23DE43EF00651B2B /* TerraTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

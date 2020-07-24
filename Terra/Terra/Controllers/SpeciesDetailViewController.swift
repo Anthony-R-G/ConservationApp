@@ -13,7 +13,12 @@ final class SpeciesDetailViewController: UIViewController {
     
     //MARK: -- UI Element Initialization
     
-    private lazy var scrollView: UIScrollView = {
+    private lazy var verticalScrollView: UIScrollView = {
+        let sv = UIScrollView()
+        return sv
+    }()
+    
+    private lazy var horizontalScrollView: UIScrollView = {
         let sv = UIScrollView()
         return sv
     }()
@@ -68,7 +73,6 @@ final class SpeciesDetailViewController: UIViewController {
     
     private lazy var speciesOverviewView: SpeciesOverviewView = {
         let sov = SpeciesOverviewView()
-        
         return sov
     }()
     
@@ -84,9 +88,11 @@ final class SpeciesDetailViewController: UIViewController {
         return subheaderInfoView.heightAnchor.constraint(equalToConstant: subheaderInfoView.frame.height)
     }()
     
-    private lazy var speciesOverviewViewTopAnchorConstraint: NSLayoutConstraint = {
-        return speciesOverviewView.topAnchor.constraint(equalTo: headerNameView.bottomAnchor, constant: 300)
+    private lazy var horizontalScrollViewTopAnchorConstraint: NSLayoutConstraint = {
+        return horizontalScrollView.topAnchor.constraint(equalTo: headerNameView.bottomAnchor, constant: 300)
     }()
+    
+   
     
     //MARK: -- Properties
     
@@ -107,7 +113,7 @@ final class SpeciesDetailViewController: UIViewController {
     }
     
     private func setDelegates() {
-        scrollView.delegate = self
+        verticalScrollView.delegate = self
         donateButton.delegate = self
         infoOptionPanelView.delegate = self
     }
@@ -121,9 +127,11 @@ final class SpeciesDetailViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        setScrollViewConstraints()
+        setVerticalScrollViewConstraints()
+        setHorizontalScrollViewConstraints()
         //This is hardcoded for now. Need to adjust for diff device sizes in future without having extra scroll space.
-        scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.view.frame.height + 350)
+        verticalScrollView.contentSize = CGSize(width: self.view.frame.width, height: self.view.frame.height + 350)
+        horizontalScrollView.contentSize = CGSize(width: self.view.frame.width + 500, height: 300)
     }
     
     
@@ -164,7 +172,7 @@ extension SpeciesDetailViewController: UIScrollViewDelegate {
         
         let overviewViewTopAnchorConstantOffset = 300 - offset
         let overviewViewTopAnchor = max(100, overviewViewTopAnchorConstantOffset)
-        speciesOverviewViewTopAnchorConstraint.constant = overviewViewTopAnchor
+        horizontalScrollViewTopAnchorConstraint.constant = overviewViewTopAnchor
     }
 }
 
@@ -179,13 +187,12 @@ extension SpeciesDetailViewController: InfoOptionPanelDelegate {
     
     func overviewButtonPressed(_ sender: UIButton) {
         sender.isSelected = true
-        UIView.animate(withDuration: 1) {
-            self.speciesOverviewView.transform = CGAffineTransform(translationX: +300, y: 0)
-        }
+        print("Show overview")
     }
     
     func threatsButtonPressed(_ sender: UIButton) {
         sender.isSelected = true
+        print("Show threats")
     }
     
     func habitatButtonPressed(_ sender: UIButton) {
@@ -197,19 +204,21 @@ extension SpeciesDetailViewController: InfoOptionPanelDelegate {
         sender.isSelected = true
         print("Show gallery")
     }
-    
-    
 }
 
 //MARK: -- Adding Subviews & Constraints
 extension SpeciesDetailViewController {
     private func addSubviews() {
-        view.addSubview(scrollView)
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(verticalScrollView)
+        verticalScrollView.translatesAutoresizingMaskIntoConstraints = false
         
-        let UIElements = [headerNameView, subheaderInfoView, speciesOverviewView, infoOptionPanelView, donateButton]
-        UIElements.forEach{ scrollView.addSubview($0) }
-        UIElements.forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
+        let verticalScrollViewUIElements = [headerNameView, subheaderInfoView, infoOptionPanelView, donateButton, horizontalScrollView]
+        verticalScrollViewUIElements.forEach{ verticalScrollView.addSubview($0) }
+        verticalScrollViewUIElements.forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
+        
+        let horizontalScrollViewUIElements = [speciesOverviewView]
+        horizontalScrollViewUIElements.forEach{ horizontalScrollView.addSubview($0) }
+        horizontalScrollViewUIElements.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
     }
     
     private func setConstraints() {
@@ -222,13 +231,23 @@ extension SpeciesDetailViewController {
         setDonateButtonConstraints()
     }
     
-    private func setScrollViewConstraints() {
-        scrollView.backgroundColor = .clear
+    private func setVerticalScrollViewConstraints() {
+        verticalScrollView.backgroundColor = .clear
         NSLayoutConstraint.activate([
-            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            verticalScrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            verticalScrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            verticalScrollView.topAnchor.constraint(equalTo: view.topAnchor),
+            verticalScrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+    }
+    
+    private func setHorizontalScrollViewConstraints() {
+        horizontalScrollView.backgroundColor = .clear
+        NSLayoutConstraint.activate([
+            horizontalScrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            horizontalScrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            horizontalScrollView.heightAnchor.constraint(equalToConstant: 420),
+            horizontalScrollViewTopAnchorConstraint
         ])
     }
     
@@ -252,8 +271,8 @@ extension SpeciesDetailViewController {
     
     private func setHeaderInfoViewConstraints() {
         NSLayoutConstraint.activate([
-            headerNameView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 20),
-            headerNameView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            headerNameView.leadingAnchor.constraint(equalTo: verticalScrollView.leadingAnchor, constant: 20),
+            headerNameView.widthAnchor.constraint(equalTo: verticalScrollView.widthAnchor),
             headerNameViewTopAnchorConstraint,
             headerNameViewHeightConstraint
         ])
@@ -273,7 +292,7 @@ extension SpeciesDetailViewController {
             infoOptionPanelView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             infoOptionPanelView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
             infoOptionPanelView.heightAnchor.constraint(equalToConstant: 80),
-            infoOptionPanelView.topAnchor.constraint(equalTo: speciesOverviewView.bottomAnchor, constant: 100)
+            infoOptionPanelView.topAnchor.constraint(equalTo: horizontalScrollView.bottomAnchor, constant: 100)
         ])
     }
     
@@ -288,10 +307,10 @@ extension SpeciesDetailViewController {
     
     private func setSpeciesOverviewViewConstraints() {
         NSLayoutConstraint.activate([
-            speciesOverviewView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+            speciesOverviewView.centerYAnchor.constraint(equalTo: horizontalScrollView.centerYAnchor),
+            speciesOverviewView.leadingAnchor.constraint(equalTo: horizontalScrollView.leadingAnchor, constant: 18),
             speciesOverviewView.widthAnchor.constraint(equalToConstant: 375),
             speciesOverviewView.heightAnchor.constraint(equalToConstant: 420),
-            speciesOverviewViewTopAnchorConstraint
         ])
     }
 }
