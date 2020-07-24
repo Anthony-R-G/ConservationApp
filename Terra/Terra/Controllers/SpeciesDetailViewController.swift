@@ -187,13 +187,12 @@ extension SpeciesDetailViewController: InfoOptionPanelDelegate {
     
     func overviewButtonPressed(_ sender: UIButton) {
         sender.isSelected = true
-        UIView.animate(withDuration: 1) {
-            self.speciesOverviewView.transform = CGAffineTransform(translationX: +300, y: 0)
-        }
+        print("Show overview")
     }
     
     func threatsButtonPressed(_ sender: UIButton) {
         sender.isSelected = true
+        print("Show threats")
     }
     
     func habitatButtonPressed(_ sender: UIButton) {
@@ -227,7 +226,7 @@ extension SpeciesDetailViewController {
         setBackgroundGradientOverlayConstraints()
         setHeaderInfoViewConstraints()
         setSubheaderInfoViewConstraints()
-//        setSpeciesOverviewViewConstraints()
+        setSpeciesOverviewViewConstraints()
         setInfoOptionPanelViewConstraints()
         setDonateButtonConstraints()
     }
@@ -243,9 +242,8 @@ extension SpeciesDetailViewController {
     }
     
     private func setHorizontalScrollViewConstraints() {
-        horizontalScrollView.backgroundColor = .purple
+        horizontalScrollView.backgroundColor = .clear
         NSLayoutConstraint.activate([
-            horizontalScrollView.centerXAnchor.constraint(equalTo: verticalScrollView.centerXAnchor),
             horizontalScrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             horizontalScrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             horizontalScrollView.heightAnchor.constraint(equalToConstant: 420),
@@ -309,10 +307,10 @@ extension SpeciesDetailViewController {
     
     private func setSpeciesOverviewViewConstraints() {
         NSLayoutConstraint.activate([
-            speciesOverviewView.centerXAnchor.constraint(equalTo: verticalScrollView.centerXAnchor),
+            speciesOverviewView.centerYAnchor.constraint(equalTo: horizontalScrollView.centerYAnchor),
+            speciesOverviewView.leadingAnchor.constraint(equalTo: horizontalScrollView.leadingAnchor, constant: 18),
             speciesOverviewView.widthAnchor.constraint(equalToConstant: 375),
             speciesOverviewView.heightAnchor.constraint(equalToConstant: 420),
-            horizontalScrollViewTopAnchorConstraint
         ])
     }
 }
