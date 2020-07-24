@@ -7,14 +7,13 @@
 //
 
 import Foundation
-
 import FirebaseFirestore
 
 class FirestoreService {
     static let manager = FirestoreService()
     private let db = Firestore.firestore()
     
-    func getAllSpeciesData(completion: @escaping (Result<[Species], Error>) -> ()) {
+    func getAllSpeciesData(completion: @escaping (Result<[Species], Error>) -> ()) { 
         db.collection("Species").getDocuments { (snapshot, error) in
             if let error = error {
                 completion(.failure(error))

@@ -7,7 +7,20 @@
 		<key>Terra.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>0</integer>
+			<integer>22</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>979C190F23DE43E900651B2B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>979C192523DE43EF00651B2B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>

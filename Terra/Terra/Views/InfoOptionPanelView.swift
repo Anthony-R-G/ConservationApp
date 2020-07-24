@@ -53,7 +53,7 @@ class InfoOptionPanelView: UIView {
     
     //MARK: -- Properties
     
-    var delegate: InfoOptionPanelDelegate?
+    weak var delegate: InfoOptionPanelDelegate?
     
     private var shapeLayer: CALayer?
     

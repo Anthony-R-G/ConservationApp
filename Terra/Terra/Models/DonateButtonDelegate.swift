@@ -6,8 +6,8 @@
 //  Copyright © 2020 Antnee. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-protocol DonateButtonDelegate {
+protocol DonateButtonDelegate: AnyObject {
     func donateButtonPressed()
 }
