@@ -8,6 +8,9 @@
 
 import UIKit
 
+
+//MARK: -- Not used. Refactor into the "Read More" option from the OverviewView.
+
 final class SpeciesTaxonomyView: UIView {
     
     //MARK: -- UI Element Initialization

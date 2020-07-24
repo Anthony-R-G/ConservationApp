@@ -33,7 +33,6 @@
 		974CC98424C64F0F00E4EF85 /* PopulationTrend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974CC98324C64F0E00E4EF85 /* PopulationTrend.swift */; };
 		97591FD224CB8BA7002EAC96 /* SpeciesHabitatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FD124CB8BA7002EAC96 /* SpeciesHabitatView.swift */; };
 		97591FD424CB8D46002EAC96 /* DetailInfoPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FD324CB8D46002EAC96 /* DetailInfoPanelView.swift */; };
-		97591FD624CB9680002EAC96 /* InfoPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FD524CB9680002EAC96 /* InfoPanel.swift */; };
 		9767D04C24C3EA9200384FCD /* SubheaderInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9767D04B24C3EA9200384FCD /* SubheaderInfoView.swift */; };
 		978E5CF223FB5CBC007BCD25 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 978E5CF123FB5CBC007BCD25 /* GoogleService-Info.plist */; };
 		979C191423DE43E900651B2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979C191323DE43E900651B2B /* AppDelegate.swift */; };
@@ -87,7 +86,6 @@
 		974CC98324C64F0E00E4EF85 /* PopulationTrend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopulationTrend.swift; sourceTree = "<group>"; };
 		97591FD124CB8BA7002EAC96 /* SpeciesHabitatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesHabitatView.swift; sourceTree = "<group>"; };
 		97591FD324CB8D46002EAC96 /* DetailInfoPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInfoPanelView.swift; sourceTree = "<group>"; };
-		97591FD524CB9680002EAC96 /* InfoPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPanel.swift; sourceTree = "<group>"; };
 		9767D04B24C3EA9200384FCD /* SubheaderInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubheaderInfoView.swift; sourceTree = "<group>"; };
 		978E5CF123FB5CBC007BCD25 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		979C191023DE43E900651B2B /* Terra.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Terra.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -213,7 +211,6 @@
 				974CC98324C64F0E00E4EF85 /* PopulationTrend.swift */,
 				97F7B42724C56886007AEE97 /* DonateButtonDelegate.swift */,
 				97DD101C24C69EB000A21DF4 /* InfoOptionPanelDelegate.swift */,
-				97591FD524CB9680002EAC96 /* InfoPanel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -459,7 +456,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				97591FD624CB9680002EAC96 /* InfoPanel.swift in Sources */,
 				972BBF7924C0204600B6F7C0 /* UIViewExtensions.swift in Sources */,
 				9711D8FC24BD42C800C2E6F1 /* FirestoresService.swift in Sources */,
 				971FD0CD24C6112E003ED029 /* DonateButton.swift in Sources */,
