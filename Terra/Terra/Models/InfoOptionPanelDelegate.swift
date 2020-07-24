@@ -6,10 +6,9 @@
 //  Copyright © 2020 Antnee. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
-protocol InfoOptionPanelDelegate {
+protocol InfoOptionPanelDelegate: AnyObject {
     func overviewButtonPressed(_ sender: UIButton)
     func threatsButtonPressed(_ sender: UIButton)
     func habitatButtonPressed(_ sender: UIButton)
