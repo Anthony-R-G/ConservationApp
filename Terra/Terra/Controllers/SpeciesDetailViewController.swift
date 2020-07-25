@@ -14,8 +14,7 @@ final class SpeciesDetailViewController: UIViewController {
     //MARK: -- UI Element Initialization
     
     private lazy var verticalScrollView: UIScrollView = {
-        let sv = UIScrollView()
-        return sv
+        return UIScrollView()
     }()
     
     private lazy var horizontalScrollView: UIScrollView = {
@@ -62,15 +61,6 @@ final class SpeciesDetailViewController: UIViewController {
         return bar
     }()
     
-    
-    //    private lazy var donateButton: DonateButton = {
-    //        let btn = DonateButton()
-    //        var frame = btn.frame
-    //        frame.size.width = 80
-    //        frame.size.height = 80
-    //        btn.frame = frame
-    //        return btn
-    //    }()
     
     private lazy var speciesOverviewView: SpeciesOverviewView = {
         let sov = SpeciesOverviewView()
