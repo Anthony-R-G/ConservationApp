@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum ButtonOption {
+public enum ButtonOption {
     case overviewButton
     case threatsButton
     case habitatButton
