@@ -38,14 +38,14 @@ class SpeciesCollectionViewCell: UICollectionViewCell {
     
     //MARK: -- Methods
     
-    public func configureCell(from species: Species) {
+    public func configureCellUI(from species: Species) {
         speciesNameLabel.text = species.commonName
         let imageURL = URL(string: species.cellImage)
         backgroundImage.kf.setImage(with: imageURL)
         backgroundImage.kf.indicatorType = .activity
         
         backgroundColor = species.habitatSystem == .marine ? #colorLiteral(red: 0.2312238216, green: 0.3822638988, blue: 0.7663728595, alpha: 1) : #colorLiteral(red: 0.8971922994, green: 0.4322043657, blue: 0.1033880934, alpha: 1)
-        layer.cornerRadius = 39
+        layer.cornerRadius = Constants.cornerRadius
         layer.masksToBounds = true
     }
     
@@ -76,13 +76,13 @@ extension SpeciesCollectionViewCell {
     }
     
     private func setBackgroundImageConstraints() {
-          NSLayoutConstraint.activate([
-              backgroundImage.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-              backgroundImage.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-              backgroundImage.heightAnchor.constraint(equalTo: contentView.heightAnchor),
-              backgroundImage.widthAnchor.constraint(equalTo: contentView.widthAnchor)
-          ])
-      }
+        NSLayoutConstraint.activate([
+            backgroundImage.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            backgroundImage.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            backgroundImage.heightAnchor.constraint(equalTo: contentView.heightAnchor),
+            backgroundImage.widthAnchor.constraint(equalTo: contentView.widthAnchor)
+        ])
+    }
     
     private func setBackgroundGradientOverlayConstraints() {
         NSLayoutConstraint.activate([
@@ -101,6 +101,4 @@ extension SpeciesCollectionViewCell {
             speciesNameLabel.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
-    
-  
 }

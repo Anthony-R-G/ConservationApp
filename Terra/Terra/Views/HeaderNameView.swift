@@ -1,5 +1,5 @@
 //
-//  BasicInfoView.swift
+//  HeaderNameView.swift
 //  Terra
 //
 //  Created by Anthony Gonzalez on 7/12/20.
@@ -12,38 +12,21 @@ final class HeaderNameView: UIView {
     //MARK: -- UI Element Initialization
     
     private lazy var conservationStatusLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont(name: "Roboto-Medium", size: 17)
-        label.textAlignment = .center
-        label.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        let label = Utilities.makeLabel(title: nil, weight: .regular, size: 17, alignment: .center)
         label.backgroundColor = #colorLiteral(red: 0.6787196398, green: 0.2409698367, blue: 0.261569947, alpha: 0.8461579623)
         label.layer.cornerRadius = 10
-        label.clipsToBounds = true
-        label.adjustsFontSizeToFitWidth = true
-        label.sizeToFit()
         return label
     }()
     
     private lazy var speciesCommonNameLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont(name: "Roboto-Bold", size: 55)
-        label.textColor = .white
-        label.textAlignment = .left
+        let label = Utilities.makeLabel(title: nil, weight: .bold, size: 55, alignment: .left)
         label.numberOfLines = 2
-        label.adjustsFontSizeToFitWidth = true
-        label.sizeToFit()
         return label
     }()
     
     private lazy var speciesScientificNameLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont(name: "Roboto-Light", size: 17)
-        label.textColor = .white
-        label.textAlignment = .left
-        label.numberOfLines = 0
-        label.adjustsFontSizeToFitWidth = true
+        let label = Utilities.makeLabel(title: nil, weight: .light, size: 17, alignment: .left)
         let neededSize = label.sizeThatFits(CGSize(width: frame.size.width, height: CGFloat.greatestFiniteMagnitude))
-        label.sizeToFit()
         return label
     }()
     
@@ -64,7 +47,6 @@ final class HeaderNameView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }
 
 //MARK: -- Adding Subviews & Constraints
@@ -88,7 +70,6 @@ extension HeaderNameView {
             conservationStatusLabel.bottomAnchor.constraint(equalTo: speciesCommonNameLabel.topAnchor, constant: -10),
             conservationStatusLabel.heightAnchor.constraint(equalToConstant: 25),
             conservationStatusLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.3),
-            
         ])
     }
     
@@ -105,8 +86,6 @@ extension HeaderNameView {
         NSLayoutConstraint.activate([
             speciesScientificNameLabel.leadingAnchor.constraint(equalTo: speciesCommonNameLabel.leadingAnchor),
             speciesScientificNameLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
-            //            speciesScientificNameLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.3),
-//            speciesScientificNameLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.6)
         ])
     }
 }

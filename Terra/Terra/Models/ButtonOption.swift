@@ -1,5 +1,5 @@
 //
-//  buttonType.swift
+//  ButtonType.swift
 //  Terra
 //
 //  Created by Anthony Gonzalez on 7/25/20.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum ButtonOption {
+public enum ButtonOption {
     case overviewButton
     case threatsButton
     case habitatButton
