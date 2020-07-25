@@ -24,7 +24,7 @@ class SpeciesCollectionViewCell: UICollectionViewCell {
     private lazy var backgroundImage: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
-        self.insertSubview(iv, at: 0)
+        insertSubview(iv, at: 0)
         return iv
     }()
     
@@ -32,7 +32,7 @@ class SpeciesCollectionViewCell: UICollectionViewCell {
         let gv = GradientView()
         gv.startColor = .clear
         gv.endColor = #colorLiteral(red: 0.06859237701, green: 0.08213501424, blue: 0.2409383953, alpha: 0.6547784675)
-        self.insertSubview(gv, at: 1)
+        insertSubview(gv, at: 1)
         return gv
     }()
     
@@ -45,8 +45,8 @@ class SpeciesCollectionViewCell: UICollectionViewCell {
         backgroundImage.kf.indicatorType = .activity
         
         backgroundColor = species.habitatSystem == .marine ? #colorLiteral(red: 0.2312238216, green: 0.3822638988, blue: 0.7663728595, alpha: 1) : #colorLiteral(red: 0.8971922994, green: 0.4322043657, blue: 0.1033880934, alpha: 1)
-        self.layer.cornerRadius = 39
-        self.layer.masksToBounds = true
+        layer.cornerRadius = 39
+        layer.masksToBounds = true
     }
     
     override init(frame: CGRect) {
@@ -65,7 +65,7 @@ class SpeciesCollectionViewCell: UICollectionViewCell {
 extension SpeciesCollectionViewCell {
     private func addSubviews() {
         let UIElements = [backgroundImage, backgroundGradientOverlay, speciesNameLabel]
-        UIElements.forEach{ self.contentView.addSubview($0) }
+        UIElements.forEach{ contentView.addSubview($0) }
         UIElements.forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
     }
     
