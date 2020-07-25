@@ -252,7 +252,6 @@ extension SpeciesDetailViewController: DonateButtonDelegate {
     }
 }
 
-
 extension SpeciesDetailViewController: BottomBarDelegate {
     func overviewButtonPressed(_ sender: UIButton) {
         bottomToolBar.highlightButton(button: .overviewButton)
@@ -318,7 +317,7 @@ extension SpeciesDetailViewController {
         NSLayoutConstraint.activate([
             horizontalScrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             horizontalScrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            horizontalScrollView.heightAnchor.constraint(equalToConstant: 420),
+            horizontalScrollView.heightAnchor.constraint(equalToConstant: Constants.detailInfoViewHeight),
             horizontalScrollViewTopAnchorConstraint
         ])
     }
@@ -382,8 +381,8 @@ extension SpeciesDetailViewController {
         NSLayoutConstraint.activate([
             speciesOverviewView.centerYAnchor.constraint(equalTo: horizontalScrollView.centerYAnchor),
             speciesOverviewView.leadingAnchor.constraint(equalTo: horizontalScrollView.leadingAnchor, constant: 20),
-            speciesOverviewView.widthAnchor.constraint(equalToConstant: 375),
-            speciesOverviewView.heightAnchor.constraint(equalToConstant: 420),
+            speciesOverviewView.widthAnchor.constraint(equalToConstant: Constants.detailInfoViewWidth),
+            speciesOverviewView.heightAnchor.constraint(equalToConstant: Constants.detailInfoViewHeight),
         ])
     }
     
@@ -391,8 +390,8 @@ extension SpeciesDetailViewController {
         NSLayoutConstraint.activate([
             speciesThreatsView.centerYAnchor.constraint(equalTo: horizontalScrollView.centerYAnchor),
             speciesThreatsView.leadingAnchor.constraint(equalTo: speciesOverviewView.trailingAnchor, constant: 40),
-            speciesThreatsView.widthAnchor.constraint(equalToConstant: 375),
-            speciesThreatsView.heightAnchor.constraint(equalToConstant: 420),
+            speciesThreatsView.widthAnchor.constraint(equalToConstant: Constants.detailInfoViewWidth),
+            speciesThreatsView.heightAnchor.constraint(equalToConstant: Constants.detailInfoViewHeight),
         ])
     }
     
@@ -400,8 +399,8 @@ extension SpeciesDetailViewController {
         NSLayoutConstraint.activate([
             speciesHabitatView.centerYAnchor.constraint(equalTo: horizontalScrollView.centerYAnchor),
             speciesHabitatView.leadingAnchor.constraint(equalTo: speciesThreatsView.trailingAnchor, constant: 40),
-            speciesHabitatView.widthAnchor.constraint(equalToConstant: 375),
-            speciesHabitatView.heightAnchor.constraint(equalToConstant: 420),
+            speciesHabitatView.widthAnchor.constraint(equalToConstant: Constants.detailInfoViewWidth),
+            speciesHabitatView.heightAnchor.constraint(equalToConstant: Constants.detailInfoViewHeight),
         ])
     }
     
@@ -409,8 +408,8 @@ extension SpeciesDetailViewController {
         NSLayoutConstraint.activate([
             speciesGalleryView.centerYAnchor.constraint(equalTo: horizontalScrollView.centerYAnchor),
             speciesGalleryView.leadingAnchor.constraint(equalTo: speciesHabitatView.trailingAnchor, constant: 40),
-            speciesGalleryView.widthAnchor.constraint(equalToConstant: 375),
-            speciesGalleryView.heightAnchor.constraint(equalToConstant: 420),
+            speciesGalleryView.widthAnchor.constraint(equalToConstant: Constants.detailInfoViewWidth),
+            speciesGalleryView.heightAnchor.constraint(equalToConstant: Constants.detailInfoViewHeight),
         ])
     }
 }

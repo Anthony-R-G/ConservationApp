@@ -38,6 +38,7 @@
 		97591FDC24CC4524002EAC96 /* ButtonOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FDB24CC4524002EAC96 /* ButtonOption.swift */; };
 		97591FDD24CCC352002EAC96 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97FEAEAB24BE5FCC005BAEFE /* Utilities.swift */; };
 		97591FDF24CCD14A002EAC96 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FDE24CCD14A002EAC96 /* Constants.swift */; };
+		97591FE024CCD2E9002EAC96 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FDE24CCD14A002EAC96 /* Constants.swift */; };
 		9767D04C24C3EA9200384FCD /* SubheaderInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9767D04B24C3EA9200384FCD /* SubheaderInfoView.swift */; };
 		978E5CF223FB5CBC007BCD25 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 978E5CF123FB5CBC007BCD25 /* GoogleService-Info.plist */; };
 		979C191423DE43E900651B2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979C191323DE43E900651B2B /* AppDelegate.swift */; };
@@ -218,7 +219,6 @@
 				971FD0CE24C61ABE003ED029 /* Extensions */,
 				9711D8F824BD19B900C2E6F1 /* Firebase */,
 				9711D8F624BD199700C2E6F1 /* Species.swift */,
-				97FEAEAB24BE5FCC005BAEFE /* Utilities.swift */,
 				9711D91E24BD63B000C2E6F1 /* HabitatSystem.swift */,
 				97E9450324BE10C800550824 /* ConservationStatus.swift */,
 				97D9E24A24C6470600524000 /* Diet.swift */,
@@ -226,6 +226,7 @@
 				97F7B42724C56886007AEE97 /* DonateButtonDelegate.swift */,
 				97DD101C24C69EB000A21DF4 /* BottomBarDelegate.swift */,
 				97591FDB24CC4524002EAC96 /* ButtonOption.swift */,
+				97FEAEAB24BE5FCC005BAEFE /* Utilities.swift */,
 				97591FDE24CCD14A002EAC96 /* Constants.swift */,
 			);
 			path = Models;
@@ -516,6 +517,7 @@
 				972A615224C94C6C00A59AB6 /* ConservationStatus.swift in Sources */,
 				97591FDD24CCC352002EAC96 /* Utilities.swift in Sources */,
 				979C192B23DE43EF00651B2B /* TerraTests.swift in Sources */,
+				97591FE024CCD2E9002EAC96 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
