@@ -8,13 +8,6 @@
 
 import UIKit
 
-enum buttonOption {
-    case overviewButton
-    case threatsButton
-    case habitatButton
-    case galleryButton
-}
-
 class BottomBarView: UIToolbar {
     //MARK: -- Lazy UI Element Initialization
     
@@ -101,7 +94,7 @@ class BottomBarView: UIToolbar {
         barStyle = .black
     }
     
-    public func highlightButton(button: buttonOption) {
+    public func highlightButton(button: ButtonOption) {
         switch button {
         case .overviewButton:
             overviewButton.isSelected = true
