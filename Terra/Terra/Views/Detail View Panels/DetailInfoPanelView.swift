@@ -75,11 +75,15 @@ class DetailInfoPanelView: UIView {
     
     //MARK: -- Methods
     
-    public func configureSpecificViewInfo (titleLabelStr: String, infoBarTitleLabelAStr: String, infoBarTitleLabelBStr: String, infoBarTitleLabelCStr: String) {
-        titleLabel.text = titleLabelStr.uppercased()
-        infoBarTitleLabelA.text = infoBarTitleLabelAStr.capitalized
-        infoBarTitleLabelB.text = infoBarTitleLabelBStr.capitalized
-        infoBarTitleLabelC.text = infoBarTitleLabelCStr.capitalized
+    public func configureSpecificViewInfo(
+        titleLabelStr: String,
+        infoBarTitleLabelAStr: String,
+        infoBarTitleLabelBStr: String,
+        infoBarTitleLabelCStr: String) {
+            titleLabel.text = titleLabelStr.uppercased()
+            infoBarTitleLabelA.text = infoBarTitleLabelAStr.capitalized
+            infoBarTitleLabelB.text = infoBarTitleLabelBStr.capitalized
+            infoBarTitleLabelC.text = infoBarTitleLabelCStr.capitalized
     }
     
     public func setViewElementsFromSpeciesData(species: Species) {}
