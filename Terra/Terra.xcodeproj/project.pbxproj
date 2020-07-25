@@ -33,6 +33,7 @@
 		974CC98424C64F0F00E4EF85 /* PopulationTrend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974CC98324C64F0E00E4EF85 /* PopulationTrend.swift */; };
 		97591FD224CB8BA7002EAC96 /* SpeciesHabitatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FD124CB8BA7002EAC96 /* SpeciesHabitatView.swift */; };
 		97591FD424CB8D46002EAC96 /* DetailInfoPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FD324CB8D46002EAC96 /* DetailInfoPanelView.swift */; };
+		97591FD824CBA51F002EAC96 /* BottomBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FD724CBA51F002EAC96 /* BottomBarView.swift */; };
 		9767D04C24C3EA9200384FCD /* SubheaderInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9767D04B24C3EA9200384FCD /* SubheaderInfoView.swift */; };
 		978E5CF223FB5CBC007BCD25 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 978E5CF123FB5CBC007BCD25 /* GoogleService-Info.plist */; };
 		979C191423DE43E900651B2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979C191323DE43E900651B2B /* AppDelegate.swift */; };
@@ -43,7 +44,7 @@
 		97B68CD424BBB0AC005B8AB8 /* HeaderNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B68CD324BBB0AC005B8AB8 /* HeaderNameView.swift */; };
 		97BF745323DF42F90058F2D7 /* SpeciesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BF745223DF42F90058F2D7 /* SpeciesListViewController.swift */; };
 		97D9E24B24C6470700524000 /* Diet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D9E24A24C6470600524000 /* Diet.swift */; };
-		97DD101D24C69EB000A21DF4 /* InfoOptionPanelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DD101C24C69EB000A21DF4 /* InfoOptionPanelDelegate.swift */; };
+		97DD101D24C69EB000A21DF4 /* BottomBarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DD101C24C69EB000A21DF4 /* BottomBarDelegate.swift */; };
 		97E9450424BE10C800550824 /* ConservationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E9450324BE10C800550824 /* ConservationStatus.swift */; };
 		97F0CCA924C56F5C00C581D3 /* UIScrollViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F0CCA824C56F5C00C581D3 /* UIScrollViewExtensions.swift */; };
 		97F7B42624C562A9007AEE97 /* InfoOptionPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F7B42524C562A9007AEE97 /* InfoOptionPanelView.swift */; };
@@ -86,6 +87,7 @@
 		974CC98324C64F0E00E4EF85 /* PopulationTrend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopulationTrend.swift; sourceTree = "<group>"; };
 		97591FD124CB8BA7002EAC96 /* SpeciesHabitatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesHabitatView.swift; sourceTree = "<group>"; };
 		97591FD324CB8D46002EAC96 /* DetailInfoPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInfoPanelView.swift; sourceTree = "<group>"; };
+		97591FD724CBA51F002EAC96 /* BottomBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBarView.swift; sourceTree = "<group>"; };
 		9767D04B24C3EA9200384FCD /* SubheaderInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubheaderInfoView.swift; sourceTree = "<group>"; };
 		978E5CF123FB5CBC007BCD25 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		979C191023DE43E900651B2B /* Terra.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Terra.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -100,7 +102,7 @@
 		97B68CD324BBB0AC005B8AB8 /* HeaderNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderNameView.swift; sourceTree = "<group>"; };
 		97BF745223DF42F90058F2D7 /* SpeciesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesListViewController.swift; sourceTree = "<group>"; };
 		97D9E24A24C6470600524000 /* Diet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diet.swift; sourceTree = "<group>"; };
-		97DD101C24C69EB000A21DF4 /* InfoOptionPanelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoOptionPanelDelegate.swift; sourceTree = "<group>"; };
+		97DD101C24C69EB000A21DF4 /* BottomBarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBarDelegate.swift; sourceTree = "<group>"; };
 		97E9450324BE10C800550824 /* ConservationStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConservationStatus.swift; sourceTree = "<group>"; };
 		97F0CCA824C56F5C00C581D3 /* UIScrollViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScrollViewExtensions.swift; sourceTree = "<group>"; };
 		97F7B42524C562A9007AEE97 /* InfoOptionPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoOptionPanelView.swift; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 				9767D04B24C3EA9200384FCD /* SubheaderInfoView.swift */,
 				971FD0CC24C6112E003ED029 /* DonateButton.swift */,
 				97F7B42524C562A9007AEE97 /* InfoOptionPanelView.swift */,
+				97591FD724CBA51F002EAC96 /* BottomBarView.swift */,
 				97591FD024CB85C1002EAC96 /* Detail View Panels */,
 			);
 			path = Views;
@@ -210,7 +213,7 @@
 				97D9E24A24C6470600524000 /* Diet.swift */,
 				974CC98324C64F0E00E4EF85 /* PopulationTrend.swift */,
 				97F7B42724C56886007AEE97 /* DonateButtonDelegate.swift */,
-				97DD101C24C69EB000A21DF4 /* InfoOptionPanelDelegate.swift */,
+				97DD101C24C69EB000A21DF4 /* BottomBarDelegate.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -482,7 +485,8 @@
 				979C191623DE43E900651B2B /* SceneDelegate.swift in Sources */,
 				97452E4823E1EEE9005636E0 /* GradientView.swift in Sources */,
 				97F0CCA924C56F5C00C581D3 /* UIScrollViewExtensions.swift in Sources */,
-				97DD101D24C69EB000A21DF4 /* InfoOptionPanelDelegate.swift in Sources */,
+				97DD101D24C69EB000A21DF4 /* BottomBarDelegate.swift in Sources */,
+				97591FD824CBA51F002EAC96 /* BottomBarView.swift in Sources */,
 				971FD0D024C61AD3003ED029 /* CGFloatExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
