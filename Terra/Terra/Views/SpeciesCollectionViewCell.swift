@@ -38,7 +38,7 @@ class SpeciesCollectionViewCell: UICollectionViewCell {
     
     //MARK: -- Methods
     
-    public func configureCell(from species: Species) {
+    public func configureCellUI(from species: Species) {
         speciesNameLabel.text = species.commonName
         let imageURL = URL(string: species.cellImage)
         backgroundImage.kf.setImage(with: imageURL)

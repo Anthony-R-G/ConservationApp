@@ -109,13 +109,11 @@ final class SpeciesListViewController: UIViewController {
         return filteredSpecies
     }
     
-    
     private func loadSpeciesDataFromFirebase() {
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             FirestoreService.manager.getAllSpeciesData() { (result) in
                 
                 switch result {
-                    
                 case .success(let speciesData):
                     self?.animalData = speciesData
                     
@@ -168,24 +166,22 @@ extension SpeciesListViewController: UICollectionViewDataSource {
         let speciesCell = collectionView.dequeueReusableCell(withReuseIdentifier: "speciesCell", for: indexPath) as! SpeciesCollectionViewCell
         
         switch collectionView {
-            
         case criticalSpeciesCollectionView:
             let specificAnimal = filteredCriticalSpecies[indexPath.row]
-            speciesCell.configureCell(from: specificAnimal)
+            speciesCell.configureCellUI(from: specificAnimal)
             return speciesCell
             
         case endangeredSpeciesCollectionView:
             let specificAnimal = filteredEndangeredSpecies[indexPath.row]
-            speciesCell.configureCell(from: specificAnimal)
+            speciesCell.configureCellUI(from: specificAnimal)
             return speciesCell
             
         case vulnerableSpeciesCollectionView:
             let specificAnimal = filteredVulnerableSpecies[indexPath.row]
-            speciesCell.configureCell(from: specificAnimal)
+            speciesCell.configureCellUI(from: specificAnimal)
             return speciesCell
             
         default: return UICollectionViewCell()
-            
         }
     }
 }
@@ -223,9 +219,9 @@ extension SpeciesListViewController: UICollectionViewDelegateFlowLayout {
 extension SpeciesListViewController {
     
     private func addSubviews() {
-        let parentViewUIElements = [terraTitleLabel, subtitleLabel, scrollView]
-        parentViewUIElements.forEach { view.addSubview($0) }
-        parentViewUIElements.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
+        let mainViewUIElements = [terraTitleLabel, subtitleLabel, scrollView]
+        mainViewUIElements.forEach { view.addSubview($0) }
+        mainViewUIElements.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
         
         let scrollViewUIElements = [criticalSpeciesLabel, criticalSpeciesCollectionView, endangeredSpeciesLabel, endangeredSpeciesCollectionView, vulnerableSpeciesLabel, vulnerableSpeciesCollectionView]
         scrollViewUIElements.forEach{ scrollView.addSubview($0) }
@@ -287,9 +283,8 @@ extension SpeciesListViewController {
     private func setCriticalSpeciesCVConstraints() {
         NSLayoutConstraint.activate([
             criticalSpeciesCollectionView.topAnchor.constraint(equalTo: criticalSpeciesLabel.bottomAnchor, constant: 30),
-            criticalSpeciesCollectionView.heightAnchor.constraint(equalToConstant: 235),
+            criticalSpeciesCollectionView.heightAnchor.constraint(equalToConstant: Constants.listVCCollectionViewHeight),
             criticalSpeciesCollectionView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
-            
         ])
     }
     
