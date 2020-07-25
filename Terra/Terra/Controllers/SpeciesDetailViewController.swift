@@ -208,19 +208,24 @@ extension SpeciesDetailViewController: DonateButtonDelegate {
 extension SpeciesDetailViewController: BottomBarDelegate {
     func overviewButtonPressed(_ sender: UIButton) {
         sender.isSelected = true
-        print("Show overview")
+        horizontalScrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+        
     }
     
     func threatsButtonPressed(_ sender: UIButton) {
         print("Show threats")
+        horizontalScrollView.setContentOffset(CGPoint(x: speciesThreatsView.frame.minX - 20, y: 0), animated: true)
     }
     
     func habitatButtonPressed(_ sender: UIButton) {
         print("Show habitat")
+        horizontalScrollView.setContentOffset(CGPoint(x: speciesHabitatView.frame.minX - 20, y: 0), animated: true)
     }
+    
     
     func galleryButtonPressed(_ sender: UIButton) {
         print("Show gallery")
+        
     }
 }
 
@@ -317,14 +322,6 @@ extension SpeciesDetailViewController {
         ])
     }
     
-    //    private func setInfoOptionPanelViewConstraints() {
-    //        NSLayoutConstraint.activate([
-    //            infoOptionPanelView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-    //            infoOptionPanelView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-    //            infoOptionPanelView.heightAnchor.constraint(equalToConstant: 80),
-    //            infoOptionPanelView.topAnchor.constraint(equalTo: horizontalScrollView.bottomAnchor, constant: 100)
-    //        ])
-    //    }
     //
     //    private func setDonateButtonConstraints() {
     //        NSLayoutConstraint.activate([
