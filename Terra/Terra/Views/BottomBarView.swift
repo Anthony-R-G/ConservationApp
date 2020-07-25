@@ -47,7 +47,7 @@ class BottomBarView: UIToolbar {
     
     private lazy var habitatButton: UIButton = {
         let button = UIButton(type: .custom)
-        button.setTitle("THREATS", for: .normal)
+        button.setTitle("HABITAT", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.setTitleColor(#colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1), for: .selected)
         button.showsTouchWhenHighlighted = true
@@ -64,7 +64,7 @@ class BottomBarView: UIToolbar {
     
     private lazy var galleryButton: UIButton = {
         let button = UIButton(type: .custom)
-        button.setTitle("THREATS", for: .normal)
+        button.setTitle("GALLERY", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.setTitleColor(#colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1), for: .selected)
         button.showsTouchWhenHighlighted = true
