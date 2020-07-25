@@ -15,7 +15,6 @@ final class HeaderNameView: UIView {
         let label = Utilities.makeLabel(title: nil, weight: .regular, size: 17, alignment: .center)
         label.backgroundColor = #colorLiteral(red: 0.6787196398, green: 0.2409698367, blue: 0.261569947, alpha: 0.8461579623)
         label.layer.cornerRadius = 10
-        label.clipsToBounds = true
         return label
     }()
     

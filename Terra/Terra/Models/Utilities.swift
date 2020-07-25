@@ -28,6 +28,7 @@ class Utilities {
         label.textAlignment = alignment
         label.textColor = .white
         label.adjustsFontSizeToFitWidth = true
+        label.clipsToBounds = true
         label.sizeToFit()
         return label
     }
