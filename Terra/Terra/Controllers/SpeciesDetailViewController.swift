@@ -253,24 +253,26 @@ extension SpeciesDetailViewController: DonateButtonDelegate {
 }
 
 extension SpeciesDetailViewController: BottomBarDelegate {
-    func overviewButtonPressed(_ sender: UIButton) {
-        bottomToolBar.highlightButton(button: .overviewButton)
-        transitionToView(buttonPressed: .overviewButton)
-    }
-    
-    func threatsButtonPressed(_ sender: UIButton) {
-        bottomToolBar.highlightButton(button: .threatsButton)
-        transitionToView(buttonPressed: .threatsButton)
-    }
-    
-    func habitatButtonPressed(_ sender: UIButton) {
-        bottomToolBar.highlightButton(button: .habitatButton)
-        transitionToView(buttonPressed: .habitatButton)
-    }
-    
-    func galleryButtonPressed(_ sender: UIButton) {
-        bottomToolBar.highlightButton(button: .galleryButton)
-        transitionToView(buttonPressed: .galleryButton)
+    func buttonPressed(_ sender: UIButton) {
+        switch sender.tag {
+        case 0:
+            bottomToolBar.highlightButton(button: .overviewButton)
+            transitionToView(buttonPressed: .overviewButton)
+            
+        case 1:
+            bottomToolBar.highlightButton(button: .threatsButton)
+            transitionToView(buttonPressed: .threatsButton)
+            
+        case 2:
+            bottomToolBar.highlightButton(button: .habitatButton)
+            transitionToView(buttonPressed: .habitatButton)
+            
+        case 3:
+            bottomToolBar.highlightButton(button: .galleryButton)
+                   transitionToView(buttonPressed: .galleryButton)
+            
+        default: ()
+        }
     }
 }
 

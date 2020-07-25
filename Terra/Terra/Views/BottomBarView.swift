@@ -12,76 +12,52 @@ class BottomBarView: UIToolbar {
     //MARK: -- Lazy UI Element Initialization
     
     private lazy var overviewButton: UIButton = {
-        let button = UIButton(type: .custom)
-        button.setTitle("OVERVIEW", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.setTitleColor(#colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1), for: .selected)
-        button.showsTouchWhenHighlighted = true
-        button.titleLabel?.font = UIFont(name: "Roboto-Medium", size: 15)
-        button.addTarget(self, action: #selector(overviewButtonPressed), for: .touchUpInside)
-        button.sizeToFit()
-        return button
+        let btn = Utilities.makeBottomBarButton(title: "OVERVIEW")
+        btn.tag = 0
+        btn.addTarget(self, action: #selector(bottomBarButtonPressed(sender:)), for: .touchUpInside)
+        return btn
     }()
     
     private lazy var overviewBarButtonItem: UIBarButtonItem = {
-        var btn = UIBarButtonItem(customView: overviewButton)
-        return btn
+        return UIBarButtonItem(customView: overviewButton)
     }()
     
     private lazy var threatsButton: UIButton = {
-        let button = UIButton(type: .custom)
-        button.setTitle("THREATS", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.setTitleColor(#colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1), for: .selected)
-        button.showsTouchWhenHighlighted = true
-        button.titleLabel?.font = UIFont(name: "Roboto-Medium", size: 15)
-        button.addTarget(self, action: #selector(threatsButtonPressed), for: .touchUpInside)
-        button.sizeToFit()
-        return button
+        let btn = Utilities.makeBottomBarButton(title: "THREATS")
+        btn.tag = 1
+        btn.addTarget(self, action: #selector(bottomBarButtonPressed(sender:)), for: .touchUpInside)
+        return btn
     }()
     
     private lazy var threatsBarButtonItem: UIBarButtonItem = {
-        var btn = UIBarButtonItem(customView: threatsButton)
-        return btn
+        return UIBarButtonItem(customView: threatsButton)
     }()
     
     private lazy var habitatButton: UIButton = {
-        let button = UIButton(type: .custom)
-        button.setTitle("HABITAT", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.setTitleColor(#colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1), for: .selected)
-        button.showsTouchWhenHighlighted = true
-        button.titleLabel?.font = UIFont(name: "Roboto-Medium", size: 15)
-        button.addTarget(self, action: #selector(habitatButtonPressed), for: .touchUpInside)
-        button.sizeToFit()
-        return button
+        let btn = Utilities.makeBottomBarButton(title: "HABITAT")
+        btn.tag = 2
+        btn.addTarget(self, action: #selector(bottomBarButtonPressed(sender:)), for: .touchUpInside)
+        return btn
     }()
     
     private lazy var habitatBarButtonItem: UIBarButtonItem = {
-        var btn = UIBarButtonItem(customView: habitatButton)
-        return btn
+        return UIBarButtonItem(customView: habitatButton)
     }()
     
     private lazy var galleryButton: UIButton = {
-        let button = UIButton(type: .custom)
-        button.setTitle("GALLERY", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.setTitleColor(#colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1), for: .selected)
-        button.showsTouchWhenHighlighted = true
-        button.titleLabel?.font = UIFont(name: "Roboto-Medium", size: 15)
-        button.addTarget(self, action: #selector(galleryButtonPressed), for: .touchUpInside)
-        button.sizeToFit()
-        return button
+        let btn = Utilities.makeBottomBarButton(title: "GALLERY")
+        btn.tag = 3
+        btn.addTarget(self, action: #selector(bottomBarButtonPressed(sender:)), for: .touchUpInside)
+        return btn
     }()
     
     private lazy var galleryBarButtonItem: UIBarButtonItem = {
-        var btn = UIBarButtonItem(customView: galleryButton)
-        return btn
+        return UIBarButtonItem(customView: galleryButton)
     }()
     
     private lazy var spacer: UIBarButtonItem = {
-        let btn = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        return btn
+        let fs = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        return fs
     }()
     
     //MARK: -- Properties
@@ -114,28 +90,15 @@ class BottomBarView: UIToolbar {
         }
     }
     
-    @objc private func overviewButtonPressed() {
-        actionDelegate?.overviewButtonPressed(overviewButton)
-    }
-    
-    @objc private func threatsButtonPressed() {
-        actionDelegate?.threatsButtonPressed(threatsButton)
-    }
-    
-    @objc private func habitatButtonPressed() {
-        actionDelegate?.habitatButtonPressed(habitatButton)
-    }
-    
-    @objc private func galleryButtonPressed() {
-        actionDelegate?.galleryButtonPressed(galleryButton)
+    @objc private func bottomBarButtonPressed(sender: UIButton) {
+        actionDelegate?.buttonPressed(sender)
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         setAppearance()
-        
-        let barButtonItems = [overviewBarButtonItem, spacer, threatsBarButtonItem, spacer, habitatBarButtonItem, spacer, galleryBarButtonItem]
-        items = barButtonItems
+
+        items = [overviewBarButtonItem, spacer, threatsBarButtonItem, spacer, habitatBarButtonItem, spacer, galleryBarButtonItem]
     }
     
     required init?(coder: NSCoder) {
