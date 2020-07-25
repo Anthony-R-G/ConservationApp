@@ -152,7 +152,7 @@ final class SpeciesDetailViewController: UIViewController {
         
         //This is hardcoded for now. Need to adjust for diff device sizes in future without having extra scroll space.
         verticalScrollView.contentSize = CGSize(width: view.frame.width, height: view.frame.height + 350)
-        horizontalScrollView.contentSize = CGSize(width: view.frame.width + 1000, height: 300)
+        horizontalScrollView.contentSize = CGSize(width: view.frame.width + 1300, height: 300)
     }
     
     
@@ -166,6 +166,7 @@ final class SpeciesDetailViewController: UIViewController {
         
         setViewElementsFromSpeciesData()
         setBackground()
+        bottomToolBar.highlightButton(button: .overviewButton)
     }
 }
 
@@ -198,15 +199,21 @@ extension SpeciesDetailViewController: UIScrollViewDelegate {
             horizontalScrollViewTopAnchorConstraint.constant = overviewViewTopAnchor
             
         case horizontalScrollView:
-            if scrollView.bounds.contains(speciesThreatsView.frame) {
+            if scrollView.bounds.contains(speciesOverviewView.frame) {
+                bottomToolBar.highlightButton(button: .overviewButton)
                 
+            } else if scrollView.bounds.contains(speciesThreatsView.frame) {
+                bottomToolBar.highlightButton(button: .threatsButton)
+                
+            } else if scrollView.bounds.contains(speciesHabitatView.frame) {
+                bottomToolBar.highlightButton(button: .habitatButton)
+                
+            } else if scrollView.bounds.contains(speciesGalleryView.frame) {
+                bottomToolBar.highlightButton(button: .galleryButton)
             }
             
-        default:()
+            default:()
         }
-        
-        
-        
     }
 }
 
@@ -238,7 +245,7 @@ extension SpeciesDetailViewController: BottomBarDelegate {
     
     func galleryButtonPressed(_ sender: UIButton) {
         bottomToolBar.highlightButton(button: .galleryButton)
-        horizontalScrollView.setContentOffset(CGPoint(x: speciesHabitatView.frame.minX - 20, y: 0), animated: true)
+        horizontalScrollView.setContentOffset(CGPoint(x: speciesGalleryView.frame.minX - 20, y: 0), animated: true)
         
     }
 }
