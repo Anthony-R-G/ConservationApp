@@ -97,7 +97,7 @@ class BottomBarView: UIToolbar {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setAppearance()
-
+        
         items = [overviewBarButtonItem, spacer, threatsBarButtonItem, spacer, habitatBarButtonItem, spacer, galleryBarButtonItem]
     }
     

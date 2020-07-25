@@ -228,9 +228,9 @@
 				97D9E24A24C6470600524000 /* Diet.swift */,
 				974CC98324C64F0E00E4EF85 /* PopulationTrend.swift */,
 				97591FDB24CC4524002EAC96 /* ButtonOption.swift */,
+				97591FE224CCDC48002EAC96 /* FontWeight.swift */,
 				97F7B42724C56886007AEE97 /* DonateButtonDelegate.swift */,
 				97DD101C24C69EB000A21DF4 /* BottomBarDelegate.swift */,
-				97591FE224CCDC48002EAC96 /* FontWeight.swift */,
 				97FEAEAB24BE5FCC005BAEFE /* Utilities.swift */,
 				97591FDE24CCD14A002EAC96 /* Constants.swift */,
 			);

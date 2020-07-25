@@ -269,7 +269,7 @@ extension SpeciesDetailViewController: BottomBarDelegate {
             
         case 3:
             bottomToolBar.highlightButton(button: .galleryButton)
-                   transitionToView(buttonPressed: .galleryButton)
+            transitionToView(buttonPressed: .galleryButton)
             
         default: ()
         }
