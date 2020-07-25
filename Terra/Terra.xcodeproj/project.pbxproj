@@ -36,6 +36,10 @@
 		97591FD824CBA51F002EAC96 /* BottomBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FD724CBA51F002EAC96 /* BottomBarView.swift */; };
 		97591FDA24CC2E9F002EAC96 /* SpeciesGalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FD924CC2E9F002EAC96 /* SpeciesGalleryView.swift */; };
 		97591FDC24CC4524002EAC96 /* ButtonOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FDB24CC4524002EAC96 /* ButtonOption.swift */; };
+		97591FDD24CCC352002EAC96 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97FEAEAB24BE5FCC005BAEFE /* Utilities.swift */; };
+		97591FDF24CCD14A002EAC96 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FDE24CCD14A002EAC96 /* Constants.swift */; };
+		97591FE024CCD2E9002EAC96 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FDE24CCD14A002EAC96 /* Constants.swift */; };
+		97591FE324CCDC48002EAC96 /* FontWeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FE224CCDC48002EAC96 /* FontWeight.swift */; };
 		9767D04C24C3EA9200384FCD /* SubheaderInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9767D04B24C3EA9200384FCD /* SubheaderInfoView.swift */; };
 		978E5CF223FB5CBC007BCD25 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 978E5CF123FB5CBC007BCD25 /* GoogleService-Info.plist */; };
 		979C191423DE43E900651B2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979C191323DE43E900651B2B /* AppDelegate.swift */; };
@@ -92,6 +96,9 @@
 		97591FD724CBA51F002EAC96 /* BottomBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBarView.swift; sourceTree = "<group>"; };
 		97591FD924CC2E9F002EAC96 /* SpeciesGalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesGalleryView.swift; sourceTree = "<group>"; };
 		97591FDB24CC4524002EAC96 /* ButtonOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonOption.swift; sourceTree = "<group>"; };
+		97591FDE24CCD14A002EAC96 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		97591FE124CCDC28002EAC96 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		97591FE224CCDC48002EAC96 /* FontWeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontWeight.swift; sourceTree = "<group>"; };
 		9767D04B24C3EA9200384FCD /* SubheaderInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubheaderInfoView.swift; sourceTree = "<group>"; };
 		978E5CF123FB5CBC007BCD25 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		979C191023DE43E900651B2B /* Terra.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Terra.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -177,6 +184,7 @@
 			children = (
 				972BBF7B24C0256F00B6F7C0 /* Roboto-Bold.ttf */,
 				972BBF7C24C0257600B6F7C0 /* Roboto-Medium.ttf */,
+				97591FE124CCDC28002EAC96 /* Roboto-Regular.ttf */,
 				972BBF7D24C0257B00B6F7C0 /* Roboto-Light.ttf */,
 			);
 			path = Fonts;
@@ -189,8 +197,8 @@
 				97B68CD324BBB0AC005B8AB8 /* HeaderNameView.swift */,
 				9767D04B24C3EA9200384FCD /* SubheaderInfoView.swift */,
 				971FD0CC24C6112E003ED029 /* DonateButton.swift */,
-				97F7B42524C562A9007AEE97 /* InfoOptionPanelView.swift */,
 				97591FD724CBA51F002EAC96 /* BottomBarView.swift */,
+				97F7B42524C562A9007AEE97 /* InfoOptionPanelView.swift */,
 				97591FD024CB85C1002EAC96 /* Detail View Panels */,
 			);
 			path = Views;
@@ -212,14 +220,19 @@
 		979492EC23F46ACE00B636A4 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				971FD0CE24C61ABE003ED029 /* Extensions */,
+				9711D8F824BD19B900C2E6F1 /* Firebase */,
 				9711D8F624BD199700C2E6F1 /* Species.swift */,
 				9711D91E24BD63B000C2E6F1 /* HabitatSystem.swift */,
 				97E9450324BE10C800550824 /* ConservationStatus.swift */,
 				97D9E24A24C6470600524000 /* Diet.swift */,
 				974CC98324C64F0E00E4EF85 /* PopulationTrend.swift */,
+				97591FDB24CC4524002EAC96 /* ButtonOption.swift */,
 				97F7B42724C56886007AEE97 /* DonateButtonDelegate.swift */,
 				97DD101C24C69EB000A21DF4 /* BottomBarDelegate.swift */,
-				97591FDB24CC4524002EAC96 /* ButtonOption.swift */,
+				97591FE224CCDC48002EAC96 /* FontWeight.swift */,
+				97FEAEAB24BE5FCC005BAEFE /* Utilities.swift */,
+				97591FDE24CCD14A002EAC96 /* Constants.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -247,13 +260,10 @@
 		979C191223DE43E900651B2B /* Terra */ = {
 			isa = PBXGroup;
 			children = (
-				97FEAEAB24BE5FCC005BAEFE /* Utilities.swift */,
 				972BBF7A24C0256400B6F7C0 /* Fonts */,
 				979492EC23F46ACE00B636A4 /* Models */,
 				97452E4423E1E6A9005636E0 /* Views */,
 				97BF745123DF42CC0058F2D7 /* Controllers */,
-				9711D8F824BD19B900C2E6F1 /* Firebase */,
-				971FD0CE24C61ABE003ED029 /* Extensions */,
 				9711D8FD24BD469B00C2E6F1 /* Third Party Code */,
 				979C191C23DE43EF00651B2B /* Assets.xcassets */,
 				979C191323DE43E900651B2B /* AppDelegate.swift */,
@@ -472,6 +482,7 @@
 				97591FDA24CC2E9F002EAC96 /* SpeciesGalleryView.swift in Sources */,
 				97E9450424BE10C800550824 /* ConservationStatus.swift in Sources */,
 				97591FD224CB8BA7002EAC96 /* SpeciesHabitatView.swift in Sources */,
+				97591FDF24CCD14A002EAC96 /* Constants.swift in Sources */,
 				97F7B42824C56886007AEE97 /* DonateButtonDelegate.swift in Sources */,
 				9735688F24BFDC8900D17F19 /* SpeciesTaxonomyView.swift in Sources */,
 				9711D8F724BD199700C2E6F1 /* Species.swift in Sources */,
@@ -495,6 +506,7 @@
 				97F0CCA924C56F5C00C581D3 /* UIScrollViewExtensions.swift in Sources */,
 				97DD101D24C69EB000A21DF4 /* BottomBarDelegate.swift in Sources */,
 				97591FD824CBA51F002EAC96 /* BottomBarView.swift in Sources */,
+				97591FE324CCDC48002EAC96 /* FontWeight.swift in Sources */,
 				971FD0D024C61AD3003ED029 /* CGFloatExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -509,7 +521,9 @@
 				972A615424C94C7000A59AB6 /* PopulationTrend.swift in Sources */,
 				972A615124C94C6A00A59AB6 /* HabitatSystem.swift in Sources */,
 				972A615224C94C6C00A59AB6 /* ConservationStatus.swift in Sources */,
+				97591FDD24CCC352002EAC96 /* Utilities.swift in Sources */,
 				979C192B23DE43EF00651B2B /* TerraTests.swift in Sources */,
+				97591FE024CCD2E9002EAC96 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

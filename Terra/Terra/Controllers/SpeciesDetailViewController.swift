@@ -1,5 +1,5 @@
 //
-//  DetailViewController.swift
+//  SpeciesDetailViewController.swift
 //  Terra
 //
 //  Created by Anthony Gonzalez on 7/17/20.
@@ -126,6 +126,7 @@ final class SpeciesDetailViewController: UIViewController {
     }
     
     private func setBackground() {
+        view.backgroundColor = .gray
         let imageURL = URL(string: currentSpecies!.detailImage)
         backgroundImageView.kf.setImage(with: imageURL)
     }
@@ -135,14 +136,57 @@ final class SpeciesDetailViewController: UIViewController {
         horizontalScrollView.delegate = self
         bottomToolBar.actionDelegate = self
         //        donateButton.delegate = self
-        //        infoOptionPanelView.delegate = self
     }
     
-    private func showWebBrowser(link: URL){
+    private func presentWebBrowser(link: URL){
         let config = SFSafariViewController.Configuration()
         config.entersReaderIfAvailable = true
         let safariVC = SFSafariViewController(url: link, configuration: config)
         present(safariVC, animated: true)
+    }
+    
+    private func updateAlpha(scrollOffset: CGFloat) {
+        let alphaOffset = (scrollOffset/400)
+        let newAlpha = max(0, min(alphaOffset, 0.34))
+        backgroundGradientOverlay.startColor = #colorLiteral(red: 0.06859237701, green: 0.08213501424, blue: 0.2409383953, alpha: Float(newAlpha))
+    }
+    
+    private func updateHeaderViewHeight(scrollOffset: CGFloat) {
+        let headerNameViewOffset = 275 - (scrollOffset)
+        let newHeaderNameViewHeight = max(110, headerNameViewOffset)
+        headerNameViewHeightConstraint.constant = newHeaderNameViewHeight
+    }
+    
+    private func updateHeaderTopAnchor(scrollOffset: CGFloat) {
+        let headerTopAnchorConstantOffset = 400 - scrollOffset
+        let newHeaderTopAnchorConstant = max(35, headerTopAnchorConstantOffset)
+        headerNameViewTopAnchorConstraint.constant = newHeaderTopAnchorConstant
+    }
+    
+    private func updateSubheaderHeight(scrollOffset: CGFloat) {
+        let subheaderViewOffset = 80 - (scrollOffset)
+        let newSubheaderViewHeight = max(50, subheaderViewOffset)
+        subheaderInfoViewHeightConstraint.constant = newSubheaderViewHeight
+    }
+    
+    private func updateHorizontalScrollTopAnchor(scrollOffset: CGFloat) {
+        let horizontalScrollTopAnchorOffset = 300 - scrollOffset
+        let newHorizontalScrollTopAnchorConstant = max(100, horizontalScrollTopAnchorOffset)
+        horizontalScrollViewTopAnchorConstraint.constant = newHorizontalScrollTopAnchorConstant
+    }
+    
+    private func transitionToView(buttonPressed: ButtonOption) {
+        switch buttonPressed {
+            
+        case .overviewButton:
+            horizontalScrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+        case .threatsButton:
+            horizontalScrollView.setContentOffset(CGPoint(x: speciesThreatsView.frame.minX - 20, y: 0), animated: true)
+        case .habitatButton:
+            horizontalScrollView.setContentOffset(CGPoint(x: speciesHabitatView.frame.minX - 20, y: 0), animated: true)
+        case .galleryButton:
+            horizontalScrollView.setContentOffset(CGPoint(x: speciesGalleryView.frame.minX - 20, y: 0), animated: true)
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -158,8 +202,6 @@ final class SpeciesDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .gray
-        
         addSubviews()
         setConstraints()
         setDelegates()
@@ -176,27 +218,13 @@ extension SpeciesDetailViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         switch scrollView {
         case verticalScrollView:
-            let offset = scrollView.contentOffset.y
+            let offsetY = scrollView.contentOffset.y
             
-            let alphaOffset = (offset/400)
-            let alpha = max(0, min(alphaOffset, 0.34))
-            backgroundGradientOverlay.startColor = #colorLiteral(red: 0.06859237701, green: 0.08213501424, blue: 0.2409383953, alpha: Float(alpha))
-            
-            let hnvOffset = 275 - (offset)
-            let hnvHeight = max(110, hnvOffset)
-            headerNameViewHeightConstraint.constant = hnvHeight
-            
-            let headerTopAnchorConstantOffset = 400 - offset
-            let headerTopAnchor = max(35, headerTopAnchorConstantOffset)
-            headerNameViewTopAnchorConstraint.constant = headerTopAnchor
-            
-            let sivOffset = 80 - (offset)
-            let sivHeight = max(50, sivOffset)
-            subheaderInfoViewHeightConstraint.constant = sivHeight
-            
-            let overviewViewTopAnchorConstantOffset = 300 - offset
-            let overviewViewTopAnchor = max(100, overviewViewTopAnchorConstantOffset)
-            horizontalScrollViewTopAnchorConstraint.constant = overviewViewTopAnchor
+            updateAlpha(scrollOffset: offsetY)
+            updateHeaderViewHeight(scrollOffset: offsetY)
+            updateHeaderTopAnchor(scrollOffset: offsetY)
+            updateSubheaderHeight(scrollOffset: offsetY)
+            updateHorizontalScrollTopAnchor(scrollOffset: offsetY)
             
         case horizontalScrollView:
             if scrollView.bounds.contains(speciesOverviewView.frame) {
@@ -212,7 +240,7 @@ extension SpeciesDetailViewController: UIScrollViewDelegate {
                 bottomToolBar.highlightButton(button: .galleryButton)
             }
             
-            default:()
+        default:()
         }
     }
 }
@@ -220,33 +248,29 @@ extension SpeciesDetailViewController: UIScrollViewDelegate {
 //MARK: -- Custom Delegate Implementation
 extension SpeciesDetailViewController: DonateButtonDelegate {
     func donateButtonPressed() {
-        showWebBrowser(link: URL(string: currentSpecies.donationLink)!)
+        presentWebBrowser(link: URL(string: currentSpecies.donationLink)!)
     }
 }
-
 
 extension SpeciesDetailViewController: BottomBarDelegate {
     func overviewButtonPressed(_ sender: UIButton) {
         bottomToolBar.highlightButton(button: .overviewButton)
-        horizontalScrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
-        
+        transitionToView(buttonPressed: .overviewButton)
     }
     
     func threatsButtonPressed(_ sender: UIButton) {
         bottomToolBar.highlightButton(button: .threatsButton)
-        horizontalScrollView.setContentOffset(CGPoint(x: speciesThreatsView.frame.minX - 20, y: 0), animated: true)
+        transitionToView(buttonPressed: .threatsButton)
     }
     
     func habitatButtonPressed(_ sender: UIButton) {
         bottomToolBar.highlightButton(button: .habitatButton)
-        horizontalScrollView.setContentOffset(CGPoint(x: speciesHabitatView.frame.minX - 20, y: 0), animated: true)
+        transitionToView(buttonPressed: .habitatButton)
     }
-    
     
     func galleryButtonPressed(_ sender: UIButton) {
         bottomToolBar.highlightButton(button: .galleryButton)
-        horizontalScrollView.setContentOffset(CGPoint(x: speciesGalleryView.frame.minX - 20, y: 0), animated: true)
-        
+        transitionToView(buttonPressed: .galleryButton)
     }
 }
 
@@ -293,7 +317,7 @@ extension SpeciesDetailViewController {
         NSLayoutConstraint.activate([
             horizontalScrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             horizontalScrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            horizontalScrollView.heightAnchor.constraint(equalToConstant: 420),
+            horizontalScrollView.heightAnchor.constraint(equalToConstant: Constants.detailInfoViewHeight),
             horizontalScrollViewTopAnchorConstraint
         ])
     }
@@ -357,8 +381,8 @@ extension SpeciesDetailViewController {
         NSLayoutConstraint.activate([
             speciesOverviewView.centerYAnchor.constraint(equalTo: horizontalScrollView.centerYAnchor),
             speciesOverviewView.leadingAnchor.constraint(equalTo: horizontalScrollView.leadingAnchor, constant: 20),
-            speciesOverviewView.widthAnchor.constraint(equalToConstant: 375),
-            speciesOverviewView.heightAnchor.constraint(equalToConstant: 420),
+            speciesOverviewView.widthAnchor.constraint(equalToConstant: Constants.detailInfoViewWidth),
+            speciesOverviewView.heightAnchor.constraint(equalToConstant: Constants.detailInfoViewHeight),
         ])
     }
     
@@ -366,8 +390,8 @@ extension SpeciesDetailViewController {
         NSLayoutConstraint.activate([
             speciesThreatsView.centerYAnchor.constraint(equalTo: horizontalScrollView.centerYAnchor),
             speciesThreatsView.leadingAnchor.constraint(equalTo: speciesOverviewView.trailingAnchor, constant: 40),
-            speciesThreatsView.widthAnchor.constraint(equalToConstant: 375),
-            speciesThreatsView.heightAnchor.constraint(equalToConstant: 420),
+            speciesThreatsView.widthAnchor.constraint(equalToConstant: Constants.detailInfoViewWidth),
+            speciesThreatsView.heightAnchor.constraint(equalToConstant: Constants.detailInfoViewHeight),
         ])
     }
     
@@ -375,8 +399,8 @@ extension SpeciesDetailViewController {
         NSLayoutConstraint.activate([
             speciesHabitatView.centerYAnchor.constraint(equalTo: horizontalScrollView.centerYAnchor),
             speciesHabitatView.leadingAnchor.constraint(equalTo: speciesThreatsView.trailingAnchor, constant: 40),
-            speciesHabitatView.widthAnchor.constraint(equalToConstant: 375),
-            speciesHabitatView.heightAnchor.constraint(equalToConstant: 420),
+            speciesHabitatView.widthAnchor.constraint(equalToConstant: Constants.detailInfoViewWidth),
+            speciesHabitatView.heightAnchor.constraint(equalToConstant: Constants.detailInfoViewHeight),
         ])
     }
     
@@ -384,8 +408,8 @@ extension SpeciesDetailViewController {
         NSLayoutConstraint.activate([
             speciesGalleryView.centerYAnchor.constraint(equalTo: horizontalScrollView.centerYAnchor),
             speciesGalleryView.leadingAnchor.constraint(equalTo: speciesHabitatView.trailingAnchor, constant: 40),
-            speciesGalleryView.widthAnchor.constraint(equalToConstant: 375),
-            speciesGalleryView.heightAnchor.constraint(equalToConstant: 420),
+            speciesGalleryView.widthAnchor.constraint(equalToConstant: Constants.detailInfoViewWidth),
+            speciesGalleryView.heightAnchor.constraint(equalToConstant: Constants.detailInfoViewHeight),
         ])
     }
 }

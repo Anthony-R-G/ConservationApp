@@ -1,5 +1,5 @@
 //
-//  Firestore.swift
+//  FirestoreService.swift
 //  Terra
 //
 //  Created by Anthony Gonzalez on 7/13/20.

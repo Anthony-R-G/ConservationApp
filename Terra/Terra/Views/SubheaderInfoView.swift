@@ -1,5 +1,5 @@
 //
-//  HeaderStacksView.swift
+//  SubheaderInfoView.swift
 //  Terra
 //
 //  Created by Anthony Gonzalez on 7/18/20.
