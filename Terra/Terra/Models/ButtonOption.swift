@@ -1,5 +1,5 @@
 //
-//  buttonType.swift
+//  ButtonType.swift
 //  Terra
 //
 //  Created by Anthony Gonzalez on 7/25/20.

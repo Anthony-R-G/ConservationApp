@@ -1,5 +1,5 @@
 //
-//  conservationStatus.swift
+//  ConservationStatus.swift
 //  Terra
 //
 //  Created by Anthony Gonzalez on 7/14/20.

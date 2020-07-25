@@ -1,5 +1,5 @@
 //
-//  InfoOptionPanelDelegate.swift
+//  BottomBarDelegate.swift
 //  Terra
 //
 //  Created by Anthony Gonzalez on 7/20/20.

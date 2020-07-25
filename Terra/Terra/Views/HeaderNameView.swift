@@ -1,5 +1,5 @@
 //
-//  BasicInfoView.swift
+//  HeaderNameView.swift
 //  Terra
 //
 //  Created by Anthony Gonzalez on 7/12/20.
