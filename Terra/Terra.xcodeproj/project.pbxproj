@@ -197,8 +197,8 @@
 				97B68CD324BBB0AC005B8AB8 /* HeaderNameView.swift */,
 				9767D04B24C3EA9200384FCD /* SubheaderInfoView.swift */,
 				971FD0CC24C6112E003ED029 /* DonateButton.swift */,
-				97F7B42524C562A9007AEE97 /* InfoOptionPanelView.swift */,
 				97591FD724CBA51F002EAC96 /* BottomBarView.swift */,
+				97F7B42524C562A9007AEE97 /* InfoOptionPanelView.swift */,
 				97591FD024CB85C1002EAC96 /* Detail View Panels */,
 			);
 			path = Views;
@@ -230,9 +230,9 @@
 				97591FDB24CC4524002EAC96 /* ButtonOption.swift */,
 				97F7B42724C56886007AEE97 /* DonateButtonDelegate.swift */,
 				97DD101C24C69EB000A21DF4 /* BottomBarDelegate.swift */,
+				97591FE224CCDC48002EAC96 /* FontWeight.swift */,
 				97FEAEAB24BE5FCC005BAEFE /* Utilities.swift */,
 				97591FDE24CCD14A002EAC96 /* Constants.swift */,
-				97591FE224CCDC48002EAC96 /* FontWeight.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";

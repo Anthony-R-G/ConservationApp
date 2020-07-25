@@ -6,7 +6,6 @@
 //  Copyright © 2020 Antnee. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 class Utilities {
@@ -21,5 +20,17 @@ class Utilities {
         collectionView.register(SpeciesCollectionViewCell.self, forCellWithReuseIdentifier: "speciesCell")
         return collectionView
     }
+    
+    static func makeLabel(title: String?, weight: FontWeight, size: CGFloat, alignment: NSTextAlignment) -> UILabel {
+        let label = UILabel()
+        label.text = title
+        label.font = UIFont(name: weight.rawValue, size: size)
+        label.textAlignment = alignment
+        label.textColor = .white
+        label.adjustsFontSizeToFitWidth = true
+        label.sizeToFit()
+        return label
+    }
+    
 }
 
