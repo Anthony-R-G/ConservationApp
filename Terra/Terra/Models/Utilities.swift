@@ -14,7 +14,7 @@ class Utilities {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 5)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 5)
         let collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: superView.frame.width, height: 0), collectionViewLayout: layout)
         
         collectionView.backgroundColor = .clear

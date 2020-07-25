@@ -56,7 +56,7 @@ final class SpeciesListViewController: UIViewController {
     private lazy var endangeredSpeciesLabel: UILabel = {
         let label = UILabel()
         label.text = "ENDANGERED"
-        label.font = UIFont(name: "Roboto-Medium", size: 21)
+        label.font = UIFont(name: "Roboto-Medium", size: 19)
         label.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.7993899829)
         label.textAlignment = .left
         return label
@@ -76,7 +76,7 @@ final class SpeciesListViewController: UIViewController {
     
     //MARK: -- Properties
     
-    private var animalData = [Species]() {
+    private var animalData: [Species] = [] {
         didSet {
             filteredCriticalSpecies = filterSpecies(by: .critical)
             filteredEndangeredSpecies = filterSpecies(by: .endangered)
@@ -111,11 +111,12 @@ final class SpeciesListViewController: UIViewController {
     
     private func loadSpeciesDataFromFirebase() {
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            guard let self = self else { return }
             FirestoreService.manager.getAllSpeciesData() { (result) in
                 
                 switch result {
                 case .success(let speciesData):
-                    self?.animalData = speciesData
+                    self.animalData = speciesData
                     
                 case .failure(let error):
                     print(error.localizedDescription)

@@ -13,4 +13,6 @@ struct Constants {
     
     static let detailInfoViewHeight: CGFloat = 420
     static let detailInfoViewWidth: CGFloat = 375
+    
+    static let cornerRadius: CGFloat = 39
 }

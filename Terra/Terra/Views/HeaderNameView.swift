@@ -15,7 +15,7 @@ final class HeaderNameView: UIView {
         let label = UILabel()
         label.font = UIFont(name: "Roboto-Medium", size: 17)
         label.textAlignment = .center
-        label.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        label.textColor = .white
         label.backgroundColor = #colorLiteral(red: 0.6787196398, green: 0.2409698367, blue: 0.261569947, alpha: 0.8461579623)
         label.layer.cornerRadius = 10
         label.clipsToBounds = true
@@ -40,7 +40,6 @@ final class HeaderNameView: UIView {
         label.font = UIFont(name: "Roboto-Light", size: 17)
         label.textColor = .white
         label.textAlignment = .left
-        label.numberOfLines = 0
         label.adjustsFontSizeToFitWidth = true
         let neededSize = label.sizeThatFits(CGSize(width: frame.size.width, height: CGFloat.greatestFiniteMagnitude))
         label.sizeToFit()
@@ -64,7 +63,6 @@ final class HeaderNameView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }
 
 //MARK: -- Adding Subviews & Constraints
@@ -88,7 +86,6 @@ extension HeaderNameView {
             conservationStatusLabel.bottomAnchor.constraint(equalTo: speciesCommonNameLabel.topAnchor, constant: -10),
             conservationStatusLabel.heightAnchor.constraint(equalToConstant: 25),
             conservationStatusLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.3),
-            
         ])
     }
     
@@ -105,8 +102,6 @@ extension HeaderNameView {
         NSLayoutConstraint.activate([
             speciesScientificNameLabel.leadingAnchor.constraint(equalTo: speciesCommonNameLabel.leadingAnchor),
             speciesScientificNameLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
-            //            speciesScientificNameLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.3),
-//            speciesScientificNameLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.6)
         ])
     }
 }
