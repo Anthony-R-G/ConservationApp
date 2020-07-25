@@ -62,15 +62,15 @@ final class SpeciesListViewController: UIViewController {
         return label
     }()
     
-    private lazy var criticalSpeciesCV: UICollectionView = {
+    private lazy var criticalSpeciesCollectionView: UICollectionView = {
         Utilities.makeCollectionView(superView: self.view)
     }()
     
-    private lazy var endangeredSpeciesCV: UICollectionView = {
+    private lazy var endangeredSpeciesCollectionView: UICollectionView = {
         Utilities.makeCollectionView(superView: self.view)
     }()
     
-    private lazy var vulnerableSpeciesCV: UICollectionView = {
+    private lazy var vulnerableSpeciesCollectionView: UICollectionView = {
         Utilities.makeCollectionView(superView: self.view)
     }()
     
@@ -86,19 +86,19 @@ final class SpeciesListViewController: UIViewController {
     
     private var filteredCriticalSpecies = [Species]() {
         didSet {
-            criticalSpeciesCV.reloadData()
+            criticalSpeciesCollectionView.reloadData()
         }
     }
     
     private var filteredEndangeredSpecies = [Species]() {
         didSet {
-            endangeredSpeciesCV.reloadData()
+            endangeredSpeciesCollectionView.reloadData()
         }
     }
     
     private var filteredVulnerableSpecies = [Species]() {
         didSet {
-            vulnerableSpeciesCV.reloadData()
+            vulnerableSpeciesCollectionView.reloadData()
         }
     }
     
@@ -113,9 +113,12 @@ final class SpeciesListViewController: UIViewController {
     private func loadSpeciesDataFromFirebase() {
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             FirestoreService.manager.getAllSpeciesData() { (result) in
+                
                 switch result {
+                    
                 case .success(let speciesData):
                     self?.animalData = speciesData
+                    
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
@@ -124,7 +127,7 @@ final class SpeciesListViewController: UIViewController {
     }
     
     private func setDatasourceAndDelegates() {
-        let collectionViews = [criticalSpeciesCV, endangeredSpeciesCV, vulnerableSpeciesCV]
+        let collectionViews = [criticalSpeciesCollectionView, endangeredSpeciesCollectionView, vulnerableSpeciesCollectionView]
         collectionViews.forEach { $0.dataSource = self }
         collectionViews.forEach { $0.delegate = self }
         scrollView.delegate = self
@@ -154,9 +157,9 @@ final class SpeciesListViewController: UIViewController {
 extension SpeciesListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView {
-        case criticalSpeciesCV: return filteredCriticalSpecies.count
-        case endangeredSpeciesCV: return filteredEndangeredSpecies.count
-        case vulnerableSpeciesCV: return filteredVulnerableSpecies.count
+        case criticalSpeciesCollectionView: return filteredCriticalSpecies.count
+        case endangeredSpeciesCollectionView: return filteredEndangeredSpecies.count
+        case vulnerableSpeciesCollectionView: return filteredVulnerableSpecies.count
         default: return 0
         }
     }
@@ -166,17 +169,17 @@ extension SpeciesListViewController: UICollectionViewDataSource {
         
         switch collectionView {
             
-        case criticalSpeciesCV:
+        case criticalSpeciesCollectionView:
             let specificAnimal = filteredCriticalSpecies[indexPath.row]
             speciesCell.configureCell(from: specificAnimal)
             return speciesCell
             
-        case endangeredSpeciesCV:
+        case endangeredSpeciesCollectionView:
             let specificAnimal = filteredEndangeredSpecies[indexPath.row]
             speciesCell.configureCell(from: specificAnimal)
             return speciesCell
             
-        case vulnerableSpeciesCV:
+        case vulnerableSpeciesCollectionView:
             let specificAnimal = filteredVulnerableSpecies[indexPath.row]
             speciesCell.configureCell(from: specificAnimal)
             return speciesCell
@@ -197,11 +200,11 @@ extension SpeciesListViewController: UICollectionViewDelegateFlowLayout {
         var specificAnimal = Species(from: [:])
         
         switch collectionView {
-        case criticalSpeciesCV: specificAnimal = filteredCriticalSpecies[indexPath.row]
+        case criticalSpeciesCollectionView: specificAnimal = filteredCriticalSpecies[indexPath.row]
             
-        case endangeredSpeciesCV: specificAnimal = filteredEndangeredSpecies[indexPath.row]
+        case endangeredSpeciesCollectionView: specificAnimal = filteredEndangeredSpecies[indexPath.row]
             
-        case vulnerableSpeciesCV: specificAnimal = filteredVulnerableSpecies[indexPath.row]
+        case vulnerableSpeciesCollectionView: specificAnimal = filteredVulnerableSpecies[indexPath.row]
             
         default: ()
         }
@@ -224,7 +227,7 @@ extension SpeciesListViewController {
         parentViewUIElements.forEach { view.addSubview($0) }
         parentViewUIElements.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
         
-        let scrollViewUIElements = [criticalSpeciesLabel, criticalSpeciesCV, endangeredSpeciesLabel, endangeredSpeciesCV, vulnerableSpeciesLabel, vulnerableSpeciesCV]
+        let scrollViewUIElements = [criticalSpeciesLabel, criticalSpeciesCollectionView, endangeredSpeciesLabel, endangeredSpeciesCollectionView, vulnerableSpeciesLabel, vulnerableSpeciesCollectionView]
         scrollViewUIElements.forEach{ scrollView.addSubview($0) }
         scrollViewUIElements.forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
     }
@@ -283,9 +286,9 @@ extension SpeciesListViewController {
     
     private func setCriticalSpeciesCVConstraints() {
         NSLayoutConstraint.activate([
-            criticalSpeciesCV.topAnchor.constraint(equalTo: criticalSpeciesLabel.bottomAnchor, constant: 30),
-            criticalSpeciesCV.heightAnchor.constraint(equalToConstant: 235),
-            criticalSpeciesCV.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
+            criticalSpeciesCollectionView.topAnchor.constraint(equalTo: criticalSpeciesLabel.bottomAnchor, constant: 30),
+            criticalSpeciesCollectionView.heightAnchor.constraint(equalToConstant: 235),
+            criticalSpeciesCollectionView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
             
         ])
     }
@@ -293,7 +296,7 @@ extension SpeciesListViewController {
     private func setEndangeredSpeciesLabelConstraints() {
         NSLayoutConstraint.activate([
             endangeredSpeciesLabel.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 30),
-            endangeredSpeciesLabel.topAnchor.constraint(equalTo: criticalSpeciesCV.bottomAnchor, constant: 30),
+            endangeredSpeciesLabel.topAnchor.constraint(equalTo: criticalSpeciesCollectionView.bottomAnchor, constant: 30),
             endangeredSpeciesLabel.heightAnchor.constraint(equalToConstant: 30),
             endangeredSpeciesLabel.widthAnchor.constraint(equalToConstant: 300)
         ])
@@ -301,17 +304,17 @@ extension SpeciesListViewController {
     
     private func setEndangeredSpeciesCVConstraints() {
         NSLayoutConstraint.activate([
-            endangeredSpeciesCV.topAnchor.constraint(equalTo: endangeredSpeciesLabel.bottomAnchor, constant: 30),
-            endangeredSpeciesCV.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-            endangeredSpeciesCV.heightAnchor.constraint(equalToConstant: 235),
-            endangeredSpeciesCV.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor)
+            endangeredSpeciesCollectionView.topAnchor.constraint(equalTo: endangeredSpeciesLabel.bottomAnchor, constant: 30),
+            endangeredSpeciesCollectionView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            endangeredSpeciesCollectionView.heightAnchor.constraint(equalToConstant: 235),
+            endangeredSpeciesCollectionView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor)
         ])
     }
     
     private func setVulnerableSpeciesLabelConstraints() {
         NSLayoutConstraint.activate([
             vulnerableSpeciesLabel.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 30),
-            vulnerableSpeciesLabel.topAnchor.constraint(equalTo: endangeredSpeciesCV.bottomAnchor, constant: 30),
+            vulnerableSpeciesLabel.topAnchor.constraint(equalTo: endangeredSpeciesCollectionView.bottomAnchor, constant: 30),
             vulnerableSpeciesLabel.heightAnchor.constraint(equalToConstant: 30),
             vulnerableSpeciesLabel.widthAnchor.constraint(equalToConstant: 300)
         ])
@@ -319,10 +322,10 @@ extension SpeciesListViewController {
     
     private func setVulnerableSpeciesCVConstraints() {
         NSLayoutConstraint.activate([
-            vulnerableSpeciesCV.topAnchor.constraint(equalTo: vulnerableSpeciesLabel.bottomAnchor, constant: 30),
-            vulnerableSpeciesCV.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-            vulnerableSpeciesCV.heightAnchor.constraint(equalToConstant: 235),
-            vulnerableSpeciesCV.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor)
+            vulnerableSpeciesCollectionView.topAnchor.constraint(equalTo: vulnerableSpeciesLabel.bottomAnchor, constant: 30),
+            vulnerableSpeciesCollectionView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            vulnerableSpeciesCollectionView.heightAnchor.constraint(equalToConstant: 235),
+            vulnerableSpeciesCollectionView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor)
         ])
     }
 }

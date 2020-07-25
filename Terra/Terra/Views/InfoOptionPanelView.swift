@@ -8,6 +8,7 @@
 
 import UIKit
 
+/*
 class InfoOptionPanelView: UIView {
     
     //MARK: -- UI Element Initialization
@@ -53,7 +54,7 @@ class InfoOptionPanelView: UIView {
     
     //MARK: -- Properties
     
-    weak var delegate: InfoOptionPanelDelegate?
+    weak var delegate: BottomBarDelegate?
     
     private var shapeLayer: CALayer?
     
@@ -180,4 +181,5 @@ extension InfoOptionPanelView {
         return path.cgPath
     }
 }
+ */
 
