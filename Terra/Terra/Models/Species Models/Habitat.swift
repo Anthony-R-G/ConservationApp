@@ -9,6 +9,8 @@
 import Foundation
 
 struct Habitat: FirebaseConvertible {
-    let habitatSummary: String
-    let habitatSystem: HabitatSystem
+    let summary: String
+    let system: HabitatSystem
+    let latitude: Double
+    let longitude: Double
 }
