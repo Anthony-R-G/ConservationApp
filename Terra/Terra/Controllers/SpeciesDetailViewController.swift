@@ -170,10 +170,13 @@ final class SpeciesDetailViewController: UIViewController {
             
         case .overviewButton:
             horizontalScrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+            
         case .threatsButton:
             horizontalScrollView.setContentOffset(CGPoint(x: speciesThreatsView.frame.minX - 20, y: 0), animated: true)
+            
         case .habitatButton:
             horizontalScrollView.setContentOffset(CGPoint(x: speciesHabitatView.frame.minX - 20, y: 0), animated: true)
+            
         case .galleryButton:
             horizontalScrollView.setContentOffset(CGPoint(x: speciesGalleryView.frame.minX - 20, y: 0), animated: true)
         }
@@ -238,31 +241,16 @@ extension SpeciesDetailViewController: UIScrollViewDelegate {
 //MARK: -- Custom Delegate Implementation
 extension SpeciesDetailViewController: DonateButtonDelegate {
     func donateButtonPressed() {
-        presentWebBrowser(link: URL(string: currentSpecies.donationLink)!)
+        guard let donationURL = URL(string: currentSpecies.donationLink) else { return }
+        presentWebBrowser(link: donationURL)
     }
 }
 
 extension SpeciesDetailViewController: BottomBarDelegate {
     func buttonPressed(_ sender: UIButton) {
-        switch sender.tag {
-        case 0:
-            bottomToolBar.highlightButton(button: .overviewButton)
-            transitionToView(buttonPressed: .overviewButton)
-            
-        case 1:
-            bottomToolBar.highlightButton(button: .threatsButton)
-            transitionToView(buttonPressed: .threatsButton)
-            
-        case 2:
-            bottomToolBar.highlightButton(button: .habitatButton)
-            transitionToView(buttonPressed: .habitatButton)
-            
-        case 3:
-            bottomToolBar.highlightButton(button: .galleryButton)
-            transitionToView(buttonPressed: .galleryButton)
-            
-        default: ()
-        }
+        guard let buttonOption = ButtonOption(rawValue: sender.tag) else { return }
+        bottomToolBar.highlightButton(button: buttonOption)
+        transitionToView(buttonPressed: buttonOption)
     }
 }
 
