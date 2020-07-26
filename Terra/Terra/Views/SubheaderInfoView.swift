@@ -12,77 +12,35 @@ final class SubheaderInfoView: UIView {
     //MARK: -- UI Element Initialization
     
     private lazy var numbersTitleLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .white
-        label.text = "Numbers"
-        label.textAlignment = .left
-        label.font = UIFont(name: "Roboto-Light", size: 16)
-        label.adjustsFontSizeToFitWidth = true
-        label.sizeToFit()
-        return label
+        return Utilities.makeLabel(title: "Numbers", weight: .light, size: 16, alignment: .left)
     }()
     
-    private lazy var numbersInfoLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .white
-        label.textAlignment = .left
-        label.font = UIFont(name: "Roboto-Medium", size: 18)
-        label.backgroundColor = .clear
-        label.adjustsFontSizeToFitWidth = true
-        label.sizeToFit()
-        return label
+    private lazy var numbersDataLabel: UILabel = {
+        return Utilities.makeLabel(title: nil, weight: .medium, size: 18, alignment: .left)
     }()
     
-    private lazy var numbersTrendLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .white
-        label.text = "Trend"
-        label.textAlignment = .left
-        label.font = UIFont(name: "Roboto-Light", size: 16)
-        label.adjustsFontSizeToFitWidth = true
-        label.sizeToFit()
-        return label
+    private lazy var trendTitleLabel: UILabel = {
+        return Utilities.makeLabel(title: "Trend", weight: .light, size: 16, alignment: .left)
     }()
     
-    private lazy var numbersTrendInfoLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .white
-        label.textAlignment = .left
-        label.font = UIFont(name: "Roboto-Medium", size: 18)
-        label.backgroundColor = .clear
-        label.adjustsFontSizeToFitWidth = true
-        label.sizeToFit()
-        return label
+    private lazy var trendDataLabel: UILabel = {
+        return Utilities.makeLabel(title: nil, weight: .medium, size: 18, alignment: .left)
     }()
     
     private lazy var lastAssessedTitleLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .white
-        label.text = "Last Assessed"
-        label.textAlignment = .left
-        label.font = UIFont(name: "Roboto-Light", size: 16)
-        label.adjustsFontSizeToFitWidth = true
-        label.sizeToFit()
-        return label
+         return Utilities.makeLabel(title: "Last Assessed", weight: .light, size: 16, alignment: .left)
     }()
     
-    private lazy var lastAssessedInfoLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .white
-        label.textAlignment = .left
-        label.font = UIFont(name: "Roboto-Medium", size: 18)
-        label.backgroundColor = .clear
-        label.adjustsFontSizeToFitWidth = true
-        label.sizeToFit()
-        return label
+    private lazy var lastAssessedDataLabel: UILabel = {
+        return Utilities.makeLabel(title: nil, weight: .medium, size: 18, alignment: .left)
     }()
     
     //MARK: -- Methods
     public func setViewElementsFromSpeciesData(species: Species) {
-        numbersInfoLabel.text = species.populationNumbers
-        numbersTrendInfoLabel.text = species.populationTrend.rawValue
-        numbersTrendInfoLabel.textColor = species.populationTrend == .recovering ?  #colorLiteral(red: 0.7970843911, green: 1, blue: 0.5273691416, alpha: 1) : #colorLiteral(red: 1, green: 0.5084088445, blue: 0.5854002237, alpha: 1)
-        lastAssessedInfoLabel.text = species.assessmentDate
+        numbersDataLabel.text = species.populationNumbers
+        trendDataLabel.text = species.populationTrend.rawValue
+        trendDataLabel.textColor = species.populationTrend == .recovering ?  #colorLiteral(red: 0.7970843911, green: 1, blue: 0.5273691416, alpha: 1) : #colorLiteral(red: 1, green: 0.5084088445, blue: 0.5854002237, alpha: 1)
+        lastAssessedDataLabel.text = species.assessmentDate
     }
     
     override init(frame: CGRect) {
@@ -101,7 +59,7 @@ final class SubheaderInfoView: UIView {
 extension SubheaderInfoView {
     
     private func addSubviews() {
-        let UIElements = [numbersTitleLabel, numbersInfoLabel, numbersTrendLabel, numbersTrendInfoLabel, lastAssessedTitleLabel, lastAssessedInfoLabel]
+        let UIElements = [numbersTitleLabel, numbersDataLabel, trendTitleLabel, trendDataLabel, lastAssessedTitleLabel, lastAssessedDataLabel]
         UIElements.forEach { self.addSubview($0) }
         UIElements.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
     }
@@ -126,34 +84,34 @@ extension SubheaderInfoView {
     
     private func setNumbersInfoLabelConstraints() {
         NSLayoutConstraint.activate([
-            numbersInfoLabel.leadingAnchor.constraint(equalTo: numbersTitleLabel.leadingAnchor),
-            numbersInfoLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.5),
-            numbersInfoLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.25),
-            numbersInfoLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 10)
+            numbersDataLabel.leadingAnchor.constraint(equalTo: numbersTitleLabel.leadingAnchor),
+            numbersDataLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.5),
+            numbersDataLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.25),
+            numbersDataLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 10)
         ])
     }
     
     private func setWeightTitleLabelConstraints() {
         NSLayoutConstraint.activate([
-            numbersTrendLabel.leadingAnchor.constraint(equalTo: numbersTitleLabel.trailingAnchor, constant: 20),
-            numbersTrendLabel.topAnchor.constraint(equalTo: numbersTitleLabel.topAnchor),
-            numbersTrendLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.5),
-            numbersTrendLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.25)
+            trendTitleLabel.leadingAnchor.constraint(equalTo: numbersTitleLabel.trailingAnchor, constant: 20),
+            trendTitleLabel.topAnchor.constraint(equalTo: numbersTitleLabel.topAnchor),
+            trendTitleLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.5),
+            trendTitleLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.25)
         ])
     }
     
     private func setWeightInfoLabelConstraints() {
         NSLayoutConstraint.activate([
-            numbersTrendInfoLabel.leadingAnchor.constraint(equalTo: numbersTrendLabel.leadingAnchor),
-            numbersTrendInfoLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.5),
-            numbersTrendInfoLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.25),
-            numbersTrendInfoLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 10)
+            trendDataLabel.leadingAnchor.constraint(equalTo: trendTitleLabel.leadingAnchor),
+            trendDataLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.5),
+            trendDataLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.25),
+            trendDataLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 10)
         ])
     }
     
     private func setHeightTitleLabelConstraints() {
         NSLayoutConstraint.activate([
-            lastAssessedTitleLabel.leadingAnchor.constraint(equalTo: numbersTrendLabel.trailingAnchor, constant: 20),
+            lastAssessedTitleLabel.leadingAnchor.constraint(equalTo: trendTitleLabel.trailingAnchor, constant: 20),
             lastAssessedTitleLabel.topAnchor.constraint(equalTo: numbersTitleLabel.topAnchor),
             lastAssessedTitleLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.5),
             lastAssessedTitleLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.25)
@@ -162,10 +120,10 @@ extension SubheaderInfoView {
     
     private func setHeightInfoLabelConstraints() {
         NSLayoutConstraint.activate([
-            lastAssessedInfoLabel.leadingAnchor.constraint(equalTo: self.lastAssessedTitleLabel.leadingAnchor),
-            lastAssessedInfoLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.5),
-            lastAssessedInfoLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.25),
-            lastAssessedInfoLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 10)
+            lastAssessedDataLabel.leadingAnchor.constraint(equalTo: self.lastAssessedTitleLabel.leadingAnchor),
+            lastAssessedDataLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.5),
+            lastAssessedDataLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.25),
+            lastAssessedDataLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 10)
         ])
     }
 }

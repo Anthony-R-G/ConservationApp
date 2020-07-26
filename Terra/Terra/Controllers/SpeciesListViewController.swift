@@ -13,52 +13,39 @@ final class SpeciesListViewController: UIViewController {
     //MARK: -- UI Element Initialization
     
     private lazy var scrollView: UIScrollView = {
-        let sv = UIScrollView()
-        return sv
+        return UIScrollView()
     }()
     
     private lazy var terraTitleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Terra"
-        label.font = UIFont(name: "Roboto-Bold", size: 30)
+        let label = Utilities.makeLabel(title: "Terra", weight: .bold, size: 30, alignment: .left)
         label.textColor = #colorLiteral(red: 0.9257398248, green: 1, blue: 0.7623538375, alpha: 1)
-        label.textAlignment = .left
         return label
     }()
     
     private lazy var subtitleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Protect the earth's biodiversity"
-        label.font = UIFont(name: "Roboto-Light", size: 20)
+        let label = Utilities.makeLabel(title: "Protect the earth's biodiversity",
+                                        weight: .light,
+                                        size: 20,
+                                        alignment: .left)
         label.textColor = #colorLiteral(red: 0.6699403524, green: 0.6602986455, blue: 0.7864833474, alpha: 1)
-        label.textAlignment = .left
         return label
     }()
     
     private lazy var criticalSpeciesLabel: UILabel = {
-        let label = UILabel()
-        label.text = "CRITICALLY ENDANGERED"
-        label.font = UIFont(name: "Roboto-Medium", size: 19)
+        let label = Utilities.makeLabel(title: "CRITICALLY ENDANGERED", weight: .medium, size: 19, alignment: .left)
         label.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.7993899829)
-        label.textAlignment = .left
-        return label
-    }()
-    
-    private lazy var vulnerableSpeciesLabel: UILabel = {
-        let label = UILabel()
-        label.text = "VULNERABLE"
-        label.font = UIFont(name: "Roboto-Medium", size: 19)
-        label.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.7993899829)
-        label.textAlignment = .left
         return label
     }()
     
     private lazy var endangeredSpeciesLabel: UILabel = {
-        let label = UILabel()
-        label.text = "ENDANGERED"
-        label.font = UIFont(name: "Roboto-Medium", size: 19)
+        let label = Utilities.makeLabel(title: "ENDANGERED", weight: .medium, size: 19, alignment: .left)
         label.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.7993899829)
-        label.textAlignment = .left
+        return label
+    }()
+    
+    private lazy var vulnerableSpeciesLabel: UILabel = {
+        let label = Utilities.makeLabel(title: "VULNERABLE", weight: .medium, size: 19, alignment: .left)
+        label.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.7993899829)
         return label
     }()
     

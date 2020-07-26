@@ -14,8 +14,7 @@ final class SpeciesDetailViewController: UIViewController {
     //MARK: -- UI Element Initialization
     
     private lazy var verticalScrollView: UIScrollView = {
-        let sv = UIScrollView()
-        return sv
+        return UIScrollView()
     }()
     
     private lazy var horizontalScrollView: UIScrollView = {
@@ -62,15 +61,6 @@ final class SpeciesDetailViewController: UIViewController {
         return bar
     }()
     
-    
-    //    private lazy var donateButton: DonateButton = {
-    //        let btn = DonateButton()
-    //        var frame = btn.frame
-    //        frame.size.width = 80
-    //        frame.size.height = 80
-    //        btn.frame = frame
-    //        return btn
-    //    }()
     
     private lazy var speciesOverviewView: SpeciesOverviewView = {
         let sov = SpeciesOverviewView()
@@ -180,10 +170,13 @@ final class SpeciesDetailViewController: UIViewController {
             
         case .overviewButton:
             horizontalScrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+            
         case .threatsButton:
             horizontalScrollView.setContentOffset(CGPoint(x: speciesThreatsView.frame.minX - 20, y: 0), animated: true)
+            
         case .habitatButton:
             horizontalScrollView.setContentOffset(CGPoint(x: speciesHabitatView.frame.minX - 20, y: 0), animated: true)
+            
         case .galleryButton:
             horizontalScrollView.setContentOffset(CGPoint(x: speciesGalleryView.frame.minX - 20, y: 0), animated: true)
         }
@@ -248,29 +241,16 @@ extension SpeciesDetailViewController: UIScrollViewDelegate {
 //MARK: -- Custom Delegate Implementation
 extension SpeciesDetailViewController: DonateButtonDelegate {
     func donateButtonPressed() {
-        presentWebBrowser(link: URL(string: currentSpecies.donationLink)!)
+        guard let donationURL = URL(string: currentSpecies.donationLink) else { return }
+        presentWebBrowser(link: donationURL)
     }
 }
 
 extension SpeciesDetailViewController: BottomBarDelegate {
-    func overviewButtonPressed(_ sender: UIButton) {
-        bottomToolBar.highlightButton(button: .overviewButton)
-        transitionToView(buttonPressed: .overviewButton)
-    }
-    
-    func threatsButtonPressed(_ sender: UIButton) {
-        bottomToolBar.highlightButton(button: .threatsButton)
-        transitionToView(buttonPressed: .threatsButton)
-    }
-    
-    func habitatButtonPressed(_ sender: UIButton) {
-        bottomToolBar.highlightButton(button: .habitatButton)
-        transitionToView(buttonPressed: .habitatButton)
-    }
-    
-    func galleryButtonPressed(_ sender: UIButton) {
-        bottomToolBar.highlightButton(button: .galleryButton)
-        transitionToView(buttonPressed: .galleryButton)
+    func buttonPressed(_ sender: UIButton) {
+        guard let buttonOption = ButtonOption(rawValue: sender.tag) else { return }
+        bottomToolBar.highlightButton(button: buttonOption)
+        transitionToView(buttonPressed: buttonOption)
     }
 }
 

@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum PopulationTrend: String {
+enum PopulationTrend: String {
     case recovering = "Recovering"
     case decreasing = "Decreasing"
 }

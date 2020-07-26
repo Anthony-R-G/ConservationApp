@@ -16,7 +16,10 @@ final class SpeciesHabitatView: DetailInfoPanelView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configureSpecificViewInfo(titleLabelStr: "HABITAT", infoBarTitleLabelAStr: "Temperature", infoBarTitleLabelBStr: "Humidity", infoBarTitleLabelCStr: "Latitude")
+        configureSpecificViewInfo(titleLabelStr: "HABITAT",
+                                   infoBarTitleLabelAStr: "Temperature",
+                                   infoBarTitleLabelBStr: "Humidity",
+                                   infoBarTitleLabelCStr: "Latitude")
     }
     
     required init?(coder: NSCoder) {

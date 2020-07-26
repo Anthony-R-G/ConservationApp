@@ -13,11 +13,7 @@ class DetailInfoPanelView: UIView {
     //MARK: -- UI Element Initialization
     
     public lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "TITLE"
-        label.font = UIFont(name: "Roboto-Bold", size: 28)
-        label.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        return label
+        return Utilities.makeLabel(title: "TITLE", weight: .bold, size: 28, alignment: .left)
     }()
     
     public lazy var bodyTextView: UITextView = {
@@ -37,54 +33,33 @@ class DetailInfoPanelView: UIView {
     }()
     
     private lazy var infoBarTitleLabelA: UILabel = {
-        let label = UILabel()
-        label.text = "Title Label A"
+        let label = Utilities.makeLabel(title: "Title Label A", weight: .light, size: 15, alignment: .center)
         label.textColor = #colorLiteral(red: 0.8390320539, green: 0.8525128961, blue: 0.8612788916, alpha: 0.7811162243)
-        label.textAlignment = .center
-        label.font = UIFont(name: "Roboto-Light", size: 15)
         return label
     }()
     
     public lazy var infoBarDataLabelA: UILabel = {
-        let label = UILabel()
-        label.textColor = .white
-        label.textAlignment = .center
-        label.font = UIFont(name: "Roboto-Medium", size: 18)
-        return label
+        return Utilities.makeLabel(title: nil, weight: .medium, size: 18, alignment: .center)
     }()
     
     private lazy var infoBarTitleLabelB: UILabel = {
-        let label = UILabel()
-        label.text = "Title Label B"
+        let label = Utilities.makeLabel(title: "Title Label B", weight: .light, size: 15, alignment: .center)
         label.textColor = #colorLiteral(red: 0.8390320539, green: 0.8525128961, blue: 0.8612788916, alpha: 0.7811162243)
-        label.textAlignment = .center
-        label.font = UIFont(name: "Roboto-Light", size: 15)
         return label
     }()
     
     public lazy var infoBarDataLabelB: UILabel = {
-        let label = UILabel()
-        label.textColor = .white
-        label.textAlignment = .center
-        label.font = UIFont(name: "Roboto-Medium", size: 18)
-        return label
+        return Utilities.makeLabel(title: nil, weight: .medium, size: 18, alignment: .center)
     }()
     
     private lazy var infoBarTitleLabelC: UILabel = {
-        let label = UILabel()
-        label.text = " "
+        let label = Utilities.makeLabel(title: "Title Label C", weight: .light, size: 15, alignment: .center)
         label.textColor = #colorLiteral(red: 0.8390320539, green: 0.8525128961, blue: 0.8612788916, alpha: 0.7811162243)
-        label.textAlignment = .center
-        label.font = UIFont(name: "Roboto-Light", size: 15)
         return label
     }()
     
     public lazy var infoBarDataLabelC: UILabel = {
-        let label = UILabel()
-        label.textColor = .white
-        label.textAlignment = .center
-        label.font = UIFont(name: "Roboto-Medium", size: 18)
-        return label
+        return Utilities.makeLabel(title: nil, weight: .medium, size: 18, alignment: .center)
     }()
     
     private lazy var readMoreButton: UIButton = {
@@ -100,11 +75,15 @@ class DetailInfoPanelView: UIView {
     
     //MARK: -- Methods
     
-    public func configureSpecificViewInfo (titleLabelStr: String, infoBarTitleLabelAStr: String, infoBarTitleLabelBStr: String, infoBarTitleLabelCStr: String) {
-        titleLabel.text = titleLabelStr.uppercased()
-        infoBarTitleLabelA.text = infoBarTitleLabelAStr.capitalized
-        infoBarTitleLabelB.text = infoBarTitleLabelBStr.capitalized
-        infoBarTitleLabelC.text = infoBarTitleLabelCStr.capitalized
+    public func configureSpecificViewInfo(
+        titleLabelStr: String,
+        infoBarTitleLabelAStr: String,
+        infoBarTitleLabelBStr: String,
+        infoBarTitleLabelCStr: String) {
+            titleLabel.text = titleLabelStr.uppercased()
+            infoBarTitleLabelA.text = infoBarTitleLabelAStr.capitalized
+            infoBarTitleLabelB.text = infoBarTitleLabelBStr.capitalized
+            infoBarTitleLabelC.text = infoBarTitleLabelCStr.capitalized
     }
     
     public func setViewElementsFromSpeciesData(species: Species) {}

@@ -9,6 +9,7 @@
 import UIKit
 
 class Utilities {
+    
     static func makeCollectionView(superView: UIView) -> UICollectionView {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -33,5 +34,15 @@ class Utilities {
         return label
     }
     
+    static func makeBottomBarButton(title: String) -> UIButton {
+        let button = UIButton(type: .custom)
+        button.setTitle(title, for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(#colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1), for: .selected)
+        button.showsTouchWhenHighlighted = true
+        button.titleLabel?.font = UIFont(name: "Roboto-Medium", size: 15)
+        button.sizeToFit()
+        return button
+    }
 }
 
