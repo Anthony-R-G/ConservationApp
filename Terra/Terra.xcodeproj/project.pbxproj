@@ -42,6 +42,8 @@
 		97591FE324CCDC48002EAC96 /* FontWeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FE224CCDC48002EAC96 /* FontWeight.swift */; };
 		9767D04C24C3EA9200384FCD /* SubheaderInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9767D04B24C3EA9200384FCD /* SubheaderInfoView.swift */; };
 		977D876C24CD3A6100AE5E51 /* Taxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977D876B24CD3A6100AE5E51 /* Taxonomy.swift */; };
+		977D876E24CD698500AE5E51 /* Taxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977D876B24CD3A6100AE5E51 /* Taxonomy.swift */; };
+		977D877024CD6A1200AE5E51 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977D876F24CD6A1200AE5E51 /* Group.swift */; };
 		978E5CF223FB5CBC007BCD25 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 978E5CF123FB5CBC007BCD25 /* GoogleService-Info.plist */; };
 		97928F7924CD11BF00AF90C5 /* FirestoreError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97928F7824CD11BF00AF90C5 /* FirestoreError.swift */; };
 		97928F7B24CD347200AF90C5 /* FirebaseConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97928F7A24CD347200AF90C5 /* FirebaseConvertible.swift */; };
@@ -104,6 +106,7 @@
 		97591FE224CCDC48002EAC96 /* FontWeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontWeight.swift; sourceTree = "<group>"; };
 		9767D04B24C3EA9200384FCD /* SubheaderInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubheaderInfoView.swift; sourceTree = "<group>"; };
 		977D876B24CD3A6100AE5E51 /* Taxonomy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Taxonomy.swift; sourceTree = "<group>"; };
+		977D876F24CD6A1200AE5E51 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		978E5CF123FB5CBC007BCD25 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		97928F7824CD11BF00AF90C5 /* FirestoreError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreError.swift; sourceTree = "<group>"; };
 		97928F7A24CD347200AF90C5 /* FirebaseConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseConvertible.swift; sourceTree = "<group>"; };
@@ -225,17 +228,26 @@
 			path = "Detail View Panels";
 			sourceTree = "<group>";
 		};
-		979492EC23F46ACE00B636A4 /* Models */ = {
+		977D876D24CD697700AE5E51 /* Species Models */ = {
 			isa = PBXGroup;
 			children = (
-				971FD0CE24C61ABE003ED029 /* Extensions */,
-				9711D8F824BD19B900C2E6F1 /* Firebase */,
 				9711D8F624BD199700C2E6F1 /* Species.swift */,
 				977D876B24CD3A6100AE5E51 /* Taxonomy.swift */,
 				9711D91E24BD63B000C2E6F1 /* HabitatSystem.swift */,
 				97E9450324BE10C800550824 /* ConservationStatus.swift */,
-				97D9E24A24C6470600524000 /* Diet.swift */,
 				974CC98324C64F0E00E4EF85 /* PopulationTrend.swift */,
+				97D9E24A24C6470600524000 /* Diet.swift */,
+				977D876F24CD6A1200AE5E51 /* Group.swift */,
+			);
+			path = "Species Models";
+			sourceTree = "<group>";
+		};
+		979492EC23F46ACE00B636A4 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				977D876D24CD697700AE5E51 /* Species Models */,
+				971FD0CE24C61ABE003ED029 /* Extensions */,
+				9711D8F824BD19B900C2E6F1 /* Firebase */,
 				97591FDB24CC4524002EAC96 /* ButtonOption.swift */,
 				97591FE224CCDC48002EAC96 /* FontWeight.swift */,
 				97F7B42724C56886007AEE97 /* DonateButtonDelegate.swift */,
@@ -516,6 +528,7 @@
 				97F0CCA924C56F5C00C581D3 /* UIScrollViewExtensions.swift in Sources */,
 				97DD101D24C69EB000A21DF4 /* BottomBarDelegate.swift in Sources */,
 				97591FD824CBA51F002EAC96 /* BottomBarView.swift in Sources */,
+				977D877024CD6A1200AE5E51 /* Group.swift in Sources */,
 				97591FE324CCDC48002EAC96 /* FontWeight.swift in Sources */,
 				97928F7924CD11BF00AF90C5 /* FirestoreError.swift in Sources */,
 				971FD0D024C61AD3003ED029 /* CGFloatExtensions.swift in Sources */,
@@ -533,6 +546,7 @@
 				972A615424C94C7000A59AB6 /* PopulationTrend.swift in Sources */,
 				972A615124C94C6A00A59AB6 /* HabitatSystem.swift in Sources */,
 				972A615224C94C6C00A59AB6 /* ConservationStatus.swift in Sources */,
+				977D876E24CD698500AE5E51 /* Taxonomy.swift in Sources */,
 				97591FDD24CCC352002EAC96 /* Utilities.swift in Sources */,
 				979C192B23DE43EF00651B2B /* TerraTests.swift in Sources */,
 				97591FE024CCD2E9002EAC96 /* Constants.swift in Sources */,

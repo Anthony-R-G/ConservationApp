@@ -12,8 +12,10 @@ public struct Species: FirebaseConvertible {
     let commonName: String
     let scientificName: String
     let taxonomy: Taxonomy
+    let group: Group
     let assessmentDate: String
-    let habitat: String
+    
+    let habitatSummary: String
     let habitatSystem: HabitatSystem
     let threats: String
     let populationSummary: String
