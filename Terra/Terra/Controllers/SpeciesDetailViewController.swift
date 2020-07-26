@@ -56,6 +56,10 @@ final class SpeciesDetailViewController: UIViewController {
         return siv
     }()
     
+    private lazy var donateButton: DonateButton = {
+        return DonateButton()
+    }()
+    
     private lazy var bottomToolBar: BottomBarView = {
         return BottomBarView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 35))
     }()
@@ -121,7 +125,7 @@ final class SpeciesDetailViewController: UIViewController {
         verticalScrollView.delegate = self
         horizontalScrollView.delegate = self
         bottomToolBar.actionDelegate = self
-        //        donateButton.delegate = self
+        donateButton.delegate = self
     }
     
     private func presentWebBrowser(link: URL){
@@ -256,7 +260,7 @@ extension SpeciesDetailViewController {
         view.addSubview(verticalScrollView)
         verticalScrollView.translatesAutoresizingMaskIntoConstraints = false
         
-        let verticalScrollViewUIElements = [headerNameView, subheaderInfoView, horizontalScrollView, bottomToolBar]
+        let verticalScrollViewUIElements = [headerNameView, subheaderInfoView, horizontalScrollView, donateButton, bottomToolBar]
         verticalScrollViewUIElements.forEach{ verticalScrollView.addSubview($0) }
         verticalScrollViewUIElements.forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
         
@@ -275,7 +279,7 @@ extension SpeciesDetailViewController {
         setSpeciesHabitatViewConstraints()
         setSpeciesGalleryViewConstraints()
         setBottomToolBarConstraints()
-        //        setDonateButtonConstraints()
+        setDonateButtonConstraints()
     }
     
     private func setVerticalScrollViewConstraints() {
@@ -343,15 +347,15 @@ extension SpeciesDetailViewController {
         ])
     }
     
-    //
-    //    private func setDonateButtonConstraints() {
-    //        NSLayoutConstraint.activate([
-    //            donateButton.widthAnchor.constraint(equalToConstant: donateButton.frame.width),
-    //            donateButton.heightAnchor.constraint(equalToConstant: donateButton.frame.height),
-    //            donateButton.centerXAnchor.constraint(equalTo: infoOptionPanelView.centerXAnchor),
-    //            donateButton.bottomAnchor.constraint(equalTo: infoOptionPanelView.topAnchor, constant: 30)
-    //        ])
-    //    }
+    
+    private func setDonateButtonConstraints() {
+        NSLayoutConstraint.activate([
+            donateButton.widthAnchor.constraint(equalTo: speciesOverviewView.widthAnchor),
+            donateButton.heightAnchor.constraint(equalToConstant: 40),
+            donateButton.centerXAnchor.constraint(equalTo: bottomToolBar.centerXAnchor),
+            donateButton.bottomAnchor.constraint(equalTo: bottomToolBar.topAnchor, constant: 30)
+        ])
+    }
     
     private func setSpeciesOverviewViewConstraints() {
         NSLayoutConstraint.activate([
