@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum PopulationTrend: String {
+enum PopulationTrend: String, FirebaseConvertible {
     case recovering = "Recovering"
     case decreasing = "Decreasing"
 }

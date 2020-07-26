@@ -57,29 +57,25 @@ final class SpeciesDetailViewController: UIViewController {
     }()
     
     private lazy var bottomToolBar: BottomBarView = {
-        let bar = BottomBarView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 35))
-        return bar
+        return BottomBarView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 35))
     }()
     
-    
     private lazy var speciesOverviewView: SpeciesOverviewView = {
-        let sov = SpeciesOverviewView()
-        return sov
+        return SpeciesOverviewView()
     }()
     
     private lazy var speciesThreatsView: SpeciesThreatsView = {
-        let stv = SpeciesThreatsView()
-        return stv
+        return SpeciesThreatsView()
     }()
     
     private lazy var speciesHabitatView: SpeciesHabitatView = {
-        let shv = SpeciesHabitatView()
-        return shv
+        return SpeciesHabitatView()
+        
     }()
     
     private lazy var speciesGalleryView: SpeciesGalleryView = {
-        let sgv = SpeciesGalleryView()
-        return sgv
+        return SpeciesGalleryView()
+        
     }()
     
     private lazy var headerNameViewHeightConstraint: NSLayoutConstraint = {

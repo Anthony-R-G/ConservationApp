@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum ConservationStatus: String {
+enum ConservationStatus: String, FirebaseConvertible {
     case critical = "Critical"
     case endangered = "Endangered"
     case vulnerable = "Vulnerable"

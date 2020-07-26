@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum Diet: String {
+enum Diet: String, FirebaseConvertible {
     case carnivore = "Carnivore"
     case herbivore = "Herbivore"
     case omnivore = "Omnivore"
