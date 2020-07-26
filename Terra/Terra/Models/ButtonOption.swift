@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum ButtonOption: Int {
+enum ButtonOption: Int {
     case overviewButton = 0
     case threatsButton = 1
     case habitatButton = 2

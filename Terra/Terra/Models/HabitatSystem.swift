@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum HabitatSystem: String {
+enum HabitatSystem: String {
     case marine = "marine"
     case freshwater = "freshwater"
     case terrestrial = "terrestrial"

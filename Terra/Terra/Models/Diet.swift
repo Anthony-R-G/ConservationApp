@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum Diet: String {
+enum Diet: String {
     case carnivore = "Carnivore"
     case herbivore = "Herbivore"
     case omnivore = "Omnivore"
