@@ -11,7 +11,7 @@ import UIKit
 final class SpeciesHabitatView: DetailInfoPanelView {
     
     public override func setViewElementsFromSpeciesData(species: Species) {
-        self.bodyTextView.text = species.habitatSummary
+        self.bodyTextView.text = species.habitat.habitatSummary
     }
     
     override init(frame: CGRect) {

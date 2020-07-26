@@ -14,14 +14,12 @@ public struct Species: FirebaseConvertible {
     let taxonomy: Taxonomy
     let group: Group
     let assessmentDate: String
-    
-    let habitatSummary: String
-    let habitatSystem: HabitatSystem
+    let habitat: Habitat
     let threats: String
     let populationSummary: String
     let populationTrend: PopulationTrend
     let populationNumbers: String
-    var conservationStatus: ConservationStatus
+    let conservationStatus: ConservationStatus
     let donationLink: String
     let weight: String
     let height: String

@@ -44,6 +44,7 @@
 		977D876C24CD3A6100AE5E51 /* Taxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977D876B24CD3A6100AE5E51 /* Taxonomy.swift */; };
 		977D876E24CD698500AE5E51 /* Taxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977D876B24CD3A6100AE5E51 /* Taxonomy.swift */; };
 		977D877024CD6A1200AE5E51 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977D876F24CD6A1200AE5E51 /* Group.swift */; };
+		977D877224CD7BFF00AE5E51 /* Habitat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977D877124CD7BFF00AE5E51 /* Habitat.swift */; };
 		978E5CF223FB5CBC007BCD25 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 978E5CF123FB5CBC007BCD25 /* GoogleService-Info.plist */; };
 		97928F7924CD11BF00AF90C5 /* FirestoreError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97928F7824CD11BF00AF90C5 /* FirestoreError.swift */; };
 		97928F7B24CD347200AF90C5 /* FirebaseConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97928F7A24CD347200AF90C5 /* FirebaseConvertible.swift */; };
@@ -107,6 +108,7 @@
 		9767D04B24C3EA9200384FCD /* SubheaderInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubheaderInfoView.swift; sourceTree = "<group>"; };
 		977D876B24CD3A6100AE5E51 /* Taxonomy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Taxonomy.swift; sourceTree = "<group>"; };
 		977D876F24CD6A1200AE5E51 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
+		977D877124CD7BFF00AE5E51 /* Habitat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Habitat.swift; sourceTree = "<group>"; };
 		978E5CF123FB5CBC007BCD25 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		97928F7824CD11BF00AF90C5 /* FirestoreError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreError.swift; sourceTree = "<group>"; };
 		97928F7A24CD347200AF90C5 /* FirebaseConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseConvertible.swift; sourceTree = "<group>"; };
@@ -233,6 +235,7 @@
 			children = (
 				9711D8F624BD199700C2E6F1 /* Species.swift */,
 				977D876B24CD3A6100AE5E51 /* Taxonomy.swift */,
+				977D877124CD7BFF00AE5E51 /* Habitat.swift */,
 				9711D91E24BD63B000C2E6F1 /* HabitatSystem.swift */,
 				97E9450324BE10C800550824 /* ConservationStatus.swift */,
 				974CC98324C64F0E00E4EF85 /* PopulationTrend.swift */,
@@ -499,6 +502,7 @@
 				972BBF7924C0204600B6F7C0 /* UIViewExtensions.swift in Sources */,
 				9711D8FC24BD42C800C2E6F1 /* FirestoresService.swift in Sources */,
 				971FD0CD24C6112E003ED029 /* DonateButton.swift in Sources */,
+				977D877224CD7BFF00AE5E51 /* Habitat.swift in Sources */,
 				972BBF7724C01FA900B6F7C0 /* PSORoundedVisualEffectView.swift in Sources */,
 				977D876C24CD3A6100AE5E51 /* Taxonomy.swift in Sources */,
 				97591FDA24CC2E9F002EAC96 /* SpeciesGalleryView.swift in Sources */,
