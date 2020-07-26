@@ -9,8 +9,5 @@
 import UIKit
 
 protocol BottomBarDelegate: AnyObject {
-    func overviewButtonPressed (_ sender: UIButton)
-    func threatsButtonPressed  (_ sender: UIButton)
-    func habitatButtonPressed  (_ sender: UIButton)
-    func galleryButtonPressed  (_ sender: UIButton)
+    func buttonPressed(_ sender: UIButton)
 }

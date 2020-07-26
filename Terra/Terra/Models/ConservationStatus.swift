@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum ConservationStatus: String {
+enum ConservationStatus: String {
     case critical = "Critical"
     case endangered = "Endangered"
     case vulnerable = "Vulnerable"

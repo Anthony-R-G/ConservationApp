@@ -13,12 +13,7 @@ class SpeciesCollectionViewCell: UICollectionViewCell {
     //MARK: -- UI Element Initialization
     
     private lazy var speciesNameLabel: UILabel = {
-        let label = UILabel()
-        label.adjustsFontSizeToFitWidth = true
-        label.textColor = .white
-        label.font = UIFont(name: "Roboto-Bold", size: 23)
-        label.textAlignment = .left
-        return label
+        return Utilities.makeLabel(title: nil, weight: .bold, size: 23, alignment: .left)
     }()
     
     private lazy var backgroundImage: UIImageView = {

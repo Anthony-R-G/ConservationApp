@@ -15,7 +15,10 @@ final class SpeciesGalleryView: DetailInfoPanelView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configureSpecificViewInfo(titleLabelStr: "GALLERY", infoBarTitleLabelAStr: "", infoBarTitleLabelBStr: "", infoBarTitleLabelCStr: "")
+        configureSpecificViewInfo(titleLabelStr: "GALLERY",
+                                   infoBarTitleLabelAStr: "",
+                                   infoBarTitleLabelBStr: "",
+                                   infoBarTitleLabelCStr: "")
     }
     
     required init?(coder: NSCoder) {
