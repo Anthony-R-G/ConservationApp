@@ -57,7 +57,8 @@ final class SpeciesDetailViewController: UIViewController {
     }()
     
     private lazy var donateButton: DonateButton = {
-        return DonateButton()
+        let db = DonateButton(gradientColors: [#colorLiteral(red: 1, green: 0.2914688587, blue: 0.3886995912, alpha: 0.9019156678), #colorLiteral(red: 0.5421239734, green: 0.1666001081, blue: 0.2197911441, alpha: 0.8952536387)], startPoint: CGPoint(x: 0, y: 0), endPoint: CGPoint(x: 1, y: 1))
+        return db
     }()
     
     private lazy var bottomToolBar: BottomBarView = {
@@ -116,7 +117,7 @@ final class SpeciesDetailViewController: UIViewController {
     }
     
     private func setBackground() {
-        view.backgroundColor = .gray
+        view.backgroundColor = .white
         let imageURL = URL(string: currentSpecies!.detailImage)
         backgroundImageView.kf.setImage(with: imageURL)
     }
@@ -198,6 +199,7 @@ final class SpeciesDetailViewController: UIViewController {
         addSubviews()
         setConstraints()
         setDelegates()
+        
         
         setViewElementsFromSpeciesData()
         setBackground()
@@ -351,9 +353,9 @@ extension SpeciesDetailViewController {
     private func setDonateButtonConstraints() {
         NSLayoutConstraint.activate([
             donateButton.widthAnchor.constraint(equalTo: speciesOverviewView.widthAnchor),
-            donateButton.heightAnchor.constraint(equalToConstant: 40),
+            donateButton.heightAnchor.constraint(equalToConstant: 50),
             donateButton.centerXAnchor.constraint(equalTo: bottomToolBar.centerXAnchor),
-            donateButton.bottomAnchor.constraint(equalTo: bottomToolBar.topAnchor, constant: 30)
+            donateButton.bottomAnchor.constraint(equalTo: bottomToolBar.topAnchor, constant: -30)
         ])
     }
     

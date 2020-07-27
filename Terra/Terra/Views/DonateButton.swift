@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DonateButton: UIButton {
+class DonateButton: UIRoundedButtonWithGradientAndShadow {
     
     //MARK: -- Properties
     weak var delegate: DonateButtonDelegate?
@@ -19,34 +19,17 @@ class DonateButton: UIButton {
         delegate?.donateButtonPressed()
     }
     
-    private func setBehavior() {
-        self.addTarget(self, action: #selector(buttonIsPressed), for: .touchUpInside)
-        self.isUserInteractionEnabled = true
-    }
     
-    private func setAppearance() {
-        setTitle("DONATE", for: .normal)
-        setTitleColor(.white, for: .normal)
-        titleLabel?.font = UIFont(name: "Roboto-Bold", size: 20)
-        showsTouchWhenHighlighted = true
-        clipsToBounds = true
-        layer.borderColor = UIColor.lightGray.cgColor
-        layer.borderWidth = 0.0
-    }
-    
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        //        addSubviews()
-        //        setConstraints()
-        setBehavior()
-    }
-    
-    override func draw(_ rect: CGRect) {
-        setAppearance()
-    }
-    
-    required init?(coder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    required init(gradientColors: [UIColor], startPoint: CGPoint = CGPoint(x: 0, y: 0.5), endPoint: CGPoint = CGPoint(x: 1, y: 0.5)) {
+        super.init(gradientColors: gradientColors, startPoint: startPoint, endPoint: endPoint)
+        setTitle("DONATE", for: .normal)
+        titleLabel?.font = UIFont(name: "Roboto-Medium", size: 18)
+        addTarget(self, action: #selector(buttonIsPressed), for: .touchUpInside)
+        showsTouchWhenHighlighted = true
+    }
 }
+
