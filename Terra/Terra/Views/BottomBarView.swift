@@ -2,24 +2,19 @@
 //  BottomBarView.swift
 //  Terra
 //
-//  Created by Anthony Gonzalez on 7/24/20.
+//  Created by Anthony Gonzalez on 7/26/20.
 //  Copyright © 2020 Antnee. All rights reserved.
 //
 
 import UIKit
 
-class BottomBarView: UIToolbar {
+class BottomBarView: UIView {
     //MARK: -- Lazy UI Element Initialization
-    
     private lazy var overviewButton: UIButton = {
         let btn = Utilities.makeBottomBarButton(title: "OVERVIEW")
         btn.tag = 0
         btn.addTarget(self, action: #selector(bottomBarButtonPressed(sender:)), for: .touchUpInside)
         return btn
-    }()
-    
-    private lazy var overviewBarButtonItem: UIBarButtonItem = {
-        return UIBarButtonItem(customView: overviewButton)
     }()
     
     private lazy var threatsButton: UIButton = {
@@ -29,19 +24,11 @@ class BottomBarView: UIToolbar {
         return btn
     }()
     
-    private lazy var threatsBarButtonItem: UIBarButtonItem = {
-        return UIBarButtonItem(customView: threatsButton)
-    }()
-    
     private lazy var habitatButton: UIButton = {
         let btn = Utilities.makeBottomBarButton(title: "HABITAT")
         btn.tag = 2
         btn.addTarget(self, action: #selector(bottomBarButtonPressed(sender:)), for: .touchUpInside)
         return btn
-    }()
-    
-    private lazy var habitatBarButtonItem: UIBarButtonItem = {
-        return UIBarButtonItem(customView: habitatButton)
     }()
     
     private lazy var galleryButton: UIButton = {
@@ -51,23 +38,43 @@ class BottomBarView: UIToolbar {
         return btn
     }()
     
-    private lazy var galleryBarButtonItem: UIBarButtonItem = {
-        return UIBarButtonItem(customView: galleryButton)
+    private lazy var buttonStackView: UIStackView = {
+        let sv = UIStackView(arrangedSubviews: [overviewButton, threatsButton, habitatButton, galleryButton])
+        sv.axis = .horizontal
+        sv.spacing = 3
+        sv.alignment = .center
+        sv.distribution = .equalSpacing
+        return sv
     }()
     
-    private lazy var spacer: UIBarButtonItem = {
-        let fs = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        return fs
+    private lazy var highlightedIndicator: UIView = {
+        let screenWidth = UIScreen.main.bounds.width
+        let view = UIView(frame: CGRect(x: .zero, y: .zero, width: screenWidth / 4.5, height: 2))
+        view.backgroundColor = UIColor.white
+        return view
+    }()
+    
+    private lazy var highlightedIndicatorLeadingAnchorConstraint: NSLayoutConstraint = {
+        highlightedIndicator.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10)
     }()
     
     //MARK: -- Properties
     
     weak var actionDelegate: BottomBarDelegate?
     
-    
     //MARK: -- Methods
     private func setAppearance() {
-        barStyle = .black
+        addBlurToView(cornerRadius: 0)
+    }
+    
+    public func updateHighlightIndicator(scrollOffset: CGFloat) {
+        let highlightOffset = scrollOffset/4.01 + 12
+        let newHighlightLeadingConstant = min(UIScreen.main.bounds.width - 100, max(highlightOffset, 10))
+        highlightedIndicatorLeadingAnchorConstraint.constant = newHighlightLeadingConstant
+        
+        UIView.animate(withDuration: 0.1, delay: 0, options: .curveEaseInOut, animations: {
+            self.layoutIfNeeded()
+        }, completion: nil)
     }
     
     public func highlightButton(button: ButtonOption) {
@@ -97,11 +104,43 @@ class BottomBarView: UIToolbar {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setAppearance()
-        
-        items = [overviewBarButtonItem, spacer, threatsBarButtonItem, spacer, habitatBarButtonItem, spacer, galleryBarButtonItem]
+        addSubviews()
+        setConstraints()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension BottomBarView {
+    
+    private func addSubviews() {
+        let UIElements = [buttonStackView, highlightedIndicator]
+        UIElements.forEach { self.addSubview($0) }
+        UIElements.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
+    }
+    
+    private func setConstraints() {
+        setButtonStackViewConstraints()
+        setHighlightedIndicatorConstraints()
+        
+    }
+    
+    private func setButtonStackViewConstraints() {
+        NSLayoutConstraint.activate([
+            buttonStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            buttonStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            buttonStackView.topAnchor.constraint(equalTo: topAnchor, constant: 0)
+        ])
+    }
+    
+    private func setHighlightedIndicatorConstraints() {
+        NSLayoutConstraint.activate([
+            highlightedIndicator.topAnchor.constraint(equalTo: buttonStackView.bottomAnchor, constant: 0),
+            highlightedIndicator.widthAnchor.constraint(equalToConstant: highlightedIndicator.frame.size.width),
+            highlightedIndicator.heightAnchor.constraint(equalToConstant: highlightedIndicator.frame.size.height),
+            highlightedIndicatorLeadingAnchorConstraint
+        ])
     }
 }

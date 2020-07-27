@@ -62,7 +62,7 @@ final class SpeciesDetailViewController: UIViewController {
     }()
     
     private lazy var bottomToolBar: BottomBarView = {
-        return BottomBarView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 35))
+        return BottomBarView()
     }()
     
     private lazy var speciesOverviewView: SpeciesOverviewView = {
@@ -98,8 +98,6 @@ final class SpeciesDetailViewController: UIViewController {
     private lazy var horizontalScrollViewTopAnchorConstraint: NSLayoutConstraint = {
         return horizontalScrollView.topAnchor.constraint(equalTo: headerNameView.bottomAnchor, constant: 300)
     }()
-    
-    
     
     //MARK: -- Properties
     
@@ -183,6 +181,7 @@ final class SpeciesDetailViewController: UIViewController {
         }
     }
     
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         setVerticalScrollViewConstraints()
@@ -199,7 +198,6 @@ final class SpeciesDetailViewController: UIViewController {
         addSubviews()
         setConstraints()
         setDelegates()
-        
         
         setViewElementsFromSpeciesData()
         setBackground()
@@ -222,6 +220,11 @@ extension SpeciesDetailViewController: UIScrollViewDelegate {
             updateHorizontalScrollTopAnchor(scrollOffset: offsetY)
             
         case horizontalScrollView:
+            let offsetX = scrollView.contentOffset.x
+            
+            bottomToolBar.updateHighlightIndicator(scrollOffset: offsetX)
+            
+            
             if scrollView.bounds.contains(speciesOverviewView.frame) {
                 bottomToolBar.highlightButton(button: .overviewButton)
                 
@@ -233,6 +236,7 @@ extension SpeciesDetailViewController: UIScrollViewDelegate {
                 
             } else if scrollView.bounds.contains(speciesGalleryView.frame) {
                 bottomToolBar.highlightButton(button: .galleryButton)
+                
             }
             
         default:()
@@ -255,6 +259,7 @@ extension SpeciesDetailViewController: BottomBarDelegate {
         transitionToView(buttonPressed: buttonOption)
     }
 }
+
 
 //MARK: -- Adding Subviews & Constraints
 extension SpeciesDetailViewController {
@@ -342,10 +347,10 @@ extension SpeciesDetailViewController {
     
     private func setBottomToolBarConstraints() {
         NSLayoutConstraint.activate([
-            bottomToolBar.topAnchor.constraint(equalTo: horizontalScrollView.bottomAnchor, constant: 110),
+            bottomToolBar.topAnchor.constraint(equalTo: horizontalScrollView.bottomAnchor, constant: 120),
             bottomToolBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             bottomToolBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            bottomToolBar.heightAnchor.constraint(equalToConstant: 50)
+            bottomToolBar.heightAnchor.constraint(equalToConstant: 80)
         ])
     }
     

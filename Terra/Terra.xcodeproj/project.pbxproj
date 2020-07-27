@@ -32,7 +32,6 @@
 		974CC98424C64F0F00E4EF85 /* PopulationTrend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974CC98324C64F0E00E4EF85 /* PopulationTrend.swift */; };
 		97591FD224CB8BA7002EAC96 /* SpeciesHabitatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FD124CB8BA7002EAC96 /* SpeciesHabitatView.swift */; };
 		97591FD424CB8D46002EAC96 /* DetailInfoPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FD324CB8D46002EAC96 /* DetailInfoPanelView.swift */; };
-		97591FD824CBA51F002EAC96 /* BottomBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FD724CBA51F002EAC96 /* BottomBarView.swift */; };
 		97591FDA24CC2E9F002EAC96 /* SpeciesGalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FD924CC2E9F002EAC96 /* SpeciesGalleryView.swift */; };
 		97591FDC24CC4524002EAC96 /* ButtonOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FDB24CC4524002EAC96 /* ButtonOption.swift */; };
 		97591FDF24CCD14A002EAC96 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FDE24CCD14A002EAC96 /* Constants.swift */; };
@@ -59,6 +58,7 @@
 		97A2BC7324CE559F000D6B2D /* FontWeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FE224CCDC48002EAC96 /* FontWeight.swift */; };
 		97B68CD424BBB0AC005B8AB8 /* HeaderNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B68CD324BBB0AC005B8AB8 /* HeaderNameView.swift */; };
 		97BF745323DF42F90058F2D7 /* SpeciesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BF745223DF42F90058F2D7 /* SpeciesListViewController.swift */; };
+		97D5946424CE7E49001BD566 /* BottomBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D5946324CE7E49001BD566 /* BottomBarView.swift */; };
 		97D9E24B24C6470700524000 /* Diet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D9E24A24C6470600524000 /* Diet.swift */; };
 		97DD101D24C69EB000A21DF4 /* BottomBarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DD101C24C69EB000A21DF4 /* BottomBarDelegate.swift */; };
 		97E61B8024CE54A100E83691 /* Habitat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977D877124CD7BFF00AE5E51 /* Habitat.swift */; };
@@ -104,7 +104,6 @@
 		974CC98324C64F0E00E4EF85 /* PopulationTrend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopulationTrend.swift; sourceTree = "<group>"; };
 		97591FD124CB8BA7002EAC96 /* SpeciesHabitatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesHabitatView.swift; sourceTree = "<group>"; };
 		97591FD324CB8D46002EAC96 /* DetailInfoPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInfoPanelView.swift; sourceTree = "<group>"; };
-		97591FD724CBA51F002EAC96 /* BottomBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBarView.swift; sourceTree = "<group>"; };
 		97591FD924CC2E9F002EAC96 /* SpeciesGalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesGalleryView.swift; sourceTree = "<group>"; };
 		97591FDB24CC4524002EAC96 /* ButtonOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonOption.swift; sourceTree = "<group>"; };
 		97591FDE24CCD14A002EAC96 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -131,6 +130,7 @@
 		979C192C23DE43EF00651B2B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		97B68CD324BBB0AC005B8AB8 /* HeaderNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderNameView.swift; sourceTree = "<group>"; };
 		97BF745223DF42F90058F2D7 /* SpeciesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesListViewController.swift; sourceTree = "<group>"; };
+		97D5946324CE7E49001BD566 /* BottomBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBarView.swift; sourceTree = "<group>"; };
 		97D9E24A24C6470600524000 /* Diet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diet.swift; sourceTree = "<group>"; };
 		97DD101C24C69EB000A21DF4 /* BottomBarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBarDelegate.swift; sourceTree = "<group>"; };
 		97E9450324BE10C800550824 /* ConservationStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConservationStatus.swift; sourceTree = "<group>"; };
@@ -219,7 +219,7 @@
 				97B68CD324BBB0AC005B8AB8 /* HeaderNameView.swift */,
 				9767D04B24C3EA9200384FCD /* SubheaderInfoView.swift */,
 				977D877324CE0D8C00AE5E51 /* DonateButton.swift */,
-				97591FD724CBA51F002EAC96 /* BottomBarView.swift */,
+				97D5946324CE7E49001BD566 /* BottomBarView.swift */,
 				97F7B42524C562A9007AEE97 /* InfoOptionPanelView.swift */,
 				97591FD024CB85C1002EAC96 /* Detail View Panels */,
 			);
@@ -513,6 +513,7 @@
 				972BBF7924C0204600B6F7C0 /* UIViewExtensions.swift in Sources */,
 				9711D8FC24BD42C800C2E6F1 /* FirestoresService.swift in Sources */,
 				977D877224CD7BFF00AE5E51 /* Habitat.swift in Sources */,
+				97D5946424CE7E49001BD566 /* BottomBarView.swift in Sources */,
 				972BBF7724C01FA900B6F7C0 /* PSORoundedVisualEffectView.swift in Sources */,
 				977D877424CE0D8C00AE5E51 /* DonateButton.swift in Sources */,
 				977D876C24CD3A6100AE5E51 /* Taxonomy.swift in Sources */,
@@ -543,7 +544,6 @@
 				97452E4823E1EEE9005636E0 /* GradientView.swift in Sources */,
 				97F0CCA924C56F5C00C581D3 /* UIScrollViewExtensions.swift in Sources */,
 				97DD101D24C69EB000A21DF4 /* BottomBarDelegate.swift in Sources */,
-				97591FD824CBA51F002EAC96 /* BottomBarView.swift in Sources */,
 				977D877024CD6A1200AE5E51 /* Group.swift in Sources */,
 				97591FE324CCDC48002EAC96 /* FontWeight.swift in Sources */,
 				97928F7924CD11BF00AF90C5 /* FirestoreError.swift in Sources */,

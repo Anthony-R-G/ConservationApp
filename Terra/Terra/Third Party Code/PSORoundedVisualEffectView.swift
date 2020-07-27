@@ -9,7 +9,7 @@ class PSORoundedVisualEffectView : UIVisualEffectView{
 
     func updateMaskLayer(){
         let shapeLayer = CAShapeLayer()
-        shapeLayer.path = UIBezierPath(roundedRect: self.bounds, cornerRadius: Constants.cornerRadius).cgPath
+        shapeLayer.path = UIBezierPath(roundedRect: self.bounds, cornerRadius: 0).cgPath
         self.layer.mask = shapeLayer
     }
 }

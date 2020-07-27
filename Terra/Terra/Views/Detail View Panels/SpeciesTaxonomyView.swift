@@ -180,7 +180,7 @@ final class SpeciesTaxonomyView: UIView {
         super.init(frame: frame)
         self.backgroundColor = .clear
         self.layer.cornerRadius = 10
-        self.addBlurToView()
+        self.addBlurToView(cornerRadius: 39)
         addSubviews()
         setConstraints()
     }
