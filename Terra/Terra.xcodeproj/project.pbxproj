@@ -12,7 +12,6 @@
 		9711D8F724BD199700C2E6F1 /* Species.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9711D8F624BD199700C2E6F1 /* Species.swift */; };
 		9711D8FC24BD42C800C2E6F1 /* FirestoresService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9711D8FB24BD42C800C2E6F1 /* FirestoresService.swift */; };
 		9711D91F24BD63B000C2E6F1 /* HabitatSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9711D91E24BD63B000C2E6F1 /* HabitatSystem.swift */; };
-		971FD0CD24C6112E003ED029 /* DonateButtonOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971FD0CC24C6112E003ED029 /* DonateButtonOld.swift */; };
 		971FD0D024C61AD3003ED029 /* CGFloatExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971FD0CF24C61AD3003ED029 /* CGFloatExtensions.swift */; };
 		972897CF24C633F6004AEF5E /* SpeciesOverviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972897CE24C633F6004AEF5E /* SpeciesOverviewView.swift */; };
 		972A615024C94C6800A59AB6 /* Species.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9711D8F624BD199700C2E6F1 /* Species.swift */; };
@@ -36,7 +35,6 @@
 		97591FD824CBA51F002EAC96 /* BottomBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FD724CBA51F002EAC96 /* BottomBarView.swift */; };
 		97591FDA24CC2E9F002EAC96 /* SpeciesGalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FD924CC2E9F002EAC96 /* SpeciesGalleryView.swift */; };
 		97591FDC24CC4524002EAC96 /* ButtonOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FDB24CC4524002EAC96 /* ButtonOption.swift */; };
-		97591FDD24CCC352002EAC96 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97FEAEAB24BE5FCC005BAEFE /* Utilities.swift */; };
 		97591FDF24CCD14A002EAC96 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FDE24CCD14A002EAC96 /* Constants.swift */; };
 		97591FE024CCD2E9002EAC96 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FDE24CCD14A002EAC96 /* Constants.swift */; };
 		97591FE324CCDC48002EAC96 /* FontWeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FE224CCDC48002EAC96 /* FontWeight.swift */; };
@@ -46,6 +44,9 @@
 		977D877024CD6A1200AE5E51 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977D876F24CD6A1200AE5E51 /* Group.swift */; };
 		977D877224CD7BFF00AE5E51 /* Habitat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977D877124CD7BFF00AE5E51 /* Habitat.swift */; };
 		977D877424CE0D8C00AE5E51 /* DonateButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977D877324CE0D8C00AE5E51 /* DonateButton.swift */; };
+		977D877624CE1F3800AE5E51 /* UIRoundedButtonWithGradientAndShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977D877524CE1F3700AE5E51 /* UIRoundedButtonWithGradientAndShadow.swift */; };
+		977D877824CE504C00AE5E51 /* modelTestData.json in Resources */ = {isa = PBXBuildFile; fileRef = 977D877724CE504C00AE5E51 /* modelTestData.json */; };
+		977D877924CE540800AE5E51 /* FirebaseConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97928F7A24CD347200AF90C5 /* FirebaseConvertible.swift */; };
 		978E5CF223FB5CBC007BCD25 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 978E5CF123FB5CBC007BCD25 /* GoogleService-Info.plist */; };
 		97928F7924CD11BF00AF90C5 /* FirestoreError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97928F7824CD11BF00AF90C5 /* FirestoreError.swift */; };
 		97928F7B24CD347200AF90C5 /* FirebaseConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97928F7A24CD347200AF90C5 /* FirebaseConvertible.swift */; };
@@ -54,10 +55,14 @@
 		979C191D23DE43EF00651B2B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 979C191C23DE43EF00651B2B /* Assets.xcassets */; };
 		979C192023DE43EF00651B2B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 979C191E23DE43EF00651B2B /* LaunchScreen.storyboard */; };
 		979C192B23DE43EF00651B2B /* TerraTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979C192A23DE43EF00651B2B /* TerraTests.swift */; };
+		97A2BC7224CE5578000D6B2D /* FirestoreError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97928F7824CD11BF00AF90C5 /* FirestoreError.swift */; };
+		97A2BC7324CE559F000D6B2D /* FontWeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FE224CCDC48002EAC96 /* FontWeight.swift */; };
 		97B68CD424BBB0AC005B8AB8 /* HeaderNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B68CD324BBB0AC005B8AB8 /* HeaderNameView.swift */; };
 		97BF745323DF42F90058F2D7 /* SpeciesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BF745223DF42F90058F2D7 /* SpeciesListViewController.swift */; };
 		97D9E24B24C6470700524000 /* Diet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D9E24A24C6470600524000 /* Diet.swift */; };
 		97DD101D24C69EB000A21DF4 /* BottomBarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DD101C24C69EB000A21DF4 /* BottomBarDelegate.swift */; };
+		97E61B8024CE54A100E83691 /* Habitat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977D877124CD7BFF00AE5E51 /* Habitat.swift */; };
+		97E61B8124CE54A800E83691 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977D876F24CD6A1200AE5E51 /* Group.swift */; };
 		97E9450424BE10C800550824 /* ConservationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E9450324BE10C800550824 /* ConservationStatus.swift */; };
 		97F0CCA924C56F5C00C581D3 /* UIScrollViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F0CCA824C56F5C00C581D3 /* UIScrollViewExtensions.swift */; };
 		97F7B42624C562A9007AEE97 /* InfoOptionPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F7B42524C562A9007AEE97 /* InfoOptionPanelView.swift */; };
@@ -85,7 +90,6 @@
 		9711D8F624BD199700C2E6F1 /* Species.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Species.swift; sourceTree = "<group>"; };
 		9711D8FB24BD42C800C2E6F1 /* FirestoresService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoresService.swift; sourceTree = "<group>"; };
 		9711D91E24BD63B000C2E6F1 /* HabitatSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitatSystem.swift; sourceTree = "<group>"; };
-		971FD0CC24C6112E003ED029 /* DonateButtonOld.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonateButtonOld.swift; sourceTree = "<group>"; };
 		971FD0CF24C61AD3003ED029 /* CGFloatExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloatExtensions.swift; sourceTree = "<group>"; };
 		972897CE24C633F6004AEF5E /* SpeciesOverviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesOverviewView.swift; sourceTree = "<group>"; };
 		972A615824CAA5E900A59AB6 /* SpeciesThreatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesThreatsView.swift; sourceTree = "<group>"; };
@@ -111,6 +115,8 @@
 		977D876F24CD6A1200AE5E51 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		977D877124CD7BFF00AE5E51 /* Habitat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Habitat.swift; sourceTree = "<group>"; };
 		977D877324CE0D8C00AE5E51 /* DonateButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonateButton.swift; sourceTree = "<group>"; };
+		977D877524CE1F3700AE5E51 /* UIRoundedButtonWithGradientAndShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIRoundedButtonWithGradientAndShadow.swift; sourceTree = "<group>"; };
+		977D877724CE504C00AE5E51 /* modelTestData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = modelTestData.json; sourceTree = "<group>"; };
 		978E5CF123FB5CBC007BCD25 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		97928F7824CD11BF00AF90C5 /* FirestoreError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreError.swift; sourceTree = "<group>"; };
 		97928F7A24CD347200AF90C5 /* FirebaseConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseConvertible.swift; sourceTree = "<group>"; };
@@ -180,6 +186,7 @@
 			children = (
 				97452E4723E1EEE9005636E0 /* GradientView.swift */,
 				972BBF7624C01FA900B6F7C0 /* PSORoundedVisualEffectView.swift */,
+				977D877524CE1F3700AE5E51 /* UIRoundedButtonWithGradientAndShadow.swift */,
 			);
 			path = "Third Party Code";
 			sourceTree = "<group>";
@@ -212,7 +219,6 @@
 				97B68CD324BBB0AC005B8AB8 /* HeaderNameView.swift */,
 				9767D04B24C3EA9200384FCD /* SubheaderInfoView.swift */,
 				977D877324CE0D8C00AE5E51 /* DonateButton.swift */,
-				971FD0CC24C6112E003ED029 /* DonateButtonOld.swift */,
 				97591FD724CBA51F002EAC96 /* BottomBarView.swift */,
 				97F7B42524C562A9007AEE97 /* InfoOptionPanelView.swift */,
 				97591FD024CB85C1002EAC96 /* Detail View Panels */,
@@ -251,9 +257,9 @@
 		979492EC23F46ACE00B636A4 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				9711D8F824BD19B900C2E6F1 /* Firebase */,
 				977D876D24CD697700AE5E51 /* Species Models */,
 				971FD0CE24C61ABE003ED029 /* Extensions */,
-				9711D8F824BD19B900C2E6F1 /* Firebase */,
 				97591FDB24CC4524002EAC96 /* ButtonOption.swift */,
 				97591FE224CCDC48002EAC96 /* FontWeight.swift */,
 				97F7B42724C56886007AEE97 /* DonateButtonDelegate.swift */,
@@ -305,6 +311,7 @@
 		979C192923DE43EF00651B2B /* TerraTests */ = {
 			isa = PBXGroup;
 			children = (
+				977D877724CE504C00AE5E51 /* modelTestData.json */,
 				979C192A23DE43EF00651B2B /* TerraTests.swift */,
 				979C192C23DE43EF00651B2B /* Info.plist */,
 			);
@@ -428,6 +435,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				977D877824CE504C00AE5E51 /* modelTestData.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -504,7 +512,6 @@
 			files = (
 				972BBF7924C0204600B6F7C0 /* UIViewExtensions.swift in Sources */,
 				9711D8FC24BD42C800C2E6F1 /* FirestoresService.swift in Sources */,
-				971FD0CD24C6112E003ED029 /* DonateButtonOld.swift in Sources */,
 				977D877224CD7BFF00AE5E51 /* Habitat.swift in Sources */,
 				972BBF7724C01FA900B6F7C0 /* PSORoundedVisualEffectView.swift in Sources */,
 				977D877424CE0D8C00AE5E51 /* DonateButton.swift in Sources */,
@@ -513,6 +520,7 @@
 				97E9450424BE10C800550824 /* ConservationStatus.swift in Sources */,
 				97591FD224CB8BA7002EAC96 /* SpeciesHabitatView.swift in Sources */,
 				97591FDF24CCD14A002EAC96 /* Constants.swift in Sources */,
+				977D877624CE1F3800AE5E51 /* UIRoundedButtonWithGradientAndShadow.swift in Sources */,
 				97F7B42824C56886007AEE97 /* DonateButtonDelegate.swift in Sources */,
 				9735688F24BFDC8900D17F19 /* SpeciesTaxonomyView.swift in Sources */,
 				9711D8F724BD199700C2E6F1 /* Species.swift in Sources */,
@@ -552,10 +560,14 @@
 				972A615024C94C6800A59AB6 /* Species.swift in Sources */,
 				972A615324C94C6E00A59AB6 /* Diet.swift in Sources */,
 				972A615424C94C7000A59AB6 /* PopulationTrend.swift in Sources */,
+				97A2BC7224CE5578000D6B2D /* FirestoreError.swift in Sources */,
 				972A615124C94C6A00A59AB6 /* HabitatSystem.swift in Sources */,
+				97E61B8024CE54A100E83691 /* Habitat.swift in Sources */,
+				97E61B8124CE54A800E83691 /* Group.swift in Sources */,
+				977D877924CE540800AE5E51 /* FirebaseConvertible.swift in Sources */,
 				972A615224C94C6C00A59AB6 /* ConservationStatus.swift in Sources */,
+				97A2BC7324CE559F000D6B2D /* FontWeight.swift in Sources */,
 				977D876E24CD698500AE5E51 /* Taxonomy.swift in Sources */,
-				97591FDD24CCC352002EAC96 /* Utilities.swift in Sources */,
 				979C192B23DE43EF00651B2B /* TerraTests.swift in Sources */,
 				97591FE024CCD2E9002EAC96 /* Constants.swift in Sources */,
 			);

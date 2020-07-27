@@ -9,7 +9,7 @@
 import Foundation
 
 protocol FirebaseConvertible: Codable {
-//    func fieldsDict() -> [String: Any]
+    func fieldsDict() -> [String: Any]
     init?(fromFirebaseDict dict: [String: Any])
 }
 
@@ -24,7 +24,7 @@ extension FirebaseConvertible {
         }
     }
     
-//    func fieldsDict() -> [String: Any] {
-//        return try! JSONSerialization.jsonObject(with: JSONEncoder().encode(self)) as! [String: Any]
-//    }
+    func fieldsDict() -> [String: Any] {
+        return try! JSONSerialization.jsonObject(with: JSONEncoder().encode(self)) as! [String: Any]
+    }
 }

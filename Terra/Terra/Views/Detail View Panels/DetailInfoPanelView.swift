@@ -16,13 +16,13 @@ class DetailInfoPanelView: UIView {
         return Utilities.makeLabel(title: "TITLE", weight: .bold, size: 28, alignment: .left)
     }()
     
-    public lazy var bodyTextView: UITextView = {
-        let tv = UITextView()
-        tv.font = UIFont(name: "Roboto-Light", size: 17)
-        tv.textColor = #colorLiteral(red: 1, green: 0.9833787084, blue: 0.8849565387, alpha: 1)
-        tv.backgroundColor = .clear
-        tv.isEditable = false
-        return tv
+    public lazy var bodyTextView: UILabel = {
+        let label = Utilities.makeLabel(title: nil, weight: .light, size: 17, alignment: .natural)
+        label.textColor = #colorLiteral(red: 1, green: 0.9833787084, blue: 0.8849565387, alpha: 1)
+        label.numberOfLines = 0
+        label.lineBreakMode = .byTruncatingTail
+        label.adjustsFontSizeToFitWidth = false
+        return label
     }()
     
     private lazy var infoBarView: UIView = {
@@ -62,14 +62,14 @@ class DetailInfoPanelView: UIView {
         return Utilities.makeLabel(title: nil, weight: .medium, size: 18, alignment: .center)
     }()
     
-    private lazy var readMoreButton: UIButton = {
+    private lazy var learnMore: UIButton = {
         let btn = UIButton()
-        btn.titleLabel?.font = UIFont(name: "Roboto-Medium", size: 20)
-        btn.setTitle("Read More", for: .normal)
-        btn.setTitleColor(#colorLiteral(red: 0, green: 0.1362192035, blue: 0.1518113911, alpha: 1), for: .normal)
+        btn.titleLabel?.font = UIFont(name: "Roboto-Regular", size: 20)
+        btn.setTitle("Learn More >>", for: .normal)
+        btn.setTitleColor(#colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1), for: .normal)
         btn.layer.cornerRadius = 10
         btn.layer.maskedCorners = [.layerMinXMinYCorner]
-        btn.backgroundColor = #colorLiteral(red: 0.9798273444, green: 0.6242600083, blue: 0.5739037395, alpha: 0.9131260702)
+        btn.backgroundColor = .clear
         return btn
     }()
     
@@ -80,10 +80,10 @@ class DetailInfoPanelView: UIView {
         infoBarTitleLabelAStr: String,
         infoBarTitleLabelBStr: String,
         infoBarTitleLabelCStr: String) {
-            titleLabel.text = titleLabelStr.uppercased()
-            infoBarTitleLabelA.text = infoBarTitleLabelAStr.capitalized
-            infoBarTitleLabelB.text = infoBarTitleLabelBStr.capitalized
-            infoBarTitleLabelC.text = infoBarTitleLabelCStr.capitalized
+        titleLabel.text = titleLabelStr.uppercased()
+        infoBarTitleLabelA.text = infoBarTitleLabelAStr.capitalized
+        infoBarTitleLabelB.text = infoBarTitleLabelBStr.capitalized
+        infoBarTitleLabelC.text = infoBarTitleLabelCStr.capitalized
     }
     
     public func setViewElementsFromSpeciesData(species: Species) {}
@@ -113,7 +113,7 @@ class DetailInfoPanelView: UIView {
 extension DetailInfoPanelView {
     
     private func addSubviews() {
-        let UIElements =  [titleLabel, infoBarView, bodyTextView, readMoreButton]
+        let UIElements =  [titleLabel, infoBarView, bodyTextView, learnMore]
         UIElements.forEach{ self.addSubview($0) }
         UIElements.forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
         
@@ -215,17 +215,17 @@ extension DetailInfoPanelView {
         NSLayoutConstraint.activate([
             bodyTextView.topAnchor.constraint(equalTo: infoBarView.bottomAnchor, constant: 15),
             bodyTextView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            bodyTextView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -40),
+            bodyTextView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -50),
             bodyTextView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.9)
         ])
     }
     
     private func setReadMoreButtonConstraints() {
         NSLayoutConstraint.activate([
-            readMoreButton.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            readMoreButton.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            readMoreButton.heightAnchor.constraint(equalToConstant: 50),
-            readMoreButton.widthAnchor.constraint(equalToConstant: 140)
+            learnMore.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            learnMore.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            learnMore.heightAnchor.constraint(equalToConstant: 40),
+            learnMore.widthAnchor.constraint(equalToConstant: 140)
         ])
     }
 }
