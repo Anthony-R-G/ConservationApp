@@ -152,9 +152,19 @@ final class SpeciesDetailViewController: UIViewController {
     }
     
     private func updateDiscoverLabelAlpha(scrollOffset: CGFloat) {
-        let alphaOffset = (scrollOffset/400)
-        let newAlpha = max(0, min(alphaOffset, 0.34))
-        discoverLabel.alpha = newAlpha
+        var newAlpha = CGFloat()
+        if scrollOffset <= 40 {
+            newAlpha = 0.7
+        } else {
+            newAlpha = 0
+        }
+        
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 1, delay: 0, options: .curveEaseInOut, animations: {
+                self.discoverLabel.alpha = newAlpha
+                print(self.discoverLabel.alpha)
+            }, completion: nil)
+        }
     }
     
     private func updateHeaderViewHeight(scrollOffset: CGFloat) {
@@ -234,6 +244,7 @@ extension SpeciesDetailViewController: UIScrollViewDelegate {
             let offsetY = scrollView.contentOffset.y
             
             updateTopGradientAlpha(scrollOffset: offsetY)
+            updateDiscoverLabelAlpha(scrollOffset: offsetY)
             updateHeaderViewHeight(scrollOffset: offsetY)
             updateHeaderTopAnchor(scrollOffset: offsetY)
             updateSubheaderHeight(scrollOffset: offsetY)
@@ -287,7 +298,7 @@ extension SpeciesDetailViewController {
         view.addSubview(verticalScrollView)
         verticalScrollView.translatesAutoresizingMaskIntoConstraints = false
         
-        let verticalScrollViewUIElements = [headerNameView, subheaderInfoView, horizontalScrollView, donateButton, bottomToolBar, discoverLabel]
+        let verticalScrollViewUIElements = [headerNameView, subheaderInfoView, discoverLabel, horizontalScrollView, donateButton, bottomToolBar]
         verticalScrollViewUIElements.forEach{ verticalScrollView.addSubview($0) }
         verticalScrollViewUIElements.forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
         
