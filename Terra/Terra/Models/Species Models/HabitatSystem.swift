@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum HabitatSystem: String {
+enum HabitatSystem: String, FirebaseConvertible {
     case marine = "marine"
     case freshwater = "freshwater"
     case terrestrial = "terrestrial"

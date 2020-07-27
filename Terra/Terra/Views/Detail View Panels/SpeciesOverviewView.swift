@@ -11,7 +11,7 @@ import UIKit
 final class SpeciesOverviewView: DetailInfoPanelView {
 
     public override func setViewElementsFromSpeciesData(species: Species) {
-        bodyTextView.text = species.populationSummary
+        bodyTextView.text = species.overview.replacingOccurrences(of: "\n", with: "\n")
         infoBarDataLabelA.text = species.height
         infoBarDataLabelB.text = species.weight
         infoBarDataLabelC.text = species.diet.rawValue

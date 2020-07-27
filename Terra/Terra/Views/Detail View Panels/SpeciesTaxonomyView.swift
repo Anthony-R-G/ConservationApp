@@ -167,14 +167,14 @@ final class SpeciesTaxonomyView: UIView {
     
     
     //MARK: -- Methods
-    public func setViewElementsFromSpeciesData(species: Species) {
-        kingdomInfoLabel.text = species.kingdom
-        classInfoLabel.text = species.classTaxonomy
-        familyInfoLabel.text = species.family
-        phylumInfoLabel.text = species.phylum
-        orderInfoLabel.text = species.order
-        genusInfoLabel.text = species.genus
-    }
+//    public func setViewElementsFromSpeciesData(species: Species) {
+//        kingdomInfoLabel.text = species.taxonomy.kingdom
+//        classInfoLabel.text = species.taxonomy.classTaxonomy
+//        familyInfoLabel.text = species.taxonomy.family
+//        phylumInfoLabel.text = species.taxonomy.phylum
+//        orderInfoLabel.text = species.taxonomy.order
+//        genusInfoLabel.text = species.taxonomy.genus
+//    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)

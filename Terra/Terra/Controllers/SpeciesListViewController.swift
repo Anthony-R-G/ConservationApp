@@ -181,7 +181,7 @@ extension SpeciesListViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        var specificAnimal = Species(from: [:])
+        var specificAnimal = Species(fromFirebaseDict: [:])
         
         switch collectionView {
         case criticalCollectionView: specificAnimal = filteredCriticalSpecies[indexPath.row]

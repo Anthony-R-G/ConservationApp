@@ -38,8 +38,6 @@ class SpeciesCollectionViewCell: UICollectionViewCell {
         let imageURL = URL(string: species.cellImage)
         backgroundImage.kf.setImage(with: imageURL)
         backgroundImage.kf.indicatorType = .activity
-        
-        backgroundColor = species.habitatSystem == .marine ? #colorLiteral(red: 0.2312238216, green: 0.3822638988, blue: 0.7663728595, alpha: 1) : #colorLiteral(red: 0.8971922994, green: 0.4322043657, blue: 0.1033880934, alpha: 1)
         layer.cornerRadius = Constants.cornerRadius
         layer.masksToBounds = true
     }
