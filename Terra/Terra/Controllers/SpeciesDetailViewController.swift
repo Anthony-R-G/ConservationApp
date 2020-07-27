@@ -14,12 +14,15 @@ final class SpeciesDetailViewController: UIViewController {
     //MARK: -- UI Element Initialization
     
     private lazy var verticalScrollView: UIScrollView = {
-        return UIScrollView()
+        let sv = UIScrollView()
+        sv.showsVerticalScrollIndicator = false
+        return sv
     }()
     
     private lazy var horizontalScrollView: UIScrollView = {
         let sv = UIScrollView()
         sv.isPagingEnabled = true
+        sv.showsHorizontalScrollIndicator = false
         return sv
     }()
     

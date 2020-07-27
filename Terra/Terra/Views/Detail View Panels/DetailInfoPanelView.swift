@@ -70,7 +70,7 @@ class DetailInfoPanelView: UIView {
         btn.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
         btn.titleLabel?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
         btn.imageView?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
-        btn.imageEdgeInsets = UIEdgeInsets(top: 5, left: -5, bottom: 0, right: 5)
+        btn.imageEdgeInsets = UIEdgeInsets(top: 2.5, left: -5, bottom: 0, right: 5)
         btn.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 5)
         btn.tintColor = #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
         btn.setTitleColor(#colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1), for: .normal)
