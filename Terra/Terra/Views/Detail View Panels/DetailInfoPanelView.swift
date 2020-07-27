@@ -64,12 +64,16 @@ class DetailInfoPanelView: UIView {
     
     private lazy var learnMore: UIButton = {
         let btn = UIButton()
-        btn.titleLabel?.font = UIFont(name: "Roboto-Regular", size: 20)
-        btn.setTitle("Learn More >>", for: .normal)
+        btn.titleLabel?.font = UIFont(name: "Roboto-Medium", size: 20)
+        btn.setTitle("Learn More", for: .normal)
+        btn.setImage(UIImage(systemName: "chevron.right"), for: .normal)
+        btn.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        btn.titleLabel?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        btn.imageView?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: 5)
+        btn.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 5)
+        btn.tintColor = #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
         btn.setTitleColor(#colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1), for: .normal)
-        btn.layer.cornerRadius = 10
-        btn.layer.maskedCorners = [.layerMinXMinYCorner]
-        btn.backgroundColor = .clear
         return btn
     }()
     
@@ -222,10 +226,10 @@ extension DetailInfoPanelView {
     
     private func setReadMoreButtonConstraints() {
         NSLayoutConstraint.activate([
-            learnMore.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            learnMore.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            learnMore.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
+            learnMore.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10),
             learnMore.heightAnchor.constraint(equalToConstant: 40),
-            learnMore.widthAnchor.constraint(equalToConstant: 140)
+            learnMore.widthAnchor.constraint(equalToConstant: 170)
         ])
     }
 }
