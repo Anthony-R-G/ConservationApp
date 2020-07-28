@@ -31,6 +31,7 @@ class FirestoreService {
                    return
                }
             
+            
                let objects = snapshot.documents.compactMap { T(fromFirebaseDict: $0.data()) }
                completion(.success(objects))
            }

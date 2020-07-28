@@ -49,8 +49,9 @@ class BottomBarView: UIView {
     
     private lazy var highlightedIndicator: UIView = {
         let screenWidth = UIScreen.main.bounds.width
-        let view = UIView(frame: CGRect(x: .zero, y: .zero, width: screenWidth / 4.5, height: 2))
+        let view = UIView(frame: CGRect(x: .zero, y: .zero, width: screenWidth / 4.55, height: 2))
         view.backgroundColor = UIColor.white
+        
         return view
     }()
     
@@ -131,7 +132,7 @@ extension BottomBarView {
         NSLayoutConstraint.activate([
             buttonStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             buttonStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            buttonStackView.topAnchor.constraint(equalTo: topAnchor, constant: 0)
+            buttonStackView.topAnchor.constraint(equalTo: topAnchor, constant: 10)
         ])
     }
     
