@@ -195,7 +195,7 @@ extension SpeciesListViewController: UICollectionViewDelegateFlowLayout {
         
         let detailVC = SpeciesDetailViewController()
         detailVC.currentSpecies = specificAnimal
-        self.present(detailVC, animated: true, completion: nil)
+        present(detailVC, animated: true, completion: nil)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

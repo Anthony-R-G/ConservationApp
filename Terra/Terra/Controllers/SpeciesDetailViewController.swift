@@ -14,12 +14,15 @@ final class SpeciesDetailViewController: UIViewController {
     //MARK: -- UI Element Initialization
     
     private lazy var verticalScrollView: UIScrollView = {
-        return UIScrollView()
+        let sv = UIScrollView()
+        sv.showsVerticalScrollIndicator = false
+        return sv
     }()
     
     private lazy var horizontalScrollView: UIScrollView = {
         let sv = UIScrollView()
         sv.isPagingEnabled = true
+        sv.showsHorizontalScrollIndicator = false
         return sv
     }()
     
@@ -56,13 +59,28 @@ final class SpeciesDetailViewController: UIViewController {
         return siv
     }()
     
+    private lazy var exploreButton: UIButton = {
+        let btn = UIButton(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
+        btn.isUserInteractionEnabled = false
+        btn.setImage(UIImage(systemName: "chevron.up"), for: .normal)
+        btn.setTitle("Explore", for: .normal)
+        btn.titleLabel?.font = UIFont(name: "Roboto-Light", size: 16)
+        btn.alignImageAndTitleVertically()
+        btn.imageView?.transform = CGAffineTransform(scaleX: 1.2, y: 1)
+        
+        let color = UIColor(white: 1, alpha: 0.6)
+        btn.setTitleColor(color, for: .normal)
+        btn.tintColor = color
+        return btn
+    }()
+    
     private lazy var donateButton: DonateButton = {
         let db = DonateButton(gradientColors: [#colorLiteral(red: 1, green: 0.2914688587, blue: 0.3886995912, alpha: 0.9019156678), #colorLiteral(red: 0.5421239734, green: 0.1666001081, blue: 0.2197911441, alpha: 0.8952536387)], startPoint: CGPoint(x: 0, y: 0), endPoint: CGPoint(x: 1, y: 1))
         return db
     }()
     
     private lazy var bottomToolBar: BottomBarView = {
-        return BottomBarView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 35))
+        return BottomBarView()
     }()
     
     private lazy var speciesOverviewView: SpeciesOverviewView = {
@@ -99,8 +117,6 @@ final class SpeciesDetailViewController: UIViewController {
         return horizontalScrollView.topAnchor.constraint(equalTo: headerNameView.bottomAnchor, constant: 300)
     }()
     
-    
-    
     //MARK: -- Properties
     
     public var currentSpecies: Species!
@@ -117,7 +133,7 @@ final class SpeciesDetailViewController: UIViewController {
     }
     
     private func setBackground() {
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor(white: 1, alpha: 0.1)
         let imageURL = URL(string: currentSpecies!.detailImage)
         backgroundImageView.kf.setImage(with: imageURL)
     }
@@ -136,10 +152,22 @@ final class SpeciesDetailViewController: UIViewController {
         present(safariVC, animated: true)
     }
     
-    private func updateAlpha(scrollOffset: CGFloat) {
+    private func updateTopGradientAlpha(scrollOffset: CGFloat) {
         let alphaOffset = (scrollOffset/400)
         let newAlpha = max(0, min(alphaOffset, 0.34))
         backgroundGradientOverlay.startColor = #colorLiteral(red: 0.06859237701, green: 0.08213501424, blue: 0.2409383953, alpha: Float(newAlpha))
+    }
+    
+    private func updateDiscoverLabelAlpha(scrollOffset: CGFloat) {
+        var newAlpha = CGFloat()
+        newAlpha = scrollOffset <= 40 ? 0.6 : 0
+       
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 1, delay: 0, options: .curveEaseInOut, animations: {
+                self.exploreButton.alpha = newAlpha
+                
+            }, completion: nil)
+        }
     }
     
     private func updateHeaderViewHeight(scrollOffset: CGFloat) {
@@ -183,6 +211,7 @@ final class SpeciesDetailViewController: UIViewController {
         }
     }
     
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         setVerticalScrollViewConstraints()
@@ -193,13 +222,15 @@ final class SpeciesDetailViewController: UIViewController {
         horizontalScrollView.contentSize = CGSize(width: view.frame.width + 1300, height: 300)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        exploreButton.startShimmeringAnimation(animationSpeed: 2, direction: .leftToRight, repeatCount: .infinity)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         addSubviews()
         setConstraints()
         setDelegates()
-        
         
         setViewElementsFromSpeciesData()
         setBackground()
@@ -215,13 +246,19 @@ extension SpeciesDetailViewController: UIScrollViewDelegate {
         case verticalScrollView:
             let offsetY = scrollView.contentOffset.y
             
-            updateAlpha(scrollOffset: offsetY)
+            updateTopGradientAlpha(scrollOffset: offsetY)
+            updateDiscoverLabelAlpha(scrollOffset: offsetY)
             updateHeaderViewHeight(scrollOffset: offsetY)
             updateHeaderTopAnchor(scrollOffset: offsetY)
             updateSubheaderHeight(scrollOffset: offsetY)
             updateHorizontalScrollTopAnchor(scrollOffset: offsetY)
             
         case horizontalScrollView:
+            let offsetX = scrollView.contentOffset.x
+            
+            bottomToolBar.updateHighlightIndicator(scrollOffset: offsetX)
+            
+            
             if scrollView.bounds.contains(speciesOverviewView.frame) {
                 bottomToolBar.highlightButton(button: .overviewButton)
                 
@@ -233,6 +270,7 @@ extension SpeciesDetailViewController: UIScrollViewDelegate {
                 
             } else if scrollView.bounds.contains(speciesGalleryView.frame) {
                 bottomToolBar.highlightButton(button: .galleryButton)
+                
             }
             
         default:()
@@ -256,13 +294,14 @@ extension SpeciesDetailViewController: BottomBarDelegate {
     }
 }
 
+
 //MARK: -- Adding Subviews & Constraints
 extension SpeciesDetailViewController {
     private func addSubviews() {
         view.addSubview(verticalScrollView)
         verticalScrollView.translatesAutoresizingMaskIntoConstraints = false
         
-        let verticalScrollViewUIElements = [headerNameView, subheaderInfoView, horizontalScrollView, donateButton, bottomToolBar]
+        let verticalScrollViewUIElements = [headerNameView, subheaderInfoView, exploreButton, horizontalScrollView, donateButton, bottomToolBar]
         verticalScrollViewUIElements.forEach{ verticalScrollView.addSubview($0) }
         verticalScrollViewUIElements.forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
         
@@ -274,14 +313,18 @@ extension SpeciesDetailViewController {
     private func setConstraints() {
         setBackgroundImageViewConstraints()
         setBackgroundGradientOverlayConstraints()
+        
         setHeaderInfoViewConstraints()
         setSubheaderInfoViewConstraints()
+        setDiscoverButtonConstraints()
+        
         setSpeciesOverviewViewConstraints()
         setSpeciesThreatsViewConstraints()
         setSpeciesHabitatViewConstraints()
         setSpeciesGalleryViewConstraints()
-        setBottomToolBarConstraints()
+        
         setDonateButtonConstraints()
+        setBottomToolBarConstraints()
     }
     
     private func setVerticalScrollViewConstraints() {
@@ -340,15 +383,14 @@ extension SpeciesDetailViewController {
         ])
     }
     
-    private func setBottomToolBarConstraints() {
+    private func setDiscoverButtonConstraints() {
         NSLayoutConstraint.activate([
-            bottomToolBar.topAnchor.constraint(equalTo: horizontalScrollView.bottomAnchor, constant: 110),
-            bottomToolBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            bottomToolBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            bottomToolBar.heightAnchor.constraint(equalToConstant: 50)
+            exploreButton.heightAnchor.constraint(equalToConstant: exploreButton.frame.size.height),
+            exploreButton.widthAnchor.constraint(equalToConstant: exploreButton.frame.size.width),
+            exploreButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            exploreButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10)
         ])
     }
-    
     
     private func setDonateButtonConstraints() {
         NSLayoutConstraint.activate([
@@ -356,6 +398,15 @@ extension SpeciesDetailViewController {
             donateButton.heightAnchor.constraint(equalToConstant: 50),
             donateButton.centerXAnchor.constraint(equalTo: bottomToolBar.centerXAnchor),
             donateButton.bottomAnchor.constraint(equalTo: bottomToolBar.topAnchor, constant: -30)
+        ])
+    }
+    
+    private func setBottomToolBarConstraints() {
+        NSLayoutConstraint.activate([
+            bottomToolBar.topAnchor.constraint(equalTo: horizontalScrollView.bottomAnchor, constant: 120),
+            bottomToolBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            bottomToolBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            bottomToolBar.heightAnchor.constraint(equalToConstant: 80)
         ])
     }
     
@@ -395,3 +446,5 @@ extension SpeciesDetailViewController {
         ])
     }
 }
+
+
