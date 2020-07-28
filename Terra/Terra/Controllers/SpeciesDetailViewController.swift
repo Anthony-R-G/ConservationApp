@@ -59,12 +59,19 @@ final class SpeciesDetailViewController: UIViewController {
         return siv
     }()
     
-    private lazy var discoverLabel: UILabel = {
-        let label = Utilities.makeLabel(title: "Discover", weight: .light, size: 25, alignment: .center)
-        label.textColor = UIColor(white: 1, alpha: 0.7)
-        label.frame = CGRect(x: 0, y: 0, width: 100, height: 50)
-        label.textAlignment = .center
-        return label
+    private lazy var exploreButton: UIButton = {
+        let btn = UIButton(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
+        btn.isUserInteractionEnabled = false
+        btn.setImage(UIImage(systemName: "chevron.up"), for: .normal)
+        btn.setTitle("Explore", for: .normal)
+        btn.titleLabel?.font = UIFont(name: "Roboto-Light", size: 16)
+        btn.alignImageAndTitleVertically()
+        btn.imageView?.transform = CGAffineTransform(scaleX: 1.2, y: 1)
+        
+        let color = UIColor(white: 1, alpha: 0.6)
+        btn.setTitleColor(color, for: .normal)
+        btn.tintColor = color
+        return btn
     }()
     
     private lazy var donateButton: DonateButton = {
@@ -153,16 +160,12 @@ final class SpeciesDetailViewController: UIViewController {
     
     private func updateDiscoverLabelAlpha(scrollOffset: CGFloat) {
         var newAlpha = CGFloat()
-        if scrollOffset <= 40 {
-            newAlpha = 0.7
-        } else {
-            newAlpha = 0
-        }
-        
+        newAlpha = scrollOffset <= 40 ? 0.6 : 0
+       
         DispatchQueue.main.async {
             UIView.animate(withDuration: 1, delay: 0, options: .curveEaseInOut, animations: {
-                self.discoverLabel.alpha = newAlpha
-                print(self.discoverLabel.alpha)
+                self.exploreButton.alpha = newAlpha
+                
             }, completion: nil)
         }
     }
@@ -220,7 +223,7 @@ final class SpeciesDetailViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        discoverLabel.startShimmeringAnimation(animationSpeed: 2, direction: .leftToRight, repeatCount: .infinity)
+        exploreButton.startShimmeringAnimation(animationSpeed: 2, direction: .leftToRight, repeatCount: .infinity)
     }
     
     override func viewDidLoad() {
@@ -298,7 +301,7 @@ extension SpeciesDetailViewController {
         view.addSubview(verticalScrollView)
         verticalScrollView.translatesAutoresizingMaskIntoConstraints = false
         
-        let verticalScrollViewUIElements = [headerNameView, subheaderInfoView, discoverLabel, horizontalScrollView, donateButton, bottomToolBar]
+        let verticalScrollViewUIElements = [headerNameView, subheaderInfoView, exploreButton, horizontalScrollView, donateButton, bottomToolBar]
         verticalScrollViewUIElements.forEach{ verticalScrollView.addSubview($0) }
         verticalScrollViewUIElements.forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
         
@@ -313,7 +316,7 @@ extension SpeciesDetailViewController {
         
         setHeaderInfoViewConstraints()
         setSubheaderInfoViewConstraints()
-        setDiscoverLabelConstraints()
+        setDiscoverButtonConstraints()
         
         setSpeciesOverviewViewConstraints()
         setSpeciesThreatsViewConstraints()
@@ -362,7 +365,6 @@ extension SpeciesDetailViewController {
         ])
     }
     
-    
     private func setHeaderInfoViewConstraints() {
         NSLayoutConstraint.activate([
             headerNameView.leadingAnchor.constraint(equalTo: verticalScrollView.leadingAnchor, constant: 20),
@@ -381,12 +383,12 @@ extension SpeciesDetailViewController {
         ])
     }
     
-    private func setDiscoverLabelConstraints() {
+    private func setDiscoverButtonConstraints() {
         NSLayoutConstraint.activate([
-            discoverLabel.heightAnchor.constraint(equalToConstant: discoverLabel.frame.size.height),
-            discoverLabel.widthAnchor.constraint(equalToConstant: discoverLabel.frame.size.width),
-            discoverLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            discoverLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20)
+            exploreButton.heightAnchor.constraint(equalToConstant: exploreButton.frame.size.height),
+            exploreButton.widthAnchor.constraint(equalToConstant: exploreButton.frame.size.width),
+            exploreButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            exploreButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10)
         ])
     }
     
@@ -444,3 +446,5 @@ extension SpeciesDetailViewController {
         ])
     }
 }
+
+
