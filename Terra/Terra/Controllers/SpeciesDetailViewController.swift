@@ -127,9 +127,9 @@ final class SpeciesDetailViewController: UIViewController {
     private func setViewElementsFromSpeciesData() {
         headerNameView.setViewElementsFromSpeciesData(species: currentSpecies)
         subheaderInfoView.setViewElementsFromSpeciesData(species: currentSpecies)
-        speciesOverviewView.setViewElementsFromSpeciesData(species: currentSpecies)
-        speciesThreatsView.setViewElementsFromSpeciesData(species: currentSpecies)
-        speciesHabitatView.setViewElementsFromSpeciesData(species: currentSpecies)
+        
+        
+      
     }
     
     private func setBackground() {

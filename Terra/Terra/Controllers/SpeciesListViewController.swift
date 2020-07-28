@@ -17,36 +17,26 @@ final class SpeciesListViewController: UIViewController {
     }()
     
     private lazy var terraTitleLabel: UILabel = {
-        let label = Utilities.makeLabel(title: "Terra", weight: .bold, size: 30, alignment: .left)
-        label.textColor = #colorLiteral(red: 0.9257398248, green: 1, blue: 0.7623538375, alpha: 1)
-        return label
+        return Utilities.makeLabel(title: "Terra", weight: .bold, size: 30, color: #colorLiteral(red: 0.9257398248, green: 1, blue: 0.7623538375, alpha: 1), alignment: .left)
     }()
     
     private lazy var subtitleLabel: UILabel = {
-        let label = Utilities.makeLabel(title: "Protect the earth's biodiversity",
+        return  Utilities.makeLabel(title: "Protect the earth's biodiversity",
                                         weight: .light,
-                                        size: 20,
+                                        size: 20, color: #colorLiteral(red: 0.6699403524, green: 0.6602986455, blue: 0.7864833474, alpha: 1),
                                         alignment: .left)
-        label.textColor = #colorLiteral(red: 0.6699403524, green: 0.6602986455, blue: 0.7864833474, alpha: 1)
-        return label
     }()
     
     private lazy var criticalSpeciesLabel: UILabel = {
-        let label = Utilities.makeLabel(title: "CRITICALLY ENDANGERED", weight: .medium, size: 19, alignment: .left)
-        label.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.7993899829)
-        return label
+        return Utilities.makeLabel(title: "CRITICALLY ENDANGERED", weight: .medium, size: 19, color: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.7993899829), alignment: .left)
     }()
     
     private lazy var endangeredSpeciesLabel: UILabel = {
-        let label = Utilities.makeLabel(title: "ENDANGERED", weight: .medium, size: 19, alignment: .left)
-        label.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.7993899829)
-        return label
+        return Utilities.makeLabel(title: "ENDANGERED", weight: .medium, size: 19, color: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.7993899829), alignment: .left)
     }()
     
     private lazy var vulnerableSpeciesLabel: UILabel = {
-        let label = Utilities.makeLabel(title: "VULNERABLE", weight: .medium, size: 19, alignment: .left)
-        label.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.7993899829)
-        return label
+        return Utilities.makeLabel(title: "VULNERABLE", weight: .medium, size: 19, color: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.7993899829), alignment: .left)
     }()
     
     private lazy var criticalCollectionView: UICollectionView = {

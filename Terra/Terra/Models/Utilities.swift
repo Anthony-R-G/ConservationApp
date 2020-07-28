@@ -22,12 +22,16 @@ class Utilities {
         return collectionView
     }
     
-    static func makeLabel(title: String?, weight: FontWeight, size: CGFloat, alignment: NSTextAlignment) -> UILabel {
+    static func makeLabel(title: String?,
+                          weight: FontWeight,
+                          size: CGFloat,
+                          color: UIColor,
+                          alignment: NSTextAlignment) -> UILabel {
         let label = UILabel()
         label.text = title
         label.font = UIFont(name: weight.rawValue, size: size)
         label.textAlignment = alignment
-        label.textColor = .white
+        label.textColor = color
         label.adjustsFontSizeToFitWidth = true
         label.clipsToBounds = true
         label.sizeToFit()
