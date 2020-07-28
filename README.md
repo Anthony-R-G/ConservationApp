@@ -32,7 +32,7 @@ Tapping any one cell will transition to a new page where the species you've sele
 ![Example 2](https://i.imgur.com/PPx1lXy.png)
 
 
-![Example 3](https://i.imgur.com/oDIq6KP.png)
+![Example 3](https://i.imgur.com/fsasSpG.png)
 
 
 Scrolling up on this page will bring up detailed information about the species:
