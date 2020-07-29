@@ -35,11 +35,11 @@ Tapping any one cell will transition to a new page where the species you've sele
 ![Example 3](https://i.imgur.com/fsasSpG.png)
 
 
-Scrolling up on this page will bring up detailed information about the species:
+Scrolling up on this page will bring up an overview of the species. You can then swipe left and right or use the buttons on the bottom bar to get other information on the species such as the threats that it faces at the moment. Each panel also has it's own "Learn More" button to transition to a full-sized screen. 
 
 ![Example 4](https://i.imgur.com/ZGcKpU1.png)
 
-You can show your support for animal conservation efforts by clicking on the donate button. This will redirect you in-app to the relevant conservation for that specific animal. 
+You can show your support for animal conservation efforts by clicking on the donate button. This will redirect you in-app to the relevant conservation for that specific animal. This makes it easy to get involved.
 
 ![Example 5](https://i.imgur.com/XABKk0Q.png)
 
