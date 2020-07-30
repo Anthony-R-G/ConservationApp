@@ -8,6 +8,8 @@
 
 import UIKit
 import SafariServices
+import FirebaseUI
+import FirebaseStorage
 
 final class SpeciesDetailViewController: UIViewController {
     
@@ -150,9 +152,8 @@ final class SpeciesDetailViewController: UIViewController {
     }
     
     private func setBackground() {
-        view.backgroundColor = UIColor(white: 1, alpha: 0.1)
-        let imageURL = URL(string: currentSpecies!.detailImage)
-        backgroundImageView.kf.setImage(with: imageURL)
+        view.backgroundColor = .black
+        FirebaseStorageService.detailImageManager.getImage(imageRefStr: currentSpecies.commonName, imageView: backgroundImageView)
     }
     
     private func setDelegates() {
