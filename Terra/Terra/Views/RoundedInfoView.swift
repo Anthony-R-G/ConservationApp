@@ -72,7 +72,7 @@ class RoundedInfoView: UIView {
     }()
     
     //MARK: -- Methods
-        
+    
     public func configureTitleLabels(
         titleText: String,
         barLeftTitle: String,
@@ -120,10 +120,11 @@ class RoundedInfoView: UIView {
     }
 }
 
-//MARK: -- Adding Subviews & Constraints
-extension RoundedInfoView {
+//MARK: -- Add Subviews & Constraints
+
+fileprivate extension RoundedInfoView {
     
-    private func addSubviews() {
+    func addSubviews() {
         let UIElements =  [titleLabel, infoBarView, bodyTextLabel, learnMoreButton]
         UIElements.forEach{ self.addSubview($0) }
         UIElements.forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
@@ -133,7 +134,7 @@ extension RoundedInfoView {
         infoBarElements.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
     }
     
-    private func setConstraints() {
+    func setConstraints() {
         setOverviewTitleLabelConstraints()
         setInfoBarConstraints()
         
@@ -150,7 +151,7 @@ extension RoundedInfoView {
         setReadMoreButtonConstraints()
     }
     
-    private func setOverviewTitleLabelConstraints() {
+    func setOverviewTitleLabelConstraints() {
         NSLayoutConstraint.activate([
             titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 25),
             titleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 15),
@@ -159,7 +160,7 @@ extension RoundedInfoView {
         ])
     }
     
-    private func setInfoBarConstraints() {
+    func setInfoBarConstraints() {
         NSLayoutConstraint.activate([
             infoBarView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 15),
             infoBarView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
@@ -168,7 +169,7 @@ extension RoundedInfoView {
         ])
     }
     
-    private func setInfoBarTitleLabelAConstraints() {
+    func setInfoBarTitleLabelAConstraints() {
         NSLayoutConstraint.activate([
             barLeftTitleLabel.topAnchor.constraint(equalTo: infoBarView.topAnchor, constant: 10),
             barLeftTitleLabel.centerXAnchor.constraint(equalTo: barLeftDataLabel.centerXAnchor),
@@ -177,7 +178,7 @@ extension RoundedInfoView {
         ])
     }
     
-    private func setInfoBarDataLabelAConstraints() {
+    func setInfoBarDataLabelAConstraints() {
         NSLayoutConstraint.activate([
             barLeftDataLabel.topAnchor.constraint(equalTo: barLeftTitleLabel.bottomAnchor, constant: 5),
             barLeftDataLabel.leadingAnchor.constraint(equalTo: infoBarView.leadingAnchor, constant: 15),
@@ -186,7 +187,7 @@ extension RoundedInfoView {
         ])
     }
     
-    private func setInfoBarTitleLabelBConstraints() {
+    func setInfoBarTitleLabelBConstraints() {
         NSLayoutConstraint.activate([
             barMiddleTitleLabel.topAnchor.constraint(equalTo: barLeftTitleLabel.topAnchor),
             barMiddleTitleLabel.centerXAnchor.constraint(equalTo: barMiddleDataLabel.centerXAnchor),
@@ -195,7 +196,7 @@ extension RoundedInfoView {
         ])
     }
     
-    private func setInfoBarDataLabelBConstraints() {
+    func setInfoBarDataLabelBConstraints() {
         NSLayoutConstraint.activate([
             barMiddleDataLabel.topAnchor.constraint(equalTo: barLeftDataLabel.topAnchor),
             barMiddleDataLabel.leadingAnchor.constraint(equalTo: barLeftDataLabel.trailingAnchor, constant: 15),
@@ -204,7 +205,7 @@ extension RoundedInfoView {
         ])
     }
     
-    private func setInfoBarTitleLabelCConstraints() {
+    func setInfoBarTitleLabelCConstraints() {
         NSLayoutConstraint.activate([
             barRightTitleLabel.topAnchor.constraint(equalTo: barLeftTitleLabel.topAnchor),
             barRightTitleLabel.centerXAnchor.constraint(equalTo: barRightDataLabel.centerXAnchor),
@@ -213,7 +214,7 @@ extension RoundedInfoView {
         ])
     }
     
-    private func setInfoBarDataLabelCConstraints() {
+    func setInfoBarDataLabelCConstraints() {
         NSLayoutConstraint.activate([
             barRightDataLabel.topAnchor.constraint(equalTo: barLeftDataLabel.topAnchor),
             barRightDataLabel.trailingAnchor.constraint(equalTo: infoBarView.trailingAnchor, constant: -15),
@@ -222,7 +223,7 @@ extension RoundedInfoView {
         ])
     }
     
-    private func setBodyTextViewConstraints() {
+    func setBodyTextViewConstraints() {
         NSLayoutConstraint.activate([
             bodyTextLabel.topAnchor.constraint(equalTo: infoBarView.bottomAnchor, constant: 15),
             bodyTextLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
@@ -231,7 +232,7 @@ extension RoundedInfoView {
         ])
     }
     
-    private func setReadMoreButtonConstraints() {
+    func setReadMoreButtonConstraints() {
         NSLayoutConstraint.activate([
             learnMoreButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
             learnMoreButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10),

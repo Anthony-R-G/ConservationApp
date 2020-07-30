@@ -54,17 +54,17 @@ final class SubheaderInfoView: UIView {
     }
 }
 
-//MARK: -- Adding Subviews & Constraints
+//MARK: -- Add Subviews & Constraints
 
-extension SubheaderInfoView {
+fileprivate extension SubheaderInfoView {
     
-    private func addSubviews() {
+    func addSubviews() {
         let UIElements = [numbersTitleLabel, numbersDataLabel, trendTitleLabel, trendDataLabel, lastAssessedTitleLabel, lastAssessedDataLabel]
         UIElements.forEach { self.addSubview($0) }
         UIElements.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
     }
     
-    private func setConstraints() {
+    func setConstraints() {
         setNumbersTitleLabelConstraints()
         setNumbersInfoLabelConstraints()
         setWeightTitleLabelConstraints()
@@ -73,7 +73,7 @@ extension SubheaderInfoView {
         setHeightInfoLabelConstraints()
     }
     
-    private func setNumbersTitleLabelConstraints() {
+    func setNumbersTitleLabelConstraints() {
         NSLayoutConstraint.activate([
             numbersTitleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             numbersTitleLabel.topAnchor.constraint(equalTo: self.topAnchor),
@@ -82,7 +82,7 @@ extension SubheaderInfoView {
         ])
     }
     
-    private func setNumbersInfoLabelConstraints() {
+    func setNumbersInfoLabelConstraints() {
         NSLayoutConstraint.activate([
             numbersDataLabel.leadingAnchor.constraint(equalTo: numbersTitleLabel.leadingAnchor),
             numbersDataLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.5),
@@ -91,7 +91,7 @@ extension SubheaderInfoView {
         ])
     }
     
-    private func setWeightTitleLabelConstraints() {
+    func setWeightTitleLabelConstraints() {
         NSLayoutConstraint.activate([
             trendTitleLabel.leadingAnchor.constraint(equalTo: numbersTitleLabel.trailingAnchor, constant: 20),
             trendTitleLabel.topAnchor.constraint(equalTo: numbersTitleLabel.topAnchor),
@@ -100,7 +100,7 @@ extension SubheaderInfoView {
         ])
     }
     
-    private func setWeightInfoLabelConstraints() {
+    func setWeightInfoLabelConstraints() {
         NSLayoutConstraint.activate([
             trendDataLabel.leadingAnchor.constraint(equalTo: trendTitleLabel.leadingAnchor),
             trendDataLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.5),
@@ -109,7 +109,7 @@ extension SubheaderInfoView {
         ])
     }
     
-    private func setHeightTitleLabelConstraints() {
+    func setHeightTitleLabelConstraints() {
         NSLayoutConstraint.activate([
             lastAssessedTitleLabel.leadingAnchor.constraint(equalTo: trendTitleLabel.trailingAnchor, constant: 20),
             lastAssessedTitleLabel.topAnchor.constraint(equalTo: numbersTitleLabel.topAnchor),
@@ -118,7 +118,7 @@ extension SubheaderInfoView {
         ])
     }
     
-    private func setHeightInfoLabelConstraints() {
+    func setHeightInfoLabelConstraints() {
         NSLayoutConstraint.activate([
             lastAssessedDataLabel.leadingAnchor.constraint(equalTo: self.lastAssessedTitleLabel.leadingAnchor),
             lastAssessedDataLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.5),

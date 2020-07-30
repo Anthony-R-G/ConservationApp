@@ -10,6 +10,7 @@ import UIKit
 
 class BottomBarView: UIView {
     //MARK: -- Lazy UI Element Initialization
+    
     private lazy var overviewButton: UIButton = {
         let btn = Utilities.makeBottomBarButton(title: "OVERVIEW")
         btn.tag = 0
@@ -114,21 +115,23 @@ class BottomBarView: UIView {
     }
 }
 
-extension BottomBarView {
+//MARK: -- Add Subviews & Constraints
+
+fileprivate extension BottomBarView {
     
-    private func addSubviews() {
+    func addSubviews() {
         let UIElements = [buttonStackView, highlightedIndicator]
         UIElements.forEach { self.addSubview($0) }
         UIElements.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
     }
     
-    private func setConstraints() {
+    func setConstraints() {
         setButtonStackViewConstraints()
         setHighlightedIndicatorConstraints()
         
     }
     
-    private func setButtonStackViewConstraints() {
+    func setButtonStackViewConstraints() {
         NSLayoutConstraint.activate([
             buttonStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             buttonStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
@@ -136,7 +139,7 @@ extension BottomBarView {
         ])
     }
     
-    private func setHighlightedIndicatorConstraints() {
+    func setHighlightedIndicatorConstraints() {
         NSLayoutConstraint.activate([
             highlightedIndicator.topAnchor.constraint(equalTo: buttonStackView.bottomAnchor, constant: 0),
             highlightedIndicator.widthAnchor.constraint(equalToConstant: highlightedIndicator.frame.size.width),

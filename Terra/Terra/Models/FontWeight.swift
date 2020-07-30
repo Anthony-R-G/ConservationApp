@@ -13,4 +13,5 @@ enum FontWeight: String {
     case medium = "Roboto-Medium"
     case regular = "Roboto-Regular"
     case light = "Roboto-Light"
+    case lightItalic = "Roboto-LightItalic"
 }
