@@ -8,21 +8,19 @@
 
 import UIKit
 
-final class SpeciesThreatsView: DetailInfoPanelView {
-    
-    public override func setViewElementsFromSpeciesData(species: Species) {
-        bodyTextView.text = species.threats
-    }
+final class SpeciesThreatsView: RoundedInfoView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configureSpecificViewInfo(titleLabelStr: "THREATS",
-                                   infoBarTitleLabelAStr: "",
-                                   infoBarTitleLabelBStr: "",
-                                   infoBarTitleLabelCStr: "")
+        configureTitleLabels(titleText: "THREATS",
+                                 barLeftTitle: "",
+                                 barMiddleTitle: "",
+                                 barRightTitle: "")
+        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
 }

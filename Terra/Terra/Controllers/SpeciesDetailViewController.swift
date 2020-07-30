@@ -83,12 +83,17 @@ final class SpeciesDetailViewController: UIViewController {
         return BottomBarView()
     }()
     
-    private lazy var speciesOverviewView: SpeciesOverviewView = {
-        return SpeciesOverviewView()
+    private lazy var speciesOverviewView: RoundedInfoView = {
+        let infoView = Utilities.makeRoundedInfoView(title: "OVERVIEW", barLeftTitle: "Height", barMiddleTitle: "Weight", barRightTitle: "Diet")
+         infoView.addLearnMoreAction(buttonTag: 0, target: self, selector: #selector(learnMoreButtonPressed(sender:)))
+       
+        return infoView
     }()
     
-    private lazy var speciesThreatsView: SpeciesThreatsView = {
-        return SpeciesThreatsView()
+    private lazy var speciesThreatsView: RoundedInfoView = {
+        let infoView = Utilities.makeRoundedInfoView(title: "THREATS", barLeftTitle: "", barMiddleTitle: "", barRightTitle: "")
+        infoView.addLearnMoreAction(buttonTag: 1, target: self, selector: #selector(learnMoreButtonPressed(sender:)))
+        return infoView
     }()
     
     private lazy var speciesHabitatView: SpeciesHabitatView = {
@@ -127,9 +132,9 @@ final class SpeciesDetailViewController: UIViewController {
     private func setViewElementsFromSpeciesData() {
         headerNameView.setViewElementsFromSpeciesData(species: currentSpecies)
         subheaderInfoView.setViewElementsFromSpeciesData(species: currentSpecies)
-        speciesOverviewView.setViewElementsFromSpeciesData(species: currentSpecies)
-        speciesThreatsView.setViewElementsFromSpeciesData(species: currentSpecies)
-        speciesHabitatView.setViewElementsFromSpeciesData(species: currentSpecies)
+        speciesOverviewView.configureDataLabels(bodyText: currentSpecies.overview, barLeftData: currentSpecies.height, barMiddleData: currentSpecies.weight, barRightData: currentSpecies.diet.rawValue)
+        speciesOverviewView.configureDataLabels(bodyText: currentSpecies.threats, barLeftData: "", barMiddleData: "", barRightData: "")
+        
     }
     
     private func setBackground() {
@@ -161,7 +166,7 @@ final class SpeciesDetailViewController: UIViewController {
     private func updateDiscoverLabelAlpha(scrollOffset: CGFloat) {
         var newAlpha = CGFloat()
         newAlpha = scrollOffset <= 40 ? 0.6 : 0
-       
+        
         DispatchQueue.main.async {
             UIView.animate(withDuration: 1, delay: 0, options: .curveEaseInOut, animations: {
                 self.exploreButton.alpha = newAlpha
@@ -235,6 +240,15 @@ final class SpeciesDetailViewController: UIViewController {
         setViewElementsFromSpeciesData()
         setBackground()
         bottomToolBar.highlightButton(button: .overviewButton)
+    }
+}
+
+//MARK: -- Objective C Selector Methods
+extension SpeciesDetailViewController {
+    @objc private func learnMoreButtonPressed(sender: UIButton) {
+        switch sender.tag {
+        default: print(sender.tag)
+        }
     }
 }
 
@@ -446,5 +460,7 @@ extension SpeciesDetailViewController {
         ])
     }
 }
+
+
 
 

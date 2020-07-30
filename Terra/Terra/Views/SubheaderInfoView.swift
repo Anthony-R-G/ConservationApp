@@ -12,27 +12,27 @@ final class SubheaderInfoView: UIView {
     //MARK: -- UI Element Initialization
     
     private lazy var numbersTitleLabel: UILabel = {
-        return Utilities.makeLabel(title: "Numbers", weight: .light, size: 16, alignment: .left)
+        return Utilities.makeLabel(title: "Numbers", weight: .light, size: 16, color: .white, alignment: .left)
     }()
     
     private lazy var numbersDataLabel: UILabel = {
-        return Utilities.makeLabel(title: nil, weight: .medium, size: 18, alignment: .left)
+        return Utilities.makeLabel(title: nil, weight: .medium, size: 18, color: .white, alignment: .left)
     }()
     
     private lazy var trendTitleLabel: UILabel = {
-        return Utilities.makeLabel(title: "Trend", weight: .light, size: 16, alignment: .left)
+        return Utilities.makeLabel(title: "Trend", weight: .light, size: 16, color: .white, alignment: .left)
     }()
     
     private lazy var trendDataLabel: UILabel = {
-        return Utilities.makeLabel(title: nil, weight: .medium, size: 18, alignment: .left)
+        return Utilities.makeLabel(title: nil, weight: .medium, size: 18, color: .white, alignment: .left)
     }()
     
     private lazy var lastAssessedTitleLabel: UILabel = {
-         return Utilities.makeLabel(title: "Last Assessed", weight: .light, size: 16, alignment: .left)
+        return Utilities.makeLabel(title: "Last Assessed", weight: .light, size: 16, color: .white, alignment: .left)
     }()
     
     private lazy var lastAssessedDataLabel: UILabel = {
-        return Utilities.makeLabel(title: nil, weight: .medium, size: 18, alignment: .left)
+        return Utilities.makeLabel(title: nil, weight: .medium, size: 18, color: .white, alignment: .left)
     }()
     
     //MARK: -- Methods

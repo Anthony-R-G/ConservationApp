@@ -8,26 +8,23 @@
 
 import UIKit
 
-final class SpeciesHabitatView: DetailInfoPanelView {
+final class SpeciesHabitatView: RoundedInfoView {
     
-    public override func setViewElementsFromSpeciesData(species: Species) {
-        bodyTextView.text = species.habitat.summary
-        infoBarDataLabelA.text = species.habitat.temperature
-        infoBarDataLabelC.text = " \(species.habitat.latitude.rounded(toPlaces:1))°"
-    }
-    
+  
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configureSpecificViewInfo(titleLabelStr: "HABITAT",
-                                   infoBarTitleLabelAStr: "Temp",
-                                   infoBarTitleLabelBStr: "Humidity",
-                                   infoBarTitleLabelCStr: "Latitude")
+        configureTitleLabels(titleText: "HABITAT",
+                                 barLeftTitle: "Temp",
+                                 barMiddleTitle: "Humidity",
+                                 barRightTitle: "Latitude")
     }
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
 
 
 

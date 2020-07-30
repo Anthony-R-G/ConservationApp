@@ -13,7 +13,7 @@ class SpeciesCollectionViewCell: UICollectionViewCell {
     //MARK: -- UI Element Initialization
     
     private lazy var speciesNameLabel: UILabel = {
-        return Utilities.makeLabel(title: nil, weight: .bold, size: 23, alignment: .left)
+        return Utilities.makeLabel(title: nil, weight: .bold, size: 23, color: .white, alignment: .left)
     }()
     
     private lazy var backgroundImage: UIImageView = {

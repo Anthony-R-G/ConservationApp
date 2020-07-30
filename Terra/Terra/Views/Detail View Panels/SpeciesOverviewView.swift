@@ -8,26 +8,17 @@
 
 import UIKit
 
-final class SpeciesOverviewView: DetailInfoPanelView {
-
-    public override func setViewElementsFromSpeciesData(species: Species) {
-        bodyTextView.text = species.overview.replacingOccurrences(of: "\n", with: "\n")
-        infoBarDataLabelA.text = species.height
-        infoBarDataLabelB.text = species.weight
-        infoBarDataLabelC.text = species.diet.rawValue
-    }
+final class SpeciesOverviewView: RoundedInfoView {
+    
+   
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configureSpecificViewInfo(titleLabelStr: "OVERVIEW",
-                                  infoBarTitleLabelAStr: "Height",
-                                  infoBarTitleLabelBStr: "Weight",
-                                  infoBarTitleLabelCStr: "Diet")
     }
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }
 

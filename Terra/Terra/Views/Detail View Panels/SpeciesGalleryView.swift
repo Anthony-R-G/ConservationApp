@@ -8,20 +8,18 @@
 
 import UIKit
 
-final class SpeciesGalleryView: DetailInfoPanelView {
-    
-    public override func setViewElementsFromSpeciesData(species: Species) {
-    }
+final class SpeciesGalleryView: RoundedInfoView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configureSpecificViewInfo(titleLabelStr: "GALLERY",
-                                   infoBarTitleLabelAStr: "",
-                                   infoBarTitleLabelBStr: "",
-                                   infoBarTitleLabelCStr: "")
+        configureTitleLabels(titleText: "GALLERY",
+                                 barLeftTitle: "",
+                                 barMiddleTitle: "",
+                                 barRightTitle: "")
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
 }

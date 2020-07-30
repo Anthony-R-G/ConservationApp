@@ -22,12 +22,16 @@ class Utilities {
         return collectionView
     }
     
-    static func makeLabel(title: String?, weight: FontWeight, size: CGFloat, alignment: NSTextAlignment) -> UILabel {
+    static func makeLabel(title: String?,
+                          weight: FontWeight,
+                          size: CGFloat,
+                          color: UIColor,
+                          alignment: NSTextAlignment) -> UILabel {
         let label = UILabel()
         label.text = title
         label.font = UIFont(name: weight.rawValue, size: size)
         label.textAlignment = alignment
-        label.textColor = .white
+        label.textColor = color
         label.adjustsFontSizeToFitWidth = true
         label.clipsToBounds = true
         label.sizeToFit()
@@ -43,6 +47,16 @@ class Utilities {
         button.titleLabel?.font = UIFont(name: "Roboto-Medium", size: 15)
         button.sizeToFit()
         return button
+    }
+    
+    static func makeRoundedInfoView(title: String,
+                                    barLeftTitle: String,
+                                    barMiddleTitle: String,
+                                    barRightTitle: String
+                                    ) -> RoundedInfoView {
+        let view = RoundedInfoView()
+        view.configureTitleLabels(titleText: title, barLeftTitle: barLeftTitle, barMiddleTitle: barMiddleTitle, barRightTitle: barRightTitle)
+        return view
     }
 }
 

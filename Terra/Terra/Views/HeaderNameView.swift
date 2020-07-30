@@ -12,20 +12,20 @@ final class HeaderNameView: UIView {
     //MARK: -- UI Element Initialization
     
     private lazy var conservationStatusLabel: UILabel = {
-        let label = Utilities.makeLabel(title: nil, weight: .regular, size: 17, alignment: .center)
+        let label = Utilities.makeLabel(title: nil, weight: .regular, size: 17, color: .white, alignment: .center)
         label.backgroundColor = Constants.red
         label.layer.cornerRadius = 10
         return label
     }()
     
     private lazy var speciesCommonNameLabel: UILabel = {
-        let label = Utilities.makeLabel(title: nil, weight: .bold, size: 55, alignment: .left)
+        let label = Utilities.makeLabel(title: nil, weight: .bold, size: 55, color: .white, alignment: .left)
         label.numberOfLines = 2
         return label
     }()
     
     private lazy var speciesScientificNameLabel: UILabel = {
-        let label = Utilities.makeLabel(title: nil, weight: .light, size: 17, alignment: .left)
+        let label = Utilities.makeLabel(title: nil, weight: .light, size: 17, color: .white, alignment: .left)
         let neededSize = label.sizeThatFits(CGSize(width: frame.size.width, height: CGFloat.greatestFiniteMagnitude))
         return label
     }()
