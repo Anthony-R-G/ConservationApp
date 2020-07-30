@@ -14,6 +14,8 @@
 		9711D8FC24BD42C800C2E6F1 /* FirestoresService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9711D8FB24BD42C800C2E6F1 /* FirestoresService.swift */; };
 		9711D91F24BD63B000C2E6F1 /* HabitatSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9711D91E24BD63B000C2E6F1 /* HabitatSystem.swift */; };
 		971FD0D024C61AD3003ED029 /* CGFloatExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971FD0CF24C61AD3003ED029 /* CGFloatExtensions.swift */; };
+		9723E7AA24D3505C0038ECB6 /* SpeciesAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9723E7A924D3505C0038ECB6 /* SpeciesAnnotation.swift */; };
+		9723E7AC24D353340038ECB6 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9723E7AB24D353330038ECB6 /* MapKit.framework */; };
 		972A615024C94C6800A59AB6 /* Species.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9711D8F624BD199700C2E6F1 /* Species.swift */; };
 		972A615124C94C6A00A59AB6 /* HabitatSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9711D91E24BD63B000C2E6F1 /* HabitatSystem.swift */; };
 		972A615224C94C6C00A59AB6 /* ConservationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E9450324BE10C800550824 /* ConservationStatus.swift */; };
@@ -36,6 +38,8 @@
 		9767D04C24C3EA9200384FCD /* SubheaderInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9767D04B24C3EA9200384FCD /* SubheaderInfoView.swift */; };
 		976D585724CF9FD800FC7458 /* Double Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976D585624CF9FD800FC7458 /* Double Extensions.swift */; };
 		976D585924CFA04400FC7458 /* UIButtonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976D585824CFA04400FC7458 /* UIButtonExtensions.swift */; };
+		976FB55324D367AE00848E35 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 97591FE124CCDC28002EAC96 /* Roboto-Regular.ttf */; };
+		976FB55524D367E400848E35 /* Roboto-Light-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 976FB55424D367E400848E35 /* Roboto-Light-Italic.ttf */; };
 		9772167924D287EA00828582 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9772167824D287EA00828582 /* MapViewController.swift */; };
 		977D876C24CD3A6100AE5E51 /* Taxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977D876B24CD3A6100AE5E51 /* Taxonomy.swift */; };
 		977D876E24CD698500AE5E51 /* Taxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977D876B24CD3A6100AE5E51 /* Taxonomy.swift */; };
@@ -87,6 +91,8 @@
 		9711D8FB24BD42C800C2E6F1 /* FirestoresService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoresService.swift; sourceTree = "<group>"; };
 		9711D91E24BD63B000C2E6F1 /* HabitatSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitatSystem.swift; sourceTree = "<group>"; };
 		971FD0CF24C61AD3003ED029 /* CGFloatExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloatExtensions.swift; sourceTree = "<group>"; };
+		9723E7A924D3505C0038ECB6 /* SpeciesAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesAnnotation.swift; sourceTree = "<group>"; };
+		9723E7AB24D353330038ECB6 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		972BBF7624C01FA900B6F7C0 /* PSORoundedVisualEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSORoundedVisualEffectView.swift; sourceTree = "<group>"; };
 		972BBF7824C0204600B6F7C0 /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		972BBF7B24C0256F00B6F7C0 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
@@ -103,6 +109,7 @@
 		9767D04B24C3EA9200384FCD /* SubheaderInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubheaderInfoView.swift; sourceTree = "<group>"; };
 		976D585624CF9FD800FC7458 /* Double Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double Extensions.swift"; sourceTree = "<group>"; };
 		976D585824CFA04400FC7458 /* UIButtonExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtensions.swift; sourceTree = "<group>"; };
+		976FB55424D367E400848E35 /* Roboto-Light-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light-Italic.ttf"; sourceTree = "<group>"; };
 		9772167824D287EA00828582 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		977D876B24CD3A6100AE5E51 /* Taxonomy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Taxonomy.swift; sourceTree = "<group>"; };
 		977D876F24CD6A1200AE5E51 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
@@ -141,6 +148,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9723E7AC24D353340038ECB6 /* MapKit.framework in Frameworks */,
 				26F453B1F1D6E3EF4FFC7A4C /* Pods_Terra.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -191,6 +199,7 @@
 		972BBF7A24C0256400B6F7C0 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				976FB55424D367E400848E35 /* Roboto-Light-Italic.ttf */,
 				972BBF7B24C0256F00B6F7C0 /* Roboto-Bold.ttf */,
 				972BBF7C24C0257600B6F7C0 /* Roboto-Medium.ttf */,
 				97591FE124CCDC28002EAC96 /* Roboto-Regular.ttf */,
@@ -208,6 +217,7 @@
 				977D877324CE0D8C00AE5E51 /* DonateButton.swift */,
 				97D5946324CE7E49001BD566 /* BottomBarView.swift */,
 				97591FD324CB8D46002EAC96 /* RoundedInfoView.swift */,
+				9723E7A924D3505C0038ECB6 /* SpeciesAnnotation.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -315,6 +325,7 @@
 		B30AEC29118276EF72B01F0A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9723E7AB24D353330038ECB6 /* MapKit.framework */,
 				9BFC2362C88D3D8EDE2B1F8C /* Pods_Terra.framework */,
 				8A5606D9806647E6951E497D /* Pods_TerraTests.framework */,
 			);
@@ -405,11 +416,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				972BBF7F24C026CF00B6F7C0 /* Roboto-Medium.ttf in Resources */,
-				979C192023DE43EF00651B2B /* LaunchScreen.storyboard in Resources */,
+				976FB55524D367E400848E35 /* Roboto-Light-Italic.ttf in Resources */,
 				972BBF8024C026D100B6F7C0 /* Roboto-Light.ttf in Resources */,
-				978E5CF223FB5CBC007BCD25 /* GoogleService-Info.plist in Resources */,
+				976FB55324D367AE00848E35 /* Roboto-Regular.ttf in Resources */,
+				972BBF7F24C026CF00B6F7C0 /* Roboto-Medium.ttf in Resources */,
 				972BBF7E24C026CD00B6F7C0 /* Roboto-Bold.ttf in Resources */,
+				978E5CF223FB5CBC007BCD25 /* GoogleService-Info.plist in Resources */,
+				979C192023DE43EF00651B2B /* LaunchScreen.storyboard in Resources */,
 				979C191D23DE43EF00651B2B /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -498,6 +511,7 @@
 				977D877224CD7BFF00AE5E51 /* Habitat.swift in Sources */,
 				97D5946424CE7E49001BD566 /* BottomBarView.swift in Sources */,
 				972BBF7724C01FA900B6F7C0 /* PSORoundedVisualEffectView.swift in Sources */,
+				9723E7AA24D3505C0038ECB6 /* SpeciesAnnotation.swift in Sources */,
 				976D585924CFA04400FC7458 /* UIButtonExtensions.swift in Sources */,
 				977D877424CE0D8C00AE5E51 /* DonateButton.swift in Sources */,
 				977D876C24CD3A6100AE5E51 /* Taxonomy.swift in Sources */,

@@ -16,41 +16,46 @@ class MapViewController: UIViewController {
         let mv = MKMapView()
         mv.mapType = .satelliteFlyover
         mv.showsTraffic = false
-        mv.delegate = self
         return mv
     }()
     
     //MARK: -- Properties
-    var habitatLocation = CLLocation() {
+    
+    var currentSpecies: Species! {
         didSet {
-            makeMKAnnotation(latitude: habitatLocation.coordinate.latitude, longitude: habitatLocation.coordinate.longitude, title: "Amur Leopard", subtitle: nil)
+            habitatLocation = makeCLLocation(latitude: currentSpecies.habitat.latitude, longitude: currentSpecies.habitat.longitude)
+        }
+    }
+    
+    
+    private var habitatLocation = CLLocation() {
+        didSet {
+            makeAnnotation(latitude: habitatLocation.coordinate.latitude, longitude: habitatLocation.coordinate.longitude, title: currentSpecies.commonName , subtitle: nil)
             mapView.centerToLocation(habitatLocation)
+            
         }
     }
     
     //MARK: -- Methods
-    func makeCLLocation(latitude: CLLocationDegrees, longitude: CLLocationDegrees) -> CLLocation {
+    private func makeCLLocation(latitude: CLLocationDegrees, longitude: CLLocationDegrees) -> CLLocation {
         let location = CLLocation(latitude: latitude, longitude: longitude)
         return location
     }
     
     
-    private func makeMKAnnotation(latitude: CLLocationDegrees, longitude: CLLocationDegrees, title: String?, subtitle: String?) {
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-        if let title = title {
-            annotation.title = title
-        }
-        if let subtitle = subtitle {
-            annotation.subtitle = subtitle
-        }
+    private func makeAnnotation(latitude: CLLocationDegrees, longitude: CLLocationDegrees, title: String, subtitle: String?) {
+        let annotation = SpeciesAnnotation(title: currentSpecies.commonName, subtitle: currentSpecies.scientificName, coordinate: CLLocationCoordinate2D(latitude: habitatLocation.coordinate.latitude, longitude: habitatLocation.coordinate.longitude))
         mapView.addAnnotation(annotation)
     }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         addSubviews()
         setConstraints()
+        mapView.delegate = self
+        let annotation = SpeciesAnnotation(title: currentSpecies.commonName, subtitle: currentSpecies.scientificName, coordinate: CLLocationCoordinate2D(latitude: currentSpecies.habitat.latitude, longitude: currentSpecies.habitat.longitude))
+        mapView.addAnnotation(annotation)
     }
 }
 
@@ -70,11 +75,29 @@ private extension MKMapView {
 //MARK: -- MapView Delegate Methods
 
 extension MapViewController: MKMapViewDelegate {
-  
-    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        print(view.annotation?.title)
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        guard let annotation = annotation as? SpeciesAnnotation else {
+            return nil
+        }
+        
+        let identifier = "species"
+        var view: MKMarkerAnnotationView
+        
+        if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKMarkerAnnotationView {
+            dequeuedView.annotation = annotation
+            view = dequeuedView
+        } else {
+            view = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            view.canShowCallout = true
+            view.calloutOffset = CGPoint(x: -5, y: 5)
+            view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+        }
+        
+        return view
     }
 }
+
 
 //MARK: --Add Subviews & Set Constraints
 

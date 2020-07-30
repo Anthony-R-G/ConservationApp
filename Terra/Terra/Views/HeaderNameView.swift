@@ -25,7 +25,7 @@ final class HeaderNameView: UIView {
     }()
     
     private lazy var speciesScientificNameLabel: UILabel = {
-        let label = Utilities.makeLabel(title: nil, weight: .light, size: 17, color: .white, alignment: .left)
+        let label = Utilities.makeLabel(title: nil, weight: .lightItalic, size: 17, color: .white, alignment: .left)
         let neededSize = label.sizeThatFits(CGSize(width: frame.size.width, height: CGFloat.greatestFiniteMagnitude))
         return label
     }()
