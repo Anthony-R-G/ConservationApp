@@ -38,14 +38,13 @@ class MapViewController: UIViewController {
     private func makeMKAnnotation(latitude: CLLocationDegrees, longitude: CLLocationDegrees, title: String?, subtitle: String?) {
         let annotation = MKPointAnnotation()
         annotation.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-        mapView.addAnnotation(annotation)
         if let title = title {
             annotation.title = title
         }
         if let subtitle = subtitle {
             annotation.subtitle = subtitle
         }
-        
+        mapView.addAnnotation(annotation)
     }
     
     override func viewDidLoad() {
@@ -71,22 +70,7 @@ private extension MKMapView {
 //MARK: -- MapView Delegate Methods
 
 extension MapViewController: MKMapViewDelegate {
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        guard annotation is MKPointAnnotation else { return nil }
-        
-        let identifier = "Annotation"
-        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
-        
-        if annotationView == nil {
-            annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-            annotationView!.canShowCallout = true
-        } else {
-            annotationView!.annotation = annotation
-        }
-        
-        return annotationView
-    }
-    
+  
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         print(view.annotation?.title)
     }
