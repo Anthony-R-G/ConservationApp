@@ -48,5 +48,15 @@ class Utilities {
         button.sizeToFit()
         return button
     }
+    
+    static func makeRoundedInfoView(title: String,
+                                    barLeftTitle: String,
+                                    barMiddleTitle: String,
+                                    barRightTitle: String
+                                    ) -> RoundedInfoView {
+        let view = RoundedInfoView()
+        view.configureTitleLabels(titleText: title, barLeftTitle: barLeftTitle, barMiddleTitle: barMiddleTitle, barRightTitle: barRightTitle)
+        return view
+    }
 }
 

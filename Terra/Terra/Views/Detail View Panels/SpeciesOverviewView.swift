@@ -10,15 +10,12 @@ import UIKit
 
 final class SpeciesOverviewView: RoundedInfoView {
     
+   
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configureTitleLabels(titleText: "OVERVIEW",
-                                 barLeftTitle: "Height",
-                                 barMiddleTitle: "Weight",
-                                 barRightTitle: "diet")
-        
     }
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

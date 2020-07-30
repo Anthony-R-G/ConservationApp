@@ -12,7 +12,7 @@ class RoundedInfoView: UIView {
     
     //MARK: -- UI Element Initialization
     
-    private(set) lazy var titleLabel: UILabel = {
+    private lazy var titleLabel: UILabel = {
         return Utilities.makeLabel(title: "TITLE", weight: .bold, size: 28, color: .white, alignment: .left)
     }()
     
@@ -72,9 +72,7 @@ class RoundedInfoView: UIView {
     }()
     
     //MARK: -- Methods
-    
-    var species: Species?
-    
+        
     public func configureTitleLabels(
         titleText: String,
         barLeftTitle: String,
@@ -97,6 +95,11 @@ class RoundedInfoView: UIView {
         barRightDataLabel.text = barRightData
     }
     
+    public func addLearnMoreAction(buttonTag: Int, target: Any, selector: Selector) {
+        learnMoreButton.tag = buttonTag
+        learnMoreButton.addTarget(target, action: selector, for: .touchUpInside)
+    }
+    
     private func setAppearance() {
         self.backgroundColor = .clear
         self.layer.cornerRadius = 39
@@ -104,7 +107,7 @@ class RoundedInfoView: UIView {
         self.addBlurToView(cornerRadius: 39)
     }
     
-    init(frame: CGRect, bodyText: String, barLeftTitle: String, barMiddleTitle: String) {
+    override init(frame: CGRect) {
         super.init(frame: frame)
         
         setAppearance()
