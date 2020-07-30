@@ -85,8 +85,7 @@ final class SpeciesDetailViewController: UIViewController {
     
     private lazy var speciesOverviewView: RoundedInfoView = {
         let infoView = Utilities.makeRoundedInfoView(title: "OVERVIEW", barLeftTitle: "Height", barMiddleTitle: "Weight", barRightTitle: "Diet")
-         infoView.addLearnMoreAction(buttonTag: 0, target: self, selector: #selector(learnMoreButtonPressed(sender:)))
-       
+        infoView.addLearnMoreAction(buttonTag: 0, target: self, selector: #selector(learnMoreButtonPressed(sender:)))
         return infoView
     }()
     
@@ -96,14 +95,16 @@ final class SpeciesDetailViewController: UIViewController {
         return infoView
     }()
     
-    private lazy var speciesHabitatView: SpeciesHabitatView = {
-        return SpeciesHabitatView()
-        
+    private lazy var speciesHabitatView: RoundedInfoView = {
+        let infoView = Utilities.makeRoundedInfoView(title: "HABITAT", barLeftTitle: "Temperature", barMiddleTitle: "Humidity", barRightTitle: "Latitude")
+        infoView.addLearnMoreAction(buttonTag: 2, target: self, selector: #selector(learnMoreButtonPressed(sender:)))
+        return infoView
     }()
     
-    private lazy var speciesGalleryView: SpeciesGalleryView = {
-        return SpeciesGalleryView()
-        
+    private lazy var speciesGalleryView: RoundedInfoView = {
+        let infoView = Utilities.makeRoundedInfoView(title: "GALLERY", barLeftTitle: "", barMiddleTitle: "", barRightTitle: "")
+        infoView.addLearnMoreAction(buttonTag: 3, target: self, selector: #selector(learnMoreButtonPressed(sender:)))
+        return infoView
     }()
     
     private lazy var headerNameViewHeightConstraint: NSLayoutConstraint = {
@@ -128,6 +129,12 @@ final class SpeciesDetailViewController: UIViewController {
     
     
     //MARK: -- Methods
+    
+    @objc private func learnMoreButtonPressed(sender: UIButton) {
+        switch sender.tag {
+        default: print(sender.tag)
+        }
+    }
     
     private func setViewElementsFromSpeciesData() {
         headerNameView.setViewElementsFromSpeciesData(species: currentSpecies)
@@ -240,15 +247,6 @@ final class SpeciesDetailViewController: UIViewController {
         setViewElementsFromSpeciesData()
         setBackground()
         bottomToolBar.highlightButton(button: .overviewButton)
-    }
-}
-
-//MARK: -- Objective C Selector Methods
-extension SpeciesDetailViewController {
-    @objc private func learnMoreButtonPressed(sender: UIButton) {
-        switch sender.tag {
-        default: print(sender.tag)
-        }
     }
 }
 
