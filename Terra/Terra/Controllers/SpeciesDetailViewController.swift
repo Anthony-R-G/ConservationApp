@@ -134,7 +134,7 @@ final class SpeciesDetailViewController: UIViewController {
         switch sender.tag {
         case 2:
             let mapVC = MapViewController()
-            mapVC.speciesHabitat = currentSpecies.habitat
+            mapVC.habitatLocation = mapVC.makeCLLocation(latitude: currentSpecies.habitat.latitude, longitude: currentSpecies.habitat.longitude)
             present(mapVC, animated: true, completion: nil)
         default: print(sender.tag)
         }

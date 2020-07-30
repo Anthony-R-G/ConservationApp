@@ -18,21 +18,20 @@ class MapViewController: UIViewController {
         return mv
     }()
     
-    var speciesHabitat: Habitat! {
+    var habitatLocation = CLLocation() {
         didSet {
-            addMapAnnotation(latitude: speciesHabitat.latitude, longitude: speciesHabitat.longitude)
-            zoomToArea()
+            addMapAnnotation(latitude: habitatLocation.coordinate.latitude, longitude: habitatLocation.coordinate.longitude)
+           
         }
     }
     
-    private func zoomToArea() {
-        let locationCoordinate = CLLocationCoordinate2D(latitude: speciesHabitat.latitude, longitude: speciesHabitat.longitude)
-        mapView.centerCoordinate = locationCoordinate
-        let region = MKCoordinateRegion(center: locationCoordinate, latitudinalMeters: 9484.1, longitudinalMeters: 9484.1)
-        mapView.setRegion(region, animated: true)
+    func makeCLLocation(latitude: Double, longitude: Double) -> CLLocation {
+        let location = CLLocation(latitude: latitude, longitude: longitude)
+        return location
     }
     
-    private func addMapAnnotation(latitude: Double, longitude: Double) {
+    
+    private func addMapAnnotation(latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
         let annotation = MKPointAnnotation()
         annotation.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         mapView.addAnnotation(annotation)
@@ -43,7 +42,38 @@ class MapViewController: UIViewController {
         super.viewDidLoad()
         addSubviews()
         setConstraints()
-       
+        
+    }
+}
+
+extension MapViewController: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        guard annotation is MKPointAnnotation else { return nil }
+        
+        let identifier = "Annotation"
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+        
+        if annotationView == nil {
+            annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            annotationView!.canShowCallout = true
+        } else {
+            annotationView!.annotation = annotation
+        }
+        
+        return annotationView
+    }
+}
+
+private extension MKMapView {
+    func centerToLocation(
+        _ location: CLLocation,
+        regionRadius: CLLocationDistance = 1000
+    ) {
+        let coordinateRegion = MKCoordinateRegion(
+            center: location.coordinate,
+            latitudinalMeters: regionRadius,
+            longitudinalMeters: regionRadius)
+        setRegion(coordinateRegion, animated: true)
     }
 }
 
@@ -67,24 +97,6 @@ extension MapViewController {
             mapView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             mapView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
-    }
-}
-
-extension MapViewController: MKMapViewDelegate {
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        guard annotation is MKPointAnnotation else { return nil }
-
-        let identifier = "Annotation"
-        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
-
-        if annotationView == nil {
-            annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-            annotationView!.canShowCallout = true
-        } else {
-            annotationView!.annotation = annotation
-        }
-
-        return annotationView
     }
 }
 
