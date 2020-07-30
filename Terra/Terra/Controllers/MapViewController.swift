@@ -21,7 +21,7 @@ class MapViewController: UIViewController {
     var habitatLocation = CLLocation() {
         didSet {
             addMapAnnotation(latitude: habitatLocation.coordinate.latitude, longitude: habitatLocation.coordinate.longitude)
-           
+            mapView.centerToLocation(habitatLocation)
         }
     }
     
@@ -55,6 +55,7 @@ extension MapViewController: MKMapViewDelegate {
         
         if annotationView == nil {
             annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            
             annotationView!.canShowCallout = true
         } else {
             annotationView!.annotation = annotation
