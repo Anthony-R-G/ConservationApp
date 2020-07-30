@@ -53,22 +53,22 @@ class SpeciesCollectionViewCell: UICollectionViewCell {
     }
 }
 
-//MARK: -- Adding Subviews & Constraints
+//MARK: -- Add Subviews & Constraints
 
-extension SpeciesCollectionViewCell {
-    private func addSubviews() {
+fileprivate extension SpeciesCollectionViewCell {
+    func addSubviews() {
         let UIElements = [backgroundImage, backgroundGradientOverlay, speciesNameLabel]
         UIElements.forEach{ contentView.addSubview($0) }
         UIElements.forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
     }
     
-    private func setConstraints() {
+    func setConstraints() {
         setBackgroundImageConstraints()
         setBackgroundGradientOverlayConstraints()
         setSpeciesNameLabelConstraints()
     }
     
-    private func setBackgroundImageConstraints() {
+    func setBackgroundImageConstraints() {
         NSLayoutConstraint.activate([
             backgroundImage.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             backgroundImage.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
@@ -77,7 +77,7 @@ extension SpeciesCollectionViewCell {
         ])
     }
     
-    private func setBackgroundGradientOverlayConstraints() {
+    func setBackgroundGradientOverlayConstraints() {
         NSLayoutConstraint.activate([
             backgroundGradientOverlay.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             backgroundGradientOverlay.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
@@ -86,7 +86,7 @@ extension SpeciesCollectionViewCell {
         ])
     }
     
-    private func setSpeciesNameLabelConstraints(){
+    func setSpeciesNameLabelConstraints(){
         NSLayoutConstraint.activate([
             speciesNameLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             speciesNameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -30),

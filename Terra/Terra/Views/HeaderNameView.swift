@@ -49,22 +49,22 @@ final class HeaderNameView: UIView {
     }
 }
 
-//MARK: -- Adding Subviews & Constraints
+//MARK: -- Add Subviews & Constraints
 
-extension HeaderNameView {
+fileprivate extension HeaderNameView {
     
-    private func addSubviews() {
+    func addSubviews() {
         let UIElements = [conservationStatusLabel, speciesCommonNameLabel, speciesScientificNameLabel]
         UIElements.forEach { addSubview($0) }
         UIElements.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
     }
-    private func setConstraints() {
+    func setConstraints() {
         setConservationStatusLabelConstraints()
         setSpeciesCommonNameLabelConstraints()
         setSpeciesScientificNameLabelConstraints()
     }
     
-    private func setConservationStatusLabelConstraints() {
+    func setConservationStatusLabelConstraints() {
         NSLayoutConstraint.activate([
             conservationStatusLabel.leadingAnchor.constraint(equalTo: speciesCommonNameLabel.leadingAnchor, constant: 5),
             conservationStatusLabel.bottomAnchor.constraint(equalTo: speciesCommonNameLabel.topAnchor, constant: -10),
@@ -73,7 +73,7 @@ extension HeaderNameView {
         ])
     }
     
-    private func setSpeciesCommonNameLabelConstraints(){
+    func setSpeciesCommonNameLabelConstraints(){
         NSLayoutConstraint.activate([
             speciesCommonNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
             speciesCommonNameLabel.bottomAnchor.constraint(equalTo: speciesScientificNameLabel.topAnchor),
@@ -82,7 +82,7 @@ extension HeaderNameView {
         ])
     }
     
-    private func setSpeciesScientificNameLabelConstraints() {
+    func setSpeciesScientificNameLabelConstraints() {
         NSLayoutConstraint.activate([
             speciesScientificNameLabel.leadingAnchor.constraint(equalTo: speciesCommonNameLabel.leadingAnchor),
             speciesScientificNameLabel.bottomAnchor.constraint(equalTo: bottomAnchor)

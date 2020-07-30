@@ -125,7 +125,7 @@ final class SpeciesDetailViewController: UIViewController {
     
     //MARK: -- Properties
     
-    public var currentSpecies: Species!
+    var currentSpecies: Species!
     
     
     //MARK: -- Methods
@@ -295,6 +295,7 @@ extension SpeciesDetailViewController: UIScrollViewDelegate {
 }
 
 //MARK: -- Custom Delegate Implementation
+
 extension SpeciesDetailViewController: DonateButtonDelegate {
     func donateButtonPressed() {
         guard let donationURL = URL(string: currentSpecies.donationLink) else { return }
@@ -311,9 +312,10 @@ extension SpeciesDetailViewController: BottomBarDelegate {
 }
 
 
-//MARK: -- Adding Subviews & Constraints
-extension SpeciesDetailViewController {
-    private func addSubviews() {
+//MARK: -- Add Subviews & Constraints
+
+fileprivate extension SpeciesDetailViewController {
+    func addSubviews() {
         view.addSubview(verticalScrollView)
         verticalScrollView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -326,7 +328,7 @@ extension SpeciesDetailViewController {
         horizontalScrollViewUIElements.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
     }
     
-    private func setConstraints() {
+    func setConstraints() {
         setBackgroundImageViewConstraints()
         setBackgroundGradientOverlayConstraints()
         
@@ -343,7 +345,7 @@ extension SpeciesDetailViewController {
         setBottomToolBarConstraints()
     }
     
-    private func setVerticalScrollViewConstraints() {
+    func setVerticalScrollViewConstraints() {
         verticalScrollView.backgroundColor = .clear
         NSLayoutConstraint.activate([
             verticalScrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -353,7 +355,7 @@ extension SpeciesDetailViewController {
         ])
     }
     
-    private func setHorizontalScrollViewConstraints() {
+    func setHorizontalScrollViewConstraints() {
         horizontalScrollView.backgroundColor = .clear
         NSLayoutConstraint.activate([
             horizontalScrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -363,7 +365,7 @@ extension SpeciesDetailViewController {
         ])
     }
     
-    private func setBackgroundImageViewConstraints() {
+    func setBackgroundImageViewConstraints() {
         NSLayoutConstraint.activate([
             backgroundImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             backgroundImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
@@ -372,7 +374,7 @@ extension SpeciesDetailViewController {
         ])
     }
     
-    private func setBackgroundGradientOverlayConstraints() {
+    func setBackgroundGradientOverlayConstraints() {
         NSLayoutConstraint.activate([
             backgroundGradientOverlay.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             backgroundGradientOverlay.centerYAnchor.constraint(equalTo: view.centerYAnchor),
@@ -381,7 +383,7 @@ extension SpeciesDetailViewController {
         ])
     }
     
-    private func setHeaderInfoViewConstraints() {
+    func setHeaderInfoViewConstraints() {
         NSLayoutConstraint.activate([
             headerNameView.leadingAnchor.constraint(equalTo: verticalScrollView.leadingAnchor, constant: 20),
             headerNameView.widthAnchor.constraint(equalTo: verticalScrollView.widthAnchor),
@@ -390,7 +392,7 @@ extension SpeciesDetailViewController {
         ])
     }
     
-    private func setSubheaderInfoViewConstraints() {
+    func setSubheaderInfoViewConstraints() {
         NSLayoutConstraint.activate([
             subheaderInfoView.leadingAnchor.constraint(equalTo: headerNameView.leadingAnchor),
             subheaderInfoView.trailingAnchor.constraint(equalTo: headerNameView.trailingAnchor),
@@ -399,7 +401,7 @@ extension SpeciesDetailViewController {
         ])
     }
     
-    private func setDiscoverButtonConstraints() {
+    func setDiscoverButtonConstraints() {
         NSLayoutConstraint.activate([
             exploreButton.heightAnchor.constraint(equalToConstant: exploreButton.frame.size.height),
             exploreButton.widthAnchor.constraint(equalToConstant: exploreButton.frame.size.width),
@@ -408,7 +410,7 @@ extension SpeciesDetailViewController {
         ])
     }
     
-    private func setDonateButtonConstraints() {
+    func setDonateButtonConstraints() {
         NSLayoutConstraint.activate([
             donateButton.widthAnchor.constraint(equalTo: speciesOverviewView.widthAnchor),
             donateButton.heightAnchor.constraint(equalToConstant: 50),
@@ -417,7 +419,7 @@ extension SpeciesDetailViewController {
         ])
     }
     
-    private func setBottomToolBarConstraints() {
+    func setBottomToolBarConstraints() {
         NSLayoutConstraint.activate([
             bottomToolBar.topAnchor.constraint(equalTo: horizontalScrollView.bottomAnchor, constant: 120),
             bottomToolBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -426,7 +428,7 @@ extension SpeciesDetailViewController {
         ])
     }
     
-    private func setSpeciesOverviewViewConstraints() {
+    func setSpeciesOverviewViewConstraints() {
         NSLayoutConstraint.activate([
             speciesOverviewView.centerYAnchor.constraint(equalTo: horizontalScrollView.centerYAnchor),
             speciesOverviewView.leadingAnchor.constraint(equalTo: horizontalScrollView.leadingAnchor, constant: 20),
@@ -435,7 +437,7 @@ extension SpeciesDetailViewController {
         ])
     }
     
-    private func setSpeciesThreatsViewConstraints() {
+    func setSpeciesThreatsViewConstraints() {
         NSLayoutConstraint.activate([
             speciesThreatsView.centerYAnchor.constraint(equalTo: horizontalScrollView.centerYAnchor),
             speciesThreatsView.leadingAnchor.constraint(equalTo: speciesOverviewView.trailingAnchor, constant: 40),
@@ -444,7 +446,7 @@ extension SpeciesDetailViewController {
         ])
     }
     
-    private func setSpeciesHabitatViewConstraints() {
+    func setSpeciesHabitatViewConstraints() {
         NSLayoutConstraint.activate([
             speciesHabitatView.centerYAnchor.constraint(equalTo: horizontalScrollView.centerYAnchor),
             speciesHabitatView.leadingAnchor.constraint(equalTo: speciesThreatsView.trailingAnchor, constant: 40),
@@ -453,7 +455,7 @@ extension SpeciesDetailViewController {
         ])
     }
     
-    private func setSpeciesGalleryViewConstraints() {
+    func setSpeciesGalleryViewConstraints() {
         NSLayoutConstraint.activate([
             speciesGalleryView.centerYAnchor.constraint(equalTo: horizontalScrollView.centerYAnchor),
             speciesGalleryView.leadingAnchor.constraint(equalTo: speciesHabitatView.trailingAnchor, constant: 40),
