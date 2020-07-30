@@ -132,6 +132,10 @@ final class SpeciesDetailViewController: UIViewController {
     
     @objc private func learnMoreButtonPressed(sender: UIButton) {
         switch sender.tag {
+        case 2:
+            let mapVC = MapViewController()
+            mapVC.speciesHabitat = currentSpecies.habitat
+            present(mapVC, animated: true, completion: nil)
         default: print(sender.tag)
         }
     }
