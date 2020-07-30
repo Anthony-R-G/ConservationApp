@@ -12,8 +12,10 @@ final class HeaderNameView: UIView {
     //MARK: -- UI Element Initialization
     
     private lazy var conservationStatusLabel: UILabel = {
-        let label = Utilities.makeLabel(title: nil, weight: .regular, size: 17, color: .white, alignment: .center)
-        label.backgroundColor = Constants.red
+        let label = Utilities.makeLabel(title: nil, weight: .regular, size: 17, color: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), alignment: .center)
+        label.backgroundColor = .clear
+        label.layer.borderColor = UIColor.white.cgColor
+        label.layer.borderWidth = 1
         label.layer.cornerRadius = 10
         return label
     }()
