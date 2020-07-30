@@ -21,8 +21,15 @@ class MapViewController: UIViewController {
     var speciesHabitat: Habitat! {
         didSet {
             addMapAnnotation(latitude: speciesHabitat.latitude, longitude: speciesHabitat.longitude)
-            
+            zoomToArea()
         }
+    }
+    
+    private func zoomToArea() {
+        let locationCoordinate = CLLocationCoordinate2D(latitude: speciesHabitat.latitude, longitude: speciesHabitat.longitude)
+        mapView.centerCoordinate = locationCoordinate
+        let region = MKCoordinateRegion(center: locationCoordinate, latitudinalMeters: 9484.1, longitudinalMeters: 9484.1)
+        mapView.setRegion(region, animated: true)
     }
     
     private func addMapAnnotation(latitude: Double, longitude: Double) {
