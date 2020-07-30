@@ -9,7 +9,6 @@
 import UIKit
 import SafariServices
 import FirebaseUI
-import FirebaseStorage
 
 final class SpeciesDetailViewController: UIViewController {
     

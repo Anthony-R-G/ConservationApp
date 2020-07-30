@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Kingfisher
+import FirebaseUI
 
 class SpeciesCollectionViewCell: UICollectionViewCell {
     //MARK: -- UI Element Initialization
@@ -16,7 +16,7 @@ class SpeciesCollectionViewCell: UICollectionViewCell {
         return Utilities.makeLabel(title: nil, weight: .bold, size: 23, color: .white, alignment: .left)
     }()
     
-    private lazy var backgroundImage: UIImageView = {
+    private lazy var backgroundImageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
         insertSubview(iv, at: 0)
@@ -35,9 +35,7 @@ class SpeciesCollectionViewCell: UICollectionViewCell {
     
     public func configureCellUI(from species: Species) {
         speciesNameLabel.text = species.commonName
-        let imageURL = URL(string: species.cellImage)
-        backgroundImage.kf.setImage(with: imageURL)
-        backgroundImage.kf.indicatorType = .activity
+        FirebaseStorageService.cellImageManager.getImage(imageRefStr: species.commonName, imageView: backgroundImageView)
         layer.cornerRadius = Constants.cornerRadius
         layer.masksToBounds = true
     }
@@ -57,7 +55,7 @@ class SpeciesCollectionViewCell: UICollectionViewCell {
 
 fileprivate extension SpeciesCollectionViewCell {
     func addSubviews() {
-        let UIElements = [backgroundImage, backgroundGradientOverlay, speciesNameLabel]
+        let UIElements = [backgroundImageView, backgroundGradientOverlay, speciesNameLabel]
         UIElements.forEach{ contentView.addSubview($0) }
         UIElements.forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
     }
@@ -70,10 +68,10 @@ fileprivate extension SpeciesCollectionViewCell {
     
     func setBackgroundImageConstraints() {
         NSLayoutConstraint.activate([
-            backgroundImage.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            backgroundImage.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            backgroundImage.heightAnchor.constraint(equalTo: contentView.heightAnchor),
-            backgroundImage.widthAnchor.constraint(equalTo: contentView.widthAnchor)
+            backgroundImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            backgroundImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            backgroundImageView.heightAnchor.constraint(equalTo: contentView.heightAnchor),
+            backgroundImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor)
         ])
     }
     
