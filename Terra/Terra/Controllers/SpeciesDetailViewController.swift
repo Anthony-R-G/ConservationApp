@@ -30,7 +30,6 @@ final class SpeciesDetailViewController: UIViewController {
     private lazy var backgroundImageView: UIImageView = {
         let iv = UIImageView()
         iv.translatesAutoresizingMaskIntoConstraints = false
-        
         iv.contentMode = UIView.ContentMode.scaleAspectFill
         view.insertSubview(iv, at: 0)
         return iv
@@ -230,6 +229,10 @@ final class SpeciesDetailViewController: UIViewController {
         }
     }
     
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -424,7 +427,7 @@ fileprivate extension SpeciesDetailViewController {
     
     func setBottomToolBarConstraints() {
         NSLayoutConstraint.activate([
-            bottomToolBar.topAnchor.constraint(equalTo: horizontalScrollView.bottomAnchor, constant: 120),
+            bottomToolBar.topAnchor.constraint(equalTo: horizontalScrollView.bottomAnchor, constant: 110),
             bottomToolBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             bottomToolBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             bottomToolBar.heightAnchor.constraint(equalToConstant: 80)
