@@ -29,7 +29,7 @@ ARKit (some animals will have the option to "View in AR" which will bring up a 3
 ## Screenshots
 List of animal species, separated by Red List conservation levels:
 
-![Example 1](https://i.imgur.com/qI0W18I.png)
+![Example 1](https://i.imgur.com/w4DbKSR.png)
 
 Tapping any one cell will transition to a new page where the species you've selected is put at the forefront:
 
