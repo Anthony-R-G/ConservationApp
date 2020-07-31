@@ -146,7 +146,8 @@ final class SpeciesDetailViewController: UIViewController {
         headerNameView.setViewElementsFromSpeciesData(species: currentSpecies)
         subheaderInfoView.setViewElementsFromSpeciesData(species: currentSpecies)
         speciesOverviewView.configureDataLabels(bodyText: currentSpecies.overview, barLeftData: currentSpecies.height, barMiddleData: currentSpecies.weight, barRightData: currentSpecies.diet.rawValue)
-        speciesOverviewView.configureDataLabels(bodyText: currentSpecies.threats, barLeftData: "", barMiddleData: "", barRightData: "")
+        speciesThreatsView.configureDataLabels(bodyText: currentSpecies.threats, barLeftData: "", barMiddleData: "", barRightData: "")
+        speciesHabitatView.configureDataLabels(bodyText: currentSpecies.habitat.summary, barLeftData: currentSpecies.habitat.temperature, barMiddleData: "", barRightData: "\(currentSpecies.habitat.latitude)")
         
     }
     

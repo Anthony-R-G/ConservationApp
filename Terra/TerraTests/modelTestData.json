@@ -1,33 +1,30 @@
 {
-"weight":"70-105lbs",
-        "populationSummary":"The IUCN Species Survival Commission has considered Amur leopards Critically Endangered (IUCN 1996) since 1996. As of 2019, more than 84 individuals remain in the wild (mostly in protected areas) and 170 to 180 live in captivity.",
-        "overview":"People  usually think of leopards in the savannas of Africa but in the Russian Far East, a rare subspecies has adapted to life in the temperate forests that make up the northern-most part of the species’ range. Similar to other leopards, the Amur leopard can run at speeds of up to 37 miles per hour. This incredible animal has been reported to leap more than 19 feet horizontally and up to 10 feet vertically.  The Amur leopard is solitary. Nimble-footed and strong, it carries and hides unfinished kills so that they are not taken by other predators. It has been reported that some males stay with females after mating, and may even help with rearing the young. Several males sometimes follow and fight over a female. They live for 10-15 years, and in captivity up to 20 years. The Amur leopard is also known as the Far East leopard, the Manchurian leopard or the Korean leopard.",
-        "cellImage":"https://firebasestorage.googleapis.com/v0/b/terra-a1b2b.appspot.com/o/Collection%20Cell%20Images%2FamurLeopard.jpg?alt=media&token=7c5b4c2e-9dc5-4f94-ab3f-814f06cf5cd4",
-        "donationLink":"https://support.wwf.org.uk/adopt-a-leopard",
-        "group":"Mammal",
-        "assessmentDate":"2019",
-        "scientificName":"Panthers pardus orientalis",
-        "detailImage":"https://firebasestorage.googleapis.com/v0/b/terra-a1b2b.appspot.com/o/Detail%20VC%20Images%2FamurLeopard.jpg?alt=media&token=f47a2ff7-e581-4d7f-89c4-bf4c5dec37da",
-        "height":"2.4 feet",
-        "habitat":{
-           "latitude":43.1332,
-           "summary":"Amur leopards live in the Amur Heilong Landscape, which spans both the Russian Far East and adjacent areas of China. This rare subspecies of leopard has adapted to life in the temperate forests that make up the northernmost part of the species' range.",
-           "system":"terrestrial",
-           "temperature":"34.7 °F",
-           "longitude":130
-        },
-        "populationNumbers":"~260",
-        "diet":"Carnivore",
-        "commonName":"Amur Leopard",
-        "populationTrend":"Decreasing",
-        "threats":"The Amur leopard is poached largely for its beautiful, spotted fur. In 1999, an undercover investigation team recovered a female and a male Amur leopard skin, which were being sold for $500 and $1,000 respectively in the village of Barabash, not far from the Kedrovaya Pad reserve in Russia. Agriculture and villages surround the forests where the leopards live. As a result the forests are relatively accessible, making poaching a problem—not only for the leopards themselves, but also for important prey species, such as roe deer, sika deer and hare, which are hunted by the villagers both for food and cash.",
-        "taxonomy":{
-           "phylum":"Chordata",
-           "order":"Carnivora",
-           "genus":"Panthera",
-           "classTaxonomy":"Mammalia",
-           "family":"Felidae",
-           "kingdom":"Animalia"
-        },
-        "conservationStatus":"Critical"
-     }
+         "donationLink":"https://donate.wildnet.org/?fund=Painted_Dog__",
+         "group":"Mammal",
+         "populationTrend":"Decreasing",
+         "populationSummary":"The African wild dog has become one of the most critically endangered species in Africa. Once nearly 500,000 wild dogs roamed Africa, however now there is only an estimated 3,000 to 5,000. With greatly reduced numbers from the encroachment on farmer and rancher lands, there is a lack of genetic variation and a new strand of canine distemper threatens the species with further decline.",
+         "habitat":{
+            "longitude":30,
+            "summary":"Though they were once found throughout the continent—from desert to mountain habitats—African wild dogs have disappeared from most of their geographic range. These days, African wild dogs typically roam the open plains and sparse woodlands of sub-Saharan Africa.",
+            "temperature":"77°F",
+            "latitude":15,
+            "system":"terrestrial"
+         },
+         "populationNumbers":"~5,000",
+         "scientificName":"Lycaon pictus",
+         "diet":"Carnivore",
+         "commonName":"African Wild Dog",
+         "weight":"40-70 lbs",
+         "assessmentDate":"2020",
+         "height":"3.4 feet",
+         "taxonomy":{
+            "classTaxonomy":"Mammalia",
+            "phylum":"Chordata",
+            "family":"Canidae",
+            "order":"Carnivora",
+            "genus":"Lycaon",
+            "kingdom":"Animalia"
+         },
+         "threats":"The principal threat to this species is habitat fragmentation, which increases human-wildlife conflict and localized, small population extinction due to epidemic disease. Larger populations have a higher chance of recovery from such outbreaks. As human populations expand, leading to agriculture, settlements, and roads, wild dogs are losing the spaces in which they were once able to roam freely.",
+         "conservationStatus":"Endangered"
+      }
