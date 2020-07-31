@@ -30,6 +30,7 @@ final class SpeciesDetailViewController: UIViewController {
     private lazy var backgroundImageView: UIImageView = {
         let iv = UIImageView()
         iv.translatesAutoresizingMaskIntoConstraints = false
+        
         iv.contentMode = UIView.ContentMode.scaleAspectFill
         view.insertSubview(iv, at: 0)
         return iv
