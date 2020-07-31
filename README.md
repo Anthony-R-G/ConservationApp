@@ -33,18 +33,20 @@ List of animal species, separated by Red List conservation levels:
 
 Tapping any one cell will transition to a new page where the species you've selected is put at the forefront:
 
-![Example 2](https://i.imgur.com/PPx1lXy.png)
-
-
-![Example 3](https://i.imgur.com/fsasSpG.png)
+## Species Detail Page
+| Amur Leopard | Blue Whale | Lion | Mountain Gorilla |
+|:-----:|:-------:|:-------:|:-------|
+|![screen 1](https://i.imgur.com/4LOHr9o.png) | ![screen 2](https://i.imgur.com/E4Ayd80.png) |![screen 3](https://i.imgur.com/h6s1IGG.png)|![screen 4](https://i.imgur.com/HEA6LRg.png)|
 
 
 Scrolling up on this page will bring up an overview of the species. You can then swipe left and right or use the buttons on the bottom bar to get other information on the species such as the threats that it faces at the moment. Each panel also has it's own "Learn More" button to transition to a full-sized screen. 
 
-![Example 4](https://i.imgur.com/ZGcKpU1.png)
+![Example 4](https://i.imgur.com/uNDl0Ce.png)
 
 You can show your support for animal conservation efforts by clicking on the donate button. This will redirect you in-app to the relevant conservation for that specific animal. This makes it easy to get involved.
 
 ![Example 5](https://i.imgur.com/XABKk0Q.png)
 
 ![Example 6](https://i.imgur.com/o26bLy6.png)
+
+
