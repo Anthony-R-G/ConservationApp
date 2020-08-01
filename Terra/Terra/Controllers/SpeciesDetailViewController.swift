@@ -8,6 +8,7 @@
 
 import UIKit
 import SafariServices
+import FirebaseUI
 
 final class SpeciesDetailViewController: UIViewController {
     
@@ -84,25 +85,25 @@ final class SpeciesDetailViewController: UIViewController {
     }()
     
     private lazy var speciesOverviewView: RoundedInfoView = {
-        let infoView = Utilities.makeRoundedInfoView(title: "OVERVIEW", barLeftTitle: "Height", barMiddleTitle: "Weight", barRightTitle: "Diet")
+        let infoView = Utilities.makeRoundedInfoView(strategy: SpeciesOverviewStrategy(species: currentSpecies))
         infoView.addLearnMoreAction(buttonTag: 0, target: self, selector: #selector(learnMoreButtonPressed(sender:)))
         return infoView
     }()
     
     private lazy var speciesThreatsView: RoundedInfoView = {
-        let infoView = Utilities.makeRoundedInfoView(title: "THREATS", barLeftTitle: "", barMiddleTitle: "", barRightTitle: "")
+        let infoView = Utilities.makeRoundedInfoView(strategy: SpeciesThreatsStrategy(species: currentSpecies))
         infoView.addLearnMoreAction(buttonTag: 1, target: self, selector: #selector(learnMoreButtonPressed(sender:)))
         return infoView
     }()
     
     private lazy var speciesHabitatView: RoundedInfoView = {
-        let infoView = Utilities.makeRoundedInfoView(title: "HABITAT", barLeftTitle: "Temperature", barMiddleTitle: "Humidity", barRightTitle: "Latitude")
+        let infoView = Utilities.makeRoundedInfoView(strategy: SpeciesHabitatStrategy(species: currentSpecies))
         infoView.addLearnMoreAction(buttonTag: 2, target: self, selector: #selector(learnMoreButtonPressed(sender:)))
         return infoView
     }()
     
     private lazy var speciesGalleryView: RoundedInfoView = {
-        let infoView = Utilities.makeRoundedInfoView(title: "GALLERY", barLeftTitle: "", barMiddleTitle: "", barRightTitle: "")
+         let infoView = RoundedInfoView(frame: CGRect(), strategy: SpeciesGalleryStrategy(species: currentSpecies))
         infoView.addLearnMoreAction(buttonTag: 3, target: self, selector: #selector(learnMoreButtonPressed(sender:)))
         return infoView
     }()
@@ -144,15 +145,11 @@ final class SpeciesDetailViewController: UIViewController {
     private func setViewElementsFromSpeciesData() {
         headerNameView.setViewElementsFromSpeciesData(species: currentSpecies)
         subheaderInfoView.setViewElementsFromSpeciesData(species: currentSpecies)
-        speciesOverviewView.configureDataLabels(bodyText: currentSpecies.overview, barLeftData: currentSpecies.height, barMiddleData: currentSpecies.weight, barRightData: currentSpecies.diet.rawValue)
-        speciesOverviewView.configureDataLabels(bodyText: currentSpecies.threats, barLeftData: "", barMiddleData: "", barRightData: "")
-        
     }
     
     private func setBackground() {
-        view.backgroundColor = UIColor(white: 1, alpha: 0.1)
-        let imageURL = URL(string: currentSpecies!.detailImage)
-        backgroundImageView.kf.setImage(with: imageURL)
+        view.backgroundColor = .black
+        FirebaseStorageService.detailImageManager.getImage(imageRefStr: currentSpecies.commonName, imageView: backgroundImageView)
     }
     
     private func setDelegates() {
@@ -175,14 +172,13 @@ final class SpeciesDetailViewController: UIViewController {
         backgroundGradientOverlay.startColor = #colorLiteral(red: 0.06859237701, green: 0.08213501424, blue: 0.2409383953, alpha: Float(newAlpha))
     }
     
-    private func updateDiscoverLabelAlpha(scrollOffset: CGFloat) {
+    private func updateExploreLabelAlpha(scrollOffset: CGFloat) {
         var newAlpha = CGFloat()
         newAlpha = scrollOffset <= 40 ? 0.6 : 0
         
         DispatchQueue.main.async {
             UIView.animate(withDuration: 1, delay: 0, options: .curveEaseInOut, animations: {
                 self.exploreButton.alpha = newAlpha
-                
             }, completion: nil)
         }
     }
@@ -228,6 +224,10 @@ final class SpeciesDetailViewController: UIViewController {
         }
     }
     
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -256,7 +256,6 @@ final class SpeciesDetailViewController: UIViewController {
 }
 
 //MARK: -- ScrollView Methods
-
 extension SpeciesDetailViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         switch scrollView {
@@ -264,7 +263,7 @@ extension SpeciesDetailViewController: UIScrollViewDelegate {
             let offsetY = scrollView.contentOffset.y
             
             updateTopGradientAlpha(scrollOffset: offsetY)
-            updateDiscoverLabelAlpha(scrollOffset: offsetY)
+            updateExploreLabelAlpha(scrollOffset: offsetY)
             updateHeaderViewHeight(scrollOffset: offsetY)
             updateHeaderTopAnchor(scrollOffset: offsetY)
             updateSubheaderHeight(scrollOffset: offsetY)
@@ -296,7 +295,6 @@ extension SpeciesDetailViewController: UIScrollViewDelegate {
 }
 
 //MARK: -- Custom Delegate Implementation
-
 extension SpeciesDetailViewController: DonateButtonDelegate {
     func donateButtonPressed() {
         guard let donationURL = URL(string: currentSpecies.donationLink) else { return }
@@ -314,7 +312,6 @@ extension SpeciesDetailViewController: BottomBarDelegate {
 
 
 //MARK: -- Add Subviews & Constraints
-
 fileprivate extension SpeciesDetailViewController {
     func addSubviews() {
         view.addSubview(verticalScrollView)
@@ -422,7 +419,7 @@ fileprivate extension SpeciesDetailViewController {
     
     func setBottomToolBarConstraints() {
         NSLayoutConstraint.activate([
-            bottomToolBar.topAnchor.constraint(equalTo: horizontalScrollView.bottomAnchor, constant: 120),
+            bottomToolBar.topAnchor.constraint(equalTo: horizontalScrollView.bottomAnchor, constant: 100),
             bottomToolBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             bottomToolBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             bottomToolBar.heightAnchor.constraint(equalToConstant: 80)
@@ -465,7 +462,6 @@ fileprivate extension SpeciesDetailViewController {
         ])
     }
 }
-
 
 
 

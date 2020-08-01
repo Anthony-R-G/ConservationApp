@@ -10,12 +10,16 @@ import UIKit
 
 class Utilities {
     
-    static func makeCollectionView(superView: UIView) -> UICollectionView {
+    static func makeCollectionView(superview: UIView) -> UICollectionView {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         
         layout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 5)
-        let collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: superView.frame.width, height: 0), collectionViewLayout: layout)
+        let collectionView = UICollectionView(frame: CGRect(x: 0,
+                                                            y: 0,
+                                                            width: superview.frame.width,
+                                                            height: 0),
+                                              collectionViewLayout: layout)
         
         collectionView.backgroundColor = .clear
         collectionView.register(SpeciesCollectionViewCell.self, forCellWithReuseIdentifier: "speciesCell")
@@ -27,6 +31,7 @@ class Utilities {
                           size: CGFloat,
                           color: UIColor,
                           alignment: NSTextAlignment) -> UILabel {
+        
         let label = UILabel()
         label.text = title
         label.font = UIFont(name: weight.rawValue, size: size)
@@ -49,13 +54,8 @@ class Utilities {
         return button
     }
     
-    static func makeRoundedInfoView(title: String,
-                                    barLeftTitle: String,
-                                    barMiddleTitle: String,
-                                    barRightTitle: String
-                                    ) -> RoundedInfoView {
-        let view = RoundedInfoView()
-        view.configureTitleLabels(titleText: title, barLeftTitle: barLeftTitle, barMiddleTitle: barMiddleTitle, barRightTitle: barRightTitle)
+    static func makeRoundedInfoView(strategy: SpeciesStrategy) -> RoundedInfoView {
+        let view = RoundedInfoView(frame: CGRect(), strategy: strategy)
         return view
     }
 }
