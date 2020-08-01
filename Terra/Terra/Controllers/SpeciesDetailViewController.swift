@@ -97,14 +97,14 @@ final class SpeciesDetailViewController: UIViewController {
     }()
     
     private lazy var speciesHabitatView: RoundedInfoView = {
-        let infoView = RoundedInfoView(frame: CGRect(), strategy: SpeciesHabitatStrategy(species: currentSpecies))
+        let infoView = Utilities.makeRoundedInfoView(strategy: SpeciesHabitatStrategy(species: currentSpecies))
         
         infoView.addLearnMoreAction(buttonTag: 2, target: self, selector: #selector(learnMoreButtonPressed(sender:)))
         return infoView
     }()
     
     private lazy var speciesGalleryView: RoundedInfoView = {
-         let infoView = RoundedInfoView(frame: CGRect(), strategy: SpeciesGalleryStrategy(species: currentSpecies))
+         let infoView = RoundedInfoView(frame: CGRect(), strategy: SpeciesHabitatStrategy(species: currentSpecies))
         infoView.addLearnMoreAction(buttonTag: 3, target: self, selector: #selector(learnMoreButtonPressed(sender:)))
         return infoView
     }()
@@ -146,10 +146,6 @@ final class SpeciesDetailViewController: UIViewController {
     private func setViewElementsFromSpeciesData() {
         headerNameView.setViewElementsFromSpeciesData(species: currentSpecies)
         subheaderInfoView.setViewElementsFromSpeciesData(species: currentSpecies)
-//        speciesOverviewView.configureDataLabels(bodyText: currentSpecies.overview, barLeftData: currentSpecies.height, barMiddleData: currentSpecies.weight, barRightData: currentSpecies.diet.rawValue)
-//        speciesThreatsView.configureDataLabels(bodyText: currentSpecies.threats, barLeftData: "", barMiddleData: "", barRightData: "")
-//        speciesHabitatView.configureDataLabels(bodyText: currentSpecies.habitat.summary, barLeftData: currentSpecies.habitat.temperature, barMiddleData: "", barRightData: "\(currentSpecies.habitat.latitude)")
-        
     }
     
     private func setBackground() {

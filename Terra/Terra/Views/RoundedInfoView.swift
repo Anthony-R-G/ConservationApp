@@ -17,28 +17,38 @@ struct SpeciesHabitatStrategy: SpeciesStrategy {
         return "HABITAT"
     }
     
-   
-    
     func bodyText() -> String {
         return species.habitat.summary
     }
-}
-
-struct SpeciesOverviewStrategy: SpeciesStrategy {
-    var species: Species
     
-    func titleText() -> String {
-        return "OVERVIEW"
+    func barLeftTitleText() -> String {
+        return "Temperature"
     }
     
-
+    func barMiddleTitleText() -> String {
+        return "Humidity"
+    }
     
-    func bodyText() -> String {
-        return species.overview
+    func barRightTitleText() -> String {
+        return "Latitude"
+    }
+    
+    func barLeftDataText() -> String {
+        return species.habitat.temperature
+    }
+    
+    func barMiddleDataText() -> String {
+        return "" //No data for this yet
+    }
+    
+    func barRightDataText() -> String {
+        return "\(species.habitat.latitude)"
     }
 }
 
-struct SpeciesThreatsStrategy: SpeciesStrategy {
+
+
+struct SpeciesThreatsStrategy  {
     var species: Species
     
     func titleText() -> String {
@@ -50,7 +60,7 @@ struct SpeciesThreatsStrategy: SpeciesStrategy {
     }
 }
 
-struct SpeciesGalleryStrategy: SpeciesStrategy {
+struct SpeciesGalleryStrategy {
     var species: Species
     
     func titleText() -> String {
@@ -127,6 +137,8 @@ class RoundedInfoView: UIView {
     
     //MARK: -- Methods
     
+    var strategy: SpeciesStrategy
+    
     public func configureTitleLabels(
         titleText: String,
         barLeftTitle: String,
@@ -139,8 +151,17 @@ class RoundedInfoView: UIView {
     }
     
     private func configureDataLabels() {
-        
+        titleLabel.text = strategy.titleText()
         bodyTextLabel.text = strategy.bodyText()
+        
+        barLeftTitleLabel.text = strategy.barLeftTitleText()
+        barMiddleTitleLabel.text = strategy.barMiddleDataText()
+        barRightTitleLabel.text = strategy.barRightTitleText()
+        
+        
+        barLeftDataLabel.text = strategy.barLeftDataText()
+        barMiddleDataLabel.text = strategy.barMiddleDataText()
+        barRightDataLabel.text = strategy.barRightDataText()
     }
     
     public func addLearnMoreAction(buttonTag: Int, target: Any, selector: Selector) {
