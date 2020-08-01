@@ -48,6 +48,9 @@ class MapViewController: UIViewController {
         mapView.addAnnotation(annotation)
     }
     
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -9,6 +9,7 @@
 import Foundation
 
 enum Biome: String, FirebaseConvertible {
+    case cloudForest = "Cloud Forest"
     case forest = "Forest"
     case freshwater = "Freshwater"
     case ocean = "Ocean"
@@ -16,3 +17,4 @@ enum Biome: String, FirebaseConvertible {
     case temperateForest = "Temperate Forest"
     case tropicalRainforest = "Tropical Rainforest"
 }
+ 

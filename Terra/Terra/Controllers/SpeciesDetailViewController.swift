@@ -161,7 +161,7 @@ final class SpeciesDetailViewController: UIViewController {
     
     private func presentWebBrowser(link: URL){
         let config = SFSafariViewController.Configuration()
-        config.entersReaderIfAvailable = true
+        config.entersReaderIfAvailable = false
         let safariVC = SFSafariViewController(url: link, configuration: config)
         present(safariVC, animated: true)
     }
