@@ -19,5 +19,4 @@ public struct Species: FirebaseConvertible {
     let group: Group
     let habitat: Habitat
     let population: Population
-    let conservationStatus: ConservationStatus
 }

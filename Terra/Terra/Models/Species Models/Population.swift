@@ -9,9 +9,10 @@
 import Foundation
 
 struct Population: FirebaseConvertible {
-    let trend: PopulationTrend
-    let summary: String
-    let numbers: String
     let assessmentDate: Int
+    let conservationStatus: ConservationStatus
+    let numbers: String
+    let summary: String
     let threats: String
+    let trend: PopulationTrend
 }
