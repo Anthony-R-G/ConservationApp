@@ -11,7 +11,7 @@ import UIKit
 struct Constants {
     static let listVCCollectionViewHeight: CGFloat = 235
     
-    static let detailInfoViewHeight: CGFloat = 430
+    static let detailInfoViewHeight: CGFloat = 440
     static let detailInfoViewWidth: CGFloat = 375
     
     static let cornerRadius: CGFloat = 39

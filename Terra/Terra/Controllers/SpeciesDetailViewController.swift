@@ -121,7 +121,7 @@ final class SpeciesDetailViewController: UIViewController {
     }()
     
     private lazy var horizontalScrollViewTopAnchorConstraint: NSLayoutConstraint = {
-        return horizontalScrollView.topAnchor.constraint(equalTo: headerNameView.bottomAnchor, constant: 300)
+        return horizontalScrollView.topAnchor.constraint(equalTo: headerNameView.bottomAnchor, constant: 280)
     }()
     
     //MARK: -- Properties
@@ -203,7 +203,7 @@ final class SpeciesDetailViewController: UIViewController {
     
     private func updateHorizontalScrollTopAnchor(scrollOffset: CGFloat) {
         let horizontalScrollTopAnchorOffset = 300 - scrollOffset
-        let newHorizontalScrollTopAnchorConstant = max(100, horizontalScrollTopAnchorOffset)
+        let newHorizontalScrollTopAnchorConstant = max(90, horizontalScrollTopAnchorOffset)
         horizontalScrollViewTopAnchorConstraint.constant = newHorizontalScrollTopAnchorConstant
     }
     
@@ -413,13 +413,13 @@ fileprivate extension SpeciesDetailViewController {
             donateButton.widthAnchor.constraint(equalTo: speciesOverviewView.widthAnchor),
             donateButton.heightAnchor.constraint(equalToConstant: 50),
             donateButton.centerXAnchor.constraint(equalTo: bottomToolBar.centerXAnchor),
-            donateButton.bottomAnchor.constraint(equalTo: bottomToolBar.topAnchor, constant: -30)
+            donateButton.topAnchor.constraint(equalTo: horizontalScrollView.bottomAnchor, constant: 25)
         ])
     }
     
     func setBottomToolBarConstraints() {
         NSLayoutConstraint.activate([
-            bottomToolBar.topAnchor.constraint(equalTo: horizontalScrollView.bottomAnchor, constant: 100),
+            bottomToolBar.topAnchor.constraint(equalTo: donateButton.bottomAnchor, constant: 25),
             bottomToolBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             bottomToolBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             bottomToolBar.heightAnchor.constraint(equalToConstant: 80)
