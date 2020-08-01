@@ -14,7 +14,10 @@ class Factory {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         
-        layout.sectionInset = UIEdgeInsets(top: 0, left: Constants.universalLeadingConstant, bottom: 0, right: 5)
+        layout.sectionInset = UIEdgeInsets(top: 0,
+                                           left: Constants.universalLeadingConstant,
+                                           bottom: 0,
+                                           right: Constants.universalLeadingConstant)
         let collectionView = UICollectionView(frame: CGRect(x: 0,
                                                             y: 0,
                                                             width: superview.frame.width,
