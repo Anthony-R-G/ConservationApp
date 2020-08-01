@@ -12,7 +12,7 @@ One principle behind the app is keeping the design clean and visually appealing.
 ## Technologies 
 Written in Swift
 
-UIKit
+UIKit (programmatic, no Storyboards)
 
 MapKit
 
