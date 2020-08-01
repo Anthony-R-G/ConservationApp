@@ -27,6 +27,8 @@ CoreLocation (for determining your position relative to a species habitat range)
 ARKit (some animals will have the option to "View in AR" which will bring up a 3D model that can be placed and manipulated using iPhone's rear camera.)
 
 ## Screenshots
+
+### List Page
 List of animal species, separated by Red List conservation levels:
 
 |  |  |  
@@ -35,21 +37,22 @@ List of animal species, separated by Red List conservation levels:
 
 Tapping any one cell will transition to a new page with a minimalistic user interface where the species you've selected is put at the forefront:
 
-## Species Detail Page
+### Individual Species Page 
 | Amur Leopard | Blue Whale | Lion | Mountain Gorilla |
-|:-----:|:-------:|:-------:|:-------|
+|:-----:|:-------:|:-------:|:-------:|
 |![screen 1](https://i.imgur.com/4LOHr9o.png) | ![screen 2](https://i.imgur.com/E4Ayd80.png) |![screen 3](https://i.imgur.com/h6s1IGG.png)|![screen 4](https://i.imgur.com/HEA6LRg.png)|
 
 
 Scrolling up on this page will bring up an overview of the species. You can then swipe left and right or use the buttons on the bottom bar to get info snippets on that specific species such as the current threats to its population. Each panel also has it's own "Learn More" button to transition to a full-sized screen with even more detailed-information such as taxonomy and distribution. 
 
-
+### Getting Detailed Information
 | African Elephant Overview | Blue-throated Macaw Habitat | Blue-throated Macaw Distribution | Panamanian Golden Frog Distribution |
 |:-----:|:-------:|:-------:|:-------|
 |![screen 1](https://i.imgur.com/G2HG7Ju.png) | ![screen 2](https://i.imgur.com/gAL8twq.png) |![screen 3](https://i.imgur.com/Ueikygo.png)|![screen 4](https://i.imgur.com/fz7PtXS.png)|
 
 You can show your support for animal conservation efforts by clicking on the donate button. This will redirect you in-app to the relevant conservation for that specific animal. This makes it easy to get involved.
 
+### Donating
 | African Elephant Donation |Bornean Orangutan Donation | Great White Shark Donation |
 |:-----:|:-------:|:-------:|
 |![screen 1](https://i.imgur.com/SvsfysX.png) | ![screen 2](https://i.imgur.com/3x6d1IV.png) | ![screen 3](https://i.imgur.com/5rljCyK.png)
