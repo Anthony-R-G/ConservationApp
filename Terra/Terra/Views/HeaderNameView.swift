@@ -47,9 +47,9 @@ final class HeaderNameView: UIView {
     
     //MARK: -- Methods
     public func setViewElementsFromSpeciesData(species: Species) {
-        conservationStatusLabel.text = species.conservationStatus.rawValue
+        conservationStatusLabel.text = species.population.conservationStatus.rawValue
         speciesCommonNameLabel.text = species.commonName
-        speciesScientificNameLabel.text = "— \(species.scientificName)"
+        speciesScientificNameLabel.text = "— \(species.taxonomy.scientificName)"
     }
     
     override init(frame: CGRect) {

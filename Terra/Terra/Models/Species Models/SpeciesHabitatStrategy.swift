@@ -24,11 +24,11 @@ struct SpeciesHabitatStrategy: SpeciesStrategy {
     }
     
     func barMiddleTitleText() -> String {
-        return "Humidity"
+        return "Biome"
     }
     
     func barRightTitleText() -> String {
-        return "Latitude"
+        return "Area"
     }
     
     func barLeftDataText() -> String {
@@ -36,10 +36,10 @@ struct SpeciesHabitatStrategy: SpeciesStrategy {
     }
     
     func barMiddleDataText() -> String {
-        return "" //No data for this yet
+        return species.habitat.biome.rawValue
     }
     
     func barRightDataText() -> String {
-        return "\(species.habitat.latitude)"
+        return species.habitat.area
     }
 }

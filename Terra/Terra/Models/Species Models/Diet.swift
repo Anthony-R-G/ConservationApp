@@ -11,5 +11,6 @@ import Foundation
 enum Diet: String, FirebaseConvertible {
     case carnivore = "Carnivore"
     case herbivore = "Herbivore"
+    case insectivore = "Insectivore"
     case omnivore = "Omnivore"
 }
