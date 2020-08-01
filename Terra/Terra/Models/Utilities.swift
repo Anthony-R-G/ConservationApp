@@ -55,7 +55,7 @@ class Utilities {
     }
     
     static func makeRoundedInfoView(strategy: SpeciesStrategy) -> RoundedInfoView {
-        let view = RoundedInfoView(frame: CGRect(), strategy: strategy)
+        let view = RoundedInfoView(frame: CGRect(), speciesStrategy: strategy)
         return view
     }
 }

@@ -105,14 +105,14 @@ class RoundedInfoView: UIView {
     }
     
     private func setAppearance() {
-        self.backgroundColor = .clear
-        self.layer.cornerRadius = 39
-        self.clipsToBounds = true
-        self.addBlurToView(cornerRadius: 39)
+        backgroundColor = .clear
+        layer.cornerRadius = 39
+        clipsToBounds = true
+        addBlurToView(cornerRadius: 39)
     }
     
-    init(frame: CGRect, strategy: SpeciesStrategy) {
-        self.strategy = strategy
+    init(frame: CGRect, speciesStrategy: SpeciesStrategy) {
+        strategy = speciesStrategy
         super.init(frame: frame)
         setAppearance()
         addSubviews()

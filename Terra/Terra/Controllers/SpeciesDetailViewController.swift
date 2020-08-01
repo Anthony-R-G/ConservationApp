@@ -103,7 +103,7 @@ final class SpeciesDetailViewController: UIViewController {
     }()
     
     private lazy var speciesGalleryView: RoundedInfoView = {
-        let infoView = RoundedInfoView(frame: CGRect(), strategy: SpeciesGalleryStrategy(species: currentSpecies))
+        let infoView = Utilities.makeRoundedInfoView(strategy: SpeciesGalleryStrategy(species: currentSpecies))
         infoView.addLearnMoreAction(buttonTag: 3, target: self, selector: #selector(learnMoreButtonPressed(sender:)))
         return infoView
     }()
@@ -133,7 +133,7 @@ final class SpeciesDetailViewController: UIViewController {
     
     @objc private func learnMoreButtonPressed(sender: UIButton) {
         switch sender.tag {
-        case 2:
+        case 1:
             let mapVC = MapViewController()
             mapVC.currentSpecies = currentSpecies
             mapVC.modalPresentationStyle = .fullScreen

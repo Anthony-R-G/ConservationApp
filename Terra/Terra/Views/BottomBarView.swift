@@ -20,14 +20,14 @@ class BottomBarView: UIView {
     
     private lazy var habitatButton: UIButton = {
         let btn = Utilities.makeBottomBarButton(title: "HABITAT")
-        btn.tag = 2
+        btn.tag = 1
         btn.addTarget(self, action: #selector(bottomBarButtonPressed(sender:)), for: .touchUpInside)
         return btn
     }()
     
     private lazy var threatsButton: UIButton = {
         let btn = Utilities.makeBottomBarButton(title: "THREATS")
-        btn.tag = 1
+        btn.tag = 2
         btn.addTarget(self, action: #selector(bottomBarButtonPressed(sender:)), for: .touchUpInside)
         return btn
     }()
@@ -52,7 +52,6 @@ class BottomBarView: UIView {
         let screenWidth = UIScreen.main.bounds.width
         let view = UIView(frame: CGRect(x: .zero, y: .zero, width: screenWidth / 4.55, height: 2))
         view.backgroundColor = UIColor.white
-        
         return view
     }()
     
