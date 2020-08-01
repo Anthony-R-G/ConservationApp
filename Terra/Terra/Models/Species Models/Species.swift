@@ -10,8 +10,7 @@ import Foundation
 
 public struct Species: FirebaseConvertible {
     let commonName: String
-    let scientificName: String
-    let assessmentDate: String
+//    let assessmentDate: String
     let overview: String
     let taxonomy: Taxonomy
     let group: Group

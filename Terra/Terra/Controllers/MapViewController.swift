@@ -44,7 +44,7 @@ class MapViewController: UIViewController {
     
     
     private func makeAnnotation(latitude: CLLocationDegrees, longitude: CLLocationDegrees, title: String, subtitle: String?) {
-        let annotation = SpeciesAnnotation(title: currentSpecies.commonName, subtitle: currentSpecies.scientificName, coordinate: CLLocationCoordinate2D(latitude: habitatLocation.coordinate.latitude, longitude: habitatLocation.coordinate.longitude))
+        let annotation = SpeciesAnnotation(title: currentSpecies.commonName, subtitle: currentSpecies.taxonomy.scientificName, coordinate: CLLocationCoordinate2D(latitude: habitatLocation.coordinate.latitude, longitude: habitatLocation.coordinate.longitude))
         mapView.addAnnotation(annotation)
     }
     
@@ -54,7 +54,7 @@ class MapViewController: UIViewController {
         addSubviews()
         setConstraints()
         mapView.delegate = self
-        let annotation = SpeciesAnnotation(title: currentSpecies.commonName, subtitle: currentSpecies.scientificName, coordinate: CLLocationCoordinate2D(latitude: currentSpecies.habitat.latitude, longitude: currentSpecies.habitat.longitude))
+        let annotation = SpeciesAnnotation(title: currentSpecies.commonName, subtitle: currentSpecies.taxonomy.scientificName, coordinate: CLLocationCoordinate2D(latitude: currentSpecies.habitat.latitude, longitude: currentSpecies.habitat.longitude))
         mapView.addAnnotation(annotation)
     }
 }
