@@ -8,18 +8,6 @@
 
 import UIKit
 
-struct SpeciesGalleryStrategy {
-    var species: Species
-    
-    func titleText() -> String {
-        return "GALLERY"
-    }
-    
-    func bodyText() -> String {
-        return "o"
-    }
-}
-
 class RoundedInfoView: UIView {
     
     //MARK: -- UI Element Initialization

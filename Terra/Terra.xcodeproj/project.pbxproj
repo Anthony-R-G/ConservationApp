@@ -33,6 +33,7 @@
 		975812EB24D4EF9400C09D56 /* SpeciesOverviewStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975812EA24D4EF9400C09D56 /* SpeciesOverviewStrategy.swift */; };
 		975812ED24D528E100C09D56 /* SpeciesThreatsStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975812EC24D528E100C09D56 /* SpeciesThreatsStrategy.swift */; };
 		975812F124D52F7B00C09D56 /* SpeciesHabitatStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975812F024D52F7B00C09D56 /* SpeciesHabitatStrategy.swift */; };
+		975812F324D530AA00C09D56 /* SpeciesGalleryStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975812F224D530AA00C09D56 /* SpeciesGalleryStrategy.swift */; };
 		97591FD424CB8D46002EAC96 /* RoundedInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FD324CB8D46002EAC96 /* RoundedInfoView.swift */; };
 		97591FDC24CC4524002EAC96 /* ButtonOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FDB24CC4524002EAC96 /* ButtonOption.swift */; };
 		97591FDF24CCD14A002EAC96 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FDE24CCD14A002EAC96 /* Constants.swift */; };
@@ -111,6 +112,7 @@
 		975812EA24D4EF9400C09D56 /* SpeciesOverviewStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesOverviewStrategy.swift; sourceTree = "<group>"; };
 		975812EC24D528E100C09D56 /* SpeciesThreatsStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesThreatsStrategy.swift; sourceTree = "<group>"; };
 		975812F024D52F7B00C09D56 /* SpeciesHabitatStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesHabitatStrategy.swift; sourceTree = "<group>"; };
+		975812F224D530AA00C09D56 /* SpeciesGalleryStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesGalleryStrategy.swift; sourceTree = "<group>"; };
 		97591FD324CB8D46002EAC96 /* RoundedInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedInfoView.swift; sourceTree = "<group>"; };
 		97591FDB24CC4524002EAC96 /* ButtonOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonOption.swift; sourceTree = "<group>"; };
 		97591FDE24CCD14A002EAC96 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -248,6 +250,7 @@
 				975812EA24D4EF9400C09D56 /* SpeciesOverviewStrategy.swift */,
 				975812EC24D528E100C09D56 /* SpeciesThreatsStrategy.swift */,
 				975812F024D52F7B00C09D56 /* SpeciesHabitatStrategy.swift */,
+				975812F224D530AA00C09D56 /* SpeciesGalleryStrategy.swift */,
 			);
 			path = "Species Models";
 			sourceTree = "<group>";
@@ -561,6 +564,7 @@
 				9772167924D287EA00828582 /* MapViewController.swift in Sources */,
 				97591FE324CCDC48002EAC96 /* FontWeight.swift in Sources */,
 				97928F7924CD11BF00AF90C5 /* FirestoreError.swift in Sources */,
+				975812F324D530AA00C09D56 /* SpeciesGalleryStrategy.swift in Sources */,
 				971FD0D024C61AD3003ED029 /* CGFloatExtensions.swift in Sources */,
 				97928F7B24CD347200AF90C5 /* FirebaseConvertible.swift in Sources */,
 			);

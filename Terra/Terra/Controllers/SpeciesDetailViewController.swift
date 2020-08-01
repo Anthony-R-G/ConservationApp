@@ -103,7 +103,7 @@ final class SpeciesDetailViewController: UIViewController {
     }()
     
     private lazy var speciesGalleryView: RoundedInfoView = {
-         let infoView = RoundedInfoView(frame: CGRect(), strategy: SpeciesHabitatStrategy(species: currentSpecies))
+         let infoView = RoundedInfoView(frame: CGRect(), strategy: SpeciesGalleryStrategy(species: currentSpecies))
         infoView.addLearnMoreAction(buttonTag: 3, target: self, selector: #selector(learnMoreButtonPressed(sender:)))
         return infoView
     }()
