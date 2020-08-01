@@ -13,11 +13,11 @@ class RoundedInfoView: UIView {
     //MARK: -- UI Element Initialization
     
     private lazy var titleLabel: UILabel = {
-        return Utilities.makeLabel(title: "TITLE", weight: .bold, size: 28, color: .white, alignment: .left)
+        return Utilities.makeLabel(title: strategy.titleText(), weight: .bold, size: 28, color: .white, alignment: .left)
     }()
     
     private lazy var bodyTextLabel: UILabel = {
-        let label = Utilities.makeLabel(title: nil, weight: .light, size: 17, color: #colorLiteral(red: 1, green: 0.9833787084, blue: 0.8849565387, alpha: 1), alignment: .natural)
+        let label = Utilities.makeLabel(title: strategy.bodyText(), weight: .light, size: 17, color: #colorLiteral(red: 1, green: 0.9833787084, blue: 0.8849565387, alpha: 1), alignment: .natural)
         label.numberOfLines = 0
         label.lineBreakMode = .byTruncatingTail
         label.adjustsFontSizeToFitWidth = false
@@ -32,27 +32,51 @@ class RoundedInfoView: UIView {
     }()
     
     private lazy var barLeftTitleLabel: UILabel = {
-        return Utilities.makeLabel(title: "Title Label A", weight: .light, size: 15, color: #colorLiteral(red: 0.8390320539, green: 0.8525128961, blue: 0.8612788916, alpha: 0.7811162243), alignment: .center)
+        return Utilities.makeLabel(title: strategy.barLeftTitleText(),
+                                   weight: .light,
+                                   size: 15,
+                                   color: #colorLiteral(red: 0.8390320539, green: 0.8525128961, blue: 0.8612788916, alpha: 0.7811162243),
+                                   alignment: .center)
     }()
     
     private lazy var barLeftDataLabel: UILabel = {
-        return Utilities.makeLabel(title: nil, weight: .medium, size: 18, color: .white, alignment: .center)
+        return Utilities.makeLabel(title: strategy.barLeftDataText(),
+                                   weight: .medium,
+                                   size: 18,
+                                   color: .white,
+                                   alignment: .center)
     }()
     
     private lazy var barMiddleTitleLabel: UILabel = {
-        return Utilities.makeLabel(title: "Title Label B", weight: .light, size: 15, color: #colorLiteral(red: 0.8390320539, green: 0.8525128961, blue: 0.8612788916, alpha: 0.7811162243), alignment: .center)
+        return Utilities.makeLabel(title: strategy.barMiddleTitleText(),
+                                   weight: .light,
+                                   size: 15,
+                                   color: #colorLiteral(red: 0.8390320539, green: 0.8525128961, blue: 0.8612788916, alpha: 0.7811162243),
+                                   alignment: .center)
     }()
     
     private lazy var barMiddleDataLabel: UILabel = {
-        return Utilities.makeLabel(title: nil, weight: .medium, size: 18, color: .white, alignment: .center)
+        return Utilities.makeLabel(title: strategy.barMiddleDataText(),
+                                   weight: .medium,
+                                   size: 18,
+                                   color: .white,
+                                   alignment: .center)
     }()
     
     private lazy var barRightTitleLabel: UILabel = {
-        return Utilities.makeLabel(title: "Title Label C", weight: .light, size: 15, color: #colorLiteral(red: 0.8390320539, green: 0.8525128961, blue: 0.8612788916, alpha: 0.7811162243), alignment: .center)
+        return Utilities.makeLabel(title: strategy.barRightTitleText(),
+                                   weight: .light,
+                                   size: 15,
+                                   color: #colorLiteral(red: 0.8390320539, green: 0.8525128961, blue: 0.8612788916, alpha: 0.7811162243),
+                                   alignment: .center)
     }()
     
     private lazy var barRightDataLabel: UILabel = {
-        return Utilities.makeLabel(title: nil, weight: .medium, size: 18, color: .white, alignment: .center)
+        return Utilities.makeLabel(title: strategy.barRightDataText(),
+                                   weight: .medium,
+                                   size: 18,
+                                   color: .white,
+                                   alignment: .center)
     }()
     
     private lazy var learnMoreButton: UIButton = {
@@ -75,31 +99,6 @@ class RoundedInfoView: UIView {
     
     var strategy: SpeciesStrategy
     
-    public func configureTitleLabels(
-        titleText: String,
-        barLeftTitle: String,
-        barMiddleTitle: String,
-        barRightTitle: String) {
-        titleLabel.text = titleText.uppercased()
-        barLeftTitleLabel.text = barLeftTitle.capitalized
-        barMiddleTitleLabel.text = barMiddleTitle.capitalized
-        barRightTitleLabel.text = barRightTitle.capitalized
-    }
-    
-    private func configureDataLabels() {
-        titleLabel.text = strategy.titleText()
-        bodyTextLabel.text = strategy.bodyText()
-        
-        barLeftTitleLabel.text = strategy.barLeftTitleText()
-        barMiddleTitleLabel.text = strategy.barMiddleDataText()
-        barRightTitleLabel.text = strategy.barRightTitleText()
-        
-        
-        barLeftDataLabel.text = strategy.barLeftDataText()
-        barMiddleDataLabel.text = strategy.barMiddleDataText()
-        barRightDataLabel.text = strategy.barRightDataText()
-    }
-    
     public func addLearnMoreAction(buttonTag: Int, target: Any, selector: Selector) {
         learnMoreButton.tag = buttonTag
         learnMoreButton.addTarget(target, action: selector, for: .touchUpInside)
@@ -118,7 +117,6 @@ class RoundedInfoView: UIView {
         setAppearance()
         addSubviews()
         setConstraints()
-        configureDataLabels()
     }
     
     required init?(coder: NSCoder) {

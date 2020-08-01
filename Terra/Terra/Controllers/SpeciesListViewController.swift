@@ -17,7 +17,11 @@ final class SpeciesListViewController: UIViewController {
     }()
     
     private lazy var terraTitleLabel: UILabel = {
-        return Utilities.makeLabel(title: "Terra", weight: .bold, size: 30, color: #colorLiteral(red: 0.9257398248, green: 1, blue: 0.7623538375, alpha: 1), alignment: .left)
+        return Utilities.makeLabel(title: "Terra",
+                                   weight: .bold,
+                                   size: 30,
+                                   color: #colorLiteral(red: 0.9257398248, green: 1, blue: 0.7623538375, alpha: 1),
+                                   alignment: .left)
     }()
     
     private lazy var subtitleLabel: UILabel = {
@@ -28,27 +32,39 @@ final class SpeciesListViewController: UIViewController {
     }()
     
     private lazy var criticalSpeciesLabel: UILabel = {
-        return Utilities.makeLabel(title: "CRITICALLY ENDANGERED", weight: .medium, size: 19, color: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.7993899829), alignment: .left)
+        return Utilities.makeLabel(title: "CRITICALLY ENDANGERED",
+                                   weight: .medium,
+                                   size: 19,
+                                   color: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.7993899829),
+                                   alignment: .left)
     }()
     
     private lazy var endangeredSpeciesLabel: UILabel = {
-        return Utilities.makeLabel(title: "ENDANGERED", weight: .medium, size: 19, color: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.7993899829), alignment: .left)
+        return Utilities.makeLabel(title: "ENDANGERED",
+                                   weight: .medium,
+                                   size: 19,
+                                   color: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.7993899829),
+                                   alignment: .left)
     }()
     
     private lazy var vulnerableSpeciesLabel: UILabel = {
-        return Utilities.makeLabel(title: "VULNERABLE", weight: .medium, size: 19, color: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.7993899829), alignment: .left)
+        return Utilities.makeLabel(title: "VULNERABLE",
+                                   weight: .medium,
+                                   size: 19,
+                                   color: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.7993899829),
+                                   alignment: .left)
     }()
     
     private lazy var criticalCollectionView: UICollectionView = {
-        Utilities.makeCollectionView(superView: self.view)
+        Utilities.makeCollectionView(superview: self.view)
     }()
     
     private lazy var endangeredCollectionView: UICollectionView = {
-        Utilities.makeCollectionView(superView: self.view)
+        Utilities.makeCollectionView(superview: self.view)
     }()
     
     private lazy var vulnerableCollectionView: UICollectionView = {
-        Utilities.makeCollectionView(superView: self.view)
+        Utilities.makeCollectionView(superview: self.view)
     }()
     
     //MARK: -- Properties

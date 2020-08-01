@@ -172,14 +172,13 @@ final class SpeciesDetailViewController: UIViewController {
         backgroundGradientOverlay.startColor = #colorLiteral(red: 0.06859237701, green: 0.08213501424, blue: 0.2409383953, alpha: Float(newAlpha))
     }
     
-    private func updateDiscoverLabelAlpha(scrollOffset: CGFloat) {
+    private func updateExploreLabelAlpha(scrollOffset: CGFloat) {
         var newAlpha = CGFloat()
         newAlpha = scrollOffset <= 40 ? 0.6 : 0
         
         DispatchQueue.main.async {
             UIView.animate(withDuration: 1, delay: 0, options: .curveEaseInOut, animations: {
                 self.exploreButton.alpha = newAlpha
-                
             }, completion: nil)
         }
     }
@@ -264,7 +263,7 @@ extension SpeciesDetailViewController: UIScrollViewDelegate {
             let offsetY = scrollView.contentOffset.y
             
             updateTopGradientAlpha(scrollOffset: offsetY)
-            updateDiscoverLabelAlpha(scrollOffset: offsetY)
+            updateExploreLabelAlpha(scrollOffset: offsetY)
             updateHeaderViewHeight(scrollOffset: offsetY)
             updateHeaderTopAnchor(scrollOffset: offsetY)
             updateSubheaderHeight(scrollOffset: offsetY)
@@ -420,7 +419,7 @@ fileprivate extension SpeciesDetailViewController {
     
     func setBottomToolBarConstraints() {
         NSLayoutConstraint.activate([
-            bottomToolBar.topAnchor.constraint(equalTo: horizontalScrollView.bottomAnchor, constant: 110),
+            bottomToolBar.topAnchor.constraint(equalTo: horizontalScrollView.bottomAnchor, constant: 100),
             bottomToolBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             bottomToolBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             bottomToolBar.heightAnchor.constraint(equalToConstant: 80)

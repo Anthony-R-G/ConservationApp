@@ -12,7 +12,7 @@ struct SpeciesGalleryStrategy: SpeciesStrategy {
     var species: Species
     
     func titleText() -> String {
-        return ""
+        return "GALLERY"
     }
     
     func barLeftTitleText() -> String {
@@ -40,7 +40,10 @@ struct SpeciesGalleryStrategy: SpeciesStrategy {
     }
     
     func bodyText() -> String {
-        return ""
+        return """
+        This is where I'd put my gallery \n \n
+        IF I HAD ONE
+"""
     }
 }
 
