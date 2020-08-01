@@ -76,8 +76,7 @@ final class SpeciesDetailViewController: UIViewController {
     }()
     
     private lazy var donateButton: DonateButton = {
-        let db = DonateButton(gradientColors: [#colorLiteral(red: 1, green: 0.2914688587, blue: 0.3886995912, alpha: 0.9019156678), #colorLiteral(red: 0.5421239734, green: 0.1666001081, blue: 0.2197911441, alpha: 0.8952536387)], startPoint: CGPoint(x: 0, y: 0), endPoint: CGPoint(x: 1, y: 1))
-        return db
+        return DonateButton(gradientColors: [#colorLiteral(red: 1, green: 0.2914688587, blue: 0.3886995912, alpha: 0.9019156678), #colorLiteral(red: 0.5421239734, green: 0.1666001081, blue: 0.2197911441, alpha: 0.8952536387)], startPoint: CGPoint(x: 0, y: 0), endPoint: CGPoint(x: 1, y: 1))
     }()
     
     private lazy var bottomToolBar: BottomBarView = {
@@ -85,27 +84,19 @@ final class SpeciesDetailViewController: UIViewController {
     }()
     
     private lazy var speciesOverviewView: RoundedInfoView = {
-        let infoView = Factory.makeRoundedInfoView(strategy: SpeciesOverviewStrategy(species: currentSpecies))
-        infoView.addLearnMoreAction(buttonTag: 0, target: self, selector: #selector(learnMoreButtonPressed(sender:)))
-        return infoView
+        return Factory.makeRoundedInfoView(strategy: SpeciesOverviewStrategy(species: currentSpecies))
     }()
     
     private lazy var speciesHabitatView: RoundedInfoView = {
-        let infoView = Factory.makeRoundedInfoView(strategy: SpeciesHabitatStrategy(species: currentSpecies))
-        infoView.addLearnMoreAction(buttonTag: 2, target: self, selector: #selector(learnMoreButtonPressed(sender:)))
-        return infoView
+        return Factory.makeRoundedInfoView(strategy: SpeciesHabitatStrategy(species: currentSpecies))
     }()
     
     private lazy var speciesThreatsView: RoundedInfoView = {
-        let infoView = Factory.makeRoundedInfoView(strategy: SpeciesThreatsStrategy(species: currentSpecies))
-        infoView.addLearnMoreAction(buttonTag: 1, target: self, selector: #selector(learnMoreButtonPressed(sender:)))
-        return infoView
+        return Factory.makeRoundedInfoView(strategy: SpeciesThreatsStrategy(species: currentSpecies))
     }()
     
     private lazy var speciesGalleryView: RoundedInfoView = {
-        let infoView = Factory.makeRoundedInfoView(strategy: SpeciesGalleryStrategy(species: currentSpecies))
-        infoView.addLearnMoreAction(buttonTag: 3, target: self, selector: #selector(learnMoreButtonPressed(sender:)))
-        return infoView
+        return Factory.makeRoundedInfoView(strategy: SpeciesGalleryStrategy(species: currentSpecies))
     }()
     
     private lazy var headerNameViewHeightConstraint: NSLayoutConstraint = {
@@ -131,17 +122,6 @@ final class SpeciesDetailViewController: UIViewController {
     
     //MARK: -- Methods
     
-    @objc private func learnMoreButtonPressed(sender: UIButton) {
-        switch sender.tag {
-        case 1:
-            let mapVC = MapViewController()
-            mapVC.currentSpecies = currentSpecies
-            mapVC.modalPresentationStyle = .fullScreen
-            present(mapVC, animated: true, completion: nil)
-        default: print(sender.tag)
-        }
-    }
-    
     private func setViewElementsFromSpeciesData() {
         headerNameView.setViewElementsFromSpeciesData(species: currentSpecies)
         subheaderInfoView.setViewElementsFromSpeciesData(species: currentSpecies)
@@ -153,10 +133,10 @@ final class SpeciesDetailViewController: UIViewController {
     }
     
     private func setDelegates() {
-        verticalScrollView.delegate = self
-        horizontalScrollView.delegate = self
-        bottomToolBar.actionDelegate = self
+        [verticalScrollView, horizontalScrollView].forEach { $0.delegate = self }
+        bottomToolBar.delegate = self
         donateButton.delegate = self
+        [speciesOverviewView, speciesHabitatView, speciesThreatsView, speciesGalleryView].forEach {$0.delegate = self }
     }
     
     private func presentWebBrowser(link: URL){
@@ -307,6 +287,19 @@ extension SpeciesDetailViewController: BottomBarDelegate {
         guard let buttonOption = ButtonOption(rawValue: sender.tag) else { return }
         bottomToolBar.highlightButton(button: buttonOption)
         transitionToView(buttonPressed: buttonOption)
+    }
+}
+
+extension SpeciesDetailViewController: RoundedInfoViewDelegate {
+    func learnMoreButtonPressed(_ sender: UIButton) {
+        switch sender.tag {
+        case 1:
+            let mapVC = MapViewController()
+            mapVC.currentSpecies = currentSpecies
+            mapVC.modalPresentationStyle = .fullScreen
+            present(mapVC, animated: true, completion: nil)
+        default: print(sender.tag)
+        }
     }
 }
 

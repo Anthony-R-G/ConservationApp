@@ -61,7 +61,7 @@ class BottomBarView: UIView {
     
     //MARK: -- Properties
     
-    weak var actionDelegate: BottomBarDelegate?
+    weak var delegate: BottomBarDelegate?
     
     //MARK: -- Methods
     private func setAppearance() {
@@ -99,7 +99,7 @@ class BottomBarView: UIView {
     }
     
     @objc private func bottomBarButtonPressed(sender: UIButton) {
-        actionDelegate?.buttonPressed(sender)
+        delegate?.buttonPressed(sender)
     }
     
     override init(frame: CGRect) {

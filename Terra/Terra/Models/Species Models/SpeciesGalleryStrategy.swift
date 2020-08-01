@@ -43,7 +43,11 @@ struct SpeciesGalleryStrategy: SpeciesStrategy {
         return """
         This is where I'd put my gallery \n \n
         IF I HAD ONE
-"""
+        """
+    }
+    
+    func learnMoreButtonTag() -> Int {
+        return 3
     }
 }
 

@@ -21,4 +21,6 @@ protocol SpeciesStrategy {
     func barRightDataText() -> String
     
     func bodyText() -> String
+    
+    func learnMoreButtonTag() -> Int
 }

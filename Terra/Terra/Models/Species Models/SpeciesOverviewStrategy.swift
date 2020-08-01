@@ -42,4 +42,8 @@ struct SpeciesOverviewStrategy: SpeciesStrategy {
     func bodyText() -> String {
         return species.overview
     }
+    
+    func learnMoreButtonTag() -> Int {
+        return 0
+    }
 }

@@ -96,6 +96,9 @@ class RoundedInfoView: UIView {
         btn.tintColor = #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
         btn.setTitleColor(#colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1), for: .normal)
         btn.showsTouchWhenHighlighted = true
+        
+        btn.tag = strategy.learnMoreButtonTag()
+        btn.addTarget(self, action: #selector(learnMoreButtonPressed(sender:)), for: .touchUpInside)
         return btn
     }()
     
@@ -103,9 +106,10 @@ class RoundedInfoView: UIView {
     
     var strategy: SpeciesStrategy
     
-    public func addLearnMoreAction(buttonTag: Int, target: Any, selector: Selector) {
-        learnMoreButton.tag = buttonTag
-        learnMoreButton.addTarget(target, action: selector, for: .touchUpInside)
+    weak var delegate: RoundedInfoViewDelegate?
+    
+    @objc private func learnMoreButtonPressed(sender: UIButton) {
+        delegate?.learnMoreButtonPressed(learnMoreButton)
     }
     
     private func setAppearance() {
