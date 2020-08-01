@@ -47,19 +47,6 @@ struct SpeciesHabitatStrategy: SpeciesStrategy {
 }
 
 
-
-struct SpeciesThreatsStrategy  {
-    var species: Species
-    
-    func titleText() -> String {
-        return "THREATS"
-    }
-    
-    func bodyText() -> String {
-        return species.threats
-    }
-}
-
 struct SpeciesGalleryStrategy {
     var species: Species
     
