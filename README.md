@@ -51,7 +51,7 @@ Scrolling up on this page will bring up an overview of the species. You can then
 ### Getting Detailed Information
 | African Elephant Overview | Blue-throated Macaw Habitat | Blue-throated Macaw Distribution | Panamanian Golden Frog Distribution |
 |:-----:|:-------:|:-------:|:-------|
-|![screen 1](https://i.imgur.com/G2HG7Ju.png) | ![screen 2](https://i.imgur.com/gAL8twq.png) |![screen 3](https://i.imgur.com/Ueikygo.png)|![screen 4](https://i.imgur.com/fz7PtXS.png)|
+|![screen 1](https://i.imgur.com/XVNFPHj.png) | ![screen 2](https://i.imgur.com/kgitJkv.png) |![screen 3](https://i.imgur.com/Ueikygo.png)|![screen 4](https://i.imgur.com/fz7PtXS.png)|
 
 You can show your support for animal conservation efforts by clicking on the donate button. This will redirect you in-app to the relevant conservation for that specific animal. This makes it easy to get involved.
 
