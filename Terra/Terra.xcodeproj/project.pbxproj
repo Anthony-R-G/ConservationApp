@@ -34,6 +34,7 @@
 		975812ED24D528E100C09D56 /* SpeciesThreatsStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975812EC24D528E100C09D56 /* SpeciesThreatsStrategy.swift */; };
 		975812F124D52F7B00C09D56 /* SpeciesHabitatStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975812F024D52F7B00C09D56 /* SpeciesHabitatStrategy.swift */; };
 		975812F324D530AA00C09D56 /* SpeciesGalleryStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975812F224D530AA00C09D56 /* SpeciesGalleryStrategy.swift */; };
+		975812F524D539D500C09D56 /* Biome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975812F424D539D500C09D56 /* Biome.swift */; };
 		97591FD424CB8D46002EAC96 /* RoundedInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FD324CB8D46002EAC96 /* RoundedInfoView.swift */; };
 		97591FDC24CC4524002EAC96 /* ButtonOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FDB24CC4524002EAC96 /* ButtonOption.swift */; };
 		97591FDF24CCD14A002EAC96 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FDE24CCD14A002EAC96 /* Constants.swift */; };
@@ -113,6 +114,7 @@
 		975812EC24D528E100C09D56 /* SpeciesThreatsStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesThreatsStrategy.swift; sourceTree = "<group>"; };
 		975812F024D52F7B00C09D56 /* SpeciesHabitatStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesHabitatStrategy.swift; sourceTree = "<group>"; };
 		975812F224D530AA00C09D56 /* SpeciesGalleryStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesGalleryStrategy.swift; sourceTree = "<group>"; };
+		975812F424D539D500C09D56 /* Biome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Biome.swift; sourceTree = "<group>"; };
 		97591FD324CB8D46002EAC96 /* RoundedInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedInfoView.swift; sourceTree = "<group>"; };
 		97591FDB24CC4524002EAC96 /* ButtonOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonOption.swift; sourceTree = "<group>"; };
 		97591FDE24CCD14A002EAC96 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -241,6 +243,7 @@
 				9711D8F624BD199700C2E6F1 /* Species.swift */,
 				977D876B24CD3A6100AE5E51 /* Taxonomy.swift */,
 				977D877124CD7BFF00AE5E51 /* Habitat.swift */,
+				975812F424D539D500C09D56 /* Biome.swift */,
 				9711D91E24BD63B000C2E6F1 /* HabitatSystem.swift */,
 				97E9450324BE10C800550824 /* ConservationStatus.swift */,
 				974CC98324C64F0E00E4EF85 /* PopulationTrend.swift */,
@@ -248,8 +251,8 @@
 				977D876F24CD6A1200AE5E51 /* Group.swift */,
 				975812E824D4EDF900C09D56 /* SpeciesStrategy.swift */,
 				975812EA24D4EF9400C09D56 /* SpeciesOverviewStrategy.swift */,
-				975812EC24D528E100C09D56 /* SpeciesThreatsStrategy.swift */,
 				975812F024D52F7B00C09D56 /* SpeciesHabitatStrategy.swift */,
+				975812EC24D528E100C09D56 /* SpeciesThreatsStrategy.swift */,
 				975812F224D530AA00C09D56 /* SpeciesGalleryStrategy.swift */,
 			);
 			path = "Species Models";
@@ -530,6 +533,7 @@
 				97D5946424CE7E49001BD566 /* BottomBarView.swift in Sources */,
 				972BBF7724C01FA900B6F7C0 /* PSORoundedVisualEffectView.swift in Sources */,
 				9723E7AA24D3505C0038ECB6 /* SpeciesAnnotation.swift in Sources */,
+				975812F524D539D500C09D56 /* Biome.swift in Sources */,
 				976D585924CFA04400FC7458 /* UIButtonExtensions.swift in Sources */,
 				977D877424CE0D8C00AE5E51 /* DonateButton.swift in Sources */,
 				977D876C24CD3A6100AE5E51 /* Taxonomy.swift in Sources */,

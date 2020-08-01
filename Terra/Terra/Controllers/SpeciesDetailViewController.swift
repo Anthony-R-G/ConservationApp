@@ -90,20 +90,20 @@ final class SpeciesDetailViewController: UIViewController {
         return infoView
     }()
     
-    private lazy var speciesThreatsView: RoundedInfoView = {
-        let infoView = Utilities.makeRoundedInfoView(strategy: SpeciesThreatsStrategy(species: currentSpecies))
-        infoView.addLearnMoreAction(buttonTag: 1, target: self, selector: #selector(learnMoreButtonPressed(sender:)))
-        return infoView
-    }()
-    
     private lazy var speciesHabitatView: RoundedInfoView = {
         let infoView = Utilities.makeRoundedInfoView(strategy: SpeciesHabitatStrategy(species: currentSpecies))
         infoView.addLearnMoreAction(buttonTag: 2, target: self, selector: #selector(learnMoreButtonPressed(sender:)))
         return infoView
     }()
     
+    private lazy var speciesThreatsView: RoundedInfoView = {
+        let infoView = Utilities.makeRoundedInfoView(strategy: SpeciesThreatsStrategy(species: currentSpecies))
+        infoView.addLearnMoreAction(buttonTag: 1, target: self, selector: #selector(learnMoreButtonPressed(sender:)))
+        return infoView
+    }()
+    
     private lazy var speciesGalleryView: RoundedInfoView = {
-         let infoView = RoundedInfoView(frame: CGRect(), strategy: SpeciesGalleryStrategy(species: currentSpecies))
+        let infoView = RoundedInfoView(frame: CGRect(), strategy: SpeciesGalleryStrategy(species: currentSpecies))
         infoView.addLearnMoreAction(buttonTag: 3, target: self, selector: #selector(learnMoreButtonPressed(sender:)))
         return infoView
     }()
@@ -213,11 +213,11 @@ final class SpeciesDetailViewController: UIViewController {
         case .overviewButton:
             horizontalScrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
             
-        case .threatsButton:
-            horizontalScrollView.setContentOffset(CGPoint(x: speciesThreatsView.frame.minX - 20, y: 0), animated: true)
-            
         case .habitatButton:
             horizontalScrollView.setContentOffset(CGPoint(x: speciesHabitatView.frame.minX - 20, y: 0), animated: true)
+            
+        case .threatsButton:
+            horizontalScrollView.setContentOffset(CGPoint(x: speciesThreatsView.frame.minX - 20, y: 0), animated: true)
             
         case .galleryButton:
             horizontalScrollView.setContentOffset(CGPoint(x: speciesGalleryView.frame.minX - 20, y: 0), animated: true)
@@ -278,11 +278,11 @@ extension SpeciesDetailViewController: UIScrollViewDelegate {
             if scrollView.bounds.contains(speciesOverviewView.frame) {
                 bottomToolBar.highlightButton(button: .overviewButton)
                 
-            } else if scrollView.bounds.contains(speciesThreatsView.frame) {
-                bottomToolBar.highlightButton(button: .threatsButton)
-                
             } else if scrollView.bounds.contains(speciesHabitatView.frame) {
                 bottomToolBar.highlightButton(button: .habitatButton)
+                
+            } else if scrollView.bounds.contains(speciesThreatsView.frame) {
+                bottomToolBar.highlightButton(button: .threatsButton)
                 
             } else if scrollView.bounds.contains(speciesGalleryView.frame) {
                 bottomToolBar.highlightButton(button: .galleryButton)
@@ -321,7 +321,7 @@ fileprivate extension SpeciesDetailViewController {
         verticalScrollViewUIElements.forEach{ verticalScrollView.addSubview($0) }
         verticalScrollViewUIElements.forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
         
-        let horizontalScrollViewUIElements = [speciesOverviewView, speciesThreatsView, speciesHabitatView, speciesGalleryView]
+        let horizontalScrollViewUIElements = [speciesOverviewView, speciesHabitatView, speciesThreatsView, speciesGalleryView]
         horizontalScrollViewUIElements.forEach{ horizontalScrollView.addSubview($0) }
         horizontalScrollViewUIElements.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
     }
@@ -335,8 +335,8 @@ fileprivate extension SpeciesDetailViewController {
         setDiscoverButtonConstraints()
         
         setSpeciesOverviewViewConstraints()
-        setSpeciesThreatsViewConstraints()
         setSpeciesHabitatViewConstraints()
+        setSpeciesThreatsViewConstraints()
         setSpeciesGalleryViewConstraints()
         
         setDonateButtonConstraints()
@@ -435,28 +435,28 @@ fileprivate extension SpeciesDetailViewController {
         ])
     }
     
-    func setSpeciesThreatsViewConstraints() {
-        NSLayoutConstraint.activate([
-            speciesThreatsView.centerYAnchor.constraint(equalTo: horizontalScrollView.centerYAnchor),
-            speciesThreatsView.leadingAnchor.constraint(equalTo: speciesOverviewView.trailingAnchor, constant: 40),
-            speciesThreatsView.widthAnchor.constraint(equalToConstant: Constants.detailInfoViewWidth),
-            speciesThreatsView.heightAnchor.constraint(equalToConstant: Constants.detailInfoViewHeight),
-        ])
-    }
-    
     func setSpeciesHabitatViewConstraints() {
         NSLayoutConstraint.activate([
             speciesHabitatView.centerYAnchor.constraint(equalTo: horizontalScrollView.centerYAnchor),
-            speciesHabitatView.leadingAnchor.constraint(equalTo: speciesThreatsView.trailingAnchor, constant: 40),
+            speciesHabitatView.leadingAnchor.constraint(equalTo: speciesOverviewView.trailingAnchor, constant: 40),
             speciesHabitatView.widthAnchor.constraint(equalToConstant: Constants.detailInfoViewWidth),
             speciesHabitatView.heightAnchor.constraint(equalToConstant: Constants.detailInfoViewHeight),
+        ])
+    }
+    
+    func setSpeciesThreatsViewConstraints() {
+        NSLayoutConstraint.activate([
+            speciesThreatsView.centerYAnchor.constraint(equalTo: horizontalScrollView.centerYAnchor),
+            speciesThreatsView.leadingAnchor.constraint(equalTo: speciesHabitatView.trailingAnchor, constant: 40),
+            speciesThreatsView.widthAnchor.constraint(equalToConstant: Constants.detailInfoViewWidth),
+            speciesThreatsView.heightAnchor.constraint(equalToConstant: Constants.detailInfoViewHeight),
         ])
     }
     
     func setSpeciesGalleryViewConstraints() {
         NSLayoutConstraint.activate([
             speciesGalleryView.centerYAnchor.constraint(equalTo: horizontalScrollView.centerYAnchor),
-            speciesGalleryView.leadingAnchor.constraint(equalTo: speciesHabitatView.trailingAnchor, constant: 40),
+            speciesGalleryView.leadingAnchor.constraint(equalTo: speciesThreatsView.trailingAnchor, constant: 40),
             speciesGalleryView.widthAnchor.constraint(equalToConstant: Constants.detailInfoViewWidth),
             speciesGalleryView.heightAnchor.constraint(equalToConstant: Constants.detailInfoViewHeight),
         ])
