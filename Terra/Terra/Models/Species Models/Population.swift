@@ -12,6 +12,6 @@ struct Population: FirebaseConvertible {
     let trend: PopulationTrend
     let summary: String
     let numbers: String
-    let assessmentDate: String
+    let assessmentDate: Int
     let threats: String
 }

@@ -63,13 +63,8 @@ final class SubheaderInfoView: UIView {
     public func setViewElementsFromSpeciesData(species: Species) {
         numbersDataLabel.text = species.population.numbers
         trendDataLabel.text = species.population.trend.rawValue
-        switch species.population.trend {
-        case .decreasing: trendDataLabel.textColor = #colorLiteral(red: 1, green: 0.4507741928, blue: 0.5112823844, alpha: 1)
-        case .recovering: trendDataLabel.textColor = #colorLiteral(red: 0.7970843911, green: 1, blue: 0.5273691416, alpha: 1)
-        case .stable: trendDataLabel.textColor = #colorLiteral(red: 0.7970843911, green: 1, blue: 0.5273691416, alpha: 1)
-        }
-        
-        lastAssessedDataLabel.text = ""
+        trendDataLabel.textColor = species.population.trend == .decreasing ? #colorLiteral(red: 1, green: 0.4507741928, blue: 0.5112823844, alpha: 1) : #colorLiteral(red: 0.7970843911, green: 1, blue: 0.5273691416, alpha: 1)
+        lastAssessedDataLabel.text = "\(species.population.assessmentDate)"
     }
     
     override init(frame: CGRect) {
