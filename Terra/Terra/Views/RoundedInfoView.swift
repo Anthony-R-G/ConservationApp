@@ -13,7 +13,11 @@ class RoundedInfoView: UIView {
     //MARK: -- UI Element Initialization
     
     private lazy var titleLabel: UILabel = {
-        return Factory.makeLabel(title: strategy.titleText(), weight: .bold, size: 28, color: .white, alignment: .left)
+        return Factory.makeLabel(title: strategy.titleText(),
+                                 weight: .bold,
+                                 size: 28,
+                                 color: .white,
+                                 alignment: .left)
     }()
     
     private lazy var bodyTextLabel: UILabel = {
@@ -108,7 +112,7 @@ class RoundedInfoView: UIView {
         backgroundColor = .clear
         layer.cornerRadius = 39
         clipsToBounds = true
-        addBlurToView(cornerRadius: 39)
+        addBlurToView()
     }
     
     init(frame: CGRect, speciesStrategy: SpeciesStrategy) {

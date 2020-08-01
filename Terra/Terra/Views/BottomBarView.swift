@@ -65,7 +65,7 @@ class BottomBarView: UIView {
     
     //MARK: -- Methods
     private func setAppearance() {
-        addBlurToView(cornerRadius: 0)
+        addBlurToView()
     }
     
     public func updateHighlightIndicator(scrollOffset: CGFloat) {
