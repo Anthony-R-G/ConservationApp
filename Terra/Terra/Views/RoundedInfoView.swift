@@ -8,6 +8,60 @@
 
 import UIKit
 
+
+
+struct SpeciesHabitatStrategy: SpeciesStrategy {
+    var species: Species
+    
+    func titleText() -> String {
+        return "HABITAT"
+    }
+    
+   
+    
+    func bodyText() -> String {
+        return species.habitat.summary
+    }
+}
+
+struct SpeciesOverviewStrategy: SpeciesStrategy {
+    var species: Species
+    
+    func titleText() -> String {
+        return "OVERVIEW"
+    }
+    
+
+    
+    func bodyText() -> String {
+        return species.overview
+    }
+}
+
+struct SpeciesThreatsStrategy: SpeciesStrategy {
+    var species: Species
+    
+    func titleText() -> String {
+        return "THREATS"
+    }
+    
+    func bodyText() -> String {
+        return species.threats
+    }
+}
+
+struct SpeciesGalleryStrategy: SpeciesStrategy {
+    var species: Species
+    
+    func titleText() -> String {
+        return "GALLERY"
+    }
+    
+    func bodyText() -> String {
+        return "o"
+    }
+}
+
 class RoundedInfoView: UIView {
     
     //MARK: -- UI Element Initialization
@@ -84,15 +138,9 @@ class RoundedInfoView: UIView {
         barRightTitleLabel.text = barRightTitle.capitalized
     }
     
-    public func configureDataLabels(
-        bodyText: String,
-        barLeftData: String,
-        barMiddleData: String,
-        barRightData: String) {
-        bodyTextLabel.text = bodyText
-        barLeftDataLabel.text = barLeftData
-        barMiddleDataLabel.text = barMiddleData
-        barRightDataLabel.text = barRightData
+    private func configureDataLabels() {
+        
+        bodyTextLabel.text = strategy.bodyText()
     }
     
     public func addLearnMoreAction(buttonTag: Int, target: Any, selector: Selector) {
@@ -107,12 +155,13 @@ class RoundedInfoView: UIView {
         self.addBlurToView(cornerRadius: 39)
     }
     
-    override init(frame: CGRect) {
+    init(frame: CGRect, strategy: SpeciesStrategy) {
+        self.strategy = strategy
         super.init(frame: frame)
-        
         setAppearance()
         addSubviews()
         setConstraints()
+        configureDataLabels()
     }
     
     required init?(coder: NSCoder) {

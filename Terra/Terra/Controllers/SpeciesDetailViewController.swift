@@ -85,25 +85,26 @@ final class SpeciesDetailViewController: UIViewController {
     }()
     
     private lazy var speciesOverviewView: RoundedInfoView = {
-        let infoView = Utilities.makeRoundedInfoView(title: "OVERVIEW", barLeftTitle: "Height", barMiddleTitle: "Weight", barRightTitle: "Diet")
+         let infoView = RoundedInfoView(frame: CGRect(), strategy: SpeciesOverviewStrategy(species: currentSpecies))
         infoView.addLearnMoreAction(buttonTag: 0, target: self, selector: #selector(learnMoreButtonPressed(sender:)))
         return infoView
     }()
     
     private lazy var speciesThreatsView: RoundedInfoView = {
-        let infoView = Utilities.makeRoundedInfoView(title: "THREATS", barLeftTitle: "", barMiddleTitle: "", barRightTitle: "")
+         let infoView = RoundedInfoView(frame: CGRect(), strategy: SpeciesHabitatStrategy(species: currentSpecies))
         infoView.addLearnMoreAction(buttonTag: 1, target: self, selector: #selector(learnMoreButtonPressed(sender:)))
         return infoView
     }()
     
     private lazy var speciesHabitatView: RoundedInfoView = {
-        let infoView = Utilities.makeRoundedInfoView(title: "HABITAT", barLeftTitle: "Temperature", barMiddleTitle: "Humidity", barRightTitle: "Latitude")
+        let infoView = RoundedInfoView(frame: CGRect(), strategy: SpeciesHabitatStrategy(species: currentSpecies))
+        
         infoView.addLearnMoreAction(buttonTag: 2, target: self, selector: #selector(learnMoreButtonPressed(sender:)))
         return infoView
     }()
     
     private lazy var speciesGalleryView: RoundedInfoView = {
-        let infoView = Utilities.makeRoundedInfoView(title: "GALLERY", barLeftTitle: "", barMiddleTitle: "", barRightTitle: "")
+         let infoView = RoundedInfoView(frame: CGRect(), strategy: SpeciesGalleryStrategy(species: currentSpecies))
         infoView.addLearnMoreAction(buttonTag: 3, target: self, selector: #selector(learnMoreButtonPressed(sender:)))
         return infoView
     }()
@@ -145,9 +146,9 @@ final class SpeciesDetailViewController: UIViewController {
     private func setViewElementsFromSpeciesData() {
         headerNameView.setViewElementsFromSpeciesData(species: currentSpecies)
         subheaderInfoView.setViewElementsFromSpeciesData(species: currentSpecies)
-        speciesOverviewView.configureDataLabels(bodyText: currentSpecies.overview, barLeftData: currentSpecies.height, barMiddleData: currentSpecies.weight, barRightData: currentSpecies.diet.rawValue)
-        speciesThreatsView.configureDataLabels(bodyText: currentSpecies.threats, barLeftData: "", barMiddleData: "", barRightData: "")
-        speciesHabitatView.configureDataLabels(bodyText: currentSpecies.habitat.summary, barLeftData: currentSpecies.habitat.temperature, barMiddleData: "", barRightData: "\(currentSpecies.habitat.latitude)")
+//        speciesOverviewView.configureDataLabels(bodyText: currentSpecies.overview, barLeftData: currentSpecies.height, barMiddleData: currentSpecies.weight, barRightData: currentSpecies.diet.rawValue)
+//        speciesThreatsView.configureDataLabels(bodyText: currentSpecies.threats, barLeftData: "", barMiddleData: "", barRightData: "")
+//        speciesHabitatView.configureDataLabels(bodyText: currentSpecies.habitat.summary, barLeftData: currentSpecies.habitat.temperature, barMiddleData: "", barRightData: "\(currentSpecies.habitat.latitude)")
         
     }
     
@@ -261,7 +262,6 @@ final class SpeciesDetailViewController: UIViewController {
 }
 
 //MARK: -- ScrollView Methods
-
 extension SpeciesDetailViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         switch scrollView {
@@ -301,7 +301,6 @@ extension SpeciesDetailViewController: UIScrollViewDelegate {
 }
 
 //MARK: -- Custom Delegate Implementation
-
 extension SpeciesDetailViewController: DonateButtonDelegate {
     func donateButtonPressed() {
         guard let donationURL = URL(string: currentSpecies.donationLink) else { return }
@@ -319,7 +318,6 @@ extension SpeciesDetailViewController: BottomBarDelegate {
 
 
 //MARK: -- Add Subviews & Constraints
-
 fileprivate extension SpeciesDetailViewController {
     func addSubviews() {
         view.addSubview(verticalScrollView)
@@ -470,7 +468,6 @@ fileprivate extension SpeciesDetailViewController {
         ])
     }
 }
-
 
 
 

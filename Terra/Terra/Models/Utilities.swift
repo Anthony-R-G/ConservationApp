@@ -49,13 +49,11 @@ class Utilities {
         return button
     }
     
-    static func makeRoundedInfoView(title: String,
-                                    barLeftTitle: String,
-                                    barMiddleTitle: String,
-                                    barRightTitle: String
+    static func makeRoundedInfoView(strategy: SpeciesStrategy
                                     ) -> RoundedInfoView {
-        let view = RoundedInfoView()
-        view.configureTitleLabels(titleText: title, barLeftTitle: barLeftTitle, barMiddleTitle: barMiddleTitle, barRightTitle: barRightTitle)
+        let view = RoundedInfoView(frame: CGRect(), strategy: strategy)
+//        view.configureTitleLabels(titleText: title, barLeftTitle: barLeftTitle, barMiddleTitle: barMiddleTitle, barRightTitle: barRightTitle)
+
         return view
     }
 }
