@@ -110,7 +110,7 @@ class RoundedInfoView: UIView {
     
     private func setAppearance() {
         backgroundColor = .clear
-        layer.cornerRadius = 39
+        layer.cornerRadius = Constants.cornerRadius
         clipsToBounds = true
         addBlurToView()
     }
