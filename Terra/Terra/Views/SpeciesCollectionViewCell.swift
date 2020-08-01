@@ -39,7 +39,7 @@ class SpeciesCollectionViewCell: UICollectionViewCell {
     
     public func configureCellUI(from species: Species) {
         speciesNameLabel.text = species.commonName
-        FirebaseStorageService.cellImageManager.getImage(imageRefStr: species.commonName, imageView: backgroundImageView)
+        FirebaseStorageService.cellImageManager.getImage(for: species.commonName, setTo: backgroundImageView)
         layer.cornerRadius = Constants.cornerRadius
         layer.masksToBounds = true
     }

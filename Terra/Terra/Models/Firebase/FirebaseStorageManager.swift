@@ -36,8 +36,8 @@ class FirebaseStorageService {
         }
     }
     
-    func getImage(imageRefStr: String, imageView: UIImageView) {
-        let cleanedStr = imageRefStr.lowercased().replacingOccurrences(of: " ", with: "")
+    func getImage(for speciesName: String, setTo imageView: UIImageView) {
+        let cleanedStr = speciesName.lowercased().replacingOccurrences(of: " ", with: "")
         let animalImageReference = imagesFolderReference.child("\(cleanedStr).png")
         imageView.sd_imageTransition = .fade
         imageView.sd_imageIndicator = SDWebImageActivityIndicator.gray

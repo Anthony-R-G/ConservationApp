@@ -149,7 +149,7 @@ final class SpeciesDetailViewController: UIViewController {
     
     private func setBackground() {
         view.backgroundColor = .black
-        FirebaseStorageService.detailImageManager.getImage(imageRefStr: currentSpecies.commonName, imageView: backgroundImageView)
+        FirebaseStorageService.detailImageManager.getImage(for: currentSpecies.commonName, setTo: backgroundImageView)
     }
     
     private func setDelegates() {
