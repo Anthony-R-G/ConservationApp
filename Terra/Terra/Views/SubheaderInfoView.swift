@@ -84,7 +84,7 @@ fileprivate extension SubheaderInfoView {
     
     func addSubviews() {
         let UIElements = [numbersTitleLabel, numbersDataLabel, trendTitleLabel, trendDataLabel, lastAssessedTitleLabel, lastAssessedDataLabel]
-        UIElements.forEach { self.addSubview($0) }
+        UIElements.forEach { addSubview($0) }
         UIElements.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
     }
     
@@ -138,7 +138,7 @@ fileprivate extension SubheaderInfoView {
             lastAssessedTitleLabel.leadingAnchor.constraint(equalTo: trendTitleLabel.trailingAnchor, constant: Constants.universalLeadingConstant),
             lastAssessedTitleLabel.topAnchor.constraint(equalTo: numbersTitleLabel.topAnchor),
             lastAssessedTitleLabel.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.5),
-            lastAssessedTitleLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.25)
+            lastAssessedTitleLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.25)
         ])
     }
     

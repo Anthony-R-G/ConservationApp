@@ -134,7 +134,7 @@ fileprivate extension RoundedInfoView {
     
     func addSubviews() {
         let UIElements =  [titleLabel, infoBarView, bodyTextLabel, learnMoreButton]
-        UIElements.forEach{ self.addSubview($0) }
+        UIElements.forEach{ addSubview($0) }
         UIElements.forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
         
         let infoBarElements = [barLeftTitleLabel, barLeftDataLabel, barMiddleTitleLabel, barMiddleDataLabel, barRightTitleLabel, barRightDataLabel]
@@ -161,8 +161,8 @@ fileprivate extension RoundedInfoView {
     
     func setOverviewTitleLabelConstraints() {
         NSLayoutConstraint.activate([
-            titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 25),
-            titleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 15),
+            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 25),
+            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 15),
             titleLabel.heightAnchor.constraint(equalToConstant: 40),
             titleLabel.widthAnchor.constraint(equalToConstant: 200)
         ])
@@ -171,9 +171,9 @@ fileprivate extension RoundedInfoView {
     func setInfoBarConstraints() {
         NSLayoutConstraint.activate([
             infoBarView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 15),
-            infoBarView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            infoBarView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.18),
-            infoBarView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.9)
+            infoBarView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            infoBarView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.18),
+            infoBarView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.9)
         ])
     }
     
@@ -234,16 +234,16 @@ fileprivate extension RoundedInfoView {
     func setBodyTextViewConstraints() {
         NSLayoutConstraint.activate([
             bodyTextLabel.topAnchor.constraint(equalTo: infoBarView.bottomAnchor, constant: 15),
-            bodyTextLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            bodyTextLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -50),
-            bodyTextLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.9)
+            bodyTextLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            bodyTextLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -50),
+            bodyTextLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.9)
         ])
     }
     
     func setReadMoreButtonConstraints() {
         NSLayoutConstraint.activate([
-            learnMoreButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
-            learnMoreButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10),
+            learnMoreButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            learnMoreButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
             learnMoreButton.heightAnchor.constraint(equalToConstant: 40),
             learnMoreButton.widthAnchor.constraint(equalToConstant: 170)
         ])

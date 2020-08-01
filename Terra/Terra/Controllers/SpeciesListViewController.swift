@@ -56,15 +56,15 @@ final class SpeciesListViewController: UIViewController {
     }()
     
     private lazy var criticalCollectionView: UICollectionView = {
-        Factory.makeCollectionView(superview: self.view)
+        Factory.makeCollectionView(superview: view)
     }()
     
     private lazy var endangeredCollectionView: UICollectionView = {
-        Factory.makeCollectionView(superview: self.view)
+        Factory.makeCollectionView(superview: view)
     }()
     
     private lazy var vulnerableCollectionView: UICollectionView = {
-        Factory.makeCollectionView(superview: self.view)
+        Factory.makeCollectionView(superview: view)
     }()
     
     //MARK: -- Properties

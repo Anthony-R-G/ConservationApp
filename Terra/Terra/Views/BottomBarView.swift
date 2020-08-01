@@ -120,7 +120,7 @@ fileprivate extension BottomBarView {
     
     func addSubviews() {
         let UIElements = [buttonStackView, highlightedIndicator]
-        UIElements.forEach { self.addSubview($0) }
+        UIElements.forEach { addSubview($0) }
         UIElements.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
     }
     
