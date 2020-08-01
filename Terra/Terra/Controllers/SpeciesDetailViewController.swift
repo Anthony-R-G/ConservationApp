@@ -168,7 +168,7 @@ final class SpeciesDetailViewController: UIViewController {
     
     private func updateTopGradientAlpha(scrollOffset: CGFloat) {
         let alphaOffset = (scrollOffset/400)
-        let newAlpha = max(0, min(alphaOffset, 0.34))
+        let newAlpha = max(0, min(alphaOffset, 0.38))
         backgroundGradientOverlay.startColor = #colorLiteral(red: 0.06859237701, green: 0.08213501424, blue: 0.2409383953, alpha: Float(newAlpha))
     }
     

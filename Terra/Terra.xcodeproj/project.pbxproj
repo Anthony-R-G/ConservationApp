@@ -41,6 +41,7 @@
 		97591FE024CCD2E9002EAC96 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FDE24CCD14A002EAC96 /* Constants.swift */; };
 		97591FE324CCDC48002EAC96 /* FontWeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FE224CCDC48002EAC96 /* FontWeight.swift */; };
 		9767D04C24C3EA9200384FCD /* SubheaderInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9767D04B24C3EA9200384FCD /* SubheaderInfoView.swift */; };
+		97682CC524D550BB000E5B30 /* Biome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975812F424D539D500C09D56 /* Biome.swift */; };
 		976D585724CF9FD800FC7458 /* Double Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976D585624CF9FD800FC7458 /* Double Extensions.swift */; };
 		976D585924CFA04400FC7458 /* UIButtonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976D585824CFA04400FC7458 /* UIButtonExtensions.swift */; };
 		976FB55324D367AE00848E35 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 97591FE124CCDC28002EAC96 /* Roboto-Regular.ttf */; };
@@ -587,6 +588,7 @@
 				97E61B8024CE54A100E83691 /* Habitat.swift in Sources */,
 				97E61B8124CE54A800E83691 /* Group.swift in Sources */,
 				977D877924CE540800AE5E51 /* FirebaseConvertible.swift in Sources */,
+				97682CC524D550BB000E5B30 /* Biome.swift in Sources */,
 				972A615224C94C6C00A59AB6 /* ConservationStatus.swift in Sources */,
 				97A2BC7324CE559F000D6B2D /* FontWeight.swift in Sources */,
 				977D876E24CD698500AE5E51 /* Taxonomy.swift in Sources */,
