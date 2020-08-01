@@ -25,6 +25,4 @@ public struct Species: FirebaseConvertible {
     let weight: String
     let height: String
     let diet: Diet
-    let cellImage: String
-    let detailImage: String
 }

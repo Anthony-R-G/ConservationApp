@@ -12,21 +12,36 @@ final class HeaderNameView: UIView {
     //MARK: -- UI Element Initialization
     
     private lazy var conservationStatusLabel: UILabel = {
-        let label = Utilities.makeLabel(title: nil, weight: .regular, size: 17, alignment: .center)
-        label.backgroundColor = Constants.red
+        let label = Utilities.makeLabel(title: nil,
+                                        weight: .regular,
+                                        size: 17,
+                                        color: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1),
+                                        alignment: .center)
+        label.backgroundColor = .clear
+        label.layer.borderColor = UIColor.white.cgColor
+        label.layer.borderWidth = 1
         label.layer.cornerRadius = 10
         return label
     }()
     
     private lazy var speciesCommonNameLabel: UILabel = {
-        let label = Utilities.makeLabel(title: nil, weight: .bold, size: 55, alignment: .left)
+        let label = Utilities.makeLabel(title: nil,
+                                        weight: .bold,
+                                        size: 55,
+                                        color: .white,
+                                        alignment: .left)
         label.numberOfLines = 2
         return label
     }()
     
     private lazy var speciesScientificNameLabel: UILabel = {
-        let label = Utilities.makeLabel(title: nil, weight: .light, size: 17, alignment: .left)
-        let neededSize = label.sizeThatFits(CGSize(width: frame.size.width, height: CGFloat.greatestFiniteMagnitude))
+        let label = Utilities.makeLabel(title: nil,
+                                        weight: .lightItalic,
+                                        size: 17,
+                                        color: .white,
+                                        alignment: .left)
+        let neededSize = label.sizeThatFits(CGSize(width: frame.size.width,
+                                                   height: CGFloat.greatestFiniteMagnitude))
         return label
     }()
     
@@ -49,22 +64,22 @@ final class HeaderNameView: UIView {
     }
 }
 
-//MARK: -- Adding Subviews & Constraints
+//MARK: -- Add Subviews & Constraints
 
-extension HeaderNameView {
+fileprivate extension HeaderNameView {
     
-    private func addSubviews() {
+    func addSubviews() {
         let UIElements = [conservationStatusLabel, speciesCommonNameLabel, speciesScientificNameLabel]
         UIElements.forEach { addSubview($0) }
         UIElements.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
     }
-    private func setConstraints() {
+    func setConstraints() {
         setConservationStatusLabelConstraints()
         setSpeciesCommonNameLabelConstraints()
         setSpeciesScientificNameLabelConstraints()
     }
     
-    private func setConservationStatusLabelConstraints() {
+    func setConservationStatusLabelConstraints() {
         NSLayoutConstraint.activate([
             conservationStatusLabel.leadingAnchor.constraint(equalTo: speciesCommonNameLabel.leadingAnchor, constant: 5),
             conservationStatusLabel.bottomAnchor.constraint(equalTo: speciesCommonNameLabel.topAnchor, constant: -10),
@@ -73,7 +88,7 @@ extension HeaderNameView {
         ])
     }
     
-    private func setSpeciesCommonNameLabelConstraints(){
+    func setSpeciesCommonNameLabelConstraints(){
         NSLayoutConstraint.activate([
             speciesCommonNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
             speciesCommonNameLabel.bottomAnchor.constraint(equalTo: speciesScientificNameLabel.topAnchor),
@@ -82,7 +97,7 @@ extension HeaderNameView {
         ])
     }
     
-    private func setSpeciesScientificNameLabelConstraints() {
+    func setSpeciesScientificNameLabelConstraints() {
         NSLayoutConstraint.activate([
             speciesScientificNameLabel.leadingAnchor.constraint(equalTo: speciesCommonNameLabel.leadingAnchor),
             speciesScientificNameLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
