@@ -85,25 +85,25 @@ final class SpeciesDetailViewController: UIViewController {
     }()
     
     private lazy var speciesOverviewView: RoundedInfoView = {
-        let infoView = Utilities.makeRoundedInfoView(strategy: SpeciesOverviewStrategy(species: currentSpecies))
+        let infoView = Factory.makeRoundedInfoView(strategy: SpeciesOverviewStrategy(species: currentSpecies))
         infoView.addLearnMoreAction(buttonTag: 0, target: self, selector: #selector(learnMoreButtonPressed(sender:)))
         return infoView
     }()
     
     private lazy var speciesHabitatView: RoundedInfoView = {
-        let infoView = Utilities.makeRoundedInfoView(strategy: SpeciesHabitatStrategy(species: currentSpecies))
+        let infoView = Factory.makeRoundedInfoView(strategy: SpeciesHabitatStrategy(species: currentSpecies))
         infoView.addLearnMoreAction(buttonTag: 2, target: self, selector: #selector(learnMoreButtonPressed(sender:)))
         return infoView
     }()
     
     private lazy var speciesThreatsView: RoundedInfoView = {
-        let infoView = Utilities.makeRoundedInfoView(strategy: SpeciesThreatsStrategy(species: currentSpecies))
+        let infoView = Factory.makeRoundedInfoView(strategy: SpeciesThreatsStrategy(species: currentSpecies))
         infoView.addLearnMoreAction(buttonTag: 1, target: self, selector: #selector(learnMoreButtonPressed(sender:)))
         return infoView
     }()
     
     private lazy var speciesGalleryView: RoundedInfoView = {
-        let infoView = Utilities.makeRoundedInfoView(strategy: SpeciesGalleryStrategy(species: currentSpecies))
+        let infoView = Factory.makeRoundedInfoView(strategy: SpeciesGalleryStrategy(species: currentSpecies))
         infoView.addLearnMoreAction(buttonTag: 3, target: self, selector: #selector(learnMoreButtonPressed(sender:)))
         return infoView
     }()

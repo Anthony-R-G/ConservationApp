@@ -12,7 +12,7 @@ final class SubheaderInfoView: UIView {
     //MARK: -- UI Element Initialization
     
     private lazy var numbersTitleLabel: UILabel = {
-        return Utilities.makeLabel(title: "Numbers",
+        return Factory.makeLabel(title: "Numbers",
                                    weight: .light,
                                    size: 16,
                                    color: .white,
@@ -20,7 +20,7 @@ final class SubheaderInfoView: UIView {
     }()
     
     private lazy var numbersDataLabel: UILabel = {
-        return Utilities.makeLabel(title: nil,
+        return Factory.makeLabel(title: nil,
                                    weight: .medium,
                                    size: 18,
                                    color: .white,
@@ -28,7 +28,7 @@ final class SubheaderInfoView: UIView {
     }()
     
     private lazy var trendTitleLabel: UILabel = {
-        return Utilities.makeLabel(title: "Trend",
+        return Factory.makeLabel(title: "Trend",
                                    weight: .light,
                                    size: 16,
                                    color: .white,
@@ -36,7 +36,7 @@ final class SubheaderInfoView: UIView {
     }()
     
     private lazy var trendDataLabel: UILabel = {
-        return Utilities.makeLabel(title: nil,
+        return Factory.makeLabel(title: nil,
                                    weight: .medium,
                                    size: 18,
                                    color: .white,
@@ -44,7 +44,7 @@ final class SubheaderInfoView: UIView {
     }()
     
     private lazy var lastAssessedTitleLabel: UILabel = {
-        return Utilities.makeLabel(title: "Last Assessed",
+        return Factory.makeLabel(title: "Last Assessed",
                                    weight: .light,
                                    size: 16,
                                    color: .white,
@@ -52,7 +52,7 @@ final class SubheaderInfoView: UIView {
     }()
     
     private lazy var lastAssessedDataLabel: UILabel = {
-        return Utilities.makeLabel(title: nil,
+        return Factory.makeLabel(title: nil,
                                    weight: .medium,
                                    size: 18,
                                    color: .white,

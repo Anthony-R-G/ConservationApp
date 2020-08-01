@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Utilities {
+class Factory {
     
     static func makeCollectionView(superview: UIView) -> UICollectionView {
         let layout = UICollectionViewFlowLayout()

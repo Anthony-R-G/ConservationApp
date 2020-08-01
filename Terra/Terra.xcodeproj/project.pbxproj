@@ -76,7 +76,7 @@
 		97EDD4F024D36D0A00D30674 /* FirebaseStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EDD4EF24D36D0A00D30674 /* FirebaseStorageManager.swift */; };
 		97F0CCA924C56F5C00C581D3 /* UIScrollViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F0CCA824C56F5C00C581D3 /* UIScrollViewExtensions.swift */; };
 		97F7B42824C56886007AEE97 /* DonateButtonDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F7B42724C56886007AEE97 /* DonateButtonDelegate.swift */; };
-		97FEAEAC24BE5FCC005BAEFE /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97FEAEAB24BE5FCC005BAEFE /* Utilities.swift */; };
+		97FEAEAC24BE5FCC005BAEFE /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97FEAEAB24BE5FCC005BAEFE /* Factory.swift */; };
 		A7D641531C8171B7C904A57B /* Pods_Terra.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC5914FE36FA5AF8F029ED91 /* Pods_Terra.framework */; };
 /* End PBXBuildFile section */
 
@@ -153,7 +153,7 @@
 		97EDD4EF24D36D0A00D30674 /* FirebaseStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStorageManager.swift; sourceTree = "<group>"; };
 		97F0CCA824C56F5C00C581D3 /* UIScrollViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScrollViewExtensions.swift; sourceTree = "<group>"; };
 		97F7B42724C56886007AEE97 /* DonateButtonDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonateButtonDelegate.swift; sourceTree = "<group>"; };
-		97FEAEAB24BE5FCC005BAEFE /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		97FEAEAB24BE5FCC005BAEFE /* Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Factory.swift; sourceTree = "<group>"; };
 		AC5914FE36FA5AF8F029ED91 /* Pods_Terra.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Terra.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B27DC6CEA9E8DA16458B7ECC /* Pods_TerraTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TerraTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -269,7 +269,7 @@
 				97591FE224CCDC48002EAC96 /* FontWeight.swift */,
 				97F7B42724C56886007AEE97 /* DonateButtonDelegate.swift */,
 				97DD101C24C69EB000A21DF4 /* BottomBarDelegate.swift */,
-				97FEAEAB24BE5FCC005BAEFE /* Utilities.swift */,
+				97FEAEAB24BE5FCC005BAEFE /* Factory.swift */,
 				97591FDE24CCD14A002EAC96 /* Constants.swift */,
 			);
 			path = Models;
@@ -551,7 +551,7 @@
 				9711D8F724BD199700C2E6F1 /* Species.swift in Sources */,
 				974CC98424C64F0F00E4EF85 /* PopulationTrend.swift in Sources */,
 				970B172524C2699E007F32E0 /* SpeciesDetailViewController.swift in Sources */,
-				97FEAEAC24BE5FCC005BAEFE /* Utilities.swift in Sources */,
+				97FEAEAC24BE5FCC005BAEFE /* Factory.swift in Sources */,
 				97B68CD424BBB0AC005B8AB8 /* HeaderNameView.swift in Sources */,
 				97591FDC24CC4524002EAC96 /* ButtonOption.swift in Sources */,
 				97D9E24B24C6470700524000 /* Diet.swift in Sources */,

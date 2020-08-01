@@ -12,28 +12,28 @@ class BottomBarView: UIView {
     //MARK: -- Lazy UI Element Initialization
     
     private lazy var overviewButton: UIButton = {
-        let btn = Utilities.makeBottomBarButton(title: "OVERVIEW")
+        let btn = Factory.makeBottomBarButton(title: "OVERVIEW")
         btn.tag = 0
         btn.addTarget(self, action: #selector(bottomBarButtonPressed(sender:)), for: .touchUpInside)
         return btn
     }()
     
     private lazy var habitatButton: UIButton = {
-        let btn = Utilities.makeBottomBarButton(title: "HABITAT")
+        let btn = Factory.makeBottomBarButton(title: "HABITAT")
         btn.tag = 1
         btn.addTarget(self, action: #selector(bottomBarButtonPressed(sender:)), for: .touchUpInside)
         return btn
     }()
     
     private lazy var threatsButton: UIButton = {
-        let btn = Utilities.makeBottomBarButton(title: "THREATS")
+        let btn = Factory.makeBottomBarButton(title: "THREATS")
         btn.tag = 2
         btn.addTarget(self, action: #selector(bottomBarButtonPressed(sender:)), for: .touchUpInside)
         return btn
     }()
     
     private lazy var galleryButton: UIButton = {
-        let btn = Utilities.makeBottomBarButton(title: "GALLERY")
+        let btn = Factory.makeBottomBarButton(title: "GALLERY")
         btn.tag = 3
         btn.addTarget(self, action: #selector(bottomBarButtonPressed(sender:)), for: .touchUpInside)
         return btn
