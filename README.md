@@ -31,7 +31,7 @@ List of animal species, separated by Red List conservation levels:
 
 ![Example 1](https://i.imgur.com/w4DbKSR.png)
 
-Tapping any one cell will transition to a new page where the species you've selected is put at the forefront:
+Tapping any one cell will transition to a new page with a minimalistic user interface where the species you've selected is put at the forefront:
 
 ## Species Detail Page
 | Amur Leopard | Blue Whale | Lion | Mountain Gorilla |
