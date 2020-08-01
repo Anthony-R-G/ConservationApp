@@ -10,7 +10,11 @@ Clicking on any animal brings the user to a page displaying more information abo
 One principle behind the app is keeping the design clean and visually appealing. Learning should be fun! It's hard to feel interested in a subject if it's presented in a way that feels lifeless and drab. Additionally, mobile apps are unique in that they enable you to interact directly with your content. Because of that, an app should package content in such a way that there's preference to use it and not simply get the data from a web browser.
 
 ## Technologies 
-Written in Swift using UIKIt
+Written in Swift
+
+UIKit
+
+MapKit
 
 CocoaPods 
 
@@ -25,22 +29,24 @@ ARKit (some animals will have the option to "View in AR" which will bring up a 3
 ## Screenshots
 List of animal species, separated by Red List conservation levels:
 
-![Example 1](https://i.imgur.com/qI0W18I.png)
+![Example 1](https://i.imgur.com/w4DbKSR.png)
 
 Tapping any one cell will transition to a new page where the species you've selected is put at the forefront:
 
-![Example 2](https://i.imgur.com/OukfgKR.png)
+## Species Detail Page
+| Amur Leopard | Blue Whale | Lion | Mountain Gorilla |
+|:-----:|:-------:|:-------:|:-------|
+|![screen 1](https://i.imgur.com/4LOHr9o.png) | ![screen 2](https://i.imgur.com/E4Ayd80.png) |![screen 3](https://i.imgur.com/h6s1IGG.png)|![screen 4](https://i.imgur.com/HEA6LRg.png)|
 
 
-![Example 3](https://i.imgur.com/kN93X9n.png)
+Scrolling up on this page will bring up an overview of the species. You can then swipe left and right or use the buttons on the bottom bar to get other information on the species such as the threats that it faces at the moment. Each panel also has it's own "Learn More" button to transition to a full-sized screen. 
 
+![Example 4](https://i.imgur.com/uNDl0Ce.png)
 
-Scrolling up on this page will bring up detailed information about the species:
-
-![Example 4](https://i.imgur.com/x6T5a9l.png)
-
-You can show your support for animal conservation efforts by clicking on the donate button. This will redirect you in-app to the relevant conservation for that specific animal. 
+You can show your support for animal conservation efforts by clicking on the donate button. This will redirect you in-app to the relevant conservation for that specific animal. This makes it easy to get involved.
 
 ![Example 5](https://i.imgur.com/XABKk0Q.png)
 
 ![Example 6](https://i.imgur.com/o26bLy6.png)
+
+
