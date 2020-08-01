@@ -43,7 +43,7 @@ Tapping any one cell will transition to a new page with a minimalistic user inte
 |![screen 1](https://i.imgur.com/4LOHr9o.png) | ![screen 2](https://i.imgur.com/E4Ayd80.png) |![screen 3](https://i.imgur.com/h6s1IGG.png)|![screen 4](https://i.imgur.com/HEA6LRg.png)|
 
 
-Scrolling up on this page will bring up an overview of the species. You can then swipe left and right or use the buttons on the bottom bar to get info snippets on that specific species such as the current threats to its population. Each panel also has it's own "Learn More" button to transition to a full-sized screen with even more detailed-information such as taxonomy and distribution. 
+Scrolling up on this page will bring up an overview of the species. You can then swipe left and right or use the buttons on the bottom bar to get information snippets on that specific species such as the current threats to its population. Each panel also has it's own "Learn More" button to transition to a full-sized screen with even more data such as taxonomy and distribution. 
 
 ### Getting Detailed Information
 | African Elephant Overview | Blue-throated Macaw Habitat | Blue-throated Macaw Distribution | Panamanian Golden Frog Distribution |
