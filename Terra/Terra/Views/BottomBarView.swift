@@ -12,28 +12,28 @@ class BottomBarView: UIView {
     //MARK: -- Lazy UI Element Initialization
     
     private lazy var overviewButton: UIButton = {
-        let btn = Utilities.makeBottomBarButton(title: "OVERVIEW")
+        let btn = Factory.makeBottomBarButton(title: "OVERVIEW")
         btn.tag = 0
         btn.addTarget(self, action: #selector(bottomBarButtonPressed(sender:)), for: .touchUpInside)
         return btn
     }()
     
     private lazy var habitatButton: UIButton = {
-        let btn = Utilities.makeBottomBarButton(title: "HABITAT")
-        btn.tag = 2
-        btn.addTarget(self, action: #selector(bottomBarButtonPressed(sender:)), for: .touchUpInside)
-        return btn
-    }()
-    
-    private lazy var threatsButton: UIButton = {
-        let btn = Utilities.makeBottomBarButton(title: "THREATS")
+        let btn = Factory.makeBottomBarButton(title: "HABITAT")
         btn.tag = 1
         btn.addTarget(self, action: #selector(bottomBarButtonPressed(sender:)), for: .touchUpInside)
         return btn
     }()
     
+    private lazy var threatsButton: UIButton = {
+        let btn = Factory.makeBottomBarButton(title: "THREATS")
+        btn.tag = 2
+        btn.addTarget(self, action: #selector(bottomBarButtonPressed(sender:)), for: .touchUpInside)
+        return btn
+    }()
+    
     private lazy var galleryButton: UIButton = {
-        let btn = Utilities.makeBottomBarButton(title: "GALLERY")
+        let btn = Factory.makeBottomBarButton(title: "GALLERY")
         btn.tag = 3
         btn.addTarget(self, action: #selector(bottomBarButtonPressed(sender:)), for: .touchUpInside)
         return btn
@@ -52,7 +52,6 @@ class BottomBarView: UIView {
         let screenWidth = UIScreen.main.bounds.width
         let view = UIView(frame: CGRect(x: .zero, y: .zero, width: screenWidth / 4.55, height: 2))
         view.backgroundColor = UIColor.white
-        
         return view
     }()
     
@@ -62,11 +61,11 @@ class BottomBarView: UIView {
     
     //MARK: -- Properties
     
-    weak var actionDelegate: BottomBarDelegate?
+    weak var delegate: BottomBarDelegate?
     
     //MARK: -- Methods
     private func setAppearance() {
-        addBlurToView(cornerRadius: 0)
+        addBlurToView()
     }
     
     public func updateHighlightIndicator(scrollOffset: CGFloat) {
@@ -100,7 +99,7 @@ class BottomBarView: UIView {
     }
     
     @objc private func bottomBarButtonPressed(sender: UIButton) {
-        actionDelegate?.buttonPressed(sender)
+        delegate?.buttonPressed(sender)
     }
     
     override init(frame: CGRect) {
@@ -121,7 +120,7 @@ fileprivate extension BottomBarView {
     
     func addSubviews() {
         let UIElements = [buttonStackView, highlightedIndicator]
-        UIElements.forEach { self.addSubview($0) }
+        UIElements.forEach { addSubview($0) }
         UIElements.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
     }
     

@@ -42,6 +42,7 @@
 		97682CC524D550BB000E5B30 /* Biome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975812F424D539D500C09D56 /* Biome.swift */; };
 		97682CC724D5EAA3000E5B30 /* Population.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97682CC624D5EAA3000E5B30 /* Population.swift */; };
 		97682CC824D5EB79000E5B30 /* Population.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97682CC624D5EAA3000E5B30 /* Population.swift */; };
+		97682CCA24D634AA000E5B30 /* RoundedInfoViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97682CC924D634AA000E5B30 /* RoundedInfoViewDelegate.swift */; };
 		976D585724CF9FD800FC7458 /* Double Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976D585624CF9FD800FC7458 /* Double Extensions.swift */; };
 		976D585924CFA04400FC7458 /* UIButtonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976D585824CFA04400FC7458 /* UIButtonExtensions.swift */; };
 		976FB55324D367AE00848E35 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 97591FE124CCDC28002EAC96 /* Roboto-Regular.ttf */; };
@@ -76,7 +77,7 @@
 		97EDD4F024D36D0A00D30674 /* FirebaseStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EDD4EF24D36D0A00D30674 /* FirebaseStorageManager.swift */; };
 		97F0CCA924C56F5C00C581D3 /* UIScrollViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F0CCA824C56F5C00C581D3 /* UIScrollViewExtensions.swift */; };
 		97F7B42824C56886007AEE97 /* DonateButtonDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F7B42724C56886007AEE97 /* DonateButtonDelegate.swift */; };
-		97FEAEAC24BE5FCC005BAEFE /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97FEAEAB24BE5FCC005BAEFE /* Utilities.swift */; };
+		97FEAEAC24BE5FCC005BAEFE /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97FEAEAB24BE5FCC005BAEFE /* Factory.swift */; };
 		A7D641531C8171B7C904A57B /* Pods_Terra.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC5914FE36FA5AF8F029ED91 /* Pods_Terra.framework */; };
 /* End PBXBuildFile section */
 
@@ -122,6 +123,7 @@
 		97591FE224CCDC48002EAC96 /* FontWeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontWeight.swift; sourceTree = "<group>"; };
 		9767D04B24C3EA9200384FCD /* SubheaderInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubheaderInfoView.swift; sourceTree = "<group>"; };
 		97682CC624D5EAA3000E5B30 /* Population.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Population.swift; sourceTree = "<group>"; };
+		97682CC924D634AA000E5B30 /* RoundedInfoViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedInfoViewDelegate.swift; sourceTree = "<group>"; };
 		976D585624CF9FD800FC7458 /* Double Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double Extensions.swift"; sourceTree = "<group>"; };
 		976D585824CFA04400FC7458 /* UIButtonExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtensions.swift; sourceTree = "<group>"; };
 		976FB55424D367E400848E35 /* Roboto-Light-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light-Italic.ttf"; sourceTree = "<group>"; };
@@ -153,7 +155,7 @@
 		97EDD4EF24D36D0A00D30674 /* FirebaseStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStorageManager.swift; sourceTree = "<group>"; };
 		97F0CCA824C56F5C00C581D3 /* UIScrollViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScrollViewExtensions.swift; sourceTree = "<group>"; };
 		97F7B42724C56886007AEE97 /* DonateButtonDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonateButtonDelegate.swift; sourceTree = "<group>"; };
-		97FEAEAB24BE5FCC005BAEFE /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		97FEAEAB24BE5FCC005BAEFE /* Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Factory.swift; sourceTree = "<group>"; };
 		AC5914FE36FA5AF8F029ED91 /* Pods_Terra.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Terra.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B27DC6CEA9E8DA16458B7ECC /* Pods_TerraTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TerraTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -267,9 +269,10 @@
 				971FD0CE24C61ABE003ED029 /* Extensions Built-In Types */,
 				97591FDB24CC4524002EAC96 /* ButtonOption.swift */,
 				97591FE224CCDC48002EAC96 /* FontWeight.swift */,
+				97682CC924D634AA000E5B30 /* RoundedInfoViewDelegate.swift */,
 				97F7B42724C56886007AEE97 /* DonateButtonDelegate.swift */,
 				97DD101C24C69EB000A21DF4 /* BottomBarDelegate.swift */,
-				97FEAEAB24BE5FCC005BAEFE /* Utilities.swift */,
+				97FEAEAB24BE5FCC005BAEFE /* Factory.swift */,
 				97591FDE24CCD14A002EAC96 /* Constants.swift */,
 			);
 			path = Models;
@@ -542,6 +545,7 @@
 				97E9450424BE10C800550824 /* ConservationStatus.swift in Sources */,
 				976D585724CF9FD800FC7458 /* Double Extensions.swift in Sources */,
 				97591FDF24CCD14A002EAC96 /* Constants.swift in Sources */,
+				97682CCA24D634AA000E5B30 /* RoundedInfoViewDelegate.swift in Sources */,
 				975812E924D4EDF900C09D56 /* SpeciesStrategy.swift in Sources */,
 				975812ED24D528E100C09D56 /* SpeciesThreatsStrategy.swift in Sources */,
 				977D877624CE1F3800AE5E51 /* UIRoundedButtonWithGradientAndShadow.swift in Sources */,
@@ -551,7 +555,7 @@
 				9711D8F724BD199700C2E6F1 /* Species.swift in Sources */,
 				974CC98424C64F0F00E4EF85 /* PopulationTrend.swift in Sources */,
 				970B172524C2699E007F32E0 /* SpeciesDetailViewController.swift in Sources */,
-				97FEAEAC24BE5FCC005BAEFE /* Utilities.swift in Sources */,
+				97FEAEAC24BE5FCC005BAEFE /* Factory.swift in Sources */,
 				97B68CD424BBB0AC005B8AB8 /* HeaderNameView.swift in Sources */,
 				97591FDC24CC4524002EAC96 /* ButtonOption.swift in Sources */,
 				97D9E24B24C6470700524000 /* Diet.swift in Sources */,

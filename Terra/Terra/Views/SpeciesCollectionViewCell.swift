@@ -13,7 +13,7 @@ class SpeciesCollectionViewCell: UICollectionViewCell {
     //MARK: -- UI Element Initialization
     
     private lazy var speciesNameLabel: UILabel = {
-        return Utilities.makeLabel(title: nil,
+        return Factory.makeLabel(title: nil,
                                    weight: .bold,
                                    size: 23,
                                    color: .white,
@@ -39,7 +39,7 @@ class SpeciesCollectionViewCell: UICollectionViewCell {
     
     public func configureCellUI(from species: Species) {
         speciesNameLabel.text = species.commonName
-        FirebaseStorageService.cellImageManager.getImage(imageRefStr: species.commonName, imageView: backgroundImageView)
+        FirebaseStorageService.cellImageManager.getImage(for: species.commonName, setTo: backgroundImageView)
         layer.cornerRadius = Constants.cornerRadius
         layer.masksToBounds = true
     }

@@ -13,11 +13,15 @@ class RoundedInfoView: UIView {
     //MARK: -- UI Element Initialization
     
     private lazy var titleLabel: UILabel = {
-        return Utilities.makeLabel(title: strategy.titleText(), weight: .bold, size: 28, color: .white, alignment: .left)
+        return Factory.makeLabel(title: strategy.titleText(),
+                                 weight: .bold,
+                                 size: 28,
+                                 color: .white,
+                                 alignment: .left)
     }()
     
     private lazy var bodyTextLabel: UILabel = {
-        let label = Utilities.makeLabel(title: strategy.bodyText(), weight: .light, size: 17, color: #colorLiteral(red: 1, green: 0.9833787084, blue: 0.8849565387, alpha: 1), alignment: .natural)
+        let label = Factory.makeLabel(title: strategy.bodyText(), weight: .light, size: 17, color: #colorLiteral(red: 1, green: 0.9833787084, blue: 0.8849565387, alpha: 1), alignment: .natural)
         label.numberOfLines = 0
         label.lineBreakMode = .byTruncatingTail
         label.adjustsFontSizeToFitWidth = false
@@ -32,7 +36,7 @@ class RoundedInfoView: UIView {
     }()
     
     private lazy var barLeftTitleLabel: UILabel = {
-        return Utilities.makeLabel(title: strategy.barLeftTitleText(),
+        return Factory.makeLabel(title: strategy.barLeftTitleText(),
                                    weight: .light,
                                    size: 15,
                                    color: #colorLiteral(red: 0.8390320539, green: 0.8525128961, blue: 0.8612788916, alpha: 0.7811162243),
@@ -40,7 +44,7 @@ class RoundedInfoView: UIView {
     }()
     
     private lazy var barLeftDataLabel: UILabel = {
-        return Utilities.makeLabel(title: strategy.barLeftDataText(),
+        return Factory.makeLabel(title: strategy.barLeftDataText(),
                                    weight: .medium,
                                    size: 18,
                                    color: .white,
@@ -48,7 +52,7 @@ class RoundedInfoView: UIView {
     }()
     
     private lazy var barMiddleTitleLabel: UILabel = {
-        return Utilities.makeLabel(title: strategy.barMiddleTitleText(),
+        return Factory.makeLabel(title: strategy.barMiddleTitleText(),
                                    weight: .light,
                                    size: 15,
                                    color: #colorLiteral(red: 0.8390320539, green: 0.8525128961, blue: 0.8612788916, alpha: 0.7811162243),
@@ -56,7 +60,7 @@ class RoundedInfoView: UIView {
     }()
     
     private lazy var barMiddleDataLabel: UILabel = {
-        return Utilities.makeLabel(title: strategy.barMiddleDataText(),
+        return Factory.makeLabel(title: strategy.barMiddleDataText(),
                                    weight: .medium,
                                    size: 18,
                                    color: .white,
@@ -64,7 +68,7 @@ class RoundedInfoView: UIView {
     }()
     
     private lazy var barRightTitleLabel: UILabel = {
-        return Utilities.makeLabel(title: strategy.barRightTitleText(),
+        return Factory.makeLabel(title: strategy.barRightTitleText(),
                                    weight: .light,
                                    size: 15,
                                    color: #colorLiteral(red: 0.8390320539, green: 0.8525128961, blue: 0.8612788916, alpha: 0.7811162243),
@@ -72,7 +76,7 @@ class RoundedInfoView: UIView {
     }()
     
     private lazy var barRightDataLabel: UILabel = {
-        return Utilities.makeLabel(title: strategy.barRightDataText(),
+        return Factory.makeLabel(title: strategy.barRightDataText(),
                                    weight: .medium,
                                    size: 18,
                                    color: .white,
@@ -92,6 +96,9 @@ class RoundedInfoView: UIView {
         btn.tintColor = #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
         btn.setTitleColor(#colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1), for: .normal)
         btn.showsTouchWhenHighlighted = true
+        
+        btn.tag = strategy.learnMoreButtonTag()
+        btn.addTarget(self, action: #selector(learnMoreButtonPressed(sender:)), for: .touchUpInside)
         return btn
     }()
     
@@ -99,20 +106,21 @@ class RoundedInfoView: UIView {
     
     var strategy: SpeciesStrategy
     
-    public func addLearnMoreAction(buttonTag: Int, target: Any, selector: Selector) {
-        learnMoreButton.tag = buttonTag
-        learnMoreButton.addTarget(target, action: selector, for: .touchUpInside)
+    weak var delegate: RoundedInfoViewDelegate?
+    
+    @objc private func learnMoreButtonPressed(sender: UIButton) {
+        delegate?.learnMoreButtonPressed(learnMoreButton)
     }
     
     private func setAppearance() {
-        self.backgroundColor = .clear
-        self.layer.cornerRadius = 39
-        self.clipsToBounds = true
-        self.addBlurToView(cornerRadius: 39)
+        backgroundColor = .clear
+        layer.cornerRadius = Constants.cornerRadius
+        clipsToBounds = true
+        addBlurToView()
     }
     
-    init(frame: CGRect, strategy: SpeciesStrategy) {
-        self.strategy = strategy
+    init(frame: CGRect, speciesStrategy: SpeciesStrategy) {
+        strategy = speciesStrategy
         super.init(frame: frame)
         setAppearance()
         addSubviews()
@@ -130,7 +138,7 @@ fileprivate extension RoundedInfoView {
     
     func addSubviews() {
         let UIElements =  [titleLabel, infoBarView, bodyTextLabel, learnMoreButton]
-        UIElements.forEach{ self.addSubview($0) }
+        UIElements.forEach{ addSubview($0) }
         UIElements.forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
         
         let infoBarElements = [barLeftTitleLabel, barLeftDataLabel, barMiddleTitleLabel, barMiddleDataLabel, barRightTitleLabel, barRightDataLabel]
@@ -157,8 +165,8 @@ fileprivate extension RoundedInfoView {
     
     func setOverviewTitleLabelConstraints() {
         NSLayoutConstraint.activate([
-            titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 25),
-            titleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 15),
+            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 25),
+            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 15),
             titleLabel.heightAnchor.constraint(equalToConstant: 40),
             titleLabel.widthAnchor.constraint(equalToConstant: 200)
         ])
@@ -167,9 +175,9 @@ fileprivate extension RoundedInfoView {
     func setInfoBarConstraints() {
         NSLayoutConstraint.activate([
             infoBarView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 15),
-            infoBarView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            infoBarView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.18),
-            infoBarView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.9)
+            infoBarView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            infoBarView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.18),
+            infoBarView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.9)
         ])
     }
     
@@ -230,16 +238,16 @@ fileprivate extension RoundedInfoView {
     func setBodyTextViewConstraints() {
         NSLayoutConstraint.activate([
             bodyTextLabel.topAnchor.constraint(equalTo: infoBarView.bottomAnchor, constant: 15),
-            bodyTextLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            bodyTextLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -50),
-            bodyTextLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.9)
+            bodyTextLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            bodyTextLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -50),
+            bodyTextLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.9)
         ])
     }
     
     func setReadMoreButtonConstraints() {
         NSLayoutConstraint.activate([
-            learnMoreButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
-            learnMoreButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10),
+            learnMoreButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            learnMoreButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
             learnMoreButton.heightAnchor.constraint(equalToConstant: 40),
             learnMoreButton.widthAnchor.constraint(equalToConstant: 170)
         ])

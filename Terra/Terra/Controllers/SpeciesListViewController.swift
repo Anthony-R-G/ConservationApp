@@ -17,7 +17,7 @@ final class SpeciesListViewController: UIViewController {
     }()
     
     private lazy var terraTitleLabel: UILabel = {
-        return Utilities.makeLabel(title: "Terra",
+        return Factory.makeLabel(title: "Terra",
                                    weight: .bold,
                                    size: 30,
                                    color: #colorLiteral(red: 0.9257398248, green: 1, blue: 0.7623538375, alpha: 1),
@@ -25,14 +25,14 @@ final class SpeciesListViewController: UIViewController {
     }()
     
     private lazy var subtitleLabel: UILabel = {
-        return  Utilities.makeLabel(title: "Protect the earth's biodiversity",
+        return  Factory.makeLabel(title: "Protect the earth's biodiversity",
                                     weight: .light,
                                     size: 20, color: #colorLiteral(red: 0.6699403524, green: 0.6602986455, blue: 0.7864833474, alpha: 1),
                                     alignment: .left)
     }()
     
     private lazy var criticalSpeciesLabel: UILabel = {
-        return Utilities.makeLabel(title: "CRITICALLY ENDANGERED",
+        return Factory.makeLabel(title: "CRITICALLY ENDANGERED",
                                    weight: .medium,
                                    size: 19,
                                    color: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.7993899829),
@@ -40,7 +40,7 @@ final class SpeciesListViewController: UIViewController {
     }()
     
     private lazy var endangeredSpeciesLabel: UILabel = {
-        return Utilities.makeLabel(title: "ENDANGERED",
+        return Factory.makeLabel(title: "ENDANGERED",
                                    weight: .medium,
                                    size: 19,
                                    color: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.7993899829),
@@ -48,7 +48,7 @@ final class SpeciesListViewController: UIViewController {
     }()
     
     private lazy var vulnerableSpeciesLabel: UILabel = {
-        return Utilities.makeLabel(title: "VULNERABLE",
+        return Factory.makeLabel(title: "VULNERABLE",
                                    weight: .medium,
                                    size: 19,
                                    color: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.7993899829),
@@ -56,15 +56,15 @@ final class SpeciesListViewController: UIViewController {
     }()
     
     private lazy var criticalCollectionView: UICollectionView = {
-        Utilities.makeCollectionView(superview: self.view)
+        Factory.makeCollectionView(superview: view)
     }()
     
     private lazy var endangeredCollectionView: UICollectionView = {
-        Utilities.makeCollectionView(superview: self.view)
+        Factory.makeCollectionView(superview: view)
     }()
     
     private lazy var vulnerableCollectionView: UICollectionView = {
-        Utilities.makeCollectionView(superview: self.view)
+        Factory.makeCollectionView(superview: view)
     }()
     
     //MARK: -- Properties
@@ -206,7 +206,7 @@ extension SpeciesListViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 20
+        return Constants.universalLeadingConstant
     }
 }
 
@@ -243,7 +243,7 @@ fileprivate extension SpeciesListViewController {
         NSLayoutConstraint.activate([
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            scrollView.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor, constant: 30),
+            scrollView.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor, constant: 20),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }

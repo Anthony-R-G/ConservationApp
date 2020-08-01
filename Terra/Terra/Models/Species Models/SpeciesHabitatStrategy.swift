@@ -42,4 +42,8 @@ struct SpeciesHabitatStrategy: SpeciesStrategy {
     func barRightDataText() -> String {
         return species.habitat.area
     }
+    
+    func learnMoreButtonTag() -> Int {
+        return 1
+    }
 }

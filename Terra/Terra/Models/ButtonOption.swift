@@ -10,7 +10,7 @@ import Foundation
 
 enum ButtonOption: Int {
     case overviewButton = 0
-    case threatsButton = 1
-    case habitatButton = 2
+    case habitatButton = 1
+    case threatsButton = 2
     case galleryButton = 3
 }

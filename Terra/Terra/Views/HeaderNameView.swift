@@ -12,7 +12,7 @@ final class HeaderNameView: UIView {
     //MARK: -- UI Element Initialization
     
     private lazy var conservationStatusLabel: UILabel = {
-        let label = Utilities.makeLabel(title: nil,
+        let label = Factory.makeLabel(title: nil,
                                         weight: .regular,
                                         size: 17,
                                         color: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1),
@@ -25,7 +25,7 @@ final class HeaderNameView: UIView {
     }()
     
     private lazy var speciesCommonNameLabel: UILabel = {
-        let label = Utilities.makeLabel(title: nil,
+        let label = Factory.makeLabel(title: nil,
                                         weight: .bold,
                                         size: 55,
                                         color: .white,
@@ -35,7 +35,7 @@ final class HeaderNameView: UIView {
     }()
     
     private lazy var speciesScientificNameLabel: UILabel = {
-        let label = Utilities.makeLabel(title: nil,
+        let label = Factory.makeLabel(title: nil,
                                         weight: .lightItalic,
                                         size: 17,
                                         color: .white,

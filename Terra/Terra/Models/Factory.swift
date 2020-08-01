@@ -8,13 +8,16 @@
 
 import UIKit
 
-class Utilities {
+class Factory {
     
     static func makeCollectionView(superview: UIView) -> UICollectionView {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 5)
+        layout.sectionInset = UIEdgeInsets(top: 0,
+                                           left: Constants.universalLeadingConstant,
+                                           bottom: 0,
+                                           right: Constants.universalLeadingConstant)
         let collectionView = UICollectionView(frame: CGRect(x: 0,
                                                             y: 0,
                                                             width: superview.frame.width,
@@ -55,7 +58,7 @@ class Utilities {
     }
     
     static func makeRoundedInfoView(strategy: SpeciesStrategy) -> RoundedInfoView {
-        let view = RoundedInfoView(frame: CGRect(), strategy: strategy)
+        let view = RoundedInfoView(frame: CGRect(), speciesStrategy: strategy)
         return view
     }
 }

@@ -42,4 +42,8 @@ struct SpeciesThreatsStrategy: SpeciesStrategy {
     func bodyText() -> String {
         return species.population.threats
     }
+    
+    func learnMoreButtonTag() -> Int {
+        return 2
+    }
 }

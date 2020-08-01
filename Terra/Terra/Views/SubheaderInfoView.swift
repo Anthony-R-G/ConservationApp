@@ -12,7 +12,7 @@ final class SubheaderInfoView: UIView {
     //MARK: -- UI Element Initialization
     
     private lazy var numbersTitleLabel: UILabel = {
-        return Utilities.makeLabel(title: "Numbers",
+        return Factory.makeLabel(title: "Numbers",
                                    weight: .light,
                                    size: 16,
                                    color: .white,
@@ -20,7 +20,7 @@ final class SubheaderInfoView: UIView {
     }()
     
     private lazy var numbersDataLabel: UILabel = {
-        return Utilities.makeLabel(title: nil,
+        return Factory.makeLabel(title: nil,
                                    weight: .medium,
                                    size: 18,
                                    color: .white,
@@ -28,7 +28,7 @@ final class SubheaderInfoView: UIView {
     }()
     
     private lazy var trendTitleLabel: UILabel = {
-        return Utilities.makeLabel(title: "Trend",
+        return Factory.makeLabel(title: "Trend",
                                    weight: .light,
                                    size: 16,
                                    color: .white,
@@ -36,7 +36,7 @@ final class SubheaderInfoView: UIView {
     }()
     
     private lazy var trendDataLabel: UILabel = {
-        return Utilities.makeLabel(title: nil,
+        return Factory.makeLabel(title: nil,
                                    weight: .medium,
                                    size: 18,
                                    color: .white,
@@ -44,7 +44,7 @@ final class SubheaderInfoView: UIView {
     }()
     
     private lazy var lastAssessedTitleLabel: UILabel = {
-        return Utilities.makeLabel(title: "Last Assessed",
+        return Factory.makeLabel(title: "Last Assessed",
                                    weight: .light,
                                    size: 16,
                                    color: .white,
@@ -52,7 +52,7 @@ final class SubheaderInfoView: UIView {
     }()
     
     private lazy var lastAssessedDataLabel: UILabel = {
-        return Utilities.makeLabel(title: nil,
+        return Factory.makeLabel(title: nil,
                                    weight: .medium,
                                    size: 18,
                                    color: .white,
@@ -84,70 +84,70 @@ fileprivate extension SubheaderInfoView {
     
     func addSubviews() {
         let UIElements = [numbersTitleLabel, numbersDataLabel, trendTitleLabel, trendDataLabel, lastAssessedTitleLabel, lastAssessedDataLabel]
-        UIElements.forEach { self.addSubview($0) }
+        UIElements.forEach { addSubview($0) }
         UIElements.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
     }
     
     func setConstraints() {
         setNumbersTitleLabelConstraints()
-        setNumbersInfoLabelConstraints()
-        setWeightTitleLabelConstraints()
-        setWeightInfoLabelConstraints()
-        setHeightTitleLabelConstraints()
-        setHeightInfoLabelConstraints()
+        setNumbersDataLabelConstraints()
+        setTrendTitleLabelConstraints()
+        setTrendDataLabelConstraints()
+        setLastAssessedTitleLabelConstraints()
+        setLastAssessedDataLabelConstraints()
     }
     
     func setNumbersTitleLabelConstraints() {
         NSLayoutConstraint.activate([
-            numbersTitleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            numbersTitleLabel.topAnchor.constraint(equalTo: self.topAnchor),
-            numbersTitleLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.5),
-            numbersTitleLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.25)
+            numbersTitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+            numbersTitleLabel.topAnchor.constraint(equalTo: topAnchor),
+            numbersTitleLabel.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.5),
+            numbersTitleLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.25)
         ])
     }
     
-    func setNumbersInfoLabelConstraints() {
+    func setNumbersDataLabelConstraints() {
         NSLayoutConstraint.activate([
             numbersDataLabel.leadingAnchor.constraint(equalTo: numbersTitleLabel.leadingAnchor),
-            numbersDataLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.5),
-            numbersDataLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.25),
-            numbersDataLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 10)
+            numbersDataLabel.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.5),
+            numbersDataLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.25),
+            numbersDataLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 10)
         ])
     }
     
-    func setWeightTitleLabelConstraints() {
+    func setTrendTitleLabelConstraints() {
         NSLayoutConstraint.activate([
-            trendTitleLabel.leadingAnchor.constraint(equalTo: numbersTitleLabel.trailingAnchor, constant: 20),
+            trendTitleLabel.leadingAnchor.constraint(equalTo: numbersTitleLabel.trailingAnchor, constant: Constants.universalLeadingConstant),
             trendTitleLabel.topAnchor.constraint(equalTo: numbersTitleLabel.topAnchor),
-            trendTitleLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.5),
-            trendTitleLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.25)
+            trendTitleLabel.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.5),
+            trendTitleLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.25)
         ])
     }
     
-    func setWeightInfoLabelConstraints() {
+    func setTrendDataLabelConstraints() {
         NSLayoutConstraint.activate([
             trendDataLabel.leadingAnchor.constraint(equalTo: trendTitleLabel.leadingAnchor),
-            trendDataLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.5),
-            trendDataLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.25),
-            trendDataLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 10)
+            trendDataLabel.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.5),
+            trendDataLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.25),
+            trendDataLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 10)
         ])
     }
     
-    func setHeightTitleLabelConstraints() {
+    func setLastAssessedTitleLabelConstraints() {
         NSLayoutConstraint.activate([
-            lastAssessedTitleLabel.leadingAnchor.constraint(equalTo: trendTitleLabel.trailingAnchor, constant: 20),
+            lastAssessedTitleLabel.leadingAnchor.constraint(equalTo: trendTitleLabel.trailingAnchor, constant: Constants.universalLeadingConstant),
             lastAssessedTitleLabel.topAnchor.constraint(equalTo: numbersTitleLabel.topAnchor),
-            lastAssessedTitleLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.5),
-            lastAssessedTitleLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.25)
+            lastAssessedTitleLabel.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.5),
+            lastAssessedTitleLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.25)
         ])
     }
     
-    func setHeightInfoLabelConstraints() {
+    func setLastAssessedDataLabelConstraints() {
         NSLayoutConstraint.activate([
-            lastAssessedDataLabel.leadingAnchor.constraint(equalTo: self.lastAssessedTitleLabel.leadingAnchor),
-            lastAssessedDataLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.5),
-            lastAssessedDataLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.25),
-            lastAssessedDataLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 10)
+            lastAssessedDataLabel.leadingAnchor.constraint(equalTo: lastAssessedTitleLabel.leadingAnchor),
+            lastAssessedDataLabel.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.5),
+            lastAssessedDataLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.25),
+            lastAssessedDataLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 10)
         ])
     }
 }
