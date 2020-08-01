@@ -50,9 +50,9 @@ Scrolling up on this page will bring up an overview of the species. You can then
 
 You can show your support for animal conservation efforts by clicking on the donate button. This will redirect you in-app to the relevant conservation for that specific animal. This makes it easy to get involved.
 
-| African Elephant Donation | Great White Shark Donation | Bornean Orangutan Donation |
+| African Elephant Donation |Bornean Orangutan Donation | Great White Shark Donation |
 |:-----:|:-------:|:-------:|
-|![screen 1](https://i.imgur.com/SvsfysX.png) | ![screen 2](https://i.imgur.com/5rljCyK.png) | ![screen 3](https://i.imgur.com/3x6d1IV.png)
+|![screen 1](https://i.imgur.com/SvsfysX.png) | ![screen 2](https://i.imgur.com/3x6d1IV.png) | ![screen 3](https://i.imgur.com/5rljCyK.png)
 
 
 
