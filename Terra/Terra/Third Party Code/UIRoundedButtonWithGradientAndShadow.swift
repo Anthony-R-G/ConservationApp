@@ -49,7 +49,7 @@ class UIRoundedButtonWithGradientAndShadow: UIButton {
         
         // setup shadow
         
-        layer.shadowColor = #colorLiteral(red: 0.1064235941, green: 0.1057985201, blue: 0.1069089398, alpha: 1)
+        layer.shadowColor = #colorLiteral(red: 0.1474502683, green: 0.1465809047, blue: 0.1481231153, alpha: 1)
         layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: halfOfButtonHeight).cgPath
         layer.shadowOffset = CGSize(width: 0.0, height: 5.0)
         layer.shadowOpacity = 0.80

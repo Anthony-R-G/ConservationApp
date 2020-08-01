@@ -10,19 +10,13 @@ import Foundation
 
 public struct Species: FirebaseConvertible {
     let commonName: String
-    let scientificName: String
-    let assessmentDate: String
     let overview: String
+    let weight: String
+    let height: String
+    let donationLink: String
+    let diet: Diet
     let taxonomy: Taxonomy
     let group: Group
     let habitat: Habitat
-    let threats: String
-    let populationSummary: String
-    let populationTrend: PopulationTrend
-    let populationNumbers: String
-    let conservationStatus: ConservationStatus
-    let donationLink: String
-    let weight: String
-    let height: String
-    let diet: Diet
+    let population: Population
 }

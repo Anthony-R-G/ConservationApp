@@ -18,16 +18,16 @@ class BottomBarView: UIView {
         return btn
     }()
     
-    private lazy var threatsButton: UIButton = {
-        let btn = Utilities.makeBottomBarButton(title: "THREATS")
-        btn.tag = 1
+    private lazy var habitatButton: UIButton = {
+        let btn = Utilities.makeBottomBarButton(title: "HABITAT")
+        btn.tag = 2
         btn.addTarget(self, action: #selector(bottomBarButtonPressed(sender:)), for: .touchUpInside)
         return btn
     }()
     
-    private lazy var habitatButton: UIButton = {
-        let btn = Utilities.makeBottomBarButton(title: "HABITAT")
-        btn.tag = 2
+    private lazy var threatsButton: UIButton = {
+        let btn = Utilities.makeBottomBarButton(title: "THREATS")
+        btn.tag = 1
         btn.addTarget(self, action: #selector(bottomBarButtonPressed(sender:)), for: .touchUpInside)
         return btn
     }()
@@ -40,7 +40,7 @@ class BottomBarView: UIView {
     }()
     
     private lazy var buttonStackView: UIStackView = {
-        let sv = UIStackView(arrangedSubviews: [overviewButton, threatsButton, habitatButton, galleryButton])
+        let sv = UIStackView(arrangedSubviews: [overviewButton, habitatButton, threatsButton, galleryButton])
         sv.axis = .horizontal
         sv.spacing = 3
         sv.alignment = .center
@@ -85,13 +85,13 @@ class BottomBarView: UIView {
             overviewButton.isSelected = true
             [threatsButton, habitatButton, galleryButton].forEach { $0.isSelected = false }
             
-        case .threatsButton:
-            threatsButton.isSelected = true
-            [overviewButton, habitatButton, galleryButton].forEach { $0.isSelected = false }
-            
         case .habitatButton:
             habitatButton.isSelected = true
             [threatsButton, overviewButton, galleryButton].forEach { $0.isSelected = false }
+            
+        case .threatsButton:
+            threatsButton.isSelected = true
+            [overviewButton, habitatButton, galleryButton].forEach { $0.isSelected = false }
             
         case .galleryButton:
             galleryButton.isSelected = true

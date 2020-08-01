@@ -98,7 +98,7 @@ final class SpeciesListViewController: UIViewController {
     //MARK: -- Methods
     
     private func filterSpecies(by status: ConservationStatus) -> [Species] {
-        let filteredSpecies = animalData.filter { $0.conservationStatus == status }
+        let filteredSpecies = animalData.filter { $0.population.conservationStatus == status }
         return filteredSpecies
     }
     

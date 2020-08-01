@@ -15,4 +15,5 @@ struct Taxonomy: FirebaseConvertible {
     let classTaxonomy: String
     let family: String
     let genus: String
+    let scientificName: String
 }

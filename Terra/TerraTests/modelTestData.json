@@ -1,33 +1,32 @@
 {
-"weight":"70-105lbs",
-        "populationSummary":"The IUCN Species Survival Commission has considered Amur leopards Critically Endangered (IUCN 1996) since 1996. As of 2019, more than 84 individuals remain in the wild (mostly in protected areas) and 170 to 180 live in captivity.",
-        "overview":"People  usually think of leopards in the savannas of Africa but in the Russian Far East, a rare subspecies has adapted to life in the temperate forests that make up the northern-most part of the species’ range. Similar to other leopards, the Amur leopard can run at speeds of up to 37 miles per hour. This incredible animal has been reported to leap more than 19 feet horizontally and up to 10 feet vertically.  The Amur leopard is solitary. Nimble-footed and strong, it carries and hides unfinished kills so that they are not taken by other predators. It has been reported that some males stay with females after mating, and may even help with rearing the young. Several males sometimes follow and fight over a female. They live for 10-15 years, and in captivity up to 20 years. The Amur leopard is also known as the Far East leopard, the Manchurian leopard or the Korean leopard.",
-        "cellImage":"https://firebasestorage.googleapis.com/v0/b/terra-a1b2b.appspot.com/o/Collection%20Cell%20Images%2FamurLeopard.jpg?alt=media&token=7c5b4c2e-9dc5-4f94-ab3f-814f06cf5cd4",
-        "donationLink":"https://support.wwf.org.uk/adopt-a-leopard",
-        "group":"Mammal",
-        "assessmentDate":"2019",
-        "scientificName":"Panthers pardus orientalis",
-        "detailImage":"https://firebasestorage.googleapis.com/v0/b/terra-a1b2b.appspot.com/o/Detail%20VC%20Images%2FamurLeopard.jpg?alt=media&token=f47a2ff7-e581-4d7f-89c4-bf4c5dec37da",
-        "height":"2.4 feet",
-        "habitat":{
-           "latitude":43.1332,
-           "summary":"Amur leopards live in the Amur Heilong Landscape, which spans both the Russian Far East and adjacent areas of China. This rare subspecies of leopard has adapted to life in the temperate forests that make up the northernmost part of the species' range.",
-           "system":"terrestrial",
-           "temperature":"34.7 °F",
-           "longitude":130
-        },
-        "populationNumbers":"~260",
-        "diet":"Carnivore",
-        "commonName":"Amur Leopard",
-        "populationTrend":"Decreasing",
-        "threats":"The Amur leopard is poached largely for its beautiful, spotted fur. In 1999, an undercover investigation team recovered a female and a male Amur leopard skin, which were being sold for $500 and $1,000 respectively in the village of Barabash, not far from the Kedrovaya Pad reserve in Russia. Agriculture and villages surround the forests where the leopards live. As a result the forests are relatively accessible, making poaching a problem—not only for the leopards themselves, but also for important prey species, such as roe deer, sika deer and hare, which are hunted by the villagers both for food and cash.",
-        "taxonomy":{
-           "phylum":"Chordata",
-           "order":"Carnivora",
-           "genus":"Panthera",
-           "classTaxonomy":"Mammalia",
-           "family":"Felidae",
-           "kingdom":"Animalia"
-        },
-        "conservationStatus":"Critical"
-     }
+    "diet": "Carnivore",
+    "height": "2.4 feet",
+    "commonName": "Amur Leopard",
+    "donationLink": "https://support.wwf.org.uk/adopt-a-leopard",
+    "conservationStatus": "Critical",
+    "assessmentDate": "2019",
+    "populationNumbers": "~260",
+    "group": "Mammal",
+    "overview": "People  usually think of leopards in the savannas of Africa but in the Russian Far East, a rare subspecies has adapted to life in the temperate forests that make up the northern-most part of the species’ range. Similar to other leopards, the Amur leopard can run at speeds of up to 37 miles per hour. This incredible animal has been reported to leap more than 19 feet horizontally and up to 10 feet vertically.  The Amur leopard is solitary. Nimble-footed and strong, it carries and hides unfinished kills so that they are not taken by other predators. It has been reported that some males stay with females after mating, and may even help with rearing the young. Several males sometimes follow and fight over a female. They live for 10-15 years, and in captivity up to 20 years. The Amur leopard is also known as the Far East leopard, the Manchurian leopard or the Korean leopard.",
+    "populationSummary": "The IUCN Species Survival Commission has considered Amur leopards Critically Endangered (IUCN 1996) since 1996. As of 2019, more than 84 individuals remain in the wild (mostly in protected areas) and 170 to 180 live in captivity.",
+    "scientificName": "Panthers pardus orientalis",
+    "threats": "The Amur leopard is poached largely for its beautiful, spotted fur. In 1999, an undercover investigation team recovered a female and a male Amur leopard skin, which were being sold for $500 and $1,000 respectively in the village of Barabash, not far from the Kedrovaya Pad reserve in Russia. Agriculture and villages surround the forests where the leopards live. As a result the forests are relatively accessible, making poaching a problem—not only for the leopards themselves, but also for important prey species, such as roe deer, sika deer and hare, which are hunted by the villagers both for food and cash.",
+    "habitat": {
+        "area": "Amur-Heilong",
+        "biome": "Temperate Forest",
+        "temperature": "34.7 °F",
+        "latitude": 43.1332,
+        "summary": "Amur leopards live in the Amur Heilong Landscape, which spans both the Russian Far East and adjacent areas of China. This rare subspecies of leopard has adapted to life in the temperate forests that make up the northernmost part of the species' range.",
+        "longitude": 130
+    },
+    "populationTrend": "Decreasing",
+    "taxonomy": {
+        "family": "Felidae",
+        "order": "Carnivora",
+        "classTaxonomy": "Mammalia",
+        "phylum": "Chordata",
+        "genus": "Panthera",
+        "kingdom": "Animalia"
+    },
+    "weight": "70-105 lbs"
+}

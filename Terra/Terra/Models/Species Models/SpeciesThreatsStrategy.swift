@@ -40,6 +40,6 @@ struct SpeciesThreatsStrategy: SpeciesStrategy {
     }
     
     func bodyText() -> String {
-        return species.threats
+        return species.population.threats
     }
 }
