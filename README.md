@@ -42,14 +42,15 @@ Tapping any one cell will transition to a new page with a minimalistic user inte
 Scrolling up on this page will bring up an overview of the species. You can then swipe left and right or use the buttons on the bottom bar to get info snippets on that specific species such as the current threats to its population. Each panel also has it's own "Learn More" button to transition to a full-sized screen with even more detailed-information such as taxonomy and distribution. 
 
 
-| Elephant Overview | Blue-throated Macaw Habitat | Blue-throated Macaw Distribution | Panamanian Golden Frog Distribution |
+| African Elephant Overview | Blue-throated Macaw Habitat | Blue-throated Macaw Distribution | Panamanian Golden Frog Distribution |
 |:-----:|:-------:|:-------:|:-------|
 |![screen 1](https://i.imgur.com/G2HG7Ju.png) | ![screen 2](https://i.imgur.com/gAL8twq.png) |![screen 3](https://i.imgur.com/Ueikygo.png)|![screen 4](https://i.imgur.com/fz7PtXS.png)|
 
 You can show your support for animal conservation efforts by clicking on the donate button. This will redirect you in-app to the relevant conservation for that specific animal. This makes it easy to get involved.
 
-![Example 5](https://i.imgur.com/XABKk0Q.png)
+| African Elephant Donation | Great White Shark Donation | Bornean Orangutan Donation |
+|:-----:|:-------:|:-------:|
+|![screen 1](https://i.imgur.com/SvsfysX.png) | ![screen 2](https://i.imgur.com/5rljCyK.png) | ![screen 3](https://i.imgur.com/3x6d1IV.png)
 
-![Example 6](https://i.imgur.com/o26bLy6.png)
 
 
