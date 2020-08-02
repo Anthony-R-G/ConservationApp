@@ -1,7 +1,6 @@
 {
   "images" : [
     {
-      "filename" : "photo-1476842634003-7dcca8f832de.jpeg",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -10,6 +9,7 @@
       "scale" : "2x"
     },
     {
+      "filename" : "icons8-leopard-100.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
