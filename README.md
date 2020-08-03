@@ -13,7 +13,7 @@ One principle behind the app is keeping the design clean and visually appealing.
 ## Technologies 
 Written in Swift
 
-UIKit (programmatic, no Storyboards)
+UIKit (UI is created programmatically without Storyboards)
 
 Safari Services
 
@@ -36,7 +36,7 @@ List of animal species, separated by Red List conservation levels:
 
 |  |  |  
 |:-----:|:-------:|
-|![screen 1](https://i.imgur.com/h36QYDc.png) | ![screen 2](https://i.imgur.com/7IRm237.png) 
+|![screen 1](https://i.imgur.com/eUc1NtV.png) | ![screen 2](https://i.imgur.com/XNbnvl1.png) 
 
 Tapping any one cell will transition to a new page with a minimalistic user interface where the species you've selected is put at the forefront:
 
