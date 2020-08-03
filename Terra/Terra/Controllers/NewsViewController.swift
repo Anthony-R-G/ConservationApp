@@ -22,9 +22,11 @@ class NewsViewController: UIViewController {
     
     lazy var tableView: UITableView = {
         let tv = UITableView()
-        tv.register(UITableViewCell.self, forCellReuseIdentifier: "newsCell")
-        tv.backgroundColor = #colorLiteral(red: 0.0744978413, green: 0.0745158717, blue: 0.07449541241, alpha: 1)
+        tv.register(NewsArticleTableViewCell.self, forCellReuseIdentifier: "newsCell")
+        tv.backgroundColor = .white
         tv.refreshControl = refreshControl
+        tv.dataSource = self
+        tv.delegate = self
         return tv
     }()
     
@@ -64,6 +66,25 @@ class NewsViewController: UIViewController {
         addSubviews()
         setConstraints()
         fetchNewsData()
+    }
+}
+
+extension NewsViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return newsArticles.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let newsCell = tableView.dequeueReusableCell(withIdentifier: "newsCell", for: indexPath) as! NewsArticleTableViewCell
+        let specificArticle = newsArticles[indexPath.row]
+        newsCell.configureCellUI(from: specificArticle)
+        return newsCell
+    }
+}
+
+extension NewsViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 180
     }
 }
 
