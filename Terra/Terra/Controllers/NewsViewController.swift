@@ -24,6 +24,7 @@ class NewsViewController: UIViewController {
         let tv = UITableView()
         tv.register(UITableViewCell.self, forCellReuseIdentifier: "newsCell")
         tv.backgroundColor = #colorLiteral(red: 0.0744978413, green: 0.0745158717, blue: 0.07449541241, alpha: 1)
+        tv.refreshControl = refreshControl
         return tv
     }()
     
