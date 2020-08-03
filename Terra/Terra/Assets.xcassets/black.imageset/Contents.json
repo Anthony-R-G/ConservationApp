@@ -1,11 +1,11 @@
 {
   "images" : [
     {
-      "filename" : "square-black-box-hi.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "square-black-box-hi.png",
       "idiom" : "universal",
       "scale" : "2x"
     },

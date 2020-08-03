@@ -7,35 +7,40 @@
 //
 
 import Foundation
-import FloatingTabBarController
+import BATabBarController
 
-class FloatingTabViewController: FloatingTabBarController {
+class TabBarViewController: UIViewController {
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
     
-    private func setTabItemIcons() {
-        
-    }
-    
     override func viewDidLoad() {
+        let tabBarVC = BATabBarController()
+        
         super.viewDidLoad()
-       
-        tabBar.visualEffect = UIBlurEffect(style: .systemUltraThinMaterialDark)
-        tabBar.tintColor = .white
+        let listVC = SpeciesListViewController()
+        let newsVC = NewsViewController()
         
-        let firstVC = SpeciesListViewController()
-        let leopardSmallIcon = UIImage(named: "leopardSmall")!
-        let leopardLargeIcon = UIImage(named: "leopardLarge")!
-        firstVC.floatingTabItem = FloatingTabItem(selectedImage: leopardLargeIcon, normalImage: leopardSmallIcon)
+        let listVCTabBarItem = BATabBarItem(image: UIImage(named: "listVCUnselected")!, selectedImage: UIImage(named: "listVCSelected")!)
+        listVCTabBarItem.tintColor = .white
+        let newsVCTabBarItem = BATabBarItem(image: UIImage(named: "newsVCUnselected")!, selectedImage: UIImage(named: "newsVCSelected")!)
+        newsVCTabBarItem.tintColor = .white
         
+        tabBarVC.delegate = self
+        tabBarVC.tabBarItemStrokeColor = .white
+        tabBarVC.tabBarItemLineWidth = 1
+        tabBarVC.viewControllers = [ listVC, newsVC ]
+        tabBarVC.tabBarItems = [ listVCTabBarItem, newsVCTabBarItem ]
         
-        let secondVC = NewsViewController()
-        let newsSmallIcon = UIImage(named: "newsSmall")!
-        let newsLargeIcon = UIImage(named: "newsLarge")!
-        secondVC.floatingTabItem = FloatingTabItem(selectedImage: newsLargeIcon, normalImage: newsSmallIcon)
-        
-        viewControllers = [firstVC, secondVC ]
+        view.addSubview(tabBarVC.view)
+    }
+}
+
+
+
+extension TabBarViewController: BATabBarControllerDelegate {
+    func tabBarController(_ tabBarController: BATabBarController, didSelect: UIViewController) {
+        print("Delegate success!");
     }
 }
