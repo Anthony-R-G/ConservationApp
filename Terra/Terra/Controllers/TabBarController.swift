@@ -24,6 +24,7 @@ class TabBarViewController: UIViewController {
         
         let listVCTabBarItem = BATabBarItem(image: UIImage(named: "listVCUnselected")!, selectedImage: UIImage(named: "listVCSelected")!)
         listVCTabBarItem.tintColor = .white
+        
         let newsVCTabBarItem = BATabBarItem(image: UIImage(named: "newsVCUnselected")!, selectedImage: UIImage(named: "newsVCSelected")!)
         newsVCTabBarItem.tintColor = .white
         
@@ -41,6 +42,6 @@ class TabBarViewController: UIViewController {
 
 extension TabBarViewController: BATabBarControllerDelegate {
     func tabBarController(_ tabBarController: BATabBarController, didSelect: UIViewController) {
-        print("Delegate success!");
+
     }
 }
