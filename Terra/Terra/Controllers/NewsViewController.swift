@@ -23,9 +23,7 @@ class NewsViewController: UIViewController {
     lazy var tableView: UITableView = {
         let tv = UITableView()
         tv.register(UITableViewCell.self, forCellReuseIdentifier: "newsCell")
-        view.addSubview(tv)
         tv.backgroundColor = #colorLiteral(red: 0.0744978413, green: 0.0745158717, blue: 0.07449541241, alpha: 1)
-        tv.translatesAutoresizingMaskIntoConstraints = false
         return tv
     }()
     
@@ -46,12 +44,13 @@ class NewsViewController: UIViewController {
         }
     }
     
-    private func getNewsData() {
-        NewsAPIClient.shared.getNewsData { (result) in
+    private func fetchNewsData() {
+        NewsAPIClient.shared.fetchNewsData { (result) in
             switch result {
             case .success(let newsData):
                 self.newsArticles = newsData
-            
+                dump(newsData)
+                
             case .failure(let error):
                 print(error)
             }
@@ -61,5 +60,33 @@ class NewsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        addSubviews()
+        setConstraints()
+        fetchNewsData()
+    }
+}
+
+
+//MARK: -- Add Subviews & Constraints
+
+fileprivate extension NewsViewController {
+    
+    func addSubviews() {
+        let UIElements = [tableView]
+        UIElements.forEach { view.addSubview($0) }
+        UIElements.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
+    }
+    
+    func setConstraints() {
+        setTableViewConstraints()
+    }
+    
+    func setTableViewConstraints() {
+        NSLayoutConstraint.activate([
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
     }
 }

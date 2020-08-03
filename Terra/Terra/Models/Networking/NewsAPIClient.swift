@@ -13,7 +13,7 @@ final class NewsAPIClient {
 
     static let shared = NewsAPIClient()
 
-    func getNewsData(completionHandler: @escaping (Result<[Article], NetworkError>) -> Void) {
+    func fetchNewsData(completionHandler: @escaping (Result<[Article], NetworkError>) -> Void) {
         let urlStr = "http://newsapi.org/v2/everything?q=animal%20endangered%20conservation%20wildlife&sortBy=publishedAt&apiKey=\(Secrets.newsAPIKey)&pageSize=20&page=1"
       
          guard let url = URL(string: urlStr) else {
@@ -25,6 +25,7 @@ final class NewsAPIClient {
              switch result {
              case .failure(let error) :
                  completionHandler(.failure(error))
+                
              case .success(let data):
                  do {
                      let newsResultWrapper = try JSONDecoder().decode(NewsAPIResult.self, from: data)
