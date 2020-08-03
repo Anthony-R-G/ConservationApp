@@ -12,7 +12,7 @@ class NetworkManager {
     
     // MARK: - Static Properties
     
-    static let manager = NetworkManager()
+    static let shared = NetworkManager()
     
     // MARK: - Internal Properties
     
