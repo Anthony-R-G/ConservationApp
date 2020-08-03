@@ -26,7 +26,9 @@ class NewsArticleTableViewCell: UITableViewCell {
         return label
     }()
     
-   
+    lazy var publishedDateLabel: UILabel = {
+        return Factory.makeLabel(title: nil, weight: .medium, size: 15, color: #colorLiteral(red: 0.6783636212, green: 0.6784659028, blue: 0.6783496737, alpha: 1), alignment: .left)
+    }()
     
     
     //MARK: -- Methods
@@ -35,6 +37,7 @@ class NewsArticleTableViewCell: UITableViewCell {
         let articleThumbImageURL = URL(string: article.urlToImage)
         articleThumbImageView.sd_setImage(with: articleThumbImageURL, completed: nil)
         articleTitleLabel.text = article.title
+        publishedDateLabel.text = article.formattedPublishDate
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -57,7 +60,7 @@ class NewsArticleTableViewCell: UITableViewCell {
 fileprivate extension NewsArticleTableViewCell {
     
     func addSubviews() {
-        let UIElements = [articleThumbImageView, articleTitleLabel]
+        let UIElements = [articleThumbImageView, articleTitleLabel, publishedDateLabel]
         UIElements.forEach{ addSubview($0) }
         UIElements.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
     }
@@ -65,6 +68,7 @@ fileprivate extension NewsArticleTableViewCell {
     func setConstraints() {
         setArticleThumbImageViewConstraints()
         setArticleTitleLabelConstraints()
+        setPublishedDateLabelConstraints()
     }
     
     func setArticleThumbImageViewConstraints() {
@@ -80,8 +84,17 @@ fileprivate extension NewsArticleTableViewCell {
         NSLayoutConstraint.activate([
             articleTitleLabel.leadingAnchor.constraint(equalTo: articleThumbImageView.trailingAnchor, constant: 20),
             articleTitleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 20),
-            articleTitleLabel.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.7),
+            articleTitleLabel.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.6),
             articleTitleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
+        ])
+    }
+    
+    func setPublishedDateLabelConstraints() {
+        NSLayoutConstraint.activate([
+            publishedDateLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
+            publishedDateLabel.leadingAnchor.constraint(equalTo: articleTitleLabel.leadingAnchor),
+            publishedDateLabel.heightAnchor.constraint(equalToConstant: 40),
+            publishedDateLabel.widthAnchor.constraint(equalToConstant: 150)
         ])
     }
 }
