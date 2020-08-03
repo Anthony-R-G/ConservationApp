@@ -20,6 +20,25 @@ class NewsViewController: UIViewController {
         return refreshControl
     }()
     
+    lazy var tableView: UITableView = {
+        let tv = UITableView()
+        tv.register(UITableViewCell.self, forCellReuseIdentifier: "newsCell")
+        view.addSubview(tv)
+        tv.backgroundColor = #colorLiteral(red: 0.0744978413, green: 0.0745158717, blue: 0.07449541241, alpha: 1)
+        tv.translatesAutoresizingMaskIntoConstraints = false
+        return tv
+    }()
+    
+    //MARK: -- Properties
+    
+    var newsArticles: [Article] = []  {
+        didSet {
+            tableView.reloadData()
+        }
+    }
+    
+    
+    //MARK: -- Methods
     
     @objc func handleRefresh() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
@@ -27,9 +46,20 @@ class NewsViewController: UIViewController {
         }
     }
     
+    private func getNewsData() {
+        NewsAPIClient.shared.getNewsData { (result) in
+            switch result {
+            case .success(let newsData):
+                self.newsArticles = newsData
+            
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .black
     }
 }
