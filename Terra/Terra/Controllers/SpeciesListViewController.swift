@@ -22,6 +22,11 @@ final class SpeciesListViewController: UIViewController {
         return sb
     }()
     
+    private lazy var topToolBar: toolBar = {
+        let tb = toolBar(frame: .zero, strategy: ToolBarListVCStrategy())
+        return tb
+    }()
+    
     private lazy var backgroundImageView: UIImageView = {
         let iv = UIImageView()
         iv.translatesAutoresizingMaskIntoConstraints = false
@@ -30,15 +35,15 @@ final class SpeciesListViewController: UIViewController {
         view.insertSubview(iv, at: 0)
         return iv
     }()
-
+    
     private lazy var backgroundGradientOverlay: GradientView = {
-           let gv = GradientView()
-           gv.translatesAutoresizingMaskIntoConstraints = false
-           gv.startColor = #colorLiteral(red: 0.06859237701, green: 0.08213501424, blue: 0.2409383953, alpha: 0.1955800514)
-           gv.endColor = #colorLiteral(red: 0.06042958051, green: 0.07334413379, blue: 0.2174944878, alpha: 0.8456228596)
-           view.insertSubview(gv, at: 1)
-           return gv
-       }()
+        let gv = GradientView()
+        gv.translatesAutoresizingMaskIntoConstraints = false
+        gv.startColor = #colorLiteral(red: 0.06859237701, green: 0.08213501424, blue: 0.2409383953, alpha: 0.1955800514)
+        gv.endColor = #colorLiteral(red: 0.06042958051, green: 0.07334413379, blue: 0.2174944878, alpha: 0.8456228596)
+        view.insertSubview(gv, at: 1)
+        return gv
+    }()
     
     private lazy var terraTitleLabel: UILabel = {
         return Factory.makeLabel(title: "Terra",
@@ -80,45 +85,26 @@ final class SpeciesListViewController: UIViewController {
                                  alignment: .left)
     }()
     
-    private lazy var criticalCollectionView: UICollectionView = {
-        Factory.makeCollectionView(superview: view)
-    }()
-    
-    private lazy var endangeredCollectionView: UICollectionView = {
-        Factory.makeCollectionView(superview: view)
-    }()
-    
-    private lazy var vulnerableCollectionView: UICollectionView = {
-        Factory.makeCollectionView(superview: view)
+    private lazy var speciesCollectionView: UICollectionView = {
+        Factory.makeCollectionView()
     }()
     
     //MARK: -- Properties
     
     private var animalData: [Species] = [] {
         didSet {
-            filteredCriticalSpecies = filterSpecies(by: .critical)
-            filteredEndangeredSpecies = filterSpecies(by: .endangered)
-            filteredVulnerableSpecies = filterSpecies(by: .vulnerable)
+            DispatchQueue.main.async {
+                self.speciesCollectionView.reloadData()
+            }
         }
     }
     
-    private var filteredCriticalSpecies = [Species]() {
-        didSet {
-            criticalCollectionView.reloadData()
+    private var filteredAnimals: [Species] {
+        get {
+            return animalData
         }
     }
     
-    private var filteredEndangeredSpecies = [Species]() {
-        didSet {
-            endangeredCollectionView.reloadData()
-        }
-    }
-    
-    private var filteredVulnerableSpecies = [Species]() {
-        didSet {
-            vulnerableCollectionView.reloadData()
-        }
-    }
     
     //MARK: -- Methods
     
@@ -150,25 +136,18 @@ final class SpeciesListViewController: UIViewController {
     }
     
     private func setDatasourceAndDelegates() {
-        let collectionViews = [criticalCollectionView, endangeredCollectionView, vulnerableCollectionView]
-        collectionViews.forEach { $0.dataSource = self }
-        collectionViews.forEach { $0.delegate = self }
-        scrollView.delegate = self
+        speciesCollectionView.dataSource = self
+        speciesCollectionView.delegate = self
+        topToolBar.delegate = self
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        setScrollViewConstraints()
-        scrollView.updateContentView()
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        view.backgroundColor = #colorLiteral(red: 0.0744978413, green: 0.0745158717, blue: 0.07449541241, alpha: 1)
         view.backgroundColor = .white
         addSubviews()
         setConstraints()
@@ -180,57 +159,25 @@ final class SpeciesListViewController: UIViewController {
 //MARK: -- CollectionView DataSource Methods
 extension SpeciesListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        switch collectionView {
-        case criticalCollectionView: return filteredCriticalSpecies.count
-        case endangeredCollectionView: return filteredEndangeredSpecies.count
-        case vulnerableCollectionView: return filteredVulnerableSpecies.count
-        default: return 0
-        }
+        return animalData.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let speciesCell = collectionView.dequeueReusableCell(withReuseIdentifier: "speciesCell", for: indexPath) as! SpeciesCollectionViewCell
-        
-        switch collectionView {
-        case criticalCollectionView:
-            let specificAnimal = filteredCriticalSpecies[indexPath.row]
-            speciesCell.configureCellUI(from: specificAnimal)
-            return speciesCell
-            
-        case endangeredCollectionView:
-            let specificAnimal = filteredEndangeredSpecies[indexPath.row]
-            speciesCell.configureCellUI(from: specificAnimal)
-            return speciesCell
-            
-        case vulnerableCollectionView:
-            let specificAnimal = filteredVulnerableSpecies[indexPath.row]
-            speciesCell.configureCellUI(from: specificAnimal)
-            return speciesCell
-            
-        default: return UICollectionViewCell()
-        }
+        let specificAnimal = animalData[indexPath.row]
+        speciesCell.configureCellUI(from: specificAnimal)
+        return speciesCell
     }
 }
 
 //MARK: -- CollectionView Delegate Methods
 extension SpeciesListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        return CGSize(width: 290, height: 230)
-        return CGSize(width: 240, height: 320)
+        return CGSize(width: view.frame.width, height: 230)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        var specificAnimal = Species(fromFirebaseDict: [:])
-        
-        switch collectionView {
-        case criticalCollectionView: specificAnimal = filteredCriticalSpecies[indexPath.row]
-            
-        case endangeredCollectionView: specificAnimal = filteredEndangeredSpecies[indexPath.row]
-            
-        case vulnerableCollectionView: specificAnimal = filteredVulnerableSpecies[indexPath.row]
-            
-        default: ()
-        }
+        let specificAnimal = animalData[indexPath.row]
         
         let detailVC = SpeciesDetailViewController()
         detailVC.currentSpecies = specificAnimal
@@ -239,8 +186,29 @@ extension SpeciesListViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return Constants.universalLeadingConstant
+        return 0
     }
+    
+}
+
+//MARK: -- Custom Delegate Implementations
+extension SpeciesListViewController: BottomBarDelegate {
+    func buttonPressed(_ sender: UIButton) {
+        guard let buttonOption = ButtonOption(rawValue: sender.tag) else { return }
+        topToolBar.highlightButton(button: buttonOption)
+        switch buttonOption {
+        case .overviewButton:
+            ()
+        case .habitatButton:
+            ()
+        case .threatsButton:
+            ()
+        case .galleryButton:
+            ()
+        }
+    }
+    
+    
 }
 
 //MARK: -- Add Subviews & Constraints
@@ -248,13 +216,9 @@ extension SpeciesListViewController: UICollectionViewDelegateFlowLayout {
 fileprivate extension SpeciesListViewController {
     
     func addSubviews() {
-        let mainViewUIElements = [terraTitleLabel, subtitleLabel, scrollView]
+        let mainViewUIElements = [terraTitleLabel, speciesCollectionView, topToolBar]
         mainViewUIElements.forEach { view.addSubview($0) }
         mainViewUIElements.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
-        
-        let scrollViewUIElements = [criticalSpeciesLabel, criticalCollectionView, endangeredSpeciesLabel, endangeredCollectionView, vulnerableSpeciesLabel, vulnerableCollectionView]
-        scrollViewUIElements.forEach{ scrollView.addSubview($0) }
-        scrollViewUIElements.forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
     }
     
     func setConstraints() {
@@ -262,26 +226,11 @@ fileprivate extension SpeciesListViewController {
         setBackgroundGradientOverlayConstraints()
         
         setTerraTitleLabelConstraints()
-        setSubtitleLabelConstraints()
+        //        setSubtitleLabelConstraints()
         
-        setCriticalSpeciesLabelConstraints()
-        setCriticalSpeciesCVConstraints()
+        setSpeciesCollectionViewConstraints()
+        setToolBarConstraints()
         
-        setEndangeredSpeciesLabelConstraints()
-        setEndangeredSpeciesCVConstraints()
-        
-        setVulnerableSpeciesLabelConstraints()
-        setVulnerableSpeciesCVConstraints()
-    }
-    
-    func setScrollViewConstraints(){
-        scrollView.backgroundColor = .clear
-        NSLayoutConstraint.activate([
-            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            scrollView.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor, constant: 20),
-            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -60)
-        ])
     }
     
     func setBackgroundImageViewConstraints() {
@@ -304,8 +253,8 @@ fileprivate extension SpeciesListViewController {
     
     func setTerraTitleLabelConstraints() {
         NSLayoutConstraint.activate([
-            terraTitleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 80),
-            terraTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+            terraTitleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
+            terraTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             terraTitleLabel.heightAnchor.constraint(equalToConstant: 25),
             terraTitleLabel.widthAnchor.constraint(equalToConstant: 100)
         ])
@@ -320,56 +269,22 @@ fileprivate extension SpeciesListViewController {
         ])
     }
     
-    func setCriticalSpeciesLabelConstraints() {
+    func setToolBarConstraints() {
         NSLayoutConstraint.activate([
-            criticalSpeciesLabel.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 30),
-            criticalSpeciesLabel.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 20),
-            criticalSpeciesLabel.heightAnchor.constraint(equalToConstant: 30),
-            criticalSpeciesLabel.widthAnchor.constraint(equalToConstant: 300)
+            topToolBar.topAnchor.constraint(equalTo: terraTitleLabel.bottomAnchor, constant: 10),
+            topToolBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            topToolBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            topToolBar.heightAnchor.constraint(equalToConstant: 40)
         ])
     }
     
-    func setCriticalSpeciesCVConstraints() {
-        NSLayoutConstraint.activate([
-            criticalCollectionView.topAnchor.constraint(equalTo: criticalSpeciesLabel.bottomAnchor, constant: 20),
-            criticalCollectionView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-            criticalCollectionView.heightAnchor.constraint(equalToConstant: Constants.listVCCollectionViewHeight)
-        ])
-    }
     
-    func setEndangeredSpeciesLabelConstraints() {
+    func setSpeciesCollectionViewConstraints() {
         NSLayoutConstraint.activate([
-            endangeredSpeciesLabel.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 30),
-            endangeredSpeciesLabel.topAnchor.constraint(equalTo: criticalCollectionView.bottomAnchor, constant: 30),
-            endangeredSpeciesLabel.heightAnchor.constraint(equalToConstant: 30),
-            endangeredSpeciesLabel.widthAnchor.constraint(equalToConstant: 300)
-        ])
-    }
-    
-    func setEndangeredSpeciesCVConstraints() {
-        NSLayoutConstraint.activate([
-            endangeredCollectionView.topAnchor.constraint(equalTo: endangeredSpeciesLabel.bottomAnchor, constant: 20),
-            endangeredCollectionView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-            endangeredCollectionView.heightAnchor.constraint(equalToConstant: Constants.listVCCollectionViewHeight),
-            endangeredCollectionView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor)
-        ])
-    }
-    
-    func setVulnerableSpeciesLabelConstraints() {
-        NSLayoutConstraint.activate([
-            vulnerableSpeciesLabel.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 30),
-            vulnerableSpeciesLabel.topAnchor.constraint(equalTo: endangeredCollectionView.bottomAnchor, constant: 30),
-            vulnerableSpeciesLabel.heightAnchor.constraint(equalToConstant: 30),
-            vulnerableSpeciesLabel.widthAnchor.constraint(equalToConstant: 300)
-        ])
-    }
-    
-    func setVulnerableSpeciesCVConstraints() {
-        NSLayoutConstraint.activate([
-            vulnerableCollectionView.topAnchor.constraint(equalTo: vulnerableSpeciesLabel.bottomAnchor, constant: 20),
-            vulnerableCollectionView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-            vulnerableCollectionView.heightAnchor.constraint(equalToConstant: Constants.listVCCollectionViewHeight),
-            vulnerableCollectionView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor)
+            speciesCollectionView.topAnchor.constraint(equalTo: topToolBar.bottomAnchor, constant: 0),
+            speciesCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            speciesCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            speciesCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50)
         ])
     }
 }
