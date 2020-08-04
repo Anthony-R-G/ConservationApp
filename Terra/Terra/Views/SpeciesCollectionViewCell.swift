@@ -13,11 +13,13 @@ class SpeciesCollectionViewCell: UICollectionViewCell {
     //MARK: -- UI Element Initialization
     
     private lazy var speciesNameLabel: UILabel = {
-        return Factory.makeLabel(title: nil,
-                                   weight: .bold,
-                                   size: 23,
+        let label = Factory.makeLabel(title: nil,
+                                   weight: .medium,
+                                   size: 27,
                                    color: .white,
                                    alignment: .left)
+        label.numberOfLines = 0
+        return label
     }()
     
     private lazy var backgroundImageView: UIImageView = {
@@ -40,8 +42,29 @@ class SpeciesCollectionViewCell: UICollectionViewCell {
     public func configureCellUI(from species: Species) {
         speciesNameLabel.text = species.commonName
         FirebaseStorageService.cellImageManager.getImage(for: species.commonName, setTo: backgroundImageView)
-        layer.cornerRadius = Constants.cornerRadius
-        layer.masksToBounds = true
+//        layer.cornerRadius = Constants.cornerRadius
+//        layer.masksToBounds = true
+    }
+    
+    override func layoutSubviews() {
+        // cell rounded section
+        self.layer.cornerRadius = 15.0
+        self.layer.borderWidth = 5.0
+        self.layer.borderColor = UIColor.clear.cgColor
+        self.layer.masksToBounds = true
+        
+        // cell shadow section
+        self.contentView.layer.cornerRadius = 20.0
+        self.contentView.layer.borderWidth = 5.0
+        self.contentView.layer.borderColor = UIColor.clear.cgColor
+        self.contentView.layer.masksToBounds = true
+        self.layer.shadowColor = UIColor.black.cgColor
+        self.layer.shadowOffset = CGSize(width: 0, height: 0.0)
+        self.layer.shadowRadius = 10.0
+        self.layer.shadowOpacity = 0.6
+        self.layer.cornerRadius = 20.0
+        self.layer.masksToBounds = false
+        self.layer.shadowPath = UIBezierPath(roundedRect: self.bounds, cornerRadius: self.contentView.layer.cornerRadius).cgPath
     }
     
     override init(frame: CGRect) {
@@ -90,10 +113,10 @@ fileprivate extension SpeciesCollectionViewCell {
     
     func setSpeciesNameLabelConstraints(){
         NSLayoutConstraint.activate([
-            speciesNameLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            speciesNameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -30),
-            speciesNameLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.85),
-            speciesNameLabel.heightAnchor.constraint(equalToConstant: 50)
+            speciesNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            speciesNameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -50),
+            speciesNameLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.70),
+            speciesNameLabel.heightAnchor.constraint(equalToConstant: 90)
         ])
     }
 }

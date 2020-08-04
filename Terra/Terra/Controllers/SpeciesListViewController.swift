@@ -16,10 +16,34 @@ final class SpeciesListViewController: UIViewController {
         return UIScrollView()
     }()
     
+    private lazy var searchBar: UISearchBar = {
+        let sb = UISearchBar()
+        sb.placeholder = "Search Species..."
+        return sb
+    }()
+    
+    private lazy var backgroundImageView: UIImageView = {
+        let iv = UIImageView()
+        iv.translatesAutoresizingMaskIntoConstraints = false
+        iv.image = #imageLiteral(resourceName: "listVCbackground")
+        iv.contentMode = UIView.ContentMode.scaleAspectFill
+        view.insertSubview(iv, at: 0)
+        return iv
+    }()
+
+    private lazy var backgroundGradientOverlay: GradientView = {
+           let gv = GradientView()
+           gv.translatesAutoresizingMaskIntoConstraints = false
+           gv.startColor = #colorLiteral(red: 0.06859237701, green: 0.08213501424, blue: 0.2409383953, alpha: 0.1955800514)
+           gv.endColor = #colorLiteral(red: 0.06042958051, green: 0.07334413379, blue: 0.2174944878, alpha: 0.8456228596)
+           view.insertSubview(gv, at: 1)
+           return gv
+       }()
+    
     private lazy var terraTitleLabel: UILabel = {
         return Factory.makeLabel(title: "Terra",
                                  weight: .bold,
-                                 size: 30,
+                                 size: 36,
                                  color: #colorLiteral(red: 0.9257398248, green: 1, blue: 0.7623538375, alpha: 1),
                                  alignment: .left)
     }()
@@ -144,7 +168,8 @@ final class SpeciesListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = #colorLiteral(red: 0.0744978413, green: 0.0745158717, blue: 0.07449541241, alpha: 1)
+//        view.backgroundColor = #colorLiteral(red: 0.0744978413, green: 0.0745158717, blue: 0.07449541241, alpha: 1)
+        view.backgroundColor = .white
         addSubviews()
         setConstraints()
         loadSpeciesDataFromFirebase()
@@ -190,7 +215,8 @@ extension SpeciesListViewController: UICollectionViewDataSource {
 //MARK: -- CollectionView Delegate Methods
 extension SpeciesListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 290, height: 230)
+//        return CGSize(width: 290, height: 230)
+        return CGSize(width: 240, height: 320)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -232,6 +258,9 @@ fileprivate extension SpeciesListViewController {
     }
     
     func setConstraints() {
+        setBackgroundImageViewConstraints()
+        setBackgroundGradientOverlayConstraints()
+        
         setTerraTitleLabelConstraints()
         setSubtitleLabelConstraints()
         
@@ -252,6 +281,24 @@ fileprivate extension SpeciesListViewController {
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             scrollView.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor, constant: 20),
             scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -60)
+        ])
+    }
+    
+    func setBackgroundImageViewConstraints() {
+        NSLayoutConstraint.activate([
+            backgroundImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            backgroundImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            backgroundImageView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            backgroundImageView.heightAnchor.constraint(equalTo: view.heightAnchor)
+        ])
+    }
+    
+    func setBackgroundGradientOverlayConstraints() {
+        NSLayoutConstraint.activate([
+            backgroundGradientOverlay.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            backgroundGradientOverlay.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            backgroundGradientOverlay.widthAnchor.constraint(equalTo: view.widthAnchor),
+            backgroundGradientOverlay.heightAnchor.constraint(equalTo: view.heightAnchor)
         ])
     }
     

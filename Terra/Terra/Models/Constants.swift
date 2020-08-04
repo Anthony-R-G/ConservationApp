@@ -9,7 +9,7 @@
 import UIKit
 
 struct Constants {
-    static let listVCCollectionViewHeight: CGFloat = 235
+    static let listVCCollectionViewHeight: CGFloat = 340
     static let universalLeadingConstant: CGFloat = 20
     
     static let roundedInfoViewHeight: CGFloat = 440
