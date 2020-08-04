@@ -22,8 +22,8 @@ final class SpeciesListViewController: UIViewController {
         return sb
     }()
     
-    private lazy var toolBar: BottomBarView = {
-        let tb = BottomBarView()
+    private lazy var topToolBar: toolBar = {
+        let tb = toolBar()
         return tb
     }()
     
@@ -187,7 +187,7 @@ extension SpeciesListViewController: UICollectionViewDelegateFlowLayout {
 fileprivate extension SpeciesListViewController {
     
     func addSubviews() {
-        let mainViewUIElements = [terraTitleLabel, speciesCollectionView, toolBar]
+        let mainViewUIElements = [terraTitleLabel, speciesCollectionView, topToolBar]
         mainViewUIElements.forEach { view.addSubview($0) }
         mainViewUIElements.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
     }
@@ -244,17 +244,17 @@ fileprivate extension SpeciesListViewController {
     
     func setToolBarConstraints() {
        NSLayoutConstraint.activate([
-            toolBar.topAnchor.constraint(equalTo: terraTitleLabel.bottomAnchor, constant: 10),
-            toolBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            toolBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            toolBar.heightAnchor.constraint(equalToConstant: 40)
+            topToolBar.topAnchor.constraint(equalTo: terraTitleLabel.bottomAnchor, constant: 10),
+            topToolBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            topToolBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            topToolBar.heightAnchor.constraint(equalToConstant: 40)
         ])
     }
     
     
     func setSpeciesCollectionViewConstraints() {
         NSLayoutConstraint.activate([
-            speciesCollectionView.topAnchor.constraint(equalTo: toolBar.bottomAnchor, constant: 10),
+            speciesCollectionView.topAnchor.constraint(equalTo: topToolBar.bottomAnchor, constant: 10),
             speciesCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             speciesCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             speciesCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50)

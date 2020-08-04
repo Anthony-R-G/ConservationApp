@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BottomBarView: UIView {
+class toolBar: UIView {
     //MARK: -- Lazy UI Element Initialization
     
     private lazy var overviewButton: UIButton = {
@@ -116,7 +116,7 @@ class BottomBarView: UIView {
 
 //MARK: -- Add Subviews & Constraints
 
-fileprivate extension BottomBarView {
+fileprivate extension toolBar {
     
     func addSubviews() {
         let UIElements = [buttonStackView, highlightedIndicator]

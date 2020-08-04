@@ -79,8 +79,8 @@ final class SpeciesDetailViewController: UIViewController {
         return DonateButton(gradientColors: [#colorLiteral(red: 1, green: 0.2914688587, blue: 0.3886995912, alpha: 0.9019156678), #colorLiteral(red: 0.5421239734, green: 0.1666001081, blue: 0.2197911441, alpha: 0.8952536387)], startPoint: CGPoint(x: 0, y: 0), endPoint: CGPoint(x: 1, y: 1))
     }()
     
-    private lazy var bottomToolBar: BottomBarView = {
-        return BottomBarView()
+    private lazy var bottomToolBar: toolBar = {
+        return toolBar()
     }()
     
     private lazy var speciesOverviewView: RoundedInfoView = {
