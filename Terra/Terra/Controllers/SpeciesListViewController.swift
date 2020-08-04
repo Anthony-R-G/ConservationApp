@@ -91,7 +91,10 @@ final class SpeciesListViewController: UIViewController {
     
     //MARK: -- Properties
     
-    private var animalData: [Species] = [] {
+    private var animalData: [Species] = []
+    
+    
+    private var filteredAnimals: [Species] = [] {
         didSet {
             DispatchQueue.main.async {
                 self.speciesCollectionView.reloadData()
@@ -99,11 +102,6 @@ final class SpeciesListViewController: UIViewController {
         }
     }
     
-    private var filteredAnimals: [Species] {
-        get {
-            return animalData
-        }
-    }
     
     
     //MARK: -- Methods
@@ -123,10 +121,10 @@ final class SpeciesListViewController: UIViewController {
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             guard let self = self else { return }
             FirestoreService.manager.getAllSpeciesData() { (result) in
-                
                 switch result {
                 case .success(let speciesData):
                     self.animalData = speciesData
+                    self.filteredAnimals = speciesData
                     
                 case .failure(let error):
                     print(error)
@@ -159,12 +157,12 @@ final class SpeciesListViewController: UIViewController {
 //MARK: -- CollectionView DataSource Methods
 extension SpeciesListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return animalData.count
+        return filteredAnimals.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let speciesCell = collectionView.dequeueReusableCell(withReuseIdentifier: "speciesCell", for: indexPath) as! SpeciesCollectionViewCell
-        let specificAnimal = animalData[indexPath.row]
+        let specificAnimal = filteredAnimals[indexPath.row]
         speciesCell.configureCellUI(from: specificAnimal)
         return speciesCell
     }
@@ -177,7 +175,7 @@ extension SpeciesListViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let specificAnimal = animalData[indexPath.row]
+        let specificAnimal = filteredAnimals[indexPath.row]
         
         let detailVC = SpeciesDetailViewController()
         detailVC.currentSpecies = specificAnimal
@@ -198,13 +196,14 @@ extension SpeciesListViewController: BottomBarDelegate {
         topToolBar.highlightButton(button: buttonOption)
         switch buttonOption {
         case .overviewButton:
-            ()
+            filteredAnimals = animalData
         case .habitatButton:
-            ()
+            
+            filteredAnimals = filterSpecies(by: .critical)
         case .threatsButton:
-            ()
+            filteredAnimals = filterSpecies(by: .endangered)
         case .galleryButton:
-            ()
+            filteredAnimals =  filterSpecies(by: .vulnerable)
         }
     }
     
