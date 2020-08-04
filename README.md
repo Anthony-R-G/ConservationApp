@@ -32,13 +32,13 @@ ARKit (some animals will have the option to "View in AR" which will bring up a 3
 ## Screenshots
 
 ### List Page
-List of animal species, separated by Red List conservation levels:
+This page contains a list of animals that are currently considered threatened. The main three categories are: Critically Endangered, Endangered, and Vulnerable. These come from the IUCN Red List of Threatened Species, and are intended to be an easily and widely understood system for classifying species at high risk of global extinction.
 
-|  |  |  
-|:-----:|:-------:|
-|![screen 1](https://i.imgur.com/eUc1NtV.png) | ![screen 2](https://i.imgur.com/XNbnvl1.png) 
+| See All Species | Filtered By Critical Status | Filtered by Endangered Status | Filtered by Vulnerable Status |
+|:-----:|:-------:|:-------:|:-------:|
+|![screen 1](https://i.imgur.com/DnQzKiL.png) | ![screen 2](https://i.imgur.com/32QhNWn.png) | ![screen 3](https://i.imgur.com/xnRwpzP.png) | ![screen 3](https://i.imgur.com/SsKI4Ge.png) |
 
-Tapping any one cell will transition to a new page with a minimalistic user interface where the species you've selected is put at the forefront:
+Tapping any one cell will transition to a new "cover page" with a minimalistic user interface where the animal selected is the main focus.
 
 ### Individual Species Page 
 | Amur Leopard | Blue Whale | Lion | Mountain Gorilla |
