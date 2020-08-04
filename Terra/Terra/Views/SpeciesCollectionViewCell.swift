@@ -58,7 +58,7 @@ class SpeciesCollectionViewCell: UICollectionViewCell {
     private lazy var backgroundGradientOverlay: GradientView = {
         let gv = GradientView()
         gv.startColor = .clear
-        gv.endColor = #colorLiteral(red: 0.06859237701, green: 0.08213501424, blue: 0.2409383953, alpha: 0.6547784675)
+        gv.endColor = #colorLiteral(red: 0.06859237701, green: 0.08213501424, blue: 0.2409383953, alpha: 0.7399935788)
         insertSubview(gv, at: 1)
         return gv
     }()

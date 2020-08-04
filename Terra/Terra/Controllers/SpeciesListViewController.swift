@@ -190,13 +190,13 @@ extension SpeciesListViewController: BottomBarDelegate {
         topToolBar.highlightButton(button: buttonOption)
         switch buttonOption {
         case .overviewButton:
-            <#code#>
+            ()
         case .habitatButton:
-            <#code#>
+            ()
         case .threatsButton:
-            <#code#>
+            ()
         case .galleryButton:
-            <#code#>
+            ()
         }
     }
     
