@@ -93,7 +93,15 @@ final class SpeciesListViewController: UIViewController {
     
     private var animalData: [Species] = [] {
         didSet {
-            speciesCollectionView.reloadData()
+            DispatchQueue.main.async {
+                self.speciesCollectionView.reloadData()
+            }
+        }
+    }
+    
+    private var filteredAnimals: [Species] {
+        get {
+            return animalData
         }
     }
     
@@ -262,7 +270,7 @@ fileprivate extension SpeciesListViewController {
     }
     
     func setToolBarConstraints() {
-       NSLayoutConstraint.activate([
+        NSLayoutConstraint.activate([
             topToolBar.topAnchor.constraint(equalTo: terraTitleLabel.bottomAnchor, constant: 10),
             topToolBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             topToolBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
