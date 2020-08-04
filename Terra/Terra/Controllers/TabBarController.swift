@@ -23,10 +23,10 @@ class TabBarViewController: UIViewController {
         let newsVC = NewsViewController()
         
         let listVCTabBarItem = BATabBarItem(image: UIImage(named: "listVCUnselected")!, selectedImage: UIImage(named: "listVCSelected")!)
-        listVCTabBarItem.tintColor = .white
+        listVCTabBarItem.tintColor = #colorLiteral(red: 0.9257398248, green: 1, blue: 0.7623538375, alpha: 1)
         
         let newsVCTabBarItem = BATabBarItem(image: UIImage(named: "newsVCUnselected")!, selectedImage: UIImage(named: "newsVCSelected")!)
-        newsVCTabBarItem.tintColor = .white
+        newsVCTabBarItem.tintColor = #colorLiteral(red: 0.9257398248, green: 1, blue: 0.7623538375, alpha: 1)
         
         tabBarVC.delegate = self
         tabBarVC.tabBarItemStrokeColor = .white

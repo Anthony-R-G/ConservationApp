@@ -50,7 +50,7 @@ class BottomBarView: UIView {
     
     private lazy var highlightedIndicator: UIView = {
         let screenWidth = UIScreen.main.bounds.width
-        let view = UIView(frame: CGRect(x: .zero, y: .zero, width: screenWidth / 4.55, height: 2))
+        let view = UIView(frame: CGRect(x: .zero, y: .zero, width: screenWidth / 4.55, height: 1))
         view.backgroundColor = UIColor.white
         return view
     }()

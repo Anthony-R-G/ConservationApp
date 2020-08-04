@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class NewsViewController: UIViewController {
     
@@ -15,8 +16,8 @@ class NewsViewController: UIViewController {
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
-        refreshControl.tintColor = .white
-        refreshControl.attributedTitle = NSAttributedString(string: "Fetching News Data ...", attributes: [NSAttributedString.Key.foregroundColor : UIColor.white])
+        refreshControl.tintColor = .darkGray
+        refreshControl.attributedTitle = NSAttributedString(string: "Fetching News Data ...", attributes: [NSAttributedString.Key.foregroundColor : UIColor.darkGray])
         return refreshControl
     }()
     
@@ -42,7 +43,8 @@ class NewsViewController: UIViewController {
     //MARK: -- Methods
     
     @objc func handleRefresh() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+        fetchNewsData()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             self.refreshControl.endRefreshing()
         }
     }
@@ -52,7 +54,7 @@ class NewsViewController: UIViewController {
             switch result {
             case .success(let newsData):
                 self.newsArticles = newsData
-                dump(newsData)
+                
                 
             case .failure(let error):
                 print(error)
@@ -60,9 +62,23 @@ class NewsViewController: UIViewController {
         }
     }
     
+    func showModally(_ viewController: UIViewController) {
+        let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
+        let rootViewController = window?.rootViewController
+        rootViewController?.present(viewController, animated: true, completion: nil)
+    }
+    
+    private func presentWebBrowser(link: URL){
+        let config = SFSafariViewController.Configuration()
+        config.entersReaderIfAvailable = false
+        let safariVC = SFSafariViewController(url: link, configuration: config)
+        showModally(safariVC)
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
         addSubviews()
         setConstraints()
         fetchNewsData()
@@ -86,6 +102,13 @@ extension NewsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 180
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let articleURL = newsArticles[indexPath.row].url
+        if articleURL.isValidURL {
+            presentWebBrowser(link: URL(string: articleURL)!)
+        }
+    }
 }
 
 
@@ -108,7 +131,7 @@ fileprivate extension NewsViewController {
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -60)
         ])
     }
 }

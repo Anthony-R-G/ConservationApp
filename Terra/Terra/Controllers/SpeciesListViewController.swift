@@ -18,41 +18,42 @@ final class SpeciesListViewController: UIViewController {
     
     private lazy var terraTitleLabel: UILabel = {
         return Factory.makeLabel(title: "Terra",
-                                   weight: .bold,
-                                   size: 30,
-                                   color: #colorLiteral(red: 0.9257398248, green: 1, blue: 0.7623538375, alpha: 1),
-                                   alignment: .left)
+                                 weight: .bold,
+                                 size: 30,
+                                 color: #colorLiteral(red: 0.9257398248, green: 1, blue: 0.7623538375, alpha: 1),
+                                 alignment: .left)
     }()
     
     private lazy var subtitleLabel: UILabel = {
         return  Factory.makeLabel(title: "Protect the earth's biodiversity",
-                                    weight: .light,
-                                    size: 20, color: #colorLiteral(red: 0.6699403524, green: 0.6602986455, blue: 0.7864833474, alpha: 1),
-                                    alignment: .left)
+                                  weight: .light,
+                                  size: 20,
+                                  color: #colorLiteral(red: 0.6699403524, green: 0.6602986455, blue: 0.7864833474, alpha: 1),
+                                  alignment: .left)
     }()
     
     private lazy var criticalSpeciesLabel: UILabel = {
         return Factory.makeLabel(title: "CRITICALLY ENDANGERED",
-                                   weight: .medium,
-                                   size: 19,
-                                   color: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.7993899829),
-                                   alignment: .left)
+                                 weight: .medium,
+                                 size: 19,
+                                 color: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.7993899829),
+                                 alignment: .left)
     }()
     
     private lazy var endangeredSpeciesLabel: UILabel = {
         return Factory.makeLabel(title: "ENDANGERED",
-                                   weight: .medium,
-                                   size: 19,
-                                   color: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.7993899829),
-                                   alignment: .left)
+                                 weight: .medium,
+                                 size: 19,
+                                 color: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.7993899829),
+                                 alignment: .left)
     }()
     
     private lazy var vulnerableSpeciesLabel: UILabel = {
         return Factory.makeLabel(title: "VULNERABLE",
-                                   weight: .medium,
-                                   size: 19,
-                                   color: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.7993899829),
-                                   alignment: .left)
+                                 weight: .medium,
+                                 size: 19,
+                                 color: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.7993899829),
+                                 alignment: .left)
     }()
     
     private lazy var criticalCollectionView: UICollectionView = {
@@ -97,6 +98,12 @@ final class SpeciesListViewController: UIViewController {
     
     //MARK: -- Methods
     
+    func showModally(_ viewController: UIViewController) {
+        let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
+        let rootViewController = window?.rootViewController
+        rootViewController?.present(viewController, animated: true, completion: nil)
+    }
+    
     private func filterSpecies(by status: ConservationStatus) -> [Species] {
         let filteredSpecies = animalData.filter { $0.population.conservationStatus == status }
         return filteredSpecies
@@ -112,7 +119,7 @@ final class SpeciesListViewController: UIViewController {
                     self.animalData = speciesData
                     
                 case .failure(let error):
-                    print(error.localizedDescription)
+                    print(error)
                 }
             }
         }
@@ -201,8 +208,8 @@ extension SpeciesListViewController: UICollectionViewDelegateFlowLayout {
         
         let detailVC = SpeciesDetailViewController()
         detailVC.currentSpecies = specificAnimal
-       
-        present(detailVC, animated: true, completion: nil)
+        
+        showModally(detailVC)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
