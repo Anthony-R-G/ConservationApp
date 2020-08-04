@@ -9,6 +9,7 @@ Terra is an iOS application meant to educate people on the biodiversity in the w
 Clicking on any animal brings the user to a page displaying more information about the animal as well as the option to be redirected to a donation page to help support conservation efforts. 
 
 One major design principle behind the app is keeping the look of it clean and visually appealing. Learning should be fun! It's hard to feel interested in a subject if it's presented in a way that feels lifeless, drab, and flat. The main focus of Terra are the animals, and so the UI attempts to make the experience feel more dynamic and focused on the content. This is done through the use of imagery, thin lines, and light blur effects.
+
 Mobile apps are unique in that they enable you to interact directly with your content. Because of that, an app should package content in such a way that there's preference to use it and not simply get the data from a web browser. 
 
 
