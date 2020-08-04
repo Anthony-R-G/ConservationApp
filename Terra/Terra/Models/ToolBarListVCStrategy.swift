@@ -9,20 +9,25 @@
 import Foundation
 
 struct ToolBarListVCStrategy: ToolBarVCStrategy {
+    
     func buttonOneName() -> String {
-        return "OVERVIEW"
+        return "ALL"
     }
     
     func buttonTwoName() -> String {
-        return "HABITAT"
+        return "CRITICAL"
     }
     
     func buttonThreeName() -> String {
-        return "THREATS"
+        return "ENDANGERED"
     }
     
     func buttonFourName() -> String {
-        return "GALLERY"
+        return "VULNERABLE"
+    }
+    
+    func highlightIndicatorHidden() -> Bool {
+        return true
     }
     
     

@@ -23,7 +23,7 @@ final class SpeciesListViewController: UIViewController {
     }()
     
     private lazy var topToolBar: toolBar = {
-        let tb = toolBar()
+        let tb = toolBar(frame: .zero, strategy: ToolBarListVCStrategy())
         return tb
     }()
     
@@ -130,6 +130,7 @@ final class SpeciesListViewController: UIViewController {
     private func setDatasourceAndDelegates() {
         speciesCollectionView.dataSource = self
         speciesCollectionView.delegate = self
+        topToolBar.delegate = self
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -182,6 +183,26 @@ extension SpeciesListViewController: UICollectionViewDelegateFlowLayout {
     
 }
 
+//MARK: -- Custom Delegate Implementations
+extension SpeciesListViewController: BottomBarDelegate {
+    func buttonPressed(_ sender: UIButton) {
+        guard let buttonOption = ButtonOption(rawValue: sender.tag) else { return }
+        topToolBar.highlightButton(button: buttonOption)
+        switch buttonOption {
+        case .overviewButton:
+            <#code#>
+        case .habitatButton:
+            <#code#>
+        case .threatsButton:
+            <#code#>
+        case .galleryButton:
+            <#code#>
+        }
+    }
+    
+    
+}
+
 //MARK: -- Add Subviews & Constraints
 
 fileprivate extension SpeciesListViewController {
@@ -203,8 +224,6 @@ fileprivate extension SpeciesListViewController {
         setToolBarConstraints()
         
     }
-    
-    
     
     func setBackgroundImageViewConstraints() {
         NSLayoutConstraint.activate([
@@ -254,7 +273,7 @@ fileprivate extension SpeciesListViewController {
     
     func setSpeciesCollectionViewConstraints() {
         NSLayoutConstraint.activate([
-            speciesCollectionView.topAnchor.constraint(equalTo: topToolBar.bottomAnchor, constant: 10),
+            speciesCollectionView.topAnchor.constraint(equalTo: topToolBar.bottomAnchor, constant: 0),
             speciesCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             speciesCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             speciesCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50)

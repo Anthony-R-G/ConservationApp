@@ -12,28 +12,28 @@ class toolBar: UIView {
     //MARK: -- Lazy UI Element Initialization
     
     private lazy var overviewButton: UIButton = {
-        let btn = Factory.makeBottomBarButton(title: "OVERVIEW")
+        let btn = Factory.makeBottomBarButton(title: viewControllerStrategy.buttonOneName())
         btn.tag = 0
         btn.addTarget(self, action: #selector(bottomBarButtonPressed(sender:)), for: .touchUpInside)
         return btn
     }()
     
     private lazy var habitatButton: UIButton = {
-        let btn = Factory.makeBottomBarButton(title: "HABITAT")
+        let btn = Factory.makeBottomBarButton(title: viewControllerStrategy.buttonTwoName())
         btn.tag = 1
         btn.addTarget(self, action: #selector(bottomBarButtonPressed(sender:)), for: .touchUpInside)
         return btn
     }()
     
     private lazy var threatsButton: UIButton = {
-        let btn = Factory.makeBottomBarButton(title: "THREATS")
+        let btn = Factory.makeBottomBarButton(title: viewControllerStrategy.buttonThreeName())
         btn.tag = 2
         btn.addTarget(self, action: #selector(bottomBarButtonPressed(sender:)), for: .touchUpInside)
         return btn
     }()
     
     private lazy var galleryButton: UIButton = {
-        let btn = Factory.makeBottomBarButton(title: "GALLERY")
+        let btn = Factory.makeBottomBarButton(title: viewControllerStrategy.buttonFourName())
         btn.tag = 3
         btn.addTarget(self, action: #selector(bottomBarButtonPressed(sender:)), for: .touchUpInside)
         return btn
@@ -52,6 +52,7 @@ class toolBar: UIView {
         let screenWidth = UIScreen.main.bounds.width
         let view = UIView(frame: CGRect(x: .zero, y: .zero, width: screenWidth / 4.55, height: 1))
         view.backgroundColor = UIColor.white
+        view.isHidden = viewControllerStrategy.highlightIndicatorHidden()
         return view
     }()
     
@@ -60,6 +61,8 @@ class toolBar: UIView {
     }()
     
     //MARK: -- Properties
+    
+    var viewControllerStrategy: ToolBarVCStrategy
     
     weak var delegate: BottomBarDelegate?
     
@@ -102,7 +105,8 @@ class toolBar: UIView {
         delegate?.buttonPressed(sender)
     }
     
-    override init(frame: CGRect) {
+    init(frame: CGRect, strategy: ToolBarVCStrategy) {
+        viewControllerStrategy = strategy
         super.init(frame: frame)
         setAppearance()
         addSubviews()

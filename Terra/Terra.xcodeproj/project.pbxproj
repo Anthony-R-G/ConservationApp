@@ -46,6 +46,7 @@
 		9764D12E24D7E46E0050AF37 /* NewsArticleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9764D12D24D7E46E0050AF37 /* NewsArticleTableViewCell.swift */; };
 		9764D13124D9D07F0050AF37 /* ToolBarVCStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9764D13024D9D07F0050AF37 /* ToolBarVCStrategy.swift */; };
 		9764D13324D9D0E90050AF37 /* ToolBarListVCStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9764D13224D9D0E90050AF37 /* ToolBarListVCStrategy.swift */; };
+		9764D13524D9D1A20050AF37 /* ToolBarDetailVCStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9764D13424D9D1A20050AF37 /* ToolBarDetailVCStrategy.swift */; };
 		9767D04C24C3EA9200384FCD /* SubheaderInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9767D04B24C3EA9200384FCD /* SubheaderInfoView.swift */; };
 		97682CC524D550BB000E5B30 /* Biome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975812F424D539D500C09D56 /* Biome.swift */; };
 		97682CC724D5EAA3000E5B30 /* Population.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97682CC624D5EAA3000E5B30 /* Population.swift */; };
@@ -140,6 +141,7 @@
 		9764D12D24D7E46E0050AF37 /* NewsArticleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsArticleTableViewCell.swift; sourceTree = "<group>"; };
 		9764D13024D9D07F0050AF37 /* ToolBarVCStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolBarVCStrategy.swift; sourceTree = "<group>"; };
 		9764D13224D9D0E90050AF37 /* ToolBarListVCStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolBarListVCStrategy.swift; sourceTree = "<group>"; };
+		9764D13424D9D1A20050AF37 /* ToolBarDetailVCStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolBarDetailVCStrategy.swift; sourceTree = "<group>"; };
 		9767D04B24C3EA9200384FCD /* SubheaderInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubheaderInfoView.swift; sourceTree = "<group>"; };
 		97682CC624D5EAA3000E5B30 /* Population.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Population.swift; sourceTree = "<group>"; };
 		97682CC924D634AA000E5B30 /* RoundedInfoViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedInfoViewDelegate.swift; sourceTree = "<group>"; };
@@ -313,6 +315,7 @@
 				9764D12A24D7DD820050AF37 /* Secrets.swift */,
 				9764D13024D9D07F0050AF37 /* ToolBarVCStrategy.swift */,
 				9764D13224D9D0E90050AF37 /* ToolBarListVCStrategy.swift */,
+				9764D13424D9D1A20050AF37 /* ToolBarDetailVCStrategy.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -635,6 +638,7 @@
 				97928F7924CD11BF00AF90C5 /* FirestoreError.swift in Sources */,
 				975812F324D530AA00C09D56 /* SpeciesGalleryStrategy.swift in Sources */,
 				971FD0D024C61AD3003ED029 /* CGFloatExtensions.swift in Sources */,
+				9764D13524D9D1A20050AF37 /* ToolBarDetailVCStrategy.swift in Sources */,
 				97928F7B24CD347200AF90C5 /* FirebaseConvertible.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

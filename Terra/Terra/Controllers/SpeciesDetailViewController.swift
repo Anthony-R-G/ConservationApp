@@ -80,7 +80,7 @@ final class SpeciesDetailViewController: UIViewController {
     }()
     
     private lazy var bottomToolBar: toolBar = {
-        return toolBar()
+        return toolBar(frame: .zero, strategy: ToolBarDetailVCStrategy())
     }()
     
     private lazy var speciesOverviewView: RoundedInfoView = {
