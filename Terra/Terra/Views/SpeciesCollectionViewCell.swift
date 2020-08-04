@@ -22,6 +22,20 @@ class SpeciesCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
+    private lazy var conservationStatusLabel: UILabel = {
+        let label = Factory.makeLabel(title: nil, weight: .bold, size: 16, color: .white, alignment: .center)
+        label.backgroundColor = Constants.red
+        label.layer.cornerRadius = 15
+        label.clipsToBounds = true
+        label.layer.maskedCorners = [.layerMinXMaxYCorner]
+        return label
+    }()
+    
+    private lazy var populationNumbersLabel: UILabel = {
+        let label = Factory.makeLabel(title: nil, weight: .medium, size: 18, color: .white, alignment: .left)
+        return label
+    }()
+    
     private lazy var backgroundImageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
@@ -42,6 +56,12 @@ class SpeciesCollectionViewCell: UICollectionViewCell {
     public func configureCellUI(from species: Species) {
         speciesNameLabel.text = species.commonName
         FirebaseStorageService.cellImageManager.getImage(for: species.commonName, setTo: backgroundImageView)
+        switch species.population.conservationStatus {
+        case .critical: conservationStatusLabel.text = "CR"
+        case .endangered: conservationStatusLabel.text = "EN"
+        case .vulnerable: conservationStatusLabel.text = "VU"
+        }
+        populationNumbersLabel.text = species.population.numbers
 //        layer.cornerRadius = Constants.cornerRadius
 //        layer.masksToBounds = true
     }
@@ -82,7 +102,7 @@ class SpeciesCollectionViewCell: UICollectionViewCell {
 
 fileprivate extension SpeciesCollectionViewCell {
     func addSubviews() {
-        let UIElements = [backgroundImageView, backgroundGradientOverlay, speciesNameLabel]
+        let UIElements = [backgroundImageView, backgroundGradientOverlay, speciesNameLabel, conservationStatusLabel, populationNumbersLabel]
         UIElements.forEach{ contentView.addSubview($0) }
         UIElements.forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
     }
@@ -91,6 +111,8 @@ fileprivate extension SpeciesCollectionViewCell {
         setBackgroundImageConstraints()
         setBackgroundGradientOverlayConstraints()
         setSpeciesNameLabelConstraints()
+        setConservationStatusLabelConstraints()
+        setPopulationNumbersLabelConstraints() 
     }
     
     func setBackgroundImageConstraints() {
@@ -117,6 +139,25 @@ fileprivate extension SpeciesCollectionViewCell {
             speciesNameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -50),
             speciesNameLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.70),
             speciesNameLabel.heightAnchor.constraint(equalToConstant: 90)
+        ])
+    }
+    
+    func setConservationStatusLabelConstraints() {
+        NSLayoutConstraint.activate([
+            conservationStatusLabel.topAnchor.constraint(equalTo: topAnchor),
+            conservationStatusLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
+            conservationStatusLabel.heightAnchor.constraint(equalToConstant: 50),
+            conservationStatusLabel.widthAnchor.constraint(equalToConstant: 50)
+
+        ])
+    }
+    
+    func setPopulationNumbersLabelConstraints() {
+        NSLayoutConstraint.activate([
+            populationNumbersLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20),
+            populationNumbersLabel.leadingAnchor.constraint(equalTo: speciesNameLabel.leadingAnchor),
+            populationNumbersLabel.heightAnchor.constraint(equalToConstant: 40),
+            populationNumbersLabel.widthAnchor.constraint(equalToConstant: 50)
         ])
     }
 }
