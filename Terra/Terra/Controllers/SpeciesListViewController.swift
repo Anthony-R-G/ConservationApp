@@ -18,6 +18,12 @@ final class SpeciesListViewController: UIViewController {
     
     private lazy var searchBar: UISearchBar = {
         let sb = UISearchBar()
+        sb.backgroundColor = .clear
+        sb.barStyle = .black
+        sb.backgroundImage = UIImage()
+        sb.alpha = 0
+        sb.keyboardAppearance = .dark
+        sb.showsCancelButton = true
         sb.placeholder = "Search Species..."
         return sb
     }()
@@ -25,6 +31,14 @@ final class SpeciesListViewController: UIViewController {
     private lazy var topToolBar: toolBar = {
         let tb = toolBar(frame: .zero, strategy: ToolBarListVCStrategy())
         return tb
+    }()
+    
+    private lazy var searchBarButton: UIButton = {
+        let btn = UIButton()
+        btn.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
+        btn.tintColor = .white
+        btn.addTarget(self, action: #selector(expandSearchBar), for: .touchUpInside)
+        return btn
     }()
     
     private lazy var backgroundImageView: UIImageView = {
@@ -89,6 +103,22 @@ final class SpeciesListViewController: UIViewController {
         Factory.makeCollectionView()
     }()
     
+    private lazy var searchBarLeadingAnchorConstraint: NSLayoutConstraint = {
+        return searchBar.leadingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
+    }()
+    
+    private lazy var searchBarTrailingAnchorConstraint: NSLayoutConstraint = {
+        return searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
+    }()
+    
+    private lazy var searchBarTrailingAnchorConstraintDeactivate: NSLayoutConstraint = {
+        return searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
+    }()
+    
+    private lazy var terraTitleLabelLeadingAnchorConstraint: NSLayoutConstraint = {
+        return terraTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20)
+    }()
+    
     //MARK: -- Properties
     
     private var animalData: [Species] = []
@@ -102,11 +132,46 @@ final class SpeciesListViewController: UIViewController {
         }
     }
     
+    private var searchString: String? = nil {
+        didSet {
+           filteredAnimals = Species.getFilteredSpeciesByName(arr: filteredAnimals, searchString: searchString!)
+            speciesCollectionView.reloadData()
+        }
+    }
+    
+    
     
     
     //MARK: -- Methods
     
-    func showModally(_ viewController: UIViewController) {
+    @objc private func expandSearchBar() {
+        searchBarLeadingAnchorConstraint.constant = -400
+    
+        searchBarTrailingAnchorConstraint.isActive = true
+        terraTitleLabelLeadingAnchorConstraint.constant = -100
+        searchBar.alpha = 1
+        searchBarButton.alpha = 0
+        UIView.animate(withDuration: 0.3, animations: {
+            self.view.layoutIfNeeded()
+        }) { (result) in
+            self.searchBar.becomeFirstResponder()
+        }
+    }
+    
+    private func dismissSearchBar() {
+        searchBarLeadingAnchorConstraint.constant = -20
+        searchBarTrailingAnchorConstraint.isActive = false
+        terraTitleLabelLeadingAnchorConstraint.constant = 20
+        searchBar.alpha = 0
+        searchBarButton.alpha = 1
+        UIView.animate(withDuration: 0.3, animations: {
+            self.view.layoutIfNeeded()
+        }) { (result) in
+            self.searchBar.resignFirstResponder()
+        }
+    }
+    
+    private func showModally(_ viewController: UIViewController) {
         let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
         let rootViewController = window?.rootViewController
         rootViewController?.present(viewController, animated: true, completion: nil)
@@ -137,6 +202,7 @@ final class SpeciesListViewController: UIViewController {
         speciesCollectionView.dataSource = self
         speciesCollectionView.delegate = self
         topToolBar.delegate = self
+        searchBar.delegate = self
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -151,6 +217,7 @@ final class SpeciesListViewController: UIViewController {
         setConstraints()
         loadSpeciesDataFromFirebase()
         setDatasourceAndDelegates()
+        topToolBar.highlightButton(button: .overviewButton)
     }
 }
 
@@ -171,7 +238,7 @@ extension SpeciesListViewController: UICollectionViewDataSource {
 //MARK: -- CollectionView Delegate Methods
 extension SpeciesListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: 230)
+        return CGSize(width: view.frame.width, height: 227)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -189,6 +256,17 @@ extension SpeciesListViewController: UICollectionViewDelegateFlowLayout {
     
 }
 
+//MARK: --SearchBar Delegate Methods
+extension SpeciesListViewController: UISearchBarDelegate {
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        dismissSearchBar()
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchString = searchText
+    }
+}
+
 //MARK: -- Custom Delegate Implementations
 extension SpeciesListViewController: BottomBarDelegate {
     func buttonPressed(_ sender: UIButton) {
@@ -198,7 +276,6 @@ extension SpeciesListViewController: BottomBarDelegate {
         case .overviewButton:
             filteredAnimals = animalData
         case .habitatButton:
-            
             filteredAnimals = filterSpecies(by: .critical)
         case .threatsButton:
             filteredAnimals = filterSpecies(by: .endangered)
@@ -206,8 +283,6 @@ extension SpeciesListViewController: BottomBarDelegate {
             filteredAnimals =  filterSpecies(by: .vulnerable)
         }
     }
-    
-    
 }
 
 //MARK: -- Add Subviews & Constraints
@@ -215,7 +290,7 @@ extension SpeciesListViewController: BottomBarDelegate {
 fileprivate extension SpeciesListViewController {
     
     func addSubviews() {
-        let mainViewUIElements = [terraTitleLabel, speciesCollectionView, topToolBar]
+        let mainViewUIElements = [terraTitleLabel, searchBarButton, searchBar, speciesCollectionView, topToolBar]
         mainViewUIElements.forEach { view.addSubview($0) }
         mainViewUIElements.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
     }
@@ -225,7 +300,8 @@ fileprivate extension SpeciesListViewController {
         setBackgroundGradientOverlayConstraints()
         
         setTerraTitleLabelConstraints()
-        //        setSubtitleLabelConstraints()
+        setSearchBarButtonConstraints()
+        setSearchBarConstraints()
         
         setSpeciesCollectionViewConstraints()
         setToolBarConstraints()
@@ -253,18 +329,26 @@ fileprivate extension SpeciesListViewController {
     func setTerraTitleLabelConstraints() {
         NSLayoutConstraint.activate([
             terraTitleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
-            terraTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            terraTitleLabelLeadingAnchorConstraint,
             terraTitleLabel.heightAnchor.constraint(equalToConstant: 25),
             terraTitleLabel.widthAnchor.constraint(equalToConstant: 100)
         ])
     }
     
-    func setSubtitleLabelConstraints() {
+    func setSearchBarButtonConstraints() {
         NSLayoutConstraint.activate([
-            subtitleLabel.topAnchor.constraint(equalTo: terraTitleLabel.bottomAnchor, constant: 20),
-            subtitleLabel.leadingAnchor.constraint(equalTo: terraTitleLabel.leadingAnchor),
-            subtitleLabel.heightAnchor.constraint(equalToConstant: 20),
-            subtitleLabel.widthAnchor.constraint(equalToConstant: 300)
+            searchBarButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            searchBarButton.centerYAnchor.constraint(equalTo: terraTitleLabel.centerYAnchor),
+            searchBarButton.heightAnchor.constraint(equalToConstant: 40),
+            searchBarButton.widthAnchor.constraint(equalToConstant: 40)
+        ])
+    }
+    
+    func setSearchBarConstraints() {
+        NSLayoutConstraint.activate([
+            searchBarLeadingAnchorConstraint,
+            searchBarTrailingAnchorConstraintDeactivate,
+            searchBar.centerYAnchor.constraint(equalTo: searchBarButton.centerYAnchor),
         ])
     }
     

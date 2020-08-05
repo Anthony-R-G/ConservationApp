@@ -42,6 +42,6 @@ class TabBarViewController: UIViewController {
 
 extension TabBarViewController: BATabBarControllerDelegate {
     func tabBarController(_ tabBarController: BATabBarController, didSelect: UIViewController) {
-
+        
     }
 }
