@@ -58,8 +58,9 @@ From the initial app screen, there are two tabs on the bottom. Selecting the sec
 | :------: | :------: | :------: | :------: |
 |![screen 1](https://i.imgur.com/4LOHr9o.png) | ![screen 2](https://i.imgur.com/E4Ayd80.png) |![screen 3](https://i.imgur.com/h6s1IGG.png)|![screen 4](https://i.imgur.com/HEA6LRg.png)|
 
+The initial presentation of the individual species page is a cover page for the specific animal that was selected from the list before. Scrolling up on this page will adjust the UI to scale/pin to the top and bring up an overview of the species. You can then swipe left and right or use the buttons on the bottom bar to get information snippets on that specific species such as the current threats to its population. Each panel also has it's own "Learn More" button to transition to a full-sized screen with even more data such as taxonomy and distribution. 
 
-Scrolling up on this page will bring up an overview of the species. You can then swipe left and right or use the buttons on the bottom bar to get information snippets on that specific species such as the current threats to its population. Each panel also has it's own "Learn More" button to transition to a full-sized screen with even more data such as taxonomy and distribution. 
+Blur effects are used so that the color from the background image leaks through. This is to keep each animal's page feeling more aesthetically unique.
 
 ![screen 1](https://media.giphy.com/media/iIoxEOe632nhzJz6Lq/giphy.gif)
 
