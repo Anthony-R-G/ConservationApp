@@ -10,18 +10,15 @@ import UIKit
 
 class Factory {
     
-    static func makeCollectionView(superview: UIView) -> UICollectionView {
+    static func makeCollectionView() -> UICollectionView {
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
+        layout.scrollDirection = .vertical
         
         layout.sectionInset = UIEdgeInsets(top: 0,
-                                           left: Constants.universalLeadingConstant,
+                                           left: 0,
                                            bottom: 0,
-                                           right: Constants.universalLeadingConstant)
-        let collectionView = UICollectionView(frame: CGRect(x: 0,
-                                                            y: 0,
-                                                            width: superview.frame.width,
-                                                            height: 0),
+                                           right:0)
+        let collectionView = UICollectionView(frame: .zero,
                                               collectionViewLayout: layout)
         
         collectionView.backgroundColor = .clear

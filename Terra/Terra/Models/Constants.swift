@@ -9,13 +9,14 @@
 import UIKit
 
 struct Constants {
-    static let listVCCollectionViewHeight: CGFloat = 235
+    static let listVCCollectionViewHeight: CGFloat = 350
     static let universalLeadingConstant: CGFloat = 20
     
     static let roundedInfoViewHeight: CGFloat = 440
     static let roundedInfoViewWidth: CGFloat = 375
     
     static let cornerRadius: CGFloat = 39
-    static let red = #colorLiteral(red: 0.6787196398, green: 0.2409698367, blue: 0.261569947, alpha: 0.8461579623)
+    static let titleLabelColor = #colorLiteral(red: 0.9257398248, green: 1, blue: 0.7623538375, alpha: 1)
+    static let red = #colorLiteral(red: 1, green: 0.2914688587, blue: 0.3886995912, alpha: 0.9019156678)
     static let darkBlue = #colorLiteral(red: 0.1046695188, green: 0.09944508225, blue: 0.2029559612, alpha: 1)
 }

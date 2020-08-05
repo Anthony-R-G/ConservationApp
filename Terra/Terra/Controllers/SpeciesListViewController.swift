@@ -16,11 +16,56 @@ final class SpeciesListViewController: UIViewController {
         return UIScrollView()
     }()
     
+    private lazy var searchBar: UISearchBar = {
+        let sb = UISearchBar()
+        sb.backgroundColor = .clear
+        sb.barStyle = .black
+        sb.backgroundImage = UIImage()
+        sb.alpha = 0
+        sb.keyboardAppearance = .dark
+        sb.showsCancelButton = true
+        sb.placeholder = "Search species..."
+        sb.tintColor = Constants.red
+        return sb
+    }()
+    
+    private lazy var topToolBar: toolBar = {
+        let tb = toolBar(frame: .zero, strategy: ToolBarListVCStrategy())
+        return tb
+    }()
+    
+    private lazy var searchBarButton: UIButton = {
+        let btn = UIButton()
+        btn.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
+        btn.tintColor = .white
+        btn.addTarget(self, action: #selector(expandSearchBar), for: .touchUpInside)
+        return btn
+    }()
+    
+    private lazy var backgroundImageView: UIImageView = {
+        let iv = UIImageView()
+        iv.translatesAutoresizingMaskIntoConstraints = false
+        iv.image = #imageLiteral(resourceName: "listVCbackground")
+        iv.contentMode = UIView.ContentMode.scaleAspectFill
+        iv.clipsToBounds = true
+        view.insertSubview(iv, at: 0)
+        return iv
+    }()
+    
+    private lazy var backgroundGradientOverlay: GradientView = {
+        let gv = GradientView()
+        gv.translatesAutoresizingMaskIntoConstraints = false
+        gv.startColor = #colorLiteral(red: 0.06859237701, green: 0.08213501424, blue: 0.2409383953, alpha: 0.1955800514)
+        gv.endColor = #colorLiteral(red: 0.06042958051, green: 0.07334413379, blue: 0.2174944878, alpha: 0.8456228596)
+        view.insertSubview(gv, at: 1)
+        return gv
+    }()
+    
     private lazy var terraTitleLabel: UILabel = {
         return Factory.makeLabel(title: "Terra",
                                  weight: .bold,
-                                 size: 30,
-                                 color: #colorLiteral(red: 0.9257398248, green: 1, blue: 0.7623538375, alpha: 1),
+                                 size: 36,
+                                 color: Constants.titleLabelColor,
                                  alignment: .left)
     }()
     
@@ -56,49 +101,72 @@ final class SpeciesListViewController: UIViewController {
                                  alignment: .left)
     }()
     
-    private lazy var criticalCollectionView: UICollectionView = {
-        Factory.makeCollectionView(superview: view)
+    private lazy var speciesCollectionView: UICollectionView = {
+        Factory.makeCollectionView()
     }()
     
-    private lazy var endangeredCollectionView: UICollectionView = {
-        Factory.makeCollectionView(superview: view)
+    private lazy var searchBarLeadingAnchorConstraint: NSLayoutConstraint = {
+        return searchBar.leadingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
     }()
     
-    private lazy var vulnerableCollectionView: UICollectionView = {
-        Factory.makeCollectionView(superview: view)
+    private lazy var terraTitleLabelLeadingAnchorConstraint: NSLayoutConstraint = {
+        return terraTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20)
     }()
     
     //MARK: -- Properties
     
-    private var animalData: [Species] = [] {
+    private var animalData: [Species] = []
+    
+    
+    private var redListCategoryFilteredAnimals: [Species] = [] {
         didSet {
-            filteredCriticalSpecies = filterSpecies(by: .critical)
-            filteredEndangeredSpecies = filterSpecies(by: .endangered)
-            filteredVulnerableSpecies = filterSpecies(by: .vulnerable)
+            DispatchQueue.main.async {
+                self.speciesCollectionView.reloadData()
+            }
         }
     }
     
-    private var filteredCriticalSpecies = [Species]() {
-        didSet {
-            criticalCollectionView.reloadData()
+    var searchFilteredSpecies: [Species] {
+        get {
+            guard let searchString = searchString else { return redListCategoryFilteredAnimals }
+            guard searchString != ""  else { return redListCategoryFilteredAnimals }
+            return Species.getFilteredSpeciesByName(arr: redListCategoryFilteredAnimals, searchString: searchString)
         }
     }
     
-    private var filteredEndangeredSpecies = [Species]() {
+    private var searchString: String? = nil {
         didSet {
-            endangeredCollectionView.reloadData()
-        }
-    }
-    
-    private var filteredVulnerableSpecies = [Species]() {
-        didSet {
-            vulnerableCollectionView.reloadData()
+            speciesCollectionView.reloadData()
         }
     }
     
     //MARK: -- Methods
     
-    func showModally(_ viewController: UIViewController) {
+    @objc private func expandSearchBar() {
+        searchBarLeadingAnchorConstraint.constant = -400
+        terraTitleLabelLeadingAnchorConstraint.constant = -100
+        searchBar.alpha = 1
+        searchBarButton.alpha = 0
+        UIView.animate(withDuration: 0.3, animations: {
+            self.view.layoutIfNeeded()
+        }) { (result) in
+            self.searchBar.becomeFirstResponder()
+        }
+    }
+    
+    private func dismissSearchBar() {
+        searchBarLeadingAnchorConstraint.constant = -20
+        terraTitleLabelLeadingAnchorConstraint.constant = 20
+        searchBar.alpha = 0
+        searchBarButton.alpha = 1
+        UIView.animate(withDuration: 0.3, animations: {
+            self.view.layoutIfNeeded()
+        }) { (result) in
+            self.searchBar.resignFirstResponder()
+        }
+    }
+    
+    private func showModally(_ viewController: UIViewController) {
         let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
         let rootViewController = window?.rootViewController
         rootViewController?.present(viewController, animated: true, completion: nil)
@@ -113,10 +181,10 @@ final class SpeciesListViewController: UIViewController {
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             guard let self = self else { return }
             FirestoreService.manager.getAllSpeciesData() { (result) in
-                
                 switch result {
                 case .success(let speciesData):
                     self.animalData = speciesData
+                    self.redListCategoryFilteredAnimals = speciesData
                     
                 case .failure(let error):
                     print(error)
@@ -126,85 +194,50 @@ final class SpeciesListViewController: UIViewController {
     }
     
     private func setDatasourceAndDelegates() {
-        let collectionViews = [criticalCollectionView, endangeredCollectionView, vulnerableCollectionView]
-        collectionViews.forEach { $0.dataSource = self }
-        collectionViews.forEach { $0.delegate = self }
-        scrollView.delegate = self
+        speciesCollectionView.dataSource = self
+        speciesCollectionView.delegate = self
+        topToolBar.delegate = self
+        searchBar.delegate = self
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        setScrollViewConstraints()
-        scrollView.updateContentView()
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = #colorLiteral(red: 0.0744978413, green: 0.0745158717, blue: 0.07449541241, alpha: 1)
+        view.backgroundColor = .black
         addSubviews()
         setConstraints()
         loadSpeciesDataFromFirebase()
         setDatasourceAndDelegates()
+        topToolBar.highlightButton(button: .buttonOne)
     }
 }
 
 //MARK: -- CollectionView DataSource Methods
 extension SpeciesListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        switch collectionView {
-        case criticalCollectionView: return filteredCriticalSpecies.count
-        case endangeredCollectionView: return filteredEndangeredSpecies.count
-        case vulnerableCollectionView: return filteredVulnerableSpecies.count
-        default: return 0
-        }
+        return searchFilteredSpecies.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let speciesCell = collectionView.dequeueReusableCell(withReuseIdentifier: "speciesCell", for: indexPath) as! SpeciesCollectionViewCell
-        
-        switch collectionView {
-        case criticalCollectionView:
-            let specificAnimal = filteredCriticalSpecies[indexPath.row]
-            speciesCell.configureCellUI(from: specificAnimal)
-            return speciesCell
-            
-        case endangeredCollectionView:
-            let specificAnimal = filteredEndangeredSpecies[indexPath.row]
-            speciesCell.configureCellUI(from: specificAnimal)
-            return speciesCell
-            
-        case vulnerableCollectionView:
-            let specificAnimal = filteredVulnerableSpecies[indexPath.row]
-            speciesCell.configureCellUI(from: specificAnimal)
-            return speciesCell
-            
-        default: return UICollectionViewCell()
-        }
+        let specificAnimal = searchFilteredSpecies[indexPath.row]
+        speciesCell.configureCellUI(from: specificAnimal)
+        return speciesCell
     }
 }
 
 //MARK: -- CollectionView Delegate Methods
 extension SpeciesListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 290, height: 230)
+        return CGSize(width: view.frame.width, height: 227)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        var specificAnimal = Species(fromFirebaseDict: [:])
-        
-        switch collectionView {
-        case criticalCollectionView: specificAnimal = filteredCriticalSpecies[indexPath.row]
-            
-        case endangeredCollectionView: specificAnimal = filteredEndangeredSpecies[indexPath.row]
-            
-        case vulnerableCollectionView: specificAnimal = filteredVulnerableSpecies[indexPath.row]
-            
-        default: ()
-        }
+        let specificAnimal = searchFilteredSpecies[indexPath.row]
         
         let detailVC = SpeciesDetailViewController()
         detailVC.currentSpecies = specificAnimal
@@ -213,7 +246,44 @@ extension SpeciesListViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return Constants.universalLeadingConstant
+        return 0
+    }
+    
+}
+
+//MARK: --SearchBar Delegate Methods
+extension SpeciesListViewController: UISearchBarDelegate {
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        dismissSearchBar()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        dismissSearchBar()
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchString = searchText
+    }
+}
+
+//MARK: -- Custom Delegate Implementations
+extension SpeciesListViewController: BottomBarDelegate {
+    func buttonPressed(_ sender: UIButton) {
+        guard let buttonOption = ButtonOption(rawValue: sender.tag) else { return }
+        topToolBar.highlightButton(button: buttonOption)
+        switch buttonOption {
+        case .buttonOne:
+            redListCategoryFilteredAnimals = animalData
+            
+        case .buttonTwo:
+            redListCategoryFilteredAnimals = filterSpecies(by: .critical)
+            
+        case .buttonThree:
+            redListCategoryFilteredAnimals = filterSpecies(by: .endangered)
+            
+        case .buttonFour:
+            redListCategoryFilteredAnimals =  filterSpecies(by: .vulnerable)
+        }
     }
 }
 
@@ -222,107 +292,84 @@ extension SpeciesListViewController: UICollectionViewDelegateFlowLayout {
 fileprivate extension SpeciesListViewController {
     
     func addSubviews() {
-        let mainViewUIElements = [terraTitleLabel, subtitleLabel, scrollView]
+        let mainViewUIElements = [terraTitleLabel, searchBarButton, searchBar, speciesCollectionView, topToolBar]
         mainViewUIElements.forEach { view.addSubview($0) }
         mainViewUIElements.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
-        
-        let scrollViewUIElements = [criticalSpeciesLabel, criticalCollectionView, endangeredSpeciesLabel, endangeredCollectionView, vulnerableSpeciesLabel, vulnerableCollectionView]
-        scrollViewUIElements.forEach{ scrollView.addSubview($0) }
-        scrollViewUIElements.forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
     }
     
     func setConstraints() {
+        setBackgroundImageViewConstraints()
+        setBackgroundGradientOverlayConstraints()
+        
         setTerraTitleLabelConstraints()
-        setSubtitleLabelConstraints()
+        setSearchBarButtonConstraints()
+        setSearchBarConstraints()
         
-        setCriticalSpeciesLabelConstraints()
-        setCriticalSpeciesCVConstraints()
+        setSpeciesCollectionViewConstraints()
+        setToolBarConstraints()
         
-        setEndangeredSpeciesLabelConstraints()
-        setEndangeredSpeciesCVConstraints()
-        
-        setVulnerableSpeciesLabelConstraints()
-        setVulnerableSpeciesCVConstraints()
     }
     
-    func setScrollViewConstraints(){
-        scrollView.backgroundColor = .clear
+    func setBackgroundImageViewConstraints() {
         NSLayoutConstraint.activate([
-            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            scrollView.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor, constant: 20),
-            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -60)
+            backgroundImageView.topAnchor.constraint(equalTo: view.topAnchor),
+            backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            backgroundImageView.bottomAnchor.constraint(equalTo: speciesCollectionView.topAnchor)
+        ])
+    }
+    
+    func setBackgroundGradientOverlayConstraints() {
+        NSLayoutConstraint.activate([
+            backgroundGradientOverlay.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            backgroundGradientOverlay.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            backgroundGradientOverlay.widthAnchor.constraint(equalTo: view.widthAnchor),
+            backgroundGradientOverlay.heightAnchor.constraint(equalTo: view.heightAnchor)
         ])
     }
     
     func setTerraTitleLabelConstraints() {
         NSLayoutConstraint.activate([
-            terraTitleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 80),
-            terraTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+            terraTitleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
+            terraTitleLabelLeadingAnchorConstraint,
             terraTitleLabel.heightAnchor.constraint(equalToConstant: 25),
             terraTitleLabel.widthAnchor.constraint(equalToConstant: 100)
         ])
     }
     
-    func setSubtitleLabelConstraints() {
+    func setSearchBarButtonConstraints() {
         NSLayoutConstraint.activate([
-            subtitleLabel.topAnchor.constraint(equalTo: terraTitleLabel.bottomAnchor, constant: 20),
-            subtitleLabel.leadingAnchor.constraint(equalTo: terraTitleLabel.leadingAnchor),
-            subtitleLabel.heightAnchor.constraint(equalToConstant: 20),
-            subtitleLabel.widthAnchor.constraint(equalToConstant: 300)
+            searchBarButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            searchBarButton.centerYAnchor.constraint(equalTo: terraTitleLabel.centerYAnchor),
+            searchBarButton.heightAnchor.constraint(equalToConstant: 40),
+            searchBarButton.widthAnchor.constraint(equalToConstant: 40)
         ])
     }
     
-    func setCriticalSpeciesLabelConstraints() {
+    func setSearchBarConstraints() {
         NSLayoutConstraint.activate([
-            criticalSpeciesLabel.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 30),
-            criticalSpeciesLabel.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 20),
-            criticalSpeciesLabel.heightAnchor.constraint(equalToConstant: 30),
-            criticalSpeciesLabel.widthAnchor.constraint(equalToConstant: 300)
+            searchBarLeadingAnchorConstraint,
+            searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            searchBar.centerYAnchor.constraint(equalTo: searchBarButton.centerYAnchor),
         ])
     }
     
-    func setCriticalSpeciesCVConstraints() {
+    func setToolBarConstraints() {
         NSLayoutConstraint.activate([
-            criticalCollectionView.topAnchor.constraint(equalTo: criticalSpeciesLabel.bottomAnchor, constant: 20),
-            criticalCollectionView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-            criticalCollectionView.heightAnchor.constraint(equalToConstant: Constants.listVCCollectionViewHeight)
+            topToolBar.topAnchor.constraint(equalTo: terraTitleLabel.bottomAnchor, constant: 10),
+            topToolBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            topToolBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            topToolBar.heightAnchor.constraint(equalToConstant: 40)
         ])
     }
     
-    func setEndangeredSpeciesLabelConstraints() {
-        NSLayoutConstraint.activate([
-            endangeredSpeciesLabel.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 30),
-            endangeredSpeciesLabel.topAnchor.constraint(equalTo: criticalCollectionView.bottomAnchor, constant: 30),
-            endangeredSpeciesLabel.heightAnchor.constraint(equalToConstant: 30),
-            endangeredSpeciesLabel.widthAnchor.constraint(equalToConstant: 300)
-        ])
-    }
     
-    func setEndangeredSpeciesCVConstraints() {
+    func setSpeciesCollectionViewConstraints() {
         NSLayoutConstraint.activate([
-            endangeredCollectionView.topAnchor.constraint(equalTo: endangeredSpeciesLabel.bottomAnchor, constant: 20),
-            endangeredCollectionView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-            endangeredCollectionView.heightAnchor.constraint(equalToConstant: Constants.listVCCollectionViewHeight),
-            endangeredCollectionView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor)
-        ])
-    }
-    
-    func setVulnerableSpeciesLabelConstraints() {
-        NSLayoutConstraint.activate([
-            vulnerableSpeciesLabel.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 30),
-            vulnerableSpeciesLabel.topAnchor.constraint(equalTo: endangeredCollectionView.bottomAnchor, constant: 30),
-            vulnerableSpeciesLabel.heightAnchor.constraint(equalToConstant: 30),
-            vulnerableSpeciesLabel.widthAnchor.constraint(equalToConstant: 300)
-        ])
-    }
-    
-    func setVulnerableSpeciesCVConstraints() {
-        NSLayoutConstraint.activate([
-            vulnerableCollectionView.topAnchor.constraint(equalTo: vulnerableSpeciesLabel.bottomAnchor, constant: 20),
-            vulnerableCollectionView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-            vulnerableCollectionView.heightAnchor.constraint(equalToConstant: Constants.listVCCollectionViewHeight),
-            vulnerableCollectionView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor)
+            speciesCollectionView.topAnchor.constraint(equalTo: topToolBar.bottomAnchor, constant: 0),
+            speciesCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            speciesCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            speciesCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50)
         ])
     }
 }

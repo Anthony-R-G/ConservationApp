@@ -16,18 +16,20 @@ class NewsViewController: UIViewController {
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
-        refreshControl.tintColor = .darkGray
-        refreshControl.attributedTitle = NSAttributedString(string: "Fetching News Data ...", attributes: [NSAttributedString.Key.foregroundColor : UIColor.darkGray])
+        refreshControl.tintColor = .lightGray
+        refreshControl.attributedTitle = NSAttributedString(string: "Fetching News Data ...", attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray])
         return refreshControl
     }()
     
     lazy var tableView: UITableView = {
         let tv = UITableView()
         tv.register(NewsArticleTableViewCell.self, forCellReuseIdentifier: "newsCell")
-        tv.backgroundColor = .white
+        tv.backgroundColor = .clear
         tv.refreshControl = refreshControl
+        tv.separatorColor = .white
         tv.dataSource = self
         tv.delegate = self
+        tv.prefetchDataSource = self
         return tv
     }()
     
@@ -50,7 +52,7 @@ class NewsViewController: UIViewController {
     }
     
     private func fetchNewsData() {
-        NewsAPIClient.shared.fetchNewsData { (result) in
+        NewsAPIClient.shared.fetchNewsData(page: 3) { (result) in
             switch result {
             case .success(let newsData):
                 self.newsArticles = newsData
@@ -78,7 +80,7 @@ class NewsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = #colorLiteral(red: 0.1108833775, green: 0.1294697225, blue: 0.1595396101, alpha: 1)
         addSubviews()
         setConstraints()
         fetchNewsData()
@@ -111,6 +113,12 @@ extension NewsViewController: UITableViewDelegate {
     }
 }
 
+extension NewsViewController: UITableViewDataSourcePrefetching {
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        print("ya")
+    }
+}
+
 
 //MARK: -- Add Subviews & Constraints
 
@@ -129,7 +137,7 @@ fileprivate extension NewsViewController {
     func setTableViewConstraints() {
         NSLayoutConstraint.activate([
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableView.topAnchor.constraint(equalTo: view.topAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -60)
         ])
