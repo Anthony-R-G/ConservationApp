@@ -19,5 +19,13 @@ public struct Species: FirebaseConvertible {
     let group: Group
     let habitat: Habitat
     let population: Population
+    
+    static func getFilteredSpeciesByName(arr: [Species], searchString: String) -> [Species] {
+        return arr.filter{$0.commonName.lowercased().contains(searchString.lowercased())}
+    }
+    
+    static func getFilteredSpeciesByConservationStatus(arr: [Species], by status: ConservationStatus) -> [Species] {
+        return arr.filter{$0.population.conservationStatus == status}
+    }
 }
 

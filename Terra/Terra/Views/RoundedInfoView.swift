@@ -16,7 +16,7 @@ class RoundedInfoView: UIView {
         return Factory.makeLabel(title: strategy.titleText(),
                                  weight: .bold,
                                  size: 28,
-                                 color: .white,
+                                 color: Constants.titleLabelColor,
                                  alignment: .left)
     }()
     

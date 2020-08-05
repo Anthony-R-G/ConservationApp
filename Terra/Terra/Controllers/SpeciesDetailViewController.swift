@@ -190,16 +190,16 @@ final class SpeciesDetailViewController: UIViewController {
     private func transitionToView(buttonPressed: ButtonOption) {
         switch buttonPressed {
             
-        case .overviewButton:
+        case .buttonOne:
             horizontalScrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
             
-        case .habitatButton:
+        case .buttonTwo:
             horizontalScrollView.setContentOffset(CGPoint(x: speciesHabitatView.frame.minX - 20, y: 0), animated: true)
             
-        case .threatsButton:
+        case .buttonThree:
             horizontalScrollView.setContentOffset(CGPoint(x: speciesThreatsView.frame.minX - 20, y: 0), animated: true)
             
-        case .galleryButton:
+        case .buttonFour:
             horizontalScrollView.setContentOffset(CGPoint(x: speciesGalleryView.frame.minX - 20, y: 0), animated: true)
         }
     }
@@ -231,7 +231,7 @@ final class SpeciesDetailViewController: UIViewController {
         
         setViewElementsFromSpeciesData()
         setBackground()
-        bottomToolBar.highlightButton(button: .overviewButton)
+        bottomToolBar.highlightButton(button: .buttonOne)
     }
 }
 
@@ -254,18 +254,17 @@ extension SpeciesDetailViewController: UIScrollViewDelegate {
             
             bottomToolBar.updateHighlightIndicator(scrollOffset: offsetX)
             
-            
             if scrollView.bounds.contains(speciesOverviewView.frame) {
-                bottomToolBar.highlightButton(button: .overviewButton)
+                bottomToolBar.highlightButton(button: .buttonOne)
                 
             } else if scrollView.bounds.contains(speciesHabitatView.frame) {
-                bottomToolBar.highlightButton(button: .habitatButton)
+                bottomToolBar.highlightButton(button: .buttonTwo)
                 
             } else if scrollView.bounds.contains(speciesThreatsView.frame) {
-                bottomToolBar.highlightButton(button: .threatsButton)
+                bottomToolBar.highlightButton(button: .buttonThree)
                 
             } else if scrollView.bounds.contains(speciesGalleryView.frame) {
-                bottomToolBar.highlightButton(button: .galleryButton)
+                bottomToolBar.highlightButton(button: .buttonFour)
                 
             }
             

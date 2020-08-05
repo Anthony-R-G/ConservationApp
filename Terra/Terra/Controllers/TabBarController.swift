@@ -20,13 +20,21 @@ class TabBarViewController: UIViewController {
         
         super.viewDidLoad()
         let listVC = SpeciesListViewController()
-        let newsVC = NewsViewController()
+        let newsVC = UINavigationController(rootViewController: NewsViewController())
+        newsVC.navigationBar.prefersLargeTitles = true
+        newsVC.navigationBar.topItem?.title = "Wildlife News"
+        newsVC.navigationBar.barStyle = .black
+        
+        let textAttributes = [NSAttributedString.Key.foregroundColor: Constants.titleLabelColor]
+        newsVC.navigationBar.largeTitleTextAttributes = textAttributes
+        newsVC.navigationBar.titleTextAttributes = textAttributes
+        
         
         let listVCTabBarItem = BATabBarItem(image: UIImage(named: "listVCUnselected")!, selectedImage: UIImage(named: "listVCSelected")!)
-        listVCTabBarItem.tintColor = #colorLiteral(red: 0.9257398248, green: 1, blue: 0.7623538375, alpha: 1)
+        listVCTabBarItem.tintColor = Constants.titleLabelColor
         
         let newsVCTabBarItem = BATabBarItem(image: UIImage(named: "newsVCUnselected")!, selectedImage: UIImage(named: "newsVCSelected")!)
-        newsVCTabBarItem.tintColor = #colorLiteral(red: 0.9257398248, green: 1, blue: 0.7623538375, alpha: 1)
+        newsVCTabBarItem.tintColor = Constants.titleLabelColor
         
         tabBarVC.delegate = self
         tabBarVC.tabBarItemStrokeColor = .white
@@ -42,6 +50,6 @@ class TabBarViewController: UIViewController {
 
 extension TabBarViewController: BATabBarControllerDelegate {
     func tabBarController(_ tabBarController: BATabBarController, didSelect: UIViewController) {
-
+        
     }
 }
