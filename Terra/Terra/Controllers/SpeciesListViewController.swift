@@ -65,7 +65,7 @@ final class SpeciesListViewController: UIViewController {
         return Factory.makeLabel(title: "Terra",
                                  weight: .bold,
                                  size: 36,
-                                 color: #colorLiteral(red: 0.9257398248, green: 1, blue: 0.7623538375, alpha: 1),
+                                 color: Constants.titleLabelColor,
                                  alignment: .left)
     }()
     

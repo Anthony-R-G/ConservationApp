@@ -34,8 +34,13 @@ class NewsArticleTableViewCell: UITableViewCell {
     //MARK: -- Methods
     
     func configureCellUI(from article: Article) {
-        let articleThumbImageURL = URL(string: article.urlToImage)
-        articleThumbImageView.sd_setImage(with: articleThumbImageURL, completed: nil)
+        if let articleThumbImageURLStr = article.urlToImage {
+            let articleThumbImageURL = URL(string: articleThumbImageURLStr)
+            articleThumbImageView.sd_setImage(with: articleThumbImageURL, completed: nil)
+        } else {
+            articleThumbImageView.image = #imageLiteral(resourceName: "newsImagePlaceholder")
+        }
+        
         articleTitleLabel.text = article.title
         publishedDateLabel.text = article.formattedPublishDate
     }

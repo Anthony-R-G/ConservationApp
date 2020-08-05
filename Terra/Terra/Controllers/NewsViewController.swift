@@ -29,6 +29,7 @@ class NewsViewController: UIViewController {
         tv.separatorColor = .white
         tv.dataSource = self
         tv.delegate = self
+        tv.prefetchDataSource = self
         return tv
     }()
     
@@ -51,7 +52,7 @@ class NewsViewController: UIViewController {
     }
     
     private func fetchNewsData() {
-        NewsAPIClient.shared.fetchNewsData { (result) in
+        NewsAPIClient.shared.fetchNewsData(page: 3) { (result) in
             switch result {
             case .success(let newsData):
                 self.newsArticles = newsData
@@ -109,6 +110,12 @@ extension NewsViewController: UITableViewDelegate {
         if articleURL.isValidURL {
             presentWebBrowser(link: URL(string: articleURL)!)
         }
+    }
+}
+
+extension NewsViewController: UITableViewDataSourcePrefetching {
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        print("ya")
     }
 }
 
