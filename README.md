@@ -4,11 +4,11 @@
 
 *Note: Still a WIP!*
 
-Terra is an iOS application meant to educate people on the biodiversity in the world and the importance of conserving it. Data is packaged from multiple sources, among which include the [International Union for Conservation of Nature](https://www.iucnredlist.org/) and [World Wide Fund for Nature](https://www.worldwildlife.org/). This is to ensure that information is accurate and up-to-date.
+Terra is an iOS application meant to educate people on biodiversity and the importance of conserving it. Data is packaged from multiple sources, among which include the [International Union for Conservation of Nature](https://www.iucnredlist.org/) and [World Wide Fund for Nature](https://www.worldwildlife.org/). This is to ensure that the data is accurate and up-to-date.
 
 Clicking on any animal brings the user to a page displaying more information about the animal as well as the option to be redirected to a donation page to help support conservation efforts. 
 
-One major design principle behind the app is keeping the look of it clean and visually appealing. Learning should be fun! Studies have shown the importance of imagery in the learning process. It's hard to feel interested in a subject if it's presented in a way that feels lifeless, drab, and flat. The main focus of Terra are the animals, and so the UI attempts to make the experience feel more dynamic and focused on the content. This is done through the use of visuals, thin lines, and light blur effects.
+One major design principle behind the app is keeping the look of it clean and visually appealing. Learning should be fun! Studies have shown the importance of imagery in the learning process. It's hard to feel interested in a subject if it's presented in a way that feels lifeless, drab, and flat. The main focus of Terra is the list of threatened animals, and so the UI attempts to make the experience feel more dynamic and focused on the content. This is done through the use of visuals, thin lines, and light blur effects.
 
 Mobile apps are unique in that they enable you to interact directly with your content. Because of that, an app should package content in such a way that there's preference to use it and not simply get the data from a web browser. 
 
@@ -27,7 +27,7 @@ CocoaPods
 
 JSON/REST API
 
-Google's Firebase is used as the backend. Writing to Firebase is managed via a [separate helper app](https://github.com/Anthony-R-G/Terra-Data-Upload-Helper).
+[Google's Firebase](https://firebase.google.com/) is used as the backend. Writing to Firebase is managed via a [separate helper app](https://github.com/Anthony-R-G/Terra-Data-Upload-Helper).
 
 Coming:
 
@@ -35,7 +35,7 @@ CoreLocation (for determining your position relative to a species habitat range)
 
 ARKit (some animals will have the option to "View in AR" which will use iPhone's rear camera for plane detection. Tapping on the screen will place a 3D model at that position and the model can then be manipulated with gestures.)
 
-## Screenshots
+## App Demo
 
 ### List Page
 This page contains a list of animals that are currently considered threatened. The main three categories are: Critically Endangered, Endangered, and Vulnerable. These come from the IUCN Red List of Threatened Species, and are intended to be an easily and widely understood system for classifying species at high risk of global extinction.
@@ -47,7 +47,7 @@ This page contains a list of animals that are currently considered threatened. T
 Tapping any one cell will transition to a new individual species page with a minimalistic user interface where the animal selected is the main focus.
 
 ### News Page
-From the initial app screen, there are two tabs on the bottom. Selecting the second glyph takes you to a news page. This page gets data from [NewsAPI](https://newsapi.org/) with the endpoint specifically tailored for wildlife/animal conservation related news. 
+From the initial app screen, there are two tabs on the bottom. Selecting the second glyph takes you to a news page. This page gets data from [NewsAPI](https://newsapi.org/) with the endpoint specifically tailored for wildlife/animal conservation related news. Each cell can be pressed to read the article at its source. 
 | Transitioning Between Tabs | Selecting Articles to Read |
 | :------: | :------: |
 |![screen 1](https://media.giphy.com/media/ieaU0z4wACLIYrWIey/giphy.gif) | ![screen 2](https://media.giphy.com/media/IejPdlUw4B2Yj2cfVp/giphy.gif) |
