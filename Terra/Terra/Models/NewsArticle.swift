@@ -16,7 +16,7 @@ struct NewsAPIResult: Codable {
 struct Article: Codable {
     let title: String
     let url: String
-    let urlToImage: String
+    let urlToImage: String?
     let publishedAt: String
     
     var formattedPublishDate: String {

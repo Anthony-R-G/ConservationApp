@@ -32,9 +32,13 @@ class SpeciesCollectionViewCell: UICollectionViewCell {
     }()
     
     private lazy var conservationStatusLabel: UILabel = {
-        let label = Factory.makeLabel(title: nil, weight: .bold, size: 16, color: .white, alignment: .center)
+        let label = Factory.makeLabel(title: nil,
+                                      weight: .bold,
+                                      size: 16,
+                                      color: .white,
+                                      alignment: .center)
         label.layer.cornerRadius = 10
-        label.backgroundColor = #colorLiteral(red: 1, green: 0.2914688587, blue: 0.3886995912, alpha: 0.9019156678)
+        label.backgroundColor = Constants.red
         label.clipsToBounds = true
         return label
     }()
@@ -58,7 +62,7 @@ class SpeciesCollectionViewCell: UICollectionViewCell {
     private lazy var backgroundGradientOverlay: GradientView = {
         let gv = GradientView()
         gv.startColor = .clear
-        gv.endColor = #colorLiteral(red: 0.06859237701, green: 0.08213501424, blue: 0.2409383953, alpha: 0.7399935788)
+        gv.endColor = #colorLiteral(red: 0.06859237701, green: 0.08213501424, blue: 0.2409383953, alpha: 0.7227097603)
         insertSubview(gv, at: 1)
         return gv
     }()
@@ -121,7 +125,7 @@ fileprivate extension SpeciesCollectionViewCell {
         NSLayoutConstraint.activate([
             backgroundGradientOverlay.heightAnchor.constraint(equalTo: heightAnchor, constant: 30),
             backgroundGradientOverlay.widthAnchor.constraint(equalTo: widthAnchor),
-            
+          
         ])
     }
     
@@ -149,7 +153,6 @@ fileprivate extension SpeciesCollectionViewCell {
             conservationStatusLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
             conservationStatusLabel.heightAnchor.constraint(equalToConstant: 40),
             conservationStatusLabel.widthAnchor.constraint(equalToConstant: 40)
-            
         ])
     }
     
