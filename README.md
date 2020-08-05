@@ -25,6 +25,8 @@ MapKit
 
 CocoaPods 
 
+JSON/REST API
+
 Google's Firebase is used as the backend. Writing to Firebase is managed via a [separate helper app](https://github.com/Anthony-R-G/Terra-Data-Upload-Helper).
 
 Coming:
