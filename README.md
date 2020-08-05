@@ -48,7 +48,7 @@ Tapping any one cell will transition to a new "cover page" with a minimalistic u
 From the initial app screen, there are two tabs on the bottom. Selecting the second glyph takes you to a news page. This page gets data from [NewsAPI](http://www.newsapi.org) with the endpoint specifically tailored for wildlife/animal conservation related news. 
 | Transitioning Between Tabs | Selecting Articles to Read |
 |:-----:|:-----|
-|![screen 1](https://media.giphy.com/media/ieaU0z4wACLIYrWIey/giphy.gif) | ![screen 2](https://media.giphy.com/media/gFQaFu9Dqw0pcXxnq0/giphy.gif) |
+|![screen 1](https://media.giphy.com/media/ieaU0z4wACLIYrWIey/giphy.gif) | ![screen 2](https://media.giphy.com/media/LqDPcVoRTYNJbPiuvx/giphy.gif) |
 
 
 ### Individual Species Page 
