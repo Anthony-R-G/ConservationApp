@@ -20,3 +20,4 @@ public struct Species: FirebaseConvertible {
     let habitat: Habitat
     let population: Population
 }
+

@@ -21,7 +21,10 @@ class RoundedInfoView: UIView {
     }()
     
     private lazy var bodyTextLabel: UILabel = {
-        let label = Factory.makeLabel(title: strategy.bodyText(), weight: .light, size: 17, color: #colorLiteral(red: 1, green: 0.9833787084, blue: 0.8849565387, alpha: 1), alignment: .natural)
+        let label = Factory.makeLabel(title: strategy.bodyText(),
+                                      weight: .light, size: 17,
+                                      color: #colorLiteral(red: 1, green: 0.9833787084, blue: 0.8849565387, alpha: 1),
+                                      alignment: .natural)
         label.numberOfLines = 0
         label.lineBreakMode = .byTruncatingTail
         label.adjustsFontSizeToFitWidth = false

@@ -6,13 +6,11 @@ target 'Terra' do
   use_frameworks!
 
   # Pods for Terra
- pod 'Kingfisher', '~> 5.13'
- pod 'Firebase/Auth'
  pod 'Firebase/Firestore'
  pod 'Firebase/Storage'
  pod 'FirebaseUI/Storage'
+ pod 'BATabBarController', '~> 2.0.0'
  
-
 
   target 'TerraTests' do
 
