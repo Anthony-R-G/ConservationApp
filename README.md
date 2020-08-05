@@ -59,6 +59,8 @@ From the initial app screen, there are two tabs on the bottom. Selecting the sec
 
 Scrolling up on this page will bring up an overview of the species. You can then swipe left and right or use the buttons on the bottom bar to get information snippets on that specific species such as the current threats to its population. Each panel also has it's own "Learn More" button to transition to a full-sized screen with even more data such as taxonomy and distribution. 
 
+![screen 1](https://media.giphy.com/media/iIoxEOe632nhzJz6Lq/giphy.gif)
+
 ### Getting Detailed Information
 | African Elephant Overview | Blue-throated Macaw Habitat | Blue-throated Macaw Distribution | Panamanian Golden Frog Distribution |
 |:-----:|:-------:|:-------:|:-------|
