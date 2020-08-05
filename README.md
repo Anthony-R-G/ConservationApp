@@ -38,7 +38,7 @@ ARKit (some animals will have the option to "View in AR" which will use iPhone's
 ## App Demo
 
 ### List Page
-This page contains a list of animals that are currently considered threatened. The main three categories are: Critically Endangered, Endangered, and Vulnerable. These come from the IUCN Red List of Threatened Species, and are intended to be an easily and widely understood system for classifying species at high risk of global extinction.
+This page contains a list of animals that are currently considered threatened. The main three categories are: Critically Endangered, Endangered, and Vulnerable. This system comes from the IUCN Red List of Threatened Species, and is intended to be an easily and widely understood system for classifying species at high risk of global extinction.
 
 | See All Species | Filtered By Critical Status | Filtered by Endangered Status | Filtered by Vulnerable Status |
 | :------: | :------: | :------: | :------: |
