@@ -70,7 +70,7 @@ Scrolling up on this page will bring up an overview of the species. You can then
 
 ### Donating
 
-You can show your support for animal conservation efforts by clicking on the large donate button found on every animal's page. This will redirect you in-app to the relevant conservation for that specific animal. Getting involved is just a tap away.
+You can show your support for animal conservation efforts by clicking on the large donate button found on every animal's page. This will redirect you in-app to the relevant conservation/project for that specific animal. Getting involved is just a tap away.
 
 ![screen 1](https://media.giphy.com/media/Rm2YUtHLivpcvSU0Yg/giphy.gif)
 
