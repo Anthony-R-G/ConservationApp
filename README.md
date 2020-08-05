@@ -40,9 +40,16 @@ This page contains a list of animals that are currently considered threatened. T
 
 | See All Species | Filtered By Critical Status | Filtered by Endangered Status | Filtered by Vulnerable Status |
 |:-----:|:-------:|:-------:|:-------:|
-|![screen 1](https://i.imgur.com/DnQzKiL.png) | ![screen 2](https://i.imgur.com/32QhNWn.png) | ![screen 3](https://i.imgur.com/xnRwpzP.png) | ![screen 3](https://i.imgur.com/SsKI4Ge.png) |
+|![screen 1](https://i.imgur.com/1Vwgp0Y.png) | ![screen 2](https://i.imgur.com/grixZDv.png) | ![screen 3](https://i.imgur.com/SKy5mno.png) | ![screen 4](https://i.imgur.com/p67o6vL.png) |
 
 Tapping any one cell will transition to a new "cover page" with a minimalistic user interface where the animal selected is the main focus.
+
+### News Page
+From the initial app screen, there are two tabs on the bottom. Selecting the second glyph takes you to a news page. This page gets data from [NewsAPI](http://www.newsapi.org) with the endpoint specifically tailored for wildlife/animal conservation related news. 
+| Transitioning Between Tabs | Selecting Articles to Read |
+|:-----:|:-----|
+|![screen 1](https://media.giphy.com/media/ieaU0z4wACLIYrWIey/giphy.gif) | ![screen 2](https://media.giphy.com/media/gFQaFu9Dqw0pcXxnq0/giphy.gif) |
+
 
 ### Individual Species Page 
 | Amur Leopard | Blue Whale | Lion | Mountain Gorilla |
