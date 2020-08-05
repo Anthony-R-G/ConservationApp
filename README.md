@@ -42,7 +42,7 @@ This page contains a list of animals that are currently considered threatened. T
 |:-----:|:-------:|:-------:|:-------:|
 |![screen 1](https://i.imgur.com/1Vwgp0Y.png) | ![screen 2](https://i.imgur.com/grixZDv.png) | ![screen 3](https://i.imgur.com/SKy5mno.png) | ![screen 4](https://i.imgur.com/p67o6vL.png) |
 
-Tapping any one cell will transition to a new "cover page" with a minimalistic user interface where the animal selected is the main focus.
+Tapping any one cell will transition to a new individual species page with a minimalistic user interface where the animal selected is the main focus.
 
 ### News Page
 From the initial app screen, there are two tabs on the bottom. Selecting the second glyph takes you to a news page. This page gets data from [NewsAPI](https://newsapi.org/) with the endpoint specifically tailored for wildlife/animal conservation related news. 
