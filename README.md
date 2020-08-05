@@ -42,7 +42,7 @@ This page contains a list of animals that are currently considered threatened. T
 
 | See All Species | Filtered By Critical Status | Filtered by Endangered Status | Filtered by Vulnerable Status |
 | :------: | :------: | :------: | :------: |
-|![screen 1](https://i.imgur.com/1Vwgp0Y.png) | ![screen 2](https://i.imgur.com/grixZDv.png) | ![screen 3](https://i.imgur.com/SKy5mno.png) | ![screen 4](https://i.imgur.com/p67o6vL.png) |
+|![screen 1](https://i.imgur.com/zZWZNLx.png) | ![screen 2](https://i.imgur.com/SXKWEK9.png) | ![screen 3](https://i.imgur.com/8Q79MzC.png) | ![screen 4](https://i.imgur.com/1lTqt8w.png) |
 
 Tapping any one cell will transition to a new individual species page with a minimalistic user interface where the animal selected is the main focus.
 
