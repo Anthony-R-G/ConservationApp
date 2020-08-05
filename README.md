@@ -45,7 +45,7 @@ This page contains a list of animals that are currently considered threatened. T
 Tapping any one cell will transition to a new "cover page" with a minimalistic user interface where the animal selected is the main focus.
 
 ### News Page
-From the initial app screen, there are two tabs on the bottom. Selecting the second glyph takes you to a news page. This page gets data from [NewsAPI](http://www.newsapi.org) with the endpoint specifically tailored for wildlife/animal conservation related news. 
+From the initial app screen, there are two tabs on the bottom. Selecting the second glyph takes you to a news page. This page gets data from [NewsAPI](https://newsapi.org/) with the endpoint specifically tailored for wildlife/animal conservation related news. 
 | Transitioning Between Tabs | Selecting Articles to Read |
 |:-----:|:-----|
 |![screen 1](https://media.giphy.com/media/ieaU0z4wACLIYrWIey/giphy.gif) | ![screen 2](https://media.giphy.com/media/IejPdlUw4B2Yj2cfVp/giphy.gif) |
