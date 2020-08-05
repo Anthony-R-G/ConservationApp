@@ -124,7 +124,7 @@ final class SpeciesListViewController: UIViewController {
     private var animalData: [Species] = []
     
     
-    private var filteredAnimals: [Species] = [] {
+    private var redListCategoryFilteredAnimals: [Species] = [] {
         didSet {
             DispatchQueue.main.async {
                 self.speciesCollectionView.reloadData()
@@ -132,21 +132,24 @@ final class SpeciesListViewController: UIViewController {
         }
     }
     
-    private var searchString: String? = nil {
-        didSet {
-           filteredAnimals = Species.getFilteredSpeciesByName(arr: filteredAnimals, searchString: searchString!)
-            speciesCollectionView.reloadData()
+    var searchFilteredSpecies: [Species] {
+        get {
+            guard let searchString = searchString else { return redListCategoryFilteredAnimals }
+            guard searchString != ""  else { return redListCategoryFilteredAnimals }
+            return Species.getFilteredSpeciesByName(arr: redListCategoryFilteredAnimals, searchString: searchString)
         }
     }
     
-    
-    
+    private var searchString: String? = nil {
+        didSet {
+            speciesCollectionView.reloadData()
+        }
+    }
     
     //MARK: -- Methods
     
     @objc private func expandSearchBar() {
         searchBarLeadingAnchorConstraint.constant = -400
-    
         searchBarTrailingAnchorConstraint.isActive = true
         terraTitleLabelLeadingAnchorConstraint.constant = -100
         searchBar.alpha = 1
@@ -189,7 +192,7 @@ final class SpeciesListViewController: UIViewController {
                 switch result {
                 case .success(let speciesData):
                     self.animalData = speciesData
-                    self.filteredAnimals = speciesData
+                    self.redListCategoryFilteredAnimals = speciesData
                     
                 case .failure(let error):
                     print(error)
@@ -217,19 +220,19 @@ final class SpeciesListViewController: UIViewController {
         setConstraints()
         loadSpeciesDataFromFirebase()
         setDatasourceAndDelegates()
-        topToolBar.highlightButton(button: .overviewButton)
+        topToolBar.highlightButton(button: .buttonOne)
     }
 }
 
 //MARK: -- CollectionView DataSource Methods
 extension SpeciesListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return filteredAnimals.count
+        return searchFilteredSpecies.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let speciesCell = collectionView.dequeueReusableCell(withReuseIdentifier: "speciesCell", for: indexPath) as! SpeciesCollectionViewCell
-        let specificAnimal = filteredAnimals[indexPath.row]
+        let specificAnimal = searchFilteredSpecies[indexPath.row]
         speciesCell.configureCellUI(from: specificAnimal)
         return speciesCell
     }
@@ -242,7 +245,7 @@ extension SpeciesListViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let specificAnimal = filteredAnimals[indexPath.row]
+        let specificAnimal = searchFilteredSpecies[indexPath.row]
         
         let detailVC = SpeciesDetailViewController()
         detailVC.currentSpecies = specificAnimal
@@ -273,14 +276,17 @@ extension SpeciesListViewController: BottomBarDelegate {
         guard let buttonOption = ButtonOption(rawValue: sender.tag) else { return }
         topToolBar.highlightButton(button: buttonOption)
         switch buttonOption {
-        case .overviewButton:
-            filteredAnimals = animalData
-        case .habitatButton:
-            filteredAnimals = filterSpecies(by: .critical)
-        case .threatsButton:
-            filteredAnimals = filterSpecies(by: .endangered)
-        case .galleryButton:
-            filteredAnimals =  filterSpecies(by: .vulnerable)
+        case .buttonOne:
+            redListCategoryFilteredAnimals = animalData
+            
+        case .buttonTwo:
+            redListCategoryFilteredAnimals = filterSpecies(by: .critical)
+            
+        case .buttonThree:
+            redListCategoryFilteredAnimals = filterSpecies(by: .endangered)
+            
+        case .buttonFour:
+            redListCategoryFilteredAnimals =  filterSpecies(by: .vulnerable)
         }
     }
 }

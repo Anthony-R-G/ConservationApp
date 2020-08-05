@@ -11,28 +11,28 @@ import UIKit
 class toolBar: UIView {
     //MARK: -- Lazy UI Element Initialization
     
-    private lazy var overviewButton: UIButton = {
+    private lazy var buttonOne: UIButton = {
         let btn = Factory.makeBottomBarButton(title: viewControllerStrategy.buttonOneName())
         btn.tag = 0
         btn.addTarget(self, action: #selector(bottomBarButtonPressed(sender:)), for: .touchUpInside)
         return btn
     }()
     
-    private lazy var habitatButton: UIButton = {
+    private lazy var buttonTwo: UIButton = {
         let btn = Factory.makeBottomBarButton(title: viewControllerStrategy.buttonTwoName())
         btn.tag = 1
         btn.addTarget(self, action: #selector(bottomBarButtonPressed(sender:)), for: .touchUpInside)
         return btn
     }()
     
-    private lazy var threatsButton: UIButton = {
+    private lazy var buttonThree: UIButton = {
         let btn = Factory.makeBottomBarButton(title: viewControllerStrategy.buttonThreeName())
         btn.tag = 2
         btn.addTarget(self, action: #selector(bottomBarButtonPressed(sender:)), for: .touchUpInside)
         return btn
     }()
     
-    private lazy var galleryButton: UIButton = {
+    private lazy var buttonFour: UIButton = {
         let btn = Factory.makeBottomBarButton(title: viewControllerStrategy.buttonFourName())
         btn.tag = 3
         btn.addTarget(self, action: #selector(bottomBarButtonPressed(sender:)), for: .touchUpInside)
@@ -40,7 +40,7 @@ class toolBar: UIView {
     }()
     
     private lazy var buttonStackView: UIStackView = {
-        let sv = UIStackView(arrangedSubviews: [overviewButton, habitatButton, threatsButton, galleryButton])
+        let sv = UIStackView(arrangedSubviews: [buttonOne, buttonTwo, buttonThree, buttonFour])
         sv.axis = .horizontal
         sv.spacing = 3
         sv.alignment = .center
@@ -83,27 +83,28 @@ class toolBar: UIView {
     
     public func highlightButton(button: ButtonOption) {
         switch button {
-        case .overviewButton:
-            overviewButton.isSelected = true
-            [threatsButton, habitatButton, galleryButton].forEach { $0.isSelected = false }
+        case .buttonOne:
+            buttonOne.isSelected = true
+            [buttonThree, buttonTwo, buttonFour].forEach { $0.isSelected = false }
             
-        case .habitatButton:
-            habitatButton.isSelected = true
-            [threatsButton, overviewButton, galleryButton].forEach { $0.isSelected = false }
+        case .buttonTwo:
+            buttonTwo.isSelected = true
+            [buttonThree, buttonOne, buttonFour].forEach { $0.isSelected = false }
             
-        case .threatsButton:
-            threatsButton.isSelected = true
-            [overviewButton, habitatButton, galleryButton].forEach { $0.isSelected = false }
+        case .buttonThree:
+            buttonThree.isSelected = true
+            [buttonOne, buttonTwo, buttonFour].forEach { $0.isSelected = false }
             
-        case .galleryButton:
-            galleryButton.isSelected = true
-            [threatsButton, habitatButton, overviewButton].forEach { $0.isSelected = false }
+        case .buttonFour:
+            buttonFour.isSelected = true
+            [buttonThree, buttonTwo, buttonOne].forEach { $0.isSelected = false }
         }
     }
     
     @objc private func bottomBarButtonPressed(sender: UIButton) {
         delegate?.buttonPressed(sender)
     }
+    
     
     init(frame: CGRect, strategy: ToolBarVCStrategy) {
         viewControllerStrategy = strategy
