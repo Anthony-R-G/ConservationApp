@@ -4,11 +4,11 @@
 
 *Note: Still a WIP!*
 
-Terra is an iOS application meant to educate people on the biodiversity in the world and the importance of conserving it. Data is packaged from multiple sources, among which include the IUCN and WWF. This is to ensure that information is accurate and up-to-date.
+Terra is an iOS application meant to educate people on the biodiversity in the world and the importance of conserving it. Data is packaged from multiple sources, among which include the [International Union for Conservation of Nature](https://www.iucnredlist.org/) and [World Wide Fund for Nature](https://www.worldwildlife.org/). This is to ensure that information is accurate and up-to-date.
 
 Clicking on any animal brings the user to a page displaying more information about the animal as well as the option to be redirected to a donation page to help support conservation efforts. 
 
-One major design principle behind the app is keeping the look of it clean and visually appealing. Learning should be fun! It's hard to feel interested in a subject if it's presented in a way that feels lifeless, drab, and flat. The main focus of Terra are the animals, and so the UI attempts to make the experience feel more dynamic and focused on the content. This is done through the use of imagery, thin lines, and light blur effects.
+One major design principle behind the app is keeping the look of it clean and visually appealing. Learning should be fun! Studies have shown the importance of imagery in the learning process. It's hard to feel interested in a subject if it's presented in a way that feels lifeless, drab, and flat. The main focus of Terra are the animals, and so the UI attempts to make the experience feel more dynamic and focused on the content. This is done through the use of visuals, thin lines, and light blur effects.
 
 Mobile apps are unique in that they enable you to interact directly with your content. Because of that, an app should package content in such a way that there's preference to use it and not simply get the data from a web browser. 
 
@@ -66,12 +66,15 @@ Scrolling up on this page will bring up an overview of the species. You can then
 |:-----:|:-------:|:-------:|:-------|
 |![screen 1](https://i.imgur.com/XVNFPHj.png) | ![screen 2](https://i.imgur.com/kgitJkv.png) |![screen 3](https://i.imgur.com/Ueikygo.png)|![screen 4](https://i.imgur.com/fz7PtXS.png)|
 
+### Donating
+
 You can show your support for animal conservation efforts by clicking on the large donate button found on every animal's page. This will redirect you in-app to the relevant conservation for that specific animal. Getting involved is just a tap away.
 
-### Donating
-| African Elephant Donation |Bornean Orangutan Donation | Great White Shark Donation |
-|:-----:|:-------:|:-------:|
-|![screen 1](https://i.imgur.com/SvsfysX.png) | ![screen 2](https://i.imgur.com/3x6d1IV.png) | ![screen 3](https://i.imgur.com/5rljCyK.png)
+![screen 1](https://media.giphy.com/media/Rm2YUtHLivpcvSU0Yg/giphy.gif)
+
+|African Elephant Donation |Bornean Orangutan Donation | Great White Shark Donation |
+|:-----:|:-------:|:------:|
+|[screen 2](https://i.imgur.com/SvsfysX.png) | ![screen 3](https://i.imgur.com/3x6d1IV.png) | ![screen 4](https://i.imgur.com/5rljCyK.png)
 
 
 
