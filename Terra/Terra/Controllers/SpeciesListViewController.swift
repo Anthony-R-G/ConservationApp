@@ -24,7 +24,8 @@ final class SpeciesListViewController: UIViewController {
         sb.alpha = 0
         sb.keyboardAppearance = .dark
         sb.showsCancelButton = true
-        sb.placeholder = "Search Species..."
+        sb.placeholder = "Search species..."
+        sb.tintColor = Constants.red
         return sb
     }()
     
@@ -44,7 +45,7 @@ final class SpeciesListViewController: UIViewController {
     private lazy var backgroundImageView: UIImageView = {
         let iv = UIImageView()
         iv.translatesAutoresizingMaskIntoConstraints = false
-        iv.image = #imageLiteral(resourceName: "listVCbackground")
+//        iv.image = #imageLiteral(resourceName: "listVCbackground")
         iv.contentMode = UIView.ContentMode.scaleAspectFill
         view.insertSubview(iv, at: 0)
         return iv
@@ -107,14 +108,6 @@ final class SpeciesListViewController: UIViewController {
         return searchBar.leadingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
     }()
     
-    private lazy var searchBarTrailingAnchorConstraint: NSLayoutConstraint = {
-        return searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
-    }()
-    
-    private lazy var searchBarTrailingAnchorConstraintDeactivate: NSLayoutConstraint = {
-        return searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
-    }()
-    
     private lazy var terraTitleLabelLeadingAnchorConstraint: NSLayoutConstraint = {
         return terraTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20)
     }()
@@ -150,7 +143,6 @@ final class SpeciesListViewController: UIViewController {
     
     @objc private func expandSearchBar() {
         searchBarLeadingAnchorConstraint.constant = -400
-        searchBarTrailingAnchorConstraint.isActive = true
         terraTitleLabelLeadingAnchorConstraint.constant = -100
         searchBar.alpha = 1
         searchBarButton.alpha = 0
@@ -163,7 +155,6 @@ final class SpeciesListViewController: UIViewController {
     
     private func dismissSearchBar() {
         searchBarLeadingAnchorConstraint.constant = -20
-        searchBarTrailingAnchorConstraint.isActive = false
         terraTitleLabelLeadingAnchorConstraint.constant = 20
         searchBar.alpha = 0
         searchBarButton.alpha = 1
@@ -215,7 +206,7 @@ final class SpeciesListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .black
         addSubviews()
         setConstraints()
         loadSpeciesDataFromFirebase()
@@ -262,6 +253,10 @@ extension SpeciesListViewController: UICollectionViewDelegateFlowLayout {
 //MARK: --SearchBar Delegate Methods
 extension SpeciesListViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        dismissSearchBar()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         dismissSearchBar()
     }
     
@@ -353,7 +348,7 @@ fileprivate extension SpeciesListViewController {
     func setSearchBarConstraints() {
         NSLayoutConstraint.activate([
             searchBarLeadingAnchorConstraint,
-            searchBarTrailingAnchorConstraintDeactivate,
+            searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             searchBar.centerYAnchor.constraint(equalTo: searchBarButton.centerYAnchor),
         ])
     }

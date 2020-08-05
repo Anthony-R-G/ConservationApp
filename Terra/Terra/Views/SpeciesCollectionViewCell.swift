@@ -38,7 +38,7 @@ class SpeciesCollectionViewCell: UICollectionViewCell {
                                       color: .white,
                                       alignment: .center)
         label.layer.cornerRadius = 10
-        label.backgroundColor = #colorLiteral(red: 1, green: 0.2914688587, blue: 0.3886995912, alpha: 0.9019156678)
+        label.backgroundColor = Constants.red
         label.clipsToBounds = true
         return label
     }()
