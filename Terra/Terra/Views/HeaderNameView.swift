@@ -19,7 +19,7 @@ final class HeaderNameView: UIView {
                                         alignment: .center)
         label.backgroundColor = .clear
         label.layer.borderColor = UIColor.white.cgColor
-        label.layer.borderWidth = 1
+        label.layer.borderWidth = Constants.borderWidth
         label.layer.cornerRadius = 10
         return label
     }()

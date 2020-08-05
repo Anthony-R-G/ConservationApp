@@ -30,5 +30,7 @@ struct ToolBarListVCStrategy: ToolBarVCStrategy {
         return true
     }
     
-    
+    func blurHidden() -> Bool {
+        return true
+    }
 }

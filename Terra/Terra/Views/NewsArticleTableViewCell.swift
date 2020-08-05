@@ -78,7 +78,7 @@ fileprivate extension NewsArticleTableViewCell {
     
     func setArticleThumbImageViewConstraints() {
         NSLayoutConstraint.activate([
-            articleThumbImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            articleThumbImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.universalLeadingConstant),
             articleThumbImageView.heightAnchor.constraint(equalToConstant: 120),
             articleThumbImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
             articleThumbImageView.widthAnchor.constraint(equalToConstant: 140)
@@ -87,10 +87,10 @@ fileprivate extension NewsArticleTableViewCell {
     
     func setArticleTitleLabelConstraints() {
         NSLayoutConstraint.activate([
-            articleTitleLabel.leadingAnchor.constraint(equalTo: articleThumbImageView.trailingAnchor, constant: 20),
+            articleTitleLabel.leadingAnchor.constraint(equalTo: articleThumbImageView.trailingAnchor, constant: Constants.universalLeadingConstant),
             articleTitleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 20),
             articleTitleLabel.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.6),
-            articleTitleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
+            articleTitleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.universalLeadingConstant)
         ])
     }
     

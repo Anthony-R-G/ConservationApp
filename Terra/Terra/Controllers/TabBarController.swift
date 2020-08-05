@@ -31,14 +31,14 @@ class TabBarViewController: UIViewController {
         
         
         let listVCTabBarItem = BATabBarItem(image: UIImage(named: "listVCUnselected")!, selectedImage: UIImage(named: "listVCSelected")!)
-        listVCTabBarItem.tintColor = Constants.titleLabelColor
+        listVCTabBarItem.tintColor = Constants.buttonColor
         
         let newsVCTabBarItem = BATabBarItem(image: UIImage(named: "newsVCUnselected")!, selectedImage: UIImage(named: "newsVCSelected")!)
-        newsVCTabBarItem.tintColor = Constants.titleLabelColor
+        newsVCTabBarItem.tintColor = Constants.buttonColor
         
         tabBarVC.delegate = self
         tabBarVC.tabBarItemStrokeColor = .white
-        tabBarVC.tabBarItemLineWidth = 1
+        tabBarVC.tabBarItemLineWidth = Constants.borderWidth
         tabBarVC.viewControllers = [ listVC, newsVC ]
         tabBarVC.tabBarItems = [ listVCTabBarItem, newsVCTabBarItem ]
         

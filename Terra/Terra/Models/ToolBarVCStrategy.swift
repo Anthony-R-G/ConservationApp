@@ -14,4 +14,5 @@ protocol ToolBarVCStrategy {
     func buttonThreeName() -> String
     func buttonFourName() -> String
     func highlightIndicatorHidden() -> Bool
+    func blurHidden() -> Bool
 }
