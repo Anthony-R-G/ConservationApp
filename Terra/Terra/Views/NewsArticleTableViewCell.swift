@@ -21,7 +21,7 @@ class NewsArticleTableViewCell: UITableViewCell {
     }()
     
     lazy var articleTitleLabel: UILabel = {
-        let label = Factory.makeLabel(title: nil, weight: .bold, size: 18, color: .black, alignment: .left)
+        let label = Factory.makeLabel(title: nil, weight: .bold, size: 18, color: .white, alignment: .left)
         label.numberOfLines = 0
         return label
     }()
@@ -44,11 +44,11 @@ class NewsArticleTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         addSubviews()
         setConstraints()
-        backgroundColor = .white
+        backgroundColor = #colorLiteral(red: 0.1108833775, green: 0.1294697225, blue: 0.1595396101, alpha: 1)
         
-//        let bgColorView = UIView()
-//        bgColorView.backgroundColor = #colorLiteral(red: 0.06663120538, green: 0.07717584819, blue: 0.1243596151, alpha: 1)
-//        selectedBackgroundView = bgColorView
+        let bgColorView = UIView()
+        bgColorView.backgroundColor = #colorLiteral(red: 0.08120436221, green: 0.09556283802, blue: 0.1183818057, alpha: 1)
+        selectedBackgroundView = bgColorView
     }
     
     required init?(coder: NSCoder) {

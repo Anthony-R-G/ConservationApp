@@ -23,6 +23,8 @@ class TabBarViewController: UIViewController {
         let newsVC = UINavigationController(rootViewController: NewsViewController())
         newsVC.navigationBar.prefersLargeTitles = true
         newsVC.navigationBar.topItem?.title = "Wildlife News"
+        newsVC.navigationBar.barStyle = .black
+        newsVC.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.9257398248, green: 1, blue: 0.7623538375, alpha: 1)]
         
         
         

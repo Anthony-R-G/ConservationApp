@@ -254,7 +254,6 @@ extension SpeciesDetailViewController: UIScrollViewDelegate {
             
             bottomToolBar.updateHighlightIndicator(scrollOffset: offsetX)
             
-            
             if scrollView.bounds.contains(speciesOverviewView.frame) {
                 bottomToolBar.highlightButton(button: .buttonOne)
                 

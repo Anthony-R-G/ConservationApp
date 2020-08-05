@@ -16,16 +16,17 @@ class NewsViewController: UIViewController {
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
-        refreshControl.tintColor = .darkGray
-        refreshControl.attributedTitle = NSAttributedString(string: "Fetching News Data ...", attributes: [NSAttributedString.Key.foregroundColor : UIColor.darkGray])
+        refreshControl.tintColor = .lightGray
+        refreshControl.attributedTitle = NSAttributedString(string: "Fetching News Data ...", attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray])
         return refreshControl
     }()
     
     lazy var tableView: UITableView = {
         let tv = UITableView()
         tv.register(NewsArticleTableViewCell.self, forCellReuseIdentifier: "newsCell")
-        tv.backgroundColor = .white
+        tv.backgroundColor = .clear
         tv.refreshControl = refreshControl
+        tv.separatorColor = .white
         tv.dataSource = self
         tv.delegate = self
         return tv
@@ -78,7 +79,7 @@ class NewsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = #colorLiteral(red: 0.1108833775, green: 0.1294697225, blue: 0.1595396101, alpha: 1)
         addSubviews()
         setConstraints()
         fetchNewsData()
