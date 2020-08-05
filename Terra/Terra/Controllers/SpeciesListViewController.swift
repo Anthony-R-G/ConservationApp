@@ -45,8 +45,9 @@ final class SpeciesListViewController: UIViewController {
     private lazy var backgroundImageView: UIImageView = {
         let iv = UIImageView()
         iv.translatesAutoresizingMaskIntoConstraints = false
-//        iv.image = #imageLiteral(resourceName: "listVCbackground")
+        iv.image = #imageLiteral(resourceName: "listVCbackground")
         iv.contentMode = UIView.ContentMode.scaleAspectFill
+        iv.clipsToBounds = true
         view.insertSubview(iv, at: 0)
         return iv
     }()
@@ -311,10 +312,10 @@ fileprivate extension SpeciesListViewController {
     
     func setBackgroundImageViewConstraints() {
         NSLayoutConstraint.activate([
-            backgroundImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            backgroundImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            backgroundImageView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            backgroundImageView.heightAnchor.constraint(equalTo: view.heightAnchor)
+            backgroundImageView.topAnchor.constraint(equalTo: view.topAnchor),
+            backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            backgroundImageView.bottomAnchor.constraint(equalTo: speciesCollectionView.topAnchor)
         ])
     }
     
