@@ -41,7 +41,7 @@ ARKit (some animals will have the option to "View in AR" which will bring up a 3
 This page contains a list of animals that are currently considered threatened. The main three categories are: Critically Endangered, Endangered, and Vulnerable. These come from the IUCN Red List of Threatened Species, and are intended to be an easily and widely understood system for classifying species at high risk of global extinction.
 
 | See All Species | Filtered By Critical Status | Filtered by Endangered Status | Filtered by Vulnerable Status |
-|:-----:|:-------:|:-------:|:-------:|
+| :------: | :------: | :------: | :------: |
 |![screen 1](https://i.imgur.com/1Vwgp0Y.png) | ![screen 2](https://i.imgur.com/grixZDv.png) | ![screen 3](https://i.imgur.com/SKy5mno.png) | ![screen 4](https://i.imgur.com/p67o6vL.png) |
 
 Tapping any one cell will transition to a new individual species page with a minimalistic user interface where the animal selected is the main focus.
@@ -49,13 +49,13 @@ Tapping any one cell will transition to a new individual species page with a min
 ### News Page
 From the initial app screen, there are two tabs on the bottom. Selecting the second glyph takes you to a news page. This page gets data from [NewsAPI](https://newsapi.org/) with the endpoint specifically tailored for wildlife/animal conservation related news. 
 | Transitioning Between Tabs | Selecting Articles to Read |
-|:-----:|:-----|
+| :------: | :------: |
 |![screen 1](https://media.giphy.com/media/ieaU0z4wACLIYrWIey/giphy.gif) | ![screen 2](https://media.giphy.com/media/IejPdlUw4B2Yj2cfVp/giphy.gif) |
 
 
 ### Individual Species Page 
 | Amur Leopard | Blue Whale | Lion | Mountain Gorilla |
-|:-----:|:-------:|:-------:|:-------:|
+| :------: | :------: | :------: | :------: |
 |![screen 1](https://i.imgur.com/4LOHr9o.png) | ![screen 2](https://i.imgur.com/E4Ayd80.png) |![screen 3](https://i.imgur.com/h6s1IGG.png)|![screen 4](https://i.imgur.com/HEA6LRg.png)|
 
 
@@ -65,7 +65,7 @@ Scrolling up on this page will bring up an overview of the species. You can then
 
 ### Getting Detailed Information
 | African Elephant Overview | Blue-throated Macaw Habitat | Blue-throated Macaw Distribution | Panamanian Golden Frog Distribution |
-|:-----:|:-------:|:-------:|:-------|
+| :------: | :------: | :------: | :------: |
 |![screen 1](https://i.imgur.com/XVNFPHj.png) | ![screen 2](https://i.imgur.com/kgitJkv.png) |![screen 3](https://i.imgur.com/Ueikygo.png)|![screen 4](https://i.imgur.com/fz7PtXS.png)|
 
 ### Donating
@@ -75,8 +75,8 @@ You can show your support for animal conservation efforts by clicking on the lar
 ![screen 1](https://media.giphy.com/media/Rm2YUtHLivpcvSU0Yg/giphy.gif)
 
 |African Elephant Donation |Bornean Orangutan Donation | Great White Shark Donation |
-|:-----:|:-------:|:------:|
-|[screen 2](https://i.imgur.com/SvsfysX.png) | ![screen 3](https://i.imgur.com/3x6d1IV.png) | ![screen 4](https://i.imgur.com/5rljCyK.png)
+| :------: | :------: | :------: |
+| ![screen 2](https://i.imgur.com/SvsfysX.png) | ![screen 3](https://i.imgur.com/3x6d1IV.png) | ![screen 4](https://i.imgur.com/5rljCyK.png)
 
 
 
