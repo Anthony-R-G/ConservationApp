@@ -14,11 +14,11 @@
 
 •One major design principle behind the app is keeping the look of it clean and visually appealing. Learning should be fun! 
 
-•Studies have shown the importance of imagery in the learning process. It's hard to feel interested in a subject if it's presented in a way that feels lifeless, drab, and flat. 
+•Studies have shown the importance of imagery in the learning process. Interest in a subject wanes if it's presented in a way that's unstimulating and flat. 
 
-•The main focus of Terra is the list of threatened animals, and so the UI attempts to make the experience feel more dynamic and focused on the content. This is done through the use of visuals, thin lines, and light blur effects.
+•The main focus of Terra is the list of threatened animals, so that's what the UI puts at the forefront. This is done through the use of visuals, thin lines, and light blur effects.
 
-•Mobile apps are unique in that they enable you to interact directly with your content. Because of that, an app should package content in such a way that there's preference to use it and not simply get the data from a web browser. 
+•Mobile apps can be a more intimate experience than using a browser. With that in mind, an app should package content in such a way that there's preference to use it as opposed to just getting the data from a website. 
 
 
 
@@ -79,7 +79,7 @@ Coming:
 | :------: | :------: | :------: | :------: |
 |![screen 1](https://i.imgur.com/4LOHr9o.png) | ![screen 2](https://i.imgur.com/E4Ayd80.png) |![screen 3](https://i.imgur.com/h6s1IGG.png)|![screen 4](https://i.imgur.com/HEA6LRg.png)|
 
-•The initial presentation of the individual species page is a cover page for the specific animal that was selected from the list before. 
+•The initial appearance of this page is a cover page for the selected animal with minimal text.
 
 •Scrolling up on this page will adjust the UI to scale/pin to the top and bring up an overview of the species. 
 
