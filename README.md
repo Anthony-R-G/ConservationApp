@@ -47,7 +47,7 @@ This page contains a list of animals that are currently considered threatened. T
 Tapping any one cell will transition to a new individual species page with a minimalistic user interface where the animal selected is the main focus.
 
 ### News Page
-From the initial app screen, there are two tabs on the bottom. Selecting the second glyph takes you to a news page. This page gets data from [NewsAPI](https://newsapi.org/) with the endpoint specifically tailored for wildlife/animal conservation related news. Each cell can be pressed to read the article at its source. 
+From the initial app screen, there are two tabs on the bottom. Selecting the second glyph takes you to a news page. This page gets data from [NewsAPI](https://newsapi.org/) with the endpoint specifically tailored for wildlife/animal conservation related news. Each cell can be pressed to read the article at its source. Pagination is handled by using Apple's data source prefetching protocol so that more news articles are loaded as you scroll down.
 | Transitioning Between Tabs | Selecting Articles to Read |
 | :------: | :------: |
 |![screen 1](https://media.giphy.com/media/ieaU0z4wACLIYrWIey/giphy.gif) | ![screen 2](https://media.giphy.com/media/IejPdlUw4B2Yj2cfVp/giphy.gif) |
