@@ -8,7 +8,9 @@
 
 •Data is packaged from multiple sources, among which include the [International Union for Conservation of Nature](https://www.iucnredlist.org/) and [World Wide Fund for Nature](https://www.worldwildlife.org/). This is to ensure that the data is accurate and up-to-date.
 
-•Clicking on any animal brings the user to a page displaying more information about the animal as well as the option to be redirected to a donation page to help support conservation efforts. 
+•Clicking on any animal brings you to a page where you can learn more about that specific animal. 
+
+•Each page also has a large red donation button that will redirect you to a site to help support conservation efforts. 
 
 •One major design principle behind the app is keeping the look of it clean and visually appealing. Learning should be fun! 
 
