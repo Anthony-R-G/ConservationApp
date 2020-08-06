@@ -23,6 +23,8 @@ Safari Services
 
 MapKit
 
+CoreLocation
+
 CocoaPods 
 
 JSON/REST API
@@ -30,8 +32,6 @@ JSON/REST API
 [Google's Firebase](https://firebase.google.com/) is used as the backend. Writing to Firebase is managed via a [separate helper app](https://github.com/Anthony-R-G/Terra-Data-Upload-Helper).
 
 Coming:
-
-CoreLocation (for determining your position relative to a species habitat range)
 
 ARKit (some animals will have the option to "View in AR" which will use iPhone's rear camera for plane detection. Tapping on the screen will place a 3D model at that position and the model can then be manipulated with gestures.)
 
