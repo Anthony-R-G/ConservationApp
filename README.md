@@ -60,6 +60,8 @@ Coming:
 
 •Tapping any one cell will transition to a new individual species page with a minimalistic user interface where the animal selected is the main focus.
 
+
+
 ### News Page
 | Transitioning Between Tabs | Selecting Articles to Read |
 | :------: | :------: |
@@ -92,6 +94,8 @@ Coming:
 
 ![screen 1](https://media.giphy.com/media/iIoxEOe632nhzJz6Lq/giphy.gif)
 
+
+
 ### Getting Detailed Information
 | African Elephant Overview | Blue-throated Macaw Habitat | Blue-throated Macaw Distribution | Panamanian Golden Frog Distribution |
 | :------: | :------: | :------: | :------: |
@@ -100,15 +104,12 @@ Coming:
 ### Donating
 ![screen 1](https://media.giphy.com/media/Rm2YUtHLivpcvSU0Yg/giphy.gif)
 
-|African Elephant Donation |Bornean Orangutan Donation | Great White Shark Donation |
-| :------: | :------: | :------: |
-| ![screen 2](https://i.imgur.com/SvsfysX.png) | ![screen 3](https://i.imgur.com/3x6d1IV.png) | ![screen 4](https://i.imgur.com/5rljCyK.png)
 
 •You can show your support for animal conservation efforts by clicking on the large donate button found on every animal's page. 
 
 •This will redirect you in-app to the relevant conservation/project for that specific animal. Getting involved is just a tap away.
 
-
-
-
+|African Elephant Donation |Bornean Orangutan Donation | Great White Shark Donation |
+| :------: | :------: | :------: |
+| ![screen 2](https://i.imgur.com/SvsfysX.png) | ![screen 3](https://i.imgur.com/3x6d1IV.png) | ![screen 4](https://i.imgur.com/5rljCyK.png)
 
