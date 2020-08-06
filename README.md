@@ -45,22 +45,26 @@ Coming:
 
 ## App Demo
 
-•When the app is first loaded, you are taken to the first tab. This is the Species List page.
+•The app will load into the first tab on the bottom tab bar. This first tab is the Species List page.
 
 ### Species List Page
+| See All Species | Filtered By Critical Status | Filtered by Endangered Status | Filtered by Vulnerable Status |
+| :------: | :------: | :------: | :------: |
+|![screen 1](https://i.imgur.com/zZWZNLx.png) | ![screen 2](https://i.imgur.com/SXKWEK9.png) | ![screen 3](https://i.imgur.com/8Q79MzC.png) | ![screen 4](https://i.imgur.com/1lTqt8w.png) |
+
 •This page contains a list of animals that are currently considered threatened. 
 
 •The main three categories are: Critically Endangered, Endangered, and Vulnerable. 
 
 •This system comes from the IUCN Red List of Threatened Species, and is intended to be an easily and widely understood system for classifying species at high risk of global extinction.
 
-| See All Species | Filtered By Critical Status | Filtered by Endangered Status | Filtered by Vulnerable Status |
-| :------: | :------: | :------: | :------: |
-|![screen 1](https://i.imgur.com/zZWZNLx.png) | ![screen 2](https://i.imgur.com/SXKWEK9.png) | ![screen 3](https://i.imgur.com/8Q79MzC.png) | ![screen 4](https://i.imgur.com/1lTqt8w.png) |
-
 •Tapping any one cell will transition to a new individual species page with a minimalistic user interface where the animal selected is the main focus.
 
 ### News Page
+| Transitioning Between Tabs | Selecting Articles to Read |
+| :------: | :------: |
+|![screen 1](https://media.giphy.com/media/ieaU0z4wACLIYrWIey/giphy.gif) | ![screen 2](https://media.giphy.com/media/IejPdlUw4B2Yj2cfVp/giphy.gif) |
+
 •Selecting the second tab on the bottom tab bar takes you to a news page. 
 
 •This page gets data from [NewsAPI](https://newsapi.org/) with the endpoint specifically tailored for wildlife/animal conservation related news. 
@@ -69,9 +73,6 @@ Coming:
 
 •Pagination is handled by using Apple's data source prefetching protocol so that more news articles are loaded as you scroll down.
 
-| Transitioning Between Tabs | Selecting Articles to Read |
-| :------: | :------: |
-|![screen 1](https://media.giphy.com/media/ieaU0z4wACLIYrWIey/giphy.gif) | ![screen 2](https://media.giphy.com/media/IejPdlUw4B2Yj2cfVp/giphy.gif) |
 
 
 ### Individual Species Page 
