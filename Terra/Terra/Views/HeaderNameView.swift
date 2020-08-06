@@ -27,7 +27,7 @@ final class HeaderNameView: UIView {
     private lazy var speciesCommonNameLabel: UILabel = {
         let label = Factory.makeLabel(title: nil,
                                         weight: .bold,
-                                        size: 55,
+                                        size: 56,
                                         color: .white,
                                         alignment: .left)
         label.numberOfLines = 2
@@ -92,7 +92,7 @@ fileprivate extension HeaderNameView {
         NSLayoutConstraint.activate([
             speciesCommonNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
             speciesCommonNameLabel.bottomAnchor.constraint(equalTo: speciesScientificNameLabel.topAnchor),
-            speciesCommonNameLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.7),
+            speciesCommonNameLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.76),
             speciesCommonNameLabel.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.5)
         ])
     }
@@ -102,5 +102,5 @@ fileprivate extension HeaderNameView {
             speciesScientificNameLabel.leadingAnchor.constraint(equalTo: speciesCommonNameLabel.leadingAnchor),
             speciesScientificNameLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
-    }
+    } 
 }

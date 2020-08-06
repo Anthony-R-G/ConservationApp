@@ -41,6 +41,7 @@ class TabBarViewController: UIViewController {
         tabBarVC.tabBarItemLineWidth = Constants.borderWidth
         tabBarVC.viewControllers = [ listVC, newsVC ]
         tabBarVC.tabBarItems = [ listVCTabBarItem, newsVCTabBarItem ]
+        tabBarVC.tabBarBackgroundColor = .black
         
         view.addSubview(tabBarVC.view)
     }
