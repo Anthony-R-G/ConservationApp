@@ -109,7 +109,7 @@ Coming:
 
 •This will redirect you in-app to the relevant conservation/project for that specific animal. Getting involved is just a tap away.
 
-|African Elephant Donation |Bornean Orangutan Donation | Great White Shark Donation |
-| :------: | :------: | :------: |
-| ![screen 2](https://i.imgur.com/SvsfysX.png) | ![screen 3](https://i.imgur.com/3x6d1IV.png) | ![screen 4](https://i.imgur.com/5rljCyK.png)
+| African Elephant Donation | Bornean Orangutan Donation |Chimpanzee Donation| Great White Shark Donation |
+| :------: | :------: | :------: | :------: |
+| ![screen 2](https://i.imgur.com/SvsfysX.png) | ![screen 3](https://i.imgur.com/3x6d1IV.png) | ![screen 4](https://i.imgur.com/JxLGNa8.png)|![screen 5](https://i.imgur.com/5rljCyK.png)
 
