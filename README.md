@@ -45,7 +45,7 @@ Coming:
 
 ## App Demo
 
-•The app will load into the first tab on the bottom tab bar. This first tab is the Species List page.
+•The app will load into the first tab on the bottom tab bar, the Species List page.
 
 ### Species List Page
 | See All Species | Filtered By Critical Status | Filtered by Endangered Status | Filtered by Vulnerable Status |
@@ -98,16 +98,17 @@ Coming:
 |![screen 1](https://i.imgur.com/XVNFPHj.png) | ![screen 2](https://i.imgur.com/kgitJkv.png) |![screen 3](https://i.imgur.com/Ueikygo.png)|![screen 4](https://i.imgur.com/fz7PtXS.png)|
 
 ### Donating
-
-•You can show your support for animal conservation efforts by clicking on the large donate button found on every animal's page. 
-
-•This will redirect you in-app to the relevant conservation/project for that specific animal. Getting involved is just a tap away.
-
 ![screen 1](https://media.giphy.com/media/Rm2YUtHLivpcvSU0Yg/giphy.gif)
 
 |African Elephant Donation |Bornean Orangutan Donation | Great White Shark Donation |
 | :------: | :------: | :------: |
 | ![screen 2](https://i.imgur.com/SvsfysX.png) | ![screen 3](https://i.imgur.com/3x6d1IV.png) | ![screen 4](https://i.imgur.com/5rljCyK.png)
+
+•You can show your support for animal conservation efforts by clicking on the large donate button found on every animal's page. 
+
+•This will redirect you in-app to the relevant conservation/project for that specific animal. Getting involved is just a tap away.
+
+
 
 
 
