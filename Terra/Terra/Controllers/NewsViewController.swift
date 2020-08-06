@@ -46,7 +46,7 @@ class NewsViewController: UIViewController {
     
     private var isFetchingNews = false
     
-    
+
     //MARK: -- Methods
     
     @objc func handleRefresh() {
@@ -63,7 +63,7 @@ class NewsViewController: UIViewController {
             case .success(let newsData):
                 self.newsArticles.append(contentsOf: newsData.articles)
                 self.currentPage += 1
-                print("Page: \(self.currentPage)")
+                
                 print(newsData.totalResults)
                 self.isFetchingNews = false
                 
@@ -159,3 +159,5 @@ fileprivate extension NewsViewController {
         ])
     }
 }
+
+
