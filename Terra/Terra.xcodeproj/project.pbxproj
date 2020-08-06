@@ -11,9 +11,9 @@
 		970B172524C2699E007F32E0 /* SpeciesDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970B172424C2699E007F32E0 /* SpeciesDetailViewController.swift */; };
 		9711D8F724BD199700C2E6F1 /* Species.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9711D8F624BD199700C2E6F1 /* Species.swift */; };
 		9711D8FC24BD42C800C2E6F1 /* FirestoresService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9711D8FB24BD42C800C2E6F1 /* FirestoresService.swift */; };
-		971FD0D024C61AD3003ED029 /* CGFloatExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971FD0CF24C61AD3003ED029 /* CGFloatExtensions.swift */; };
 		9723E7AA24D3505C0038ECB6 /* SpeciesAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9723E7A924D3505C0038ECB6 /* SpeciesAnnotation.swift */; };
 		9723E7AC24D353340038ECB6 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9723E7AB24D353330038ECB6 /* MapKit.framework */; };
+		9729736F24DC9E3400123C86 /* DoubleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9729736E24DC9E3400123C86 /* DoubleExtensions.swift */; };
 		972A615024C94C6800A59AB6 /* Species.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9711D8F624BD199700C2E6F1 /* Species.swift */; };
 		972A615224C94C6C00A59AB6 /* ConservationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E9450324BE10C800550824 /* ConservationStatus.swift */; };
 		972A615324C94C6E00A59AB6 /* Diet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D9E24A24C6470600524000 /* Diet.swift */; };
@@ -52,7 +52,6 @@
 		97682CC724D5EAA3000E5B30 /* Population.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97682CC624D5EAA3000E5B30 /* Population.swift */; };
 		97682CC824D5EB79000E5B30 /* Population.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97682CC624D5EAA3000E5B30 /* Population.swift */; };
 		97682CCA24D634AA000E5B30 /* RoundedInfoViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97682CC924D634AA000E5B30 /* RoundedInfoViewDelegate.swift */; };
-		976D585724CF9FD800FC7458 /* Double Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976D585624CF9FD800FC7458 /* Double Extensions.swift */; };
 		976D585924CFA04400FC7458 /* UIButtonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976D585824CFA04400FC7458 /* UIButtonExtensions.swift */; };
 		976FB55324D367AE00848E35 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 97591FE124CCDC28002EAC96 /* Roboto-Regular.ttf */; };
 		976FB55524D367E400848E35 /* Roboto-Light-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 976FB55424D367E400848E35 /* Roboto-Light-Italic.ttf */; };
@@ -111,9 +110,9 @@
 		970B172424C2699E007F32E0 /* SpeciesDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesDetailViewController.swift; sourceTree = "<group>"; };
 		9711D8F624BD199700C2E6F1 /* Species.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Species.swift; sourceTree = "<group>"; };
 		9711D8FB24BD42C800C2E6F1 /* FirestoresService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoresService.swift; sourceTree = "<group>"; };
-		971FD0CF24C61AD3003ED029 /* CGFloatExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloatExtensions.swift; sourceTree = "<group>"; };
 		9723E7A924D3505C0038ECB6 /* SpeciesAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesAnnotation.swift; sourceTree = "<group>"; };
 		9723E7AB24D353330038ECB6 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		9729736E24DC9E3400123C86 /* DoubleExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleExtensions.swift; sourceTree = "<group>"; };
 		972BBF7624C01FA900B6F7C0 /* PSORoundedVisualEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSORoundedVisualEffectView.swift; sourceTree = "<group>"; };
 		972BBF7824C0204600B6F7C0 /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		972BBF7B24C0256F00B6F7C0 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
@@ -145,7 +144,6 @@
 		9767D04B24C3EA9200384FCD /* SubheaderInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubheaderInfoView.swift; sourceTree = "<group>"; };
 		97682CC624D5EAA3000E5B30 /* Population.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Population.swift; sourceTree = "<group>"; };
 		97682CC924D634AA000E5B30 /* RoundedInfoViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedInfoViewDelegate.swift; sourceTree = "<group>"; };
-		976D585624CF9FD800FC7458 /* Double Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double Extensions.swift"; sourceTree = "<group>"; };
 		976D585824CFA04400FC7458 /* UIButtonExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtensions.swift; sourceTree = "<group>"; };
 		976FB55424D367E400848E35 /* Roboto-Light-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light-Italic.ttf"; sourceTree = "<group>"; };
 		9772167824D287EA00828582 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -229,14 +227,23 @@
 		971FD0CE24C61ABE003ED029 /* Extensions Built-In Types */ = {
 			isa = PBXGroup;
 			children = (
-				971FD0CF24C61AD3003ED029 /* CGFloatExtensions.swift */,
 				97F0CCA824C56F5C00C581D3 /* UIScrollViewExtensions.swift */,
 				972BBF7824C0204600B6F7C0 /* UIViewExtensions.swift */,
-				976D585624CF9FD800FC7458 /* Double Extensions.swift */,
 				976D585824CFA04400FC7458 /* UIButtonExtensions.swift */,
 				97F4E00924D757C600509694 /* StringExtensions.swift */,
+				9729736E24DC9E3400123C86 /* DoubleExtensions.swift */,
 			);
 			path = "Extensions Built-In Types";
+			sourceTree = "<group>";
+		};
+		9729736D24DC95AA00123C86 /* Custom Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				97DD101C24C69EB000A21DF4 /* BottomBarDelegate.swift */,
+				97F7B42724C56886007AEE97 /* DonateButtonDelegate.swift */,
+				97682CC924D634AA000E5B30 /* RoundedInfoViewDelegate.swift */,
+			);
+			path = "Custom Delegates";
 			sourceTree = "<group>";
 		};
 		972BBF7A24C0256400B6F7C0 /* Fonts */ = {
@@ -301,16 +308,14 @@
 		979492EC23F46ACE00B636A4 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				9729736D24DC95AA00123C86 /* Custom Delegates */,
+				971FD0CE24C61ABE003ED029 /* Extensions Built-In Types */,
 				9764D12C24D7DE380050AF37 /* Networking */,
 				977D876D24CD697700AE5E51 /* Species Models */,
-				971FD0CE24C61ABE003ED029 /* Extensions Built-In Types */,
 				97591FDB24CC4524002EAC96 /* ButtonOption.swift */,
 				97591FE224CCDC48002EAC96 /* FontWeight.swift */,
-				97682CC924D634AA000E5B30 /* RoundedInfoViewDelegate.swift */,
-				97F7B42724C56886007AEE97 /* DonateButtonDelegate.swift */,
-				97DD101C24C69EB000A21DF4 /* BottomBarDelegate.swift */,
-				97FEAEAB24BE5FCC005BAEFE /* Factory.swift */,
 				97591FDE24CCD14A002EAC96 /* Constants.swift */,
+				97FEAEAB24BE5FCC005BAEFE /* Factory.swift */,
 				9764D12824D7DC250050AF37 /* NewsArticle.swift */,
 				9764D12A24D7DD820050AF37 /* Secrets.swift */,
 				9764D13024D9D07F0050AF37 /* ToolBarVCStrategy.swift */,
@@ -587,6 +592,7 @@
 				9764D13324D9D0E90050AF37 /* ToolBarListVCStrategy.swift in Sources */,
 				9764D12E24D7E46E0050AF37 /* NewsArticleTableViewCell.swift in Sources */,
 				9711D8FC24BD42C800C2E6F1 /* FirestoresService.swift in Sources */,
+				9729736F24DC9E3400123C86 /* DoubleExtensions.swift in Sources */,
 				977D877224CD7BFF00AE5E51 /* Habitat.swift in Sources */,
 				9764D12724D7DBE60050AF37 /* NewsAPIClient.swift in Sources */,
 				97D5946424CE7E49001BD566 /* toolBar.swift in Sources */,
@@ -599,7 +605,6 @@
 				977D876C24CD3A6100AE5E51 /* Taxonomy.swift in Sources */,
 				97E9450424BE10C800550824 /* ConservationStatus.swift in Sources */,
 				97F4E00A24D757C600509694 /* StringExtensions.swift in Sources */,
-				976D585724CF9FD800FC7458 /* Double Extensions.swift in Sources */,
 				97591FDF24CCD14A002EAC96 /* Constants.swift in Sources */,
 				97FAD4E924D75DBD007FEFD8 /* NewsViewController.swift in Sources */,
 				97682CCA24D634AA000E5B30 /* RoundedInfoViewDelegate.swift in Sources */,
@@ -637,7 +642,6 @@
 				97591FE324CCDC48002EAC96 /* FontWeight.swift in Sources */,
 				97928F7924CD11BF00AF90C5 /* FirestoreError.swift in Sources */,
 				975812F324D530AA00C09D56 /* SpeciesGalleryStrategy.swift in Sources */,
-				971FD0D024C61AD3003ED029 /* CGFloatExtensions.swift in Sources */,
 				9764D13524D9D1A20050AF37 /* ToolBarDetailVCStrategy.swift in Sources */,
 				97928F7B24CD347200AF90C5 /* FirebaseConvertible.swift in Sources */,
 			);

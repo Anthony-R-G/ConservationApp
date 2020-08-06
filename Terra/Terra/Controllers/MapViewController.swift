@@ -13,9 +13,18 @@ import CoreLocation
 class MapViewController: UIViewController {
     
     //MARK: -- UI Element Initialization
+    
+    private lazy var backButton: UIButton = {
+        let btn = Factory.makeButton(title: "Back", weight: .medium, color: .white)
+        btn.layer.borderWidth = Constants.borderWidth
+        btn.layer.cornerRadius = 10
+        btn.layer.borderColor = UIColor.white.cgColor
+        btn.addTarget(self, action: #selector(backButtonPressed), for: .touchUpInside)
+        return btn
+    }()
     private lazy var mapView: MKMapView = {
         let mv = MKMapView()
-        mv.mapType = .satelliteFlyover
+        mv.mapType = .hybridFlyover
         mv.showsTraffic = false
         mv.showsUserLocation = true
         mv.delegate = self
@@ -26,15 +35,14 @@ class MapViewController: UIViewController {
     
     var currentSpecies: Species! {
         didSet {
-            habitatLocation = makeCLLocation(latitude: currentSpecies.habitat.latitude, longitude: currentSpecies.habitat.longitude)
+            speciesLocation = makeCLLocation(latitude: currentSpecies.habitat.latitude, longitude: currentSpecies.habitat.longitude)
         }
     }
     
-    
-    private var habitatLocation = CLLocation() {
+    private var speciesLocation = CLLocation() {
         didSet {
-            makeAnnotation(latitude: habitatLocation.coordinate.latitude, longitude: habitatLocation.coordinate.longitude, title: currentSpecies.commonName , subtitle: nil)
-            mapView.centerToLocation(habitatLocation)
+            makeAnnotation(latitude: speciesLocation.coordinate.latitude, longitude: speciesLocation.coordinate.longitude, title: currentSpecies.commonName , subtitle: nil)
+            mapView.centerToLocation(speciesLocation)
             
         }
     }
@@ -42,6 +50,11 @@ class MapViewController: UIViewController {
     private var locationManager = CLLocationManager()
     
     //MARK: -- Methods
+    
+    @objc private func backButtonPressed() {
+        dismiss(animated: true, completion: nil)
+    }
+    
     private func makeCLLocation(latitude: CLLocationDegrees, longitude: CLLocationDegrees) -> CLLocation {
         let location = CLLocation(latitude: latitude, longitude: longitude)
         return location
@@ -49,24 +62,31 @@ class MapViewController: UIViewController {
     
     
     private func makeAnnotation(latitude: CLLocationDegrees, longitude: CLLocationDegrees, title: String, subtitle: String?) {
-        let annotation = SpeciesAnnotation(title: currentSpecies.commonName, subtitle: currentSpecies.taxonomy.scientificName, coordinate: CLLocationCoordinate2D(latitude: habitatLocation.coordinate.latitude, longitude: habitatLocation.coordinate.longitude))
+        let annotation = SpeciesAnnotation(title: currentSpecies.commonName, subtitle: currentSpecies.taxonomy.scientificName, coordinate: CLLocationCoordinate2D(latitude: speciesLocation.coordinate.latitude, longitude: speciesLocation.coordinate.longitude))
         mapView.addAnnotation(annotation)
     }
     
-    private func requestLocationAccess() {
-        let status = CLLocationManager.authorizationStatus()
-        
-        switch status {
-        case .authorizedAlways, .authorizedWhenInUse:
-            return
-            
-        case .denied, .restricted:
-            print("location access denied")
-            
-        default:
-            locationManager.requestWhenInUseAuthorization()
-        }
+    
+    private func calculateDistanceFromUserToSpecies(speciesCoordinate: CLLocation) {
+        let distanceInMeters = speciesCoordinate.distance(from: locationManager.location!)
+        let distanceInMiles = distanceInMeters.metersToMiles
+        print(distanceInMiles.rounded(toPlaces: 1))
     }
+    
+    private func requestLocationAccess() {
+           let status = CLLocationManager.authorizationStatus()
+           
+           switch status {
+           case .authorizedAlways, .authorizedWhenInUse:
+               return
+               
+           case .denied, .restricted:
+               print("location access denied")
+               
+           default:
+               locationManager.requestWhenInUseAuthorization()
+           }
+       }
     
     override var prefersStatusBarHidden: Bool {
         return true
@@ -78,6 +98,9 @@ class MapViewController: UIViewController {
         setConstraints()
         locationManager.delegate = self
         requestLocationAccess()
+        locationManager.startUpdatingLocation()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        calculateDistanceFromUserToSpecies(speciesCoordinate: speciesLocation)
     }
 }
 
@@ -129,18 +152,28 @@ extension MapViewController: CLLocationManagerDelegate {
 
 //MARK: -- Add Subviews & Set Constraints
 
-extension MapViewController {
-    private func addSubviews() {
-        let UIElements = [mapView]
+fileprivate extension MapViewController {
+     func addSubviews() {
+        let UIElements = [mapView, backButton]
         UIElements.forEach { view.addSubview($0) }
         UIElements.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
     }
     
-    private func setConstraints() {
+    func setConstraints() {
         setMapViewConstraints()
+        setBackButtonConstraints()
     }
     
-    private func setMapViewConstraints() {
+    func setBackButtonConstraints() {
+        NSLayoutConstraint.activate([
+            backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            backButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 30),
+            backButton.heightAnchor.constraint(equalToConstant: 40),
+            backButton.widthAnchor.constraint(equalToConstant: 80)
+        ])
+    }
+    
+    func setMapViewConstraints() {
         NSLayoutConstraint.activate([
             mapView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             mapView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -149,4 +182,5 @@ extension MapViewController {
         ])
     }
 }
+
 

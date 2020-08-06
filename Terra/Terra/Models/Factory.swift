@@ -54,6 +54,15 @@ class Factory {
         return button
     }
     
+    static func makeButton(title: String, weight: FontWeight, color: UIColor) -> UIButton {
+        let button = UIButton(type: .custom)
+        button.setTitle(title, for: .normal)
+        button.setTitleColor(color, for: .normal)
+        button.showsTouchWhenHighlighted = true
+        button.titleLabel?.font = UIFont(name: weight.rawValue, size: 15)
+        return button
+    }
+    
     static func makeRoundedInfoView(strategy: SpeciesStrategy) -> RoundedInfoView {
         let view = RoundedInfoView(frame: CGRect(), speciesStrategy: strategy)
         return view

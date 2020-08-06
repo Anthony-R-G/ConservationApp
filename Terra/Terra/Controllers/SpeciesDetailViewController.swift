@@ -123,8 +123,8 @@ final class SpeciesDetailViewController: UIViewController {
     //MARK: -- Methods
     
     private func setViewElementsFromSpeciesData() {
-        headerNameView.setViewElementsFromSpeciesData(species: currentSpecies)
-        subheaderInfoView.setViewElementsFromSpeciesData(species: currentSpecies)
+        headerNameView.configureView(with: currentSpecies)
+        subheaderInfoView.configureView(with: currentSpecies)
     }
     
     private func setBackground() {
