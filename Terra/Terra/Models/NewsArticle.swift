@@ -10,6 +10,7 @@ import Foundation
 
 struct NewsAPIResult: Codable {
     let articles: [Article]
+    let totalResults: Int
 }
 
 

@@ -69,14 +69,6 @@ final class SpeciesListViewController: UIViewController {
                                  alignment: .left)
     }()
     
-    private lazy var subtitleLabel: UILabel = {
-        return  Factory.makeLabel(title: "Protect the earth's biodiversity",
-                                  weight: .light,
-                                  size: 20,
-                                  color: #colorLiteral(red: 0.6699403524, green: 0.6602986455, blue: 0.7864833474, alpha: 1),
-                                  alignment: .left)
-    }()
-    
     private lazy var criticalSpeciesLabel: UILabel = {
         return Factory.makeLabel(title: "CRITICALLY ENDANGERED",
                                  weight: .medium,
@@ -106,11 +98,11 @@ final class SpeciesListViewController: UIViewController {
     }()
     
     private lazy var searchBarLeadingAnchorConstraint: NSLayoutConstraint = {
-        return searchBar.leadingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
+        return searchBar.leadingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.universalLeadingConstant)
     }()
     
     private lazy var terraTitleLabelLeadingAnchorConstraint: NSLayoutConstraint = {
-        return terraTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20)
+        return terraTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.universalLeadingConstant)
     }()
     
     //MARK: -- Properties
@@ -155,8 +147,8 @@ final class SpeciesListViewController: UIViewController {
     }
     
     private func dismissSearchBar() {
-        searchBarLeadingAnchorConstraint.constant = -20
-        terraTitleLabelLeadingAnchorConstraint.constant = 20
+        searchBarLeadingAnchorConstraint.constant = -Constants.universalLeadingConstant
+        terraTitleLabelLeadingAnchorConstraint.constant = Constants.universalLeadingConstant
         searchBar.alpha = 0
         searchBarButton.alpha = 1
         UIView.animate(withDuration: 0.3, animations: {
@@ -339,7 +331,7 @@ fileprivate extension SpeciesListViewController {
     
     func setSearchBarButtonConstraints() {
         NSLayoutConstraint.activate([
-            searchBarButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            searchBarButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.universalLeadingConstant),
             searchBarButton.centerYAnchor.constraint(equalTo: terraTitleLabel.centerYAnchor),
             searchBarButton.heightAnchor.constraint(equalToConstant: 40),
             searchBarButton.widthAnchor.constraint(equalToConstant: 40)
@@ -349,7 +341,7 @@ fileprivate extension SpeciesListViewController {
     func setSearchBarConstraints() {
         NSLayoutConstraint.activate([
             searchBarLeadingAnchorConstraint,
-            searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.universalLeadingConstant),
             searchBar.centerYAnchor.constraint(equalTo: searchBarButton.centerYAnchor),
         ])
     }
