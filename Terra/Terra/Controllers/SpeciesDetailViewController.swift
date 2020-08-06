@@ -194,13 +194,13 @@ final class SpeciesDetailViewController: UIViewController {
             horizontalScrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
             
         case .buttonTwo:
-            horizontalScrollView.setContentOffset(CGPoint(x: speciesHabitatView.frame.minX - 20, y: 0), animated: true)
+            horizontalScrollView.setContentOffset(CGPoint(x: speciesHabitatView.frame.minX - Constants.universalLeadingConstant, y: 0), animated: true)
             
         case .buttonThree:
-            horizontalScrollView.setContentOffset(CGPoint(x: speciesThreatsView.frame.minX - 20, y: 0), animated: true)
+            horizontalScrollView.setContentOffset(CGPoint(x: speciesThreatsView.frame.minX - Constants.universalLeadingConstant, y: 0), animated: true)
             
         case .buttonFour:
-            horizontalScrollView.setContentOffset(CGPoint(x: speciesGalleryView.frame.minX - 20, y: 0), animated: true)
+            horizontalScrollView.setContentOffset(CGPoint(x: speciesGalleryView.frame.minX - Constants.universalLeadingConstant, y: 0), animated: true)
         }
     }
     
@@ -386,7 +386,7 @@ fileprivate extension SpeciesDetailViewController {
         NSLayoutConstraint.activate([
             subheaderInfoView.leadingAnchor.constraint(equalTo: headerNameView.leadingAnchor),
             subheaderInfoView.trailingAnchor.constraint(equalTo: headerNameView.trailingAnchor),
-            subheaderInfoView.topAnchor.constraint(equalTo: headerNameView.bottomAnchor, constant: 20),
+            subheaderInfoView.topAnchor.constraint(equalTo: headerNameView.bottomAnchor, constant: Constants.universalLeadingConstant),
             subheaderInfoViewHeightConstraint
         ])
     }

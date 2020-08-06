@@ -43,11 +43,11 @@ class Factory {
         return label
     }
     
-    static func makeBottomBarButton(title: String) -> UIButton {
+    static func makeToolBarButton(title: String) -> UIButton {
         let button = UIButton(type: .custom)
         button.setTitle(title, for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.setTitleColor(#colorLiteral(red: 0.9257398248, green: 1, blue: 0.7623538375, alpha: 1), for: .selected)
+        button.setTitleColor(Constants.buttonColor, for: .selected)
         button.showsTouchWhenHighlighted = true
         button.titleLabel?.font = UIFont(name: "Roboto-Medium", size: 15)
         button.sizeToFit()

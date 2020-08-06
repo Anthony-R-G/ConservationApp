@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import CoreLocation
 
 class MapViewController: UIViewController {
     
@@ -16,6 +17,8 @@ class MapViewController: UIViewController {
         let mv = MKMapView()
         mv.mapType = .satelliteFlyover
         mv.showsTraffic = false
+        mv.showsUserLocation = true
+        mv.delegate = self
         return mv
     }()
     
@@ -36,6 +39,8 @@ class MapViewController: UIViewController {
         }
     }
     
+    private var locationManager = CLLocationManager()
+    
     //MARK: -- Methods
     private func makeCLLocation(latitude: CLLocationDegrees, longitude: CLLocationDegrees) -> CLLocation {
         let location = CLLocation(latitude: latitude, longitude: longitude)
@@ -48,6 +53,21 @@ class MapViewController: UIViewController {
         mapView.addAnnotation(annotation)
     }
     
+    private func requestLocationAccess() {
+        let status = CLLocationManager.authorizationStatus()
+        
+        switch status {
+        case .authorizedAlways, .authorizedWhenInUse:
+            return
+            
+        case .denied, .restricted:
+            print("location access denied")
+            
+        default:
+            locationManager.requestWhenInUseAuthorization()
+        }
+    }
+    
     override var prefersStatusBarHidden: Bool {
         return true
     }
@@ -56,9 +76,8 @@ class MapViewController: UIViewController {
         super.viewDidLoad()
         addSubviews()
         setConstraints()
-        mapView.delegate = self
-        let annotation = SpeciesAnnotation(title: currentSpecies.commonName, subtitle: currentSpecies.taxonomy.scientificName, coordinate: CLLocationCoordinate2D(latitude: currentSpecies.habitat.latitude, longitude: currentSpecies.habitat.longitude))
-        mapView.addAnnotation(annotation)
+        locationManager.delegate = self
+        requestLocationAccess()
     }
 }
 
@@ -101,8 +120,14 @@ extension MapViewController: MKMapViewDelegate {
     }
 }
 
+//MARK: --CLLocationManagerDelegate Methods
 
-//MARK: --Add Subviews & Set Constraints
+extension MapViewController: CLLocationManagerDelegate {
+    
+}
+
+
+//MARK: -- Add Subviews & Set Constraints
 
 extension MapViewController {
     private func addSubviews() {

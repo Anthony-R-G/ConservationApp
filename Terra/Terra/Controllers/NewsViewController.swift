@@ -30,6 +30,7 @@ class NewsViewController: UIViewController {
         tv.dataSource = self
         tv.delegate = self
         tv.prefetchDataSource = self
+        tv.indicatorStyle = .white
         return tv
     }()
     
@@ -41,7 +42,11 @@ class NewsViewController: UIViewController {
         }
     }
     
+    private var currentPage: Int = 1
     
+    private var isFetchingNews = false
+    
+
     //MARK: -- Methods
     
     @objc func handleRefresh() {
@@ -52,14 +57,20 @@ class NewsViewController: UIViewController {
     }
     
     private func fetchNewsData() {
-        NewsAPIClient.shared.fetchNewsData(page: 3) { (result) in
+        isFetchingNews = true
+        NewsAPIClient.shared.fetchNewsData(page: currentPage) { (result) in
             switch result {
             case .success(let newsData):
-                self.newsArticles = newsData
+                self.newsArticles.append(contentsOf: newsData.articles)
+                self.currentPage += 1
+                
+                print(newsData.totalResults)
+                self.isFetchingNews = false
                 
                 
             case .failure(let error):
                 print(error)
+                self.isFetchingNews = false
             }
         }
     }
@@ -80,7 +91,7 @@ class NewsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = #colorLiteral(red: 0.1108833775, green: 0.1294697225, blue: 0.1595396101, alpha: 1)
+        view.backgroundColor = .black
         addSubviews()
         setConstraints()
         fetchNewsData()
@@ -115,7 +126,12 @@ extension NewsViewController: UITableViewDelegate {
 
 extension NewsViewController: UITableViewDataSourcePrefetching {
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-        print("ya")
+        for index in indexPaths {
+            if index.row > newsArticles.count - 3 && !isFetchingNews {
+                fetchNewsData()
+                break
+            }
+        }
     }
 }
 
@@ -143,3 +159,5 @@ fileprivate extension NewsViewController {
         ])
     }
 }
+
+

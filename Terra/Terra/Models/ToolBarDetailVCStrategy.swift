@@ -28,4 +28,8 @@ struct ToolBarDetailVCStrategy: ToolBarVCStrategy {
     func highlightIndicatorHidden() -> Bool {
         return false
     }
+    
+    func blurHidden() -> Bool {
+        return false
+    }
 }

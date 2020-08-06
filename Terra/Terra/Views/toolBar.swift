@@ -12,28 +12,28 @@ class toolBar: UIView {
     //MARK: -- Lazy UI Element Initialization
     
     private lazy var buttonOne: UIButton = {
-        let btn = Factory.makeBottomBarButton(title: viewControllerStrategy.buttonOneName())
+        let btn = Factory.makeToolBarButton(title: viewControllerStrategy.buttonOneName())
         btn.tag = 0
         btn.addTarget(self, action: #selector(bottomBarButtonPressed(sender:)), for: .touchUpInside)
         return btn
     }()
     
     private lazy var buttonTwo: UIButton = {
-        let btn = Factory.makeBottomBarButton(title: viewControllerStrategy.buttonTwoName())
+        let btn = Factory.makeToolBarButton(title: viewControllerStrategy.buttonTwoName())
         btn.tag = 1
         btn.addTarget(self, action: #selector(bottomBarButtonPressed(sender:)), for: .touchUpInside)
         return btn
     }()
     
     private lazy var buttonThree: UIButton = {
-        let btn = Factory.makeBottomBarButton(title: viewControllerStrategy.buttonThreeName())
+        let btn = Factory.makeToolBarButton(title: viewControllerStrategy.buttonThreeName())
         btn.tag = 2
         btn.addTarget(self, action: #selector(bottomBarButtonPressed(sender:)), for: .touchUpInside)
         return btn
     }()
     
     private lazy var buttonFour: UIButton = {
-        let btn = Factory.makeBottomBarButton(title: viewControllerStrategy.buttonFourName())
+        let btn = Factory.makeToolBarButton(title: viewControllerStrategy.buttonFourName())
         btn.tag = 3
         btn.addTarget(self, action: #selector(bottomBarButtonPressed(sender:)), for: .touchUpInside)
         return btn
@@ -50,7 +50,7 @@ class toolBar: UIView {
     
     private lazy var highlightedIndicator: UIView = {
         let screenWidth = UIScreen.main.bounds.width
-        let view = UIView(frame: CGRect(x: .zero, y: .zero, width: screenWidth / 4.55, height: 1))
+        let view = UIView(frame: CGRect(x: .zero, y: .zero, width: screenWidth / 4.55, height: Constants.borderWidth))
         view.backgroundColor = UIColor.white
         view.isHidden = viewControllerStrategy.highlightIndicatorHidden()
         return view
@@ -67,9 +67,6 @@ class toolBar: UIView {
     weak var delegate: BottomBarDelegate?
     
     //MARK: -- Methods
-    private func setAppearance() {
-        addBlurToView()
-    }
     
     public func updateHighlightIndicator(scrollOffset: CGFloat) {
         let highlightOffset = scrollOffset/4.01 + 12
@@ -109,9 +106,11 @@ class toolBar: UIView {
     init(frame: CGRect, strategy: ToolBarVCStrategy) {
         viewControllerStrategy = strategy
         super.init(frame: frame)
-        setAppearance()
         addSubviews()
         setConstraints()
+        if !strategy.blurHidden() {
+            addBlurToView()
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -137,8 +136,8 @@ fileprivate extension toolBar {
     
     func setButtonStackViewConstraints() {
         NSLayoutConstraint.activate([
-            buttonStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            buttonStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            buttonStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.universalLeadingConstant),
+            buttonStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.universalLeadingConstant),
             buttonStackView.topAnchor.constraint(equalTo: topAnchor, constant: 10)
         ])
     }
