@@ -64,7 +64,6 @@ class NewsViewController: UIViewController {
                 self.newsArticles.append(contentsOf: newsData.articles)
                 self.currentPage += 1
                 
-                print(newsData.totalResults)
                 self.isFetchingNews = false
                 
                 
