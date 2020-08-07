@@ -18,7 +18,7 @@
 
 •The main focus of Terra is the list of threatened animals, so that's what the UI puts at the forefront. This is done through the use of visuals, thin lines, and light blur effects.
 
-•Using a phone is a intimate experience than using a computer browser. With that in mind, an app should package content in such a way that there's preference to use it as opposed to just getting the data from a website. 
+•Using a phone is a more intimate experience than using a computer browser. With that in mind, an app should package content in such a way that there's preference to use it as opposed to just getting the data from a website. 
 
 
 
