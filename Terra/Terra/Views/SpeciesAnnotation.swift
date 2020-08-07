@@ -6,21 +6,20 @@
 //  Copyright © 2020 Antnee. All rights reserved.
 //
 
-import MapKit
+import UIKit
+import Mapbox
 
-class SpeciesAnnotation: NSObject, MKAnnotation {
-    let title: String?
-    let subtitle: String?
-    let coordinate: CLLocationCoordinate2D
-    
-    
-    
-    init(title: String, subtitle: String, coordinate: CLLocationCoordinate2D) {
+class SpeciesAnnotation: NSObject, MGLAnnotation {
+
+    var coordinate: CLLocationCoordinate2D
+    var title: String?
+    var subtitle: String?
+    var image: UIImage
+
+    init(coordinate: CLLocationCoordinate2D, title: String, subtitle: String, image: UIImage) {
+        self.coordinate = coordinate
         self.title = title
         self.subtitle = subtitle
-        self.coordinate = coordinate
-        super.init()
-        
+        self.image = image
     }
-    
 }

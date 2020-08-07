@@ -294,7 +294,7 @@ extension SpeciesDetailViewController: RoundedInfoViewDelegate {
         switch sender.tag {
         case 1:
             let mapVC = MGLMapViewController()
-//            mapVC.currentSpecies = currentSpecies
+            mapVC.currentSpecies = currentSpecies
             mapVC.modalPresentationStyle = .fullScreen
             present(mapVC, animated: true, completion: nil)
         default: print(sender.tag)
