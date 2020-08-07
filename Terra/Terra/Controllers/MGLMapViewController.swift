@@ -31,19 +31,27 @@ class MGLMapViewController: UIViewController {
         return btn
     }()
     
+    private lazy var topGradient: GradientView = {
+        let gv = GradientView()
+        gv.translatesAutoresizingMaskIntoConstraints = false
+        gv.startColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        gv.endColor = #colorLiteral(red: 0.06859237701, green: 0.08213501424, blue: 0.2409383953, alpha: 1)
+        return gv
+    }()
+    
     //MARK: -- Properties
     
     var currentSpecies: Species! {
         didSet {
-             speciesLocation = CLLocationCoordinate2D(latitude: currentSpecies.habitat.latitude, longitude: currentSpecies.habitat.longitude)
+            speciesLocation = CLLocationCoordinate2D(latitude: currentSpecies.habitat.latitude, longitude: currentSpecies.habitat.longitude)
         }
     }
     
     private var speciesLocation = CLLocationCoordinate2D() {
-           didSet {
+        didSet {
             addAnnotation(from: speciesLocation, title: currentSpecies.commonName, subtitle: currentSpecies.taxonomy.scientificName)
-           }
-       }
+        }
+    }
     
     
     //MARK: -- Methods
@@ -69,7 +77,7 @@ class MGLMapViewController: UIViewController {
         super.viewDidLoad()
         addSubviews()
         setConstraints()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             print("User location: \(String(describing: self.mapView.userLocation?.coordinate))")
         }
     }
@@ -77,17 +85,30 @@ class MGLMapViewController: UIViewController {
 
 extension MGLMapViewController: MGLMapViewDelegate {
     func mapViewDidFinishLoadingMap(_ mapView: MGLMapView) {
-    
-      let camera = MGLMapCamera(lookingAtCenter: speciesLocation , altitude: 100000, pitch: 15, heading: 0)
+        
+        let camera = MGLMapCamera(lookingAtCenter: speciesLocation , altitude: 100000, pitch: 15, heading: 0)
         
         print("Species Location: \(speciesLocation)")
-       
-      // Animate the camera movement over 5 seconds.
-      mapView.setCamera(camera, withDuration: 5, animationTimingFunction: CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut))
-      }
+        
+        
+        mapView.setCamera(camera, withDuration: 3, animationTimingFunction: CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut))
+    }
+    
+    func mapView(_ mapView: MGLMapView, viewFor annotation: MGLAnnotation) -> MGLAnnotationView? {
+        return nil
+    }
     
     func mapView(_ mapView: MGLMapView, annotationCanShowCallout annotation: MGLAnnotation) -> Bool {
-    return true
+        return true
+    }
+    
+    func mapView(_ mapView: MGLMapView, calloutViewFor annotation: MGLAnnotation) -> MGLCalloutView? {
+        
+        let title = annotation.title ?? nil
+        let subtitle = annotation.subtitle ?? nil
+        let customAnnotation = SpeciesAnnotation(coordinate: annotation.coordinate, title: title ?? "no title", subtitle: subtitle ?? "no subtitle")
+        
+        return CustomCalloutView(annotation: customAnnotation)
     }
 }
 
@@ -98,6 +119,7 @@ fileprivate extension MGLMapViewController {
         let UIElements = [mapView, backButton]
         UIElements.forEach { view.addSubview($0) }
         UIElements.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
+        view.insertSubview(topGradient, aboveSubview: mapView)
     }
     
     func setConstraints() {
@@ -120,6 +142,15 @@ fileprivate extension MGLMapViewController {
             mapView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             mapView.heightAnchor.constraint(equalToConstant: view.bounds.size.height),
             mapView.widthAnchor.constraint(equalToConstant: view.bounds.size.width)
+        ])
+    }
+    
+    func setBackgroundGradientOverlayConstraints() {
+        NSLayoutConstraint.activate([
+            topGradient.centerXAnchor.constraint(equalTo: mapView.centerXAnchor),
+            topGradient.centerYAnchor.constraint(equalTo: mapView.centerYAnchor),
+            topGradient.widthAnchor.constraint(equalTo: mapView.widthAnchor),
+            topGradient.heightAnchor.constraint(equalTo: mapView.heightAnchor)
         ])
     }
 }

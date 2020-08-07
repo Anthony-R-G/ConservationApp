@@ -15,7 +15,6 @@ extension UIView {
         let blurredEffectView = PSORoundedVisualEffectView(effect: blurEffect)
         blurredEffectView.frame = self.bounds
         blurredEffectView.alpha = 0.9
-//        blurredEffectView.layer.cornerRadius = cornerRadius
         blurredEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.insertSubview(blurredEffectView, at: 0)
     }
