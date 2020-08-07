@@ -47,6 +47,18 @@ class MGLMapViewController: UIViewController {
     }
     
     
+    var userLocation = CLLocationCoordinate2D() {
+        didSet {
+            print("User Location: \(userLocation)")
+            let locationOne = CLLocation(latitude: userLocation.latitude, longitude: userLocation.longitude)
+            let locationTwo = CLLocation(latitude: speciesLocation.latitude, longitude: speciesLocation.longitude)
+
+            let distance = locationOne.distance(from: locationTwo) * 0.000621371
+
+            print(distance.rounded(toPlaces: 1))
+        }
+    }
+    
     //MARK: -- Methods
     
     func addAnnotation(from coordinate: CLLocationCoordinate2D, title: String, subtitle: String) {
@@ -56,39 +68,6 @@ class MGLMapViewController: UIViewController {
         annotation.subtitle = subtitle
         mapView.addAnnotation(annotation)
     }
-    
-    func degreesToRadians(degrees: Double) -> Double {
-        return degrees * .pi / 180
-    }
-    
-    func radiansToDegrees(radians: Double) -> Double {
-        return radians * 180.0 / .pi
-    }
-    
-    func distance(from coordinateOne: CLLocationCoordinate2D, to coordinateTwo: CLLocationCoordinate2D, unit:String) -> Double {
-        let theta = coordinateOne.longitude - coordinateTwo.longitude
-        
-        var dist = sin(degreesToRadians(degrees: coordinateOne.latitude))
-            * sin(degreesToRadians(degrees: coordinateTwo.latitude))
-            + cos(degreesToRadians(degrees: coordinateOne.latitude))
-            * cos(degreesToRadians(degrees: coordinateTwo.latitude))
-            * cos(degreesToRadians(degrees: theta))
-        
-        dist = acos(dist)
-        dist = radiansToDegrees(radians: dist)
-        
-        dist = dist * 60 * 1.1515
-        if (unit == "K") {
-            dist = dist * 1.609344
-        }
-            
-        else if (unit == "N") {
-            dist = dist * 0.8684
-        }
-        
-        return dist
-    }
-    
     
     @objc private func backButtonPressed() {
         dismiss(animated: true, completion: nil)
@@ -105,8 +84,7 @@ class MGLMapViewController: UIViewController {
         addSubviews()
         setConstraints()
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            print("User location: \(String(describing: self.mapView.userLocation?.coordinate))")
-            
+            self.userLocation = self.mapView.userLocation!.coordinate
         }
     }
 }

@@ -44,7 +44,6 @@ class CustomCalloutView: UIView, MGLCalloutView {
         bar.backgroundColor = .black
         bar.clipsToBounds = true
         bar.translatesAutoresizingMaskIntoConstraints = false
-        
         return bar
     }()
     
@@ -62,7 +61,7 @@ class CustomCalloutView: UIView, MGLCalloutView {
     //MARK: -- Methods
     
     func presentCallout(from rect: CGRect, in view: UIView, constrainedTo constrainedRect: CGRect, animated: Bool) {
-        center = view.center.applying(CGAffineTransform(translationX: 0, y: -self.frame.height))
+        center = view.center.applying(CGAffineTransform(translationX: 0, y: -frame.height))
         view.addSubview(self)
     }
     
