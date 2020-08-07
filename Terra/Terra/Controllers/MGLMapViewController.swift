@@ -31,14 +31,6 @@ class MGLMapViewController: UIViewController {
         return btn
     }()
     
-    private lazy var topGradient: GradientView = {
-        let gv = GradientView()
-        gv.translatesAutoresizingMaskIntoConstraints = false
-        gv.startColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        gv.endColor = #colorLiteral(red: 0.06859237701, green: 0.08213501424, blue: 0.2409383953, alpha: 1)
-        return gv
-    }()
-    
     //MARK: -- Properties
     
     var currentSpecies: Species! {
@@ -50,6 +42,7 @@ class MGLMapViewController: UIViewController {
     private var speciesLocation = CLLocationCoordinate2D() {
         didSet {
             addAnnotation(from: speciesLocation, title: currentSpecies.commonName, subtitle: currentSpecies.taxonomy.scientificName)
+            
         }
     }
     
@@ -64,6 +57,38 @@ class MGLMapViewController: UIViewController {
         mapView.addAnnotation(annotation)
     }
     
+    func degreesToRadians(degrees: Double) -> Double {
+        return degrees * .pi / 180
+    }
+    
+    func radiansToDegrees(radians: Double) -> Double {
+        return radians * 180.0 / .pi
+    }
+    
+    func distance(from coordinateOne: CLLocationCoordinate2D, to coordinateTwo: CLLocationCoordinate2D, unit:String) -> Double {
+        let theta = coordinateOne.longitude - coordinateTwo.longitude
+        
+        var dist = sin(degreesToRadians(degrees: coordinateOne.latitude))
+            * sin(degreesToRadians(degrees: coordinateTwo.latitude))
+            + cos(degreesToRadians(degrees: coordinateOne.latitude))
+            * cos(degreesToRadians(degrees: coordinateTwo.latitude))
+            * cos(degreesToRadians(degrees: theta))
+        
+        dist = acos(dist)
+        dist = radiansToDegrees(radians: dist)
+        
+        dist = dist * 60 * 1.1515
+        if (unit == "K") {
+            dist = dist * 1.609344
+        }
+            
+        else if (unit == "N") {
+            dist = dist * 0.8684
+        }
+        
+        return dist
+    }
+    
     
     @objc private func backButtonPressed() {
         dismiss(animated: true, completion: nil)
@@ -73,12 +98,15 @@ class MGLMapViewController: UIViewController {
         return true
     }
     
+    var testCoord1 = CLLocationCoordinate2D(latitude: 32.9697, longitude: -96.80322)
+    var testCoord2 = CLLocationCoordinate2D(latitude: 29.46786, longitude: -98.53506)
     override func viewDidLoad() {
         super.viewDidLoad()
         addSubviews()
         setConstraints()
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             print("User location: \(String(describing: self.mapView.userLocation?.coordinate))")
+            
         }
     }
 }
@@ -119,7 +147,6 @@ fileprivate extension MGLMapViewController {
         let UIElements = [mapView, backButton]
         UIElements.forEach { view.addSubview($0) }
         UIElements.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
-        view.insertSubview(topGradient, aboveSubview: mapView)
     }
     
     func setConstraints() {
@@ -142,15 +169,6 @@ fileprivate extension MGLMapViewController {
             mapView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             mapView.heightAnchor.constraint(equalToConstant: view.bounds.size.height),
             mapView.widthAnchor.constraint(equalToConstant: view.bounds.size.width)
-        ])
-    }
-    
-    func setBackgroundGradientOverlayConstraints() {
-        NSLayoutConstraint.activate([
-            topGradient.centerXAnchor.constraint(equalTo: mapView.centerXAnchor),
-            topGradient.centerYAnchor.constraint(equalTo: mapView.centerYAnchor),
-            topGradient.widthAnchor.constraint(equalTo: mapView.widthAnchor),
-            topGradient.heightAnchor.constraint(equalTo: mapView.heightAnchor)
         ])
     }
 }

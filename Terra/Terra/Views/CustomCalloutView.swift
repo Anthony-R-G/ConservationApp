@@ -16,8 +16,8 @@ class CustomCalloutView: UIView, MGLCalloutView {
     
     private lazy var titleLabel: UILabel = {
         return Factory.makeLabel(title: nil,
-                                 weight: .bold,
-                                 size: 17,
+                                 weight: .medium,
+                                 size: 18,
                                  color: .white,
                                  alignment: .left)
     }()
@@ -34,8 +34,18 @@ class CustomCalloutView: UIView, MGLCalloutView {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
         iv.translatesAutoresizingMaskIntoConstraints = false
+        iv.clipsToBounds = true
         insertSubview(iv, at: 0)
         return iv
+    }()
+    
+    private lazy var blackBar: UIView = {
+        let bar = UIView()
+        bar.backgroundColor = .black
+        bar.clipsToBounds = true
+        bar.translatesAutoresizingMaskIntoConstraints = false
+        
+        return bar
     }()
     
     //MARK: -- Properties
@@ -45,13 +55,14 @@ class CustomCalloutView: UIView, MGLCalloutView {
     lazy var leftAccessoryView = UIView()
     lazy var rightAccessoryView = UIView()
     
+    
     weak var delegate: MGLCalloutViewDelegate?
     
     
     //MARK: -- Methods
     
     func presentCallout(from rect: CGRect, in view: UIView, constrainedTo constrainedRect: CGRect, animated: Bool) {
-        self.center = view.center.applying(CGAffineTransform(translationX: 0, y: -self.frame.height))
+        center = view.center.applying(CGAffineTransform(translationX: 0, y: -self.frame.height))
         view.addSubview(self)
     }
     
@@ -63,17 +74,20 @@ class CustomCalloutView: UIView, MGLCalloutView {
         }
     }
     
+    var dismissesAutomatically: Bool = false
+    var isAnchoredToAnnotation: Bool = true
     
     required init(annotation: SpeciesAnnotation) {
         self.representedObject = annotation
         
-        super.init(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: UIScreen.main.bounds.width * 0.75, height: 160.0)))
+        super.init(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: UIScreen.main.bounds.width * 0.75, height: 180.0)))
         
         self.titleLabel.text = self.representedObject.title ?? ""
         self.subtitleLabel.text = self.representedObject.subtitle ?? ""
-        
+     
         clipsToBounds = true
         layer.cornerRadius = 10
+        
         
         addSubviews()
         setConstraints()
@@ -90,23 +104,36 @@ class CustomCalloutView: UIView, MGLCalloutView {
 fileprivate extension CustomCalloutView {
     
     func addSubviews() {
-        let UIElements = [titleLabel, subtitleLabel]
+        let UIElements = [blackBar, titleLabel, subtitleLabel]
         UIElements.forEach { addSubview($0) }
         UIElements.forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
     }
     
     func setConstraints() {
+        setBlackBarConstraints()
+        setBackgroundImageConstraints()
         setTitleLabelConstraints()
         setSubtitleLabelConstraints()
-        setBackgroundImageConstraints()
     }
     
+    
     func setTitleLabelConstraints() {
-        
+        NSLayoutConstraint.activate([
+            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.universalLeadingConstant),
+            titleLabel.topAnchor.constraint(equalTo: backgroundImageView.bottomAnchor, constant: 5),
+            titleLabel.widthAnchor.constraint(equalTo: widthAnchor),
+            titleLabel.heightAnchor.constraint(equalToConstant: 30)
+            
+        ])
     }
     
     func setSubtitleLabelConstraints() {
-        
+        NSLayoutConstraint.activate([
+            subtitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.universalLeadingConstant),
+            subtitleLabel.widthAnchor.constraint(equalTo: widthAnchor),
+            subtitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5),
+            subtitleLabel.heightAnchor.constraint(equalToConstant: 20)
+        ])
     }
     
     func setBackgroundImageConstraints() {
@@ -114,7 +141,16 @@ fileprivate extension CustomCalloutView {
             backgroundImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
             backgroundImageView.trailingAnchor.constraint(equalTo: trailingAnchor),
             backgroundImageView.topAnchor.constraint(equalTo: topAnchor),
-            backgroundImageView.bottomAnchor.constraint(equalTo: bottomAnchor)
+            backgroundImageView.bottomAnchor.constraint(equalTo: blackBar.topAnchor)
+        ])
+    }
+    
+    func setBlackBarConstraints() {
+        NSLayoutConstraint.activate([
+            blackBar.leadingAnchor.constraint(equalTo: leadingAnchor),
+            blackBar.trailingAnchor.constraint(equalTo: trailingAnchor),
+            blackBar.bottomAnchor.constraint(equalTo: bottomAnchor),
+            blackBar.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.4)
         ])
     }
 }
