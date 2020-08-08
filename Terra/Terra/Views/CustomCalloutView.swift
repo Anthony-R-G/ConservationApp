@@ -29,12 +29,12 @@ class CustomCalloutView: UIView, MGLCalloutView {
                                  alignment: .left)
     }()
     
-    private lazy var areaTitleLabel: UILabel = {
+    private lazy var areaLabel: UILabel = {
         return Factory.makeLabel(title: nil,
                                  weight: .light,
                                  size: 14,
                                  color: .lightGray,
-                                 alignment: .center)
+                                 alignment: .left)
     }()
     
     private lazy var blackBar: UIView = {
@@ -82,6 +82,7 @@ class CustomCalloutView: UIView, MGLCalloutView {
     private func configureUIElements(from annotation: SpeciesAnnotation) {
         titleLabel.text = representedObject.title ?? ""
         subtitleLabel.text = representedObject.subtitle ?? ""
+        areaLabel.text = annotation.area
         FirebaseStorageService.calloutImageManager.getImage(for: annotation.title!, setTo: speciesImageView)
     }
     
@@ -89,6 +90,7 @@ class CustomCalloutView: UIView, MGLCalloutView {
         mainBody.backgroundColor = .black
         mainBody.clipsToBounds = true
         mainBody.layer.cornerRadius = 10.0
+        backgroundColor = .clear
     }
     
     required init(annotation: SpeciesAnnotation) {
@@ -96,10 +98,6 @@ class CustomCalloutView: UIView, MGLCalloutView {
         mainBody = UIButton(frame: CGRect(x: 0, y: -15, width: UIScreen.main.bounds.width * 0.75, height: 180))
         
         super.init(frame: .zero)
-        
-        layer.cornerRadius = 10
-        backgroundColor = .clear
-        
         addSubviews()
         setConstraints()
         configureUIElements(from: annotation)
@@ -206,16 +204,26 @@ fileprivate extension CustomCalloutView {
     
     func addSubviews() {
         addSubview(mainBody)
-        let UIElements = [blackBar, titleLabel, subtitleLabel]
+        let UIElements = [blackBar, titleLabel, subtitleLabel, areaLabel]
         UIElements.forEach { mainBody.addSubview($0) }
         UIElements.forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
     }
     
     func setConstraints() {
         setBlackBarConstraints()
-        setBackgroundImageConstraints()
+        setSpeciesImageConstraints()
         setTitleLabelConstraints()
         setSubtitleLabelConstraints()
+        setAreaLabelConstraints()
+    }
+    
+    func setSpeciesImageConstraints() {
+        NSLayoutConstraint.activate([
+            speciesImageView.leadingAnchor.constraint(equalTo: mainBody.leadingAnchor),
+            speciesImageView.trailingAnchor.constraint(equalTo: mainBody.trailingAnchor),
+            speciesImageView.topAnchor.constraint(equalTo: mainBody.topAnchor),
+            speciesImageView.bottomAnchor.constraint(equalTo: blackBar.topAnchor)
+        ])
     }
     
     
@@ -237,12 +245,12 @@ fileprivate extension CustomCalloutView {
         ])
     }
     
-    func setBackgroundImageConstraints() {
+    func setAreaLabelConstraints() {
         NSLayoutConstraint.activate([
-            speciesImageView.leadingAnchor.constraint(equalTo: mainBody.leadingAnchor),
-            speciesImageView.trailingAnchor.constraint(equalTo: mainBody.trailingAnchor),
-            speciesImageView.topAnchor.constraint(equalTo: mainBody.topAnchor),
-            speciesImageView.bottomAnchor.constraint(equalTo: blackBar.topAnchor)
+            areaLabel.trailingAnchor.constraint(equalTo: mainBody.trailingAnchor, constant: -Constants.universalLeadingConstant),
+            areaLabel.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
+            areaLabel.widthAnchor.constraint(equalToConstant: 40),
+            areaLabel.heightAnchor.constraint(equalToConstant: 20)
         ])
     }
     
