@@ -6,7 +6,7 @@ class CustomCalloutView: UIView, MGLCalloutView {
     private lazy var titleLabel: UILabel = {
         return Factory.makeLabel(title: nil,
                                  weight: .medium,
-                                 size: 18,
+                                 size: 19,
                                  color: .white,
                                  alignment: .left)
     }()
@@ -126,11 +126,12 @@ class CustomCalloutView: UIView, MGLCalloutView {
         if animated {
             alpha = 0
             UIView.animate(withDuration: 0.2) { [weak self] in
-                guard let self = self else {
-                    return
+               guard let strongSelf = self else {
+                return
                 }
-                self.alpha = 1
-                self.delegate?.calloutViewDidAppear?(self)
+                 
+                strongSelf.alpha = 1
+                strongSelf.delegate?.calloutViewDidAppear?(strongSelf)
             }
         } else {
             delegate?.calloutViewDidAppear?(self)

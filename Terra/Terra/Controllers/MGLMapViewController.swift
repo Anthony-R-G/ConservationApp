@@ -57,6 +57,7 @@ class MGLMapViewController: UIViewController {
     private var speciesLocation = CLLocationCoordinate2D() {
         didSet {
             addAnnotation(from: speciesLocation, title: currentSpecies.commonName, subtitle: currentSpecies.taxonomy.scientificName)
+            
         }
     }
     
@@ -81,6 +82,7 @@ class MGLMapViewController: UIViewController {
         annotation.coordinate = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
         annotation.title = title
         annotation.subtitle = subtitle
+        mapView.selectAnnotation(annotation, animated: true, completionHandler: nil)
         mapView.addAnnotation(annotation)
     }
     
@@ -112,7 +114,6 @@ extension MGLMapViewController: MGLMapViewDelegate {
         mapView.setCamera(camera,
                           withDuration: 3,
                           animationTimingFunction: CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut))
-        print("Species Location: \(speciesLocation)")
     }
     
     func mapView(_ mapView: MGLMapView, viewFor annotation: MGLAnnotation) -> MGLAnnotationView? {

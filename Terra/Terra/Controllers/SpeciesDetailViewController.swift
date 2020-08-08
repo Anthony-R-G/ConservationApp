@@ -294,8 +294,8 @@ extension SpeciesDetailViewController: RoundedInfoViewDelegate {
     func learnMoreButtonPressed(_ sender: UIButton) {
         switch sender.tag {
         case 1:
-            let mapVC = MGLMapViewController()
-            mapVC.currentSpecies = currentSpecies
+            let mapVC = ViewController()
+//            mapVC.currentSpecies = currentSpecies
             mapVC.modalPresentationStyle = .fullScreen
             present(mapVC, animated: true, completion: nil)
         default: print(sender.tag)
