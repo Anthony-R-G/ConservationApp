@@ -23,15 +23,13 @@
 
 
 ## Technologies 
-•Written in Swift
+•Swift 5
 
-•UIKit (UI is created programmatically without Storyboards)
+•UIKit (UI is created programmatically, without Storyboards)
 
 •Safari Services
 
-•MapKit
-
-•CoreLocation
+•[Mapbox](https://www.mapbox.com/)
 
 •CocoaPods 
 
@@ -96,10 +94,31 @@ Coming:
 
 
 
-### Getting Detailed Information
-| African Elephant Overview | Blue-throated Macaw Habitat | Blue-throated Macaw Distribution | Panamanian Golden Frog Distribution |
+#### Getting Detailed Information
+| African Elephant Overview | Blue-throated Macaw Habitat | Cheetah Threats | Giant Panda Overview |
 | :------: | :------: | :------: | :------: |
-|![screen 1](https://i.imgur.com/XVNFPHj.png) | ![screen 2](https://i.imgur.com/kgitJkv.png) |![screen 3](https://i.imgur.com/Ueikygo.png)|![screen 4](https://i.imgur.com/fz7PtXS.png)|
+|![screen 1](https://i.imgur.com/XVNFPHj.png) | ![screen 2](https://i.imgur.com/kgitJkv.png) |![screen 3](https://i.imgur.com/vD58wua.png)|![screen 4](https://i.imgur.com/idsjgtZ.png)|
+
+
+## Map Exploration 
+*Experimental feature for post v1.0.0*
+
+•A fully interactive map using Mapbox SDK that allows you to explore the map of the earth.
+
+•The map will have the coordinates of each animal placed in the area they live. (Note: this will be changed to encompass larger polygon regions)
+
+•Each coordinate annotation can be tapped to bring up a callout view.
+
+•The callout view will contain information such as the animal's name, the distance that coordinate is away from you (if location access granted), and will enable you to visit that animal's individual species page.
+
+•There are two map options: a default satellite street style map and a custom-made hypsometric map to see color-coordinated 3D elevation levels.
+
+•The purpose of this is to make an alternative fun way to discover animals and feel more immersed in the content.
+
+| Blue-Throated Macaw | Cheetah | Cheetah Hypsometric | Giant Panda |
+| :------: | :------: | :------: | :------: |
+|![screen 1](https://i.imgur.com/sHmn7Ac.png) | ![screen 2](https://i.imgur.com/yNt86y6.png) |![screen 3](https://i.imgur.com/axdhtdh.png)|![screen 4](https://i.imgur.com/nYUa4EL.png)|
+
 
 ### Donating
 ![screen 1](https://media.giphy.com/media/Rm2YUtHLivpcvSU0Yg/giphy.gif)
