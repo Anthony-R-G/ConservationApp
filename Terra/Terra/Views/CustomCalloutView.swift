@@ -24,6 +24,7 @@ class CustomCalloutView: UIView, MGLCalloutView {
         iv.contentMode = .scaleAspectFill
         iv.translatesAutoresizingMaskIntoConstraints = false
         iv.clipsToBounds = true
+        iv.isUserInteractionEnabled = false
         mainBody.insertSubview(iv, at: 0)
         return iv
     }()
@@ -33,6 +34,7 @@ class CustomCalloutView: UIView, MGLCalloutView {
         bar.backgroundColor = .black
         bar.clipsToBounds = true
         bar.translatesAutoresizingMaskIntoConstraints = false
+        bar.isUserInteractionEnabled = false
         return bar
     }()
     
@@ -64,13 +66,12 @@ class CustomCalloutView: UIView, MGLCalloutView {
     let tipHeight: CGFloat = 30.0
     let tipWidth: CGFloat = 40.0
     
-    let mainBody: UIView
+    let mainBody: UIButton
     
     required init(annotation: SpeciesAnnotation) {
         self.representedObject = annotation
-        self.mainBody = UIView(frame: CGRect(x: 0, y: -15, width: UIScreen.main.bounds.width * 0.75, height: 180))
-        print(mainBody.frame.height)
-        
+        self.mainBody = UIButton(frame: CGRect(x: 0, y: -15, width: UIScreen.main.bounds.width * 0.75, height: 180))
+      
         super.init(frame: .zero)
         
         backgroundColor = .clear
@@ -103,16 +104,16 @@ class CustomCalloutView: UIView, MGLCalloutView {
         // Prepare title label.
         //        mainBody.setTitle(representedObject.title!, for: .normal)
         
-        //        if isCalloutTappable() {
-        //            mainBody.addTarget(self, action: #selector(CustomCalloutView.calloutTapped), for: .touchUpInside)
-        //        } else {
-        //            mainBody.isUserInteractionEnabled = false
-        //        }
+        if isCalloutTappable() {
+            mainBody.addTarget(self, action: #selector(CustomCalloutView.calloutTapped), for: .touchUpInside)
+        } else {
+            mainBody.isUserInteractionEnabled = false
+        }
         
         // Prepare our frame, adding extra space at the bottom for the tip.
         let frameWidth = mainBody.frame.size.width
         let frameHeight: CGFloat = mainBody.frame.size.height
-        print("Frame height is \(frameHeight)")
+    
         let frameOriginX = rect.origin.x + (rect.size.width/2.0) - (frameWidth/2.0)
         let frameOriginY = rect.origin.y - frameHeight
         frame = CGRect(x: frameOriginX, y: frameOriginY, width: frameWidth, height: frameHeight)
