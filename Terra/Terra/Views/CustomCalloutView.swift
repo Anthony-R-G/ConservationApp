@@ -3,6 +3,16 @@ import Mapbox
 class CustomCalloutView: UIView, MGLCalloutView {
     //MARK: -- UI Element Initialization
     
+    private lazy var speciesImageView: UIImageView = {
+        let iv = UIImageView()
+        iv.contentMode = .scaleAspectFill
+        iv.translatesAutoresizingMaskIntoConstraints = false
+        iv.clipsToBounds = true
+        iv.isUserInteractionEnabled = false
+        mainBody.insertSubview(iv, at: 0)
+        return iv
+    }()
+    
     private lazy var titleLabel: UILabel = {
         return Factory.makeLabel(title: nil,
                                  weight: .medium,
@@ -14,19 +24,17 @@ class CustomCalloutView: UIView, MGLCalloutView {
     private lazy var subtitleLabel: UILabel = {
         return Factory.makeLabel(title: nil,
                                  weight: .regular,
-                                 size: 14,
-                                 color: .white,
+                                 size: 13,
+                                 color: Constants.titleLabelColor,
                                  alignment: .left)
     }()
     
-    private lazy var backgroundImageView: UIImageView = {
-        let iv = UIImageView()
-        iv.contentMode = .scaleAspectFill
-        iv.translatesAutoresizingMaskIntoConstraints = false
-        iv.clipsToBounds = true
-        iv.isUserInteractionEnabled = false
-        mainBody.insertSubview(iv, at: 0)
-        return iv
+    private lazy var areaTitleLabel: UILabel = {
+        return Factory.makeLabel(title: nil,
+                                 weight: .light,
+                                 size: 14,
+                                 color: .lightGray,
+                                 alignment: .center)
     }()
     
     private lazy var blackBar: UIView = {
@@ -74,7 +82,7 @@ class CustomCalloutView: UIView, MGLCalloutView {
     private func configureUIElements(from annotation: SpeciesAnnotation) {
         titleLabel.text = representedObject.title ?? ""
         subtitleLabel.text = representedObject.subtitle ?? ""
-        FirebaseStorageService.calloutImageManager.getImage(for: annotation.title!, setTo: backgroundImageView)
+        FirebaseStorageService.calloutImageManager.getImage(for: annotation.title!, setTo: speciesImageView)
     }
     
     private func configureCalloutAppearance() {
@@ -126,10 +134,10 @@ class CustomCalloutView: UIView, MGLCalloutView {
         if animated {
             alpha = 0
             UIView.animate(withDuration: 0.2) { [weak self] in
-               guard let strongSelf = self else {
-                return
+                guard let strongSelf = self else {
+                    return
                 }
-                 
+                
                 strongSelf.alpha = 1
                 strongSelf.delegate?.calloutViewDidAppear?(strongSelf)
             }
@@ -214,7 +222,7 @@ fileprivate extension CustomCalloutView {
     func setTitleLabelConstraints() {
         NSLayoutConstraint.activate([
             titleLabel.leadingAnchor.constraint(equalTo: mainBody.leadingAnchor, constant: Constants.universalLeadingConstant),
-            titleLabel.topAnchor.constraint(equalTo: backgroundImageView.bottomAnchor, constant: 5),
+            titleLabel.topAnchor.constraint(equalTo: speciesImageView.bottomAnchor, constant: 5),
             titleLabel.widthAnchor.constraint(equalTo: mainBody.widthAnchor),
             titleLabel.heightAnchor.constraint(equalToConstant: 30)
         ])
@@ -231,10 +239,10 @@ fileprivate extension CustomCalloutView {
     
     func setBackgroundImageConstraints() {
         NSLayoutConstraint.activate([
-            backgroundImageView.leadingAnchor.constraint(equalTo: mainBody.leadingAnchor),
-            backgroundImageView.trailingAnchor.constraint(equalTo: mainBody.trailingAnchor),
-            backgroundImageView.topAnchor.constraint(equalTo: mainBody.topAnchor),
-            backgroundImageView.bottomAnchor.constraint(equalTo: blackBar.topAnchor)
+            speciesImageView.leadingAnchor.constraint(equalTo: mainBody.leadingAnchor),
+            speciesImageView.trailingAnchor.constraint(equalTo: mainBody.trailingAnchor),
+            speciesImageView.topAnchor.constraint(equalTo: mainBody.topAnchor),
+            speciesImageView.bottomAnchor.constraint(equalTo: blackBar.topAnchor)
         ])
     }
     
