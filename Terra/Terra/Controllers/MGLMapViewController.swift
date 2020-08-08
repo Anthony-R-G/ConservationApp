@@ -13,6 +13,8 @@ class MGLMapViewController: UIViewController {
     
     private lazy var mapView: MGLMapView = {
         let mv = MGLMapView()
+        
+        let styleURL = URL(string: "mapbox://styles/anthonyg5195/ckdkz8h2n0uri1ir58rf4o707")
         mv.styleURL = MGLStyle.satelliteStreetsStyleURL
         mv.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         mv.tintColor = .darkGray
@@ -29,6 +31,19 @@ class MGLMapViewController: UIViewController {
         btn.layer.borderColor = UIColor.white.cgColor
         btn.addTarget(self, action: #selector(backButtonPressed), for: .touchUpInside)
         return btn
+    }()
+    
+    private lazy var styleToggle: UISegmentedControl = {
+        let sc = UISegmentedControl(items: ["Normal", "Hypsometric"])
+        sc.tintColor = UIColor(red: 0.976, green: 0.843, blue: 0.831, alpha: 1)
+        sc.backgroundColor = UIColor(red: 0.973, green: 0.329, blue: 0.294, alpha: 1)
+        sc.layer.cornerRadius = 4
+        sc.clipsToBounds = true
+        sc.selectedSegmentIndex = 0
+        sc.translatesAutoresizingMaskIntoConstraints = false
+        sc.addTarget(self, action: #selector(changeStyle(sender:)), for: .valueChanged)
+        view.insertSubview(sc, aboveSubview: mapView)
+        return sc
     }()
     
     //MARK: -- Properties
@@ -52,14 +67,27 @@ class MGLMapViewController: UIViewController {
             print("User Location: \(userLocation)")
             let locationOne = CLLocation(latitude: userLocation.latitude, longitude: userLocation.longitude)
             let locationTwo = CLLocation(latitude: speciesLocation.latitude, longitude: speciesLocation.longitude)
-
+            
             let distance = locationOne.distance(from: locationTwo) * 0.000621371
-
+            
             print(distance.rounded(toPlaces: 1))
+            
         }
     }
     
     //MARK: -- Methods
+    
+    @objc func changeStyle(sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            mapView.styleURL = MGLStyle.satelliteStreetsStyleURL
+        case 1:
+            mapView.styleURL = URL(string: "mapbox://styles/anthonyg5195/ckdkz8h2n0uri1ir58rf4o707")
+      
+        default:
+            mapView.styleURL = MGLStyle.streetsStyleURL
+        }
+    }
     
     func addAnnotation(from coordinate: CLLocationCoordinate2D, title: String, subtitle: String) {
         let annotation = MGLPointAnnotation()
@@ -83,7 +111,8 @@ class MGLMapViewController: UIViewController {
         super.viewDidLoad()
         addSubviews()
         setConstraints()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+            guard let self = self else { return }
             self.userLocation = self.mapView.userLocation!.coordinate
         }
     }
@@ -91,13 +120,11 @@ class MGLMapViewController: UIViewController {
 
 extension MGLMapViewController: MGLMapViewDelegate {
     func mapViewDidFinishLoadingMap(_ mapView: MGLMapView) {
-        
         let camera = MGLMapCamera(lookingAtCenter: speciesLocation , altitude: 100000, pitch: 15, heading: 0)
-        
+        mapView.setCamera(camera,
+                          withDuration: 3,
+                          animationTimingFunction: CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut))
         print("Species Location: \(speciesLocation)")
-        
-        
-        mapView.setCamera(camera, withDuration: 3, animationTimingFunction: CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut))
     }
     
     func mapView(_ mapView: MGLMapView, viewFor annotation: MGLAnnotation) -> MGLAnnotationView? {
@@ -118,6 +145,10 @@ extension MGLMapViewController: MGLMapViewDelegate {
     }
 }
 
+extension MGLMapViewController: MGLCalloutViewDelegate {
+    
+}
+
 
 //MARK: -- Add Subviews & Constraints
 fileprivate extension MGLMapViewController {
@@ -130,6 +161,7 @@ fileprivate extension MGLMapViewController {
     func setConstraints() {
         setMapViewConstraints()
         setBackButtonConstraints()
+        setStyleToggleConstraints()
     }
     
     func setBackButtonConstraints() {
@@ -149,6 +181,12 @@ fileprivate extension MGLMapViewController {
             mapView.widthAnchor.constraint(equalToConstant: view.bounds.size.width)
         ])
     }
+    
+    func setStyleToggleConstraints() {
+        NSLayoutConstraint.activate([NSLayoutConstraint(item: styleToggle, attribute: NSLayoutConstraint.Attribute.centerX, relatedBy: NSLayoutConstraint.Relation.equal, toItem: mapView, attribute: NSLayoutConstraint.Attribute.centerX, multiplier: 1.0, constant: 0.0)])
+        NSLayoutConstraint.activate([NSLayoutConstraint(item: styleToggle, attribute: .bottom, relatedBy: .equal, toItem: mapView.logoView, attribute: .top, multiplier: 1, constant: -20)])
+    }
 }
+
 
 

@@ -81,7 +81,6 @@ class SpeciesCollectionViewCell: UICollectionViewCell {
         }
         speciesScientificNameLabel.text = species.taxonomy.scientificName
         populationNumbersLabel.text = species.population.numbers.replacingOccurrences(of: "~", with: "")
-        
     }
     
     override init(frame: CGRect) {

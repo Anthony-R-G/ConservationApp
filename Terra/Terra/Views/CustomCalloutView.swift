@@ -1,18 +1,7 @@
-//
-//  CustomCalloutView.swift
-//  Terra
-//
-//  Created by Anthony Gonzalez on 8/7/20.
-//  Copyright © 2020 Antnee. All rights reserved.
-//
-
-import UIKit
 import Mapbox
-import FirebaseUI
 
 class CustomCalloutView: UIView, MGLCalloutView {
-    
-    //MARK: UI Element Initialization
+    //MARK: -- UI Element Initialization
     
     private lazy var titleLabel: UILabel = {
         return Factory.makeLabel(title: nil,
@@ -35,7 +24,7 @@ class CustomCalloutView: UIView, MGLCalloutView {
         iv.contentMode = .scaleAspectFill
         iv.translatesAutoresizingMaskIntoConstraints = false
         iv.clipsToBounds = true
-        insertSubview(iv, at: 0)
+        mainBody.insertSubview(iv, at: 0)
         return iv
     }()
     
@@ -47,55 +36,153 @@ class CustomCalloutView: UIView, MGLCalloutView {
         return bar
     }()
     
+    
     //MARK: -- Properties
-    
     var representedObject: MGLAnnotation
-    // Required views but unused for now
-    lazy var leftAccessoryView = UIView()
-    lazy var rightAccessoryView = UIView()
     
+    // Allow the callout to remain open during panning.
+    let dismissesAutomatically: Bool = false
+    let isAnchoredToAnnotation: Bool = true
     
-    weak var delegate: MGLCalloutViewDelegate?
-    
-    
-    //MARK: -- Methods
-    
-    func presentCallout(from rect: CGRect, in view: UIView, constrainedTo constrainedRect: CGRect, animated: Bool) {
-        center = view.center.applying(CGAffineTransform(translationX: 0, y: -frame.height))
-        view.addSubview(self)
-    }
-    
-    func dismissCallout(animated: Bool) {
-        if (animated){
-            removeFromSuperview()
-        } else {
-            removeFromSuperview()
+    // https://github.com/mapbox/mapbox-gl-native/issues/9228
+    override var center: CGPoint {
+        set {
+            var newCenter = newValue
+            newCenter.y -= bounds.midY
+            super.center = newCenter
+        }
+        get {
+            return super.center
         }
     }
     
-    var dismissesAutomatically: Bool = false
-    var isAnchoredToAnnotation: Bool = true
+    lazy var leftAccessoryView = UIView() /* unused */
+    lazy var rightAccessoryView = UIView() /* unused */
+    
+    weak var delegate: MGLCalloutViewDelegate?
+    
+    let tipHeight: CGFloat = 30.0
+    let tipWidth: CGFloat = 40.0
+    
+    let mainBody: UIView
     
     required init(annotation: SpeciesAnnotation) {
         self.representedObject = annotation
+        self.mainBody = UIView(frame: CGRect(x: 0, y: -15, width: UIScreen.main.bounds.width * 0.75, height: 180))
+        print(mainBody.frame.height)
         
-        super.init(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: UIScreen.main.bounds.width * 0.75, height: 180.0)))
+        super.init(frame: .zero)
         
-        self.titleLabel.text = self.representedObject.title ?? ""
-        self.subtitleLabel.text = self.representedObject.subtitle ?? ""
-     
-        clipsToBounds = true
-        layer.cornerRadius = 10
+        backgroundColor = .clear
         
+        mainBody.backgroundColor = .black
+        mainBody.tintColor = .white
+        mainBody.clipsToBounds = true
+        mainBody.layer.cornerRadius = 10.0
         
+        addSubview(mainBody)
         addSubviews()
         setConstraints()
+        
+        titleLabel.text = self.representedObject.title ?? ""
+        subtitleLabel.text = self.representedObject.subtitle ?? ""
         FirebaseStorageService.cellImageManager.getImage(for: annotation.title!, setTo: backgroundImageView)
-
     }
     
     required init?(coder decoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - MGLCalloutView API
+    func presentCallout(from rect: CGRect, in view: UIView, constrainedTo constrainedRect: CGRect, animated: Bool) {
+        
+        delegate?.calloutViewWillAppear?(self)
+        
+        view.addSubview(self)
+        
+        // Prepare title label.
+        //        mainBody.setTitle(representedObject.title!, for: .normal)
+        
+        //        if isCalloutTappable() {
+        //            mainBody.addTarget(self, action: #selector(CustomCalloutView.calloutTapped), for: .touchUpInside)
+        //        } else {
+        //            mainBody.isUserInteractionEnabled = false
+        //        }
+        
+        // Prepare our frame, adding extra space at the bottom for the tip.
+        let frameWidth = mainBody.frame.size.width
+        let frameHeight: CGFloat = mainBody.frame.size.height
+        print("Frame height is \(frameHeight)")
+        let frameOriginX = rect.origin.x + (rect.size.width/2.0) - (frameWidth/2.0)
+        let frameOriginY = rect.origin.y - frameHeight
+        frame = CGRect(x: frameOriginX, y: frameOriginY, width: frameWidth, height: frameHeight)
+        
+        if animated {
+            alpha = 0
+            UIView.animate(withDuration: 0.2) { [weak self] in
+                guard let self = self else {
+                    return
+                }
+                self.alpha = 1
+                self.delegate?.calloutViewDidAppear?(self)
+            }
+        } else {
+            delegate?.calloutViewDidAppear?(self)
+        }
+    }
+    
+    func dismissCallout(animated: Bool) {
+        if (superview != nil) {
+            if animated {
+                UIView.animate(withDuration: 0.2, animations: { [weak self] in
+                    self?.alpha = 0
+                    }, completion: { [weak self] _ in
+                        self?.removeFromSuperview()
+                })
+            } else {
+                removeFromSuperview()
+            }
+        }
+    }
+    
+    // MARK: - Callout interaction handlers
+    
+    func isCalloutTappable() -> Bool {
+        if let delegate = delegate {
+            if delegate.responds(to: #selector(MGLCalloutViewDelegate.calloutViewShouldHighlight)) {
+                return delegate.calloutViewShouldHighlight!(self)
+            }
+        }
+        return false
+    }
+    
+    @objc func calloutTapped() {
+        if isCalloutTappable() && delegate!.responds(to: #selector(MGLCalloutViewDelegate.calloutViewTapped)) {
+            delegate!.calloutViewTapped!(self)
+        }
+    }
+    
+    // MARK: - Custom view styling
+    
+    override func draw(_ rect: CGRect) {
+        // Draw the pointed tip at the bottom.
+        let fillColor: UIColor = .black
+        
+        let tipLeft = rect.origin.x + (rect.size.width / 2.0) - (tipWidth / 2.0)
+        let tipBottom = CGPoint(x: rect.origin.x + (rect.size.width / 2.0), y: rect.origin.y + rect.size.height)
+        let heightWithoutTip = rect.size.height - tipHeight - 1
+        
+        let currentContext = UIGraphicsGetCurrentContext()!
+        
+        let tipPath = CGMutablePath()
+        tipPath.move(to: CGPoint(x: tipLeft, y: heightWithoutTip))
+        tipPath.addLine(to: CGPoint(x: tipBottom.x, y: tipBottom.y))
+        tipPath.addLine(to: CGPoint(x: tipLeft + tipWidth, y: heightWithoutTip))
+        tipPath.closeSubpath()
+        
+        fillColor.setFill()
+        currentContext.addPath(tipPath)
+        currentContext.fillPath()
     }
 }
 
@@ -104,7 +191,7 @@ fileprivate extension CustomCalloutView {
     
     func addSubviews() {
         let UIElements = [blackBar, titleLabel, subtitleLabel]
-        UIElements.forEach { addSubview($0) }
+        UIElements.forEach { mainBody.addSubview($0) }
         UIElements.forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
     }
     
@@ -118,9 +205,9 @@ fileprivate extension CustomCalloutView {
     
     func setTitleLabelConstraints() {
         NSLayoutConstraint.activate([
-            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.universalLeadingConstant),
+            titleLabel.leadingAnchor.constraint(equalTo: mainBody.leadingAnchor, constant: Constants.universalLeadingConstant),
             titleLabel.topAnchor.constraint(equalTo: backgroundImageView.bottomAnchor, constant: 5),
-            titleLabel.widthAnchor.constraint(equalTo: widthAnchor),
+            titleLabel.widthAnchor.constraint(equalTo: mainBody.widthAnchor),
             titleLabel.heightAnchor.constraint(equalToConstant: 30)
             
         ])
@@ -137,19 +224,19 @@ fileprivate extension CustomCalloutView {
     
     func setBackgroundImageConstraints() {
         NSLayoutConstraint.activate([
-            backgroundImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            backgroundImageView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            backgroundImageView.topAnchor.constraint(equalTo: topAnchor),
+            backgroundImageView.leadingAnchor.constraint(equalTo: mainBody.leadingAnchor),
+            backgroundImageView.trailingAnchor.constraint(equalTo: mainBody.trailingAnchor),
+            backgroundImageView.topAnchor.constraint(equalTo: mainBody.topAnchor),
             backgroundImageView.bottomAnchor.constraint(equalTo: blackBar.topAnchor)
         ])
     }
     
     func setBlackBarConstraints() {
         NSLayoutConstraint.activate([
-            blackBar.leadingAnchor.constraint(equalTo: leadingAnchor),
-            blackBar.trailingAnchor.constraint(equalTo: trailingAnchor),
-            blackBar.bottomAnchor.constraint(equalTo: bottomAnchor),
-            blackBar.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.4)
+            blackBar.leadingAnchor.constraint(equalTo: mainBody.leadingAnchor),
+            blackBar.trailingAnchor.constraint(equalTo: mainBody.trailingAnchor),
+            blackBar.bottomAnchor.constraint(equalTo: mainBody.bottomAnchor),
+            blackBar.heightAnchor.constraint(equalTo: mainBody.heightAnchor, multiplier: 0.4)
         ])
     }
 }

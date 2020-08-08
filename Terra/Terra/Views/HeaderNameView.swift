@@ -73,6 +73,7 @@ fileprivate extension HeaderNameView {
         UIElements.forEach { addSubview($0) }
         UIElements.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
     }
+    
     func setConstraints() {
         setConservationStatusLabelConstraints()
         setSpeciesCommonNameLabelConstraints()

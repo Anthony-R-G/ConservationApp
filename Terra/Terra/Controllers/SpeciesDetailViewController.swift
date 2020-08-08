@@ -157,7 +157,8 @@ final class SpeciesDetailViewController: UIViewController {
         newAlpha = scrollOffset <= 40 ? 0.6 : 0
         
         DispatchQueue.main.async {
-            UIView.animate(withDuration: 1, delay: 0, options: .curveEaseInOut, animations: {
+            UIView.animate(withDuration: 1, delay: 0, options: .curveEaseInOut, animations: { [weak self] in
+                guard let self = self else { return }
                 self.exploreButton.alpha = newAlpha
             }, completion: nil)
         }

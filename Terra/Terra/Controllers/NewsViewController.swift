@@ -51,7 +51,8 @@ class NewsViewController: UIViewController {
     
     @objc func handleRefresh() {
         fetchNewsData()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [weak self] in
+            guard let self = self else { return }
             self.refreshControl.endRefreshing()
         }
     }

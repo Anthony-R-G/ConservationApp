@@ -25,6 +25,16 @@ class TerraTests: XCTestCase {
         XCTAssertEqual(animal.commonName, "Amur Leopard")
     }
     
+    func testFactoryLabelWorks() {
+        let labelTitle = "ASDF"
+        let label = Factory.makeLabel(title: labelTitle, weight: .bold, size: 15, color: .white, alignment: .left)
+        
+        XCTAssert(label.text == labelTitle, "Factory method not assigning title correctly")
+       }
+    
+    //ISO8601 Formatting
+    
+    
     
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
