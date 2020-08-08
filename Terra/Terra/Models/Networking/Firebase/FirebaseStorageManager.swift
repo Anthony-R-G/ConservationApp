@@ -15,11 +15,14 @@ class FirebaseStorageService {
     enum imageType {
         case cell
         case detail
+        case callout
     }
     
     static var cellImageManager = FirebaseStorageService(type: .cell)
     
     static var detailImageManager = FirebaseStorageService(type: .detail)
+    
+    static var calloutImageManager = FirebaseStorageService(type: .callout)
     
     private let storage: Storage!
     private let storageReference: StorageReference
@@ -33,6 +36,8 @@ class FirebaseStorageService {
             imagesFolderReference = storageReference.child("Collection Cell Images")
         case .detail:
             imagesFolderReference = storageReference.child("Detail VC Images")
+        case .callout:
+            imagesFolderReference = storageReference.child("Callout Images")
         }
     }
     

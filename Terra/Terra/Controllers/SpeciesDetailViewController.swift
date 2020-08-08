@@ -123,8 +123,8 @@ final class SpeciesDetailViewController: UIViewController {
     //MARK: -- Methods
     
     private func setViewElementsFromSpeciesData() {
-        headerNameView.setViewElementsFromSpeciesData(species: currentSpecies)
-        subheaderInfoView.setViewElementsFromSpeciesData(species: currentSpecies)
+        headerNameView.configureView(with: currentSpecies)
+        subheaderInfoView.configureView(with: currentSpecies)
     }
     
     private func setBackground() {
@@ -157,7 +157,8 @@ final class SpeciesDetailViewController: UIViewController {
         newAlpha = scrollOffset <= 40 ? 0.6 : 0
         
         DispatchQueue.main.async {
-            UIView.animate(withDuration: 1, delay: 0, options: .curveEaseInOut, animations: {
+            UIView.animate(withDuration: 1, delay: 0, options: .curveEaseInOut, animations: { [weak self] in
+                guard let self = self else { return }
                 self.exploreButton.alpha = newAlpha
             }, completion: nil)
         }
@@ -293,7 +294,7 @@ extension SpeciesDetailViewController: RoundedInfoViewDelegate {
     func learnMoreButtonPressed(_ sender: UIButton) {
         switch sender.tag {
         case 1:
-            let mapVC = MapViewController()
+            let mapVC = MGLMapViewController()
             mapVC.currentSpecies = currentSpecies
             mapVC.modalPresentationStyle = .fullScreen
             present(mapVC, animated: true, completion: nil)

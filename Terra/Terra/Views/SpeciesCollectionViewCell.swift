@@ -55,6 +55,7 @@ class SpeciesCollectionViewCell: UICollectionViewCell {
     private lazy var backgroundImageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
+        iv.translatesAutoresizingMaskIntoConstraints = false
         insertSubview(iv, at: 0)
         return iv
     }()
@@ -63,6 +64,7 @@ class SpeciesCollectionViewCell: UICollectionViewCell {
         let gv = GradientView()
         gv.startColor = .clear
         gv.endColor = #colorLiteral(red: 0.06859237701, green: 0.08213501424, blue: 0.2409383953, alpha: 0.7227097603)
+        gv.translatesAutoresizingMaskIntoConstraints = false
         insertSubview(gv, at: 1)
         return gv
     }()
@@ -79,7 +81,6 @@ class SpeciesCollectionViewCell: UICollectionViewCell {
         }
         speciesScientificNameLabel.text = species.taxonomy.scientificName
         populationNumbersLabel.text = species.population.numbers.replacingOccurrences(of: "~", with: "")
-        
     }
     
     override init(frame: CGRect) {
@@ -98,7 +99,7 @@ class SpeciesCollectionViewCell: UICollectionViewCell {
 
 fileprivate extension SpeciesCollectionViewCell {
     func addSubviews() {
-        let UIElements = [backgroundImageView, backgroundGradientOverlay, speciesNameLabel, conservationStatusLabel, populationNumbersLabel, speciesScientificNameLabel]
+        let UIElements = [speciesNameLabel, conservationStatusLabel, populationNumbersLabel, speciesScientificNameLabel]
         UIElements.forEach{ contentView.addSubview($0) }
         UIElements.forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
     }

@@ -60,7 +60,7 @@ final class SubheaderInfoView: UIView {
     }()
     
     //MARK: -- Methods
-    public func setViewElementsFromSpeciesData(species: Species) {
+    public func configureView(with species: Species) {
         numbersDataLabel.text = species.population.numbers
         trendDataLabel.text = species.population.trend.rawValue
         trendDataLabel.textColor = species.population.trend == .decreasing ? #colorLiteral(red: 1, green: 0.4507741928, blue: 0.5112823844, alpha: 1) : #colorLiteral(red: 0.7970843911, green: 1, blue: 0.5273691416, alpha: 1)

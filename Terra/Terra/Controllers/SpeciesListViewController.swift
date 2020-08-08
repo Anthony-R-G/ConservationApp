@@ -139,7 +139,8 @@ final class SpeciesListViewController: UIViewController {
         terraTitleLabelLeadingAnchorConstraint.constant = -100
         searchBar.alpha = 1
         searchBarButton.alpha = 0
-        UIView.animate(withDuration: 0.3, animations: {
+        UIView.animate(withDuration: 0.3, animations: { [weak self] in
+            guard let self = self else { return }
             self.view.layoutIfNeeded()
         }) { (result) in
             self.searchBar.becomeFirstResponder()
@@ -151,7 +152,8 @@ final class SpeciesListViewController: UIViewController {
         terraTitleLabelLeadingAnchorConstraint.constant = Constants.universalLeadingConstant
         searchBar.alpha = 0
         searchBarButton.alpha = 1
-        UIView.animate(withDuration: 0.3, animations: {
+        UIView.animate(withDuration: 0.3, animations: { [weak self] in
+            guard let self = self else { return }
             self.view.layoutIfNeeded()
         }) { (result) in
             self.searchBar.resignFirstResponder()

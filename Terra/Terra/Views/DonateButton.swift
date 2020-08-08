@@ -24,7 +24,9 @@ class DonateButton: UIRoundedButtonWithGradientAndShadow {
         fatalError("init(coder:) has not been implemented")
     }
     
-    required init(gradientColors: [UIColor], startPoint: CGPoint = CGPoint(x: 0, y: 0.5), endPoint: CGPoint = CGPoint(x: 1, y: 0.5)) {
+    required init(gradientColors: [UIColor],
+                  startPoint: CGPoint = CGPoint(x: 0, y: 0.5),
+                  endPoint: CGPoint = CGPoint(x: 1, y: 0.5)) {
         super.init(gradientColors: gradientColors, startPoint: startPoint, endPoint: endPoint)
         setTitle("DONATE", for: .normal)
         titleLabel?.font = UIFont(name: "Roboto-Medium", size: 18)

@@ -153,14 +153,14 @@ fileprivate extension RoundedInfoView {
         setOverviewTitleLabelConstraints()
         setInfoBarConstraints()
         
-        setInfoBarTitleLabelAConstraints()
-        setInfoBarDataLabelAConstraints()
+        setBarLeftTitleLabelConstraints()
+        setBarLeftDataLabelConstraints()
         
-        setInfoBarTitleLabelBConstraints()
-        setInfoBarDataLabelBConstraints()
+        setBarMiddleTitleLabelConstraints()
+        setBarMiddleDataLabelConstraints()
         
-        setInfoBarTitleLabelCConstraints()
-        setInfoBarDataLabelCConstraints()
+        setBarRightTitleLabelConstraints()
+        setBarRightDataLabelConstraints()
         
         setBodyTextViewConstraints()
         setReadMoreButtonConstraints()
@@ -184,7 +184,7 @@ fileprivate extension RoundedInfoView {
         ])
     }
     
-    func setInfoBarTitleLabelAConstraints() {
+    func setBarLeftTitleLabelConstraints() {
         NSLayoutConstraint.activate([
             barLeftTitleLabel.topAnchor.constraint(equalTo: infoBarView.topAnchor, constant: 10),
             barLeftTitleLabel.centerXAnchor.constraint(equalTo: barLeftDataLabel.centerXAnchor),
@@ -193,7 +193,7 @@ fileprivate extension RoundedInfoView {
         ])
     }
     
-    func setInfoBarDataLabelAConstraints() {
+    func setBarLeftDataLabelConstraints() {
         NSLayoutConstraint.activate([
             barLeftDataLabel.topAnchor.constraint(equalTo: barLeftTitleLabel.bottomAnchor, constant: 5),
             barLeftDataLabel.leadingAnchor.constraint(equalTo: infoBarView.leadingAnchor, constant: 15),
@@ -202,7 +202,7 @@ fileprivate extension RoundedInfoView {
         ])
     }
     
-    func setInfoBarTitleLabelBConstraints() {
+    func setBarMiddleTitleLabelConstraints() {
         NSLayoutConstraint.activate([
             barMiddleTitleLabel.topAnchor.constraint(equalTo: barLeftTitleLabel.topAnchor),
             barMiddleTitleLabel.centerXAnchor.constraint(equalTo: barMiddleDataLabel.centerXAnchor),
@@ -211,7 +211,7 @@ fileprivate extension RoundedInfoView {
         ])
     }
     
-    func setInfoBarDataLabelBConstraints() {
+    func setBarMiddleDataLabelConstraints() {
         NSLayoutConstraint.activate([
             barMiddleDataLabel.topAnchor.constraint(equalTo: barLeftDataLabel.topAnchor),
             barMiddleDataLabel.leadingAnchor.constraint(equalTo: barLeftDataLabel.trailingAnchor, constant: 15),
@@ -220,7 +220,7 @@ fileprivate extension RoundedInfoView {
         ])
     }
     
-    func setInfoBarTitleLabelCConstraints() {
+    func setBarRightTitleLabelConstraints() {
         NSLayoutConstraint.activate([
             barRightTitleLabel.topAnchor.constraint(equalTo: barLeftTitleLabel.topAnchor),
             barRightTitleLabel.centerXAnchor.constraint(equalTo: barRightDataLabel.centerXAnchor),
@@ -229,7 +229,7 @@ fileprivate extension RoundedInfoView {
         ])
     }
     
-    func setInfoBarDataLabelCConstraints() {
+    func setBarRightDataLabelConstraints() {
         NSLayoutConstraint.activate([
             barRightDataLabel.topAnchor.constraint(equalTo: barLeftDataLabel.topAnchor),
             barRightDataLabel.trailingAnchor.constraint(equalTo: infoBarView.trailingAnchor, constant: -15),
