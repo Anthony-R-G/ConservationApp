@@ -68,26 +68,34 @@ class CustomCalloutView: UIView, MGLCalloutView {
     
     let mainBody: UIButton
     
-    required init(annotation: SpeciesAnnotation) {
-        self.representedObject = annotation
-        self.mainBody = UIButton(frame: CGRect(x: 0, y: -15, width: UIScreen.main.bounds.width * 0.75, height: 180))
-      
-        super.init(frame: .zero)
-        
-        backgroundColor = .clear
-        
+    
+    //MARK: -- Methods
+    
+    private func configureUIElements(from annotation: SpeciesAnnotation) {
+        titleLabel.text = representedObject.title ?? ""
+        subtitleLabel.text = representedObject.subtitle ?? ""
+        FirebaseStorageService.calloutImageManager.getImage(for: annotation.title!, setTo: backgroundImageView)
+    }
+    
+    private func configureCalloutAppearance() {
         mainBody.backgroundColor = .black
-        mainBody.tintColor = .white
         mainBody.clipsToBounds = true
         mainBody.layer.cornerRadius = 10.0
+    }
+    
+    required init(annotation: SpeciesAnnotation) {
+        representedObject = annotation
+        mainBody = UIButton(frame: CGRect(x: 0, y: -15, width: UIScreen.main.bounds.width * 0.75, height: 180))
         
-        addSubview(mainBody)
+        super.init(frame: .zero)
+        
+        layer.cornerRadius = 10
+        backgroundColor = .clear
+        
         addSubviews()
         setConstraints()
-        
-        titleLabel.text = self.representedObject.title ?? ""
-        subtitleLabel.text = self.representedObject.subtitle ?? ""
-        FirebaseStorageService.cellImageManager.getImage(for: annotation.title!, setTo: backgroundImageView)
+        configureUIElements(from: annotation)
+        configureCalloutAppearance()
     }
     
     required init?(coder decoder: NSCoder) {
@@ -101,9 +109,6 @@ class CustomCalloutView: UIView, MGLCalloutView {
         
         view.addSubview(self)
         
-        // Prepare title label.
-        //        mainBody.setTitle(representedObject.title!, for: .normal)
-        
         if isCalloutTappable() {
             mainBody.addTarget(self, action: #selector(CustomCalloutView.calloutTapped), for: .touchUpInside)
         } else {
@@ -113,7 +118,7 @@ class CustomCalloutView: UIView, MGLCalloutView {
         // Prepare our frame, adding extra space at the bottom for the tip.
         let frameWidth = mainBody.frame.size.width
         let frameHeight: CGFloat = mainBody.frame.size.height
-    
+        
         let frameOriginX = rect.origin.x + (rect.size.width/2.0) - (frameWidth/2.0)
         let frameOriginY = rect.origin.y - frameHeight
         frame = CGRect(x: frameOriginX, y: frameOriginY, width: frameWidth, height: frameHeight)
@@ -191,6 +196,7 @@ class CustomCalloutView: UIView, MGLCalloutView {
 fileprivate extension CustomCalloutView {
     
     func addSubviews() {
+        addSubview(mainBody)
         let UIElements = [blackBar, titleLabel, subtitleLabel]
         UIElements.forEach { mainBody.addSubview($0) }
         UIElements.forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
@@ -210,7 +216,6 @@ fileprivate extension CustomCalloutView {
             titleLabel.topAnchor.constraint(equalTo: backgroundImageView.bottomAnchor, constant: 5),
             titleLabel.widthAnchor.constraint(equalTo: mainBody.widthAnchor),
             titleLabel.heightAnchor.constraint(equalToConstant: 30)
-            
         ])
     }
     
