@@ -26,9 +26,9 @@ class MGLMapViewController: UIViewController {
     
     private lazy var backButton: UIButton = {
         let btn = Factory.makeButton(title: "Back", weight: .medium, color: .white)
-        btn.layer.borderWidth = Constants.borderWidth
         btn.layer.cornerRadius = 10
-        btn.layer.borderColor = UIColor.white.cgColor
+        btn.tintColor = UIColor(red: 0.976, green: 0.843, blue: 0.831, alpha: 1)
+        btn.backgroundColor = UIColor(red: 0.973, green: 0.329, blue: 0.294, alpha: 1)
         btn.addTarget(self, action: #selector(backButtonPressed), for: .touchUpInside)
         return btn
     }()
