@@ -46,7 +46,7 @@ final class HeaderNameView: UIView {
     }()
     
     //MARK: -- Methods
-    public func setViewElementsFromSpeciesData(species: Species) {
+    public func configureView(with species: Species) {
         conservationStatusLabel.text = species.population.conservationStatus.rawValue
         speciesCommonNameLabel.text = species.commonName
         speciesScientificNameLabel.text = "— \(species.taxonomy.scientificName)"
@@ -73,6 +73,7 @@ fileprivate extension HeaderNameView {
         UIElements.forEach { addSubview($0) }
         UIElements.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
     }
+    
     func setConstraints() {
         setConservationStatusLabelConstraints()
         setSpeciesCommonNameLabelConstraints()

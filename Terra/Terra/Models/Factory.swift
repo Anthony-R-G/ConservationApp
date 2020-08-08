@@ -14,10 +14,6 @@ class Factory {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         
-        layout.sectionInset = UIEdgeInsets(top: 0,
-                                           left: 0,
-                                           bottom: 0,
-                                           right:0)
         let collectionView = UICollectionView(frame: .zero,
                                               collectionViewLayout: layout)
         
@@ -51,6 +47,15 @@ class Factory {
         button.showsTouchWhenHighlighted = true
         button.titleLabel?.font = UIFont(name: "Roboto-Medium", size: 15)
         button.sizeToFit()
+        return button
+    }
+    
+    static func makeButton(title: String, weight: FontWeight, color: UIColor) -> UIButton {
+        let button = UIButton(type: .custom)
+        button.setTitle(title, for: .normal)
+        button.setTitleColor(color, for: .normal)
+        button.showsTouchWhenHighlighted = true
+        button.titleLabel?.font = UIFont(name: weight.rawValue, size: 15)
         return button
     }
     

@@ -15,18 +15,20 @@
 	<key>CFBundlePackageType</key>
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>1.0.0</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>MKDirectionsApplicationSupportedModes</key>
-	<array/>
+	<key>MGLMapboxAccessToken</key>
+	<string>pk.eyJ1IjoiYW50aG9ueWc1MTk1IiwiYSI6ImNrZGpjZGR3aTBkaTczMHBlY2Jmb3liNXAifQ.uWdR3SYdjeeozApD4lWuWg</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Your location is used to display where you are relative to the species distribution</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Roboto-Light-Italic.ttf</string>
@@ -62,8 +64,6 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Your location is used to display where you are relative to the species distribution</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

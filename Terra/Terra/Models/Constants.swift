@@ -18,5 +18,5 @@ struct Constants {
     static let borderWidth: CGFloat = 1
     static let titleLabelColor = #colorLiteral(red: 0.9257398248, green: 1, blue: 0.7623538375, alpha: 1)
     static let buttonColor = #colorLiteral(red: 0.9257398248, green: 1, blue: 0.7623538375, alpha: 1)
-    static let red = #colorLiteral(red: 1, green: 0.2914688587, blue: 0.3886995912, alpha: 0.9019156678)
+    static let red = #colorLiteral(red: 1, green: 0.2914688587, blue: 0.3886995912, alpha: 0.9485498716)
 }
