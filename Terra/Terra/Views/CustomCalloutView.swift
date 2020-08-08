@@ -34,7 +34,7 @@ class CustomCalloutView: UIView, MGLCalloutView {
                                  weight: .light,
                                  size: 14,
                                  color: .lightGray,
-                                 alignment: .left)
+                                 alignment: .right)
     }()
     
     private lazy var blackBar: UIView = {
@@ -249,7 +249,7 @@ fileprivate extension CustomCalloutView {
         NSLayoutConstraint.activate([
             areaLabel.trailingAnchor.constraint(equalTo: mainBody.trailingAnchor, constant: -Constants.universalLeadingConstant),
             areaLabel.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
-            areaLabel.widthAnchor.constraint(equalToConstant: 40),
+            areaLabel.widthAnchor.constraint(equalToConstant: 70),
             areaLabel.heightAnchor.constraint(equalToConstant: 20)
         ])
     }
