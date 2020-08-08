@@ -31,7 +31,7 @@
 
 •[Mapbox](https://www.mapbox.com/)
 
-•CocoaPods 
+•[CocoaPods](https://cocoapods.org/) 
 
 •JSON/REST API
 
