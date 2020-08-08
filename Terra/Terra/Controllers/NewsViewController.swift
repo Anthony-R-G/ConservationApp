@@ -42,11 +42,26 @@ class NewsViewController: UIViewController {
         }
     }
     
+    var filteredNewsArticles: [Article] {
+        get {
+            var seenHeadlines = Set<String>()
+            return newsArticles.compactMap { (element) in
+                guard !seenHeadlines.contains(element.cleanedUpTitle)
+                    else { return nil }
+                
+                seenHeadlines.insert(element.cleanedUpTitle)
+                return element
+            }
+        }
+    }
+    
+    
+    
     private var currentPage: Int = 1
     
     private var isFetchingNews = false
     
-
+    
     //MARK: -- Methods
     
     @objc func handleRefresh() {
@@ -62,9 +77,9 @@ class NewsViewController: UIViewController {
         NewsAPIClient.shared.fetchNewsData(page: currentPage) { (result) in
             switch result {
             case .success(let newsData):
+                
                 self.newsArticles.append(contentsOf: newsData.articles)
                 self.currentPage += 1
-                
                 self.isFetchingNews = false
                 
                 
@@ -74,6 +89,7 @@ class NewsViewController: UIViewController {
             }
         }
     }
+    
     
     func showModally(_ viewController: UIViewController) {
         let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
@@ -100,12 +116,15 @@ class NewsViewController: UIViewController {
 
 extension NewsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return newsArticles.count
+        return filteredNewsArticles.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let newsCell = tableView.dequeueReusableCell(withIdentifier: "newsCell", for: indexPath) as! NewsArticleTableViewCell
-        let specificArticle = newsArticles[indexPath.row]
+        
+        let specificArticle = filteredNewsArticles[indexPath.row]
+        
         newsCell.configureCellUI(from: specificArticle)
         return newsCell
     }
@@ -117,7 +136,7 @@ extension NewsViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let articleURL = newsArticles[indexPath.row].url
+        let articleURL = filteredNewsArticles[indexPath.row].url
         if articleURL.isValidURL {
             presentWebBrowser(link: URL(string: articleURL)!)
         }
@@ -127,7 +146,7 @@ extension NewsViewController: UITableViewDelegate {
 extension NewsViewController: UITableViewDataSourcePrefetching {
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         for index in indexPaths {
-            if index.row > newsArticles.count - 3 && !isFetchingNews {
+            if index.row > filteredNewsArticles.count - 3 && !isFetchingNews {
                 fetchNewsData()
                 break
             }
@@ -159,5 +178,6 @@ fileprivate extension NewsViewController {
         ])
     }
 }
+
 
 

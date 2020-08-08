@@ -11,10 +11,10 @@ import UIKit
 extension UIView {
     func addBlurToView() {
         var blurEffect: UIBlurEffect!
-        blurEffect = UIBlurEffect(style: .systemUltraThinMaterialDark)
+        blurEffect = UIBlurEffect(style: .systemThinMaterialDark)
         let blurredEffectView = PSORoundedVisualEffectView(effect: blurEffect)
         blurredEffectView.frame = self.bounds
-        blurredEffectView.alpha = 0.9
+        blurredEffectView.alpha = 0.8
         blurredEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.insertSubview(blurredEffectView, at: 0)
     }
