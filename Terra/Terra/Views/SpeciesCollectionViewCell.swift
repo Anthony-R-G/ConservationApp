@@ -72,15 +72,16 @@ class SpeciesCollectionViewCell: UICollectionViewCell {
     //MARK: -- Methods
     
     public func configureCellUI(from species: Species) {
-        speciesNameLabel.text = species.commonName
         FirebaseStorageService.cellImageManager.getImage(for: species.commonName, setTo: backgroundImageView)
+        speciesNameLabel.text = species.commonName
+        speciesScientificNameLabel.text = species.taxonomy.scientificName
+        populationNumbersLabel.text = species.population.numbers.replacingOccurrences(of: "~", with: "")
+        
         switch species.population.conservationStatus {
         case .critical: conservationStatusLabel.text = "CR"
         case .endangered: conservationStatusLabel.text = "EN"
         case .vulnerable: conservationStatusLabel.text = "VU"
         }
-        speciesScientificNameLabel.text = species.taxonomy.scientificName
-        populationNumbersLabel.text = species.population.numbers.replacingOccurrences(of: "~", with: "")
     }
     
     override init(frame: CGRect) {

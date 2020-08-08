@@ -13,7 +13,6 @@ class MGLMapViewController: UIViewController {
     
     private lazy var mapView: MGLMapView = {
         let mv = MGLMapView()
-        
         let styleURL = URL(string: "mapbox://styles/anthonyg5195/ckdkz8h2n0uri1ir58rf4o707")
         mv.styleURL = MGLStyle.satelliteStreetsStyleURL
         mv.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -204,27 +203,5 @@ fileprivate extension MGLMapViewController {
     func setStyleToggleConstraints() {
         NSLayoutConstraint.activate([NSLayoutConstraint(item: styleToggle, attribute: NSLayoutConstraint.Attribute.centerX, relatedBy: NSLayoutConstraint.Relation.equal, toItem: mapView, attribute: NSLayoutConstraint.Attribute.centerX, multiplier: 1.0, constant: 0.0)])
         NSLayoutConstraint.activate([NSLayoutConstraint(item: styleToggle, attribute: .bottom, relatedBy: .equal, toItem: mapView.logoView, attribute: .top, multiplier: 1, constant: -20)])
-    }
-}
-
-
-class CustomAnnotationView: MGLAnnotationView {
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        // Use CALayer’s corner radius to turn this view into a circle.
-        layer.cornerRadius = bounds.width / 2
-        layer.borderWidth = 2
-        layer.borderColor = UIColor.white.cgColor
-    }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        
-        // Animate the border width in/out, creating an iris effect.
-        let animation = CABasicAnimation(keyPath: "borderWidth")
-        animation.duration = 0.1
-        layer.borderWidth = selected ? bounds.width / 4 : 2
-        layer.add(animation, forKey: "borderWidth")
     }
 }

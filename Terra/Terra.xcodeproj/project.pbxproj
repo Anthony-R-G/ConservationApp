@@ -54,6 +54,7 @@
 		976D585924CFA04400FC7458 /* UIButtonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976D585824CFA04400FC7458 /* UIButtonExtensions.swift */; };
 		976FB55324D367AE00848E35 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 97591FE124CCDC28002EAC96 /* Roboto-Regular.ttf */; };
 		976FB55524D367E400848E35 /* Roboto-Light-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 976FB55424D367E400848E35 /* Roboto-Light-Italic.ttf */; };
+		9772515724DF66A90052A3F6 /* CustomAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9772515624DF66A90052A3F6 /* CustomAnnotationView.swift */; };
 		977D876C24CD3A6100AE5E51 /* Taxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977D876B24CD3A6100AE5E51 /* Taxonomy.swift */; };
 		977D876E24CD698500AE5E51 /* Taxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977D876B24CD3A6100AE5E51 /* Taxonomy.swift */; };
 		977D877024CD6A1200AE5E51 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977D876F24CD6A1200AE5E51 /* Group.swift */; };
@@ -144,6 +145,7 @@
 		97682CC924D634AA000E5B30 /* RoundedInfoViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedInfoViewDelegate.swift; sourceTree = "<group>"; };
 		976D585824CFA04400FC7458 /* UIButtonExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtensions.swift; sourceTree = "<group>"; };
 		976FB55424D367E400848E35 /* Roboto-Light-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light-Italic.ttf"; sourceTree = "<group>"; };
+		9772515624DF66A90052A3F6 /* CustomAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotationView.swift; sourceTree = "<group>"; };
 		977D876B24CD3A6100AE5E51 /* Taxonomy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Taxonomy.swift; sourceTree = "<group>"; };
 		977D876F24CD6A1200AE5E51 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		977D877124CD7BFF00AE5E51 /* Habitat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Habitat.swift; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 				97D5946324CE7E49001BD566 /* toolBar.swift */,
 				97591FD324CB8D46002EAC96 /* RoundedInfoView.swift */,
 				97947F5224DD1F560047052B /* CustomCalloutView.swift */,
+				9772515624DF66A90052A3F6 /* CustomAnnotationView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -617,6 +620,7 @@
 				975812EB24D4EF9400C09D56 /* SpeciesOverviewStrategy.swift in Sources */,
 				97F7B42824C56886007AEE97 /* DonateButtonDelegate.swift in Sources */,
 				97EDD4F024D36D0A00D30674 /* FirebaseStorageManager.swift in Sources */,
+				9772515724DF66A90052A3F6 /* CustomAnnotationView.swift in Sources */,
 				9711D8F724BD199700C2E6F1 /* Species.swift in Sources */,
 				974CC98424C64F0F00E4EF85 /* PopulationTrend.swift in Sources */,
 				97FAD4E724D75B20007FEFD8 /* TabBarController.swift in Sources */,
