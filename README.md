@@ -97,7 +97,7 @@ Coming:
 #### Getting Detailed Information
 | African Elephant Overview | Blue-throated Macaw Habitat | Cheetah Threats | Giant Panda Overview |
 | :------: | :------: | :------: | :------: |
-|![screen 1](https://i.imgur.com/XVNFPHj.png) | ![screen 2](https://i.imgur.com/kgitJkv.png) |![screen 3](https://i.imgur.com/vD58wua.png)|![screen 4](https://i.imgur.com/idsjgtZ.png)|
+|![screen 1](https://i.imgur.com/PixInYV.png) | ![screen 2](https://i.imgur.com/nLOVowq.png) |![screen 3](https://i.imgur.com/vD58wua.png)|![screen 4](https://i.imgur.com/idsjgtZ.png)|
 
 
 ## Map Exploration 
