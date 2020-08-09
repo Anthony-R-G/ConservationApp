@@ -33,7 +33,7 @@ class NewsArticleTableViewCell: UITableViewCell {
     
     //MARK: -- Methods
     
-    func configureCellUI(from article: Article) {
+    func configureCellUI(from article: NewsArticle) {
         if let articleThumbImageURLStr = article.urlToImage {
             let articleThumbImageURL = URL(string: articleThumbImageURLStr)
             articleThumbImageView.sd_setImage(with: articleThumbImageURL, completed: nil)
