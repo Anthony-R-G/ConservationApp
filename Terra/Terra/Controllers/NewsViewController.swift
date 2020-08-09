@@ -77,7 +77,10 @@ class NewsViewController: UIViewController {
 
 extension NewsViewController: NewsViewModelDelegate {
     func fetchCompleted() {
-        tableView.reloadData()
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.tableView.reloadData()
+        }
     }
 }
 
