@@ -9,14 +9,13 @@
 import Foundation
 import Combine
 
-enum News {
+enum NewsAPI {
     static let apiClient = APIClient()
 }
 
-
-extension News {
+extension NewsAPI {
     
-    static func request() -> AnyPublisher<NewsResponse, Error> {
+    static func request(page: String) -> AnyPublisher<NewsResponse, Error> {
         var urlComponents = URLComponents()
         urlComponents.scheme = "http"
         urlComponents.host = "newsapi.org"
@@ -27,7 +26,7 @@ extension News {
             URLQueryItem(name: "q", value: "animal+endangered+conservation+wildlife"),
             URLQueryItem(name: "sortBy", value: "publishedAt"),
             URLQueryItem(name: "pageSize", value: "20"),
-            URLQueryItem(name: "page", value: "1")
+            URLQueryItem(name: "page", value: "\(page)")
         ]
         
         let request = URLRequest(url: urlComponents.url!.absoluteURL)

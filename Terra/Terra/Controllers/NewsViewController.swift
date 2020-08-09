@@ -37,7 +37,7 @@ class NewsViewController: UIViewController {
     //MARK: -- Properties
     
     private var viewModel: NewsViewModel!
-     
+    
     
     //MARK: -- Methods
     
@@ -68,9 +68,10 @@ class NewsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
+        viewModel = NewsViewModel(delegate: self)
         addSubviews()
         setConstraints()
-        viewModel = NewsViewModel(delegate: self)
+        
     }
 }
 
@@ -82,15 +83,13 @@ extension NewsViewController: NewsViewModelDelegate {
 
 extension NewsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.totalResultsCount
+        return viewModel.totalNewsArticlesCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let newsCell = tableView.dequeueReusableCell(withIdentifier: "newsCell", for: indexPath) as! NewsArticleTableViewCell
-        
         let specificArticle = viewModel.specificArticle(at: indexPath.row)
-        
         newsCell.configureCellUI(from: specificArticle)
         return newsCell
     }
@@ -110,10 +109,10 @@ extension NewsViewController: UITableViewDelegate {
 extension NewsViewController: UITableViewDataSourcePrefetching {
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         for index in indexPaths {
-//            if index.row > filteredNewsArticles.count - 3 && !isFetchingNews {
-////                fetchNewsData()
-//                break
-//            }
+            if index.row > viewModel.totalNewsArticlesCount - 3 && viewModel.newsFetchIsUnderway {
+                viewModel.fetchNews()
+                break
+            }
         }
     }
 }

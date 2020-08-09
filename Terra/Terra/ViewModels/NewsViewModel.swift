@@ -26,10 +26,14 @@ final class NewsViewModel {
     }
     
     private var currentPage: Int = 1
-    private var isFetchingNews = false
+    private var isFetchInProgress = false
     
-    var totalResultsCount: Int {
+    var totalNewsArticlesCount: Int {
         return filteredNewsArticles.count
+    }
+    
+    var newsFetchIsUnderway: Bool {
+        return isFetchInProgress
     }
     
     
@@ -57,15 +61,23 @@ final class NewsViewModel {
 extension NewsViewModel {
     
     func fetchNews() {
-        cancellationToken = News.request()
+        guard !isFetchInProgress else {
+          return
+        }
+        
+        isFetchInProgress = true
+        
+        cancellationToken = NewsAPI.request(page: currentPage.description)
             .mapError({ (error) -> Error in 
                 print(error)
                 return error
             })
             .sink(receiveCompletion: { _ in },
-                  receiveValue: { [weak self] in
-                    guard let self = self else { return }
-                    self.newsArticles = $0.articles
+                  receiveValue: { response in
+                    self.newsArticles.append(contentsOf: response.articles)
+                    self.currentPage += 1
+                    print(self.currentPage)
+                    self.isFetchInProgress = false
             })
     }
 }
