@@ -93,7 +93,7 @@ final class SpeciesListViewController: UIViewController {
                                  alignment: .left)
     }()
     
-    private lazy var speciesCollectionView: UICollectionView = {
+    private lazy var collectionView: UICollectionView = {
         Factory.makeCollectionView()
     }()
     
@@ -111,7 +111,7 @@ final class SpeciesListViewController: UIViewController {
     
     private var searchString: String? = nil {
         didSet {
-            speciesCollectionView.reloadData()
+            collectionView.reloadData()
         }
     }
     
@@ -154,8 +154,8 @@ final class SpeciesListViewController: UIViewController {
     
     
     private func setDatasourceAndDelegates() {
-        speciesCollectionView.dataSource = self
-        speciesCollectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.delegate = self
         topToolBar.delegate = self
         searchBar.delegate = self
     }
@@ -164,13 +164,18 @@ final class SpeciesListViewController: UIViewController {
         return .lightContent
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        viewModel = SpeciesViewModel(delegate: self)
+        viewModel.fetchSpeciesData()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
-        viewModel = SpeciesViewModel(delegate: self)
+        
         addSubviews()
         setConstraints()
+        
         setDatasourceAndDelegates()
         topToolBar.highlightButton(button: .buttonOne)
     }
@@ -231,7 +236,7 @@ extension SpeciesListViewController: SpeciesViewModelDelegate {
     func fetchCompleted() {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            self.speciesCollectionView.reloadData()
+            self.collectionView.reloadData()
         }
     }
 }
@@ -240,7 +245,7 @@ extension SpeciesListViewController: BottomBarDelegate {
     func buttonPressed(_ sender: UIButton) {
         guard let buttonOption = ButtonOption(rawValue: sender.tag) else { return }
         topToolBar.highlightButton(button: buttonOption)
-      
+        viewModel.updateRedListCategoryFilteredAnimals(from: buttonOption)
     }
 }
 
@@ -249,7 +254,7 @@ extension SpeciesListViewController: BottomBarDelegate {
 fileprivate extension SpeciesListViewController {
     
     func addSubviews() {
-        let UIElements = [terraTitleLabel, searchBarButton, searchBar, speciesCollectionView, topToolBar]
+        let UIElements = [terraTitleLabel, searchBarButton, searchBar, collectionView, topToolBar]
         UIElements.forEach { view.addSubview($0) }
         UIElements.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
     }
@@ -272,7 +277,7 @@ fileprivate extension SpeciesListViewController {
             backgroundImageView.topAnchor.constraint(equalTo: view.topAnchor),
             backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            backgroundImageView.bottomAnchor.constraint(equalTo: speciesCollectionView.topAnchor)
+            backgroundImageView.bottomAnchor.constraint(equalTo: collectionView.topAnchor)
         ])
     }
     
@@ -323,10 +328,10 @@ fileprivate extension SpeciesListViewController {
     
     func setSpeciesCollectionViewConstraints() {
         NSLayoutConstraint.activate([
-            speciesCollectionView.topAnchor.constraint(equalTo: topToolBar.bottomAnchor, constant: 0),
-            speciesCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            speciesCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            speciesCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50)
+            collectionView.topAnchor.constraint(equalTo: topToolBar.bottomAnchor, constant: 0),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50)
         ])
     }
 }

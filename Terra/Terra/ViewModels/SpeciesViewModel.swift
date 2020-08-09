@@ -15,7 +15,12 @@ final class SpeciesViewModel {
     
     private var animalData: [Species] = []
     
-    private var redListCategoryFilteredAnimals: [Species] = []
+    private var redListCategoryFilteredAnimals: [Species] = [] {
+        didSet {
+            delegate?.fetchCompleted()
+        }
+    }
+    
     /*
      var searchFilteredSpecies: [Species] {
      get {
@@ -36,28 +41,28 @@ final class SpeciesViewModel {
     }
     
     func updateRedListCategoryFilteredAnimals(from buttonOption: ButtonOption) {
-           switch buttonOption {
-                 case .buttonOne:
-                     redListCategoryFilteredAnimals = animalData
-                     
-                 case .buttonTwo:
-                     redListCategoryFilteredAnimals = Species.getFilteredSpeciesByConservationStatus(arr: animalData, by: .critical)
-                     
-                 case .buttonThree:
-                     redListCategoryFilteredAnimals = Species.getFilteredSpeciesByConservationStatus(arr: animalData, by: .endangered)
-                     
-                 case .buttonFour:
-                     redListCategoryFilteredAnimals =  Species.getFilteredSpeciesByConservationStatus(arr: animalData, by: .vulnerable)
-                 }
-       }
+        switch buttonOption {
+        case .buttonOne:
+            redListCategoryFilteredAnimals = animalData
+            
+        case .buttonTwo:
+            redListCategoryFilteredAnimals = Species.getFilteredSpeciesByConservationStatus(arr: animalData, by: .critical)
+            
+        case .buttonThree:
+            redListCategoryFilteredAnimals = Species.getFilteredSpeciesByConservationStatus(arr: animalData, by: .endangered)
+            
+        case .buttonFour:
+            redListCategoryFilteredAnimals =  Species.getFilteredSpeciesByConservationStatus(arr: animalData, by: .vulnerable)
+        }
+    }
     
     init(delegate: SpeciesViewModelDelegate) {
         self.delegate = delegate
     }
 }
 
-fileprivate extension SpeciesViewModel {
-    func loadSpeciesDataFromFirebase() {
+extension SpeciesViewModel {
+    func fetchSpeciesData() {
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             guard let self = self else { return }
             FirestoreService.manager.getAllSpeciesData() { (result) in
