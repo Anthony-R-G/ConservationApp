@@ -38,7 +38,7 @@ final class NewsViewModel {
     private func filterDuplicateArticles(from news: [NewsArticle]) -> [NewsArticle] {
         var seenHeadlines = Set<String>()
         
-        return newsArticles.compactMap { (newsArticle) in
+        return news.compactMap { (newsArticle) in
             guard !seenHeadlines.contains(newsArticle.cleanedUpTitle)
                 else { return nil }
             seenHeadlines.insert(newsArticle.cleanedUpTitle)

@@ -26,6 +26,15 @@
 		97452E4623E1E6C7005636E0 /* SpeciesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97452E4523E1E6C7005636E0 /* SpeciesCollectionViewCell.swift */; };
 		97452E4823E1EEE9005636E0 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97452E4723E1EEE9005636E0 /* GradientView.swift */; };
 		974B752124DFFC72006C3D1D /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F4E00924D757C600509694 /* StringExtensions.swift */; };
+		974B752224E002AF006C3D1D /* NewsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9772515A24DF800C0052A3F6 /* NewsViewModel.swift */; };
+		974B752324E002B2006C3D1D /* SpeciesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976DA46524DFCAF9003F3197 /* SpeciesViewModel.swift */; };
+		974B752424E0053F006C3D1D /* NewsViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9772516124DFA6C40052A3F6 /* NewsViewModelDelegate.swift */; };
+		974B752524E00544006C3D1D /* SpeciesViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976DA46724DFCB5F003F3197 /* SpeciesViewModelDelegate.swift */; };
+		974B752624E00562006C3D1D /* NewsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9772515E24DF814A0052A3F6 /* NewsAPI.swift */; };
+		974B752724E0056A006C3D1D /* ToolBarSelectedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FDB24CC4524002EAC96 /* ToolBarSelectedButton.swift */; };
+		974B752824E00583006C3D1D /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9772515C24DF80FB0052A3F6 /* APIClient.swift */; };
+		974B752924E0058E006C3D1D /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9764D12A24D7DD820050AF37 /* Secrets.swift */; };
+		974B752A24E00595006C3D1D /* NewsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9772515824DF7F9C0052A3F6 /* NewsResponse.swift */; };
 		974CC98424C64F0F00E4EF85 /* PopulationTrend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974CC98324C64F0E00E4EF85 /* PopulationTrend.swift */; };
 		975812E924D4EDF900C09D56 /* SpeciesStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975812E824D4EDF900C09D56 /* SpeciesStrategy.swift */; };
 		975812EB24D4EF9400C09D56 /* SpeciesOverviewStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975812EA24D4EF9400C09D56 /* SpeciesOverviewStrategy.swift */; };
@@ -684,16 +693,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				972A615724C94C7A00A59AB6 /* FirestoresService.swift in Sources */,
+				974B752224E002AF006C3D1D /* NewsViewModel.swift in Sources */,
 				972A615024C94C6800A59AB6 /* Species.swift in Sources */,
 				972A615324C94C6E00A59AB6 /* Diet.swift in Sources */,
+				974B752324E002B2006C3D1D /* SpeciesViewModel.swift in Sources */,
+				974B752524E00544006C3D1D /* SpeciesViewModelDelegate.swift in Sources */,
 				972A615424C94C7000A59AB6 /* PopulationTrend.swift in Sources */,
+				974B752A24E00595006C3D1D /* NewsResponse.swift in Sources */,
+				974B752424E0053F006C3D1D /* NewsViewModelDelegate.swift in Sources */,
 				97A2BC7224CE5578000D6B2D /* FirestoreError.swift in Sources */,
 				97682CC824D5EB79000E5B30 /* Population.swift in Sources */,
 				97E61B8024CE54A100E83691 /* Habitat.swift in Sources */,
+				974B752824E00583006C3D1D /* APIClient.swift in Sources */,
+				974B752624E00562006C3D1D /* NewsAPI.swift in Sources */,
 				97E61B8124CE54A800E83691 /* Group.swift in Sources */,
 				977D877924CE540800AE5E51 /* FirebaseConvertible.swift in Sources */,
 				97682CC524D550BB000E5B30 /* Biome.swift in Sources */,
+				974B752924E0058E006C3D1D /* Secrets.swift in Sources */,
 				972A615224C94C6C00A59AB6 /* ConservationStatus.swift in Sources */,
+				974B752724E0056A006C3D1D /* ToolBarSelectedButton.swift in Sources */,
 				97A2BC7324CE559F000D6B2D /* FontWeight.swift in Sources */,
 				977D876E24CD698500AE5E51 /* Taxonomy.swift in Sources */,
 				9782524024DFFC3600B9F6FC /* NewsArticle.swift in Sources */,
