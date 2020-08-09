@@ -238,7 +238,7 @@ extension SpeciesListViewController: SpeciesViewModelDelegate {
     }
 }
 
-extension SpeciesListViewController: BottomBarDelegate {
+extension SpeciesListViewController: CustomToolBarDelegate {
     func buttonPressed(_ sender: UIButton) {
         guard let buttonOption = ToolBarSelectedButton(rawValue: sender.tag) else { return }
         topToolBar.highlightButton(button: buttonOption)

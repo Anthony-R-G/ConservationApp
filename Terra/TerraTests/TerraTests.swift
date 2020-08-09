@@ -50,7 +50,6 @@ class TerraTests: XCTestCase {
     }
     
     func testNewsArticleDuplicateRemoval() {
-        
         func filterDuplicateArticles(from news: [NewsArticle]) -> [NewsArticle] {
             var seenHeadlines = Set<String>()
             
@@ -80,6 +79,10 @@ class TerraTests: XCTestCase {
         let testNewsArrayFilteredCount = testNewsArrayWithFilterMethod.filter{ $0.title == testNewsArticleTitle }.count
         
         XCTAssert(testNewsArrayFilteredCount == 1, "Expected only 1 article to have this title, but returned \(testNewsArrayFilteredCount) instead")
+    }
+    
+    func testSpeciesRedListCategoryFilter() {
+        
     }
     
     

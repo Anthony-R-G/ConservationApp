@@ -289,7 +289,7 @@ extension SpeciesDetailViewController: DonateButtonDelegate {
     }
 }
 
-extension SpeciesDetailViewController: BottomBarDelegate {
+extension SpeciesDetailViewController: CustomToolBarDelegate {
     func buttonPressed(_ sender: UIButton) {
         guard let buttonOption = ToolBarSelectedButton(rawValue: sender.tag) else { return }
         bottomToolBar.highlightButton(button: buttonOption)

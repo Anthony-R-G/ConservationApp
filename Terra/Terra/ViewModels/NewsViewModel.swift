@@ -77,8 +77,6 @@ extension NewsViewModel {
                     self.currentPage += 1
                     self.delegate?.fetchCompleted()
                     self.isFetchInProgress = false
-                    print(self.newsArticles[0].formattedPublishDate)
-                    print(self.newsArticles[0].publishedAt)
             })
     }
 }
