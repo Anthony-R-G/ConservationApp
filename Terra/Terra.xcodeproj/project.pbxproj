@@ -289,6 +289,14 @@
 			path = Networking;
 			sourceTree = "<group>";
 		};
+		9772516024DF9C1F0052A3F6 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				9772515A24DF800C0052A3F6 /* NewsViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		977D876D24CD697700AE5E51 /* Species Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -327,7 +335,6 @@
 				9764D13224D9D0E90050AF37 /* ToolBarListVCStrategy.swift */,
 				9764D13424D9D1A20050AF37 /* ToolBarDetailVCStrategy.swift */,
 				9764D12824D7DC250050AF37 /* NewsArticle.swift */,
-				9772515A24DF800C0052A3F6 /* NewsViewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -358,6 +365,7 @@
 				972BBF7A24C0256400B6F7C0 /* Fonts */,
 				979492EC23F46ACE00B636A4 /* Models */,
 				97452E4423E1E6A9005636E0 /* Views */,
+				9772516024DF9C1F0052A3F6 /* ViewModels */,
 				97BF745123DF42CC0058F2D7 /* Controllers */,
 				9711D8FD24BD469B00C2E6F1 /* Third Party Code */,
 				97FAD4EA24D7783F007FEFD8 /* Supporting Files */,

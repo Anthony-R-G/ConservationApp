@@ -36,34 +36,8 @@ class NewsViewController: UIViewController {
     
     //MARK: -- Properties
     
-    var newsArticles: [NewsArticle] = []  {
-        didSet {
-            tableView.reloadData()
-        }
-    }
-    
-    var filteredNewsArticles: [NewsArticle] {
-        get {
-            var seenHeadlines = Set<String>()
-            return newsArticles.compactMap { (element) in
-                guard !seenHeadlines.contains(element.cleanedUpTitle)
-                    else { return nil }
-                
-                seenHeadlines.insert(element.cleanedUpTitle)
-                return element
-            }
-        }
-    }
-    
-    var newsViewModel = NewsViewModel()
-    
-    
-    
-    
-    private var currentPage: Int = 1
-    
-    private var isFetchingNews = false
-    
+    var viewModel: NewsViewModel!
+     
     
     //MARK: -- Methods
     
@@ -96,20 +70,28 @@ class NewsViewController: UIViewController {
         view.backgroundColor = .black
         addSubviews()
         setConstraints()
+        viewModel = NewsViewModel(delegate: self)
+        viewModel.fetchNews()
+        
+    }
+}
 
+extension NewsViewController: NewsViewModelDelegate {
+    func onFetchCompleted() {
+        tableView.reloadData()
     }
 }
 
 extension NewsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return newsViewModel.newsArticles.count
+        return viewModel.newsArticles.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let newsCell = tableView.dequeueReusableCell(withIdentifier: "newsCell", for: indexPath) as! NewsArticleTableViewCell
         
-        let specificArticle = newsViewModel.newsArticle(at: indexPath.row)
+        let specificArticle = viewModel.specificArticle(at: indexPath.row)
         
         newsCell.configureCellUI(from: specificArticle)
         return newsCell
@@ -122,10 +104,10 @@ extension NewsViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let articleURL = filteredNewsArticles[indexPath.row].url
-        if articleURL.isValidURL {
-            presentWebBrowser(link: URL(string: articleURL)!)
-        }
+//        let articleURL = filteredNewsArticles[indexPath.row].url
+//        if articleURL.isValidURL {
+//            presentWebBrowser(link: URL(string: articleURL)!)
+//        }
     }
 }
 

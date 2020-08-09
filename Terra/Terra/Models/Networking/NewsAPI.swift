@@ -11,7 +11,6 @@ import Combine
 
 enum News {
     static let apiClient = APIClient()
-    static let baseUrl = URL(string: "http://newsapi.org/v2/everything?q=animal+endangered+conservation+wildlife&sortBy=publishedAt&pageSize=20&page=1")!
 }
 
 
@@ -25,15 +24,14 @@ extension News {
         
         urlComponents.queryItems = [
             URLQueryItem(name: "apiKey", value: Secrets.newsAPIKey),
-            URLQueryItem(name: "q", value: "animals"),
+            URLQueryItem(name: "q", value: "animal+endangered+conservation+wildlife"),
             URLQueryItem(name: "sortBy", value: "publishedAt"),
             URLQueryItem(name: "pageSize", value: "20"),
             URLQueryItem(name: "page", value: "1")
         ]
         
         let request = URLRequest(url: urlComponents.url!.absoluteURL)
-        print(request)
-        
+       
         return apiClient.run(request)
             .map(\.value)
             .eraseToAnyPublisher() 
