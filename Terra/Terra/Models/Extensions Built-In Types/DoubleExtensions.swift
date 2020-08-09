@@ -16,4 +16,5 @@ extension Double {
     
     //Mark: Used on MapVC
     var metersToMiles: Double { return self * 0.000621371192 }
+
 }

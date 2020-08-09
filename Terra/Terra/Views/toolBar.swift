@@ -64,7 +64,7 @@ final class toolBar: UIView {
     
     var viewControllerStrategy: ToolBarVCStrategy
     
-    weak var delegate: BottomBarDelegate?
+    weak var delegate: CustomToolBarDelegate?
     
     //MARK: -- Methods
     

@@ -13,7 +13,7 @@ final class NewsViewController: UIViewController {
     
     //MARK: -- UI Element Initialization
     
-    lazy var refreshControl: UIRefreshControl = {
+    private lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
         refreshControl.tintColor = .lightGray
@@ -21,7 +21,7 @@ final class NewsViewController: UIViewController {
         return refreshControl
     }()
     
-    lazy var tableView: UITableView = {
+    private lazy var tableView: UITableView = {
         let tv = UITableView()
         tv.register(NewsArticleTableViewCell.self, forCellReuseIdentifier: "newsCell")
         tv.scrollsToTop = true
@@ -42,14 +42,14 @@ final class NewsViewController: UIViewController {
     
     //MARK: -- Methods
     
-    @objc func handleRefresh() {
+    @objc private func handleRefresh() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [weak self] in
             guard let self = self else { return }
             self.refreshControl.endRefreshing()
         }
     }
     
-    func showModally(_ viewController: UIViewController) {
+    private func showModally(_ viewController: UIViewController) {
         let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
         let rootViewController = window?.rootViewController
         rootViewController?.present(viewController, animated: true, completion: nil)
