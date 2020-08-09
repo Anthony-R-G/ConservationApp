@@ -9,16 +9,17 @@
 import Foundation
 import FirebaseFirestore
 
+//TODO: Possible Refactor with Combine?
 class FirestoreService {
     static let manager = FirestoreService()
     private let db = Firestore.firestore()
     private init() {}
     
     func getAllSpeciesData(completion: @escaping (Result<[Species], FirestoreError>) -> Void) {
-        getAllObjects(atCollectionName: "Species", completion: completion)
+        getAllObjects(collectionName: "Species", completion: completion)
     }
     
-    private func getAllObjects<T: FirebaseConvertible>(atCollectionName name: String,
+    private func getAllObjects<T: FirebaseConvertible>(collectionName name: String,
                                                           completion: @escaping (Result<[T], FirestoreError>) -> Void) {
            db.collection(name).getDocuments { (snapshot, error) in
                if let error = error {

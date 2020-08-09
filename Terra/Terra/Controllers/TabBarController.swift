@@ -9,17 +9,19 @@
 import Foundation
 import BATabBarController
 
-class TabBarViewController: UIViewController {
+final class TabBarViewController: UIViewController {
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
         let tabBarVC = BATabBarController()
         
-        super.viewDidLoad()
         let listVC = SpeciesListViewController()
+        
         let newsVC = UINavigationController(rootViewController: NewsViewController())
         newsVC.navigationBar.prefersLargeTitles = true
         newsVC.navigationBar.topItem?.title = "Wildlife News"

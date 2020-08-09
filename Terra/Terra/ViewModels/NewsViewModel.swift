@@ -64,7 +64,7 @@ extension NewsViewModel {
         
         isFetchInProgress = true
         
-        cancellable = NewsAPI.request(page: currentPage.description)
+        cancellable = NewsAPI.makeRequest(page: currentPage)
             .mapError({ (error) -> Error in 
                 print(error)
                 self.isFetchInProgress = false
@@ -75,7 +75,7 @@ extension NewsViewModel {
                     guard let self = self else { return }
                     self.newsArticles.append(contentsOf: response.articles)
                     self.currentPage += 1
-                    self.delegate?.onFetchCompleted()
+                    self.delegate?.fetchCompleted()
                     self.isFetchInProgress = false
             })
     }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DonateButton: UIRoundedButtonWithGradientAndShadow {
+final class DonateButton: UIRoundedButtonWithGradientAndShadow {
     
     //MARK: -- Properties
     weak var delegate: DonateButtonDelegate?

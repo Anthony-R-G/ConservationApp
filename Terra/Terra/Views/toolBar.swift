@@ -8,7 +8,7 @@
 
 import UIKit
 
-class toolBar: UIView {
+final class toolBar: UIView {
     //MARK: -- Lazy UI Element Initialization
     
     private lazy var buttonOne: UIButton = {
@@ -78,7 +78,7 @@ class toolBar: UIView {
         }, completion: nil)
     }
     
-    public func highlightButton(button: ButtonOption) {
+    public func highlightButton(button: ToolBarSelectedButton) {
         switch button {
         case .buttonOne:
             buttonOne.isSelected = true

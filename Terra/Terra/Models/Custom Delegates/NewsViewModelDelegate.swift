@@ -9,7 +9,5 @@
 import Foundation
 
 protocol NewsViewModelDelegate: class {
-    //    func onFetchCompleted(with newIndexPathsToReload: [IndexPath]?)
-    //    func onFetchFailed(with reason: String)
-    func onFetchCompleted()
+    func fetchCompleted()
 }
