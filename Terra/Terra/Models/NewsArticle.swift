@@ -8,13 +8,7 @@
 
 import Foundation
 
-struct NewsAPIResult: Codable {
-    let articles: [Article]
-    let totalResults: Int
-}
-
-
-struct Article: Codable {
+struct NewsArticle: Codable, Hashable {
     let title: String
     let url: String
     let urlToImage: String?
@@ -22,13 +16,18 @@ struct Article: Codable {
     
     var formattedPublishDate: String {
         get {
-            
             let dateFormatter8601 = ISO8601DateFormatter()
             let timeAsConvertedFullDate = dateFormatter8601.date(from: publishedAt )!
             
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "MMM d yyyy, h:mm a"
             return dateFormatter.string(from: timeAsConvertedFullDate)
+        }
+    }
+    
+    var cleanedUpTitle: String {
+        get {
+            title.removingNonAlphabetChars
         }
     }
 }

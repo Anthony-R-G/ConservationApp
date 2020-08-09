@@ -36,42 +36,15 @@ class NewsViewController: UIViewController {
     
     //MARK: -- Properties
     
-    var newsArticles: [Article] = []  {
-        didSet {
-            tableView.reloadData()
-        }
-    }
+    private var viewModel: NewsViewModel!
     
-    private var currentPage: Int = 1
     
-    private var isFetchingNews = false
-    
-
     //MARK: -- Methods
     
     @objc func handleRefresh() {
-        fetchNewsData()
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [weak self] in
             guard let self = self else { return }
             self.refreshControl.endRefreshing()
-        }
-    }
-    
-    private func fetchNewsData() {
-        isFetchingNews = true
-        NewsAPIClient.shared.fetchNewsData(page: currentPage) { (result) in
-            switch result {
-            case .success(let newsData):
-                self.newsArticles.append(contentsOf: newsData.articles)
-                self.currentPage += 1
-                
-                self.isFetchingNews = false
-                
-                
-            case .failure(let error):
-                print(error)
-                self.isFetchingNews = false
-            }
         }
     }
     
@@ -88,24 +61,35 @@ class NewsViewController: UIViewController {
         showModally(safariVC)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        viewModel.fetchNews()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
+        viewModel = NewsViewModel(delegate: self)
         addSubviews()
         setConstraints()
-        fetchNewsData()
+        
+    }
+}
+
+extension NewsViewController: NewsViewModelDelegate {
+    func onFetchCompleted() {
+        tableView.reloadData()
     }
 }
 
 extension NewsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return newsArticles.count
+        return viewModel.totalNewsArticlesCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let newsCell = tableView.dequeueReusableCell(withIdentifier: "newsCell", for: indexPath) as! NewsArticleTableViewCell
-        let specificArticle = newsArticles[indexPath.row]
+        let specificArticle = viewModel.specificArticle(at: indexPath.row)
         newsCell.configureCellUI(from: specificArticle)
         return newsCell
     }
@@ -117,18 +101,16 @@ extension NewsViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let articleURL = newsArticles[indexPath.row].url
-        if articleURL.isValidURL {
-            presentWebBrowser(link: URL(string: articleURL)!)
-        }
+        let specificArticle = viewModel.specificArticle(at: indexPath.row)
+        presentWebBrowser(link: URL(string: specificArticle.url)!)
     }
 }
 
 extension NewsViewController: UITableViewDataSourcePrefetching {
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         for index in indexPaths {
-            if index.row > newsArticles.count - 3 && !isFetchingNews {
-                fetchNewsData()
+            if index.row > viewModel.totalNewsArticlesCount - 3 && !viewModel.newsFetchIsUnderway {
+                viewModel.fetchNews()
                 break
             }
         }
@@ -159,5 +141,6 @@ fileprivate extension NewsViewController {
         ])
     }
 }
+
 
 

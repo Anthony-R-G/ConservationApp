@@ -17,4 +17,15 @@ extension String {
             return false
         }
     }
+    
+    var removingNonAlphabetChars: String {
+        let characters = Set("abcdefghijklmnopqrstuvwxyz")
+        var newStr = String()
+        for char in self.lowercased() {
+            if characters.contains(char) {
+                newStr += String(char)
+            }
+        }
+        return newStr
+    }
 }

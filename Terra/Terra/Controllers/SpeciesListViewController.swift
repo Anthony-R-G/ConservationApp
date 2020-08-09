@@ -112,7 +112,8 @@ final class SpeciesListViewController: UIViewController {
     
     private var redListCategoryFilteredAnimals: [Species] = [] {
         didSet {
-            DispatchQueue.main.async {
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
                 self.speciesCollectionView.reloadData()
             }
         }
@@ -142,7 +143,9 @@ final class SpeciesListViewController: UIViewController {
         UIView.animate(withDuration: 0.3, animations: { [weak self] in
             guard let self = self else { return }
             self.view.layoutIfNeeded()
-        }) { (result) in
+            
+        }) { [weak self] result in
+            guard let self = self else { return }
             self.searchBar.becomeFirstResponder()
         }
     }
@@ -155,20 +158,16 @@ final class SpeciesListViewController: UIViewController {
         UIView.animate(withDuration: 0.3, animations: { [weak self] in
             guard let self = self else { return }
             self.view.layoutIfNeeded()
-        }) { (result) in
+        }) { [weak self] result in
+            guard let self = self else { return }
             self.searchBar.resignFirstResponder()
         }
     }
     
     private func showModally(_ viewController: UIViewController) {
-        let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
+        let window = UIApplication.shared.windows.filter { $0.isKeyWindow }.first
         let rootViewController = window?.rootViewController
         rootViewController?.present(viewController, animated: true, completion: nil)
-    }
-    
-    private func filterSpecies(by status: ConservationStatus) -> [Species] {
-        let filteredSpecies = animalData.filter { $0.population.conservationStatus == status }
-        return filteredSpecies
     }
     
     private func loadSpeciesDataFromFirebase() {
@@ -270,13 +269,13 @@ extension SpeciesListViewController: BottomBarDelegate {
             redListCategoryFilteredAnimals = animalData
             
         case .buttonTwo:
-            redListCategoryFilteredAnimals = filterSpecies(by: .critical)
+            redListCategoryFilteredAnimals = Species.getFilteredSpeciesByConservationStatus(arr: animalData, by: .critical)
             
         case .buttonThree:
-            redListCategoryFilteredAnimals = filterSpecies(by: .endangered)
+            redListCategoryFilteredAnimals = Species.getFilteredSpeciesByConservationStatus(arr: animalData, by: .endangered)
             
         case .buttonFour:
-            redListCategoryFilteredAnimals =  filterSpecies(by: .vulnerable)
+            redListCategoryFilteredAnimals =  Species.getFilteredSpeciesByConservationStatus(arr: animalData, by: .vulnerable)
         }
     }
 }
