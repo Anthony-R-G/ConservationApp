@@ -144,7 +144,8 @@ final class SpeciesListViewController: UIViewController {
             guard let self = self else { return }
             self.view.layoutIfNeeded()
             
-        }) { (result) in
+        }) { [weak self] result in
+            guard let self = self else { return }
             self.searchBar.becomeFirstResponder()
         }
     }
@@ -157,7 +158,8 @@ final class SpeciesListViewController: UIViewController {
         UIView.animate(withDuration: 0.3, animations: { [weak self] in
             guard let self = self else { return }
             self.view.layoutIfNeeded()
-        }) { (result) in
+        }) { [weak self] result in
+            guard let self = self else { return }
             self.searchBar.resignFirstResponder()
         }
     }

@@ -71,7 +71,8 @@ extension NewsViewModel {
                 return error
             })
             .sink(receiveCompletion: { _ in },
-                  receiveValue: { response in
+                  receiveValue: { [weak self] response in
+                    guard let self = self else { return }
                     self.newsArticles.append(contentsOf: response.articles)
                     self.currentPage += 1
                     self.isFetchInProgress = false
