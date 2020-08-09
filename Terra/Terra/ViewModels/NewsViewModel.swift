@@ -9,13 +9,7 @@
 import Foundation
 import Combine
 
-protocol NewsViewModelDelegate: class {
-//    func onFetchCompleted(with newIndexPathsToReload: [IndexPath]?)
-//    func onFetchFailed(with reason: String)
-    func onFetchCompleted()
-}
-
-final class NewsViewModel: ObservableObject {
+final class NewsViewModel {
     //MARK: -- Properties
     private weak var delegate: NewsViewModelDelegate?
     private var cancellationToken: AnyCancellable?
@@ -27,20 +21,19 @@ final class NewsViewModel: ObservableObject {
     }
     
     private var filteredNewsArticles: [NewsArticle] {
-        get {
-           return filterDuplicateArticles(from: newsArticles)
-        }
+        return filterDuplicateArticles(from: newsArticles)
     }
     
     private var currentPage: Int = 1
     private var isFetchingNews = false
+    
     var totalResultsCount: Int {
         return filteredNewsArticles.count
     }
     
     
     //MARK: -- Methods
-    func filterDuplicateArticles(from news: [NewsArticle]) -> [NewsArticle] {
+    private func filterDuplicateArticles(from news: [NewsArticle]) -> [NewsArticle] {
         var seenHeadlines = Set<String>()
         
         return newsArticles.compactMap { (newsArticle) in
@@ -52,9 +45,8 @@ final class NewsViewModel: ObservableObject {
     }
     
     func specificArticle(at index: Int) -> NewsArticle {
-      return filteredNewsArticles[index]
+        return filteredNewsArticles[index]
     }
-    
     
     init(delegate: NewsViewModelDelegate) {
         self.delegate = delegate
