@@ -9,7 +9,7 @@
 import UIKit
 import SafariServices
 
-class NewsViewController: UIViewController {
+final class NewsViewController: UIViewController {
     
     //MARK: -- UI Element Initialization
     

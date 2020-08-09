@@ -17,7 +17,7 @@ struct NewsArticle: Codable, Hashable {
     var formattedPublishDate: String {
         get {
             let dateFormatter8601 = ISO8601DateFormatter()
-            let timeAsConvertedFullDate = dateFormatter8601.date(from: publishedAt )!
+            let timeAsConvertedFullDate = dateFormatter8601.date(from: publishedAt)!
             
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "MMM d yyyy, h:mm a"

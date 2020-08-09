@@ -6,10 +6,10 @@
 //  Copyright © 2020 Antnee. All rights reserved.
 //
 
-import Foundation
+
 import Mapbox
 
-class CustomAnnotationView: MGLAnnotationView {
+final class CustomAnnotationView: MGLAnnotationView {
     override func layoutSubviews() {
         super.layoutSubviews()
         

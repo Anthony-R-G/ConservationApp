@@ -15,7 +15,7 @@ enum NewsAPI {
 
 extension NewsAPI {
     
-    static func makeRequest(page: String) -> AnyPublisher<NewsResponse, Error> {
+    static func makeRequest(page: Int) -> AnyPublisher<NewsResponse, Error> {
         var urlComponents = URLComponents()
         urlComponents.scheme = "http"
         urlComponents.host = "newsapi.org"

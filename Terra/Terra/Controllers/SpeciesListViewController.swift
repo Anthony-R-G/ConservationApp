@@ -134,13 +134,14 @@ final class SpeciesListViewController: UIViewController {
         UIView.animate(withDuration: 0.3, animations: { [weak self] in
             guard let self = self else { return }
             self.view.layoutIfNeeded()
+            
         }) { [weak self] result in
             guard let self = self else { return }
             self.searchBar.resignFirstResponder()
         }
     }
     
-    private func showModally(_ viewController: UIViewController) {
+    private func presentModally(_ viewController: UIViewController) {
         let window = UIApplication.shared.windows.filter { $0.isKeyWindow }.first
         let rootViewController = window?.rootViewController
         rootViewController?.present(viewController, animated: true, completion: nil)
@@ -202,7 +203,7 @@ extension SpeciesListViewController: UICollectionViewDelegateFlowLayout {
         let detailVC = SpeciesDetailViewController()
         detailVC.currentSpecies = specificAnimal
         
-        showModally(detailVC)
+        presentModally(detailVC)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -263,7 +264,6 @@ fileprivate extension SpeciesListViewController {
         
         setSpeciesCollectionViewConstraints()
         setToolBarConstraints()
-        
     }
     
     func setBackgroundImageViewConstraints() {

@@ -121,7 +121,6 @@ final class SpeciesDetailViewController: UIViewController {
     
     var currentSpecies: Species!
     
-    
     //MARK: -- Methods
     
     private func setViewElementsFromSpeciesData() {

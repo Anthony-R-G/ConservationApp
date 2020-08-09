@@ -8,7 +8,7 @@
 
 import UIKit
 
-class toolBar: UIView {
+final class toolBar: UIView {
     //MARK: -- Lazy UI Element Initialization
     
     private lazy var buttonOne: UIButton = {
