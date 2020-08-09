@@ -13,19 +13,16 @@ final class NewsViewModel {
     //MARK: -- Properties
     
     private weak var delegate: NewsViewModelDelegate?
-    private var cancellationToken: AnyCancellable?
     
-    private var newsArticles: [NewsArticle] = [] {
-        didSet {
-            delegate?.onFetchCompleted()
-        }
-    }
+    private var cancellable: AnyCancellable?
     
+    private var newsArticles: [NewsArticle] = []
     private var filteredNewsArticles: [NewsArticle] {
         return filterDuplicateArticles(from: newsArticles)
     }
     
     private var currentPage: Int = 1
+    
     private var isFetchInProgress = false
     
     var totalNewsArticlesCount: Int {
@@ -61,10 +58,13 @@ final class NewsViewModel {
 extension NewsViewModel {
     
     func fetchNews() {
+        guard !isFetchInProgress else {
+            return
+        }
         
         isFetchInProgress = true
         
-        cancellationToken = NewsAPI.request(page: currentPage.description)
+        cancellable = NewsAPI.request(page: currentPage.description)
             .mapError({ (error) -> Error in 
                 print(error)
                 self.isFetchInProgress = false
@@ -75,6 +75,7 @@ extension NewsViewModel {
                     guard let self = self else { return }
                     self.newsArticles.append(contentsOf: response.articles)
                     self.currentPage += 1
+                    self.delegate?.onFetchCompleted()
                     self.isFetchInProgress = false
             })
     }
