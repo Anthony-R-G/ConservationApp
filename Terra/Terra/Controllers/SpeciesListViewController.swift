@@ -143,6 +143,7 @@ final class SpeciesListViewController: UIViewController {
         UIView.animate(withDuration: 0.3, animations: { [weak self] in
             guard let self = self else { return }
             self.view.layoutIfNeeded()
+            
         }) { (result) in
             self.searchBar.becomeFirstResponder()
         }

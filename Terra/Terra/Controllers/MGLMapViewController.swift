@@ -56,7 +56,6 @@ class MGLMapViewController: UIViewController {
     private var speciesLocation = CLLocationCoordinate2D() {
         didSet {
             addAnnotation(from: speciesLocation, title: currentSpecies.commonName, subtitle: currentSpecies.taxonomy.scientificName)
-            
         }
     }
     
@@ -107,6 +106,7 @@ class MGLMapViewController: UIViewController {
     }
 }
 
+//MARK: -- MapView Delegate Methods
 extension MGLMapViewController: MGLMapViewDelegate {
     func mapViewDidFinishLoadingMap(_ mapView: MGLMapView) {
         let camera = MGLMapCamera(lookingAtCenter: speciesLocation , altitude: 100000, pitch: 15, heading: 0)
@@ -114,6 +114,7 @@ extension MGLMapViewController: MGLMapViewDelegate {
                           withDuration: 3,
                           animationTimingFunction: CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut))
     }
+    
     
     func mapView(_ mapView: MGLMapView, viewFor annotation: MGLAnnotation) -> MGLAnnotationView? {
         
@@ -134,9 +135,11 @@ extension MGLMapViewController: MGLMapViewDelegate {
         return annotationView
     }
     
+    
     func mapView(_ mapView: MGLMapView, annotationCanShowCallout annotation: MGLAnnotation) -> Bool {
         return true
     }
+    
     
     func mapView(_ mapView: MGLMapView, calloutViewFor annotation: MGLAnnotation) -> MGLCalloutView? {
         let locationOne = CLLocation(latitude: userLocation.latitude, longitude: userLocation.longitude)
@@ -153,6 +156,7 @@ extension MGLMapViewController: MGLMapViewDelegate {
     }
 }
 
+//MARK: -- CalloutView Delegate Methods
 extension MGLMapViewController: MGLCalloutViewDelegate {
     func calloutViewWillAppear(_ calloutView: UIView & MGLCalloutView) {
         print("I will appear")

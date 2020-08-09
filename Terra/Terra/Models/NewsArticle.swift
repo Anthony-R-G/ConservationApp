@@ -8,13 +8,7 @@
 
 import Foundation
 
-struct NewsAPIResult: Codable {
-    let articles: [Article]
-    let totalResults: Int
-}
-
-
-struct Article: Codable, Hashable {
+struct NewsArticle: Codable, Hashable {
     let title: String
     let url: String
     let urlToImage: String?

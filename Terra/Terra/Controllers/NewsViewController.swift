@@ -36,13 +36,13 @@ class NewsViewController: UIViewController {
     
     //MARK: -- Properties
     
-    var newsArticles: [Article] = []  {
+    var newsArticles: [NewsArticle] = []  {
         didSet {
             tableView.reloadData()
         }
     }
     
-    var filteredNewsArticles: [Article] {
+    var filteredNewsArticles: [NewsArticle] {
         get {
             var seenHeadlines = Set<String>()
             return newsArticles.compactMap { (element) in
@@ -55,6 +55,9 @@ class NewsViewController: UIViewController {
         }
     }
     
+    var newsViewModel = NewsViewModel()
+    
+    
     
     
     private var currentPage: Int = 1
@@ -65,30 +68,13 @@ class NewsViewController: UIViewController {
     //MARK: -- Methods
     
     @objc func handleRefresh() {
-        fetchNewsData()
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [weak self] in
             guard let self = self else { return }
             self.refreshControl.endRefreshing()
         }
     }
     
-    private func fetchNewsData() {
-        isFetchingNews = true
-        NewsAPIClient.shared.fetchNewsData(page: currentPage) { (result) in
-            switch result {
-            case .success(let newsData):
-                
-                self.newsArticles.append(contentsOf: newsData.articles)
-                self.currentPage += 1
-                self.isFetchingNews = false
-                
-                
-            case .failure(let error):
-                print(error)
-                self.isFetchingNews = false
-            }
-        }
-    }
+
     
     
     func showModally(_ viewController: UIViewController) {
@@ -110,20 +96,20 @@ class NewsViewController: UIViewController {
         view.backgroundColor = .black
         addSubviews()
         setConstraints()
-        fetchNewsData()
+
     }
 }
 
 extension NewsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filteredNewsArticles.count
+        return newsViewModel.newsArticles.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let newsCell = tableView.dequeueReusableCell(withIdentifier: "newsCell", for: indexPath) as! NewsArticleTableViewCell
         
-        let specificArticle = filteredNewsArticles[indexPath.row]
+        let specificArticle = newsViewModel.newsArticle(at: indexPath.row)
         
         newsCell.configureCellUI(from: specificArticle)
         return newsCell
@@ -146,10 +132,10 @@ extension NewsViewController: UITableViewDelegate {
 extension NewsViewController: UITableViewDataSourcePrefetching {
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         for index in indexPaths {
-            if index.row > filteredNewsArticles.count - 3 && !isFetchingNews {
-                fetchNewsData()
-                break
-            }
+//            if index.row > filteredNewsArticles.count - 3 && !isFetchingNews {
+////                fetchNewsData()
+//                break
+//            }
         }
     }
 }
