@@ -194,7 +194,7 @@ final class SpeciesDetailViewController: UIViewController {
         horizontalScrollViewTopAnchorConstraint.constant = newHorizontalScrollTopAnchorConstant
     }
     
-    private func transitionToView(buttonPressed: ButtonOption) {
+    private func transitionToView(buttonPressed: ToolBarSelectedButton) {
         switch buttonPressed {
             
         case .buttonOne:
@@ -291,7 +291,7 @@ extension SpeciesDetailViewController: DonateButtonDelegate {
 
 extension SpeciesDetailViewController: BottomBarDelegate {
     func buttonPressed(_ sender: UIButton) {
-        guard let buttonOption = ButtonOption(rawValue: sender.tag) else { return }
+        guard let buttonOption = ToolBarSelectedButton(rawValue: sender.tag) else { return }
         bottomToolBar.highlightButton(button: buttonOption)
         transitionToView(buttonPressed: buttonOption)
     }

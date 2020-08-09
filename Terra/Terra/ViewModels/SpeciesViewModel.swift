@@ -47,8 +47,8 @@ final class SpeciesViewModel {
         return searchFilteredSpecies[index]
     }
     
-    func updateRedListCategoryFilteredAnimals(from buttonOption: ButtonOption) {
-        switch buttonOption {
+    func updateRedListCategoryFilteredAnimals(from selectedButton: ToolBarSelectedButton) {
+        switch selectedButton {
         case .buttonOne:
             redListCategoryFilteredSpecies = animalData
             

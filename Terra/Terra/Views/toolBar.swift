@@ -78,7 +78,7 @@ class toolBar: UIView {
         }, completion: nil)
     }
     
-    public func highlightButton(button: ButtonOption) {
+    public func highlightButton(button: ToolBarSelectedButton) {
         switch button {
         case .buttonOne:
             buttonOne.isSelected = true

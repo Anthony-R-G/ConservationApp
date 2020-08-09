@@ -237,7 +237,7 @@ extension SpeciesListViewController: SpeciesViewModelDelegate {
 
 extension SpeciesListViewController: BottomBarDelegate {
     func buttonPressed(_ sender: UIButton) {
-        guard let buttonOption = ButtonOption(rawValue: sender.tag) else { return }
+        guard let buttonOption = ToolBarSelectedButton(rawValue: sender.tag) else { return }
         topToolBar.highlightButton(button: buttonOption)
         viewModel.updateRedListCategoryFilteredAnimals(from: buttonOption)
     }
