@@ -64,7 +64,7 @@ extension NewsViewModel {
         
         isFetchInProgress = true
         
-        cancellable = NewsAPI.request(page: currentPage.description)
+        cancellable = NewsAPI.makeRequest(page: currentPage.description)
             .mapError({ (error) -> Error in 
                 print(error)
                 self.isFetchInProgress = false
