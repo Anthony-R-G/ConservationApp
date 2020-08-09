@@ -9,5 +9,5 @@
 import Foundation
 
 protocol SpeciesViewModelDelegate: class {
-    
+    func fetchCompleted()
 }

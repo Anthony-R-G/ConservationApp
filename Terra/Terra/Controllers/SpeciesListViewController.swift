@@ -228,7 +228,12 @@ extension SpeciesListViewController: UISearchBarDelegate {
 
 //MARK: -- Custom Delegate Implementations
 extension SpeciesListViewController: SpeciesViewModelDelegate {
-    
+    func fetchCompleted() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.speciesCollectionView.reloadData()
+        }
+    }
 }
 
 extension SpeciesListViewController: BottomBarDelegate {
@@ -244,9 +249,9 @@ extension SpeciesListViewController: BottomBarDelegate {
 fileprivate extension SpeciesListViewController {
     
     func addSubviews() {
-        let mainViewUIElements = [terraTitleLabel, searchBarButton, searchBar, speciesCollectionView, topToolBar]
-        mainViewUIElements.forEach { view.addSubview($0) }
-        mainViewUIElements.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
+        let UIElements = [terraTitleLabel, searchBarButton, searchBar, speciesCollectionView, topToolBar]
+        UIElements.forEach { view.addSubview($0) }
+        UIElements.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
     }
     
     func setConstraints() {
