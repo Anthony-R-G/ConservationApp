@@ -107,7 +107,7 @@ final class SpeciesListViewController: UIViewController {
     
     //MARK: -- Properties
     
-    var viewModel: SpeciesViewModel!
+    private var viewModel: SpeciesViewModel!
     
     //MARK: -- Methods
     
@@ -172,6 +172,7 @@ final class SpeciesListViewController: UIViewController {
         
         setDatasourceAndDelegates()
         topToolBar.highlightButton(button: .buttonOne)
+        
     }
 }
 
@@ -191,6 +192,7 @@ extension SpeciesListViewController: UICollectionViewDataSource {
 }
 
 //MARK: -- CollectionView Delegate Methods
+
 extension SpeciesListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.width, height: 227)
@@ -209,6 +211,7 @@ extension SpeciesListViewController: UICollectionViewDelegateFlowLayout {
         return 0
     }
 }
+
 
 //MARK: --SearchBar Delegate Methods
 extension SpeciesListViewController: UISearchBarDelegate {

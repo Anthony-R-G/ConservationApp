@@ -14,7 +14,7 @@ class TerraTests: XCTestCase {
     func testJSONMapping() throws {
         let bundle = Bundle(for: type(of: self))
 
-        guard let url = bundle.url(forResource: "modelTestData", withExtension: "json") else {
+        guard let url = bundle.url(forResource: "speciesModelTestData", withExtension: "json") else {
             XCTFail("Missing file: data.json")
             return
         }
@@ -32,7 +32,20 @@ class TerraTests: XCTestCase {
         XCTAssert(label.text == labelTitle, "Factory method not assigning title correctly")
        }
     
-    //ISO8601 Formatting
+ 
+    func testISO8601Formatter() {
+        let testArticle = NewsArticle(title: "",
+                                      url: "",
+                                      urlToImage: "", publishedAt: "2020-08-08T00:33:22Z")
+        XCTAssert(testArticle.formattedPublishDate == "Aug 7 2020, 8:33 PM", "Expected 'Aug 7 2020, 8:33 PM', but returned '\(testArticle.formattedPublishDate)' instead")
+    }
+    
+    func testRemovingNonAlphabetCharsExtension() {
+        let testString = "Jurong Bird Park's conservation breeding efforts soar with more than 100 new hatchlings!"
+        
+        let expectedString = "jurongbirdparksconservationbreedingeffortssoarwithmorethannewhatchlings"
+        XCTAssert(testString.removingNonAlphabetChars == expectedString, "Expected '\(expectedString)', but returned '\(testString.removingNonAlphabetChars)' instead")
+    }
     
     
     

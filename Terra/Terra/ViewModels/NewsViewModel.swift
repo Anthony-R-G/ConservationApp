@@ -23,7 +23,7 @@ final class NewsViewModel {
     
     private var currentPage: Int = 1
     
-    private var isFetchInProgress = false
+    private var isFetchInProgress: Bool = false
     
     var totalNewsArticlesCount: Int {
         return filteredNewsArticles.count
@@ -77,6 +77,8 @@ extension NewsViewModel {
                     self.currentPage += 1
                     self.delegate?.fetchCompleted()
                     self.isFetchInProgress = false
+                    print(self.newsArticles[0].formattedPublishDate)
+                    print(self.newsArticles[0].publishedAt)
             })
     }
 }
