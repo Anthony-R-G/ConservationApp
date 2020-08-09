@@ -121,7 +121,6 @@ final class SpeciesDetailViewController: UIViewController {
     
     var currentSpecies: Species!
     
-    
     //MARK: -- Methods
     
     private func setViewElementsFromSpeciesData() {
@@ -194,7 +193,7 @@ final class SpeciesDetailViewController: UIViewController {
         horizontalScrollViewTopAnchorConstraint.constant = newHorizontalScrollTopAnchorConstant
     }
     
-    private func transitionToView(buttonPressed: ButtonOption) {
+    private func transitionToView(buttonPressed: ToolBarSelectedButton) {
         switch buttonPressed {
             
         case .buttonOne:
@@ -221,8 +220,9 @@ final class SpeciesDetailViewController: UIViewController {
         setVerticalScrollViewConstraints()
         setHorizontalScrollViewConstraints()
         
-        //This is hardcoded for now. Need to adjust for diff device sizes in future without having extra scroll space.
-        verticalScrollView.contentSize = CGSize(width: view.frame.width, height: view.frame.height + 350)
+        
+        verticalScrollView.updateContentViewHeight()
+        //TODO: -- Calculate content width size to not be hardcoded
         horizontalScrollView.contentSize = CGSize(width: view.frame.width + 1300, height: 300)
     }
     
@@ -291,7 +291,7 @@ extension SpeciesDetailViewController: DonateButtonDelegate {
 
 extension SpeciesDetailViewController: BottomBarDelegate {
     func buttonPressed(_ sender: UIButton) {
-        guard let buttonOption = ButtonOption(rawValue: sender.tag) else { return }
+        guard let buttonOption = ToolBarSelectedButton(rawValue: sender.tag) else { return }
         bottomToolBar.highlightButton(button: buttonOption)
         transitionToView(buttonPressed: buttonOption)
     }

@@ -9,7 +9,11 @@
 import UIKit
 
 extension UIScrollView {
-    func updateContentView() {
+    func updateContentViewHeight() {
         contentSize.height = subviews.sorted(by: { $0.frame.maxY < $1.frame.maxY }).last?.frame.maxY ?? contentSize.height
+    }
+    
+    func updateContentViewWidth() {
+        contentSize.width = subviews.sorted(by: { $0.frame.maxX < $1.frame.maxX }).last?.frame.maxX ?? contentSize.width
     }
 }

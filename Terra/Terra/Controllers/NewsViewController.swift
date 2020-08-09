@@ -9,7 +9,7 @@
 import UIKit
 import SafariServices
 
-class NewsViewController: UIViewController {
+final class NewsViewController: UIViewController {
     
     //MARK: -- UI Element Initialization
     
@@ -24,6 +24,7 @@ class NewsViewController: UIViewController {
     lazy var tableView: UITableView = {
         let tv = UITableView()
         tv.register(NewsArticleTableViewCell.self, forCellReuseIdentifier: "newsCell")
+        tv.scrollsToTop = true
         tv.backgroundColor = .clear
         tv.refreshControl = refreshControl
         tv.separatorColor = .white
@@ -76,8 +77,11 @@ class NewsViewController: UIViewController {
 }
 
 extension NewsViewController: NewsViewModelDelegate {
-    func onFetchCompleted() {
-        tableView.reloadData()
+    func fetchCompleted() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.tableView.reloadData()
+        }
     }
 }
 

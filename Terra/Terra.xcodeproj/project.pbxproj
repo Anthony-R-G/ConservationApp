@@ -33,7 +33,7 @@
 		975812F324D530AA00C09D56 /* SpeciesGalleryStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975812F224D530AA00C09D56 /* SpeciesGalleryStrategy.swift */; };
 		975812F524D539D500C09D56 /* Biome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975812F424D539D500C09D56 /* Biome.swift */; };
 		97591FD424CB8D46002EAC96 /* RoundedInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FD324CB8D46002EAC96 /* RoundedInfoView.swift */; };
-		97591FDC24CC4524002EAC96 /* ButtonOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FDB24CC4524002EAC96 /* ButtonOption.swift */; };
+		97591FDC24CC4524002EAC96 /* ToolBarSelectedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FDB24CC4524002EAC96 /* ToolBarSelectedButton.swift */; };
 		97591FDF24CCD14A002EAC96 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FDE24CCD14A002EAC96 /* Constants.swift */; };
 		97591FE024CCD2E9002EAC96 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FDE24CCD14A002EAC96 /* Constants.swift */; };
 		97591FE324CCDC48002EAC96 /* FontWeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FE224CCDC48002EAC96 /* FontWeight.swift */; };
@@ -49,6 +49,8 @@
 		97682CC824D5EB79000E5B30 /* Population.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97682CC624D5EAA3000E5B30 /* Population.swift */; };
 		97682CCA24D634AA000E5B30 /* RoundedInfoViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97682CC924D634AA000E5B30 /* RoundedInfoViewDelegate.swift */; };
 		976D585924CFA04400FC7458 /* UIButtonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976D585824CFA04400FC7458 /* UIButtonExtensions.swift */; };
+		976DA46624DFCAF9003F3197 /* SpeciesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976DA46524DFCAF9003F3197 /* SpeciesViewModel.swift */; };
+		976DA46824DFCB5F003F3197 /* SpeciesViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976DA46724DFCB5F003F3197 /* SpeciesViewModelDelegate.swift */; };
 		976FB55324D367AE00848E35 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 97591FE124CCDC28002EAC96 /* Roboto-Regular.ttf */; };
 		976FB55524D367E400848E35 /* Roboto-Light-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 976FB55424D367E400848E35 /* Roboto-Light-Italic.ttf */; };
 		9772515724DF66A90052A3F6 /* CustomAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9772515624DF66A90052A3F6 /* CustomAnnotationView.swift */; };
@@ -129,7 +131,7 @@
 		975812F224D530AA00C09D56 /* SpeciesGalleryStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesGalleryStrategy.swift; sourceTree = "<group>"; };
 		975812F424D539D500C09D56 /* Biome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Biome.swift; sourceTree = "<group>"; };
 		97591FD324CB8D46002EAC96 /* RoundedInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedInfoView.swift; sourceTree = "<group>"; };
-		97591FDB24CC4524002EAC96 /* ButtonOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonOption.swift; sourceTree = "<group>"; };
+		97591FDB24CC4524002EAC96 /* ToolBarSelectedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolBarSelectedButton.swift; sourceTree = "<group>"; };
 		97591FDE24CCD14A002EAC96 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		97591FE124CCDC28002EAC96 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		97591FE224CCDC48002EAC96 /* FontWeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontWeight.swift; sourceTree = "<group>"; };
@@ -143,6 +145,8 @@
 		97682CC624D5EAA3000E5B30 /* Population.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Population.swift; sourceTree = "<group>"; };
 		97682CC924D634AA000E5B30 /* RoundedInfoViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedInfoViewDelegate.swift; sourceTree = "<group>"; };
 		976D585824CFA04400FC7458 /* UIButtonExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtensions.swift; sourceTree = "<group>"; };
+		976DA46524DFCAF9003F3197 /* SpeciesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesViewModel.swift; sourceTree = "<group>"; };
+		976DA46724DFCB5F003F3197 /* SpeciesViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesViewModelDelegate.swift; sourceTree = "<group>"; };
 		976FB55424D367E400848E35 /* Roboto-Light-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light-Italic.ttf"; sourceTree = "<group>"; };
 		9772515624DF66A90052A3F6 /* CustomAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotationView.swift; sourceTree = "<group>"; };
 		9772515824DF7F9C0052A3F6 /* NewsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsResponse.swift; sourceTree = "<group>"; };
@@ -249,6 +253,7 @@
 				97F7B42724C56886007AEE97 /* DonateButtonDelegate.swift */,
 				97682CC924D634AA000E5B30 /* RoundedInfoViewDelegate.swift */,
 				9772516124DFA6C40052A3F6 /* NewsViewModelDelegate.swift */,
+				976DA46724DFCB5F003F3197 /* SpeciesViewModelDelegate.swift */,
 			);
 			path = "Custom Delegates";
 			sourceTree = "<group>";
@@ -295,6 +300,7 @@
 		9772516024DF9C1F0052A3F6 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				976DA46524DFCAF9003F3197 /* SpeciesViewModel.swift */,
 				9772515A24DF800C0052A3F6 /* NewsViewModel.swift */,
 			);
 			path = ViewModels;
@@ -329,7 +335,7 @@
 				971FD0CE24C61ABE003ED029 /* Extensions Built-In Types */,
 				9764D12C24D7DE380050AF37 /* Networking */,
 				977D876D24CD697700AE5E51 /* Species Models */,
-				97591FDB24CC4524002EAC96 /* ButtonOption.swift */,
+				97591FDB24CC4524002EAC96 /* ToolBarSelectedButton.swift */,
 				97591FE224CCDC48002EAC96 /* FontWeight.swift */,
 				97591FDE24CCD14A002EAC96 /* Constants.swift */,
 				97FEAEAB24BE5FCC005BAEFE /* Factory.swift */,
@@ -394,8 +400,8 @@
 			children = (
 				97FAD4E624D75B20007FEFD8 /* TabBarController.swift */,
 				97BF745223DF42F90058F2D7 /* SpeciesListViewController.swift */,
-				97FAD4E824D75DBD007FEFD8 /* NewsViewController.swift */,
 				970B172424C2699E007F32E0 /* SpeciesDetailViewController.swift */,
+				97FAD4E824D75DBD007FEFD8 /* NewsViewController.swift */,
 				97997F2B24DCE18B00981087 /* MGLMapViewController.swift */,
 			);
 			path = Controllers;
@@ -630,6 +636,7 @@
 				975812E924D4EDF900C09D56 /* SpeciesStrategy.swift in Sources */,
 				975812ED24D528E100C09D56 /* SpeciesThreatsStrategy.swift in Sources */,
 				977D877624CE1F3800AE5E51 /* UIRoundedButtonWithGradientAndShadow.swift in Sources */,
+				976DA46624DFCAF9003F3197 /* SpeciesViewModel.swift in Sources */,
 				9772515924DF7F9C0052A3F6 /* NewsResponse.swift in Sources */,
 				97997F2C24DCE18B00981087 /* MGLMapViewController.swift in Sources */,
 				9772516224DFA6C40052A3F6 /* NewsViewModelDelegate.swift in Sources */,
@@ -645,10 +652,11 @@
 				97FEAEAC24BE5FCC005BAEFE /* Factory.swift in Sources */,
 				97B68CD424BBB0AC005B8AB8 /* HeaderNameView.swift in Sources */,
 				9764D12B24D7DD820050AF37 /* Secrets.swift in Sources */,
-				97591FDC24CC4524002EAC96 /* ButtonOption.swift in Sources */,
+				97591FDC24CC4524002EAC96 /* ToolBarSelectedButton.swift in Sources */,
 				97D9E24B24C6470700524000 /* Diet.swift in Sources */,
 				97591FD424CB8D46002EAC96 /* RoundedInfoView.swift in Sources */,
 				97452E4623E1E6C7005636E0 /* SpeciesCollectionViewCell.swift in Sources */,
+				976DA46824DFCB5F003F3197 /* SpeciesViewModelDelegate.swift in Sources */,
 				979C191423DE43E900651B2B /* AppDelegate.swift in Sources */,
 				9767D04C24C3EA9200384FCD /* SubheaderInfoView.swift in Sources */,
 				97947F5324DD1F560047052B /* CustomCalloutView.swift in Sources */,

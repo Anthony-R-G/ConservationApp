@@ -9,7 +9,7 @@
 import UIKit
 import Mapbox
 
-class MGLMapViewController: UIViewController {
+final class MGLMapViewController: UIViewController {
     
     private lazy var mapView: MGLMapView = {
         let mv = MGLMapView()

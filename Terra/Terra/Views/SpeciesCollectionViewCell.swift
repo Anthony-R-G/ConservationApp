@@ -9,7 +9,7 @@
 import UIKit
 import FirebaseUI
 
-class SpeciesCollectionViewCell: UICollectionViewCell {
+final class SpeciesCollectionViewCell: UICollectionViewCell {
     //MARK: -- UI Element Initialization
     
     private lazy var speciesNameLabel: UILabel = {
