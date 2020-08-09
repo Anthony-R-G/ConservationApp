@@ -11,6 +11,7 @@ import Combine
 
 final class NewsViewModel {
     //MARK: -- Properties
+    
     private weak var delegate: NewsViewModelDelegate?
     private var cancellationToken: AnyCancellable?
     

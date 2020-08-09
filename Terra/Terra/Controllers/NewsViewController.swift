@@ -102,10 +102,8 @@ extension NewsViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let articleURL = filteredNewsArticles[indexPath.row].url
-//        if articleURL.isValidURL {
-//            presentWebBrowser(link: URL(string: articleURL)!)
-//        }
+        let specificArticle = viewModel.specificArticle(at: indexPath.row)
+        presentWebBrowser(link: URL(string: specificArticle.url)!)
     }
 }
 
