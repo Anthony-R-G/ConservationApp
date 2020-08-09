@@ -20,18 +20,15 @@ final class NewsViewModel: ObservableObject {
     private weak var delegate: NewsViewModelDelegate?
     private var cancellationToken: AnyCancellable?
     
-    @Published private var newsArticles: [NewsArticle] = [] {
+    private var newsArticles: [NewsArticle] = [] {
         didSet {
-           
+            delegate?.onFetchCompleted()
         }
     }
     
     private var filteredNewsArticles: [NewsArticle] {
         get {
            return filterDuplicateArticles(from: newsArticles)
-        }
-        set {
-            delegate?.onFetchCompleted()
         }
     }
     
@@ -67,7 +64,6 @@ final class NewsViewModel: ObservableObject {
 extension NewsViewModel {
     
     func fetchNews() {
-        
         cancellationToken = News.request()
             .mapError({ (error) -> Error in 
                 print(error)
@@ -77,7 +73,6 @@ extension NewsViewModel {
                   receiveValue: { [weak self] in
                     guard let self = self else { return }
                     self.newsArticles = $0.articles
-                    print(self.filteredNewsArticles)
             })
     }
 }

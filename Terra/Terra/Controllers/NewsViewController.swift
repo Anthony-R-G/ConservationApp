@@ -36,7 +36,7 @@ class NewsViewController: UIViewController {
     
     //MARK: -- Properties
     
-    var viewModel: NewsViewModel!
+    private var viewModel: NewsViewModel!
      
     
     //MARK: -- Methods
@@ -47,9 +47,6 @@ class NewsViewController: UIViewController {
             self.refreshControl.endRefreshing()
         }
     }
-    
-
-    
     
     func showModally(_ viewController: UIViewController) {
         let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
@@ -64,6 +61,9 @@ class NewsViewController: UIViewController {
         showModally(safariVC)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        viewModel.fetchNews()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,8 +71,6 @@ class NewsViewController: UIViewController {
         addSubviews()
         setConstraints()
         viewModel = NewsViewModel(delegate: self)
-        viewModel.fetchNews()
-        
     }
 }
 
@@ -84,7 +82,7 @@ extension NewsViewController: NewsViewModelDelegate {
 
 extension NewsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.newsArticles.count
+        return viewModel.totalResultsCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
