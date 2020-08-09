@@ -75,7 +75,7 @@ extension NewsViewModel {
                     guard let self = self else { return }
                     self.newsArticles.append(contentsOf: response.articles)
                     self.currentPage += 1
-                    self.delegate?.onFetchCompleted()
+                    self.delegate?.fetchCompleted()
                     self.isFetchInProgress = false
             })
     }

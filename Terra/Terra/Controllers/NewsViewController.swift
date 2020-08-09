@@ -76,7 +76,7 @@ class NewsViewController: UIViewController {
 }
 
 extension NewsViewController: NewsViewModelDelegate {
-    func onFetchCompleted() {
+    func fetchCompleted() {
         tableView.reloadData()
     }
 }
