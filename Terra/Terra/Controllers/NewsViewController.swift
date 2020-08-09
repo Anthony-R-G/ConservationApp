@@ -109,7 +109,7 @@ extension NewsViewController: UITableViewDelegate {
 extension NewsViewController: UITableViewDataSourcePrefetching {
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         for index in indexPaths {
-            if index.row > viewModel.totalNewsArticlesCount - 3 && viewModel.newsFetchIsUnderway {
+            if index.row > viewModel.totalNewsArticlesCount - 3 && !viewModel.newsFetchIsUnderway {
                 viewModel.fetchNews()
                 break
             }

@@ -61,22 +61,19 @@ final class NewsViewModel {
 extension NewsViewModel {
     
     func fetchNews() {
-        guard !isFetchInProgress else {
-          return
-        }
         
         isFetchInProgress = true
         
         cancellationToken = NewsAPI.request(page: currentPage.description)
             .mapError({ (error) -> Error in 
                 print(error)
+                self.isFetchInProgress = false
                 return error
             })
             .sink(receiveCompletion: { _ in },
                   receiveValue: { response in
                     self.newsArticles.append(contentsOf: response.articles)
                     self.currentPage += 1
-                    print(self.currentPage)
                     self.isFetchInProgress = false
             })
     }
