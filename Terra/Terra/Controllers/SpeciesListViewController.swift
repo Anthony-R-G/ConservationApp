@@ -109,12 +109,6 @@ final class SpeciesListViewController: UIViewController {
     
     var viewModel: SpeciesViewModel!
     
-    private var searchString: String? = nil {
-        didSet {
-            collectionView.reloadData()
-        }
-    }
-    
     //MARK: -- Methods
     
     @objc private func expandSearchBar() {
@@ -227,7 +221,7 @@ extension SpeciesListViewController: UISearchBarDelegate {
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        searchString = searchText
+        viewModel.updateSearchString(newString: searchText)
     }
 }
 
@@ -324,7 +318,6 @@ fileprivate extension SpeciesListViewController {
             topToolBar.heightAnchor.constraint(equalToConstant: 40)
         ])
     }
-    
     
     func setSpeciesCollectionViewConstraints() {
         NSLayoutConstraint.activate([

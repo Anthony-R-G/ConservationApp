@@ -15,45 +15,56 @@ final class SpeciesViewModel {
     
     private var animalData: [Species] = []
     
-    private var redListCategoryFilteredAnimals: [Species] = [] {
+    private var redListCategoryFilteredSpecies: [Species] = [] {
         didSet {
             delegate?.fetchCompleted()
         }
     }
     
-    /*
-     var searchFilteredSpecies: [Species] {
-     get {
-     guard let searchString = searchString else { return redListCategoryFilteredAnimals }
-     guard searchString != ""  else { return redListCategoryFilteredAnimals }
-     return Species.getFilteredSpeciesByName(arr: redListCategoryFilteredAnimals, searchString: searchString)
-     }
-     }
-     */
-    
-    var totalSpeciesCount: Int {
-        return redListCategoryFilteredAnimals.count
+    private var searchFilteredSpecies: [Species] {
+        get {
+            guard let searchString = searchString else { return redListCategoryFilteredSpecies }
+            guard searchString != ""  else { return redListCategoryFilteredSpecies }
+            return Species.getFilteredSpeciesByName(arr: redListCategoryFilteredSpecies, searchString: searchString)
+        }
     }
     
+    private var searchString: String? = nil {
+        didSet {
+            delegate?.fetchCompleted()
+        }
+    }
+    
+    var totalSpeciesCount: Int {
+        return searchFilteredSpecies.count
+    }
+    
+    
     //MARK: -- Properties
+    
+    //Public Accessors
     func specificSpecies(at index: Int) -> Species {
-        return redListCategoryFilteredAnimals[index]
+        return searchFilteredSpecies[index]
     }
     
     func updateRedListCategoryFilteredAnimals(from buttonOption: ButtonOption) {
         switch buttonOption {
         case .buttonOne:
-            redListCategoryFilteredAnimals = animalData
+            redListCategoryFilteredSpecies = animalData
             
         case .buttonTwo:
-            redListCategoryFilteredAnimals = Species.getFilteredSpeciesByConservationStatus(arr: animalData, by: .critical)
+            redListCategoryFilteredSpecies = Species.getFilteredSpeciesByConservationStatus(arr: animalData, by: .critical)
             
         case .buttonThree:
-            redListCategoryFilteredAnimals = Species.getFilteredSpeciesByConservationStatus(arr: animalData, by: .endangered)
+            redListCategoryFilteredSpecies = Species.getFilteredSpeciesByConservationStatus(arr: animalData, by: .endangered)
             
         case .buttonFour:
-            redListCategoryFilteredAnimals =  Species.getFilteredSpeciesByConservationStatus(arr: animalData, by: .vulnerable)
+            redListCategoryFilteredSpecies =  Species.getFilteredSpeciesByConservationStatus(arr: animalData, by: .vulnerable)
         }
+    }
+    
+    func updateSearchString(newString: String) {
+        searchString = newString
     }
     
     init(delegate: SpeciesViewModelDelegate) {
@@ -69,7 +80,7 @@ extension SpeciesViewModel {
                 switch result {
                 case .success(let speciesData):
                     self.animalData = speciesData
-                    self.redListCategoryFilteredAnimals = speciesData
+                    self.redListCategoryFilteredSpecies = speciesData
                     
                 case .failure(let error):
                     print(error)
