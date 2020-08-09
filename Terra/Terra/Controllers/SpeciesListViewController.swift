@@ -147,7 +147,6 @@ final class SpeciesListViewController: UIViewController {
         rootViewController?.present(viewController, animated: true, completion: nil)
     }
     
-    
     private func setDatasourceAndDelegates() {
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -160,13 +159,13 @@ final class SpeciesListViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        viewModel = SpeciesViewModel(delegate: self)
         viewModel.fetchSpeciesData()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
+        viewModel = SpeciesViewModel(delegate: self)
         
         addSubviews()
         setConstraints()

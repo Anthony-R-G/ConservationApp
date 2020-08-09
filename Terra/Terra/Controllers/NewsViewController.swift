@@ -24,6 +24,7 @@ final class NewsViewController: UIViewController {
     lazy var tableView: UITableView = {
         let tv = UITableView()
         tv.register(NewsArticleTableViewCell.self, forCellReuseIdentifier: "newsCell")
+        tv.scrollsToTop = true
         tv.backgroundColor = .clear
         tv.refreshControl = refreshControl
         tv.separatorColor = .white

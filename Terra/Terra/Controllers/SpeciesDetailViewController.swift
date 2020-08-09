@@ -220,8 +220,9 @@ final class SpeciesDetailViewController: UIViewController {
         setVerticalScrollViewConstraints()
         setHorizontalScrollViewConstraints()
         
-        //This is hardcoded for now. Need to adjust for diff device sizes in future without having extra scroll space.
-        verticalScrollView.contentSize = CGSize(width: view.frame.width, height: view.frame.height + 350)
+        
+        verticalScrollView.updateContentViewHeight()
+        //TODO: -- Calculate content width size to not be hardcoded
         horizontalScrollView.contentSize = CGSize(width: view.frame.width + 1300, height: 300)
     }
     
