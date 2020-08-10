@@ -90,6 +90,7 @@
 		979C192B23DE43EF00651B2B /* TerraTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979C192A23DE43EF00651B2B /* TerraTests.swift */; };
 		97A2BC7224CE5578000D6B2D /* FirestoreError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97928F7824CD11BF00AF90C5 /* FirestoreError.swift */; };
 		97A2BC7324CE559F000D6B2D /* FontWeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FE224CCDC48002EAC96 /* FontWeight.swift */; };
+		97B406A724E1FDED00A79E98 /* LearnMoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B406A624E1FDED00A79E98 /* LearnMoreViewController.swift */; };
 		97B68CD424BBB0AC005B8AB8 /* HeaderNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B68CD324BBB0AC005B8AB8 /* HeaderNameView.swift */; };
 		97BF745323DF42F90058F2D7 /* SpeciesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BF745223DF42F90058F2D7 /* SpeciesListViewController.swift */; };
 		97D5946424CE7E49001BD566 /* toolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D5946324CE7E49001BD566 /* toolBar.swift */; };
@@ -185,6 +186,7 @@
 		979C192623DE43EF00651B2B /* TerraTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TerraTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		979C192A23DE43EF00651B2B /* TerraTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerraTests.swift; sourceTree = "<group>"; };
 		979C192C23DE43EF00651B2B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		97B406A624E1FDED00A79E98 /* LearnMoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnMoreViewController.swift; sourceTree = "<group>"; };
 		97B68CD324BBB0AC005B8AB8 /* HeaderNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderNameView.swift; sourceTree = "<group>"; };
 		97BF745223DF42F90058F2D7 /* SpeciesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesListViewController.swift; sourceTree = "<group>"; };
 		97D5946324CE7E49001BD566 /* toolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = toolBar.swift; sourceTree = "<group>"; };
@@ -412,6 +414,7 @@
 				97FAD4E624D75B20007FEFD8 /* TabBarController.swift */,
 				97BF745223DF42F90058F2D7 /* SpeciesListViewController.swift */,
 				970B172424C2699E007F32E0 /* SpeciesDetailViewController.swift */,
+				97B406A624E1FDED00A79E98 /* LearnMoreViewController.swift */,
 				97FAD4E824D75DBD007FEFD8 /* NewsViewController.swift */,
 				97997F2B24DCE18B00981087 /* MGLMapViewController.swift */,
 			);
@@ -651,6 +654,7 @@
 				9772515924DF7F9C0052A3F6 /* NewsResponse.swift in Sources */,
 				97997F2C24DCE18B00981087 /* MGLMapViewController.swift in Sources */,
 				9772516224DFA6C40052A3F6 /* NewsViewModelDelegate.swift in Sources */,
+				97B406A724E1FDED00A79E98 /* LearnMoreViewController.swift in Sources */,
 				975812EB24D4EF9400C09D56 /* SpeciesOverviewStrategy.swift in Sources */,
 				97F7B42824C56886007AEE97 /* DonateButtonDelegate.swift in Sources */,
 				97EDD4F024D36D0A00D30674 /* FirebaseStorageManager.swift in Sources */,
