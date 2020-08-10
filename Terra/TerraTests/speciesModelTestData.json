@@ -1,0 +1,34 @@
+{
+   "weight":"70 - 105 lbs",
+   "donationLink":"https://support.wwf.org.uk/adopt-a-leopard",
+   "taxonomy":{
+      "scientificName":"Panthers pardus orientalis",
+      "kingdom":"Animalia",
+      "genus":"Panthera",
+      "classTaxonomy":"Mammalia",
+      "order":"Carnivora",
+      "family":"Felidae",
+      "phylum":"Chordata"
+   },
+   "commonName":"Amur Leopard",
+   "habitat":{
+      "latitude":43.1332,
+      "summary":"Amur leopards live in the Amur Heilong Landscape, which spans both the Russian Far East and adjacent areas of China. This rare subspecies of leopard has adapted to life in the temperate forests that make up the northernmost part of the species' range.",
+      "biome":"Temperate Forest",
+      "area":"Amur-Heilong",
+      "longitude":130,
+      "temperature":"34.7 °F"
+   },
+   "height":"2.4 feet",
+   "overview":"People  usually think of leopards in the savannas of Africa but in the Russian Far East, a rare subspecies has adapted to life in the temperate forests that make up the northern-most part of the species’ range. Similar to other leopards, the Amur leopard can run at speeds of up to 37 miles per hour. This incredible animal has been reported to leap more than 19 feet horizontally and up to 10 feet vertically.  The Amur leopard is solitary. Nimble-footed and strong, it carries and hides unfinished kills so that they are not taken by other predators. It has been reported that some males stay with females after mating, and may even help with rearing the young. Several males sometimes follow and fight over a female. They live for 10-15 years, and in captivity up to 20 years. The Amur leopard is also known as the Far East leopard, the Manchurian leopard or the Korean leopard.",
+   "population":{
+      "conservationStatus":"Critical",
+      "assessmentDate":2019,
+      "summary":"The IUCN Species Survival Commission has considered Amur leopards Critically Endangered (IUCN 1996) since 1996. As of 2019, more than 84 individuals remain in the wild (mostly in protected areas) and 170 to 180 live in captivity.",
+      "trend":"Decreasing",
+      "numbers":"~260",
+      "threats":"The Amur leopard is poached largely for its beautiful, spotted fur. In 1999, an undercover investigation team recovered a female and a male Amur leopard skin, which were being sold for $500 and $1,000 respectively in the village of Barabash, not far from the Kedrovaya Pad reserve in Russia. Agriculture and villages surround the forests where the leopards live. As a result the forests are relatively accessible, making poaching a problem—not only for the leopards themselves, but also for important prey species, such as roe deer, sika deer and hare, which are hunted by the villagers both for food and cash."
+   },
+   "group":"Mammal",
+   "diet":"Carnivore"
+}

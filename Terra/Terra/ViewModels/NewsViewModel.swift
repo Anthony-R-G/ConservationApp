@@ -23,7 +23,7 @@ final class NewsViewModel {
     
     private var currentPage: Int = 1
     
-    private var isFetchInProgress = false
+    private var isFetchInProgress: Bool = false
     
     var totalNewsArticlesCount: Int {
         return filteredNewsArticles.count
@@ -38,7 +38,7 @@ final class NewsViewModel {
     private func filterDuplicateArticles(from news: [NewsArticle]) -> [NewsArticle] {
         var seenHeadlines = Set<String>()
         
-        return newsArticles.compactMap { (newsArticle) in
+        return news.compactMap { (newsArticle) in
             guard !seenHeadlines.contains(newsArticle.cleanedUpTitle)
                 else { return nil }
             seenHeadlines.insert(newsArticle.cleanedUpTitle)
@@ -65,7 +65,8 @@ extension NewsViewModel {
         isFetchInProgress = true
         
         cancellable = NewsAPI.makeRequest(page: currentPage)
-            .mapError({ (error) -> Error in 
+            .mapError({ [weak self] (error) -> Error in
+                guard let self = self else { return error }
                 print(error)
                 self.isFetchInProgress = false
                 return error

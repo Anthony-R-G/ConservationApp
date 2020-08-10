@@ -42,7 +42,7 @@ final class SpeciesListViewController: UIViewController {
         return btn
     }()
     
-    private lazy var backgroundImageView: UIImageView = {
+    private lazy var headerImageView: UIImageView = {
         let iv = UIImageView()
         iv.translatesAutoresizingMaskIntoConstraints = false
         iv.image = #imageLiteral(resourceName: "listVCbackground")
@@ -52,14 +52,6 @@ final class SpeciesListViewController: UIViewController {
         return iv
     }()
     
-    private lazy var backgroundGradientOverlay: GradientView = {
-        let gv = GradientView()
-        gv.translatesAutoresizingMaskIntoConstraints = false
-        gv.startColor = #colorLiteral(red: 0.06859237701, green: 0.08213501424, blue: 0.2409383953, alpha: 0.1955800514)
-        gv.endColor = #colorLiteral(red: 0.06042958051, green: 0.07334413379, blue: 0.2174944878, alpha: 0.8456228596)
-        view.insertSubview(gv, at: 1)
-        return gv
-    }()
     
     private lazy var terraTitleLabel: UILabel = {
         return Factory.makeLabel(title: "Terra",
@@ -93,8 +85,20 @@ final class SpeciesListViewController: UIViewController {
                                  alignment: .left)
     }()
     
+    private lazy var noResultsFoundLabel: UILabel = {
+        let label = Factory.makeLabel(title: "No Species Found",
+                                      weight: .regular,
+                                      size: 17,
+                                      color: .red,
+                                      alignment: .center)
+        label.frame = CGRect(x: 0, y: 0, width: collectionView.bounds.size.width, height: collectionView.bounds.size.height)
+        collectionView.backgroundView = label
+        label.isHidden = true
+        return label
+    }()
+    
     private lazy var collectionView: UICollectionView = {
-        Factory.makeCollectionView()
+        return Factory.makeCollectionView()
     }()
     
     private lazy var searchBarLeadingAnchorConstraint: NSLayoutConstraint = {
@@ -107,7 +111,9 @@ final class SpeciesListViewController: UIViewController {
     
     //MARK: -- Properties
     
-    var viewModel: SpeciesViewModel!
+    private var viewModel: SpeciesViewModel!
+    
+    private var isSearching: Bool = false
     
     //MARK: -- Methods
     
@@ -124,6 +130,8 @@ final class SpeciesListViewController: UIViewController {
             guard let self = self else { return }
             self.searchBar.becomeFirstResponder()
         }
+        
+        isSearching = true
     }
     
     private func dismissSearchBar() {
@@ -139,6 +147,8 @@ final class SpeciesListViewController: UIViewController {
             guard let self = self else { return }
             self.searchBar.resignFirstResponder()
         }
+        
+        isSearching = false
     }
     
     private func presentModally(_ viewController: UIViewController) {
@@ -172,14 +182,19 @@ final class SpeciesListViewController: UIViewController {
         
         setDatasourceAndDelegates()
         topToolBar.highlightButton(button: .buttonOne)
+        
     }
 }
 
 //MARK: -- CollectionView DataSource Methods
 extension SpeciesListViewController: UICollectionViewDataSource {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        noResultsFoundLabel.isHidden = viewModel.totalSpeciesCount == 0 && isSearching ? false : true
+        
         return viewModel.totalSpeciesCount
     }
+    
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let speciesCell = collectionView.dequeueReusableCell(withReuseIdentifier: "speciesCell", for: indexPath) as! SpeciesCollectionViewCell
@@ -191,6 +206,7 @@ extension SpeciesListViewController: UICollectionViewDataSource {
 }
 
 //MARK: -- CollectionView Delegate Methods
+
 extension SpeciesListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.width, height: 227)
@@ -209,6 +225,7 @@ extension SpeciesListViewController: UICollectionViewDelegateFlowLayout {
         return 0
     }
 }
+
 
 //MARK: --SearchBar Delegate Methods
 extension SpeciesListViewController: UISearchBarDelegate {
@@ -235,7 +252,7 @@ extension SpeciesListViewController: SpeciesViewModelDelegate {
     }
 }
 
-extension SpeciesListViewController: BottomBarDelegate {
+extension SpeciesListViewController: CustomToolBarDelegate {
     func buttonPressed(_ sender: UIButton) {
         guard let buttonOption = ToolBarSelectedButton(rawValue: sender.tag) else { return }
         topToolBar.highlightButton(button: buttonOption)
@@ -254,8 +271,7 @@ fileprivate extension SpeciesListViewController {
     }
     
     func setConstraints() {
-        setBackgroundImageViewConstraints()
-        setBackgroundGradientOverlayConstraints()
+        setHeaderImageViewConstraints()
         
         setTerraTitleLabelConstraints()
         setSearchBarButtonConstraints()
@@ -265,23 +281,15 @@ fileprivate extension SpeciesListViewController {
         setToolBarConstraints()
     }
     
-    func setBackgroundImageViewConstraints() {
+    func setHeaderImageViewConstraints() {
         NSLayoutConstraint.activate([
-            backgroundImageView.topAnchor.constraint(equalTo: view.topAnchor),
-            backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            backgroundImageView.bottomAnchor.constraint(equalTo: collectionView.topAnchor)
+            headerImageView.topAnchor.constraint(equalTo: view.topAnchor),
+            headerImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            headerImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            headerImageView.bottomAnchor.constraint(equalTo: collectionView.topAnchor)
         ])
     }
     
-    func setBackgroundGradientOverlayConstraints() {
-        NSLayoutConstraint.activate([
-            backgroundGradientOverlay.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            backgroundGradientOverlay.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            backgroundGradientOverlay.widthAnchor.constraint(equalTo: view.widthAnchor),
-            backgroundGradientOverlay.heightAnchor.constraint(equalTo: view.heightAnchor)
-        ])
-    }
     
     func setTerraTitleLabelConstraints() {
         NSLayoutConstraint.activate([
