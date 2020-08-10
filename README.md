@@ -105,9 +105,9 @@ Coming:
 ## Map Exploration 
 *Experimental feature for post v1.0.0*
 
-•A fully interactive map using Mapbox SDK that allows you to explore the map of the earth.
+•A fully interactive map using Mapbox SDK that allows you to explore the earth.
 
-•The map will have the coordinates of each animal placed in the area they live. (Note: this will be changed to encompass larger polygon regions)
+•The map will have the coordinates of each animal placed in the area they live. (Note: this will be updated to encompass larger polygon regions since not every species has one specific coordinate they reside in)
 
 •Each coordinate annotation can be tapped to bring up a callout view.
 
