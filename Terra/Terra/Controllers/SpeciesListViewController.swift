@@ -189,6 +189,7 @@ extension SpeciesListViewController: UICollectionViewDataSource {
         if viewModel.totalSpeciesCount == 0 && isSearching {
             noResultsFoundLabel.isHidden = false
         }
+        noResultsFoundLabel.isHidden = true
         return viewModel.totalSpeciesCount
     }
     
