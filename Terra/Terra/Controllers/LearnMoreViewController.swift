@@ -74,8 +74,7 @@ But recent research shows conservation work is having a positive effect, and wil
         view.backgroundColor = .gray
         
         addSubviews()
-        
-        
+        setConstraints()
     }
     
     override func viewDidLayoutSubviews() {
@@ -130,8 +129,72 @@ fileprivate extension LearnMoreViewController {
     }
     
     func setConstraints() {
+        setScrollViewConstraints()
         
+        setImageContainerConstraints()
+        setHeaderImageViewConstraints()
+        
+        setTextBackingConstraints()
+        setTextContainerConstraints()
+        setTextBodyConstraints()
     }
     
     
+    func setScrollViewConstraints() {
+        scrollView.snp.makeConstraints {
+            make in
+            
+            make.edges.equalTo(view)
+        }
+    }
+    
+    func setImageContainerConstraints() {
+        imageContainer.snp.makeConstraints {
+            make in
+            
+            make.top.equalTo(scrollView)
+            make.left.right.equalTo(view)
+            make.height.equalTo(imageContainer.snp.width).multipliedBy(0.7)
+        }
+    }
+    
+    func setHeaderImageViewConstraints() {
+        headerImageView.snp.makeConstraints {
+            make in
+            
+            make.left.right.equalTo(imageContainer)
+            make.top.equalTo(view).priority(.high)
+            make.height.greaterThanOrEqualTo(imageContainer.snp.height).priority(.required)
+            make.bottom.equalTo(imageContainer.snp.bottom)
+        }
+    }
+    
+    func setTextBackingConstraints() {
+        textBacking.snp.makeConstraints {
+            make in
+            
+            make.left.right.equalTo(view)
+            make.top.equalTo(textContainer)
+            make.bottom.equalTo(view)
+        }
+    }
+    
+    func setTextContainerConstraints() {
+        textContainer.snp.makeConstraints {
+            make in
+            
+            make.top.equalTo(imageContainer.snp.bottom)
+            make.left.right.equalTo(view)
+            make.bottom.equalTo(scrollView)
+        }
+    }
+    
+    func setTextBodyConstraints() {
+        textBody.snp.makeConstraints {
+            make in
+            
+            make.edges.equalTo(textContainer).inset(14)
+        }
+    }
 }
+
