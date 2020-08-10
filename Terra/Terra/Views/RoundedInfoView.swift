@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RoundedInfoView: UIView {
+final class RoundedInfoView: UIView {
     
     //MARK: -- UI Element Initialization
     

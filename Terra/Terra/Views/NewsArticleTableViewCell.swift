@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NewsArticleTableViewCell: UITableViewCell {
+final class NewsArticleTableViewCell: UITableViewCell {
     //MARK: -- UI Element Initialization
     
     lazy var articleThumbImageView: UIImageView = {
@@ -33,7 +33,7 @@ class NewsArticleTableViewCell: UITableViewCell {
     
     //MARK: -- Methods
     
-    func configureCellUI(from article: Article) {
+    func configureCellUI(from article: NewsArticle) {
         if let articleThumbImageURLStr = article.urlToImage {
             let articleThumbImageURL = URL(string: articleThumbImageURLStr)
             articleThumbImageView.sd_setImage(with: articleThumbImageURL, completed: nil)

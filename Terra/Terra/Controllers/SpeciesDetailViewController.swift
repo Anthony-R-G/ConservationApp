@@ -76,7 +76,9 @@ final class SpeciesDetailViewController: UIViewController {
     }()
     
     private lazy var donateButton: DonateButton = {
-        return DonateButton(gradientColors: [#colorLiteral(red: 1, green: 0.2914688587, blue: 0.3886995912, alpha: 0.9019156678), #colorLiteral(red: 0.5421239734, green: 0.1666001081, blue: 0.2197911441, alpha: 0.8952536387)], startPoint: CGPoint(x: 0, y: 0), endPoint: CGPoint(x: 1, y: 1))
+        return DonateButton(gradientColors: [#colorLiteral(red: 1, green: 0.2914688587, blue: 0.3886995912, alpha: 0.9019156678), #colorLiteral(red: 0.5421239734, green: 0.1666001081, blue: 0.2197911441, alpha: 0.8952536387)],
+                            startPoint: CGPoint(x: 0, y: 0),
+                            endPoint: CGPoint(x: 1, y: 1))
     }()
     
     private lazy var bottomToolBar: toolBar = {
@@ -119,7 +121,6 @@ final class SpeciesDetailViewController: UIViewController {
     
     var currentSpecies: Species!
     
-    
     //MARK: -- Methods
     
     private func setViewElementsFromSpeciesData() {
@@ -157,10 +158,14 @@ final class SpeciesDetailViewController: UIViewController {
         newAlpha = scrollOffset <= 40 ? 0.6 : 0
         
         DispatchQueue.main.async {
-            UIView.animate(withDuration: 1, delay: 0, options: .curveEaseInOut, animations: { [weak self] in
-                guard let self = self else { return }
-                self.exploreButton.alpha = newAlpha
-            }, completion: nil)
+            UIView.animate(withDuration: 1,
+                           delay: 0,
+                           options: .curveEaseInOut,
+                           animations: { [weak self] in
+                            guard let self = self else { return }
+                            self.exploreButton.alpha = newAlpha
+                },
+                           completion: nil)
         }
     }
     
@@ -188,7 +193,7 @@ final class SpeciesDetailViewController: UIViewController {
         horizontalScrollViewTopAnchorConstraint.constant = newHorizontalScrollTopAnchorConstant
     }
     
-    private func transitionToView(buttonPressed: ButtonOption) {
+    private func transitionToView(buttonPressed: ToolBarSelectedButton) {
         switch buttonPressed {
             
         case .buttonOne:
@@ -215,13 +220,16 @@ final class SpeciesDetailViewController: UIViewController {
         setVerticalScrollViewConstraints()
         setHorizontalScrollViewConstraints()
         
-        //This is hardcoded for now. Need to adjust for diff device sizes in future without having extra scroll space.
-        verticalScrollView.contentSize = CGSize(width: view.frame.width, height: view.frame.height + 350)
+        
+        verticalScrollView.updateContentViewHeight()
+        //TODO: -- Calculate content width size to not be hardcoded
         horizontalScrollView.contentSize = CGSize(width: view.frame.width + 1300, height: 300)
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        exploreButton.startShimmeringAnimation(animationSpeed: 2, direction: .leftToRight, repeatCount: .infinity)
+        exploreButton.startShimmeringAnimation(animationSpeed: 2,
+                                               direction: .leftToRight,
+                                               repeatCount: .infinity)
     }
     
     override func viewDidLoad() {
@@ -266,7 +274,6 @@ extension SpeciesDetailViewController: UIScrollViewDelegate {
                 
             } else if scrollView.bounds.contains(speciesGalleryView.frame) {
                 bottomToolBar.highlightButton(button: .buttonFour)
-                
             }
             
         default:()
@@ -282,9 +289,9 @@ extension SpeciesDetailViewController: DonateButtonDelegate {
     }
 }
 
-extension SpeciesDetailViewController: BottomBarDelegate {
+extension SpeciesDetailViewController: CustomToolBarDelegate {
     func buttonPressed(_ sender: UIButton) {
-        guard let buttonOption = ButtonOption(rawValue: sender.tag) else { return }
+        guard let buttonOption = ToolBarSelectedButton(rawValue: sender.tag) else { return }
         bottomToolBar.highlightButton(button: buttonOption)
         transitionToView(buttonPressed: buttonOption)
     }
@@ -293,11 +300,13 @@ extension SpeciesDetailViewController: BottomBarDelegate {
 extension SpeciesDetailViewController: RoundedInfoViewDelegate {
     func learnMoreButtonPressed(_ sender: UIButton) {
         switch sender.tag {
+            
         case 1:
             let mapVC = MGLMapViewController()
             mapVC.currentSpecies = currentSpecies
             mapVC.modalPresentationStyle = .fullScreen
             present(mapVC, animated: true, completion: nil)
+            
         default: print(sender.tag)
         }
     }
@@ -401,24 +410,6 @@ fileprivate extension SpeciesDetailViewController {
         ])
     }
     
-    func setDonateButtonConstraints() {
-        NSLayoutConstraint.activate([
-            donateButton.widthAnchor.constraint(equalTo: speciesOverviewView.widthAnchor),
-            donateButton.heightAnchor.constraint(equalToConstant: 50),
-            donateButton.centerXAnchor.constraint(equalTo: bottomToolBar.centerXAnchor),
-            donateButton.topAnchor.constraint(equalTo: horizontalScrollView.bottomAnchor, constant: 25)
-        ])
-    }
-    
-    func setBottomToolBarConstraints() {
-        NSLayoutConstraint.activate([
-            bottomToolBar.topAnchor.constraint(equalTo: donateButton.bottomAnchor, constant: 25),
-            bottomToolBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            bottomToolBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            bottomToolBar.heightAnchor.constraint(equalToConstant: 80)
-        ])
-    }
-    
     func setSpeciesOverviewViewConstraints() {
         NSLayoutConstraint.activate([
             speciesOverviewView.centerYAnchor.constraint(equalTo: horizontalScrollView.centerYAnchor),
@@ -452,6 +443,24 @@ fileprivate extension SpeciesDetailViewController {
             speciesGalleryView.leadingAnchor.constraint(equalTo: speciesThreatsView.trailingAnchor, constant: Constants.universalLeadingConstant * 2),
             speciesGalleryView.widthAnchor.constraint(equalToConstant: Constants.roundedInfoViewWidth),
             speciesGalleryView.heightAnchor.constraint(equalToConstant: Constants.roundedInfoViewHeight),
+        ])
+    }
+    
+    func setDonateButtonConstraints() {
+        NSLayoutConstraint.activate([
+            donateButton.widthAnchor.constraint(equalTo: speciesOverviewView.widthAnchor),
+            donateButton.heightAnchor.constraint(equalToConstant: 50),
+            donateButton.centerXAnchor.constraint(equalTo: bottomToolBar.centerXAnchor),
+            donateButton.topAnchor.constraint(equalTo: horizontalScrollView.bottomAnchor, constant: 25)
+        ])
+    }
+    
+    func setBottomToolBarConstraints() {
+        NSLayoutConstraint.activate([
+            bottomToolBar.topAnchor.constraint(equalTo: donateButton.bottomAnchor, constant: 25),
+            bottomToolBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            bottomToolBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            bottomToolBar.heightAnchor.constraint(equalToConstant: 80)
         ])
     }
 }

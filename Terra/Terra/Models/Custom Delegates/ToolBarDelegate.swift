@@ -8,6 +8,6 @@
 
 import UIKit
 
-protocol BottomBarDelegate: AnyObject {
+protocol CustomToolBarDelegate: AnyObject {
     func buttonPressed(_ sender: UIButton)
 }

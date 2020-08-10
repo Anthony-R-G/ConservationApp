@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum ButtonOption: Int {
+enum ToolBarSelectedButton: Int {
     case buttonOne = 0
     case buttonTwo = 1
     case buttonThree = 2

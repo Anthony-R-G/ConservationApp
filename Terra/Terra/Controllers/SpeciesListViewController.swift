@@ -42,7 +42,7 @@ final class SpeciesListViewController: UIViewController {
         return btn
     }()
     
-    private lazy var backgroundImageView: UIImageView = {
+    private lazy var headerImageView: UIImageView = {
         let iv = UIImageView()
         iv.translatesAutoresizingMaskIntoConstraints = false
         iv.image = #imageLiteral(resourceName: "listVCbackground")
@@ -52,14 +52,6 @@ final class SpeciesListViewController: UIViewController {
         return iv
     }()
     
-    private lazy var backgroundGradientOverlay: GradientView = {
-        let gv = GradientView()
-        gv.translatesAutoresizingMaskIntoConstraints = false
-        gv.startColor = #colorLiteral(red: 0.06859237701, green: 0.08213501424, blue: 0.2409383953, alpha: 0.1955800514)
-        gv.endColor = #colorLiteral(red: 0.06042958051, green: 0.07334413379, blue: 0.2174944878, alpha: 0.8456228596)
-        view.insertSubview(gv, at: 1)
-        return gv
-    }()
     
     private lazy var terraTitleLabel: UILabel = {
         return Factory.makeLabel(title: "Terra",
@@ -93,8 +85,20 @@ final class SpeciesListViewController: UIViewController {
                                  alignment: .left)
     }()
     
-    private lazy var speciesCollectionView: UICollectionView = {
-        Factory.makeCollectionView()
+    private lazy var noResultsFoundLabel: UILabel = {
+        let label = Factory.makeLabel(title: "No Species Found",
+                                      weight: .regular,
+                                      size: 17,
+                                      color: .red,
+                                      alignment: .center)
+        label.frame = CGRect(x: 0, y: 0, width: collectionView.bounds.size.width, height: collectionView.bounds.size.height)
+        collectionView.backgroundView = label
+        label.isHidden = true
+        return label
+    }()
+    
+    private lazy var collectionView: UICollectionView = {
+        return Factory.makeCollectionView()
     }()
     
     private lazy var searchBarLeadingAnchorConstraint: NSLayoutConstraint = {
@@ -107,31 +111,9 @@ final class SpeciesListViewController: UIViewController {
     
     //MARK: -- Properties
     
-    private var animalData: [Species] = []
+    private var viewModel: SpeciesViewModel!
     
-    
-    private var redListCategoryFilteredAnimals: [Species] = [] {
-        didSet {
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
-                self.speciesCollectionView.reloadData()
-            }
-        }
-    }
-    
-    var searchFilteredSpecies: [Species] {
-        get {
-            guard let searchString = searchString else { return redListCategoryFilteredAnimals }
-            guard searchString != ""  else { return redListCategoryFilteredAnimals }
-            return Species.getFilteredSpeciesByName(arr: redListCategoryFilteredAnimals, searchString: searchString)
-        }
-    }
-    
-    private var searchString: String? = nil {
-        didSet {
-            speciesCollectionView.reloadData()
-        }
-    }
+    private var isSearching: Bool = false
     
     //MARK: -- Methods
     
@@ -143,9 +125,13 @@ final class SpeciesListViewController: UIViewController {
         UIView.animate(withDuration: 0.3, animations: { [weak self] in
             guard let self = self else { return }
             self.view.layoutIfNeeded()
-        }) { (result) in
+            
+        }) { [weak self] result in
+            guard let self = self else { return }
             self.searchBar.becomeFirstResponder()
         }
+        
+        isSearching = true
     }
     
     private func dismissSearchBar() {
@@ -156,36 +142,24 @@ final class SpeciesListViewController: UIViewController {
         UIView.animate(withDuration: 0.3, animations: { [weak self] in
             guard let self = self else { return }
             self.view.layoutIfNeeded()
-        }) { (result) in
+            
+        }) { [weak self] result in
+            guard let self = self else { return }
             self.searchBar.resignFirstResponder()
         }
+        
+        isSearching = false
     }
     
-    private func showModally(_ viewController: UIViewController) {
+    private func presentModally(_ viewController: UIViewController) {
         let window = UIApplication.shared.windows.filter { $0.isKeyWindow }.first
         let rootViewController = window?.rootViewController
         rootViewController?.present(viewController, animated: true, completion: nil)
     }
     
-    private func loadSpeciesDataFromFirebase() {
-        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-            guard let self = self else { return }
-            FirestoreService.manager.getAllSpeciesData() { (result) in
-                switch result {
-                case .success(let speciesData):
-                    self.animalData = speciesData
-                    self.redListCategoryFilteredAnimals = speciesData
-                    
-                case .failure(let error):
-                    print(error)
-                }
-            }
-        }
-    }
-    
     private func setDatasourceAndDelegates() {
-        speciesCollectionView.dataSource = self
-        speciesCollectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.delegate = self
         topToolBar.delegate = self
         searchBar.delegate = self
     }
@@ -194,52 +168,64 @@ final class SpeciesListViewController: UIViewController {
         return .lightContent
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        viewModel.fetchSpeciesData()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
+        viewModel = SpeciesViewModel(delegate: self)
+        
         addSubviews()
         setConstraints()
-        loadSpeciesDataFromFirebase()
+        
         setDatasourceAndDelegates()
         topToolBar.highlightButton(button: .buttonOne)
+        
     }
 }
 
 //MARK: -- CollectionView DataSource Methods
 extension SpeciesListViewController: UICollectionViewDataSource {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return searchFilteredSpecies.count
+        noResultsFoundLabel.isHidden = viewModel.totalSpeciesCount == 0 && isSearching ? false : true
+        
+        return viewModel.totalSpeciesCount
     }
+    
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let speciesCell = collectionView.dequeueReusableCell(withReuseIdentifier: "speciesCell", for: indexPath) as! SpeciesCollectionViewCell
-        let specificAnimal = searchFilteredSpecies[indexPath.row]
+        
+        let specificAnimal = viewModel.specificSpecies(at: indexPath.row)
         speciesCell.configureCellUI(from: specificAnimal)
         return speciesCell
     }
 }
 
 //MARK: -- CollectionView Delegate Methods
+
 extension SpeciesListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.width, height: 227)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let specificAnimal = searchFilteredSpecies[indexPath.row]
+        let specificAnimal = viewModel.specificSpecies(at: indexPath.row)
         
         let detailVC = SpeciesDetailViewController()
         detailVC.currentSpecies = specificAnimal
         
-        showModally(detailVC)
+        presentModally(detailVC)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
-    
 }
+
 
 //MARK: --SearchBar Delegate Methods
 extension SpeciesListViewController: UISearchBarDelegate {
@@ -252,28 +238,25 @@ extension SpeciesListViewController: UISearchBarDelegate {
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        searchString = searchText
+        viewModel.updateSearchString(newString: searchText)
     }
 }
 
 //MARK: -- Custom Delegate Implementations
-extension SpeciesListViewController: BottomBarDelegate {
-    func buttonPressed(_ sender: UIButton) {
-        guard let buttonOption = ButtonOption(rawValue: sender.tag) else { return }
-        topToolBar.highlightButton(button: buttonOption)
-        switch buttonOption {
-        case .buttonOne:
-            redListCategoryFilteredAnimals = animalData
-            
-        case .buttonTwo:
-            redListCategoryFilteredAnimals = Species.getFilteredSpeciesByConservationStatus(arr: animalData, by: .critical)
-            
-        case .buttonThree:
-            redListCategoryFilteredAnimals = Species.getFilteredSpeciesByConservationStatus(arr: animalData, by: .endangered)
-            
-        case .buttonFour:
-            redListCategoryFilteredAnimals =  Species.getFilteredSpeciesByConservationStatus(arr: animalData, by: .vulnerable)
+extension SpeciesListViewController: SpeciesViewModelDelegate {
+    func fetchCompleted() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.collectionView.reloadData()
         }
+    }
+}
+
+extension SpeciesListViewController: CustomToolBarDelegate {
+    func buttonPressed(_ sender: UIButton) {
+        guard let buttonOption = ToolBarSelectedButton(rawValue: sender.tag) else { return }
+        topToolBar.highlightButton(button: buttonOption)
+        viewModel.updateRedListCategoryFilteredAnimals(from: buttonOption)
     }
 }
 
@@ -282,14 +265,13 @@ extension SpeciesListViewController: BottomBarDelegate {
 fileprivate extension SpeciesListViewController {
     
     func addSubviews() {
-        let mainViewUIElements = [terraTitleLabel, searchBarButton, searchBar, speciesCollectionView, topToolBar]
-        mainViewUIElements.forEach { view.addSubview($0) }
-        mainViewUIElements.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
+        let UIElements = [terraTitleLabel, searchBarButton, searchBar, collectionView, topToolBar]
+        UIElements.forEach { view.addSubview($0) }
+        UIElements.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
     }
     
     func setConstraints() {
-        setBackgroundImageViewConstraints()
-        setBackgroundGradientOverlayConstraints()
+        setHeaderImageViewConstraints()
         
         setTerraTitleLabelConstraints()
         setSearchBarButtonConstraints()
@@ -297,26 +279,17 @@ fileprivate extension SpeciesListViewController {
         
         setSpeciesCollectionViewConstraints()
         setToolBarConstraints()
-        
     }
     
-    func setBackgroundImageViewConstraints() {
+    func setHeaderImageViewConstraints() {
         NSLayoutConstraint.activate([
-            backgroundImageView.topAnchor.constraint(equalTo: view.topAnchor),
-            backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            backgroundImageView.bottomAnchor.constraint(equalTo: speciesCollectionView.topAnchor)
+            headerImageView.topAnchor.constraint(equalTo: view.topAnchor),
+            headerImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            headerImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            headerImageView.bottomAnchor.constraint(equalTo: collectionView.topAnchor)
         ])
     }
     
-    func setBackgroundGradientOverlayConstraints() {
-        NSLayoutConstraint.activate([
-            backgroundGradientOverlay.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            backgroundGradientOverlay.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            backgroundGradientOverlay.widthAnchor.constraint(equalTo: view.widthAnchor),
-            backgroundGradientOverlay.heightAnchor.constraint(equalTo: view.heightAnchor)
-        ])
-    }
     
     func setTerraTitleLabelConstraints() {
         NSLayoutConstraint.activate([
@@ -353,13 +326,12 @@ fileprivate extension SpeciesListViewController {
         ])
     }
     
-    
     func setSpeciesCollectionViewConstraints() {
         NSLayoutConstraint.activate([
-            speciesCollectionView.topAnchor.constraint(equalTo: topToolBar.bottomAnchor, constant: 0),
-            speciesCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            speciesCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            speciesCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50)
+            collectionView.topAnchor.constraint(equalTo: topToolBar.bottomAnchor, constant: 0),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50)
         ])
     }
 }

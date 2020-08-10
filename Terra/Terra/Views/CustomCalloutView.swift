@@ -1,6 +1,14 @@
+//
+//  CustomCalloutView.swift
+//  Terra
+//
+//  Created by Anthony Gonzalez on 8/8/20.
+//  Copyright © 2020 Antnee. All rights reserved.
+//
+
 import Mapbox
 
-class CustomCalloutView: UIView, MGLCalloutView {
+final class CustomCalloutView: UIView, MGLCalloutView {
     //MARK: -- UI Element Initialization
     
     private lazy var speciesImageView: UIImageView = {

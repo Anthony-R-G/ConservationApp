@@ -9,11 +9,11 @@
 import UIKit
 import SafariServices
 
-class NewsViewController: UIViewController {
+final class NewsViewController: UIViewController {
     
     //MARK: -- UI Element Initialization
     
-    lazy var refreshControl: UIRefreshControl = {
+    private lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
         refreshControl.tintColor = .lightGray
@@ -21,9 +21,10 @@ class NewsViewController: UIViewController {
         return refreshControl
     }()
     
-    lazy var tableView: UITableView = {
+    private lazy var tableView: UITableView = {
         let tv = UITableView()
         tv.register(NewsArticleTableViewCell.self, forCellReuseIdentifier: "newsCell")
+        tv.scrollsToTop = true
         tv.backgroundColor = .clear
         tv.refreshControl = refreshControl
         tv.separatorColor = .white
@@ -36,62 +37,19 @@ class NewsViewController: UIViewController {
     
     //MARK: -- Properties
     
-    var newsArticles: [Article] = []  {
-        didSet {
-            tableView.reloadData()
-        }
-    }
-    
-    var filteredNewsArticles: [Article] {
-        get {
-            var seenHeadlines = Set<String>()
-            return newsArticles.compactMap { (element) in
-                guard !seenHeadlines.contains(element.cleanedUpTitle)
-                    else { return nil }
-                
-                seenHeadlines.insert(element.cleanedUpTitle)
-                return element
-            }
-        }
-    }
-    
-    
-    
-    private var currentPage: Int = 1
-    
-    private var isFetchingNews = false
+    private var viewModel: NewsViewModel!
     
     
     //MARK: -- Methods
     
-    @objc func handleRefresh() {
-        fetchNewsData()
+    @objc private func handleRefresh() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [weak self] in
             guard let self = self else { return }
             self.refreshControl.endRefreshing()
         }
     }
     
-    private func fetchNewsData() {
-        isFetchingNews = true
-        NewsAPIClient.shared.fetchNewsData(page: currentPage) { (result) in
-            switch result {
-            case .success(let newsData):
-                
-                self.newsArticles.append(contentsOf: newsData.articles)
-                self.currentPage += 1
-                self.isFetchingNews = false
-                
-                
-            case .failure(let error):
-                print(error)
-                self.isFetchingNews = false
-            }
-        }
-    }
-    
-    
-    func showModally(_ viewController: UIViewController) {
+    private func showModally(_ viewController: UIViewController) {
         let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
         let rootViewController = window?.rootViewController
         rootViewController?.present(viewController, animated: true, completion: nil)
@@ -104,27 +62,38 @@ class NewsViewController: UIViewController {
         showModally(safariVC)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        viewModel.fetchNews()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
+        viewModel = NewsViewModel(delegate: self)
         addSubviews()
         setConstraints()
-        fetchNewsData()
+        
+    }
+}
+
+extension NewsViewController: NewsViewModelDelegate {
+    func fetchCompleted() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.tableView.reloadData()
+        }
     }
 }
 
 extension NewsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filteredNewsArticles.count
+        return viewModel.totalNewsArticlesCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let newsCell = tableView.dequeueReusableCell(withIdentifier: "newsCell", for: indexPath) as! NewsArticleTableViewCell
-        
-        let specificArticle = filteredNewsArticles[indexPath.row]
-        
+        let specificArticle = viewModel.specificArticle(at: indexPath.row)
         newsCell.configureCellUI(from: specificArticle)
         return newsCell
     }
@@ -136,18 +105,16 @@ extension NewsViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let articleURL = filteredNewsArticles[indexPath.row].url
-        if articleURL.isValidURL {
-            presentWebBrowser(link: URL(string: articleURL)!)
-        }
+        let specificArticle = viewModel.specificArticle(at: indexPath.row)
+        presentWebBrowser(link: URL(string: specificArticle.url)!)
     }
 }
 
 extension NewsViewController: UITableViewDataSourcePrefetching {
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         for index in indexPaths {
-            if index.row > filteredNewsArticles.count - 3 && !isFetchingNews {
-                fetchNewsData()
+            if index.row > viewModel.totalNewsArticlesCount - 3 && !viewModel.newsFetchIsUnderway {
+                viewModel.fetchNews()
                 break
             }
         }

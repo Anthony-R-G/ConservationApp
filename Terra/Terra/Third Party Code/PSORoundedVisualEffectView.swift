@@ -2,6 +2,7 @@ import UIKit
 
 class PSORoundedVisualEffectView : UIVisualEffectView{
 
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         updateMaskLayer()
