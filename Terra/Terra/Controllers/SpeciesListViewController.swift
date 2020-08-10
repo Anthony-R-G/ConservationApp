@@ -86,15 +86,19 @@ final class SpeciesListViewController: UIViewController {
     }()
     
     private lazy var noResultsFoundLabel: UILabel = {
-        let label = Factory.makeLabel(title: "No Species Found", weight: .regular, size: 15, color: .red, alignment: .center)
+        let label = Factory.makeLabel(title: "No Species Found",
+                                      weight: .regular,
+                                      size: 17,
+                                      color: .red,
+                                      alignment: .center)
         label.frame = CGRect(x: 0, y: 0, width: collectionView.bounds.size.width, height: collectionView.bounds.size.height)
-        collectionView.backgroundView  = label
+        collectionView.backgroundView = label
         label.isHidden = true
         return label
     }()
     
     private lazy var collectionView: UICollectionView = {
-        Factory.makeCollectionView()
+        return Factory.makeCollectionView()
     }()
     
     private lazy var searchBarLeadingAnchorConstraint: NSLayoutConstraint = {
@@ -186,13 +190,10 @@ final class SpeciesListViewController: UIViewController {
 extension SpeciesListViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if viewModel.totalSpeciesCount == 0 && isSearching {
-            noResultsFoundLabel.isHidden = false
-        }
-        noResultsFoundLabel.isHidden = true
+        noResultsFoundLabel.isHidden = viewModel.totalSpeciesCount == 0 && isSearching ? false : true
+        
         return viewModel.totalSpeciesCount
     }
-    
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
