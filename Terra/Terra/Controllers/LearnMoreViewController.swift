@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LearnMoreViewController: UIViewController, UIScrollViewDelegate {
+final class LearnMoreViewController: UIViewController {
     //MARK: UI Element Initialization
     
     private lazy var scrollView: UIScrollView = {
@@ -63,19 +63,29 @@ But recent research shows conservation work is having a positive effect, and wil
         return label
     }()
     
+    //MARK: -- Properties
+    
+    private var previousStatusBarHidden = false
+    
+    
+    private var shouldHideStatusBar: Bool {
+        let frame = textContainer.convert(textContainer.bounds, to: nil)
+        return frame.minY < view.safeAreaInsets.top
+    }
+    
+    override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
+        return .slide
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return shouldHideStatusBar
+    }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        view.backgroundColor = .gray
-        
-        addSubviews()
-        setConstraints()
-    }
+    //MARK: -- Methods
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -84,10 +94,19 @@ But recent research shows conservation work is having a positive effect, and wil
         scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: view.safeAreaInsets.bottom, right: 0)
     }
     
-    //MARK: - Scroll View Delegate
-    
-    private var previousStatusBarHidden = false
-    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        view.backgroundColor = .clear
+        
+        addSubviews()
+        setConstraints()
+    }
+}
+
+
+//MARK: -- ScrollView Delegate Methods
+extension LearnMoreViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if previousStatusBarHidden != shouldHideStatusBar {
             
@@ -99,23 +118,7 @@ But recent research shows conservation work is having a positive effect, and wil
             previousStatusBarHidden = shouldHideStatusBar
         }
     }
-    
-    //MARK: - Status Bar Appearance
-    
-    override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
-        return .slide
-    }
-    
-    override var prefersStatusBarHidden: Bool {
-        return shouldHideStatusBar
-    }
-    
-    private var shouldHideStatusBar: Bool {
-        let frame = textContainer.convert(textContainer.bounds, to: nil)
-        return frame.minY < view.safeAreaInsets.top
-    }
 }
-
 
 //MARK: -- Add Subviews & Constraints
 fileprivate extension LearnMoreViewController {
