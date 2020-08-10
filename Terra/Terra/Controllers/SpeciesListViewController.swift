@@ -12,10 +12,6 @@ final class SpeciesListViewController: UIViewController {
     
     //MARK: -- UI Element Initialization
     
-    private lazy var scrollView: UIScrollView = {
-        return UIScrollView()
-    }()
-    
     private lazy var searchBar: UISearchBar = {
         let sb = UISearchBar()
         sb.backgroundColor = .clear
