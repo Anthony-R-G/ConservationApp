@@ -85,6 +85,14 @@ final class SpeciesListViewController: UIViewController {
                                  alignment: .left)
     }()
     
+    private lazy var noResultsFoundLabel: UILabel = {
+        let label = Factory.makeLabel(title: "No Species Found", weight: .regular, size: 15, color: .red, alignment: .center)
+        label.frame = CGRect(x: 0, y: 0, width: collectionView.bounds.size.width, height: collectionView.bounds.size.height)
+        collectionView.backgroundView  = label
+        label.isHidden = true
+        return label
+    }()
+    
     private lazy var collectionView: UICollectionView = {
         Factory.makeCollectionView()
     }()
@@ -179,11 +187,7 @@ extension SpeciesListViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if viewModel.totalSpeciesCount == 0 && isSearching {
-            let noDataLabel: UILabel     = UILabel(frame: CGRect(x: 0, y: 0, width: collectionView.bounds.size.width, height: collectionView.bounds.size.height))
-            noDataLabel.text          = "No Species Found"
-            noDataLabel.textColor     = UIColor.red
-            noDataLabel.textAlignment = .center
-            collectionView.backgroundView  = noDataLabel
+            noResultsFoundLabel.isHidden = false
         }
         return viewModel.totalSpeciesCount
     }
