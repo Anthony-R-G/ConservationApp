@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LearnMoreCollectionViewController: UICollectionViewController {
+class LearnMoreCollectionViewController: UIViewController {
     
     //MARK: -- UI Element Initialization
     private lazy var backButton: UIButton = {
@@ -41,10 +41,23 @@ class LearnMoreCollectionViewController: UICollectionViewController {
         return bev
     }()
     
+    private lazy var collectionView: UICollectionView = {
+        let layout = StretchyHeaderLayout()
+        layout.sectionInset = .init(top: Constants.universalLeadingConstant, left: Constants.universalLeadingConstant, bottom: Constants.universalLeadingConstant, right: Constants.universalLeadingConstant)
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        cv.backgroundColor = .white
+        cv.contentInsetAdjustmentBehavior = .never
+        cv.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellID)
+        cv.register(CollectionViewHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerID)
+        cv.dataSource = self
+        cv.delegate = self
+        return cv
+    }()
+    
     //MARK: -- Properties
-    fileprivate let cellID = "cellID"
-    fileprivate let headerID = "headerID"
-    fileprivate let padding: CGFloat = Constants.universalLeadingConstant
+    private let cellID = "cellID"
+    private let headerID = "headerID"
+    
     var currentSpecies: Species!
     private var headerView: CollectionViewHeader!
     
@@ -68,13 +81,6 @@ class LearnMoreCollectionViewController: UICollectionViewController {
     }
     
     //MARK: -- Methods
-    private func setupCollectionView() {
-        collectionView.backgroundColor = .white
-        collectionView.contentInsetAdjustmentBehavior = .never
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellID)
-        
-        collectionView.register(CollectionViewHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerID)
-    }
     
     @objc private func backButtonPressed() {
         headerView.animator?.stopAnimation(true)
@@ -98,31 +104,45 @@ class LearnMoreCollectionViewController: UICollectionViewController {
         }
     }
     
-    private func setupCollectionViewLayout() {
-        if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.sectionInset = .init(top: padding, left: padding, bottom: padding, right: padding)
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupCollectionViewLayout()
-        setupCollectionView()
         addSubviews()
         setConstraints()
         
     }
+}
+
+
+extension LearnMoreCollectionViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 18
+    }
     
-    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath)
+        cell.backgroundColor = .black
+        return cell
+    }
+    
+}
+
+extension LearnMoreCollectionViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        headerView = (collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerID, for: indexPath) as? CollectionViewHeader)!
+        headerView.configureViewFromSpecies(species: currentSpecies)
+        return headerView
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: view.frame.width, height: 320)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let contentOffsetY = scrollView.contentOffset.y
+        updateBackButtonAlpha(scrollOffset: contentOffsetY)
+        print(contentOffsetY)
         
-        if contentOffsetY > 0 {
-            headerView.animator.fractionComplete = 0
-            return
-        }
-        
-        headerView.animator.fractionComplete = abs(contentOffsetY) / 100
         
         if previousStatusBarHidden != shouldHideStatusBar {
             
@@ -134,46 +154,31 @@ class LearnMoreCollectionViewController: UICollectionViewController {
             previousStatusBarHidden = shouldHideStatusBar
         }
         
-        let offset = scrollView.contentOffset.y
-        updateBackButtonAlpha(scrollOffset: offset)
+        if contentOffsetY > 0 {
+            headerView.animator.fractionComplete = 0
+            return
+        }
         
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        headerView = (collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerID, for: indexPath) as? CollectionViewHeader)!
-        headerView.configureViewFromSpecies(species: currentSpecies)
-        return headerView
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: view.frame.width, height: 320)
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 18
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath)
-        cell.backgroundColor = .black
-        return cell
+        headerView.animator.fractionComplete = abs(contentOffsetY) / 100
     }
 }
 
 extension LearnMoreCollectionViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return .init(width: view.frame.width - 2 * padding, height: 50)
+        return CGSize(width: view.frame.width - 2 * Constants.universalLeadingConstant, height: 50)
     }
 }
 
 //MARK: -- Add Subviews & Constraints
 fileprivate extension LearnMoreCollectionViewController {
     func addSubviews() {
+        view.addSubview(collectionView)
         view.addSubview(backButton)
     }
     
     func setConstraints() {
         setBackButtonConstraints()
+        setCollectionViewConstraints()
     }
     
     func setBackButtonConstraints() {
@@ -182,6 +187,12 @@ fileprivate extension LearnMoreCollectionViewController {
             make.leading.equalTo(view).inset(20)
             make.height.equalTo(backButton.frame.height)
             make.width.equalTo(backButton.frame.width)
+        }
+    }
+    
+    func setCollectionViewConstraints() {
+        collectionView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
         }
     }
 }

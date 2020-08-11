@@ -301,7 +301,7 @@ extension SpeciesDetailViewController: RoundedInfoViewDelegate {
     func learnMoreButtonPressed(_ sender: UIButton) {
         switch sender.tag {
         case 0:
-            let learnMoreVC = LearnMoreCollectionViewController(collectionViewLayout: StretchyHeaderLayout())
+            let learnMoreVC = LearnMoreCollectionViewController()
             learnMoreVC.currentSpecies = currentSpecies
             learnMoreVC.modalPresentationStyle = .fullScreen
             present(learnMoreVC, animated: true, completion: nil)
