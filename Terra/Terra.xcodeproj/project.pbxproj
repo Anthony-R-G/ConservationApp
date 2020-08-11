@@ -13,7 +13,7 @@
 		9711D8FC24BD42C800C2E6F1 /* FirestoresService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9711D8FB24BD42C800C2E6F1 /* FirestoresService.swift */; };
 		9723E7AA24D3505C0038ECB6 /* SpeciesAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9723E7A924D3505C0038ECB6 /* SpeciesAnnotation.swift */; };
 		97267DF324E26A370000402F /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97267DF224E26A370000402F /* CollectionViewController.swift */; };
-		97267DF524E26D010000402F /* CollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97267DF424E26D010000402F /* CollectionHeaderView.swift */; };
+		97267DF524E26D010000402F /* CollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97267DF424E26D010000402F /* CollectionViewHeader.swift */; };
 		97267DF724E272BD0000402F /* StretchyHeaderLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97267DF624E272BD0000402F /* StretchyHeaderLayout.swift */; };
 		9729736F24DC9E3400123C86 /* DoubleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9729736E24DC9E3400123C86 /* DoubleExtensions.swift */; };
 		972A615024C94C6800A59AB6 /* Species.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9711D8F624BD199700C2E6F1 /* Species.swift */; };
@@ -131,7 +131,7 @@
 		9723E7A924D3505C0038ECB6 /* SpeciesAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesAnnotation.swift; sourceTree = "<group>"; };
 		9723E7AB24D353330038ECB6 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		97267DF224E26A370000402F /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
-		97267DF424E26D010000402F /* CollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionHeaderView.swift; sourceTree = "<group>"; };
+		97267DF424E26D010000402F /* CollectionViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewHeader.swift; sourceTree = "<group>"; };
 		97267DF624E272BD0000402F /* StretchyHeaderLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StretchyHeaderLayout.swift; sourceTree = "<group>"; };
 		9729736E24DC9E3400123C86 /* DoubleExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleExtensions.swift; sourceTree = "<group>"; };
 		972BBF7624C01FA900B6F7C0 /* PSORoundedVisualEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSORoundedVisualEffectView.swift; sourceTree = "<group>"; };
@@ -301,7 +301,7 @@
 				97591FD324CB8D46002EAC96 /* RoundedInfoView.swift */,
 				97947F5224DD1F560047052B /* CustomCalloutView.swift */,
 				9772515624DF66A90052A3F6 /* CustomAnnotationView.swift */,
-				97267DF424E26D010000402F /* CollectionHeaderView.swift */,
+				97267DF424E26D010000402F /* CollectionViewHeader.swift */,
 				97267DF624E272BD0000402F /* StretchyHeaderLayout.swift */,
 			);
 			path = Views;
@@ -682,7 +682,7 @@
 				97D9E24B24C6470700524000 /* Diet.swift in Sources */,
 				97591FD424CB8D46002EAC96 /* RoundedInfoView.swift in Sources */,
 				97452E4623E1E6C7005636E0 /* SpeciesCollectionViewCell.swift in Sources */,
-				97267DF524E26D010000402F /* CollectionHeaderView.swift in Sources */,
+				97267DF524E26D010000402F /* CollectionViewHeader.swift in Sources */,
 				976DA46824DFCB5F003F3197 /* SpeciesViewModelDelegate.swift in Sources */,
 				979C191423DE43E900651B2B /* AppDelegate.swift in Sources */,
 				9767D04C24C3EA9200384FCD /* SubheaderInfoView.swift in Sources */,

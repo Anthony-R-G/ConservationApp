@@ -8,8 +8,6 @@
 
 import UIKit
 
-
-
 class CollectionViewController: UICollectionViewController {
     
     fileprivate let cellID = "cellID"
@@ -21,7 +19,7 @@ class CollectionViewController: UICollectionViewController {
         collectionView.contentInsetAdjustmentBehavior = .never
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellID)
         
-        collectionView.register(CollectionHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerID)
+        collectionView.register(CollectionViewHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerID)
     }
     
     fileprivate func setupCollectionViewLayout() {
@@ -41,13 +39,27 @@ class CollectionViewController: UICollectionViewController {
         setupCollectionView()
     }
     
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let contentOffsetY = scrollView.contentOffset.y
+        
+        if contentOffsetY > 0 {
+            headerView.animator.fractionComplete = 0
+            return
+        }
+        
+        headerView.animator.fractionComplete = abs(contentOffsetY) / 100
+        
+    }
+    
+    var headerView: CollectionViewHeader!
+    
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerID, for: indexPath)
-        return header
+        headerView = (collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerID, for: indexPath) as? CollectionViewHeader)!
+        return headerView
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return .init(width: view.frame.width, height: 340)
+        return CGSize(width: view.frame.width, height: 320)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
