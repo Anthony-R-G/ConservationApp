@@ -20,6 +20,13 @@ final class LearnMoreViewController: UIViewController {
         return iv
     }()
     
+    private lazy var blurredEffectView: UIVisualEffectView = {
+        let blurEffect = UIBlurEffect(style: .systemThinMaterialDark)
+        let bev = UIVisualEffectView(effect: blurEffect)
+        bev.frame = view.bounds
+        return bev
+    }()
+    
     private lazy var scrollView: UIScrollView = {
         let sv = UIScrollView()
         sv.delegate = self
@@ -55,7 +62,7 @@ final class LearnMoreViewController: UIViewController {
     }()
     
     private lazy var headerGradient: GradientView = {
-       let gv = GradientView()
+        let gv = GradientView()
         gv.startColor = #colorLiteral(red: 0.09561876208, green: 0.09505801648, blue: 0.09605474025, alpha: 0.5088827055)
         gv.endColor = .clear
         return gv
@@ -132,20 +139,20 @@ But recent research shows conservation work is having a positive effect, and wil
     }
     
     private func updateBackButtonAlpha(scrollOffset: CGFloat) {
-          var newAlpha = CGFloat()
-          newAlpha = scrollOffset < 100 ? 1 : 0
-          
-          DispatchQueue.main.async {
+        var newAlpha = CGFloat()
+        newAlpha = scrollOffset < 100 ? 1 : 0
+        
+        DispatchQueue.main.async {
             UIView.animate(withDuration: 0.3,
-                             delay: 0,
-                             options: .curveEaseInOut,
-                             animations: { [weak self] in
-                              guard let self = self else { return }
-                              self.backButton.alpha = newAlpha
-                  },
-                             completion: nil)
-          }
-      }
+                           delay: 0,
+                           options: .curveEaseInOut,
+                           animations: { [weak self] in
+                            guard let self = self else { return }
+                            self.backButton.alpha = newAlpha
+                },
+                           completion: nil)
+        }
+    }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -185,11 +192,6 @@ extension LearnMoreViewController: UIScrollViewDelegate {
 //MARK: -- Add Subviews & Constraints
 fileprivate extension LearnMoreViewController {
     func addSubviews() {
-        let blurEffect = UIBlurEffect(style: .systemThinMaterialDark)
-        let blurredEffectView = UIVisualEffectView(effect: blurEffect)
-        blurredEffectView.frame = view.bounds
-   
-       
         blurredEffectView.contentView.addSubview(scrollView)
         view.addSubview(blurredEffectView)
         
