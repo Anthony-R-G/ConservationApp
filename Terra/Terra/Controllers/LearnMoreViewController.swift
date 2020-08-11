@@ -15,7 +15,6 @@ final class LearnMoreViewController: UIViewController {
         let iv = UIImageView(frame: UIScreen.main.bounds)
         iv.translatesAutoresizingMaskIntoConstraints = false
         iv.backgroundColor = .black
-        iv.image = #imageLiteral(resourceName: "amurblurtest")
         iv.contentMode = UIView.ContentMode.scaleAspectFill
         view.insertSubview(iv, at: 0)
         return iv
@@ -75,7 +74,7 @@ final class LearnMoreViewController: UIViewController {
     }()
     
     private lazy var textBody: UILabel = {
-        let label = Factory.makeLabel(title: nil, weight: .regular, size: 16, color: .white, alignment: .natural)
+        let label = Factory.makeLabel(title: nil, weight: .regular, size: 16, color: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.7535049229), alignment: .natural)
         label.numberOfLines = 0
         let text = """
 People  usually think of leopards in the savannas of Africa but in the Russian Far East, a rare subspecies has adapted to life in the temperate forests that make up the northern-most part of the species’ range. Similar to other leopards, the Amur leopard can run at speeds of up to 37 miles per hour.
@@ -104,7 +103,6 @@ But recent research shows conservation work is having a positive effect, and wil
     
     private var previousStatusBarHidden = false
     
-    
     private var shouldHideStatusBar: Bool {
         let frame = textContainer.convert(textContainer.bounds, to: nil)
         return frame.minY < view.safeAreaInsets.top
@@ -130,6 +128,7 @@ But recent research shows conservation work is having a positive effect, and wil
     
     private func fetchFirebaseImage() {
         FirebaseStorageService.learnMoreOverviewImageManager.getImage(for: currentSpecies.commonName, setTo: headerImageView)
+        FirebaseStorageService.detailImageManager.getImage(for: currentSpecies.commonName, setTo: backgroundImageView)
     }
     
     private func updateBackButtonAlpha(scrollOffset: CGFloat) {
@@ -186,7 +185,14 @@ extension LearnMoreViewController: UIScrollViewDelegate {
 //MARK: -- Add Subviews & Constraints
 fileprivate extension LearnMoreViewController {
     func addSubviews() {
-        view.addSubview(scrollView)
+        let blurEffect = UIBlurEffect(style: .systemThinMaterialDark)
+        let blurredEffectView = UIVisualEffectView(effect: blurEffect)
+        blurredEffectView.frame = view.bounds
+   
+       
+        blurredEffectView.contentView.addSubview(scrollView)
+        view.addSubview(blurredEffectView)
+        
         view.addSubview(backButton)
         
         let UIElements = [imageContainer, headerImageView, textBacking, textContainer]
