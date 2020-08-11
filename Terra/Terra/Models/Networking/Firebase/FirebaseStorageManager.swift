@@ -16,6 +16,7 @@ class FirebaseStorageService {
         case cell
         case detail
         case callout
+        case learnMoreOverview
     }
     
     static var cellImageManager = FirebaseStorageService(type: .cell)
@@ -23,6 +24,8 @@ class FirebaseStorageService {
     static var detailImageManager = FirebaseStorageService(type: .detail)
     
     static var calloutImageManager = FirebaseStorageService(type: .callout)
+    
+    static var learnMoreOverviewImageManager = FirebaseStorageService(type: .learnMoreOverview)
     
     private let storage: Storage!
     private let storageReference: StorageReference
@@ -38,6 +41,9 @@ class FirebaseStorageService {
             imagesFolderReference = storageReference.child("Detail VC Images")
         case .callout:
             imagesFolderReference = storageReference.child("Callout Images")
+            
+        case .learnMoreOverview:
+            imagesFolderReference = storageReference.child("Learn More Overview Images")
         }
     }
     

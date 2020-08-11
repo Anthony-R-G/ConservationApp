@@ -302,7 +302,8 @@ extension SpeciesDetailViewController: RoundedInfoViewDelegate {
         switch sender.tag {
         case 0:
             let learnMoreVC = LearnMoreViewController()
-            learnMoreVC.modalPresentationStyle = .overFullScreen
+            learnMoreVC.currentSpecies = currentSpecies
+            learnMoreVC.modalPresentationStyle = .fullScreen
             present(learnMoreVC, animated: true, completion: nil)
             
         case 1:

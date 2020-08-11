@@ -11,11 +11,32 @@ import UIKit
 final class LearnMoreViewController: UIViewController {
     //MARK: UI Element Initialization
     
+    private lazy var backgroundImageView: UIImageView = {
+        let iv = UIImageView(frame: UIScreen.main.bounds)
+        iv.translatesAutoresizingMaskIntoConstraints = false
+        iv.backgroundColor = .black
+        iv.image = #imageLiteral(resourceName: "amurblurtest")
+        iv.contentMode = UIView.ContentMode.scaleAspectFill
+        view.insertSubview(iv, at: 0)
+        return iv
+    }()
+    
     private lazy var scrollView: UIScrollView = {
         let sv = UIScrollView()
         sv.delegate = self
         sv.contentInsetAdjustmentBehavior = .never
         return sv
+    }()
+    
+    private lazy var backButton: UIButton = {
+        let btn = UIButton()
+        btn.setImage(UIImage(systemName: "chevron.down"), for: .normal)
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.tintColor = .white
+        btn.imageView?.transform = CGAffineTransform(scaleX: 1.7, y: 1.7)
+        btn.showsTouchWhenHighlighted = true
+        btn.addTarget(self, action: #selector(backButtonPressed), for: .touchUpInside)
+        return btn
     }()
     
     private lazy var imageContainer: UIView = {
@@ -26,7 +47,6 @@ final class LearnMoreViewController: UIViewController {
     
     private lazy var headerImageView: UIImageView = {
         let iv = UIImageView()
-        iv.image = #imageLiteral(resourceName: "amurleopard")
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
         return iv
@@ -34,7 +54,7 @@ final class LearnMoreViewController: UIViewController {
     
     private lazy var textBacking: UIView = {
         let tb = UIView()
-        tb.backgroundColor = .black
+        tb.backgroundColor = .clear
         return tb
     }()
     
@@ -45,10 +65,15 @@ final class LearnMoreViewController: UIViewController {
     }()
     
     private lazy var textBody: UILabel = {
-        let label = UILabel()
-        label.textColor = .white
+        let label = Factory.makeLabel(title: nil, weight: .regular, size: 16, color: .white, alignment: .natural)
         label.numberOfLines = 0
         let text = """
+People  usually think of leopards in the savannas of Africa but in the Russian Far East, a rare subspecies has adapted to life in the temperate forests that make up the northern-most part of the species’ range. Similar to other leopards, the Amur leopard can run at speeds of up to 37 miles per hour.
+
+This incredible animal has been reported to leap more than 19 feet horizontally and up to 10 feet vertically.  The Amur leopard is solitary. Nimble-footed and strong, it carries and hides unfinished kills so that they are not taken by other predators.
+
+It has been reported that some males stay with females after mating, and may even help with rearing the young. Several males sometimes follow and fight over a female. They live for 10-15 years, and in captivity up to 20 years. The Amur leopard is also known as the Far East leopard, the Manchurian leopard or the Korean leopard.
+
 Not many people ever see an Amur leopard in the wild. Not surprising, as there are so few of them, but a shame considering how beautiful they are. Thick, luscious, black-ringed coats and a huge furry tails they can wrap around themselves to keep warm.
 
 The good news is, having been driven to the edge of extinction, their numbers appear to be rising thanks to conservation work - we're also able to survey more areas than before and use camera traps to estimate population changes.
@@ -64,6 +89,8 @@ But recent research shows conservation work is having a positive effect, and wil
     }()
     
     //MARK: -- Properties
+    
+    var currentSpecies: Species!
     
     private var previousStatusBarHidden = false
     
@@ -87,6 +114,14 @@ But recent research shows conservation work is having a positive effect, and wil
     
     //MARK: -- Methods
     
+    @objc private func backButtonPressed() {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    private func fetchFirebaseImage() {
+        FirebaseStorageService.learnMoreOverviewImageManager.getImage(for: currentSpecies.commonName, setTo: headerImageView)
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -97,10 +132,9 @@ But recent research shows conservation work is having a positive effect, and wil
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .clear
-        
         addSubviews()
         setConstraints()
+        fetchFirebaseImage()
     }
 }
 
@@ -117,6 +151,32 @@ extension LearnMoreViewController: UIScrollViewDelegate {
             
             previousStatusBarHidden = shouldHideStatusBar
         }
+        
+        let offset = scrollView.contentOffset.y
+        
+        if offset > 100 {
+            DispatchQueue.main.async {
+                UIView.animate(withDuration: 0.3,
+                               delay: 0,
+                               options: .curveEaseInOut,
+                               animations: { [weak self] in
+                                guard let self = self else { return }
+                                self.backButton.alpha = 0
+                    },
+                               completion: nil)
+            }
+        } else {
+            DispatchQueue.main.async {
+                UIView.animate(withDuration: 0.3,
+                                      delay: 0,
+                                      options: .curveEaseInOut,
+                                      animations: { [weak self] in
+                                       guard let self = self else { return }
+                                        self.backButton.alpha = 1
+                           },
+                                      completion: nil)
+                   }
+        }
     }
 }
 
@@ -124,6 +184,7 @@ extension LearnMoreViewController: UIScrollViewDelegate {
 fileprivate extension LearnMoreViewController {
     func addSubviews() {
         view.addSubview(scrollView)
+        view.addSubview(backButton)
         
         let UIElements = [imageContainer, headerImageView, textBacking, textContainer]
         UIElements.forEach { scrollView.addSubview($0) }
@@ -132,6 +193,8 @@ fileprivate extension LearnMoreViewController {
     }
     
     func setConstraints() {
+        setBackgroundImageConstraints()
+        setBackButtonConstraints()
         setScrollViewConstraints()
         
         setImageContainerConstraints()
@@ -140,6 +203,21 @@ fileprivate extension LearnMoreViewController {
         setTextBackingConstraints()
         setTextContainerConstraints()
         setTextBodyConstraints()
+    }
+    
+    func setBackgroundImageConstraints() {
+        backgroundImageView.snp.makeConstraints { (make) in
+            make.edges.equalTo(view)
+        }
+    }
+    
+    func setBackButtonConstraints() {
+        backButton.snp.makeConstraints { (make) in
+            make.top.equalTo(view).inset(25)
+            make.leading.equalTo(view).inset(0)
+            make.height.equalTo(80)
+            make.width.equalTo(80)
+        }
     }
     
     
