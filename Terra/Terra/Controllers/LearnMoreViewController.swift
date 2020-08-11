@@ -34,7 +34,10 @@ final class LearnMoreViewController: UIViewController {
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.tintColor = .white
         btn.imageView?.transform = CGAffineTransform(scaleX: 1.7, y: 1.7)
-        btn.showsTouchWhenHighlighted = true
+        btn.clipsToBounds = true
+        btn.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        btn.layer.cornerRadius = btn.frame.size.width / 2
+        btn.backgroundColor = #colorLiteral(red: 0.1207444444, green: 0.1200340763, blue: 0.1212952659, alpha: 0.6019905822)
         btn.addTarget(self, action: #selector(backButtonPressed), for: .touchUpInside)
         return btn
     }()
@@ -50,6 +53,11 @@ final class LearnMoreViewController: UIViewController {
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
         return iv
+    }()
+    
+    private lazy var headerGradient: GradientView = {
+       let gv = GradientView
+        return gv
     }()
     
     private lazy var textBacking: UIView = {
@@ -122,6 +130,22 @@ But recent research shows conservation work is having a positive effect, and wil
         FirebaseStorageService.learnMoreOverviewImageManager.getImage(for: currentSpecies.commonName, setTo: headerImageView)
     }
     
+    private func updateBackButtonAlpha(scrollOffset: CGFloat) {
+          var newAlpha = CGFloat()
+          newAlpha = scrollOffset < 100 ? 1 : 0
+          
+          DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.3,
+                             delay: 0,
+                             options: .curveEaseInOut,
+                             animations: { [weak self] in
+                              guard let self = self else { return }
+                              self.backButton.alpha = newAlpha
+                  },
+                             completion: nil)
+          }
+      }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -153,30 +177,7 @@ extension LearnMoreViewController: UIScrollViewDelegate {
         }
         
         let offset = scrollView.contentOffset.y
-        
-        if offset > 100 {
-            DispatchQueue.main.async {
-                UIView.animate(withDuration: 0.3,
-                               delay: 0,
-                               options: .curveEaseInOut,
-                               animations: { [weak self] in
-                                guard let self = self else { return }
-                                self.backButton.alpha = 0
-                    },
-                               completion: nil)
-            }
-        } else {
-            DispatchQueue.main.async {
-                UIView.animate(withDuration: 0.3,
-                                      delay: 0,
-                                      options: .curveEaseInOut,
-                                      animations: { [weak self] in
-                                       guard let self = self else { return }
-                                        self.backButton.alpha = 1
-                           },
-                                      completion: nil)
-                   }
-        }
+        updateBackButtonAlpha(scrollOffset: offset)
     }
 }
 
@@ -213,10 +214,10 @@ fileprivate extension LearnMoreViewController {
     
     func setBackButtonConstraints() {
         backButton.snp.makeConstraints { (make) in
-            make.top.equalTo(view).inset(25)
-            make.leading.equalTo(view).inset(0)
-            make.height.equalTo(80)
-            make.width.equalTo(80)
+            make.top.equalTo(view).inset(40)
+            make.leading.equalTo(view).inset(20)
+            make.height.equalTo(backButton.frame.height)
+            make.width.equalTo(backButton.frame.width)
         }
     }
     
