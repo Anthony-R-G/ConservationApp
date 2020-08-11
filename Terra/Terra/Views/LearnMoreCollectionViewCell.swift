@@ -9,15 +9,65 @@
 import UIKit
 
 class LearnMoreCollectionViewCell: UICollectionViewCell {
+    lazy var width: NSLayoutConstraint = {
+        let width = contentView.widthAnchor.constraint(equalToConstant: bounds.size.width)
+        width.isActive = true
+        return width
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = #colorLiteral(red: 0.115292646, green: 0.1146147624, blue: 0.1158185378, alpha: 0.5930276113)
-        layer.cornerRadius = 39
-        clipsToBounds = true
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5)
+        contentView.layer.cornerRadius = 39
+        setupViews()
     }
     
-    required init?(coder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    override func systemLayoutSizeFitting(_ targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize {
+        width.constant = bounds.size.width
+        return contentView.systemLayoutSizeFitting(CGSize(width: targetSize.width, height: 1))
+    }
+    
+    fileprivate func setupViews() {
+        contentView.addSubview(label)
+        label.snp.makeConstraints { (make) in
+            make.top.leading.width.equalToSuperview()
+        }
+        
+        contentView.addSubview(customView)
+//        customView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 10).isActive = true
+//        customView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+//        customView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+//        customView.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        customView.snp.makeConstraints { (make) in
+            make.top.equalTo(label.snp.bottom).offset(20)
+            make.height.width.equalTo(100)
+            make.centerX.equalTo(contentView.snp.centerX)
+        }
+        
+        if let lastSubview = contentView.subviews.last {
+            contentView.bottomAnchor.constraint(equalTo: lastSubview.bottomAnchor, constant: 10).isActive = true
+        }
+    }
+    
+    let label: UILabel = {
+        let label = UILabel()
+        label.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5)
+        label.layer.cornerRadius = 39
+        label.clipsToBounds = true
+        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let customView: UIView = {
+        let customView = UIView()
+        customView.backgroundColor = .green
+        customView.translatesAutoresizingMaskIntoConstraints = false
+        return customView
+    }()
 }

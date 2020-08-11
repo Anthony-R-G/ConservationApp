@@ -44,6 +44,7 @@ class LearnMoreCollectionViewController: UIViewController {
     private lazy var collectionView: UICollectionView = {
         let layout = StretchyHeaderLayout()
         layout.sectionInset = .init(top: Constants.universalLeadingConstant, left: Constants.universalLeadingConstant, bottom: Constants.universalLeadingConstant, right: Constants.universalLeadingConstant)
+        layout.estimatedItemSize = CGSize(width: UIScreen.main.bounds.size.width, height: 200)
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.backgroundColor = .clear
         cv.contentInsetAdjustmentBehavior = .never
@@ -60,6 +61,8 @@ class LearnMoreCollectionViewController: UIViewController {
     
     var currentSpecies: Species!
     private var headerView: CollectionViewHeader!
+    
+    let data = ["Lorem ipsum dolor sit amet, consectetur adipiscing elit.", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "Lorem ipsum dolor."]
     
     private var previousStatusBarHidden = false
     
@@ -121,12 +124,12 @@ class LearnMoreCollectionViewController: UIViewController {
 //MARK: -- CollectionView DataSource Methods
 extension LearnMoreCollectionViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 18
+        return data.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath)
-        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! LearnMoreCollectionViewCell
+        cell.label.text = data[indexPath.item]
         return cell
     }
     
@@ -147,7 +150,6 @@ extension LearnMoreCollectionViewController: UICollectionViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let contentOffsetY = scrollView.contentOffset.y
         updateBackButtonAlpha(scrollOffset: contentOffsetY)
-        
         
         if previousStatusBarHidden != shouldHideStatusBar {
             
