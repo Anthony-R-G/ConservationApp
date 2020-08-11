@@ -43,13 +43,22 @@ class LearnMoreCollectionViewController: UIViewController {
     
     private lazy var collectionView: UICollectionView = {
         let layout = StretchyHeaderLayout()
-        layout.sectionInset = .init(top: Constants.universalLeadingConstant, left: Constants.universalLeadingConstant, bottom: Constants.universalLeadingConstant, right: Constants.universalLeadingConstant)
-        layout.estimatedItemSize = CGSize(width: UIScreen.main.bounds.size.width, height: 200)
+        layout.sectionInset = UIEdgeInsets(top: Constants.universalLeadingConstant,
+                                           left: Constants.universalLeadingConstant,
+                                           bottom: Constants.universalLeadingConstant,
+                                           right: Constants.universalLeadingConstant)
+//        layout.estimatedItemSize = CGSize(width: UIScreen.main.bounds.size.width, height: 200)
+        
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.backgroundColor = .clear
         cv.contentInsetAdjustmentBehavior = .never
-        cv.register(LearnMoreCollectionViewCell.self, forCellWithReuseIdentifier: cellID)
-        cv.register(CollectionViewHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerID)
+        
+        cv.register(UICollectionViewCell.self,
+                    forCellWithReuseIdentifier: cellID)
+        cv.register(CollectionViewHeader.self,
+                    forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                    withReuseIdentifier: headerID)
+        
         cv.dataSource = self
         cv.delegate = self
         return cv
@@ -64,23 +73,8 @@ class LearnMoreCollectionViewController: UIViewController {
     
     let data = ["Lorem ipsum dolor sit amet, consectetur adipiscing elit.", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "Lorem ipsum dolor."]
     
-    private var previousStatusBarHidden = false
-    
-    private var shouldHideStatusBar: Bool {
-        let frame = collectionView.convert(collectionView.bounds, to: nil)
-        return frame.minY < view.safeAreaInsets.top
-    }
-    
-    override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
-        return .slide
-    }
-    
     override var prefersStatusBarHidden: Bool {
-        return shouldHideStatusBar
-    }
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+        return true
     }
     
     //MARK: -- Methods
@@ -107,9 +101,18 @@ class LearnMoreCollectionViewController: UIViewController {
         }
     }
     
-    func fetchFirebaseData() {
-        FirebaseStorageService.detailImageManager.getImage(for: currentSpecies.commonName, setTo: backgroundImageView)
+    private func fetchFirebaseData() {
+        FirebaseStorageService.detailImageManager.getImage(for: currentSpecies.commonName,
+                                                           setTo: backgroundImageView)
+    }
+    
+    private func updateHeaderAnimator(with offset: CGFloat) {
+        if offset > 0 {
+            headerView.animator.fractionComplete = 0
+            return
+        }
         
+        headerView.animator.fractionComplete = abs(offset) / 100
     }
     
     override func viewDidLoad() {
@@ -123,13 +126,19 @@ class LearnMoreCollectionViewController: UIViewController {
 
 //MARK: -- CollectionView DataSource Methods
 extension LearnMoreCollectionViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView,
+                        numberOfItemsInSection section: Int) -> Int {
         return data.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! LearnMoreCollectionViewCell
-        cell.label.text = data[indexPath.item]
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID,
+                                                      for: indexPath)
+        cell.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5159728168)
+        cell.layer.cornerRadius = 39
+//        cell.label.text = data[indexPath.item]
         return cell
     }
     
@@ -137,41 +146,35 @@ extension LearnMoreCollectionViewController: UICollectionViewDataSource {
 
 //MARK: -- CollectionView Delegate Methods
 extension LearnMoreCollectionViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        headerView = (collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerID, for: indexPath) as? CollectionViewHeader)!
+    func collectionView(_ collectionView: UICollectionView,
+                        viewForSupplementaryElementOfKind kind: String,
+                        at indexPath: IndexPath) -> UICollectionReusableView {
+        
+        headerView = (collectionView.dequeueReusableSupplementaryView(ofKind: kind,
+                                                                      withReuseIdentifier: headerID,
+                                                                      for: indexPath) as? CollectionViewHeader)!
+        
         headerView.configureViewFromSpecies(species: currentSpecies)
         return headerView
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: view.frame.width, height: 320)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let contentOffsetY = scrollView.contentOffset.y
         updateBackButtonAlpha(scrollOffset: contentOffsetY)
-        
-        if previousStatusBarHidden != shouldHideStatusBar {
-            
-            UIView.animate(withDuration: 0.2, animations: { [weak self] in
-                guard let self = self else { return }
-                self.setNeedsStatusBarAppearanceUpdate()
-            })
-            
-            previousStatusBarHidden = shouldHideStatusBar
-        }
-        
-        if contentOffsetY > 0 {
-            headerView.animator.fractionComplete = 0
-            return
-        }
-        
-        headerView.animator.fractionComplete = abs(contentOffsetY) / 100
+        updateHeaderAnimator(with: contentOffsetY)
     }
 }
 
 extension LearnMoreCollectionViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.width - 2 * Constants.universalLeadingConstant, height: 300)
     }
 }
@@ -192,7 +195,7 @@ fileprivate extension LearnMoreCollectionViewController {
     
     func setBackgroundImageConstraints() {
         backgroundImageView.snp.makeConstraints { (make) in
-            make.edges.equalTo(view)
+            make.edges.equalToSuperview()
         }
     }
     

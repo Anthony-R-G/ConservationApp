@@ -10,10 +10,10 @@ import UIKit
 
 class StretchyHeaderLayout: UICollectionViewFlowLayout {
     
-    
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         let layoutAttributes = super.layoutAttributesForElements(in: rect)
         
+        //HEADER
         layoutAttributes?.forEach({ (attributes) in
             if attributes.representedElementKind == UICollectionView.elementKindSectionHeader {
                 guard let collectionView = collectionView else { return }
