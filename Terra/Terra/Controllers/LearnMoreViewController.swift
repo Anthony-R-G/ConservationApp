@@ -234,7 +234,6 @@ fileprivate extension LearnMoreViewController {
         }
     }
     
-    
     func setScrollViewConstraints() {
         scrollView.snp.makeConstraints {
             make in

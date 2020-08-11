@@ -70,32 +70,12 @@ class CollectionViewHeader: UICollectionReusableView {
         return stackView
     }()
     
-    private lazy var backButton: UIButton = {
-        let btn = UIButton()
-        btn.setImage(UIImage(systemName: "chevron.down"), for: .normal)
-        btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.tintColor = .white
-        btn.imageView?.transform = CGAffineTransform(scaleX: 1.7, y: 1.7)
-        btn.clipsToBounds = true
-        btn.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
-        btn.layer.cornerRadius = btn.frame.size.width / 2
-        btn.backgroundColor = #colorLiteral(red: 0.1207444444, green: 0.1200340763, blue: 0.1212952659, alpha: 0.6019905822)
-        btn.addTarget(self, action: #selector(backButtonPressed), for: .touchUpInside)
-        return btn
-    }()
-    
     //MARK: -- Properties
-    
-    weak var delegate: BackButtonDelegate?
     
     var animator: UIViewPropertyAnimator!
     
     
     //MARK: -- Methods
-    
-    @objc private func backButtonPressed() {
-        delegate?.backButtonPressed()
-    }
     
     func configureViewFromSpecies(species: Species) {
         titleLabel.text = species.commonName
@@ -156,7 +136,6 @@ class CollectionViewHeader: UICollectionReusableView {
         
         setupVisualEffectBlur()
         setupGradientLayer()
-        addSubview(backButton)
         setConstraints()
     }
     
@@ -173,7 +152,6 @@ fileprivate extension CollectionViewHeader {
     func setConstraints() {
         setHeaderImageViewConstraints()
         setHeaderGradientConstraints()
-        setBackButtonConstraints()
     }
     
     
@@ -187,16 +165,6 @@ fileprivate extension CollectionViewHeader {
         headerGradient.snp.makeConstraints { (make) in
             make.top.left.right.equalTo(headerImageView)
             make.height.equalTo(headerImageView.snp.height).multipliedBy(0.25)
-        }
-    }
-    
-    func setBackButtonConstraints() {
-        backButton.snp.makeConstraints { [weak self] (make) in
-            guard let self = self else { return }
-            make.top.equalTo(self).inset(50)
-            make.leading.equalTo(self).inset(20)
-            make.height.equalTo(backButton.frame.height)
-            make.width.equalTo(backButton.frame.width)
         }
     }
 }

@@ -12,10 +12,9 @@
 		9711D8F724BD199700C2E6F1 /* Species.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9711D8F624BD199700C2E6F1 /* Species.swift */; };
 		9711D8FC24BD42C800C2E6F1 /* FirestoresService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9711D8FB24BD42C800C2E6F1 /* FirestoresService.swift */; };
 		9723E7AA24D3505C0038ECB6 /* SpeciesAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9723E7A924D3505C0038ECB6 /* SpeciesAnnotation.swift */; };
-		97267DF324E26A370000402F /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97267DF224E26A370000402F /* CollectionViewController.swift */; };
+		97267DF324E26A370000402F /* LearnMoreCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97267DF224E26A370000402F /* LearnMoreCollectionViewController.swift */; };
 		97267DF524E26D010000402F /* CollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97267DF424E26D010000402F /* CollectionViewHeader.swift */; };
 		97267DF724E272BD0000402F /* StretchyHeaderLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97267DF624E272BD0000402F /* StretchyHeaderLayout.swift */; };
-		97267DF924E2912B0000402F /* BackButtonDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97267DF824E2912B0000402F /* BackButtonDelegate.swift */; };
 		9729736F24DC9E3400123C86 /* DoubleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9729736E24DC9E3400123C86 /* DoubleExtensions.swift */; };
 		972A615024C94C6800A59AB6 /* Species.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9711D8F624BD199700C2E6F1 /* Species.swift */; };
 		972A615224C94C6C00A59AB6 /* ConservationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E9450324BE10C800550824 /* ConservationStatus.swift */; };
@@ -131,10 +130,9 @@
 		9711D8FB24BD42C800C2E6F1 /* FirestoresService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoresService.swift; sourceTree = "<group>"; };
 		9723E7A924D3505C0038ECB6 /* SpeciesAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesAnnotation.swift; sourceTree = "<group>"; };
 		9723E7AB24D353330038ECB6 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		97267DF224E26A370000402F /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
+		97267DF224E26A370000402F /* LearnMoreCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnMoreCollectionViewController.swift; sourceTree = "<group>"; };
 		97267DF424E26D010000402F /* CollectionViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewHeader.swift; sourceTree = "<group>"; };
 		97267DF624E272BD0000402F /* StretchyHeaderLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StretchyHeaderLayout.swift; sourceTree = "<group>"; };
-		97267DF824E2912B0000402F /* BackButtonDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButtonDelegate.swift; sourceTree = "<group>"; };
 		9729736E24DC9E3400123C86 /* DoubleExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleExtensions.swift; sourceTree = "<group>"; };
 		972BBF7624C01FA900B6F7C0 /* PSORoundedVisualEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSORoundedVisualEffectView.swift; sourceTree = "<group>"; };
 		972BBF7824C0204600B6F7C0 /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
@@ -275,7 +273,6 @@
 				97682CC924D634AA000E5B30 /* RoundedInfoViewDelegate.swift */,
 				9772516124DFA6C40052A3F6 /* NewsViewModelDelegate.swift */,
 				976DA46724DFCB5F003F3197 /* SpeciesViewModelDelegate.swift */,
-				97267DF824E2912B0000402F /* BackButtonDelegate.swift */,
 			);
 			path = "Custom Delegates";
 			sourceTree = "<group>";
@@ -428,7 +425,7 @@
 				97B406A624E1FDED00A79E98 /* LearnMoreViewController.swift */,
 				97FAD4E824D75DBD007FEFD8 /* NewsViewController.swift */,
 				97997F2B24DCE18B00981087 /* MGLMapViewController.swift */,
-				97267DF224E26A370000402F /* CollectionViewController.swift */,
+				97267DF224E26A370000402F /* LearnMoreCollectionViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -643,7 +640,7 @@
 				9764D13324D9D0E90050AF37 /* ToolBarListVCStrategy.swift in Sources */,
 				9764D12E24D7E46E0050AF37 /* NewsArticleTableViewCell.swift in Sources */,
 				9711D8FC24BD42C800C2E6F1 /* FirestoresService.swift in Sources */,
-				97267DF324E26A370000402F /* CollectionViewController.swift in Sources */,
+				97267DF324E26A370000402F /* LearnMoreCollectionViewController.swift in Sources */,
 				9729736F24DC9E3400123C86 /* DoubleExtensions.swift in Sources */,
 				977D877224CD7BFF00AE5E51 /* Habitat.swift in Sources */,
 				9772515B24DF800C0052A3F6 /* NewsViewModel.swift in Sources */,
@@ -663,7 +660,6 @@
 				9772515F24DF814A0052A3F6 /* NewsAPI.swift in Sources */,
 				975812E924D4EDF900C09D56 /* SpeciesStrategy.swift in Sources */,
 				975812ED24D528E100C09D56 /* SpeciesThreatsStrategy.swift in Sources */,
-				97267DF924E2912B0000402F /* BackButtonDelegate.swift in Sources */,
 				977D877624CE1F3800AE5E51 /* UIRoundedButtonWithGradientAndShadow.swift in Sources */,
 				976DA46624DFCAF9003F3197 /* SpeciesViewModel.swift in Sources */,
 				9772515924DF7F9C0052A3F6 /* NewsResponse.swift in Sources */,
