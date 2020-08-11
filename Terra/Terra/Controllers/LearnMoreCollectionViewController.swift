@@ -53,11 +53,12 @@ class LearnMoreCollectionViewController: UIViewController {
         cv.backgroundColor = .clear
         cv.contentInsetAdjustmentBehavior = .never
         
+        cv.register(CollectionViewHeader.self,
+        forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+        withReuseIdentifier: headerID)
         cv.register(UICollectionViewCell.self,
                     forCellWithReuseIdentifier: cellID)
-        cv.register(CollectionViewHeader.self,
-                    forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-                    withReuseIdentifier: headerID)
+        
         
         cv.dataSource = self
         cv.delegate = self
