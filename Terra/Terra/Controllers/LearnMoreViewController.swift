@@ -56,7 +56,9 @@ final class LearnMoreViewController: UIViewController {
     }()
     
     private lazy var headerGradient: GradientView = {
-       let gv = GradientView
+       let gv = GradientView()
+        gv.startColor = #colorLiteral(red: 0.09561876208, green: 0.09505801648, blue: 0.09605474025, alpha: 0.5088827055)
+        gv.endColor = .clear
         return gv
     }()
     
@@ -188,6 +190,8 @@ fileprivate extension LearnMoreViewController {
         view.addSubview(backButton)
         
         let UIElements = [imageContainer, headerImageView, textBacking, textContainer]
+        
+        headerImageView.addSubview(headerGradient)
         UIElements.forEach { scrollView.addSubview($0) }
         
         textContainer.addSubview(textBody)
@@ -200,6 +204,7 @@ fileprivate extension LearnMoreViewController {
         
         setImageContainerConstraints()
         setHeaderImageViewConstraints()
+        setHeaderGradientConstraints()
         
         setTextBackingConstraints()
         setTextContainerConstraints()
@@ -248,6 +253,13 @@ fileprivate extension LearnMoreViewController {
             make.top.equalTo(view).priority(.high)
             make.height.greaterThanOrEqualTo(imageContainer.snp.height).priority(.required)
             make.bottom.equalTo(imageContainer.snp.bottom)
+        }
+    }
+    
+    func setHeaderGradientConstraints() {
+        headerGradient.snp.makeConstraints { (make) in
+            make.top.left.right.equalTo(headerImageView)
+            make.height.equalTo(headerImageView.snp.height).multipliedBy(0.25)
         }
     }
     
