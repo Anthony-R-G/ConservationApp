@@ -15,6 +15,8 @@ class CollectionViewController: UICollectionViewController {
     fileprivate let padding: CGFloat = Constants.universalLeadingConstant
     var currentSpecies: Species!
     
+    private var headerView: CollectionViewHeader!
+    
     fileprivate func setupCollectionView() {
         collectionView.backgroundColor = .white
         collectionView.contentInsetAdjustmentBehavior = .never
@@ -52,8 +54,6 @@ class CollectionViewController: UICollectionViewController {
         
     }
     
-    var headerView: CollectionViewHeader!
-    
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         headerView = (collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerID, for: indexPath) as? CollectionViewHeader)!
         headerView.configureViewFromSpecies(species: currentSpecies)
@@ -80,3 +80,5 @@ extension CollectionViewController: UICollectionViewDelegateFlowLayout {
         return .init(width: view.frame.width - 2 * padding, height: 50)
     }
 }
+
+

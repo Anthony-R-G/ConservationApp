@@ -87,7 +87,21 @@ class CollectionViewHeader: UICollectionReusableView {
     //MARK: -- Properties
     
     weak var delegate: BackButtonDelegate?
+    
     var animator: UIViewPropertyAnimator!
+    
+    
+    //MARK: -- Methods
+    
+    @objc private func backButtonPressed() {
+        delegate?.backButtonPressed()
+    }
+    
+    func configureViewFromSpecies(species: Species) {
+        titleLabel.text = species.commonName
+        subtitleLabel.text = species.taxonomy.scientificName
+        FirebaseStorageService.learnMoreOverviewImageManager.getImage(for: species.commonName, setTo: headerImageView)
+    }
     
     private func setupVisualEffectBlur() {
         addSubview(visualEffectView)
@@ -133,12 +147,6 @@ class CollectionViewHeader: UICollectionReusableView {
         }
     }
     
-    func configureViewFromSpecies(species: Species) {
-        titleLabel.text = species.commonName
-        subtitleLabel.text = species.taxonomy.scientificName
-        FirebaseStorageService.learnMoreOverviewImageManager.getImage(for: species.commonName, setTo: headerImageView)
-    }
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .black
@@ -148,6 +156,7 @@ class CollectionViewHeader: UICollectionReusableView {
         
         setupVisualEffectBlur()
         setupGradientLayer()
+        addSubview(backButton)
         setConstraints()
     }
     
@@ -164,6 +173,7 @@ fileprivate extension CollectionViewHeader {
     func setConstraints() {
         setHeaderImageViewConstraints()
         setHeaderGradientConstraints()
+        setBackButtonConstraints()
     }
     
     
@@ -177,6 +187,16 @@ fileprivate extension CollectionViewHeader {
         headerGradient.snp.makeConstraints { (make) in
             make.top.left.right.equalTo(headerImageView)
             make.height.equalTo(headerImageView.snp.height).multipliedBy(0.25)
+        }
+    }
+    
+    func setBackButtonConstraints() {
+        backButton.snp.makeConstraints { [weak self] (make) in
+            guard let self = self else { return }
+            make.top.equalTo(self).inset(50)
+            make.leading.equalTo(self).inset(20)
+            make.height.equalTo(backButton.frame.height)
+            make.width.equalTo(backButton.frame.width)
         }
     }
 }
