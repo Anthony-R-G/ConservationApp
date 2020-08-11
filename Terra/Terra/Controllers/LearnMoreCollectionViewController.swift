@@ -47,7 +47,7 @@ class LearnMoreCollectionViewController: UIViewController {
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.backgroundColor = .clear
         cv.contentInsetAdjustmentBehavior = .never
-        cv.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellID)
+        cv.register(LearnMoreCollectionViewCell.self, forCellWithReuseIdentifier: cellID)
         cv.register(CollectionViewHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerID)
         cv.dataSource = self
         cv.delegate = self
@@ -104,13 +104,17 @@ class LearnMoreCollectionViewController: UIViewController {
         }
     }
     
+    func fetchFirebaseData() {
+        FirebaseStorageService.detailImageManager.getImage(for: currentSpecies.commonName, setTo: backgroundImageView)
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .clear
         addSubviews()
         setConstraints()
-        FirebaseStorageService.detailImageManager.getImage(for: currentSpecies.commonName, setTo: backgroundImageView)
-        
+        fetchFirebaseData()
     }
 }
 
@@ -122,7 +126,7 @@ extension LearnMoreCollectionViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath)
-        cell.backgroundColor = .black
+        
         return cell
     }
     
@@ -143,7 +147,6 @@ extension LearnMoreCollectionViewController: UICollectionViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let contentOffsetY = scrollView.contentOffset.y
         updateBackButtonAlpha(scrollOffset: contentOffsetY)
-        
         
         
         if previousStatusBarHidden != shouldHideStatusBar {
@@ -167,7 +170,7 @@ extension LearnMoreCollectionViewController: UICollectionViewDelegate {
 
 extension LearnMoreCollectionViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width - 2 * Constants.universalLeadingConstant, height: 50)
+        return CGSize(width: view.frame.width - 2 * Constants.universalLeadingConstant, height: 300)
     }
 }
 
