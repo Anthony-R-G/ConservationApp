@@ -45,7 +45,7 @@ class LearnMoreCollectionViewController: UIViewController {
         let layout = StretchyHeaderLayout()
         layout.sectionInset = .init(top: Constants.universalLeadingConstant, left: Constants.universalLeadingConstant, bottom: Constants.universalLeadingConstant, right: Constants.universalLeadingConstant)
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.backgroundColor = .white
+        cv.backgroundColor = .clear
         cv.contentInsetAdjustmentBehavior = .never
         cv.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellID)
         cv.register(CollectionViewHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerID)
@@ -106,14 +106,15 @@ class LearnMoreCollectionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        view.backgroundColor = .clear
         addSubviews()
         setConstraints()
+        FirebaseStorageService.detailImageManager.getImage(for: currentSpecies.commonName, setTo: backgroundImageView)
         
     }
 }
 
-
+//MARK: -- CollectionView DataSource Methods
 extension LearnMoreCollectionViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 18
@@ -127,6 +128,7 @@ extension LearnMoreCollectionViewController: UICollectionViewDataSource {
     
 }
 
+//MARK: -- CollectionView Delegate Methods
 extension LearnMoreCollectionViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         headerView = (collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerID, for: indexPath) as? CollectionViewHeader)!
@@ -172,13 +174,21 @@ extension LearnMoreCollectionViewController: UICollectionViewDelegateFlowLayout 
 //MARK: -- Add Subviews & Constraints
 fileprivate extension LearnMoreCollectionViewController {
     func addSubviews() {
-        view.addSubview(collectionView)
+        blurredEffectView.contentView.addSubview(collectionView)
+        view.addSubview(blurredEffectView)
         view.addSubview(backButton)
     }
     
     func setConstraints() {
+        setBackgroundImageConstraints()
         setBackButtonConstraints()
         setCollectionViewConstraints()
+    }
+    
+    func setBackgroundImageConstraints() {
+        backgroundImageView.snp.makeConstraints { (make) in
+            make.edges.equalTo(view)
+        }
     }
     
     func setBackButtonConstraints() {
