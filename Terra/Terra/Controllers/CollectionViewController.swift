@@ -13,6 +13,7 @@ class CollectionViewController: UICollectionViewController {
     fileprivate let cellID = "cellID"
     fileprivate let headerID = "headerID"
     fileprivate let padding: CGFloat = Constants.universalLeadingConstant
+    var currentSpecies: Species!
     
     fileprivate func setupCollectionView() {
         collectionView.backgroundColor = .white
@@ -22,7 +23,7 @@ class CollectionViewController: UICollectionViewController {
         collectionView.register(CollectionViewHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerID)
     }
     
-    fileprivate func setupCollectionViewLayout() {
+    private func setupCollectionViewLayout() {
         if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
             layout.sectionInset = .init(top: padding, left: padding, bottom: padding, right: padding)
         }
@@ -55,6 +56,7 @@ class CollectionViewController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         headerView = (collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerID, for: indexPath) as? CollectionViewHeader)!
+        headerView.configureViewFromSpecies(species: currentSpecies)
         return headerView
     }
     
