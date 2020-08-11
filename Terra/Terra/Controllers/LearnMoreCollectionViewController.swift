@@ -143,7 +143,7 @@ extension LearnMoreCollectionViewController: UICollectionViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let contentOffsetY = scrollView.contentOffset.y
         updateBackButtonAlpha(scrollOffset: contentOffsetY)
-        print(contentOffsetY)
+        
         
         
         if previousStatusBarHidden != shouldHideStatusBar {

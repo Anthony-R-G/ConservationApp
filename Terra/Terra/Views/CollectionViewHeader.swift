@@ -24,22 +24,6 @@ class CollectionViewHeader: UICollectionReusableView {
         return gv
     }()
     
-    private lazy var bottomGradient: UIView = {
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [UIColor.clear.cgColor, UIColor.darkGray.cgColor]
-        gradientLayer.locations = [0.5, 1]
-        
-        let gradientContainerView = UIView()
-        addSubview(gradientContainerView)
-        
-        gradientContainerView.layer.addSublayer(gradientLayer)
-        
-        gradientLayer.frame = self.bounds
-        
-        gradientLayer.frame.origin.y -= bounds.height
-        return gradientContainerView
-    }()
-    
     private lazy var visualEffectView: UIVisualEffectView = {
         return UIVisualEffectView(effect: UIBlurEffect(style: .regular))
     }()
@@ -54,7 +38,7 @@ class CollectionViewHeader: UICollectionReusableView {
     
     private lazy var subtitleLabel: UILabel = {
         return Factory.makeLabel(title: "Panthers pardus orientalis",
-                                 weight: .regular,
+                                 weight: .lightItalic,
                                  size: 14,
                                  color: .white,
                                  alignment: .left)
@@ -94,14 +78,14 @@ class CollectionViewHeader: UICollectionReusableView {
             guard let self = self else { return }
             self.visualEffectView.effect = nil
         })
-        
+        animator.pausesOnCompletion = true
         animator.isReversed = true
         animator.fractionComplete = 0
     }
     
     private func setupGradientLayer() {
         let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
+        gradientLayer.colors = [UIColor.clear.cgColor, UIColor.darkGray.cgColor]
         gradientLayer.locations = [0.5, 1]
         
         let gradientContainerView = UIView()
@@ -111,7 +95,8 @@ class CollectionViewHeader: UICollectionReusableView {
             make.leading.bottom.trailing.equalTo(self)
         }
         gradientContainerView.layer.addSublayer(gradientLayer)
-        gradientLayer.frame = self.bounds
+        
+        gradientLayer.frame = bounds
         gradientLayer.frame.origin.y -= bounds.height
         
         
@@ -125,6 +110,24 @@ class CollectionViewHeader: UICollectionReusableView {
             guard let self = self else { return }
             make.leading.bottom.trailing.equalTo(self).inset(20)
         }
+        addParallaxToView(vw: headerImageView)
+        addParallaxToView(vw: stackView)
+    }
+    
+    func addParallaxToView(vw: UIView) {
+        let amount = 40
+
+        let horizontal = UIInterpolatingMotionEffect(keyPath: "center.x", type: .tiltAlongHorizontalAxis)
+        horizontal.minimumRelativeValue = -amount
+        horizontal.maximumRelativeValue = amount
+
+//        let vertical = UIInterpolatingMotionEffect(keyPath: "center.y", type: .tiltAlongVerticalAxis)
+//        vertical.minimumRelativeValue = -amount
+//        vertical.maximumRelativeValue = amount
+
+        let group = UIMotionEffectGroup()
+        group.motionEffects = [horizontal]
+        vw.addMotionEffect(group)
     }
     
     override init(frame: CGRect) {
@@ -132,11 +135,13 @@ class CollectionViewHeader: UICollectionReusableView {
         backgroundColor = .black
         
         addSubview(headerImageView)
-        headerImageView.addSubview(headerGradient)
+        setConstraints()
+//        headerImageView.addSubview(headerGradient)
         
         setupVisualEffectBlur()
+        
         setupGradientLayer()
-        setConstraints()
+        
     }
     
     required init?(coder: NSCoder) {
@@ -151,7 +156,7 @@ fileprivate extension CollectionViewHeader {
     
     func setConstraints() {
         setHeaderImageViewConstraints()
-        setHeaderGradientConstraints()
+//        setHeaderGradientConstraints()
     }
     
     
