@@ -106,19 +106,11 @@ final class LearnMoreViewController: UIViewController {
    
     
     private lazy var stackContainerView: UIStackView = {
-//        let stackView = UIStackView(arrangedSubviews: [
-//            overviewSummaryView, overviewDistributionView
-//        ])
-        let stackView = UIStackView()
-        stackView.arrangedSubviews =
-        stackView.axis = .vertical
-        stackView.spacing = 20
-        return stackView
+        return strategy.arrangedSubviews()
     }()
     
     private lazy var headerImageBottomGradient: GradientView = {
         let gv = GradientView()
-//        gv.startLocation =
         gv.startColor = .clear
         gv.endColor = #colorLiteral(red: 0.2738285363, green: 0.2782334089, blue: 0.2810879052, alpha: 0.3487264556)
         return gv
@@ -128,7 +120,7 @@ final class LearnMoreViewController: UIViewController {
     
     var currentSpecies: Species!
     
-    private var strategy: LearnMoreStrategy!
+    var strategy: LearnMoreStrategy!
     
     private var previousStatusBarHidden = false
     

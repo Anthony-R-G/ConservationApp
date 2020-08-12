@@ -303,6 +303,7 @@ extension SpeciesDetailViewController: RoundedInfoViewDelegate {
         case 0:
             let learnMoreVC = LearnMoreViewController()
             learnMoreVC.currentSpecies = currentSpecies
+            learnMoreVC.strategy = LearnMoreOverviewStrategy(species: currentSpecies)
             learnMoreVC.modalPresentationStyle = .fullScreen
             present(learnMoreVC, animated: true, completion: nil)
             
