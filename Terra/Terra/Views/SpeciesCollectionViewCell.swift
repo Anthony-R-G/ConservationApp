@@ -133,7 +133,7 @@ fileprivate extension SpeciesCollectionViewCell {
     
     func setSpeciesNameLabelConstraints(){
         NSLayoutConstraint.activate([
-            speciesNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.universalLeadingConstant),
+            speciesNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.spacingConstant),
             speciesNameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
             speciesNameLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.80),
             speciesNameLabel.heightAnchor.constraint(equalToConstant: 90)

@@ -9,12 +9,12 @@
 import UIKit
 
 struct Constants {
-    static let universalLeadingConstant: CGFloat = 20
+    static let spacingConstant: CGFloat = 20
     
     static let roundedInfoViewHeight: CGFloat = 440
     static let roundedInfoViewWidth: CGFloat = 375
     
-    static let cornerRadius: CGFloat = 39
+    static let cornerRadius: CGFloat = 20
     static let borderWidth: CGFloat = 1
     static let titleLabelColor = #colorLiteral(red: 0.9257398248, green: 1, blue: 0.7623538375, alpha: 1)
     static let buttonColor = #colorLiteral(red: 0.9257398248, green: 1, blue: 0.7623538375, alpha: 1)

@@ -117,7 +117,7 @@ fileprivate extension DetailSubheaderView {
     
     func setTrendTitleLabelConstraints() {
         NSLayoutConstraint.activate([
-            trendTitleLabel.leadingAnchor.constraint(equalTo: numbersTitleLabel.trailingAnchor, constant: Constants.universalLeadingConstant),
+            trendTitleLabel.leadingAnchor.constraint(equalTo: numbersTitleLabel.trailingAnchor, constant: Constants.spacingConstant),
             trendTitleLabel.topAnchor.constraint(equalTo: numbersTitleLabel.topAnchor),
             trendTitleLabel.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.5),
             trendTitleLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.25)
@@ -135,7 +135,7 @@ fileprivate extension DetailSubheaderView {
     
     func setLastAssessedTitleLabelConstraints() {
         NSLayoutConstraint.activate([
-            lastAssessedTitleLabel.leadingAnchor.constraint(equalTo: trendTitleLabel.trailingAnchor, constant: Constants.universalLeadingConstant),
+            lastAssessedTitleLabel.leadingAnchor.constraint(equalTo: trendTitleLabel.trailingAnchor, constant: Constants.spacingConstant),
             lastAssessedTitleLabel.topAnchor.constraint(equalTo: numbersTitleLabel.topAnchor),
             lastAssessedTitleLabel.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.5),
             lastAssessedTitleLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.25)

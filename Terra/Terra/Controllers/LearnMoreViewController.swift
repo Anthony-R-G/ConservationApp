@@ -199,7 +199,6 @@ final class LearnMoreViewController: UIViewController {
 extension LearnMoreViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         updateStatusBarVisibility()
-        
         let contentOffsetY = scrollView.contentOffset.y
         updateBackButtonAlpha(scrollOffset: contentOffsetY)
         updateHeaderAnimator(with: contentOffsetY)

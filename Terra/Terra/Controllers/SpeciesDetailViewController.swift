@@ -200,13 +200,13 @@ final class SpeciesDetailViewController: UIViewController {
             horizontalScrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
             
         case .buttonTwo:
-            horizontalScrollView.setContentOffset(CGPoint(x: speciesHabitatView.frame.minX - Constants.universalLeadingConstant, y: 0), animated: true)
+            horizontalScrollView.setContentOffset(CGPoint(x: speciesHabitatView.frame.minX - Constants.spacingConstant, y: 0), animated: true)
             
         case .buttonThree:
-            horizontalScrollView.setContentOffset(CGPoint(x: speciesThreatsView.frame.minX - Constants.universalLeadingConstant, y: 0), animated: true)
+            horizontalScrollView.setContentOffset(CGPoint(x: speciesThreatsView.frame.minX - Constants.spacingConstant, y: 0), animated: true)
             
         case .buttonFour:
-            horizontalScrollView.setContentOffset(CGPoint(x: speciesGalleryView.frame.minX - Constants.universalLeadingConstant, y: 0), animated: true)
+            horizontalScrollView.setContentOffset(CGPoint(x: speciesGalleryView.frame.minX - Constants.spacingConstant, y: 0), animated: true)
         }
     }
     
@@ -395,7 +395,7 @@ fileprivate extension SpeciesDetailViewController {
     
     func setHeaderInfoViewConstraints() {
         NSLayoutConstraint.activate([
-            headerNameView.leadingAnchor.constraint(equalTo: verticalScrollView.leadingAnchor, constant: Constants.universalLeadingConstant),
+            headerNameView.leadingAnchor.constraint(equalTo: verticalScrollView.leadingAnchor, constant: Constants.spacingConstant),
             headerNameView.widthAnchor.constraint(equalTo: verticalScrollView.widthAnchor),
             headerNameViewTopAnchorConstraint,
             headerNameViewHeightConstraint
@@ -406,7 +406,7 @@ fileprivate extension SpeciesDetailViewController {
         NSLayoutConstraint.activate([
             subheaderInfoView.leadingAnchor.constraint(equalTo: headerNameView.leadingAnchor),
             subheaderInfoView.trailingAnchor.constraint(equalTo: headerNameView.trailingAnchor),
-            subheaderInfoView.topAnchor.constraint(equalTo: headerNameView.bottomAnchor, constant: Constants.universalLeadingConstant),
+            subheaderInfoView.topAnchor.constraint(equalTo: headerNameView.bottomAnchor, constant: Constants.spacingConstant),
             subheaderInfoViewHeightConstraint
         ])
     }
@@ -423,7 +423,7 @@ fileprivate extension SpeciesDetailViewController {
     func setSpeciesOverviewViewConstraints() {
         NSLayoutConstraint.activate([
             speciesOverviewView.centerYAnchor.constraint(equalTo: horizontalScrollView.centerYAnchor),
-            speciesOverviewView.leadingAnchor.constraint(equalTo: horizontalScrollView.leadingAnchor, constant: Constants.universalLeadingConstant),
+            speciesOverviewView.leadingAnchor.constraint(equalTo: horizontalScrollView.leadingAnchor, constant: Constants.spacingConstant),
             speciesOverviewView.widthAnchor.constraint(equalToConstant: Constants.roundedInfoViewWidth),
             speciesOverviewView.heightAnchor.constraint(equalToConstant: Constants.roundedInfoViewHeight),
         ])
@@ -432,7 +432,7 @@ fileprivate extension SpeciesDetailViewController {
     func setSpeciesHabitatViewConstraints() {
         NSLayoutConstraint.activate([
             speciesHabitatView.centerYAnchor.constraint(equalTo: horizontalScrollView.centerYAnchor),
-            speciesHabitatView.leadingAnchor.constraint(equalTo: speciesOverviewView.trailingAnchor, constant: Constants.universalLeadingConstant * 2),
+            speciesHabitatView.leadingAnchor.constraint(equalTo: speciesOverviewView.trailingAnchor, constant: Constants.spacingConstant * 2),
             speciesHabitatView.widthAnchor.constraint(equalToConstant: Constants.roundedInfoViewWidth),
             speciesHabitatView.heightAnchor.constraint(equalToConstant: Constants.roundedInfoViewHeight),
         ])
@@ -441,7 +441,7 @@ fileprivate extension SpeciesDetailViewController {
     func setSpeciesThreatsViewConstraints() {
         NSLayoutConstraint.activate([
             speciesThreatsView.centerYAnchor.constraint(equalTo: horizontalScrollView.centerYAnchor),
-            speciesThreatsView.leadingAnchor.constraint(equalTo: speciesHabitatView.trailingAnchor, constant: Constants.universalLeadingConstant * 2),
+            speciesThreatsView.leadingAnchor.constraint(equalTo: speciesHabitatView.trailingAnchor, constant: Constants.spacingConstant * 2),
             speciesThreatsView.widthAnchor.constraint(equalToConstant: Constants.roundedInfoViewWidth),
             speciesThreatsView.heightAnchor.constraint(equalToConstant: Constants.roundedInfoViewHeight),
         ])
@@ -450,7 +450,7 @@ fileprivate extension SpeciesDetailViewController {
     func setSpeciesGalleryViewConstraints() {
         NSLayoutConstraint.activate([
             speciesGalleryView.centerYAnchor.constraint(equalTo: horizontalScrollView.centerYAnchor),
-            speciesGalleryView.leadingAnchor.constraint(equalTo: speciesThreatsView.trailingAnchor, constant: Constants.universalLeadingConstant * 2),
+            speciesGalleryView.leadingAnchor.constraint(equalTo: speciesThreatsView.trailingAnchor, constant: Constants.spacingConstant * 2),
             speciesGalleryView.widthAnchor.constraint(equalToConstant: Constants.roundedInfoViewWidth),
             speciesGalleryView.heightAnchor.constraint(equalToConstant: Constants.roundedInfoViewHeight),
         ])

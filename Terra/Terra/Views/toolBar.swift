@@ -136,8 +136,8 @@ fileprivate extension toolBar {
     
     func setButtonStackViewConstraints() {
         NSLayoutConstraint.activate([
-            buttonStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.universalLeadingConstant),
-            buttonStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.universalLeadingConstant),
+            buttonStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.spacingConstant),
+            buttonStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.spacingConstant),
             buttonStackView.topAnchor.constraint(equalTo: topAnchor, constant: 10)
         ])
     }

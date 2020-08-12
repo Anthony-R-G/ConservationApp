@@ -98,11 +98,11 @@ final class SpeciesListViewController: UIViewController {
     }()
     
     private lazy var searchBarLeadingAnchorConstraint: NSLayoutConstraint = {
-        return searchBar.leadingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.universalLeadingConstant)
+        return searchBar.leadingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.spacingConstant)
     }()
     
     private lazy var terraTitleLabelLeadingAnchorConstraint: NSLayoutConstraint = {
-        return terraTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.universalLeadingConstant)
+        return terraTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.spacingConstant)
     }()
     
     //MARK: -- Properties
@@ -131,8 +131,8 @@ final class SpeciesListViewController: UIViewController {
     }
     
     private func dismissSearchBar() {
-        searchBarLeadingAnchorConstraint.constant = -Constants.universalLeadingConstant
-        terraTitleLabelLeadingAnchorConstraint.constant = Constants.universalLeadingConstant
+        searchBarLeadingAnchorConstraint.constant = -Constants.spacingConstant
+        terraTitleLabelLeadingAnchorConstraint.constant = Constants.spacingConstant
         searchBar.alpha = 0
         searchBarButton.alpha = 1
         UIView.animate(withDuration: 0.3, animations: { [weak self] in
@@ -299,7 +299,7 @@ fileprivate extension SpeciesListViewController {
     
     func setSearchBarButtonConstraints() {
         NSLayoutConstraint.activate([
-            searchBarButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.universalLeadingConstant),
+            searchBarButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.spacingConstant),
             searchBarButton.centerYAnchor.constraint(equalTo: terraTitleLabel.centerYAnchor),
             searchBarButton.heightAnchor.constraint(equalToConstant: 40),
             searchBarButton.widthAnchor.constraint(equalToConstant: 40)
@@ -309,7 +309,7 @@ fileprivate extension SpeciesListViewController {
     func setSearchBarConstraints() {
         NSLayoutConstraint.activate([
             searchBarLeadingAnchorConstraint,
-            searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.universalLeadingConstant),
+            searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.spacingConstant),
             searchBar.centerYAnchor.constraint(equalTo: searchBarButton.centerYAnchor),
         ])
     }
