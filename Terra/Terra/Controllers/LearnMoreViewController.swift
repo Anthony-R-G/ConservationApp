@@ -171,10 +171,8 @@ final class LearnMoreViewController: UIViewController {
             animator.fractionComplete = 0
             return
         }
-        
         animator.fractionComplete = abs(offset) / 100
     }
-    
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -327,7 +325,6 @@ fileprivate extension LearnMoreViewController {
 //MARK: -- Statusbar
 
 extension LearnMoreViewController {
-    
     
     private var shouldHideStatusBar: Bool {
         let frame = viewContainer.convert(viewContainer.bounds, to: nil)

@@ -11,7 +11,6 @@ import FirebaseUI
 
 
 class FirebaseStorageService {
-    
     enum imageType {
         case cell
         case detail
