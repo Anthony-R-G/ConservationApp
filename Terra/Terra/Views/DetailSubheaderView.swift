@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class SubheaderInfoView: UIView {
+final class DetailSubheaderView: UIView {
     //MARK: -- UI Element Initialization
     
     private lazy var numbersTitleLabel: UILabel = {
@@ -80,7 +80,7 @@ final class SubheaderInfoView: UIView {
 
 //MARK: -- Add Subviews & Constraints
 
-fileprivate extension SubheaderInfoView {
+fileprivate extension DetailSubheaderView {
     
     func addSubviews() {
         let UIElements = [numbersTitleLabel, numbersDataLabel, trendTitleLabel, trendDataLabel, lastAssessedTitleLabel, lastAssessedDataLabel]

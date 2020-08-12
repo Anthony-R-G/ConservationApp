@@ -44,16 +44,16 @@ final class SpeciesDetailViewController: UIViewController {
         return gv
     }()
     
-    private lazy var headerNameView: HeaderNameView = {
-        let hiv = HeaderNameView()
+    private lazy var headerNameView: DetailHeaderNameView = {
+        let hiv = DetailHeaderNameView()
         var frame = hiv.frame
         frame.size.height = 275
         hiv.frame = frame
         return hiv
     }()
     
-    private lazy var subheaderInfoView: SubheaderInfoView = {
-        let siv = SubheaderInfoView()
+    private lazy var subheaderInfoView: DetailSubheaderView = {
+        let siv = DetailSubheaderView()
         var frame = siv.frame
         frame.size.height = 80
         siv.frame = frame

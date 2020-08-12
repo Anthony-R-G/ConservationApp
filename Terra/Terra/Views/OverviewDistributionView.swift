@@ -11,14 +11,13 @@ import UIKit
 class OverviewDistributionView: UIView {
     
     lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "TITLE"
-        //        label.backgroundColor = .purple
-        label.font = UIFont.boldSystemFont(ofSize: 24)
-        label.textColor = Constants.titleLabelColor
-        label.numberOfLines = 0
-        return label
-    }()
+           let label = Factory.makeLabel(title: "TITLE",
+                                         weight: .bold,
+                                         size: 24,
+                                         color: Constants.titleLabelColor,
+                                         alignment: .left)
+           return label
+       }()
     
     lazy var mapImageView: UIImageView = {
         let iv = UIImageView()
@@ -38,7 +37,7 @@ class OverviewDistributionView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         translatesAutoresizingMaskIntoConstraints = false
-        backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.399026113)
+        backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.2452108305)
         layer.cornerRadius = 20
         addSubviews()
         setConstraints()

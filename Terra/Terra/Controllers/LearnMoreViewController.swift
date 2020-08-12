@@ -21,7 +21,7 @@ final class LearnMoreViewController: UIViewController {
     }()
     
     private lazy var backgroundBlurEffectView: UIVisualEffectView = {
-        let blurEffect = UIBlurEffect(style: .systemThinMaterialDark)
+        let blurEffect = UIBlurEffect(style: .systemUltraThinMaterialDark)
         let bev = UIVisualEffectView(effect: blurEffect)
         bev.frame = view.bounds
         return bev
