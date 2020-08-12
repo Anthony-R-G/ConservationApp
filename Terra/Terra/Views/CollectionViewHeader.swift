@@ -136,7 +136,6 @@ class CollectionViewHeader: UICollectionReusableView {
         
         addSubview(headerImageView)
         setConstraints()
-//        headerImageView.addSubview(headerGradient)
         
         setupVisualEffectBlur()
         
@@ -152,7 +151,6 @@ class CollectionViewHeader: UICollectionReusableView {
 //MARK: -- Add Subviews & Constraints
 
 fileprivate extension CollectionViewHeader {
-    
     
     func setConstraints() {
         setHeaderImageViewConstraints()

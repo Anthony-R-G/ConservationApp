@@ -39,14 +39,10 @@ class LearnMoreCollectionViewCell: UICollectionViewCell {
     fileprivate func setupViews() {
         contentView.addSubview(label)
         label.snp.makeConstraints { (make) in
-            make.top.leading.width.equalToSuperview()
+            make.top.leading.width.equalTo(contentView)
         }
         
         contentView.addSubview(customTextView)
-        //        customView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 10).isActive = true
-        //        customView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        //        customView.heightAnchor.constraint(equalToConstant: 100).isActive = true
-        //        customView.widthAnchor.constraint(equalToConstant: 100).isActive = true
         customTextView.snp.makeConstraints { (make) in
             make.top.equalTo(label.snp.bottom).offset(20)
             make.height.width.equalTo(200)
@@ -74,4 +70,7 @@ class LearnMoreCollectionViewCell: UICollectionViewCell {
         width.constant = bounds.size.width
         return contentView.systemLayoutSizeFitting(CGSize(width: targetSize.width, height: 1))
     }
+    
+    
 }
+

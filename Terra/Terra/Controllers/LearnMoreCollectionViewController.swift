@@ -53,9 +53,11 @@ class LearnMoreCollectionViewController: UIViewController {
         cv.backgroundColor = .clear
         cv.contentInsetAdjustmentBehavior = .never
         
+        
         cv.register(CollectionViewHeader.self,
         forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
         withReuseIdentifier: headerID)
+        
         cv.register(UICollectionViewCell.self,
                     forCellWithReuseIdentifier: cellID)
         
@@ -176,7 +178,8 @@ extension LearnMoreCollectionViewController: UICollectionViewDelegateFlowLayout 
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width - 2 * Constants.universalLeadingConstant, height: 300)
+        let oldWidth = view.frame.width - 2 * Constants.universalLeadingConstant
+        return CGSize(width: oldWidth, height: 300)
     }
 }
 

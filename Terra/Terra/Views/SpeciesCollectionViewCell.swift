@@ -127,7 +127,7 @@ fileprivate extension SpeciesCollectionViewCell {
         NSLayoutConstraint.activate([
             backgroundGradientOverlay.heightAnchor.constraint(equalTo: heightAnchor, constant: 30),
             backgroundGradientOverlay.widthAnchor.constraint(equalTo: widthAnchor),
-          
+            
         ])
     }
     
@@ -141,13 +141,13 @@ fileprivate extension SpeciesCollectionViewCell {
     }
     
     func setSpeciesScientificNameLabelConstraints() {
-           NSLayoutConstraint.activate([
-               speciesScientificNameLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
-               speciesScientificNameLabel.leadingAnchor.constraint(equalTo: speciesNameLabel.leadingAnchor),
-               speciesScientificNameLabel.heightAnchor.constraint(equalToConstant: 50),
-               speciesScientificNameLabel.widthAnchor.constraint(equalToConstant: 170)
-           ])
-       }
+        NSLayoutConstraint.activate([
+            speciesScientificNameLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
+            speciesScientificNameLabel.leadingAnchor.constraint(equalTo: speciesNameLabel.leadingAnchor),
+            speciesScientificNameLabel.heightAnchor.constraint(equalToConstant: 50),
+            speciesScientificNameLabel.widthAnchor.constraint(equalToConstant: 170)
+        ])
+    }
     
     func setConservationStatusLabelConstraints() {
         NSLayoutConstraint.activate([
