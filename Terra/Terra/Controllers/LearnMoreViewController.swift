@@ -55,8 +55,8 @@ final class LearnMoreViewController: UIViewController {
     }()
     
     private lazy var visualEffectView: UIVisualEffectView = {
-           return UIVisualEffectView(effect: UIBlurEffect(style: .regular))
-       }()
+        return UIVisualEffectView(effect: UIBlurEffect(style: .regular))
+    }()
     
     private lazy var headerImageView: UIImageView = {
         let iv = UIImageView()
@@ -72,17 +72,37 @@ final class LearnMoreViewController: UIViewController {
         return gv
     }()
     
-    private lazy var textBacking: UIView = {
-        let tb = UIView()
-        tb.backgroundColor = .clear
-        return tb
-    }()
-    
     private lazy var textContainer: UIView = {
         let tc = UIView()
         tc.backgroundColor = .clear
         return tc
     }()
+    
+    private lazy var titleLabel: UILabel = {
+         return Factory.makeLabel(title: nil,
+                                  weight: .bold,
+                                  size: 25,
+                                  color: .white,
+                                  alignment: .left)
+     }()
+     
+     private lazy var subtitleLabel: UILabel = {
+         return Factory.makeLabel(title: nil,
+                                  weight: .lightItalic,
+                                  size: 14,
+                                  color: .white,
+                                  alignment: .left)
+     }()
+     
+     private lazy var stackView: UIStackView = {
+         let stackView = UIStackView(arrangedSubviews: [
+             titleLabel, subtitleLabel
+         ])
+         stackView.axis = .vertical
+         stackView.spacing = 8
+         
+         return stackView
+     }()
     
     private lazy var textBody: UILabel = {
         let label = Factory.makeLabel(title: nil, weight: .regular, size: 16, color: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.7535049229), alignment: .natural)
@@ -108,46 +128,63 @@ But recent research shows conservation work is having a positive effect, and wil
         return label
     }()
     
+    private lazy var stackContainerView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [
+            textBody, textBody, textBody, textBody, textBody
+        ])
+        stackView.axis = .vertical
+        stackView.spacing = 8
+        return stackView
+    }()
+    
     //MARK: -- Properties
     
     var currentSpecies: Species!
     
-    var animator: UIViewPropertyAnimator!
-    
     private var previousStatusBarHidden = false
     
-    private var shouldHideStatusBar: Bool {
-        let frame = textContainer.convert(textContainer.bounds, to: nil)
-        return frame.minY < view.safeAreaInsets.top
-    }
+    private var animator: UIViewPropertyAnimator!
     
-    override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
-        return .slide
-    }
-    
-    override var prefersStatusBarHidden: Bool {
-        return shouldHideStatusBar
-    }
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
     
     //MARK: -- Methods
     
     @objc private func backButtonPressed() {
+        animator?.stopAnimation(true)
+        animator?.finishAnimation(at: .current)
         dismiss(animated: true, completion: nil)
     }
     
-    private func fetchFirebaseImage() {
+    private func setupGradientLayer() {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [UIColor.clear.cgColor, UIColor.darkGray.cgColor]
+        gradientLayer.locations = [0.5, 1]
+        
+        let gradientContainerView = UIView()
+        headerImageView.addSubview(gradientContainerView)
+        gradientContainerView.snp.makeConstraints {(make) in
+            make.leading.bottom.trailing.equalTo(headerImageView)
+        }
+        gradientContainerView.layer.addSublayer(gradientLayer)
+        
+        gradientLayer.frame = headerImageView.bounds
+        gradientLayer.frame.origin.y -= headerImageView.bounds.height
+        
+        headerImageView.addSubview(stackView)
+        stackView.snp.makeConstraints { (make) in
+            make.leading.bottom.trailing.equalTo(headerImageView).inset(20)
+        }
+    }
+    
+    private func configureUI() {
         FirebaseStorageService.learnMoreOverviewImageManager.getImage(for: currentSpecies.commonName, setTo: headerImageView)
         FirebaseStorageService.detailImageManager.getImage(for: currentSpecies.commonName, setTo: backgroundImageView)
+        titleLabel.text = currentSpecies.commonName
+        subtitleLabel.text = currentSpecies.taxonomy.scientificName
     }
     
     private func setupVisualEffectBlur() {
         headerImageView.addSubview(visualEffectView)
-        visualEffectView.snp.makeConstraints { [weak self] (make) in
-            guard let self = self else { return }
+        visualEffectView.snp.makeConstraints { (make) in
             make.edges.equalTo(headerImageView)
         }
         
@@ -177,14 +214,29 @@ But recent research shows conservation work is having a positive effect, and wil
     }
     
     private func updateHeaderAnimator(with offset: CGFloat) {
-        print(offset)
-          if offset > 0 {
-              animator.fractionComplete = 0
-              return
-          }
-          
-          animator.fractionComplete = abs(offset) / 100
-      }
+        if offset > 0 {
+            animator.fractionComplete = 0
+            return
+        }
+        
+        animator.fractionComplete = abs(offset) / 100
+    }
+    
+       private func addParallaxToView(vw: UIView) {
+            let amount = 20
+
+            let horizontal = UIInterpolatingMotionEffect(keyPath: "center.x", type: .tiltAlongHorizontalAxis)
+            horizontal.minimumRelativeValue = -amount
+            horizontal.maximumRelativeValue = amount
+
+            let vertical = UIInterpolatingMotionEffect(keyPath: "center.y", type: .tiltAlongVerticalAxis)
+            vertical.minimumRelativeValue = -amount
+            vertical.maximumRelativeValue = amount
+
+            let group = UIMotionEffectGroup()
+            group.motionEffects = [horizontal, vertical]
+            vw.addMotionEffect(group)
+        }
     
     
     override func viewDidLayoutSubviews() {
@@ -200,7 +252,11 @@ But recent research shows conservation work is having a positive effect, and wil
         addSubviews()
         setConstraints()
         setupVisualEffectBlur()
-        fetchFirebaseImage()
+        setupGradientLayer()
+        configureUI()
+        
+        addParallaxToView(vw: titleLabel)
+        addParallaxToView(vw: subtitleLabel)
     }
 }
 
@@ -208,8 +264,6 @@ But recent research shows conservation work is having a positive effect, and wil
 //MARK: -- ScrollView Delegate Methods
 extension LearnMoreViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
-        
         if previousStatusBarHidden != shouldHideStatusBar {
             
             UIView.animate(withDuration: 0.2, animations: { [weak self] in
@@ -234,12 +288,12 @@ fileprivate extension LearnMoreViewController {
         
         view.addSubview(backButton)
         
-        let UIElements = [imageContainer, headerImageView, textBacking, textContainer]
+        let UIElements = [imageContainer, headerImageView, textContainer]
         
         headerImageView.addSubview(headerGradient)
         UIElements.forEach { scrollView.addSubview($0) }
         
-        textContainer.addSubview(textBody)
+        textContainer.addSubview(stackContainerView)
     }
     
     func setConstraints() {
@@ -251,9 +305,9 @@ fileprivate extension LearnMoreViewController {
         setHeaderImageViewConstraints()
         setHeaderGradientConstraints()
         
-        setTextBackingConstraints()
+       
         setTextContainerConstraints()
-        setTextBodyConstraints()
+        setContainerStackConstraints()
     }
     
     func setBackgroundImageConstraints() {
@@ -307,15 +361,7 @@ fileprivate extension LearnMoreViewController {
         }
     }
     
-    func setTextBackingConstraints() {
-        textBacking.snp.makeConstraints {
-            make in
-            
-            make.left.right.equalTo(view)
-            make.top.equalTo(textContainer)
-            make.bottom.equalTo(view)
-        }
-    }
+   
     
     func setTextContainerConstraints() {
         textContainer.snp.makeConstraints {
@@ -326,13 +372,35 @@ fileprivate extension LearnMoreViewController {
             make.bottom.equalTo(scrollView)
         }
     }
+
     
-    func setTextBodyConstraints() {
-        textBody.snp.makeConstraints {
-            make in
-            
+    func setContainerStackConstraints() {
+        stackContainerView.snp.makeConstraints { (make) in
             make.edges.equalTo(textContainer).inset(14)
         }
     }
 }
 
+
+//MARK: -- Statusbar
+
+extension LearnMoreViewController {
+    
+    
+    private var shouldHideStatusBar: Bool {
+        let frame = textContainer.convert(textContainer.bounds, to: nil)
+        return frame.minY < view.safeAreaInsets.top
+    }
+    
+    override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
+        return .slide
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return shouldHideStatusBar
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+}
