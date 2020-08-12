@@ -299,22 +299,26 @@ extension SpeciesDetailViewController: CustomToolBarDelegate {
 
 extension SpeciesDetailViewController: RoundedInfoViewDelegate {
     func learnMoreButtonPressed(_ sender: UIButton) {
+        let learnMoreVC = LearnMoreViewController()
+        learnMoreVC.currentSpecies = currentSpecies
+        learnMoreVC.modalPresentationStyle = .fullScreen
+        
         switch sender.tag {
         case 0:
-            let learnMoreVC = LearnMoreViewController()
-            learnMoreVC.currentSpecies = currentSpecies
             learnMoreVC.strategy = LearnMoreOverviewStrategy(species: currentSpecies)
-            learnMoreVC.modalPresentationStyle = .fullScreen
-            present(learnMoreVC, animated: true, completion: nil)
-            
         case 1:
-            let mapVC = MGLMapViewController()
-            mapVC.currentSpecies = currentSpecies
-            mapVC.modalPresentationStyle = .fullScreen
-            present(mapVC, animated: true, completion: nil)
+            learnMoreVC.strategy = LearnMoreHabitatStrategy(species: currentSpecies)
+            
+
+//        case 1:
+//            let mapVC = MGLMapViewController()
+//            mapVC.currentSpecies = currentSpecies
+//            mapVC.modalPresentationStyle = .fullScreen
+//            present(mapVC, animated: true, completion: nil)
             
         default: print(sender.tag)
         }
+        present(learnMoreVC, animated: true, completion: nil)
     }
 }
 

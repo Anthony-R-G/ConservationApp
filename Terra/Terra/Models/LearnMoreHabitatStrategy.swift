@@ -6,4 +6,25 @@
 //  Copyright © 2020 Antnee. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+struct LearnMoreHabitatStrategy: LearnMoreStrategy {
+    var species: Species
+    
+    private lazy var overviewDistributionView: OverviewDistributionView = {
+        return OverviewDistributionView()
+    }()
+    
+    mutating func arrangedSubviews() -> UIStackView {
+        let stackView = UIStackView(arrangedSubviews: [
+            overviewDistributionView
+        ])
+        stackView.axis = .vertical
+        stackView.spacing = 20
+        return stackView
+    }
+    
+    init(species: Species) {
+        self.species = species
+    }
+}
