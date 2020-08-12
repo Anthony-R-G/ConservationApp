@@ -105,15 +105,11 @@ final class LearnMoreViewController: UIViewController {
     }()
     
     private lazy var overviewSummaryView: OverviewSummaryView = {
-        let osv = OverviewSummaryView()
-        osv.translatesAutoresizingMaskIntoConstraints = false
-        return osv
+        return OverviewSummaryView()
     }()
     
     private lazy var overviewDistributionView: OverviewDistributionView = {
-        let odv = OverviewDistributionView()
-        odv.translatesAutoresizingMaskIntoConstraints = false
-        return odv
+        return OverviewDistributionView()
     }()
     
     private lazy var stackContainerView: UIStackView = {
