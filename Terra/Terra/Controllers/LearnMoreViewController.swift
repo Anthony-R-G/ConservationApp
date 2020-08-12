@@ -103,8 +103,6 @@ final class LearnMoreViewController: UIViewController {
         return stackView
     }()
     
-   
-    
     private lazy var stackContainerView: UIStackView = {
         return strategy.arrangedSubviews()
     }()
