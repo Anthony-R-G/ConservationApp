@@ -90,21 +90,25 @@
 		979C192B23DE43EF00651B2B /* TerraTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979C192A23DE43EF00651B2B /* TerraTests.swift */; };
 		97A24D2024E445A800958AB9 /* LearnMoreHabitatStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A24D1F24E445A800958AB9 /* LearnMoreHabitatStrategy.swift */; };
 		97A24D2424E49A4100958AB9 /* TaxonomyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A24D2324E49A4100958AB9 /* TaxonomyView.swift */; };
+		97A24D2624E4A3CB00958AB9 /* LearnMoreTextWindowStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A24D2524E4A3CB00958AB9 /* LearnMoreTextWindowStrategy.swift */; };
+		97A24D2824E4A52100958AB9 /* LearnMoreContentWindowStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A24D2724E4A52100958AB9 /* LearnMoreContentWindowStrategy.swift */; };
 		97A2BC7224CE5578000D6B2D /* FirestoreError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97928F7824CD11BF00AF90C5 /* FirestoreError.swift */; };
 		97A2BC7324CE559F000D6B2D /* FontWeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FE224CCDC48002EAC96 /* FontWeight.swift */; };
 		97B406A724E1FDED00A79E98 /* LearnMoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B406A624E1FDED00A79E98 /* LearnMoreViewController.swift */; };
 		97B68CD424BBB0AC005B8AB8 /* DetailHeaderNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B68CD324BBB0AC005B8AB8 /* DetailHeaderNameView.swift */; };
 		97B7C79724E440CE008BD6AD /* LearnMoreOverviewStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B7C79624E440CE008BD6AD /* LearnMoreOverviewStrategy.swift */; };
 		97BF745323DF42F90058F2D7 /* SpeciesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BF745223DF42F90058F2D7 /* SpeciesListViewController.swift */; };
+		97CDF11524E4A86F0055FE78 /* LearnMoreOverviewDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CDF11424E4A86F0055FE78 /* LearnMoreOverviewDescription.swift */; };
+		97CDF11724E4A9970055FE78 /* LearnMoreTaxonomyStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CDF11624E4A9970055FE78 /* LearnMoreTaxonomyStrategy.swift */; };
 		97D5946424CE7E49001BD566 /* toolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D5946324CE7E49001BD566 /* toolBar.swift */; };
 		97D9E24B24C6470700524000 /* Diet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D9E24A24C6470600524000 /* Diet.swift */; };
 		97DD101D24C69EB000A21DF4 /* ToolBarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DD101C24C69EB000A21DF4 /* ToolBarDelegate.swift */; };
 		97E61B8024CE54A100E83691 /* Habitat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977D877124CD7BFF00AE5E51 /* Habitat.swift */; };
 		97E61B8124CE54A800E83691 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977D876F24CD6A1200AE5E51 /* Group.swift */; };
 		97E9450424BE10C800550824 /* ConservationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E9450324BE10C800550824 /* ConservationStatus.swift */; };
-		97EA493A24E3B7ED00C0FE64 /* OverviewSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EA493924E3B7ED00C0FE64 /* OverviewSummaryView.swift */; };
-		97EA493C24E3BEC200C0FE64 /* OverviewDistributionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EA493B24E3BEC200C0FE64 /* OverviewDistributionView.swift */; };
-		97EA494124E43FC500C0FE64 /* LearnMoreStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EA494024E43FC500C0FE64 /* LearnMoreStrategy.swift */; };
+		97EA493A24E3B7ED00C0FE64 /* LearnMoreTextWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EA493924E3B7ED00C0FE64 /* LearnMoreTextWindow.swift */; };
+		97EA493C24E3BEC200C0FE64 /* LearnMoreContentViewWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EA493B24E3BEC200C0FE64 /* LearnMoreContentViewWindow.swift */; };
+		97EA494124E43FC500C0FE64 /* LearnMoreVCStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EA494024E43FC500C0FE64 /* LearnMoreVCStrategy.swift */; };
 		97EDD4F024D36D0A00D30674 /* FirebaseStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EDD4EF24D36D0A00D30674 /* FirebaseStorageManager.swift */; };
 		97F0CCA924C56F5C00C581D3 /* UIScrollViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F0CCA824C56F5C00C581D3 /* UIScrollViewExtensions.swift */; };
 		97F4E00A24D757C600509694 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F4E00924D757C600509694 /* StringExtensions.swift */; };
@@ -194,17 +198,21 @@
 		979C192C23DE43EF00651B2B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		97A24D1F24E445A800958AB9 /* LearnMoreHabitatStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnMoreHabitatStrategy.swift; sourceTree = "<group>"; };
 		97A24D2324E49A4100958AB9 /* TaxonomyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxonomyView.swift; sourceTree = "<group>"; };
+		97A24D2524E4A3CB00958AB9 /* LearnMoreTextWindowStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnMoreTextWindowStrategy.swift; sourceTree = "<group>"; };
+		97A24D2724E4A52100958AB9 /* LearnMoreContentWindowStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnMoreContentWindowStrategy.swift; sourceTree = "<group>"; };
 		97B406A624E1FDED00A79E98 /* LearnMoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnMoreViewController.swift; sourceTree = "<group>"; };
 		97B68CD324BBB0AC005B8AB8 /* DetailHeaderNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailHeaderNameView.swift; sourceTree = "<group>"; };
 		97B7C79624E440CE008BD6AD /* LearnMoreOverviewStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnMoreOverviewStrategy.swift; sourceTree = "<group>"; };
 		97BF745223DF42F90058F2D7 /* SpeciesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesListViewController.swift; sourceTree = "<group>"; };
+		97CDF11424E4A86F0055FE78 /* LearnMoreOverviewDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnMoreOverviewDescription.swift; sourceTree = "<group>"; };
+		97CDF11624E4A9970055FE78 /* LearnMoreTaxonomyStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnMoreTaxonomyStrategy.swift; sourceTree = "<group>"; };
 		97D5946324CE7E49001BD566 /* toolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = toolBar.swift; sourceTree = "<group>"; };
 		97D9E24A24C6470600524000 /* Diet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diet.swift; sourceTree = "<group>"; };
 		97DD101C24C69EB000A21DF4 /* ToolBarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolBarDelegate.swift; sourceTree = "<group>"; };
 		97E9450324BE10C800550824 /* ConservationStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConservationStatus.swift; sourceTree = "<group>"; };
-		97EA493924E3B7ED00C0FE64 /* OverviewSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewSummaryView.swift; sourceTree = "<group>"; };
-		97EA493B24E3BEC200C0FE64 /* OverviewDistributionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewDistributionView.swift; sourceTree = "<group>"; };
-		97EA494024E43FC500C0FE64 /* LearnMoreStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnMoreStrategy.swift; sourceTree = "<group>"; };
+		97EA493924E3B7ED00C0FE64 /* LearnMoreTextWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnMoreTextWindow.swift; sourceTree = "<group>"; };
+		97EA493B24E3BEC200C0FE64 /* LearnMoreContentViewWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnMoreContentViewWindow.swift; sourceTree = "<group>"; };
+		97EA494024E43FC500C0FE64 /* LearnMoreVCStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnMoreVCStrategy.swift; sourceTree = "<group>"; };
 		97EDD4EF24D36D0A00D30674 /* FirebaseStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStorageManager.swift; sourceTree = "<group>"; };
 		97F0CCA824C56F5C00C581D3 /* UIScrollViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScrollViewExtensions.swift; sourceTree = "<group>"; };
 		97F4E00924D757C600509694 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
@@ -307,8 +315,8 @@
 				97591FD324CB8D46002EAC96 /* RoundedInfoView.swift */,
 				97947F5224DD1F560047052B /* CustomCalloutView.swift */,
 				9772515624DF66A90052A3F6 /* CustomAnnotationView.swift */,
-				97EA493924E3B7ED00C0FE64 /* OverviewSummaryView.swift */,
-				97EA493B24E3BEC200C0FE64 /* OverviewDistributionView.swift */,
+				97EA493924E3B7ED00C0FE64 /* LearnMoreTextWindow.swift */,
+				97EA493B24E3BEC200C0FE64 /* LearnMoreContentViewWindow.swift */,
 				97A24D2324E49A4100958AB9 /* TaxonomyView.swift */,
 			);
 			path = Views;
@@ -370,7 +378,7 @@
 				9764D12A24D7DD820050AF37 /* Secrets.swift */,
 				9764D12824D7DC250050AF37 /* NewsArticle.swift */,
 				97A24D2224E45D7300958AB9 /* ToolBarStrategies */,
-				97A24D2124E45D5B00958AB9 /* LearnMoreStrategies */,
+				97A24D2124E45D5B00958AB9 /* LearnMore */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -422,14 +430,16 @@
 			path = TerraTests;
 			sourceTree = "<group>";
 		};
-		97A24D2124E45D5B00958AB9 /* LearnMoreStrategies */ = {
+		97A24D2124E45D5B00958AB9 /* LearnMore */ = {
 			isa = PBXGroup;
 			children = (
-				97EA494024E43FC500C0FE64 /* LearnMoreStrategy.swift */,
-				97B7C79624E440CE008BD6AD /* LearnMoreOverviewStrategy.swift */,
-				97A24D1F24E445A800958AB9 /* LearnMoreHabitatStrategy.swift */,
+				97CDF11824E4AC050055FE78 /* LearnMoreVCStrategies */,
+				97A24D2524E4A3CB00958AB9 /* LearnMoreTextWindowStrategy.swift */,
+				97A24D2724E4A52100958AB9 /* LearnMoreContentWindowStrategy.swift */,
+				97CDF11424E4A86F0055FE78 /* LearnMoreOverviewDescription.swift */,
+				97CDF11624E4A9970055FE78 /* LearnMoreTaxonomyStrategy.swift */,
 			);
-			path = LearnMoreStrategies;
+			path = LearnMore;
 			sourceTree = "<group>";
 		};
 		97A24D2224E45D7300958AB9 /* ToolBarStrategies */ = {
@@ -453,6 +463,16 @@
 				97997F2B24DCE18B00981087 /* MGLMapViewController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		97CDF11824E4AC050055FE78 /* LearnMoreVCStrategies */ = {
+			isa = PBXGroup;
+			children = (
+				97EA494024E43FC500C0FE64 /* LearnMoreVCStrategy.swift */,
+				97B7C79624E440CE008BD6AD /* LearnMoreOverviewStrategy.swift */,
+				97A24D1F24E445A800958AB9 /* LearnMoreHabitatStrategy.swift */,
+			);
+			path = LearnMoreVCStrategies;
 			sourceTree = "<group>";
 		};
 		97FAD4EA24D7783F007FEFD8 /* Supporting Files */ = {
@@ -677,11 +697,12 @@
 				97682CC724D5EAA3000E5B30 /* Population.swift in Sources */,
 				977D876C24CD3A6100AE5E51 /* Taxonomy.swift in Sources */,
 				97E9450424BE10C800550824 /* ConservationStatus.swift in Sources */,
+				97CDF11524E4A86F0055FE78 /* LearnMoreOverviewDescription.swift in Sources */,
 				97F4E00A24D757C600509694 /* StringExtensions.swift in Sources */,
 				97591FDF24CCD14A002EAC96 /* Constants.swift in Sources */,
 				97FAD4E924D75DBD007FEFD8 /* NewsViewController.swift in Sources */,
 				97682CCA24D634AA000E5B30 /* RoundedInfoViewDelegate.swift in Sources */,
-				97EA493A24E3B7ED00C0FE64 /* OverviewSummaryView.swift in Sources */,
+				97EA493A24E3B7ED00C0FE64 /* LearnMoreTextWindow.swift in Sources */,
 				9772515F24DF814A0052A3F6 /* NewsAPI.swift in Sources */,
 				975812E924D4EDF900C09D56 /* SpeciesStrategy.swift in Sources */,
 				975812ED24D528E100C09D56 /* SpeciesThreatsStrategy.swift in Sources */,
@@ -694,10 +715,13 @@
 				975812EB24D4EF9400C09D56 /* SpeciesOverviewStrategy.swift in Sources */,
 				97F7B42824C56886007AEE97 /* DonateButtonDelegate.swift in Sources */,
 				97EDD4F024D36D0A00D30674 /* FirebaseStorageManager.swift in Sources */,
+				97A24D2824E4A52100958AB9 /* LearnMoreContentWindowStrategy.swift in Sources */,
 				9772515724DF66A90052A3F6 /* CustomAnnotationView.swift in Sources */,
 				9711D8F724BD199700C2E6F1 /* Species.swift in Sources */,
 				974CC98424C64F0F00E4EF85 /* PopulationTrend.swift in Sources */,
 				97A24D2424E49A4100958AB9 /* TaxonomyView.swift in Sources */,
+				97A24D2624E4A3CB00958AB9 /* LearnMoreTextWindowStrategy.swift in Sources */,
+				97CDF11724E4A9970055FE78 /* LearnMoreTaxonomyStrategy.swift in Sources */,
 				97FAD4E724D75B20007FEFD8 /* TabBarController.swift in Sources */,
 				9772515D24DF80FB0052A3F6 /* APIClient.swift in Sources */,
 				970B172524C2699E007F32E0 /* SpeciesDetailViewController.swift in Sources */,
@@ -705,7 +729,7 @@
 				97B68CD424BBB0AC005B8AB8 /* DetailHeaderNameView.swift in Sources */,
 				9764D12B24D7DD820050AF37 /* Secrets.swift in Sources */,
 				97591FDC24CC4524002EAC96 /* ToolBarSelectedButton.swift in Sources */,
-				97EA494124E43FC500C0FE64 /* LearnMoreStrategy.swift in Sources */,
+				97EA494124E43FC500C0FE64 /* LearnMoreVCStrategy.swift in Sources */,
 				97D9E24B24C6470700524000 /* Diet.swift in Sources */,
 				97591FD424CB8D46002EAC96 /* RoundedInfoView.swift in Sources */,
 				97452E4623E1E6C7005636E0 /* SpeciesCollectionViewCell.swift in Sources */,
@@ -721,7 +745,7 @@
 				97F0CCA924C56F5C00C581D3 /* UIScrollViewExtensions.swift in Sources */,
 				97DD101D24C69EB000A21DF4 /* ToolBarDelegate.swift in Sources */,
 				975812F124D52F7B00C09D56 /* SpeciesHabitatStrategy.swift in Sources */,
-				97EA493C24E3BEC200C0FE64 /* OverviewDistributionView.swift in Sources */,
+				97EA493C24E3BEC200C0FE64 /* LearnMoreContentViewWindow.swift in Sources */,
 				977D877024CD6A1200AE5E51 /* Group.swift in Sources */,
 				97A24D2024E445A800958AB9 /* LearnMoreHabitatStrategy.swift in Sources */,
 				97591FE324CCDC48002EAC96 /* FontWeight.swift in Sources */,

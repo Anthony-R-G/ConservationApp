@@ -63,5 +63,13 @@ class Factory {
         let view = RoundedInfoView(frame: CGRect(), speciesStrategy: strategy)
         return view
     }
+    
+    static func makeTextBasedLearnMoreWindow(strategy: LearnMoreTextWindowStrategy) -> LearnMoreTextWindow {
+        return LearnMoreTextWindow(strategy: strategy)
+    }
+    
+    static func makeContentbasedLearnMoreWindow(height: CGFloat, strategy: LearnMoreContentWindowStrategy) -> LearnMoreContentViewWindow {
+        return LearnMoreContentViewWindow(height: height, strategy: strategy)
+    }
 }
 

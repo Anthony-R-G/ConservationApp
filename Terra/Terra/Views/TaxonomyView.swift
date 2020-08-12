@@ -132,6 +132,14 @@ class TaxonomyView: UIView {
         return sv
     }()
     
+    func configureTaxonomyData(from species: Species) {
+        kingdomDataLabel.text = species.taxonomy.kingdom
+        phylumDataLabel.text = species.taxonomy.phylum
+        classDataLabel.text = species.taxonomy.classTaxonomy
+        orderDataLabel.text = species.taxonomy.order
+        familyDataLabel.text = species.taxonomy.family
+        genusDataLabel.text = species.taxonomy.genus
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)

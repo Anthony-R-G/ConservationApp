@@ -1,5 +1,5 @@
 //
-//  LearnMoreStrategy.swift
+//  LearnMoreContentWindowStrategy.swift
 //  Terra
 //
 //  Created by Anthony Gonzalez on 8/12/20.
@@ -8,7 +8,9 @@
 
 import UIKit
 
-protocol LearnMoreStrategy {
+protocol LearnMoreContentWindowStrategy {
     var species: Species { get set }
-    mutating func arrangedSubviews() -> UIStackView
+    
+    func titleLabel() -> String
+    func contentView() -> UIView
 }

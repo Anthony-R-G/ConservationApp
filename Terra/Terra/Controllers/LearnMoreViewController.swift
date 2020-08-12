@@ -118,7 +118,7 @@ final class LearnMoreViewController: UIViewController {
     
     var currentSpecies: Species!
     
-    var strategy: LearnMoreStrategy!
+    var strategy: LearnMoreVCStrategy!
     
     private var previousStatusBarHidden = false
     
