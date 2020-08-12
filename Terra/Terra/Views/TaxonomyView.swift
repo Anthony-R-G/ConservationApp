@@ -49,7 +49,8 @@ class TaxonomyView: UIView {
                                         alignment: .left)
     }()
     
-    private lazy var familyDataLaabel: UILabel = {
+    
+    private lazy var familyDataLabel: UILabel = {
         return Factory.makeLabel(title: "DATA ENTRY",
                                         weight: .bold,
                                         size: 18,
@@ -104,4 +105,68 @@ class TaxonomyView: UIView {
                                         color: .white,
                                         alignment: .left)
     }()
+    
+    private lazy var leftStack: UIStackView = {
+       let sv = UIStackView(arrangedSubviews: [
+       kingdomTitleLabel, kingdomDataLabel,
+       classTitleLabel, classDataLabel,
+       familyTitleLabel, familyDataLabel
+       ])
+        sv.axis = .vertical
+        sv.spacing = 10
+        sv.setCustomSpacing(20, after: kingdomDataLabel)
+        sv.setCustomSpacing(20, after: classDataLabel)
+        return sv
+    }()
+    
+    private lazy var rightStack: UIStackView = {
+       let sv = UIStackView(arrangedSubviews: [
+       phylumTitleLabel, phylumDataLabel,
+       orderTitleLabel, orderDataLabel,
+       genusTitleLabel, genusDataLabel
+       ])
+        sv.axis = .vertical
+        sv.spacing = 10
+        sv.setCustomSpacing(20, after: phylumDataLabel)
+        sv.setCustomSpacing(20, after: orderDataLabel)
+        return sv
+    }()
+    
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        addSubviews()
+        setConstraints()
+        translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+fileprivate extension TaxonomyView {
+    func addSubviews() {
+       let UIElements = [leftStack, rightStack]
+        UIElements.forEach { addSubview($0) }
+        UIElements.forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
+    }
+    
+    func setConstraints() {
+        setLeftStackConstraints()
+        setRightStackConstraints()
+    }
+    
+    func setLeftStackConstraints() {
+        leftStack.snp.makeConstraints { (make) in
+            make.leading.top.bottom.equalToSuperview()
+            
+        }
+    }
+    
+    func setRightStackConstraints() {
+        rightStack.snp.makeConstraints { (make) in
+            make.trailing.top.bottom.equalToSuperview()
+        }
+    }
 }

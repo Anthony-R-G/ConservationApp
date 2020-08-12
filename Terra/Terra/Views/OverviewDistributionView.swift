@@ -19,12 +19,8 @@ class OverviewDistributionView: UIView {
            return label
        }()
     
-    lazy var mapImageView: UIImageView = {
-        let iv = UIImageView()
-        iv.image = #imageLiteral(resourceName: "amurLeopardMap")
-        iv.clipsToBounds = true
-        iv.contentMode = .scaleAspectFill
-        return iv
+    lazy var taxonomyView: TaxonomyView = {
+        return TaxonomyView()
     }()
     
     private func setContentViewBottomConstraint() {
@@ -54,7 +50,7 @@ class OverviewDistributionView: UIView {
 
 fileprivate extension OverviewDistributionView {
     func addSubviews() {
-        let UIElements = [titleLabel, mapImageView]
+        let UIElements = [titleLabel, taxonomyView]
         UIElements.forEach { addSubview($0) }
         UIElements.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
     }
@@ -75,10 +71,10 @@ fileprivate extension OverviewDistributionView {
     
     func setLabelConstraints() {
         NSLayoutConstraint.activate([
-            mapImageView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
-            mapImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            mapImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            mapImageView.heightAnchor.constraint(equalToConstant: 130)
+            taxonomyView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
+            taxonomyView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            taxonomyView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            taxonomyView.heightAnchor.constraint(equalToConstant: 200)
         ])
     }
 }
