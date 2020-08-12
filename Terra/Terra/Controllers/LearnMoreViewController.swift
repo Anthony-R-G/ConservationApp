@@ -103,18 +103,14 @@ final class LearnMoreViewController: UIViewController {
         return stackView
     }()
     
-    private lazy var overviewSummaryView: OverviewSummaryView = {
-        return OverviewSummaryView()
-    }()
-    
-    private lazy var overviewDistributionView: OverviewDistributionView = {
-        return OverviewDistributionView()
-    }()
+   
     
     private lazy var stackContainerView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [
-            overviewSummaryView, overviewDistributionView
-        ])
+//        let stackView = UIStackView(arrangedSubviews: [
+//            overviewSummaryView, overviewDistributionView
+//        ])
+        let stackView = UIStackView()
+        stackView.arrangedSubviews =
         stackView.axis = .vertical
         stackView.spacing = 20
         return stackView
@@ -131,6 +127,8 @@ final class LearnMoreViewController: UIViewController {
     //MARK: -- Properties
     
     var currentSpecies: Species!
+    
+    private var strategy: LearnMoreStrategy!
     
     private var previousStatusBarHidden = false
     
