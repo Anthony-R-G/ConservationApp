@@ -100,7 +100,6 @@ final class LearnMoreViewController: UIViewController {
         ])
         stackView.axis = .vertical
         stackView.spacing = 8
-        
         return stackView
     }()
     
@@ -121,6 +120,14 @@ final class LearnMoreViewController: UIViewController {
         return stackView
     }()
     
+    private lazy var headerImageBottomGradient: GradientView = {
+        let gv = GradientView()
+//        gv.startLocation =
+        gv.startColor = .clear
+        gv.endColor = #colorLiteral(red: 0.2738285363, green: 0.2782334089, blue: 0.2810879052, alpha: 0.3487264556)
+        return gv
+    }()
+    
     //MARK: -- Properties
     
     var currentSpecies: Species!
@@ -136,22 +143,6 @@ final class LearnMoreViewController: UIViewController {
         animator?.stopAnimation(true)
         animator?.finishAnimation(at: .current)
         dismiss(animated: true, completion: nil)
-    }
-    
-    private func setupGradientLayer() {
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [UIColor.clear.cgColor, UIColor.darkGray.cgColor]
-        gradientLayer.locations = [0.5, 1]
-        
-        let gradientContainerView = UIView()
-        headerImageView.addSubview(gradientContainerView)
-        gradientContainerView.snp.makeConstraints {(make) in
-            make.leading.bottom.trailing.equalTo(headerImageView)
-        }
-        gradientContainerView.layer.addSublayer(gradientLayer)
-        
-        gradientLayer.frame = headerImageView.bounds
-        gradientLayer.frame.origin.y -= headerImageView.bounds.height
     }
     
     private func configureUI() {
@@ -209,7 +200,6 @@ final class LearnMoreViewController: UIViewController {
         addSubviews()
         setConstraints()
         setupHeaderVisualEffectBlur()
-        setupGradientLayer()
         configureUI()
     }
 }
@@ -236,7 +226,7 @@ fileprivate extension LearnMoreViewController {
         let UIElements = [imageContainer, headerImageView, viewContainer]
         UIElements.forEach { scrollView.addSubview($0) }
         
-        let headerViewUIElements = [headerStatusBarGradient, headerVisualEffectBlur, headerStackView]
+        let headerViewUIElements = [headerStatusBarGradient, headerVisualEffectBlur, headerImageBottomGradient, headerStackView]
         headerViewUIElements.forEach { headerImageView.addSubview($0) }
         
         viewContainer.addSubview(stackContainerView)
@@ -251,6 +241,7 @@ fileprivate extension LearnMoreViewController {
         setHeaderImageViewConstraints()
         setHeaderVisualEffectBlurConstraints()
         setHeaderStatusBarGradientConstraints()
+        setHeaderBottomGradientConstraints()
         setHeaderStackViewConstraints()
         
         setViewContainerConstraints()
@@ -317,6 +308,12 @@ fileprivate extension LearnMoreViewController {
     func setHeaderStackViewConstraints() {
         headerStackView.snp.makeConstraints { (make) in
             make.leading.bottom.trailing.equalTo(headerImageView).inset(20)
+        }
+    }
+    
+    func setHeaderBottomGradientConstraints() {
+        headerImageBottomGradient.snp.makeConstraints {(make) in
+            make.leading.top.bottom.trailing.equalTo(headerImageView)
         }
     }
     
