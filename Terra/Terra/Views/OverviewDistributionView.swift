@@ -30,7 +30,7 @@ class OverviewDistributionView: UIView {
     
     private func setContentViewBottomConstraint() {
         if let lastSubview = subviews.last {
-            bottomAnchor.constraint(equalTo: lastSubview.bottomAnchor, constant: 10).isActive = true
+            bottomAnchor.constraint(equalTo: lastSubview.bottomAnchor, constant: 20).isActive = true
         }
     }
     
@@ -39,7 +39,7 @@ class OverviewDistributionView: UIView {
         super.init(frame: frame)
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.399026113)
-        layer.cornerRadius = 10
+        layer.cornerRadius = 20
         addSubviews()
         setConstraints()
         setContentViewBottomConstraint()
