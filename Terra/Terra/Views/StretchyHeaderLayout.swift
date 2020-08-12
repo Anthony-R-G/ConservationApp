@@ -28,9 +28,7 @@ class StretchyHeaderLayout: UICollectionViewFlowLayout {
                 let width = collectionView.frame.width
                 
                 let height = attributes.frame.height - contentOffsetY
-                print("Header image height is \(height)")
 
-                
                 //Header
                 attributes.frame = CGRect(x: 0, y: contentOffsetY, width: width, height: height)
             }

@@ -54,6 +54,10 @@ final class LearnMoreViewController: UIViewController {
         return ic
     }()
     
+    private lazy var visualEffectView: UIVisualEffectView = {
+           return UIVisualEffectView(effect: UIBlurEffect(style: .regular))
+       }()
+    
     private lazy var headerImageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
@@ -108,6 +112,8 @@ But recent research shows conservation work is having a positive effect, and wil
     
     var currentSpecies: Species!
     
+    var animator: UIViewPropertyAnimator!
+    
     private var previousStatusBarHidden = false
     
     private var shouldHideStatusBar: Bool {
@@ -138,6 +144,22 @@ But recent research shows conservation work is having a positive effect, and wil
         FirebaseStorageService.detailImageManager.getImage(for: currentSpecies.commonName, setTo: backgroundImageView)
     }
     
+    private func setupVisualEffectBlur() {
+        headerImageView.addSubview(visualEffectView)
+        visualEffectView.snp.makeConstraints { [weak self] (make) in
+            guard let self = self else { return }
+            make.edges.equalTo(headerImageView)
+        }
+        
+        animator = UIViewPropertyAnimator(duration: 1.0, curve: .linear, animations: { [weak self] in
+            guard let self = self else { return }
+            self.visualEffectView.effect = nil
+        })
+        animator.pausesOnCompletion = true
+        animator.isReversed = true
+        animator.fractionComplete = 0
+    }
+    
     private func updateBackButtonAlpha(scrollOffset: CGFloat) {
         var newAlpha = CGFloat()
         newAlpha = scrollOffset < 100 ? 1 : 0
@@ -154,6 +176,17 @@ But recent research shows conservation work is having a positive effect, and wil
         }
     }
     
+    private func updateHeaderAnimator(with offset: CGFloat) {
+        print(offset)
+          if offset > 0 {
+              animator.fractionComplete = 0
+              return
+          }
+          
+          animator.fractionComplete = abs(offset) / 100
+      }
+    
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -166,6 +199,7 @@ But recent research shows conservation work is having a positive effect, and wil
         
         addSubviews()
         setConstraints()
+        setupVisualEffectBlur()
         fetchFirebaseImage()
     }
 }
@@ -174,6 +208,8 @@ But recent research shows conservation work is having a positive effect, and wil
 //MARK: -- ScrollView Delegate Methods
 extension LearnMoreViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        
         if previousStatusBarHidden != shouldHideStatusBar {
             
             UIView.animate(withDuration: 0.2, animations: { [weak self] in
@@ -184,8 +220,9 @@ extension LearnMoreViewController: UIScrollViewDelegate {
             previousStatusBarHidden = shouldHideStatusBar
         }
         
-        let offset = scrollView.contentOffset.y
-        updateBackButtonAlpha(scrollOffset: offset)
+        let contentOffsetY = scrollView.contentOffset.y
+        updateBackButtonAlpha(scrollOffset: contentOffsetY)
+        updateHeaderAnimator(with: contentOffsetY)
     }
 }
 
