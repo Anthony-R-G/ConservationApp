@@ -1,5 +1,5 @@
 //
-//  OverviewSummaryView.swift
+//  OverviewDistributionView.swift
 //  Terra
 //
 //  Created by Anthony Gonzalez on 8/12/20.
@@ -8,30 +8,32 @@
 
 import UIKit
 
-class OverviewSummaryView: UIView {
+class OverviewDistributionView: UIView {
     
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "TITLE"
-//        label.backgroundColor = .purple
+        //        label.backgroundColor = .purple
         label.font = UIFont.boldSystemFont(ofSize: 24)
         label.textColor = Constants.titleLabelColor
         label.numberOfLines = 0
         return label
     }()
     
-    lazy var bodyLabel: UILabel = {
-           let label = UILabel()
-//           label.backgroundColor = .yellow
-           label.numberOfLines = 0
-           return label
-       }()
+    lazy var mapImageView: UIImageView = {
+        let iv = UIImageView()
+        iv.image = #imageLiteral(resourceName: "amurLeopardMap")
+        iv.clipsToBounds = true
+        iv.contentMode = .scaleAspectFill
+        return iv
+    }()
     
     private func setContentViewBottomConstraint() {
         if let lastSubview = subviews.last {
             bottomAnchor.constraint(equalTo: lastSubview.bottomAnchor, constant: 10).isActive = true
         }
     }
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -46,11 +48,14 @@ class OverviewSummaryView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
 }
 
-fileprivate extension OverviewSummaryView {
+//MARK: -- Add Subviews & Constraints
+
+fileprivate extension OverviewDistributionView {
     func addSubviews() {
-        let UIElements = [titleLabel, bodyLabel]
+        let UIElements = [titleLabel, mapImageView]
         UIElements.forEach { addSubview($0) }
         UIElements.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
     }
@@ -58,7 +63,7 @@ fileprivate extension OverviewSummaryView {
     func setConstraints() {
         setTitleLabelConstraints()
         setLabelConstraints()
-       
+        
     }
     
     func setTitleLabelConstraints() {
@@ -71,9 +76,11 @@ fileprivate extension OverviewSummaryView {
     
     func setLabelConstraints() {
         NSLayoutConstraint.activate([
-            bodyLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
-            bodyLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            bodyLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
+            mapImageView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
+            mapImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            mapImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            mapImageView.heightAnchor.constraint(equalToConstant: 130)
         ])
     }
 }
+
