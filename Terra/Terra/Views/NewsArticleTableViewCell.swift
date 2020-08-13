@@ -38,7 +38,6 @@ final class NewsArticleTableViewCell: UITableViewCell {
                                  alignment: .left)
     }()
     
-    
     //MARK: -- Methods
     
     func configureCell(from article: NewsArticle) {
@@ -46,7 +45,6 @@ final class NewsArticleTableViewCell: UITableViewCell {
             articleThumbImageView.image = #imageLiteral(resourceName: "newsImagePlaceholder")
             return
         }
-        
         articleTitleLabel.text = article.title
         publishedDateLabel.text = article.formattedPublishDate
         articleThumbImageView.sd_setImage(with: URL(string: articleImageURL), completed: nil)
@@ -87,29 +85,27 @@ fileprivate extension NewsArticleTableViewCell {
     }
     
     func setArticleThumbImageViewConstraints() {
-        NSLayoutConstraint.activate([
-            articleThumbImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.spacingConstant),
-            articleThumbImageView.heightAnchor.constraint(equalToConstant: 120),
-            articleThumbImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            articleThumbImageView.widthAnchor.constraint(equalToConstant: 140)
-        ])
+        articleThumbImageView.snp.makeConstraints { (make) in
+            make.leading.equalToSuperview().inset(Constants.spacingConstant)
+            make.centerY.equalToSuperview()
+            make.height.equalTo(120)
+            make.width.equalTo(140)
+        }
     }
     
     func setArticleTitleLabelConstraints() {
-        NSLayoutConstraint.activate([
-            articleTitleLabel.leadingAnchor.constraint(equalTo: articleThumbImageView.trailingAnchor, constant: Constants.spacingConstant),
-            articleTitleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 20),
-            articleTitleLabel.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.6),
-            articleTitleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.spacingConstant)
-        ])
+        articleTitleLabel.snp.makeConstraints { (make) in
+            make.leading.equalTo(articleThumbImageView.snp.trailing).offset(Constants.spacingConstant)
+            make.top.trailing.equalToSuperview().inset(Constants.spacingConstant)
+            make.height.equalToSuperview().multipliedBy(0.6)
+        }
     }
     
     func setPublishedDateLabelConstraints() {
-        NSLayoutConstraint.activate([
-            publishedDateLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
-            publishedDateLabel.leadingAnchor.constraint(equalTo: articleTitleLabel.leadingAnchor),
-            publishedDateLabel.heightAnchor.constraint(equalToConstant: 40),
-            publishedDateLabel.widthAnchor.constraint(equalToConstant: 150)
-        ])
+        publishedDateLabel.snp.makeConstraints { (make) in
+            make.leading.trailing.equalTo(articleTitleLabel)
+            make.height.equalTo(40)
+            make.bottom.equalToSuperview().inset(10)
+        }
     }
 }
