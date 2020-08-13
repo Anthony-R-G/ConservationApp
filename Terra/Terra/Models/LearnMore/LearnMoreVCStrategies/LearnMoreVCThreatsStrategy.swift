@@ -1,5 +1,5 @@
 //
-//  LearnMoreHabitatStrategy.swift
+//  LearnMoreVCThreatsStrategy.swift
 //  Terra
 //
 //  Created by Anthony Gonzalez on 8/12/20.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct LearnMoreVCHabitatStrategy: LearnMoreVCStrategy {
+struct LearnMoreVCThreatsStrategy: LearnMoreVCStrategy {
     var species: Species
     
     func title() -> String {
@@ -16,11 +16,11 @@ struct LearnMoreVCHabitatStrategy: LearnMoreVCStrategy {
     }
     
     func subtitle() -> String {
-        return "Habitat"
+        return "Threats"
     }
     
     func firebaseStorageManager() -> FirebaseStorageService {
-        return FirebaseStorageService.learnMoreHabitatImageManager
+        return FirebaseStorageService.learnMoreThreatsImageManager
     }
     
     mutating func arrangedSubviews() -> UIStackView {
@@ -30,9 +30,5 @@ struct LearnMoreVCHabitatStrategy: LearnMoreVCStrategy {
         stackView.axis = .vertical
         stackView.spacing = 20
         return stackView
-    }
-    
-    init(species: Species) {
-        self.species = species
     }
 }

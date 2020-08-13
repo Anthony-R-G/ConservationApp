@@ -47,6 +47,7 @@
 		97591FDF24CCD14A002EAC96 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FDE24CCD14A002EAC96 /* Constants.swift */; };
 		97591FE024CCD2E9002EAC96 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FDE24CCD14A002EAC96 /* Constants.swift */; };
 		97591FE324CCDC48002EAC96 /* FontWeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FE224CCDC48002EAC96 /* FontWeight.swift */; };
+		975C8E5424E4F11500A0EB9D /* LearnMoreVCThreatsStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975C8E5324E4F11500A0EB9D /* LearnMoreVCThreatsStrategy.swift */; };
 		9764D12924D7DC250050AF37 /* NewsArticle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9764D12824D7DC250050AF37 /* NewsArticle.swift */; };
 		9764D12B24D7DD820050AF37 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9764D12A24D7DD820050AF37 /* Secrets.swift */; };
 		9764D12E24D7E46E0050AF37 /* NewsArticleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9764D12D24D7E46E0050AF37 /* NewsArticleTableViewCell.swift */; };
@@ -157,6 +158,7 @@
 		97591FDE24CCD14A002EAC96 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		97591FE124CCDC28002EAC96 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		97591FE224CCDC48002EAC96 /* FontWeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontWeight.swift; sourceTree = "<group>"; };
+		975C8E5324E4F11500A0EB9D /* LearnMoreVCThreatsStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnMoreVCThreatsStrategy.swift; sourceTree = "<group>"; };
 		9764D12824D7DC250050AF37 /* NewsArticle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsArticle.swift; sourceTree = "<group>"; };
 		9764D12A24D7DD820050AF37 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		9764D12D24D7E46E0050AF37 /* NewsArticleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsArticleTableViewCell.swift; sourceTree = "<group>"; };
@@ -479,6 +481,7 @@
 				97EA494024E43FC500C0FE64 /* LearnMoreVCStrategy.swift */,
 				97B7C79624E440CE008BD6AD /* LearnMoreVCOverviewStrategy.swift */,
 				97A24D1F24E445A800958AB9 /* LearnMoreVCHabitatStrategy.swift */,
+				975C8E5324E4F11500A0EB9D /* LearnMoreVCThreatsStrategy.swift */,
 			);
 			path = LearnMoreVCStrategies;
 			sourceTree = "<group>";
@@ -754,6 +757,7 @@
 				97DD101D24C69EB000A21DF4 /* ToolBarDelegate.swift in Sources */,
 				975812F124D52F7B00C09D56 /* SpeciesHabitatStrategy.swift in Sources */,
 				97EA493C24E3BEC200C0FE64 /* LearnMoreContentViewWindow.swift in Sources */,
+				975C8E5424E4F11500A0EB9D /* LearnMoreVCThreatsStrategy.swift in Sources */,
 				977D877024CD6A1200AE5E51 /* Group.swift in Sources */,
 				97A24D2024E445A800958AB9 /* LearnMoreVCHabitatStrategy.swift in Sources */,
 				97591FE324CCDC48002EAC96 /* FontWeight.swift in Sources */,

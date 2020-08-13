@@ -79,17 +79,17 @@ final class LearnMoreViewController: UIViewController {
     }()
     
     private lazy var titleLabel: UILabel = {
-        return Factory.makeLabel(title: nil,
+        return Factory.makeLabel(title: strategy.title(),
                                  weight: .bold,
-                                 size: 25,
+                                 size: 24,
                                  color: .white,
                                  alignment: .left)
     }()
     
     private lazy var subtitleLabel: UILabel = {
-        return Factory.makeLabel(title: nil,
-                                 weight: .lightItalic,
-                                 size: 14,
+        return Factory.makeLabel(title: strategy.subtitle(),
+                                 weight: .medium,
+                                 size: 16,
                                  color: .white,
                                  alignment: .left)
     }()
@@ -133,13 +133,10 @@ final class LearnMoreViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    private func configureUI() {
-        FirebaseStorageService.learnMoreOverviewImageManager.getImage(for: currentSpecies.commonName, setTo: headerImageView)
+    private func loadImages() {
+        strategy.firebaseStorageManager().getImage(for: currentSpecies.commonName, setTo: headerImageView)
         
         FirebaseStorageService.detailImageManager.getImage(for: currentSpecies.commonName, setTo: backgroundImageView)
-        
-        titleLabel.text = currentSpecies.commonName
-        subtitleLabel.text = currentSpecies.taxonomy.scientificName
     }
     
     private func setupHeaderVisualEffectBlur() {
@@ -188,7 +185,7 @@ final class LearnMoreViewController: UIViewController {
         addSubviews()
         setConstraints()
         setupHeaderVisualEffectBlur()
-        configureUI()
+        loadImages()
     }
 }
 

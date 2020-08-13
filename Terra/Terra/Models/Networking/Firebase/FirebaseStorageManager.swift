@@ -17,6 +17,7 @@ class FirebaseStorageService {
         case callout
         case learnMoreOverview
         case learnMoreHabitat
+        case learnMoreThreats
     }
     
     static var cellImageManager = FirebaseStorageService(type: .cell)
@@ -28,6 +29,9 @@ class FirebaseStorageService {
     static var learnMoreOverviewImageManager = FirebaseStorageService(type: .learnMoreOverview)
     
     static var learnMoreHabitatImageManager = FirebaseStorageService(type: .learnMoreHabitat)
+    
+    static var learnMoreThreatsImageManager = FirebaseStorageService(type: .learnMoreThreats)
+    
     
     private let storage: Storage!
     private let storageReference: StorageReference
@@ -52,7 +56,13 @@ class FirebaseStorageService {
             
         case .learnMoreHabitat:
             imagesFolderReference = storageReference.child("Learn More Habitat Images")
+            
+        case .learnMoreThreats:
+            imagesFolderReference = storageReference.child("Learn More Threats Images")
+    
         }
+        
+        
     }
     
     func getImage(for speciesName: String, setTo imageView: UIImageView) {

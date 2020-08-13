@@ -12,5 +12,8 @@ import UIKit
 
 protocol LearnMoreVCStrategy {
     var species: Species { get set }
+    func title() -> String
+    func subtitle() -> String
+    func firebaseStorageManager() -> FirebaseStorageService
     mutating func arrangedSubviews() -> UIStackView
 }

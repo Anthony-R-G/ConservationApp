@@ -40,7 +40,7 @@ struct SpeciesOverviewStrategy: SpeciesStrategy {
     }
     
     func bodyText() -> String {
-        return species.overview
+        return species.overview.replacingOccurrences(of: "\\n", with: "")
     }
     
     func learnMoreButtonTag() -> Int {

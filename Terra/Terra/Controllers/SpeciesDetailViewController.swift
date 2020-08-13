@@ -308,6 +308,8 @@ extension SpeciesDetailViewController: RoundedInfoViewDelegate {
             learnMoreVC.strategy = LearnMoreVCOverviewStrategy(species: currentSpecies)
         case 1:
             learnMoreVC.strategy = LearnMoreVCHabitatStrategy(species: currentSpecies)
+        case 2:
+            learnMoreVC.strategy = LearnMoreVCThreatsStrategy(species: currentSpecies)
         default: print(sender.tag)
         }
         present(learnMoreVC, animated: true, completion: nil)
