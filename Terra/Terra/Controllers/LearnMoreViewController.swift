@@ -135,7 +135,9 @@ final class LearnMoreViewController: UIViewController {
     
     private func configureUI() {
         FirebaseStorageService.learnMoreOverviewImageManager.getImage(for: currentSpecies.commonName, setTo: headerImageView)
+        
         FirebaseStorageService.detailImageManager.getImage(for: currentSpecies.commonName, setTo: backgroundImageView)
+        
         titleLabel.text = currentSpecies.commonName
         subtitleLabel.text = currentSpecies.taxonomy.scientificName
     }

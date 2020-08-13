@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct LearnMoreHabitatStrategy: LearnMoreVCStrategy {
+struct LearnMoreVCHabitatStrategy: LearnMoreVCStrategy {
     var species: Species
     
    

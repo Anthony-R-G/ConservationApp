@@ -305,13 +305,9 @@ extension SpeciesDetailViewController: RoundedInfoViewDelegate {
         
         switch sender.tag {
         case 0:
-            learnMoreVC.strategy = LearnMoreOverviewStrategy(species: currentSpecies)
+            learnMoreVC.strategy = LearnMoreVCOverviewStrategy(species: currentSpecies)
         case 1:
-            
-            let mapVC = MGLMapViewController()
-            mapVC.currentSpecies = currentSpecies
-            mapVC.modalPresentationStyle  = .fullScreen
-            present(mapVC, animated: true, completion: nil)
+            learnMoreVC.strategy = LearnMoreVCHabitatStrategy(species: currentSpecies)
         default: print(sender.tag)
         }
         present(learnMoreVC, animated: true, completion: nil)
