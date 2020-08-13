@@ -16,45 +16,54 @@ final class NewsArticleTableViewCell: UITableViewCell {
         iv.layer.cornerRadius = 10
         iv.clipsToBounds = true
         iv.contentMode = .scaleAspectFill
-        iv.backgroundColor = .clear
+        iv.backgroundColor = .black
         return iv
     }()
     
     lazy var articleTitleLabel: UILabel = {
-        let label = Factory.makeLabel(title: nil, weight: .bold, size: 18, color: .white, alignment: .left)
+        let label = Factory.makeLabel(title: nil,
+                                      weight: .bold,
+                                      size: 18,
+                                      color: .white,
+                                      alignment: .left)
         label.numberOfLines = 0
         return label
     }()
     
     lazy var publishedDateLabel: UILabel = {
-        return Factory.makeLabel(title: nil, weight: .medium, size: 15, color: #colorLiteral(red: 0.6783636212, green: 0.6784659028, blue: 0.6783496737, alpha: 1), alignment: .left)
+        return Factory.makeLabel(title: nil,
+                                 weight: .medium,
+                                 size: 15,
+                                 color: #colorLiteral(red: 0.6783636212, green: 0.6784659028, blue: 0.6783496737, alpha: 1),
+                                 alignment: .left)
     }()
     
     
     //MARK: -- Methods
     
-    func configureCellUI(from article: NewsArticle) {
-        if let articleThumbImageURLStr = article.urlToImage {
-            let articleThumbImageURL = URL(string: articleThumbImageURLStr)
-            articleThumbImageView.sd_setImage(with: articleThumbImageURL, completed: nil)
-        } else {
+    func configureCell(from article: NewsArticle) {
+        guard let articleImageURL = article.urlToImage else {
             articleThumbImageView.image = #imageLiteral(resourceName: "newsImagePlaceholder")
+            return
         }
         
         articleTitleLabel.text = article.title
         publishedDateLabel.text = article.formattedPublishDate
+        articleThumbImageView.sd_setImage(with: URL(string: articleImageURL), completed: nil)
+    }
+    
+    private func setAppearance() {
+        backgroundColor = .black
+        let bgColorView = UIView()
+        bgColorView.backgroundColor = #colorLiteral(red: 0.08120436221, green: 0.09556283802, blue: 0.1183818057, alpha: 1)
+        selectedBackgroundView = bgColorView
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         addSubviews()
         setConstraints()
-//        backgroundColor = #colorLiteral(red: 0.1108833775, green: 0.1294697225, blue: 0.1595396101, alpha: 1)
-        backgroundColor = .black
-        
-        let bgColorView = UIView()
-        bgColorView.backgroundColor = #colorLiteral(red: 0.08120436221, green: 0.09556283802, blue: 0.1183818057, alpha: 1)
-        selectedBackgroundView = bgColorView
+        setAppearance()
     }
     
     required init?(coder: NSCoder) {

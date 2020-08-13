@@ -94,7 +94,7 @@ extension NewsViewController: UITableViewDataSource {
         
         let newsCell = tableView.dequeueReusableCell(withIdentifier: "newsCell", for: indexPath) as! NewsArticleTableViewCell
         let specificArticle = viewModel.specificArticle(at: indexPath.row)
-        newsCell.configureCellUI(from: specificArticle)
+        newsCell.configureCell(from: specificArticle)
         return newsCell
     }
 }
