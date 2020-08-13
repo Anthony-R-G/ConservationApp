@@ -110,7 +110,7 @@ final class LearnMoreViewController: UIViewController {
     private lazy var headerImageBottomGradient: GradientView = {
         let gv = GradientView()
         gv.startColor = .clear
-        gv.endColor = #colorLiteral(red: 0.2738285363, green: 0.2782334089, blue: 0.2810879052, alpha: 0.3487264556)
+        gv.endColor = #colorLiteral(red: 0.2408030033, green: 0.2476645112, blue: 0.2501021922, alpha: 0.4022902398)
         return gv
     }()
     

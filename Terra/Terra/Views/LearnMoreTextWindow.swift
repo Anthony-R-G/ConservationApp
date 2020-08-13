@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LearnMoreTextWindow: UIView {
+final class LearnMoreTextWindow: UIView {
     
     private lazy var titleLabel: UILabel = {
         let label = Factory.makeLabel(title: strategy.titleLabel(),
