@@ -45,10 +45,10 @@ final class SpeciesCollectionViewCell: UICollectionViewCell {
     
     private lazy var populationNumbersLabel: UILabel = {
         let label = Factory.makeLabel(title: nil,
-                                      weight: .medium,
-                                      size: 18,
+                                      weight: .regular,
+                                      size: 16,
                                       color: .white,
-                                      alignment: .left)
+                                      alignment: .right)
         return label
     }()
     
@@ -71,7 +71,7 @@ final class SpeciesCollectionViewCell: UICollectionViewCell {
     
     //MARK: -- Methods
     
-    public func configureCellUI(from species: Species) {
+    public func configureCell(from species: Species) {
         FirebaseStorageService.cellImageManager.getImage(for: species.commonName, setTo: backgroundImageView)
         speciesNameLabel.text = species.commonName
         speciesScientificNameLabel.text = species.taxonomy.scientificName
@@ -86,9 +86,9 @@ final class SpeciesCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        clipsToBounds = true
         addSubviews()
         setConstraints()
-        clipsToBounds = true
     }
     
     required init?(coder: NSCoder) {
@@ -108,62 +108,56 @@ fileprivate extension SpeciesCollectionViewCell {
     func setConstraints() {
         setBackgroundImageConstraints()
         setBackgroundGradientOverlayConstraints()
+        
         setSpeciesNameLabelConstraints()
-        setConservationStatusLabelConstraints()
         setSpeciesScientificNameLabelConstraints()
+        
+        setConservationStatusLabelConstraints()
         setPopulationNumbersLabelConstraints()
     }
     
     func setBackgroundImageConstraints() {
-        NSLayoutConstraint.activate([
-            backgroundImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            backgroundImageView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            backgroundImageView.topAnchor.constraint(equalTo: topAnchor),
-            backgroundImageView.bottomAnchor.constraint(equalTo: bottomAnchor)
-        ])
+        backgroundImageView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
     }
     
     func setBackgroundGradientOverlayConstraints() {
-        NSLayoutConstraint.activate([
-            backgroundGradientOverlay.heightAnchor.constraint(equalTo: heightAnchor, constant: 30),
-            backgroundGradientOverlay.widthAnchor.constraint(equalTo: widthAnchor),
-            
-        ])
+        backgroundGradientOverlay.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
     }
     
     func setSpeciesNameLabelConstraints(){
-        NSLayoutConstraint.activate([
-            speciesNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.spacingConstant),
-            speciesNameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
-            speciesNameLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.80),
-            speciesNameLabel.heightAnchor.constraint(equalToConstant: 90)
-        ])
+        speciesNameLabel.snp.makeConstraints { (make) in
+            make.leading.bottom.equalToSuperview().inset(Constants.spacingConstant)
+            make.width.equalToSuperview().multipliedBy(0.8)
+            make.height.equalTo(90)
+        }
     }
     
     func setSpeciesScientificNameLabelConstraints() {
-        NSLayoutConstraint.activate([
-            speciesScientificNameLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
-            speciesScientificNameLabel.leadingAnchor.constraint(equalTo: speciesNameLabel.leadingAnchor),
-            speciesScientificNameLabel.heightAnchor.constraint(equalToConstant: 50),
-            speciesScientificNameLabel.widthAnchor.constraint(equalToConstant: 170)
-        ])
+        speciesScientificNameLabel.snp.makeConstraints { (make) in
+            make.leading.equalTo(speciesNameLabel)
+            make.trailing.equalTo(populationNumbersLabel.snp.leading)
+            make.bottom.equalToSuperview().inset(10)
+            make.height.equalTo(50)
+        }
     }
     
     func setConservationStatusLabelConstraints() {
-        NSLayoutConstraint.activate([
-            conservationStatusLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
-            conservationStatusLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-            conservationStatusLabel.heightAnchor.constraint(equalToConstant: 40),
-            conservationStatusLabel.widthAnchor.constraint(equalToConstant: 40)
-        ])
+        conservationStatusLabel.snp.makeConstraints { (make) in
+            make.centerY.equalTo(speciesScientificNameLabel)
+            make.trailing.equalToSuperview().inset(10)
+            make.height.width.equalTo(40)
+        }
     }
     
     func setPopulationNumbersLabelConstraints() {
-        NSLayoutConstraint.activate([
-            populationNumbersLabel.trailingAnchor.constraint(equalTo: conservationStatusLabel.leadingAnchor, constant: -10),
-            populationNumbersLabel.centerYAnchor.constraint(equalTo: conservationStatusLabel.centerYAnchor),
-            populationNumbersLabel.widthAnchor.constraint(equalToConstant: 50),
-            populationNumbersLabel.heightAnchor.constraint(equalToConstant: 50)
-        ])
+        populationNumbersLabel.snp.makeConstraints { (make) in
+            make.trailing.equalTo(conservationStatusLabel.snp.leading).inset(-10)
+            make.centerY.equalTo(conservationStatusLabel)
+            make.height.width.equalTo(50)
+        }
     }
 }

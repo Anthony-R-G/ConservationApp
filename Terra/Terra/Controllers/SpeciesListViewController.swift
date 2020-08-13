@@ -197,7 +197,7 @@ extension SpeciesListViewController: UICollectionViewDataSource {
         let speciesCell = collectionView.dequeueReusableCell(withReuseIdentifier: "speciesCell", for: indexPath) as! SpeciesCollectionViewCell
         
         let specificAnimal = viewModel.specificSpecies(at: indexPath.row)
-        speciesCell.configureCellUI(from: specificAnimal)
+        speciesCell.configureCell(from: specificAnimal)
         return speciesCell
     }
 }
