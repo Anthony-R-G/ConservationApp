@@ -60,20 +60,20 @@ final class SpeciesDetailViewController: UIViewController {
         return siv
     }()
     
-    private lazy var exploreButton: UIButton = {
-        let btn = UIButton(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
-        btn.isUserInteractionEnabled = false
-        btn.setImage(UIImage(systemName: "chevron.up"), for: .normal)
-        btn.setTitle("Explore", for: .normal)
-        btn.titleLabel?.font = UIFont(name: "Roboto-Light", size: 16)
-        btn.alignImageAndTitleVertically()
-        btn.imageView?.transform = CGAffineTransform(scaleX: 1.2, y: 1)
-        
-        let color = UIColor(white: 1, alpha: 0.6)
-        btn.setTitleColor(color, for: .normal)
-        btn.tintColor = color
-        return btn
-    }()
+      private lazy var exploreButton: UIButton = {
+         let btn = UIButton(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
+         btn.isUserInteractionEnabled = false
+         btn.setImage(UIImage(systemName: "chevron.down"), for: .normal)
+         btn.setTitle("Explore", for: .normal)
+         btn.titleLabel?.font = UIFont(name: "Roboto-Light", size: 16)
+         btn.alignImageAndTitleVertically()
+         btn.imageView?.transform = CGAffineTransform(scaleX: 1.2, y: 1)
+         
+         let color = UIColor(white: 1, alpha: 0.6)
+         btn.setTitleColor(color, for: .normal)
+         btn.tintColor = color
+         return btn
+     }()
     
     private lazy var donateButton: DonateButton = {
         return DonateButton(gradientColors: [#colorLiteral(red: 1, green: 0.2914688587, blue: 0.3886995912, alpha: 0.9019156678), #colorLiteral(red: 0.5421239734, green: 0.1666001081, blue: 0.2197911441, alpha: 0.8952536387)],
@@ -350,13 +350,9 @@ fileprivate extension SpeciesDetailViewController {
     }
     
     func setVerticalScrollViewConstraints() {
-        verticalScrollView.backgroundColor = .clear
-        NSLayoutConstraint.activate([
-            verticalScrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            verticalScrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            verticalScrollView.topAnchor.constraint(equalTo: view.topAnchor),
-            verticalScrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
+        verticalScrollView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
     }
     
     func setHorizontalScrollViewConstraints() {
@@ -370,21 +366,15 @@ fileprivate extension SpeciesDetailViewController {
     }
     
     func setBackgroundImageViewConstraints() {
-        NSLayoutConstraint.activate([
-            backgroundImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            backgroundImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            backgroundImageView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            backgroundImageView.heightAnchor.constraint(equalTo: view.heightAnchor)
-        ])
+        backgroundImageView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
     }
     
     func setBackgroundGradientOverlayConstraints() {
-        NSLayoutConstraint.activate([
-            backgroundGradientOverlay.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            backgroundGradientOverlay.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            backgroundGradientOverlay.widthAnchor.constraint(equalTo: view.widthAnchor),
-            backgroundGradientOverlay.heightAnchor.constraint(equalTo: view.heightAnchor)
-        ])
+        backgroundGradientOverlay.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
     }
     
     func setHeaderInfoViewConstraints() {
