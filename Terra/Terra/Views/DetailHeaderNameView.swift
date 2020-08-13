@@ -45,7 +45,7 @@ final class DetailHeaderNameView: UIView {
     }()
     
     //MARK: -- Methods
-    public func configureView(with species: Species) {
+    public func configureView(from species: Species) {
         conservationStatusLabel.text = species.population.conservationStatus.rawValue
         speciesCommonNameLabel.text = species.commonName
         speciesScientificNameLabel.text = "— \(species.taxonomy.scientificName)"

@@ -13,54 +13,87 @@ final class DetailSubheaderView: UIView {
     
     private lazy var numbersTitleLabel: UILabel = {
         return Factory.makeLabel(title: "Numbers",
-                                   weight: .light,
-                                   size: 16,
-                                   color: .white,
-                                   alignment: .left)
+                                 weight: .light,
+                                 size: 16,
+                                 color: .white,
+                                 alignment: .left)
     }()
     
     private lazy var numbersDataLabel: UILabel = {
         return Factory.makeLabel(title: nil,
-                                   weight: .medium,
-                                   size: 18,
-                                   color: .white,
-                                   alignment: .left)
+                                 weight: .medium,
+                                 size: 18,
+                                 color: .white,
+                                 alignment: .left)
     }()
     
     private lazy var trendTitleLabel: UILabel = {
         return Factory.makeLabel(title: "Trend",
-                                   weight: .light,
-                                   size: 16,
-                                   color: .white,
-                                   alignment: .left)
+                                 weight: .light,
+                                 size: 16,
+                                 color: .white,
+                                 alignment: .left)
     }()
     
     private lazy var trendDataLabel: UILabel = {
         return Factory.makeLabel(title: nil,
-                                   weight: .medium,
-                                   size: 18,
-                                   color: .white,
-                                   alignment: .left)
+                                 weight: .medium,
+                                 size: 18,
+                                 color: .white,
+                                 alignment: .left)
     }()
     
     private lazy var lastAssessedTitleLabel: UILabel = {
         return Factory.makeLabel(title: "Last Assessed",
-                                   weight: .light,
-                                   size: 16,
-                                   color: .white,
-                                   alignment: .left)
+                                 weight: .light,
+                                 size: 16,
+                                 color: .white,
+                                 alignment: .left)
     }()
     
     private lazy var lastAssessedDataLabel: UILabel = {
         return Factory.makeLabel(title: nil,
-                                   weight: .medium,
-                                   size: 18,
-                                   color: .white,
-                                   alignment: .left)
+                                 weight: .medium,
+                                 size: 18,
+                                 color: .white,
+                                 alignment: .left)
+    }()
+    
+    private lazy var numbersStack: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [
+            numbersTitleLabel, numbersDataLabel
+        ])
+        stackView.axis = .vertical
+        return stackView
+    }()
+    
+    private lazy var trendStack: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [
+            trendTitleLabel, trendDataLabel
+        ])
+        stackView.axis = .vertical
+        return stackView
+    }()
+    
+    private lazy var lastAssessedStack: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [
+            lastAssessedTitleLabel, lastAssessedDataLabel
+        ])
+        stackView.axis = .vertical
+        return stackView
+    }()
+    
+    private lazy var horizontalStack: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [
+        numbersStack, trendStack, lastAssessedStack
+        ])
+        stackView.distribution = .fillEqually
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
     }()
     
     //MARK: -- Methods
-    public func configureView(with species: Species) {
+    public func configureView(from species: Species) {
         numbersDataLabel.text = species.population.numbers
         trendDataLabel.text = species.population.trend.rawValue
         trendDataLabel.textColor = species.population.trend == .decreasing ? #colorLiteral(red: 1, green: 0.4507741928, blue: 0.5112823844, alpha: 1) : #colorLiteral(red: 0.7970843911, green: 1, blue: 0.5273691416, alpha: 1)
@@ -69,8 +102,8 @@ final class DetailSubheaderView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        addSubviews()
-        setConstraints()
+        addSubview(horizontalStack)
+        setHorizontalStackConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -78,76 +111,12 @@ final class DetailSubheaderView: UIView {
     }
 }
 
-//MARK: -- Add Subviews & Constraints
-
 fileprivate extension DetailSubheaderView {
     
-    func addSubviews() {
-        let UIElements = [numbersTitleLabel, numbersDataLabel, trendTitleLabel, trendDataLabel, lastAssessedTitleLabel, lastAssessedDataLabel]
-        UIElements.forEach { addSubview($0) }
-        UIElements.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
-    }
-    
-    func setConstraints() {
-        setNumbersTitleLabelConstraints()
-        setNumbersDataLabelConstraints()
-        setTrendTitleLabelConstraints()
-        setTrendDataLabelConstraints()
-        setLastAssessedTitleLabelConstraints()
-        setLastAssessedDataLabelConstraints()
-    }
-    
-    func setNumbersTitleLabelConstraints() {
-        NSLayoutConstraint.activate([
-            numbersTitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
-            numbersTitleLabel.topAnchor.constraint(equalTo: topAnchor),
-            numbersTitleLabel.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.5),
-            numbersTitleLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.25)
-        ])
-    }
-    
-    func setNumbersDataLabelConstraints() {
-        NSLayoutConstraint.activate([
-            numbersDataLabel.leadingAnchor.constraint(equalTo: numbersTitleLabel.leadingAnchor),
-            numbersDataLabel.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.5),
-            numbersDataLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.25),
-            numbersDataLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 10)
-        ])
-    }
-    
-    func setTrendTitleLabelConstraints() {
-        NSLayoutConstraint.activate([
-            trendTitleLabel.leadingAnchor.constraint(equalTo: numbersTitleLabel.trailingAnchor, constant: Constants.spacingConstant),
-            trendTitleLabel.topAnchor.constraint(equalTo: numbersTitleLabel.topAnchor),
-            trendTitleLabel.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.5),
-            trendTitleLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.25)
-        ])
-    }
-    
-    func setTrendDataLabelConstraints() {
-        NSLayoutConstraint.activate([
-            trendDataLabel.leadingAnchor.constraint(equalTo: trendTitleLabel.leadingAnchor),
-            trendDataLabel.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.5),
-            trendDataLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.25),
-            trendDataLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 10)
-        ])
-    }
-    
-    func setLastAssessedTitleLabelConstraints() {
-        NSLayoutConstraint.activate([
-            lastAssessedTitleLabel.leadingAnchor.constraint(equalTo: trendTitleLabel.trailingAnchor, constant: Constants.spacingConstant),
-            lastAssessedTitleLabel.topAnchor.constraint(equalTo: numbersTitleLabel.topAnchor),
-            lastAssessedTitleLabel.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.5),
-            lastAssessedTitleLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.25)
-        ])
-    }
-    
-    func setLastAssessedDataLabelConstraints() {
-        NSLayoutConstraint.activate([
-            lastAssessedDataLabel.leadingAnchor.constraint(equalTo: lastAssessedTitleLabel.leadingAnchor),
-            lastAssessedDataLabel.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.5),
-            lastAssessedDataLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.25),
-            lastAssessedDataLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 10)
-        ])
+    func setHorizontalStackConstraints() {
+        horizontalStack.snp.makeConstraints { (make) in
+            make.top.leading.trailing.equalToSuperview()
+            make.height.equalToSuperview().multipliedBy(0.75)
+        }
     }
 }

@@ -124,8 +124,8 @@ final class SpeciesDetailViewController: UIViewController {
     //MARK: -- Methods
     
     private func setViewElementsFromSpeciesData() {
-        headerNameView.configureView(with: currentSpecies)
-        subheaderInfoView.configureView(with: currentSpecies)
+        headerNameView.configureView(from: currentSpecies)
+        subheaderInfoView.configureView(from: currentSpecies)
     }
     
     private func setBackground() {
@@ -389,7 +389,7 @@ fileprivate extension SpeciesDetailViewController {
     func setSubheaderInfoViewConstraints() {
         NSLayoutConstraint.activate([
             subheaderInfoView.leadingAnchor.constraint(equalTo: headerNameView.leadingAnchor),
-            subheaderInfoView.trailingAnchor.constraint(equalTo: headerNameView.trailingAnchor),
+            subheaderInfoView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             subheaderInfoView.topAnchor.constraint(equalTo: headerNameView.bottomAnchor, constant: Constants.spacingConstant),
             subheaderInfoViewHeightConstraint
         ])
