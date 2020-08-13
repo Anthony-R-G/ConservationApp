@@ -9,6 +9,7 @@
 import UIKit
 
 final class TaxonomyView: UIView {
+    //MARK: -- UI Element Initialization
     private lazy var kingdomTitleLabel: UILabel = {
         return Factory.makeLabel(title: "Kingdom",
                                  weight: .regular,
@@ -131,6 +132,8 @@ final class TaxonomyView: UIView {
         return sv
     }()
     
+    //MARK: -- Methods
+    
     func configureTaxonomyData(from species: Species) {
         kingdomDataLabel.text = species.taxonomy.kingdom
         phylumDataLabel.text = species.taxonomy.phylum
@@ -152,6 +155,8 @@ final class TaxonomyView: UIView {
     }
 }
 
+//MARK: -- Add Subviews & Constraints
+
 fileprivate extension TaxonomyView {
     func addSubviews() {
         let UIElements = [leftStack, rightStack]
@@ -167,7 +172,6 @@ fileprivate extension TaxonomyView {
     func setLeftStackConstraints() {
         leftStack.snp.makeConstraints { (make) in
             make.leading.top.bottom.equalToSuperview()
-            
         }
     }
     

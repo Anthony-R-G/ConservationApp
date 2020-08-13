@@ -9,6 +9,7 @@
 import UIKit
 
 final class LearnMoreContentViewWindow: UIView {
+    //MARK: -- UI Element Initialization
     
     private lazy var titleLabel: UILabel = {
         let label = Factory.makeLabel(title: strategy.titleLabel(),
@@ -20,11 +21,11 @@ final class LearnMoreContentViewWindow: UIView {
     }()
     
     
-    
     private lazy var contentView: UIView = {
         return strategy.contentView()
     }()
     
+    //MARK: -- Properties
     var strategy: LearnMoreContentWindowStrategy!
     
     private func setBottomConstraint() {
@@ -33,13 +34,18 @@ final class LearnMoreContentViewWindow: UIView {
         }
     }
     
+    //MARK: -- Methods
+    private func configureAppearance() {
+        translatesAutoresizingMaskIntoConstraints = false
+        backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.2452108305)
+        layer.cornerRadius = 20
+    }
+    
     
     init(height: CGFloat, strategy: LearnMoreContentWindowStrategy) {
         super.init(frame: .zero)
         self.strategy = strategy
-        translatesAutoresizingMaskIntoConstraints = false
-        backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.2452108305)
-        layer.cornerRadius = 20
+        configureAppearance()
         addSubviews()
         setTitleLabelConstraints()
         setContentViewConstraints(height: height)
@@ -63,20 +69,18 @@ fileprivate extension LearnMoreContentViewWindow {
     
     
     func setTitleLabelConstraints() {
-        NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
-        ])
+        titleLabel.snp.makeConstraints { (make) in
+            make.leading.trailing.equalToSuperview().inset(20)
+            make.top.equalToSuperview().inset(20)
+        }
     }
     
     func setContentViewConstraints(height: CGFloat) {
-        NSLayoutConstraint.activate([
-            contentView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
-            contentView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            contentView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            contentView.heightAnchor.constraint(equalToConstant: height)
-        ])
+        contentView.snp.makeConstraints { (make) in
+            make.top.equalTo(titleLabel.snp.bottom).offset(10)
+            make.leading.trailing.equalToSuperview().inset(20)
+            make.height.equalTo(height)
+        }
     }
 }
 

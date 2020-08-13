@@ -9,6 +9,7 @@
 import UIKit
 
 final class LearnMoreTextWindow: UIView {
+    //MARK: UI Element Initialization
     
     private lazy var titleLabel: UILabel = {
         let label = Factory.makeLabel(title: strategy.titleLabel(),
@@ -30,20 +31,28 @@ final class LearnMoreTextWindow: UIView {
         return label
     }()
     
+    //MARK: -- Properties
+    
     var strategy: LearnMoreTextWindowStrategy!
+    
+    
+    //MARK: -- Methods
     
     private func setBottomAnchor() {
         if let lastSubview = subviews.last {
             bottomAnchor.constraint(equalTo: lastSubview.bottomAnchor, constant: 20).isActive = true
         }
     }
+    private func configureAppearance() {
+        translatesAutoresizingMaskIntoConstraints = false
+        backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.2452108305)
+        layer.cornerRadius = 20
+    }
     
     init(strategy: LearnMoreTextWindowStrategy) {
         super.init(frame: .zero)
         self.strategy = strategy
-        translatesAutoresizingMaskIntoConstraints = false
-        backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.2452108305)
-        layer.cornerRadius = 20
+        configureAppearance()
         addSubviews()
         setConstraints()
         setBottomAnchor()
@@ -54,6 +63,8 @@ final class LearnMoreTextWindow: UIView {
     }
 }
 
+//MARK: -- Add Subviews & Constraints
+
 fileprivate extension LearnMoreTextWindow {
     func addSubviews() {
         let UIElements = [titleLabel, bodyLabel]
@@ -63,23 +74,20 @@ fileprivate extension LearnMoreTextWindow {
     
     func setConstraints() {
         setTitleLabelConstraints()
-        setLabelConstraints()
-        
+        setBodyLabelConstraints()
     }
     
     func setTitleLabelConstraints() {
-        NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
-        ])
+        titleLabel.snp.makeConstraints { (make) in
+            make.leading.trailing.equalToSuperview().inset(20)
+            make.top.equalToSuperview().inset(20)
+        }
     }
     
-    func setLabelConstraints() {
-        NSLayoutConstraint.activate([
-            bodyLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
-            bodyLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            bodyLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
-        ])
+    func setBodyLabelConstraints() {
+        bodyLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(titleLabel.snp.bottom).offset(10)
+            make.leading.trailing.equalToSuperview().inset(20)
+        }
     }
 }
