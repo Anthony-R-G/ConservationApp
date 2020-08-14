@@ -199,7 +199,6 @@ final class CloneSpeciesDetailViewController: UIViewController {
             return
         }
         animator.fractionComplete = abs(offset)/1000
-        print(abs(offset)/100, animator.fractionComplete)
     }
     
     private func setBackground() {
