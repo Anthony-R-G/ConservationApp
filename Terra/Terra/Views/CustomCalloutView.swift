@@ -237,7 +237,7 @@ fileprivate extension CustomCalloutView {
     
     func setTitleLabelConstraints() {
         NSLayoutConstraint.activate([
-            titleLabel.leadingAnchor.constraint(equalTo: mainBody.leadingAnchor, constant: Constants.universalLeadingConstant),
+            titleLabel.leadingAnchor.constraint(equalTo: mainBody.leadingAnchor, constant: Constants.spacingConstant),
             titleLabel.topAnchor.constraint(equalTo: speciesImageView.bottomAnchor, constant: 5),
             titleLabel.widthAnchor.constraint(equalTo: mainBody.widthAnchor),
             titleLabel.heightAnchor.constraint(equalToConstant: 30)
@@ -246,7 +246,7 @@ fileprivate extension CustomCalloutView {
     
     func setSubtitleLabelConstraints() {
         NSLayoutConstraint.activate([
-            subtitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.universalLeadingConstant),
+            subtitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.spacingConstant),
             subtitleLabel.widthAnchor.constraint(equalTo: widthAnchor),
             subtitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5),
             subtitleLabel.heightAnchor.constraint(equalToConstant: 20)
@@ -255,7 +255,7 @@ fileprivate extension CustomCalloutView {
     
     func setAreaLabelConstraints() {
         NSLayoutConstraint.activate([
-            areaLabel.trailingAnchor.constraint(equalTo: mainBody.trailingAnchor, constant: -Constants.universalLeadingConstant),
+            areaLabel.trailingAnchor.constraint(equalTo: mainBody.trailingAnchor, constant: -Constants.spacingConstant),
             areaLabel.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
             areaLabel.widthAnchor.constraint(equalToConstant: 70),
             areaLabel.heightAnchor.constraint(equalToConstant: 20)

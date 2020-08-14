@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class HeaderNameView: UIView {
+final class DetailHeaderNameView: UIView {
     //MARK: -- UI Element Initialization
     
     private lazy var conservationStatusLabel: UILabel = {
@@ -17,7 +17,6 @@ final class HeaderNameView: UIView {
                                         size: 17,
                                         color: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1),
                                         alignment: .center)
-        label.backgroundColor = .clear
         label.layer.borderColor = UIColor.white.cgColor
         label.layer.borderWidth = Constants.borderWidth
         label.layer.cornerRadius = 10
@@ -46,7 +45,7 @@ final class HeaderNameView: UIView {
     }()
     
     //MARK: -- Methods
-    public func configureView(with species: Species) {
+    public func configureView(from species: Species) {
         conservationStatusLabel.text = species.population.conservationStatus.rawValue
         speciesCommonNameLabel.text = species.commonName
         speciesScientificNameLabel.text = "— \(species.taxonomy.scientificName)"
@@ -56,7 +55,6 @@ final class HeaderNameView: UIView {
         super.init(frame: frame)
         addSubviews()
         setConstraints()
-        backgroundColor = .clear
     }
     
     required init?(coder: NSCoder) {
@@ -66,7 +64,7 @@ final class HeaderNameView: UIView {
 
 //MARK: -- Add Subviews & Constraints
 
-fileprivate extension HeaderNameView {
+fileprivate extension DetailHeaderNameView {
     
     func addSubviews() {
         let UIElements = [conservationStatusLabel, speciesCommonNameLabel, speciesScientificNameLabel]
@@ -81,27 +79,27 @@ fileprivate extension HeaderNameView {
     }
     
     func setConservationStatusLabelConstraints() {
-        NSLayoutConstraint.activate([
-            conservationStatusLabel.leadingAnchor.constraint(equalTo: speciesCommonNameLabel.leadingAnchor, constant: 5),
-            conservationStatusLabel.bottomAnchor.constraint(equalTo: speciesCommonNameLabel.topAnchor, constant: -10),
-            conservationStatusLabel.heightAnchor.constraint(equalToConstant: 25),
-            conservationStatusLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.3),
-        ])
+        conservationStatusLabel.snp.makeConstraints { (make) in
+            make.leading.equalTo(speciesCommonNameLabel).inset(5)
+            make.bottom.equalTo(speciesCommonNameLabel.snp.top).inset(-10)
+            make.height.equalTo(25)
+            make.width.equalToSuperview().multipliedBy(0.3)
+        }
     }
     
     func setSpeciesCommonNameLabelConstraints(){
-        NSLayoutConstraint.activate([
-            speciesCommonNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
-            speciesCommonNameLabel.bottomAnchor.constraint(equalTo: speciesScientificNameLabel.topAnchor),
-            speciesCommonNameLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.76),
-            speciesCommonNameLabel.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.5)
-        ])
+        speciesCommonNameLabel.snp.makeConstraints { (make) in
+            make.leading.equalToSuperview()
+            make.bottom.equalTo(speciesScientificNameLabel.snp.top)
+            make.width.equalToSuperview().multipliedBy(0.76)
+            make.height.equalToSuperview().multipliedBy(0.5)
+        }
     }
     
     func setSpeciesScientificNameLabelConstraints() {
-        NSLayoutConstraint.activate([
-            speciesScientificNameLabel.leadingAnchor.constraint(equalTo: speciesCommonNameLabel.leadingAnchor),
-            speciesScientificNameLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
-        ])
+        speciesScientificNameLabel.snp.makeConstraints { (make) in
+            make.leading.equalTo(speciesCommonNameLabel.snp.leading)
+            make.bottom.equalToSuperview()
+        }
     } 
 }
