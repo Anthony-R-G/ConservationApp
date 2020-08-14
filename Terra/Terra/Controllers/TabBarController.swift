@@ -46,6 +46,7 @@ final class TabBarViewController: UIViewController {
         tabBarVC.tabBarBackgroundColor = .black
         
         view.addSubview(tabBarVC.view)
+        
     }
 }
 
