@@ -39,6 +39,16 @@ class Factory {
         return label
     }
     
+    static func makeLearnMoreWindowLabel(text: String) -> UILabel {
+        let label = Factory.makeLabel(title: text.replacingOccurrences(of: "\\n", with: "\n"),
+                                      weight: .regular,
+                                      size: 16,
+                                      color: .white,
+                                      alignment: .natural)
+        label.numberOfLines = 0
+        return label
+    }
+    
     static func makeToolBarButton(title: String) -> UIButton {
         let button = UIButton(type: .custom)
         button.setTitle(title, for: .normal)
@@ -64,11 +74,7 @@ class Factory {
         return view
     }
     
-    static func makeTextBasedLearnMoreWindow(strategy: LearnMoreTextWindowStrategy) -> LearnMoreTextWindow {
-        return LearnMoreTextWindow(strategy: strategy)
-    }
-    
-    static func makeContentBasedLearnMoreWindow(height: CGFloat, strategy: LearnMoreContentWindowStrategy) -> LearnMoreContentViewWindow {
+    static func makeLearnMoreWindow(strategy: LearnMoreContentWindowStrategy) -> LearnMoreContentViewWindow {
         return LearnMoreContentViewWindow(strategy: strategy)
     }
 }

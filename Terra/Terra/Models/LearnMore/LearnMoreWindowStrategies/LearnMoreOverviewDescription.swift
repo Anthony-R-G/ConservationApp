@@ -6,16 +6,17 @@
 //  Copyright © 2020 Antnee. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-struct LearnMoreOverviewDescription: LearnMoreTextWindowStrategy {
+struct LearnMoreOverviewDescription: LearnMoreContentWindowStrategy {
+    
     var species: Species
     
     func titleLabel() -> String {
         "DESCRIPTION"
     }
     
-    func bodyText() -> String {
-        return species.overview
+    func contentView() -> UIView {
+        return Factory.makeLearnMoreWindowLabel(text: species.overview)
     }
 }
