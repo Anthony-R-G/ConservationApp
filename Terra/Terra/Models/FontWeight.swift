@@ -9,9 +9,11 @@
 import Foundation
 
 enum FontWeight: String {
+    case black = "Roboto-Black"
     case bold = "Roboto-Bold"
     case medium = "Roboto-Medium"
     case regular = "Roboto-Regular"
+    case italic = "Roboto-Italic"
     case light = "Roboto-Light"
     case lightItalic = "Roboto-LightItalic"
 }

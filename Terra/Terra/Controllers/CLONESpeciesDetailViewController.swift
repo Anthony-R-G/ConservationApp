@@ -255,7 +255,7 @@ final class CloneSpeciesDetailViewController: UIViewController {
     
     private func updateHeaderViewHeight(scrollOffset: CGFloat) {
         let headerNameViewOffset = 275 - (scrollOffset)
-        let newHeaderNameViewHeight = max(100, headerNameViewOffset)
+        let newHeaderNameViewHeight = max(110, headerNameViewOffset)
         headerNameViewHeightConstraint.constant = newHeaderNameViewHeight
     }
     
@@ -278,7 +278,6 @@ final class CloneSpeciesDetailViewController: UIViewController {
             headerPinnedToTop = false
         }
     }
-    
     
     override var prefersStatusBarHidden: Bool {
         return true

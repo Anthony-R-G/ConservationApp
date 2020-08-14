@@ -27,7 +27,7 @@ struct LearnMoreVCOverviewStrategy: LearnMoreVCStrategy {
         let stackView = UIStackView(arrangedSubviews: [
             Factory.makeTextBasedLearnMoreWindow(strategy: LearnMoreOverviewDescription(species: species)),
             
-            Factory.makeContentBasedLearnMoreWindow(height: 200, strategy: LearnMoreTaxonomyStrategy(species: species))
+            Factory.makeContentBasedLearnMoreWindow(height: 280, strategy: LearnMoreTaxonomyStrategy(species: species))
         ])
         stackView.axis = .vertical
         stackView.spacing = 20

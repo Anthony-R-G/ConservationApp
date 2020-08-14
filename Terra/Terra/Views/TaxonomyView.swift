@@ -106,6 +106,13 @@ final class TaxonomyView: UIView {
                                  alignment: .left)
     }()
     
+    private lazy var scientificNameDataLabel: UILabel = {
+        return Factory.makeLabel(title: nil,
+                                 weight: .black,
+                                 size: 18,
+                                 color: .white, alignment: .center)
+    }()
+    
     private lazy var leftStack: UIStackView = {
         let sv = UIStackView(arrangedSubviews: [
             kingdomTitleLabel, kingdomDataLabel,
@@ -132,6 +139,21 @@ final class TaxonomyView: UIView {
         return sv
     }()
     
+    private lazy var horizontalStack: UIStackView = {
+       let sv = UIStackView(arrangedSubviews: [
+       leftStack, rightStack
+       ])
+        sv.spacing = 10
+        sv.distribution = .fillEqually
+        return sv
+    }()
+    
+    private lazy var separatorLine: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        return view
+    }()
+    
     //MARK: -- Methods
     
     func configureTaxonomyData(from species: Species) {
@@ -141,6 +163,7 @@ final class TaxonomyView: UIView {
         orderDataLabel.text = species.taxonomy.order
         familyDataLabel.text = species.taxonomy.family
         genusDataLabel.text = species.taxonomy.genus
+        scientificNameDataLabel.text = species.taxonomy.scientificName
     }
     
     override init(frame: CGRect) {
@@ -159,25 +182,37 @@ final class TaxonomyView: UIView {
 
 fileprivate extension TaxonomyView {
     func addSubviews() {
-        let UIElements = [leftStack, rightStack]
+        let UIElements = [horizontalStack, separatorLine, scientificNameDataLabel]
         UIElements.forEach { addSubview($0) }
         UIElements.forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
     }
     
     func setConstraints() {
-        setLeftStackConstraints()
-        setRightStackConstraints()
+        setHorizontalStackConstraints()
+        setSeparatorLineConstraints()
+        setScientificNameDataLabel()
     }
     
-    func setLeftStackConstraints() {
-        leftStack.snp.makeConstraints { (make) in
-            make.leading.top.bottom.equalToSuperview()
+    func setHorizontalStackConstraints() {
+        horizontalStack.snp.makeConstraints { (make) in
+            make.leading.top.trailing.equalToSuperview()
         }
     }
     
-    func setRightStackConstraints() {
-        rightStack.snp.makeConstraints { (make) in
-            make.trailing.top.bottom.equalToSuperview()
+    func setSeparatorLineConstraints() {
+        separatorLine.snp.makeConstraints { (make) in
+            make.leading.trailing.equalToSuperview()
+            make.top.equalTo(horizontalStack.snp.bottom).offset(15)
+            make.height.equalTo(1)
+        }
+    }
+    
+    func setScientificNameDataLabel() {
+        scientificNameDataLabel.snp.makeConstraints { (make) in
+            make.centerX.equalToSuperview()
+            make.width.equalToSuperview()
+            make.height.equalTo(40)
+            make.top.equalTo(separatorLine.snp.bottom).offset(15)
         }
     }
 }

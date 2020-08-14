@@ -12,7 +12,7 @@ struct LearnMoreTaxonomyStrategy: LearnMoreContentWindowStrategy {
     var species: Species
     
     func titleLabel() -> String {
-        "TAXONOMY"
+        "CLASSIFICATION"
     }
     
     func contentView() -> UIView {
