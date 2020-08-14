@@ -21,7 +21,7 @@ final class LearnMoreTextWindow: UIView {
     }()
     
     private lazy var bodyLabel: UILabel = {
-        let label = Factory.makeLabel(title: strategy.bodyText(),
+        let label = Factory.makeLabel(title: strategy.bodyText().replacingOccurrences(of: "\\n", with: "\n"),
                                       weight: .regular,
                                       size: 16,
                                       color: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.8983304795),

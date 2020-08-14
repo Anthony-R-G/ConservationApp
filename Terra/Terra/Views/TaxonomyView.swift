@@ -191,6 +191,7 @@ final class TaxonomyView: UIView {
         super.init(frame: frame)
         addSubviews()
         setConstraints()
+        heightAnchor.constraint(equalToConstant: 280).isActive = true
         translatesAutoresizingMaskIntoConstraints = false
     }
     

@@ -16,6 +16,6 @@ struct LearnMoreOverviewDescription: LearnMoreTextWindowStrategy {
     }
     
     func bodyText() -> String {
-        species.overview.replacingOccurrences(of: "\\n", with: "\n")
+        return species.overview
     }
 }

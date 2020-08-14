@@ -69,7 +69,7 @@ class Factory {
     }
     
     static func makeContentBasedLearnMoreWindow(height: CGFloat, strategy: LearnMoreContentWindowStrategy) -> LearnMoreContentViewWindow {
-        return LearnMoreContentViewWindow(height: height, strategy: strategy)
+        return LearnMoreContentViewWindow(strategy: strategy)
     }
 }
 

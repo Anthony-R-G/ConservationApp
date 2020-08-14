@@ -28,6 +28,7 @@ final class LearnMoreContentViewWindow: UIView {
     //MARK: -- Properties
     var strategy: LearnMoreContentWindowStrategy!
     
+    
     private func setBottomConstraint() {
         if let lastSubview = subviews.last {
             bottomAnchor.constraint(equalTo: lastSubview.bottomAnchor, constant: 20).isActive = true
@@ -42,13 +43,13 @@ final class LearnMoreContentViewWindow: UIView {
     }
     
     
-    init(height: CGFloat, strategy: LearnMoreContentWindowStrategy) {
+    init(strategy: LearnMoreContentWindowStrategy) {
         super.init(frame: .zero)
         self.strategy = strategy
         configureAppearance()
         addSubviews()
         setTitleLabelConstraints()
-        setContentViewConstraints(height: height)
+        setContentViewConstraints()
         setBottomConstraint()
     }
     
@@ -75,11 +76,10 @@ fileprivate extension LearnMoreContentViewWindow {
         }
     }
     
-    func setContentViewConstraints(height: CGFloat) {
+    func setContentViewConstraints() {
         contentView.snp.makeConstraints { (make) in
             make.top.equalTo(titleLabel.snp.bottom).offset(10)
             make.leading.trailing.equalToSuperview().inset(20)
-            make.height.equalTo(height)
         }
     }
 }

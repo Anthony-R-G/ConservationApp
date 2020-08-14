@@ -10,7 +10,6 @@ import UIKit
 
 protocol LearnMoreContentWindowStrategy {
     var species: Species { get set }
-    
     func titleLabel() -> String
     func contentView() -> UIView
 }
