@@ -171,6 +171,7 @@ final class LearnMoreViewController: UIViewController {
             return
         }
         animator.fractionComplete = abs(offset) / 100
+        print(animator.fractionComplete)
     }
     
     override func viewDidLayoutSubviews() {

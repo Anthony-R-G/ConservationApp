@@ -469,11 +469,11 @@
 			children = (
 				97FAD4E624D75B20007FEFD8 /* TabBarController.swift */,
 				97BF745223DF42F90058F2D7 /* SpeciesListViewController.swift */,
-				970B172424C2699E007F32E0 /* SpeciesDetailViewController.swift */,
+				97A6DE8124E631970067D784 /* CLONESpeciesDetailViewController.swift */,
 				97B406A624E1FDED00A79E98 /* LearnMoreViewController.swift */,
 				97FAD4E824D75DBD007FEFD8 /* NewsViewController.swift */,
 				97997F2B24DCE18B00981087 /* MGLMapViewController.swift */,
-				97A6DE8124E631970067D784 /* CLONESpeciesDetailViewController.swift */,
+				970B172424C2699E007F32E0 /* SpeciesDetailViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";

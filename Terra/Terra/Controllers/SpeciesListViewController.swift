@@ -98,11 +98,13 @@ final class SpeciesListViewController: UIViewController {
     }()
     
     private lazy var searchBarLeadingAnchorConstraint: NSLayoutConstraint = {
-        return searchBar.leadingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.spacingConstant)
+        return searchBar.leadingAnchor.constraint(equalTo: view.trailingAnchor,
+                                                  constant: -Constants.spacingConstant)
     }()
     
     private lazy var terraTitleLabelLeadingAnchorConstraint: NSLayoutConstraint = {
-        return terraTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.spacingConstant)
+        return terraTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor,
+                                                        constant: Constants.spacingConstant)
     }()
     
     //MARK: -- Properties
@@ -212,7 +214,7 @@ extension SpeciesListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let specificAnimal = viewModel.specificSpecies(at: indexPath.row)
         
-        let detailVC = SpeciesDetailViewController()
+        let detailVC = CloneSpeciesDetailViewController()
         detailVC.currentSpecies = specificAnimal
         
         presentModally(detailVC)
