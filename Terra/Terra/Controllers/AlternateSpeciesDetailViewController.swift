@@ -321,6 +321,7 @@ final class AlternateSpeciesDetailViewController: UIViewController {
         setupBackgroundVisualEffectBlur()
         setViewElementsFromSpeciesData()
         setBackground()
+//        Utilities.addParallaxToView(view: backgroundImageView)
     }
 }
 

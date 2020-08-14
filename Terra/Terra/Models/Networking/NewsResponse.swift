@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct NewsResponse: Codable {
+struct NewsResponse: Decodable {
     let articles: [NewsArticle]
     let totalResults: Int
 }
