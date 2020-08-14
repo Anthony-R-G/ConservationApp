@@ -9,6 +9,7 @@
 import UIKit
 
 struct LearnMoreTaxonomyStrategy: LearnMoreContentWindowStrategy {
+
     var species: Species
     
     func titleLabel() -> String {

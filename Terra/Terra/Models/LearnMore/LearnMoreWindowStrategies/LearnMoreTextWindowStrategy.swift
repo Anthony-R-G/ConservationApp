@@ -10,7 +10,6 @@ import Foundation
 
 protocol LearnMoreTextWindowStrategy {
     var species: Species { get set }
-    
     func titleLabel() -> String
     func bodyText() -> String
 }

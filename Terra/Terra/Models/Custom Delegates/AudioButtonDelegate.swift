@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol AudioButtonDelegate: AnyObject {
-    func audioButtonPressed()
+protocol LearnMoreWindowButtonDelegate: AnyObject {
+    func buttonPressed()
 }

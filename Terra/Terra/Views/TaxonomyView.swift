@@ -171,10 +171,10 @@ final class TaxonomyView: UIView {
     
     //MARK: -- Methods
     
-    weak var delegate: AudioButtonDelegate?
+    weak var delegate: LearnMoreWindowButtonDelegate?
     
     @objc private func audioButtonPressed() {
-        delegate?.audioButtonPressed()
+        delegate?.buttonPressed()
     }
     
     func configureTaxonomyData(from species: Species) {

@@ -72,11 +72,6 @@ final class LearnMoreViewController: UIViewController {
         return gv
     }()
     
-    private lazy var viewContainer: UIView = {
-        let tc = UIView()
-        tc.backgroundColor = .clear
-        return tc
-    }()
     
     private lazy var titleLabel: UILabel = {
         return Factory.makeLabel(title: strategy.title(),
@@ -103,7 +98,7 @@ final class LearnMoreViewController: UIViewController {
         return stackView
     }()
     
-    private lazy var stackContainerView: UIStackView = {
+    private lazy var containerStackView: UIStackView = {
         return strategy.arrangedSubviews()
     }()
     
@@ -208,13 +203,13 @@ fileprivate extension LearnMoreViewController {
         view.addSubview(backgroundBlurEffectView)
         view.addSubview(backButton)
         
-        let UIElements = [imageContainer, headerImageView, viewContainer]
+        let UIElements = [imageContainer, headerImageView, containerStackView]
         UIElements.forEach { scrollView.addSubview($0) }
         
         let headerViewUIElements = [headerStatusBarGradient, headerVisualEffectBlur, headerImageBottomGradient, headerStackView]
         headerViewUIElements.forEach { headerImageView.addSubview($0) }
         
-        viewContainer.addSubview(stackContainerView)
+
     }
     
     func setConstraints() {
@@ -229,8 +224,7 @@ fileprivate extension LearnMoreViewController {
         setHeaderBottomGradientConstraints()
         setHeaderStackViewConstraints()
         
-        setViewContainerConstraints()
-        setContainerStackConstraints()
+        setContainerStackView()
     }
     
     func setBackgroundImageConstraints() {
@@ -249,17 +243,13 @@ fileprivate extension LearnMoreViewController {
     }
     
     func setScrollViewConstraints() {
-        scrollView.snp.makeConstraints {
-            make in
-            
+        scrollView.snp.makeConstraints { (make) in
             make.edges.equalTo(view)
         }
     }
     
     func setImageContainerConstraints() {
-        imageContainer.snp.makeConstraints {
-            make in
-            
+        imageContainer.snp.makeConstraints { (make) in
             make.top.equalTo(scrollView)
             make.left.right.equalTo(view)
             make.height.equalTo(imageContainer.snp.width).multipliedBy(0.7)
@@ -267,9 +257,7 @@ fileprivate extension LearnMoreViewController {
     }
     
     func setHeaderImageViewConstraints() {
-        headerImageView.snp.makeConstraints {
-            make in
-            
+        headerImageView.snp.makeConstraints { (make) in
             make.left.right.equalTo(imageContainer)
             make.top.equalTo(view).priority(.high)
             make.height.greaterThanOrEqualTo(imageContainer.snp.height).priority(.required)
@@ -297,26 +285,16 @@ fileprivate extension LearnMoreViewController {
     }
     
     func setHeaderBottomGradientConstraints() {
-        headerImageBottomGradient.snp.makeConstraints {(make) in
+        headerImageBottomGradient.snp.makeConstraints { (make) in
             make.leading.top.bottom.trailing.equalTo(headerImageView)
         }
     }
     
-    
-    func setViewContainerConstraints() {
-        viewContainer.snp.makeConstraints {
-            make in
-            
-            make.top.equalTo(imageContainer.snp.bottom)
-            make.left.right.equalTo(view)
+    func setContainerStackView() {
+        containerStackView.snp.makeConstraints { (make) in
+            make.top.equalTo(imageContainer.snp.bottom).offset(20)
+            make.leading.trailing.equalTo(view).inset(20)
             make.bottom.equalTo(scrollView)
-        }
-    }
-    
-    
-    func setContainerStackConstraints() {
-        stackContainerView.snp.makeConstraints { (make) in
-            make.edges.equalTo(viewContainer).inset(14)
         }
     }
 }
@@ -327,7 +305,7 @@ fileprivate extension LearnMoreViewController {
 extension LearnMoreViewController {
     
     private var shouldHideStatusBar: Bool {
-        let frame = viewContainer.convert(viewContainer.bounds, to: nil)
+        let frame = containerStackView.convert(containerStackView.bounds, to: nil)
         return frame.minY < view.safeAreaInsets.top
     }
     
@@ -353,5 +331,11 @@ extension LearnMoreViewController {
             
             previousStatusBarHidden = shouldHideStatusBar
         }
+    }
+}
+
+extension LearnMoreViewController: LearnMoreWindowButtonDelegate {
+    func buttonPressed() {
+        print("Finally i'm pressed")
     }
 }
