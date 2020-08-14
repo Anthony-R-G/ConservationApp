@@ -172,16 +172,21 @@ final class TaxonomyView: UIView {
         return btn
     }()
     
+    let speechSynthesizer = AVSpeechSynthesizer()
+    
+    
     //MARK: -- Methods
     
     private var species: Species!
     
     @objc private func audioButtonPressed() {
-        let speechSynthesizer = AVSpeechSynthesizer()
         let speechUtterance: AVSpeechUtterance = AVSpeechUtterance(string: species.taxonomy.scientificName)
         speechUtterance.rate = AVSpeechUtteranceMaximumSpeechRate / 2.0
         speechUtterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+        audioButton.isUserInteractionEnabled = false
+        audioButton.tintColor = .darkGray
         speechSynthesizer.speak(speechUtterance)
+        
     }
     
     required init(species: Species) {
@@ -189,9 +194,9 @@ final class TaxonomyView: UIView {
         super.init(frame: .zero)
         addSubviews()
         setConstraints()
+        speechSynthesizer.delegate = self
         heightAnchor.constraint(equalToConstant: 280).isActive = true
         translatesAutoresizingMaskIntoConstraints = false
-        
     }
     
     required init?(coder: NSCoder) {
@@ -251,5 +256,13 @@ fileprivate extension TaxonomyView {
             make.height.width.equalTo(30)
             make.centerY.equalTo(scientificNameDataLabel)
         }
+    }
+}
+
+extension TaxonomyView: AVSpeechSynthesizerDelegate {
+    
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
+        audioButton.isUserInteractionEnabled = true
+        audioButton.tintColor = .white
     }
 }

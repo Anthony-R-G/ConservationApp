@@ -86,6 +86,7 @@
 		9794EF7C24E66EA700B72246 /* Roboto-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9794EF7A24E66EA600B72246 /* Roboto-Italic.ttf */; };
 		9794EF7D24E66EA700B72246 /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9794EF7B24E66EA700B72246 /* Roboto-Black.ttf */; };
 		9794EF7F24E6735D00B72246 /* AudioButtonDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9794EF7E24E6735D00B72246 /* AudioButtonDelegate.swift */; };
+		9794EF8524E68FD700B72246 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9794EF8424E68FD700B72246 /* Utilities.swift */; };
 		97997F2C24DCE18B00981087 /* MGLMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97997F2B24DCE18B00981087 /* MGLMapViewController.swift */; };
 		979C191423DE43E900651B2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979C191323DE43E900651B2B /* AppDelegate.swift */; };
 		979C191623DE43E900651B2B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979C191523DE43E900651B2B /* SceneDelegate.swift */; };
@@ -195,6 +196,7 @@
 		9794EF7A24E66EA600B72246 /* Roboto-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Italic.ttf"; sourceTree = "<group>"; };
 		9794EF7B24E66EA700B72246 /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Black.ttf"; sourceTree = "<group>"; };
 		9794EF7E24E6735D00B72246 /* AudioButtonDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioButtonDelegate.swift; sourceTree = "<group>"; };
+		9794EF8424E68FD700B72246 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		97997F2B24DCE18B00981087 /* MGLMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MGLMapViewController.swift; sourceTree = "<group>"; };
 		979C191023DE43E900651B2B /* Terra.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Terra.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		979C191323DE43E900651B2B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -393,6 +395,7 @@
 				97591FE224CCDC48002EAC96 /* FontWeight.swift */,
 				97591FDE24CCD14A002EAC96 /* Constants.swift */,
 				97FEAEAB24BE5FCC005BAEFE /* Factory.swift */,
+				9794EF8424E68FD700B72246 /* Utilities.swift */,
 				9764D12A24D7DD820050AF37 /* Secrets.swift */,
 				9764D12824D7DC250050AF37 /* NewsArticle.swift */,
 				97A24D2224E45D7300958AB9 /* ToolBarStrategies */,
@@ -747,6 +750,7 @@
 				97B68CD424BBB0AC005B8AB8 /* DetailHeaderNameView.swift in Sources */,
 				9764D12B24D7DD820050AF37 /* Secrets.swift in Sources */,
 				97591FDC24CC4524002EAC96 /* ToolBarSelectedButton.swift in Sources */,
+				9794EF8524E68FD700B72246 /* Utilities.swift in Sources */,
 				97EA494124E43FC500C0FE64 /* LearnMoreVCStrategy.swift in Sources */,
 				97D9E24B24C6470700524000 /* Diet.swift in Sources */,
 				97591FD424CB8D46002EAC96 /* RoundedInfoView.swift in Sources */,
