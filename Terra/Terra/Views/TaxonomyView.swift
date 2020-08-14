@@ -182,11 +182,9 @@ final class TaxonomyView: UIView {
     @objc private func audioButtonPressed() {
         let speechUtterance: AVSpeechUtterance = AVSpeechUtterance(string: species.taxonomy.scientificName)
         speechUtterance.rate = AVSpeechUtteranceMaximumSpeechRate / 2.0
-        speechUtterance.voice = AVSpeechSynthesisVoice(language: "en-US")
         audioButton.isUserInteractionEnabled = false
         audioButton.tintColor = .darkGray
         speechSynthesizer.speak(speechUtterance)
-        
     }
     
     required init(species: Species) {
@@ -195,7 +193,7 @@ final class TaxonomyView: UIView {
         addSubviews()
         setConstraints()
         speechSynthesizer.delegate = self
-        heightAnchor.constraint(equalToConstant: 280).isActive = true
+        heightAnchor.constraint(equalToConstant: 260).isActive = true
         translatesAutoresizingMaskIntoConstraints = false
     }
     
@@ -223,7 +221,7 @@ fileprivate extension TaxonomyView {
     
     func setHorizontalStackConstraints() {
         horizontalStack.snp.makeConstraints { (make) in
-            make.leading.top.trailing.equalToSuperview()
+            make.leading.trailing.equalToSuperview()
         }
     }
     
