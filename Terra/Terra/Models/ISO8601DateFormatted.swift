@@ -20,6 +20,10 @@ struct ISO8601DateFormatted: Hashable {
             return dateFormatter.string(from: timeAsConvertedFullDate)
         }
     }
+    
+    init(wrappedValue: String) {
+        self.value = wrappedValue
+    }
 }
 
 extension ISO8601DateFormatted: Decodable {
