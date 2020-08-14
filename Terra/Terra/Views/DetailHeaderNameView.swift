@@ -55,7 +55,6 @@ final class DetailHeaderNameView: UIView {
         super.init(frame: frame)
         addSubviews()
         setConstraints()
-        backgroundColor = .clear
     }
     
     required init?(coder: NSCoder) {

@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class toolBar: UIView {
+final class CustomToolBar: UIView {
     //MARK: -- Lazy UI Element Initialization
     
     private lazy var buttonOne: UIButton = {
@@ -73,7 +73,10 @@ final class toolBar: UIView {
         let newHighlightLeadingConstant = min(UIScreen.main.bounds.width - 100, max(highlightOffset, 10))
         highlightedIndicatorLeadingAnchorConstraint.constant = newHighlightLeadingConstant
         
-        UIView.animate(withDuration: 0.1, delay: 0, options: .curveEaseInOut, animations: {
+        UIView.animate(withDuration: 0.1,
+                       delay: 0,
+                       options: .curveEaseInOut,
+                       animations: { [weak self] in guard let self = self else { return }
             self.layoutIfNeeded()
         }, completion: nil)
     }
@@ -120,7 +123,7 @@ final class toolBar: UIView {
 
 //MARK: -- Add Subviews & Constraints
 
-fileprivate extension toolBar {
+fileprivate extension CustomToolBar {
     
     func addSubviews() {
         let UIElements = [buttonStackView, highlightedIndicator]

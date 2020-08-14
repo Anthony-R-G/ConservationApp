@@ -25,8 +25,8 @@ final class SpeciesListViewController: UIViewController {
         return sb
     }()
     
-    private lazy var topToolBar: toolBar = {
-        let tb = toolBar(frame: .zero, strategy: ToolBarListVCStrategy())
+    private lazy var topToolBar: CustomToolBar = {
+        let tb = CustomToolBar(frame: .zero, strategy: ToolBarListVCStrategy())
         return tb
     }()
     

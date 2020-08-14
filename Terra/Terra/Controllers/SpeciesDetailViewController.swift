@@ -40,6 +40,7 @@ final class SpeciesDetailViewController: UIViewController {
         gv.translatesAutoresizingMaskIntoConstraints = false
         gv.startColor = #colorLiteral(red: 0.06859237701, green: 0.08213501424, blue: 0.2409383953, alpha: 0.0)
         gv.endColor = #colorLiteral(red: 0.06859237701, green: 0.08213501424, blue: 0.2409383953, alpha: 0.8456228596)
+      
         view.insertSubview(gv, at: 1)
         return gv
     }()
@@ -81,8 +82,8 @@ final class SpeciesDetailViewController: UIViewController {
                             endPoint: CGPoint(x: 1, y: 1))
     }()
     
-    private lazy var bottomToolBar: toolBar = {
-        return toolBar(frame: .zero, strategy: ToolBarDetailVCStrategy())
+    private lazy var bottomToolBar: CustomToolBar = {
+        return CustomToolBar(frame: .zero, strategy: ToolBarDetailVCStrategy())
     }()
     
     private lazy var speciesOverviewView: RoundedInfoView = {

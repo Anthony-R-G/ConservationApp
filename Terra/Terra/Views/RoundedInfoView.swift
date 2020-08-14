@@ -168,7 +168,7 @@ fileprivate extension RoundedInfoView {
     
     func setOverviewTitleLabelConstraints() {
         NSLayoutConstraint.activate([
-            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 25),
+            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 15),
             titleLabel.heightAnchor.constraint(equalToConstant: 40),
             titleLabel.widthAnchor.constraint(equalToConstant: 200)
