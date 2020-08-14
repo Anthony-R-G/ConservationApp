@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 final class TaxonomyView: UIView {
     //MARK: -- UI Element Initialization
@@ -176,7 +177,11 @@ final class TaxonomyView: UIView {
     private var species: Species!
     
     @objc private func audioButtonPressed() {
-        print("ya")
+        let speechSynthesizer = AVSpeechSynthesizer()
+        let speechUtterance: AVSpeechUtterance = AVSpeechUtterance(string: species.taxonomy.scientificName)
+        speechUtterance.rate = AVSpeechUtteranceMaximumSpeechRate / 2.0
+        speechUtterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+        speechSynthesizer.speak(speechUtterance)
     }
     
     required init(species: Species) {
@@ -186,6 +191,7 @@ final class TaxonomyView: UIView {
         setConstraints()
         heightAnchor.constraint(equalToConstant: 280).isActive = true
         translatesAutoresizingMaskIntoConstraints = false
+        
     }
     
     required init?(coder: NSCoder) {
