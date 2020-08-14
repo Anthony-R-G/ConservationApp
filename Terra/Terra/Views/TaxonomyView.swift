@@ -19,7 +19,7 @@ final class TaxonomyView: UIView {
     }()
     
     private lazy var kingdomDataLabel: UILabel = {
-        return Factory.makeLabel(title: nil,
+        return Factory.makeLabel(title: species.taxonomy.kingdom,
                                  weight: .bold,
                                  size: 18,
                                  color: .white,
@@ -35,7 +35,7 @@ final class TaxonomyView: UIView {
     }()
     
     private lazy var phylumDataLabel: UILabel = {
-        return Factory.makeLabel(title: nil,
+        return Factory.makeLabel(title: species.taxonomy.phylum,
                                  weight: .bold,
                                  size: 18,
                                  color: .white,
@@ -51,7 +51,7 @@ final class TaxonomyView: UIView {
     }()
     
     private lazy var classDataLabel: UILabel = {
-        return Factory.makeLabel(title: nil,
+        return Factory.makeLabel(title: species.taxonomy.classTaxonomy,
                                  weight: .bold,
                                  size: 18,
                                  color: .white,
@@ -67,7 +67,7 @@ final class TaxonomyView: UIView {
     }()
     
     private lazy var orderDataLabel: UILabel = {
-        return Factory.makeLabel(title: nil,
+        return Factory.makeLabel(title: species.taxonomy.order,
                                  weight: .bold,
                                  size: 18,
                                  color: .white,
@@ -83,7 +83,7 @@ final class TaxonomyView: UIView {
     }()
     
     private lazy var familyDataLabel: UILabel = {
-        return Factory.makeLabel(title: nil,
+        return Factory.makeLabel(title: species.taxonomy.family,
                                  weight: .bold,
                                  size: 18,
                                  color: .white,
@@ -99,7 +99,7 @@ final class TaxonomyView: UIView {
     }()
     
     private lazy var genusDataLabel: UILabel = {
-        return Factory.makeLabel(title: nil,
+        return Factory.makeLabel(title: species.taxonomy.genus,
                                  weight: .bold,
                                  size: 18,
                                  color: .white,
@@ -110,14 +110,16 @@ final class TaxonomyView: UIView {
         return Factory.makeLabel(title: "Scientific Name",
                                  weight: .regular,
                                  size: 16,
-                                 color: .lightGray, alignment: .center)
+                                 color: .lightGray,
+                                 alignment: .center)
     }()
     
     private lazy var scientificNameDataLabel: UILabel = {
-        return Factory.makeLabel(title: nil,
+        return Factory.makeLabel(title: species.taxonomy.scientificName,
                                  weight: .italic,
                                  size: 18,
-                                 color: .white, alignment: .center)
+                                 color: .white,
+                                 alignment: .center)
     }()
     
     private lazy var leftStack: UIStackView = {
@@ -171,24 +173,15 @@ final class TaxonomyView: UIView {
     
     //MARK: -- Methods
     
-    weak var delegate: LearnMoreWindowButtonDelegate?
+    private var species: Species!
     
     @objc private func audioButtonPressed() {
-        delegate?.buttonPressed()
+        print("ya")
     }
     
-    func configureTaxonomyData(from species: Species) {
-        kingdomDataLabel.text = species.taxonomy.kingdom
-        phylumDataLabel.text = species.taxonomy.phylum
-        classDataLabel.text = species.taxonomy.classTaxonomy
-        orderDataLabel.text = species.taxonomy.order
-        familyDataLabel.text = species.taxonomy.family
-        genusDataLabel.text = species.taxonomy.genus
-        scientificNameDataLabel.text = species.taxonomy.scientificName
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    required init(species: Species) {
+        self.species = species
+        super.init(frame: .zero)
         addSubviews()
         setConstraints()
         heightAnchor.constraint(equalToConstant: 280).isActive = true

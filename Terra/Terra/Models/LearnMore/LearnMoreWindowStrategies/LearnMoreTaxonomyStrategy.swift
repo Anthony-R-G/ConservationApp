@@ -17,8 +17,6 @@ struct LearnMoreTaxonomyStrategy: LearnMoreContentWindowStrategy {
     }
     
     func contentView() -> UIView {
-        let taxonomyView = TaxonomyView()
-        taxonomyView.configureTaxonomyData(from: species)
-        return taxonomyView
+        return TaxonomyView(species: species)
     }
 }
