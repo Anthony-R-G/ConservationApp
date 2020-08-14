@@ -43,13 +43,17 @@ class TerraTests: XCTestCase {
         }
     }
     
-    
+ 
     
     func testFactoryLabelWorks() {
         let labelTitle = "ASDF"
-        let label = Factory.makeLabel(title: labelTitle, weight: .bold, size: 15, color: .white, alignment: .left)
-        
-        XCTAssert(label.text == labelTitle, "Factory method not assigning title correctly")
+        let label = Factory.makeLabel(title: labelTitle,
+                                      weight: .bold,
+                                      size: 15,
+                                      color: .white,
+                                      alignment: .left)
+        XCTAssert(label.text == labelTitle,
+                  "Factory method not assigning title correctly")
     }
     
     func testISO8601Formatter() {
@@ -60,7 +64,7 @@ class TerraTests: XCTestCase {
                                           publishedAt: "2020-08-08T00:33:22Z")
         
         
-        XCTAssert(testNewsArticle.publishedAt == "Aug 7 2020, 8:33 PM", "Expected 'Aug 7 2020, 8:33 PM', but returned '\(testNewsArticle.publishedAt)' instead")
+        XCTAssertEqual(testNewsArticle.publishedAt, "Aug 7 2020, 8:33 PM", "Expected 'Aug 7 2020, 8:33 PM', but returned '\(testNewsArticle.publishedAt)' instead")
     }
     
     func testRemovingNonAlphabetCharsExtension() {
@@ -68,7 +72,8 @@ class TerraTests: XCTestCase {
         
         let expectedString = "jurongbirdparksconservationbreedingeffortssoarwithmorethannewhatchlings"
         
-        XCTAssert(testString.removingNonAlphabetChars == expectedString, "Expected '\(expectedString)', but returned '\(testString.removingNonAlphabetChars)' instead")
+        XCTAssertEqual(testString.removingNonAlphabetChars,  expectedString,
+                       "Expected '\(expectedString)', but returned '\(testString.removingNonAlphabetChars)' instead")
     }
     
     func testNewsArticleDuplicateRemoval() {
@@ -123,7 +128,8 @@ class TerraTests: XCTestCase {
         
         let testNewsArrayFilteredCount = testNewsArrayWithFilterMethod.filter{ $0.title == testNewsArticleTitle }.count
         
-        XCTAssert(testNewsArrayFilteredCount == 1, "Expected only 1 article to have this title, but returned \(testNewsArrayFilteredCount) instead")
+        XCTAssertEqual(testNewsArrayFilteredCount, 1,
+                       "Expected only 1 article to have this title, but returned \(testNewsArrayFilteredCount) instead")
     }
     
     
