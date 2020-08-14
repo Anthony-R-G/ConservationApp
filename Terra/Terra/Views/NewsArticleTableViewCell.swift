@@ -16,45 +16,52 @@ final class NewsArticleTableViewCell: UITableViewCell {
         iv.layer.cornerRadius = 10
         iv.clipsToBounds = true
         iv.contentMode = .scaleAspectFill
-        iv.backgroundColor = .clear
+        iv.backgroundColor = .black
         return iv
     }()
     
     lazy var articleTitleLabel: UILabel = {
-        let label = Factory.makeLabel(title: nil, weight: .bold, size: 18, color: .white, alignment: .left)
+        let label = Factory.makeLabel(title: nil,
+                                      weight: .bold,
+                                      size: 18,
+                                      color: .white,
+                                      alignment: .left)
         label.numberOfLines = 0
         return label
     }()
     
     lazy var publishedDateLabel: UILabel = {
-        return Factory.makeLabel(title: nil, weight: .medium, size: 15, color: #colorLiteral(red: 0.6783636212, green: 0.6784659028, blue: 0.6783496737, alpha: 1), alignment: .left)
+        return Factory.makeLabel(title: nil,
+                                 weight: .medium,
+                                 size: 15,
+                                 color: #colorLiteral(red: 0.6783636212, green: 0.6784659028, blue: 0.6783496737, alpha: 1),
+                                 alignment: .left)
     }()
-    
     
     //MARK: -- Methods
     
-    func configureCellUI(from article: NewsArticle) {
-        if let articleThumbImageURLStr = article.urlToImage {
-            let articleThumbImageURL = URL(string: articleThumbImageURLStr)
-            articleThumbImageView.sd_setImage(with: articleThumbImageURL, completed: nil)
-        } else {
+    func configureCell(from article: NewsArticle) {
+        guard let articleImageURL = article.urlToImage else {
             articleThumbImageView.image = #imageLiteral(resourceName: "newsImagePlaceholder")
+            return
         }
-        
         articleTitleLabel.text = article.title
         publishedDateLabel.text = article.formattedPublishDate
+        articleThumbImageView.sd_setImage(with: URL(string: articleImageURL), completed: nil)
+    }
+    
+    private func setAppearance() {
+        backgroundColor = .black
+        let bgColorView = UIView()
+        bgColorView.backgroundColor = #colorLiteral(red: 0.08120436221, green: 0.09556283802, blue: 0.1183818057, alpha: 1)
+        selectedBackgroundView = bgColorView
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         addSubviews()
         setConstraints()
-//        backgroundColor = #colorLiteral(red: 0.1108833775, green: 0.1294697225, blue: 0.1595396101, alpha: 1)
-        backgroundColor = .black
-        
-        let bgColorView = UIView()
-        bgColorView.backgroundColor = #colorLiteral(red: 0.08120436221, green: 0.09556283802, blue: 0.1183818057, alpha: 1)
-        selectedBackgroundView = bgColorView
+        setAppearance()
     }
     
     required init?(coder: NSCoder) {
@@ -78,29 +85,27 @@ fileprivate extension NewsArticleTableViewCell {
     }
     
     func setArticleThumbImageViewConstraints() {
-        NSLayoutConstraint.activate([
-            articleThumbImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.universalLeadingConstant),
-            articleThumbImageView.heightAnchor.constraint(equalToConstant: 120),
-            articleThumbImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            articleThumbImageView.widthAnchor.constraint(equalToConstant: 140)
-        ])
+        articleThumbImageView.snp.makeConstraints { (make) in
+            make.leading.equalToSuperview().inset(Constants.spacingConstant)
+            make.centerY.equalToSuperview()
+            make.height.equalTo(120)
+            make.width.equalTo(140)
+        }
     }
     
     func setArticleTitleLabelConstraints() {
-        NSLayoutConstraint.activate([
-            articleTitleLabel.leadingAnchor.constraint(equalTo: articleThumbImageView.trailingAnchor, constant: Constants.universalLeadingConstant),
-            articleTitleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 20),
-            articleTitleLabel.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.6),
-            articleTitleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.universalLeadingConstant)
-        ])
+        articleTitleLabel.snp.makeConstraints { (make) in
+            make.leading.equalTo(articleThumbImageView.snp.trailing).offset(Constants.spacingConstant)
+            make.top.trailing.equalToSuperview().inset(Constants.spacingConstant)
+            make.height.equalToSuperview().multipliedBy(0.6)
+        }
     }
     
     func setPublishedDateLabelConstraints() {
-        NSLayoutConstraint.activate([
-            publishedDateLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
-            publishedDateLabel.leadingAnchor.constraint(equalTo: articleTitleLabel.leadingAnchor),
-            publishedDateLabel.heightAnchor.constraint(equalToConstant: 40),
-            publishedDateLabel.widthAnchor.constraint(equalToConstant: 150)
-        ])
+        publishedDateLabel.snp.makeConstraints { (make) in
+            make.leading.trailing.equalTo(articleTitleLabel)
+            make.height.equalTo(40)
+            make.bottom.equalToSuperview().inset(10)
+        }
     }
 }

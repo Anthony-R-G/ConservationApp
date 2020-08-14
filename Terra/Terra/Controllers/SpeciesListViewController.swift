@@ -12,10 +12,6 @@ final class SpeciesListViewController: UIViewController {
     
     //MARK: -- UI Element Initialization
     
-    private lazy var scrollView: UIScrollView = {
-        return UIScrollView()
-    }()
-    
     private lazy var searchBar: UISearchBar = {
         let sb = UISearchBar()
         sb.backgroundColor = .clear
@@ -29,8 +25,8 @@ final class SpeciesListViewController: UIViewController {
         return sb
     }()
     
-    private lazy var topToolBar: toolBar = {
-        let tb = toolBar(frame: .zero, strategy: ToolBarListVCStrategy())
+    private lazy var topToolBar: CustomToolBar = {
+        let tb = CustomToolBar(frame: .zero, strategy: ToolBarListVCStrategy())
         return tb
     }()
     
@@ -102,11 +98,11 @@ final class SpeciesListViewController: UIViewController {
     }()
     
     private lazy var searchBarLeadingAnchorConstraint: NSLayoutConstraint = {
-        return searchBar.leadingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.universalLeadingConstant)
+        return searchBar.leadingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.spacingConstant)
     }()
     
     private lazy var terraTitleLabelLeadingAnchorConstraint: NSLayoutConstraint = {
-        return terraTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.universalLeadingConstant)
+        return terraTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.spacingConstant)
     }()
     
     //MARK: -- Properties
@@ -135,8 +131,8 @@ final class SpeciesListViewController: UIViewController {
     }
     
     private func dismissSearchBar() {
-        searchBarLeadingAnchorConstraint.constant = -Constants.universalLeadingConstant
-        terraTitleLabelLeadingAnchorConstraint.constant = Constants.universalLeadingConstant
+        searchBarLeadingAnchorConstraint.constant = -Constants.spacingConstant
+        terraTitleLabelLeadingAnchorConstraint.constant = Constants.spacingConstant
         searchBar.alpha = 0
         searchBarButton.alpha = 1
         UIView.animate(withDuration: 0.3, animations: { [weak self] in
@@ -187,6 +183,7 @@ final class SpeciesListViewController: UIViewController {
 }
 
 //MARK: -- CollectionView DataSource Methods
+
 extension SpeciesListViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -200,7 +197,7 @@ extension SpeciesListViewController: UICollectionViewDataSource {
         let speciesCell = collectionView.dequeueReusableCell(withReuseIdentifier: "speciesCell", for: indexPath) as! SpeciesCollectionViewCell
         
         let specificAnimal = viewModel.specificSpecies(at: indexPath.row)
-        speciesCell.configureCellUI(from: specificAnimal)
+        speciesCell.configureCell(from: specificAnimal)
         return speciesCell
     }
 }
@@ -302,7 +299,7 @@ fileprivate extension SpeciesListViewController {
     
     func setSearchBarButtonConstraints() {
         NSLayoutConstraint.activate([
-            searchBarButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.universalLeadingConstant),
+            searchBarButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.spacingConstant),
             searchBarButton.centerYAnchor.constraint(equalTo: terraTitleLabel.centerYAnchor),
             searchBarButton.heightAnchor.constraint(equalToConstant: 40),
             searchBarButton.widthAnchor.constraint(equalToConstant: 40)
@@ -312,7 +309,7 @@ fileprivate extension SpeciesListViewController {
     func setSearchBarConstraints() {
         NSLayoutConstraint.activate([
             searchBarLeadingAnchorConstraint,
-            searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.universalLeadingConstant),
+            searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.spacingConstant),
             searchBar.centerYAnchor.constraint(equalTo: searchBarButton.centerYAnchor),
         ])
     }
