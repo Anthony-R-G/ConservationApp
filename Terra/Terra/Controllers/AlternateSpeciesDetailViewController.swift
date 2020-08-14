@@ -10,7 +10,7 @@ import UIKit
 import SafariServices
 import FirebaseUI
 
-final class CloneSpeciesDetailViewController: UIViewController {
+final class AlternateSpeciesDetailViewController: UIViewController {
     
     //MARK: -- UI Element Initialization
     
@@ -82,30 +82,34 @@ final class CloneSpeciesDetailViewController: UIViewController {
     
     private lazy var overviewButton: UIButton = {
         let btn = UIButton()
-        btn.isUserInteractionEnabled = true
+        btn.tag = 0
         btn.setTitle("OVERVIEW", for: .normal)
-        btn.showsTouchWhenHighlighted = true
         btn.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 45)
-        btn.addTarget(self, action: #selector(overviewButtonPressed), for: .touchUpInside)
         btn.setTitleColor(.white, for: .normal)
+        btn.showsTouchWhenHighlighted = true
+        btn.addTarget(self, action: #selector(optionButtonPressed), for: .touchUpInside)
         return btn
     }()
     
     private lazy var habitatButton: UIButton = {
         let btn = UIButton()
-        btn.isUserInteractionEnabled = true
+        btn.tag = 1
         btn.setTitle("HABITAT", for: .normal)
         btn.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 45)
         btn.setTitleColor(.white, for: .normal)
+        btn.showsTouchWhenHighlighted = true
+        btn.addTarget(self, action: #selector(optionButtonPressed), for: .touchUpInside)
         return btn
     }()
     
     private lazy var threatsButton: UIButton = {
         let btn = UIButton()
-        btn.isUserInteractionEnabled = true
+        btn.tag = 2
         btn.setTitle("THREATS", for: .normal)
         btn.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 45)
         btn.setTitleColor(.white, for: .normal)
+        btn.showsTouchWhenHighlighted = true
+        btn.addTarget(self, action: #selector(optionButtonPressed), for: .touchUpInside)
         return btn
     }()
     
@@ -115,6 +119,7 @@ final class CloneSpeciesDetailViewController: UIViewController {
         btn.setTitle("FILLER", for: .normal)
         btn.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 45)
         btn.setTitleColor(.white, for: .normal)
+        
         return btn
     }()
     
@@ -157,11 +162,7 @@ final class CloneSpeciesDetailViewController: UIViewController {
     
     var headerPinnedToTop: Bool = false {
         didSet {
-            if headerPinnedToTop == true {
-                animateStackIn()
-            } else {
-                animateStackOut()
-            }
+            headerPinnedToTop ? animateStackIn() : animateStackOut()
         }
     }
     
@@ -169,12 +170,23 @@ final class CloneSpeciesDetailViewController: UIViewController {
     
     //MARK: -- Methods
     
-    @objc private func overviewButtonPressed() {
+    @objc private func optionButtonPressed(sender: UIButton) {
         let learnMoreVC = LearnMoreViewController()
-        learnMoreVC.strategy = LearnMoreVCOverviewStrategy(species: currentSpecies)
-        learnMoreVC.modalPresentationStyle = .fullScreen
         learnMoreVC.currentSpecies = currentSpecies
-    
+        switch sender.tag {
+        case 0:
+            learnMoreVC.strategy = LearnMoreVCOverviewStrategy(species: currentSpecies)
+            
+        case 1:
+            learnMoreVC.strategy = LearnMoreVCHabitatStrategy(species: currentSpecies)
+            
+        case 2:
+            learnMoreVC.strategy = LearnMoreVCThreatsStrategy(species: currentSpecies)
+            
+        default: ()
+        }
+        
+        learnMoreVC.modalPresentationStyle = .fullScreen
         present(learnMoreVC, animated: true, completion: nil)
     }
     
@@ -313,7 +325,7 @@ final class CloneSpeciesDetailViewController: UIViewController {
 }
 
 //MARK: -- ScrollView Methods
-extension CloneSpeciesDetailViewController: UIScrollViewDelegate {
+extension AlternateSpeciesDetailViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         switch scrollView {
         case verticalScrollView:
@@ -333,35 +345,16 @@ extension CloneSpeciesDetailViewController: UIScrollViewDelegate {
 }
 
 //MARK: -- Custom Delegate Implementation
-extension CloneSpeciesDetailViewController: DonateButtonDelegate {
+extension AlternateSpeciesDetailViewController: DonateButtonDelegate {
     func donateButtonPressed() {
         guard let donationURL = URL(string: currentSpecies.donationLink) else { return }
         presentWebBrowser(link: donationURL)
     }
 }
 
-extension CloneSpeciesDetailViewController: RoundedInfoViewDelegate {
-    func learnMoreButtonPressed(_ sender: UIButton) {
-        let learnMoreVC = LearnMoreViewController()
-        learnMoreVC.currentSpecies = currentSpecies
-        learnMoreVC.modalPresentationStyle = .fullScreen
-        
-        switch sender.tag {
-        case 0:
-            learnMoreVC.strategy = LearnMoreVCOverviewStrategy(species: currentSpecies)
-        case 1:
-            learnMoreVC.strategy = LearnMoreVCHabitatStrategy(species: currentSpecies)
-        case 2:
-            learnMoreVC.strategy = LearnMoreVCThreatsStrategy(species: currentSpecies)
-        default: print(sender.tag)
-        }
-        present(learnMoreVC, animated: true, completion: nil)
-    }
-}
-
 
 //MARK: -- Add Subviews & Constraints
-fileprivate extension CloneSpeciesDetailViewController {
+fileprivate extension AlternateSpeciesDetailViewController {
     func addSubviews() {
         view.addSubview(verticalScrollView)
         verticalScrollView.translatesAutoresizingMaskIntoConstraints = false

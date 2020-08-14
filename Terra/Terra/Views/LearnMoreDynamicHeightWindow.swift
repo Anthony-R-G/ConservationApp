@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class LearnMoreContentViewWindow: UIView {
+final class LearnMoreDynamicHeightWindow: UIView {
     //MARK: -- UI Element Initialization
     
     private lazy var titleLabel: UILabel = {
@@ -61,7 +61,7 @@ final class LearnMoreContentViewWindow: UIView {
 
 //MARK: -- Add Subviews & Constraints
 
-fileprivate extension LearnMoreContentViewWindow {
+fileprivate extension LearnMoreDynamicHeightWindow {
     func addSubviews() {
         let UIElements = [titleLabel, contentView]
         UIElements.forEach { addSubview($0) }

@@ -40,7 +40,7 @@ class Factory {
     }
     
     static func makeLearnMoreWindowLabel(text: String) -> UILabel {
-        let label = Factory.makeLabel(title: text.replacingOccurrences(of: "\\n", with: "\n"),
+        let label = makeLabel(title: text.replacingOccurrences(of: "\\n", with: "\n"),
                                       weight: .regular,
                                       size: 16,
                                       color: .white,
@@ -74,8 +74,8 @@ class Factory {
         return view
     }
     
-    static func makeLearnMoreWindow(strategy: LearnMoreContentWindowStrategy) -> LearnMoreContentViewWindow {
-        return LearnMoreContentViewWindow(strategy: strategy)
+    static func makeLearnMoreWindow(strategy: LearnMoreContentWindowStrategy) -> LearnMoreDynamicHeightWindow {
+        return LearnMoreDynamicHeightWindow(strategy: strategy)
     }
 }
 

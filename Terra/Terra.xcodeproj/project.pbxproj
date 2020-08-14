@@ -97,7 +97,7 @@
 		97A24D2824E4A52100958AB9 /* LearnMoreContentWindowStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A24D2724E4A52100958AB9 /* LearnMoreContentWindowStrategy.swift */; };
 		97A2BC7224CE5578000D6B2D /* FirestoreError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97928F7824CD11BF00AF90C5 /* FirestoreError.swift */; };
 		97A2BC7324CE559F000D6B2D /* FontWeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FE224CCDC48002EAC96 /* FontWeight.swift */; };
-		97A6DE8224E631970067D784 /* CLONESpeciesDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A6DE8124E631970067D784 /* CLONESpeciesDetailViewController.swift */; };
+		97A6DE8224E631970067D784 /* AlternateSpeciesDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A6DE8124E631970067D784 /* AlternateSpeciesDetailViewController.swift */; };
 		97B406A724E1FDED00A79E98 /* LearnMoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B406A624E1FDED00A79E98 /* LearnMoreViewController.swift */; };
 		97B68CD424BBB0AC005B8AB8 /* DetailHeaderNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B68CD324BBB0AC005B8AB8 /* DetailHeaderNameView.swift */; };
 		97B7C79724E440CE008BD6AD /* LearnMoreVCOverviewStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B7C79624E440CE008BD6AD /* LearnMoreVCOverviewStrategy.swift */; };
@@ -110,7 +110,7 @@
 		97E61B8024CE54A100E83691 /* Habitat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977D877124CD7BFF00AE5E51 /* Habitat.swift */; };
 		97E61B8124CE54A800E83691 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977D876F24CD6A1200AE5E51 /* Group.swift */; };
 		97E9450424BE10C800550824 /* ConservationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E9450324BE10C800550824 /* ConservationStatus.swift */; };
-		97EA493C24E3BEC200C0FE64 /* LearnMoreContentViewWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EA493B24E3BEC200C0FE64 /* LearnMoreContentViewWindow.swift */; };
+		97EA493C24E3BEC200C0FE64 /* LearnMoreDynamicHeightWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EA493B24E3BEC200C0FE64 /* LearnMoreDynamicHeightWindow.swift */; };
 		97EA494124E43FC500C0FE64 /* LearnMoreVCStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EA494024E43FC500C0FE64 /* LearnMoreVCStrategy.swift */; };
 		97EDD4F024D36D0A00D30674 /* FirebaseStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EDD4EF24D36D0A00D30674 /* FirebaseStorageManager.swift */; };
 		97F0CCA924C56F5C00C581D3 /* UIScrollViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F0CCA824C56F5C00C581D3 /* UIScrollViewExtensions.swift */; };
@@ -208,7 +208,7 @@
 		97A24D1F24E445A800958AB9 /* LearnMoreVCHabitatStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnMoreVCHabitatStrategy.swift; sourceTree = "<group>"; };
 		97A24D2324E49A4100958AB9 /* TaxonomyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxonomyView.swift; sourceTree = "<group>"; };
 		97A24D2724E4A52100958AB9 /* LearnMoreContentWindowStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnMoreContentWindowStrategy.swift; sourceTree = "<group>"; };
-		97A6DE8124E631970067D784 /* CLONESpeciesDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLONESpeciesDetailViewController.swift; sourceTree = "<group>"; };
+		97A6DE8124E631970067D784 /* AlternateSpeciesDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternateSpeciesDetailViewController.swift; sourceTree = "<group>"; };
 		97B406A624E1FDED00A79E98 /* LearnMoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnMoreViewController.swift; sourceTree = "<group>"; };
 		97B68CD324BBB0AC005B8AB8 /* DetailHeaderNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailHeaderNameView.swift; sourceTree = "<group>"; };
 		97B7C79624E440CE008BD6AD /* LearnMoreVCOverviewStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnMoreVCOverviewStrategy.swift; sourceTree = "<group>"; };
@@ -219,7 +219,7 @@
 		97D9E24A24C6470600524000 /* Diet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diet.swift; sourceTree = "<group>"; };
 		97DD101C24C69EB000A21DF4 /* ToolBarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolBarDelegate.swift; sourceTree = "<group>"; };
 		97E9450324BE10C800550824 /* ConservationStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConservationStatus.swift; sourceTree = "<group>"; };
-		97EA493B24E3BEC200C0FE64 /* LearnMoreContentViewWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnMoreContentViewWindow.swift; sourceTree = "<group>"; };
+		97EA493B24E3BEC200C0FE64 /* LearnMoreDynamicHeightWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnMoreDynamicHeightWindow.swift; sourceTree = "<group>"; };
 		97EA494024E43FC500C0FE64 /* LearnMoreVCStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnMoreVCStrategy.swift; sourceTree = "<group>"; };
 		97EDD4EF24D36D0A00D30674 /* FirebaseStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStorageManager.swift; sourceTree = "<group>"; };
 		97F0CCA824C56F5C00C581D3 /* UIScrollViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScrollViewExtensions.swift; sourceTree = "<group>"; };
@@ -324,7 +324,7 @@
 				97591FD324CB8D46002EAC96 /* RoundedInfoView.swift */,
 				97947F5224DD1F560047052B /* CustomCalloutView.swift */,
 				9772515624DF66A90052A3F6 /* CustomAnnotationView.swift */,
-				97EA493B24E3BEC200C0FE64 /* LearnMoreContentViewWindow.swift */,
+				97EA493B24E3BEC200C0FE64 /* LearnMoreDynamicHeightWindow.swift */,
 				97A24D2324E49A4100958AB9 /* TaxonomyView.swift */,
 			);
 			path = Views;
@@ -472,7 +472,7 @@
 			children = (
 				97FAD4E624D75B20007FEFD8 /* TabBarController.swift */,
 				97BF745223DF42F90058F2D7 /* SpeciesListViewController.swift */,
-				97A6DE8124E631970067D784 /* CLONESpeciesDetailViewController.swift */,
+				97A6DE8124E631970067D784 /* AlternateSpeciesDetailViewController.swift */,
 				97B406A624E1FDED00A79E98 /* LearnMoreViewController.swift */,
 				97FAD4E824D75DBD007FEFD8 /* NewsViewController.swift */,
 				97997F2B24DCE18B00981087 /* MGLMapViewController.swift */,
@@ -763,8 +763,8 @@
 				97F0CCA924C56F5C00C581D3 /* UIScrollViewExtensions.swift in Sources */,
 				97DD101D24C69EB000A21DF4 /* ToolBarDelegate.swift in Sources */,
 				975812F124D52F7B00C09D56 /* SpeciesHabitatStrategy.swift in Sources */,
-				97EA493C24E3BEC200C0FE64 /* LearnMoreContentViewWindow.swift in Sources */,
-				97A6DE8224E631970067D784 /* CLONESpeciesDetailViewController.swift in Sources */,
+				97EA493C24E3BEC200C0FE64 /* LearnMoreDynamicHeightWindow.swift in Sources */,
+				97A6DE8224E631970067D784 /* AlternateSpeciesDetailViewController.swift in Sources */,
 				975C8E5424E4F11500A0EB9D /* LearnMoreVCThreatsStrategy.swift in Sources */,
 				977D877024CD6A1200AE5E51 /* Group.swift in Sources */,
 				97A24D2024E445A800958AB9 /* LearnMoreVCHabitatStrategy.swift in Sources */,
