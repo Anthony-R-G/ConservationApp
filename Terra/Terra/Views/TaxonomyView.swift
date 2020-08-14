@@ -107,11 +107,11 @@ final class TaxonomyView: UIView {
     }()
     
     private lazy var scientificNameTitleLabel: UILabel = {
-          return Factory.makeLabel(title: "Scientific Name",
-                                   weight: .regular,
-                                   size: 16,
-                                   color: .lightGray, alignment: .center)
-      }()
+        return Factory.makeLabel(title: "Scientific Name",
+                                 weight: .regular,
+                                 size: 16,
+                                 color: .lightGray, alignment: .center)
+    }()
     
     private lazy var scientificNameDataLabel: UILabel = {
         return Factory.makeLabel(title: nil,
@@ -147,9 +147,9 @@ final class TaxonomyView: UIView {
     }()
     
     private lazy var horizontalStack: UIStackView = {
-       let sv = UIStackView(arrangedSubviews: [
-       leftStack, rightStack
-       ])
+        let sv = UIStackView(arrangedSubviews: [
+            leftStack, rightStack
+        ])
         sv.spacing = 10
         sv.alignment = .center
         return sv
@@ -161,7 +161,21 @@ final class TaxonomyView: UIView {
         return view
     }()
     
+    private lazy var audioButton: UIButton = {
+        let btn = UIButton()
+        btn.setImage(UIImage(systemName: "speaker.3"), for: .normal)
+        btn.tintColor = .white
+        btn.addTarget(self, action: #selector(audioButtonPressed), for: .touchUpInside)
+        return btn
+    }()
+    
     //MARK: -- Methods
+    
+    weak var delegate: AudioButtonDelegate?
+    
+    @objc private func audioButtonPressed() {
+        delegate?.audioButtonPressed()
+    }
     
     func configureTaxonomyData(from species: Species) {
         kingdomDataLabel.text = species.taxonomy.kingdom
@@ -189,7 +203,7 @@ final class TaxonomyView: UIView {
 
 fileprivate extension TaxonomyView {
     func addSubviews() {
-        let UIElements = [horizontalStack, separatorLine, scientificNameTitleLabel ,scientificNameDataLabel]
+        let UIElements = [horizontalStack, separatorLine, scientificNameTitleLabel ,scientificNameDataLabel, audioButton]
         UIElements.forEach { addSubview($0) }
         UIElements.forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
     }
@@ -199,6 +213,7 @@ fileprivate extension TaxonomyView {
         setSeparatorLineConstraints()
         setScientificNameTitleLabelConstraints()
         setScientificNameDataLabelConstraints()
+        setAudioButtonConstraints()
     }
     
     func setHorizontalStackConstraints() {
@@ -226,9 +241,15 @@ fileprivate extension TaxonomyView {
     func setScientificNameDataLabelConstraints() {
         scientificNameDataLabel.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
-            make.width.equalToSuperview()
-            make.height.equalTo(30)
             make.top.equalTo(scientificNameTitleLabel.snp.bottom).offset(5)
+        }
+    }
+    
+    func setAudioButtonConstraints() {
+        audioButton.snp.makeConstraints { (make) in
+            make.leading.equalTo(scientificNameDataLabel.snp.trailing).offset(5)
+            make.height.width.equalTo(30)
+            make.centerY.equalTo(scientificNameDataLabel)
         }
     }
 }
