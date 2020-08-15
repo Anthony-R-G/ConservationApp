@@ -22,13 +22,11 @@ final class SpeciesListViewController: UIViewController {
         sb.showsCancelButton = true
         sb.placeholder = "Search species..."
         sb.tintColor = Constants.red
-        sb.delegate = self
         return sb
     }()
     
     private lazy var topToolBar: CustomToolBar = {
         let tb = CustomToolBar(frame: .zero, strategy: ToolBarListVCStrategy())
-        tb.delegate = self
         return tb
     }()
     
@@ -42,6 +40,7 @@ final class SpeciesListViewController: UIViewController {
     
     private lazy var headerImageView: UIImageView = {
         let iv = UIImageView()
+        iv.translatesAutoresizingMaskIntoConstraints = false
         iv.image = #imageLiteral(resourceName: "listVCbackground")
         iv.contentMode = UIView.ContentMode.scaleAspectFill
         iv.clipsToBounds = true
@@ -88,7 +87,10 @@ final class SpeciesListViewController: UIViewController {
                                       size: 17,
                                       color: .red,
                                       alignment: .center)
-        label.frame = CGRect(origin: .zero, size: CGSize(width: collectionView.bounds.size.width, height: collectionView.bounds.size.height))
+        label.frame = CGRect(x: 0,
+                             y: 0,
+                             width: collectionView.bounds.size.width ,
+                             height: collectionView.bounds.size.height)
         collectionView.backgroundView = label
         label.isHidden = true
         return label
@@ -159,6 +161,8 @@ final class SpeciesListViewController: UIViewController {
     private func setDatasourceAndDelegates() {
         collectionView.dataSource = self
         collectionView.delegate = self
+        topToolBar.delegate = self
+        searchBar.delegate = self
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -211,8 +215,8 @@ extension SpeciesListViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let specificAnimal = viewModel.specificSpecies(at: indexPath.row)
-        
-        let detailVC = AlternateSpeciesDetailViewController()
+        let detailVC = UpdatedSpeciesDetailViewController()
+        detailVC.modalPresentationStyle = .fullScreen
         detailVC.currentSpecies = specificAnimal
         
         presentModally(detailVC)

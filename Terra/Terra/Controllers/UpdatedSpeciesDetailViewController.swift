@@ -85,7 +85,7 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
         layout.sectionInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
         
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.backgroundColor = .clear
+        cv.backgroundColor = .blue
         cv.dataSource = self
         cv.delegate = self
         cv.register(CardCell.self, forCellWithReuseIdentifier: "cellId")
@@ -204,7 +204,7 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
     
     private func updateHeaderTopAnchor(scrollOffset: CGFloat) {
         let headerTopAnchorConstantOffset = 400 - scrollOffset
-        let newHeaderTopAnchorConstant = max(35, headerTopAnchorConstantOffset)
+        let newHeaderTopAnchorConstant = max(45, headerTopAnchorConstantOffset)
         headerNameViewTopAnchorConstraint.constant = newHeaderTopAnchorConstant
     }
     
@@ -320,8 +320,9 @@ fileprivate extension UpdatedSpeciesDetailViewController {
         let verticalScrollViewUIElements = [headerNameView, subheaderInfoView, exploreButton]
         verticalScrollViewUIElements.forEach{ verticalScrollView.addSubview($0) }
         verticalScrollViewUIElements.forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
-        
         backgroundImageView.addSubview(backgroundVisualEffectBlur)
+        
+        view.addSubview(collectionView)
     }
     
     func setConstraints() {
@@ -333,6 +334,7 @@ fileprivate extension UpdatedSpeciesDetailViewController {
         setDiscoverButtonConstraints()
         
         setBackgroundVisualEffectBlurConstraints()
+        setCollectionViewConstraints()
     }
     
     func setVerticalScrollViewConstraints() {
@@ -385,5 +387,13 @@ fileprivate extension UpdatedSpeciesDetailViewController {
             exploreButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             exploreButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10)
         ])
+    }
+    
+    func setCollectionViewConstraints() {
+        collectionView.snp.makeConstraints { (make) in
+            make.height.equalTo(540)
+            make.leading.trailing.equalToSuperview()
+            make.centerY.equalToSuperview().offset(70)
+        }
     }
 }
