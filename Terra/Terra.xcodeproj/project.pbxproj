@@ -69,6 +69,7 @@
 		976F68C224E8A62C00277F79 /* UpdatedSpeciesDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976F68C124E8A62C00277F79 /* UpdatedSpeciesDetailViewController.swift */; };
 		976F68C424E8AADD00277F79 /* UpdatedLearnMoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976F68C324E8AADD00277F79 /* UpdatedLearnMoreViewController.swift */; };
 		976F68C624E8AB2600277F79 /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976F68C524E8AB2600277F79 /* CardCell.swift */; };
+		976F68C824E8AE2500277F79 /* CommonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976F68C724E8AE2500277F79 /* CommonView.swift */; };
 		976FB55324D367AE00848E35 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 97591FE124CCDC28002EAC96 /* Roboto-Regular.ttf */; };
 		976FB55524D367E400848E35 /* Roboto-Light-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 976FB55424D367E400848E35 /* Roboto-Light-Italic.ttf */; };
 		9772515724DF66A90052A3F6 /* CustomAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9772515624DF66A90052A3F6 /* CustomAnnotationView.swift */; };
@@ -187,6 +188,7 @@
 		976F68C124E8A62C00277F79 /* UpdatedSpeciesDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatedSpeciesDetailViewController.swift; sourceTree = "<group>"; };
 		976F68C324E8AADD00277F79 /* UpdatedLearnMoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatedLearnMoreViewController.swift; sourceTree = "<group>"; };
 		976F68C524E8AB2600277F79 /* CardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCell.swift; sourceTree = "<group>"; };
+		976F68C724E8AE2500277F79 /* CommonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonView.swift; sourceTree = "<group>"; };
 		976FB55424D367E400848E35 /* Roboto-Light-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light-Italic.ttf"; sourceTree = "<group>"; };
 		9772515624DF66A90052A3F6 /* CustomAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotationView.swift; sourceTree = "<group>"; };
 		9772515824DF7F9C0052A3F6 /* NewsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsResponse.swift; sourceTree = "<group>"; };
@@ -340,6 +342,7 @@
 				97EA493B24E3BEC200C0FE64 /* LearnMoreDynamicHeightWindow.swift */,
 				97A24D2324E49A4100958AB9 /* TaxonomyView.swift */,
 				976F68C524E8AB2600277F79 /* CardCell.swift */,
+				976F68C724E8AE2500277F79 /* CommonView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -766,6 +769,7 @@
 				970B172524C2699E007F32E0 /* SpeciesDetailViewController.swift in Sources */,
 				97FEAEAC24BE5FCC005BAEFE /* Factory.swift in Sources */,
 				97B68CD424BBB0AC005B8AB8 /* DetailHeaderNameView.swift in Sources */,
+				976F68C824E8AE2500277F79 /* CommonView.swift in Sources */,
 				976F68C224E8A62C00277F79 /* UpdatedSpeciesDetailViewController.swift in Sources */,
 				9764D12B24D7DD820050AF37 /* Secrets.swift in Sources */,
 				97591FDC24CC4524002EAC96 /* ToolBarSelectedButton.swift in Sources */,
