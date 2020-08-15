@@ -77,6 +77,36 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
                             endPoint: CGPoint(x: 1, y: 1))
     }()
     
+    private lazy var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: 335, height: 410)
+        layout.scrollDirection = .horizontal
+        layout.minimumLineSpacing = 30
+        layout.sectionInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+        
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        cv.backgroundColor = .clear
+        cv.dataSource = self
+        cv.delegate = self
+        cv.register(CardCell.self, forCellWithReuseIdentifier: "cellId")
+        return cv
+    }()
+    
+    
+    //MARK: -- Properties
+    
+    var currentSpecies: Species!
+    
+    var headerPinnedToTop: Bool = false {
+        didSet {
+            print("Animate fade in/fade out")
+        }
+    }
+    
+    private var selectedCell: UICollectionViewCell?
+    
+    private var animator: UIViewPropertyAnimator!
+    
     private lazy var headerNameViewHeightConstraint: NSLayoutConstraint = {
         return headerNameView.heightAnchor.constraint(equalToConstant: headerNameView.frame.height)
     }()
@@ -89,21 +119,8 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
         return subheaderInfoView.heightAnchor.constraint(equalToConstant: subheaderInfoView.frame.height)
     }()
     
-    
-    //MARK: -- Properties
-    
-    var currentSpecies: Species!
-    
-    var headerPinnedToTop: Bool = false {
-        didSet {
-           print("Animate fade in/fade out")
-        }
-    }
-    
-    private var animator: UIViewPropertyAnimator!
-    
     //MARK: -- Methods
-        
+    
     private func setViewElementsFromSpeciesData() {
         headerNameView.configureView(from: currentSpecies)
         subheaderInfoView.configureView(from: currentSpecies)
@@ -230,6 +247,7 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.isHidden = true
         addSubviews()
         setConstraints()
         setupBackgroundVisualEffectBlur()
@@ -254,6 +272,31 @@ extension UpdatedSpeciesDetailViewController: UIScrollViewDelegate {
             
         default:()
         }
+    }
+}
+
+//MARK: -- Collection View Data Source
+extension UpdatedSpeciesDetailViewController: UICollectionViewDataSource {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! CardCell
+        return cell
+    }
+}
+
+//MARK: -- Collection View Delegate
+extension UpdatedSpeciesDetailViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedCell = collectionView.cellForItem(at: indexPath)
+        let learnMoreVC = UpdatedLearnMoreViewController()
+        navigationController?.pushViewController(learnMoreVC, animated: true)
     }
 }
 
