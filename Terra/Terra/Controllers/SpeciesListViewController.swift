@@ -180,7 +180,6 @@ final class SpeciesListViewController: UIViewController {
         
         setDatasourceAndDelegates()
         topToolBar.highlightButton(button: .buttonOne)
-        
     }
 }
 
@@ -214,7 +213,7 @@ extension SpeciesListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let specificAnimal = viewModel.specificSpecies(at: indexPath.row)
         
-        let detailVC = SpeciesDetailViewController()
+        let detailVC = AlternateSpeciesDetailViewController()
         detailVC.currentSpecies = specificAnimal
         
         presentModally(detailVC)

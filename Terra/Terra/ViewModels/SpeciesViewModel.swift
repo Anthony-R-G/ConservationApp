@@ -40,7 +40,7 @@ final class SpeciesViewModel {
     }
     
     
-    //MARK: -- Properties
+    //MARK: -- Methods
     
     //Public Accessors
     func specificSpecies(at index: Int) -> Species {
