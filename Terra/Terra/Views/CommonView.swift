@@ -13,7 +13,7 @@ final class CommonView: UIView {
     
     private lazy var titleLabel: UILabel = {
         let label = Factory.makeLabel(title: nil,
-                                      weight: .bold,
+                                      weight: .black,
                                       size: 36,
                                       color: .white,
                                       alignment: .left)
@@ -50,12 +50,20 @@ final class CommonView: UIView {
         return iv
     }()
     
-    private lazy var headerStatusBarGradient: GradientView = {
+    private lazy var backgroundImageTopGradient: GradientView = {
         let gv = GradientView()
         gv.startColor = #colorLiteral(red: 0.05166878551, green: 0.05191607028, blue: 0.05249153823, alpha: 0.6392069777)
         gv.endColor = .clear
         return gv
     }()
+    
+    private lazy var backgroundImageBottomGradient: GradientView = {
+           let gv = GradientView()
+           gv.startColor = .clear
+           gv.endColor = #colorLiteral(red: 0.1944729984, green: 0.2008640766, blue: 0.2050628662, alpha: 0.5)
+           return gv
+       }()
+    
     
     //MARK: -- Properties
     var strategy: LearnMoreVCStrategy!
@@ -96,7 +104,7 @@ final class CommonView: UIView {
 fileprivate extension CommonView {
     func addSubviews() {
         [backgroundImage, titleLabel, subtitleLabel, blurbLabel].forEach { addSubview($0) }
-        backgroundImage.addSubview(headerStatusBarGradient)
+        backgroundImage.addSubview(backgroundImageTopGradient)
     }
     
     func setConstraints() {
@@ -104,7 +112,8 @@ fileprivate extension CommonView {
         setSubtitleLabelConstraints()
         setBlurbLabelConstraints()
         setBackgroundImageConstraints()
-        setHeaderStatusBarGradientConstraints()
+        setBackgroundImageTopGradientConstraints()
+//        setBackgroundImageBottomGradientConstraints()
     }
     
     func setTitleLabelConstraints() {
@@ -114,6 +123,13 @@ fileprivate extension CommonView {
             make.leading.trailing.equalTo(self).inset(Constants.spacingConstant)
         }
     }
+    
+//    func setTitleLabelConstraints() {
+//        titleLabel.snp.makeConstraints {[weak self] (make) in
+//            guard let self = self else { return }
+//            make.leading.trailing.bottom.equalTo(self).inset(Constants.spacingConstant)
+//        }
+//    }
     
     func setSubtitleLabelConstraints() {
         subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -138,10 +154,16 @@ fileprivate extension CommonView {
         }
     }
     
-    func setHeaderStatusBarGradientConstraints() {
-        headerStatusBarGradient.snp.makeConstraints { (make) in
+    func setBackgroundImageTopGradientConstraints() {
+        backgroundImageTopGradient.snp.makeConstraints { (make) in
             make.top.left.right.equalTo(backgroundImage)
             make.height.equalTo(backgroundImage.snp.height).multipliedBy(0.30)
         }
     }
+    
+    func setBackgroundImageBottomGradientConstraints() {
+         backgroundImageBottomGradient.snp.makeConstraints { (make) in
+             make.leading.top.bottom.trailing.equalTo(backgroundImage)
+         }
+     }
 }

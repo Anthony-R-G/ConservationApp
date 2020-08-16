@@ -27,7 +27,7 @@ extension NavigationController: UINavigationControllerDelegate {
         from fromVC: UIViewController,
         to toVC: UIViewController
     ) -> UIViewControllerAnimatedTransitioning? {
-        return CustomTransitionAnimation(operation: operation, positioningDuration: 1, resizingDuration: 0.5)
+        return CustomTransitionAnimation(operation: operation, positioningDuration: 0.8, resizingDuration: 0.5)
     }
 }
 

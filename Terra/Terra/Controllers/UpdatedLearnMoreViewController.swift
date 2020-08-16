@@ -61,7 +61,9 @@ class UpdatedLearnMoreViewController: UIViewController {
     
     private lazy var closeButton: UIButton = {
         let btn = UIButton()
-        btn.setImage(#imageLiteral(resourceName: "closeButton"), for: .normal)
+        btn.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
+        btn.transform = CGAffineTransform.init(scaleX: 1.5, y: 1.5)
+        btn.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.845703125)
         btn.addTarget(self, action: #selector(closeButtonPressed), for: .touchUpInside)
         return btn
     }()
@@ -146,7 +148,7 @@ extension UpdatedLearnMoreViewController {
         
         setCommonViewConstraints()
         setContainerStackView()
-      
+        
         setCloseButtonConstraints()
         setBackgroundImageConstraints()
     }
@@ -187,9 +189,9 @@ extension UpdatedLearnMoreViewController {
     
     func setCloseButtonConstraints() {
         closeButton.snp.makeConstraints { (make) in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(Constants.spacingConstant)
-            make.trailing.equalToSuperview().inset(Constants.spacingConstant)
-            make.height.width.equalTo(44)
+            make.top.equalToSuperview().inset(5)
+            make.trailing.equalToSuperview().inset(5)
+            make.height.width.equalTo(66)
         }
     }
     

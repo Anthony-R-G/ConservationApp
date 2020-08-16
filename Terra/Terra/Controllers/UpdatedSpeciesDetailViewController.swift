@@ -145,7 +145,6 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
             return
         }
         animator.fractionComplete = abs(offset)/1000
-        print(animator.fractionComplete)
     }
     
     private func setBackground() {
@@ -155,7 +154,7 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
     
     private func animateStackIn() {
         DispatchQueue.main.async {
-            UIView.animate(withDuration: 1.5) {
+            UIView.animate(withDuration: 1.0) {
                 [weak self] in guard let self = self else { return }
                 self.collectionView.alpha = 1
                 self.donateButton.alpha = 1
@@ -165,7 +164,7 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
     
     private func animateStackOut() {
         DispatchQueue.main.async {
-            UIView.animate(withDuration: 0.5) {
+            UIView.animate(withDuration: 0.3) {
                 [weak self] in guard let self = self else { return }
                 self.collectionView.alpha = 0
                 self.donateButton.alpha = 0
@@ -209,7 +208,7 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
     }
     
     private func updateHeaderTopAnchor(scrollOffset: CGFloat) {
-        let headerTopAnchorConstantOffset = 400 - scrollOffset
+        let headerTopAnchorConstantOffset = 430 - scrollOffset
         let newHeaderTopAnchorConstant = max(90, headerTopAnchorConstantOffset)
         headerNameViewTopAnchorConstraint.constant = newHeaderTopAnchorConstant
     }
@@ -258,6 +257,7 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
         setViewElementsFromSpeciesData()
         
         strategies = [LearnMoreVCOverviewStrategy(species: currentSpecies), LearnMoreVCHabitatStrategy(species: currentSpecies), LearnMoreVCThreatsStrategy(species: currentSpecies)]
+        
     }
 }
 
@@ -309,9 +309,9 @@ extension UpdatedSpeciesDetailViewController: UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
-        
-        print("didHighlight")
         let cell = collectionView.cellForItem(at: indexPath)
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        generator.impactOccurred()
         UIView.animate(withDuration: 0.3) {
             cell?.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
         }
