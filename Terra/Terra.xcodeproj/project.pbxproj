@@ -73,6 +73,7 @@
 		976F68CA24E8AE8600277F79 /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976F68C924E8AE8600277F79 /* ShadowView.swift */; };
 		976F68CC24E8B01E00277F79 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976F68CB24E8B01E00277F79 /* NavigationController.swift */; };
 		976F68CE24E8B1C300277F79 /* Animatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976F68CD24E8B1C300277F79 /* Animatable.swift */; };
+		976F68D024E8B21A00277F79 /* CustomTransitionAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976F68CF24E8B21A00277F79 /* CustomTransitionAnimation.swift */; };
 		976FB55324D367AE00848E35 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 97591FE124CCDC28002EAC96 /* Roboto-Regular.ttf */; };
 		976FB55524D367E400848E35 /* Roboto-Light-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 976FB55424D367E400848E35 /* Roboto-Light-Italic.ttf */; };
 		9772515724DF66A90052A3F6 /* CustomAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9772515624DF66A90052A3F6 /* CustomAnnotationView.swift */; };
@@ -195,6 +196,7 @@
 		976F68C924E8AE8600277F79 /* ShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
 		976F68CB24E8B01E00277F79 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		976F68CD24E8B1C300277F79 /* Animatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animatable.swift; sourceTree = "<group>"; };
+		976F68CF24E8B21A00277F79 /* CustomTransitionAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTransitionAnimation.swift; sourceTree = "<group>"; };
 		976FB55424D367E400848E35 /* Roboto-Light-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light-Italic.ttf"; sourceTree = "<group>"; };
 		9772515624DF66A90052A3F6 /* CustomAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotationView.swift; sourceTree = "<group>"; };
 		9772515824DF7F9C0052A3F6 /* NewsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsResponse.swift; sourceTree = "<group>"; };
@@ -291,6 +293,7 @@
 				972BBF7624C01FA900B6F7C0 /* PSORoundedVisualEffectView.swift */,
 				977D877524CE1F3700AE5E51 /* UIRoundedButtonWithGradientAndShadow.swift */,
 				976F68CD24E8B1C300277F79 /* Animatable.swift */,
+				976F68CF24E8B21A00277F79 /* CustomTransitionAnimation.swift */,
 			);
 			path = "Third Party Code";
 			sourceTree = "<group>";
@@ -791,6 +794,7 @@
 				97591FD424CB8D46002EAC96 /* RoundedInfoView.swift in Sources */,
 				97452E4623E1E6C7005636E0 /* SpeciesCollectionViewCell.swift in Sources */,
 				976DA46824DFCB5F003F3197 /* SpeciesViewModelDelegate.swift in Sources */,
+				976F68D024E8B21A00277F79 /* CustomTransitionAnimation.swift in Sources */,
 				979C191423DE43E900651B2B /* AppDelegate.swift in Sources */,
 				9767D04C24C3EA9200384FCD /* DetailSubheaderView.swift in Sources */,
 				976F68C424E8AADD00277F79 /* UpdatedLearnMoreViewController.swift in Sources */,
