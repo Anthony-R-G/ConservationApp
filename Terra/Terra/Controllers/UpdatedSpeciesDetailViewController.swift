@@ -40,6 +40,7 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
         var frame = hiv.frame
         frame.size.height = UIScreen.main.bounds.height * 0.30
         hiv.frame = frame
+        hiv.backgroundColor = .red
         return hiv
     }()
     
@@ -80,11 +81,17 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
     }()
     
     private lazy var collectionView: UICollectionView = {
+        let screen = UIScreen.main.bounds
+    
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 345, height: 400)
+        layout.itemSize = CGSize(width: screen.width * 0.833,
+                                 height: screen.height * 0.445)
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 30
-        layout.sectionInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+        layout.sectionInset = UIEdgeInsets(top: Constants.spacingConstant,
+                                           left: Constants.spacingConstant,
+                                           bottom: Constants.spacingConstant,
+                                           right: Constants.spacingConstant)
         
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.backgroundColor = .clear
@@ -217,19 +224,19 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
     }
     
     private func updateHeaderViewHeight(scrollOffset: CGFloat) {
-        let headerNameViewOffset = 275 - (scrollOffset)
+        let headerNameViewOffset = (UIScreen.main.bounds.height * 0.30) - (scrollOffset)
         let newHeaderNameViewHeight = max(110, headerNameViewOffset)
         headerNameViewHeightConstraint.constant = newHeaderNameViewHeight
     }
     
     private func updateHeaderTopAnchor(scrollOffset: CGFloat) {
-        let headerTopAnchorConstantOffset = 430 - scrollOffset
+        let headerTopAnchorConstantOffset = (UIScreen.main.bounds.height * 0.48) - scrollOffset
         let newHeaderTopAnchorConstant = max(90, headerTopAnchorConstantOffset)
         headerNameViewTopAnchorConstraint.constant = newHeaderTopAnchorConstant
     }
     
     private func updateSubheaderHeight(scrollOffset: CGFloat) {
-        let subheaderViewOffset = 80 - (scrollOffset)
+        let subheaderViewOffset = (headerNameView.frame.height * 0.30) - (scrollOffset)
         let newSubheaderViewHeight = max(50, subheaderViewOffset)
         subheaderInfoViewHeightConstraint.constant = newSubheaderViewHeight
     }
