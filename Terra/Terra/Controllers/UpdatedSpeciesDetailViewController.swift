@@ -122,7 +122,20 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
         return subheaderInfoView.heightAnchor.constraint(equalToConstant: subheaderInfoView.frame.height)
     }()
     
+    private lazy var closeButton: UIButton = {
+           let btn = UIButton()
+           btn.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
+           btn.transform = CGAffineTransform.init(scaleX: 1.5, y: 1.5)
+           btn.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.845703125)
+           btn.addTarget(self, action: #selector(closeButtonPressed), for: .touchUpInside)
+           return btn
+       }()
+    
     //MARK: -- Methods
+    
+    @objc private func closeButtonPressed() {
+        dismiss(animated: true, completion: nil)
+    }
     
     private func setViewElementsFromSpeciesData() {
         headerNameView.configureView(from: currentSpecies)
@@ -348,6 +361,7 @@ fileprivate extension UpdatedSpeciesDetailViewController {
         
         view.addSubview(collectionView)
         view.addSubview(donateButton)
+        view.addSubview(closeButton)
     }
     
     func setConstraints() {
@@ -361,6 +375,7 @@ fileprivate extension UpdatedSpeciesDetailViewController {
         setBackgroundVisualEffectBlurConstraints()
         setCollectionViewConstraints()
         setDonateButtonConstraints()
+        setCloseButtonConstraints()
     }
     
     func setVerticalScrollViewConstraints() {
@@ -428,6 +443,14 @@ fileprivate extension UpdatedSpeciesDetailViewController {
             make.height.equalTo(50)
             make.centerX.equalTo(view)
             make.width.equalTo(375)
+        }
+    }
+    
+    func setCloseButtonConstraints() {
+        closeButton.snp.makeConstraints { (make) in
+            make.top.equalToSuperview().inset(5)
+            make.trailing.equalToSuperview().inset(5)
+            make.height.width.equalTo(66)
         }
     }
 }
