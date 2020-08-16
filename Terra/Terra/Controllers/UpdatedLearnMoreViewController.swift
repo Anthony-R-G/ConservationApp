@@ -70,18 +70,16 @@ class UpdatedLearnMoreViewController: UIViewController {
     
     var strategy: LearnMoreVCStrategy! {
         didSet {
-            commonView.configureView(title: strategy.subtitle())
+            commonView.configureView(from: strategy)
         }
     }
-    
-    var currentSpecies: Species!
     
     private lazy var topConstraint: NSLayoutConstraint = {
         return commonView.topAnchor.constraint(equalTo: maskView.topAnchor)
     }()
     
     private lazy var heightConstraint: NSLayoutConstraint = {
-        return commonView.heightAnchor.constraint(equalToConstant: 500)
+        return commonView.heightAnchor.constraint(equalToConstant: Constants.commonViewImageDimension)
     }()
     
     //MARK: -- Methods
@@ -101,9 +99,7 @@ class UpdatedLearnMoreViewController: UIViewController {
     }
     
     private func loadImages() {
-        //          strategy.firebaseStorageManager().getImage(for: currentSpecies.commonName, setTo: headerImageView)
-        
-        FirebaseStorageService.detailImageManager.getImage(for: currentSpecies.commonName, setTo: backgroundImageView)
+        FirebaseStorageService.detailImageManager.getImage(for: strategy.species.commonName, setTo: backgroundImageView)
     }
     
     override func viewDidLayoutSubviews() {

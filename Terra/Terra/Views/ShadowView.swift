@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ShadowView: UIView {
+final class ShadowView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()

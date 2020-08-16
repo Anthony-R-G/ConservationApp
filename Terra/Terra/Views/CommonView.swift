@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CommonView: UIView {
+final class CommonView: UIView {
     //MARK: -- UI Element Initialization
     
     private lazy var titleLabel: UILabel = {
@@ -64,8 +64,9 @@ class CommonView: UIView {
     }
     //MARK: -- Methods
     
-    func configureView(title: String) {
-        titleLabel.text = title
+    func configureView(from strategy: LearnMoreVCStrategy) {
+        titleLabel.text = strategy.subtitle()
+        strategy.firebaseStorageManager().getImage(for: strategy.species.commonName, setTo: backgroundImage)
         subtitleLabel.text = "NOW TRENDING"
         blurbLabel.text = "The event brings together creators and dreamers of all ages"
     }
@@ -124,7 +125,7 @@ fileprivate extension CommonView {
         backgroundImage.snp.makeConstraints { [weak self] (make) in
             guard let self = self else { return }
             make.centerY.centerX.equalTo(self)
-            make.height.width.equalTo(500)
+            make.height.width.equalTo(Constants.commonViewImageDimension)
         }
     }
 }

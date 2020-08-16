@@ -68,7 +68,7 @@
 		976DA46824DFCB5F003F3197 /* SpeciesViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976DA46724DFCB5F003F3197 /* SpeciesViewModelDelegate.swift */; };
 		976F68C224E8A62C00277F79 /* UpdatedSpeciesDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976F68C124E8A62C00277F79 /* UpdatedSpeciesDetailViewController.swift */; };
 		976F68C424E8AADD00277F79 /* UpdatedLearnMoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976F68C324E8AADD00277F79 /* UpdatedLearnMoreViewController.swift */; };
-		976F68C624E8AB2600277F79 /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976F68C524E8AB2600277F79 /* CardCell.swift */; };
+		976F68C624E8AB2600277F79 /* RoundedInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976F68C524E8AB2600277F79 /* RoundedInfoCell.swift */; };
 		976F68C824E8AE2500277F79 /* CommonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976F68C724E8AE2500277F79 /* CommonView.swift */; };
 		976F68CA24E8AE8600277F79 /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976F68C924E8AE8600277F79 /* ShadowView.swift */; };
 		976F68CC24E8B01E00277F79 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976F68CB24E8B01E00277F79 /* NavigationController.swift */; };
@@ -190,7 +190,7 @@
 		976DA46724DFCB5F003F3197 /* SpeciesViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesViewModelDelegate.swift; sourceTree = "<group>"; };
 		976F68C124E8A62C00277F79 /* UpdatedSpeciesDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatedSpeciesDetailViewController.swift; sourceTree = "<group>"; };
 		976F68C324E8AADD00277F79 /* UpdatedLearnMoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatedLearnMoreViewController.swift; sourceTree = "<group>"; };
-		976F68C524E8AB2600277F79 /* CardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCell.swift; sourceTree = "<group>"; };
+		976F68C524E8AB2600277F79 /* RoundedInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedInfoCell.swift; sourceTree = "<group>"; };
 		976F68C724E8AE2500277F79 /* CommonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonView.swift; sourceTree = "<group>"; };
 		976F68C924E8AE8600277F79 /* ShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
 		976F68CB24E8B01E00277F79 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
@@ -349,7 +349,7 @@
 				9772515624DF66A90052A3F6 /* CustomAnnotationView.swift */,
 				97EA493B24E3BEC200C0FE64 /* LearnMoreDynamicHeightWindow.swift */,
 				97A24D2324E49A4100958AB9 /* TaxonomyView.swift */,
-				976F68C524E8AB2600277F79 /* CardCell.swift */,
+				976F68C524E8AB2600277F79 /* RoundedInfoCell.swift */,
 				976F68C724E8AE2500277F79 /* CommonView.swift */,
 				976F68C924E8AE8600277F79 /* ShadowView.swift */,
 			);
@@ -806,7 +806,7 @@
 				975812F124D52F7B00C09D56 /* SpeciesHabitatStrategy.swift in Sources */,
 				97EA493C24E3BEC200C0FE64 /* LearnMoreDynamicHeightWindow.swift in Sources */,
 				975C8E5424E4F11500A0EB9D /* LearnMoreVCThreatsStrategy.swift in Sources */,
-				976F68C624E8AB2600277F79 /* CardCell.swift in Sources */,
+				976F68C624E8AB2600277F79 /* RoundedInfoCell.swift in Sources */,
 				977D877024CD6A1200AE5E51 /* Group.swift in Sources */,
 				97A24D2024E445A800958AB9 /* LearnMoreVCHabitatStrategy.swift in Sources */,
 				97591FE324CCDC48002EAC96 /* FontWeight.swift in Sources */,

@@ -1,5 +1,5 @@
 //
-//  CardCell.swift
+//  RoundedInfoCell.swift
 //  Terra
 //
 //  Created by Anthony Gonzalez on 8/15/20.
@@ -8,7 +8,8 @@
 
 import UIKit
 
-class CardCell: UICollectionViewCell {
+final class RoundedInfoCell: UICollectionViewCell {
+    //MARK: -- UI Element Initialization
     
     private lazy var shadowView: ShadowView = {
         let sv = ShadowView()
@@ -18,15 +19,17 @@ class CardCell: UICollectionViewCell {
     
     private lazy var commonView: CommonView = {
         let cv = CommonView()
-        cv.layer.cornerRadius = 10
+        cv.layer.cornerRadius = Constants.cornerRadius
         cv.layer.masksToBounds = true
         return cv
     }()
     
-    var species: Species!
+    
+    //MARK: -- Properties
+    
     var strategy: LearnMoreVCStrategy! {
         didSet {
-            commonView.configureView(title: strategy.subtitle())
+            commonView.configureView(from: strategy)
         }
     }
     
@@ -43,7 +46,7 @@ class CardCell: UICollectionViewCell {
 
 
 //MARK: -- Add Subviews & Constraints
-extension CardCell {
+extension RoundedInfoCell {
     func addSubviews() {
         contentView.addSubview(shadowView)
         shadowView.addSubview(commonView)

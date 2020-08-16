@@ -90,7 +90,7 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
         cv.alpha = 0
         cv.dataSource = self
         cv.delegate = self
-        cv.register(CardCell.self, forCellWithReuseIdentifier: "cellId")
+        cv.register(RoundedInfoCell.self, forCellWithReuseIdentifier: "cellId")
         return cv
     }()
     
@@ -291,10 +291,9 @@ extension UpdatedSpeciesDetailViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! CardCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! RoundedInfoCell
         let specificStrategy = strategies[indexPath.row]
         cell.strategy = specificStrategy
-        cell.species = currentSpecies
         return cell
     }
 }
@@ -305,7 +304,6 @@ extension UpdatedSpeciesDetailViewController: UICollectionViewDelegate {
         selectedCell = collectionView.cellForItem(at: indexPath)
         let learnMoreVC = UpdatedLearnMoreViewController()
         let specificStrategy = strategies[indexPath.row]
-        learnMoreVC.currentSpecies = currentSpecies
         learnMoreVC.strategy = specificStrategy
         navigationController?.pushViewController(learnMoreVC, animated: true)
     }
