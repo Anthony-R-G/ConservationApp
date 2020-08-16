@@ -71,18 +71,20 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
     }()
     
     private lazy var donateButton: DonateButton = {
-        return DonateButton(gradientColors: [#colorLiteral(red: 1, green: 0.2914688587, blue: 0.3886995912, alpha: 0.9019156678), #colorLiteral(red: 0.5421239734, green: 0.1666001081, blue: 0.2197911441, alpha: 0.8952536387)],
+        let btn = DonateButton(gradientColors: [#colorLiteral(red: 1, green: 0.2914688587, blue: 0.3886995912, alpha: 0.9019156678), #colorLiteral(red: 0.5421239734, green: 0.1666001081, blue: 0.2197911441, alpha: 0.8952536387)],
                             startPoint: CGPoint(x: 0, y: 0),
                             endPoint: CGPoint(x: 1, y: 1))
+        btn.alpha = 0
+        return btn
     }()
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 335, height: 410)
+        layout.itemSize = CGSize(width: 345, height: 400)
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 30
-        layout.sectionInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
-        
+        layout.sectionInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+    
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.backgroundColor = .clear
         cv.alpha = 0
@@ -156,6 +158,7 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
             UIView.animate(withDuration: 1.5) {
                 [weak self] in guard let self = self else { return }
                 self.collectionView.alpha = 1
+                self.donateButton.alpha = 1
             }
         }
     }
@@ -165,6 +168,7 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
             UIView.animate(withDuration: 0.5) {
                 [weak self] in guard let self = self else { return }
                 self.collectionView.alpha = 0
+                self.donateButton.alpha = 0
             }
         }
     }
@@ -224,10 +228,6 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
         }
     }
     
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
-    
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -266,7 +266,6 @@ extension UpdatedSpeciesDetailViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         switch scrollView {
         case verticalScrollView:
-            print("I'm called")
             let offsetY = scrollView.contentOffset.y
             updateBackgroundAnimator(with: offsetY)
             updateTopGradientAlpha(scrollOffset: offsetY)
@@ -326,14 +325,14 @@ extension UpdatedSpeciesDetailViewController: DonateButtonDelegate {
 fileprivate extension UpdatedSpeciesDetailViewController {
     func addSubviews() {
         view.addSubview(verticalScrollView)
-        verticalScrollView.translatesAutoresizingMaskIntoConstraints = false
         
-        let verticalScrollViewUIElements = [headerNameView, subheaderInfoView, exploreButton]
-        verticalScrollViewUIElements.forEach{ verticalScrollView.addSubview($0) }
-        verticalScrollViewUIElements.forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
+        let UIElements = [headerNameView, subheaderInfoView, exploreButton]
+        UIElements.forEach{ verticalScrollView.addSubview($0) }
+        UIElements.forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
         backgroundImageView.addSubview(backgroundVisualEffectBlur)
         
         view.addSubview(collectionView)
+        view.addSubview(donateButton)
     }
     
     func setConstraints() {
@@ -346,6 +345,7 @@ fileprivate extension UpdatedSpeciesDetailViewController {
         
         setBackgroundVisualEffectBlurConstraints()
         setCollectionViewConstraints()
+        setDonateButtonConstraints()
     }
     
     func setVerticalScrollViewConstraints() {
@@ -404,6 +404,15 @@ fileprivate extension UpdatedSpeciesDetailViewController {
             make.height.equalTo(450)
             make.leading.trailing.equalToSuperview()
             make.centerY.equalToSuperview().offset(70)
+        }
+    }
+    
+    func setDonateButtonConstraints() {
+        donateButton.snp.makeConstraints { (make) in
+            make.bottom.equalTo(view).inset(70)
+            make.height.equalTo(50)
+            make.centerX.equalTo(view)
+            make.width.equalTo(375)
         }
     }
 }

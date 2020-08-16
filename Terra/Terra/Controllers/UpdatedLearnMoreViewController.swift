@@ -177,8 +177,8 @@ extension UpdatedLearnMoreViewController {
     
     func setCloseButtonConstraints() {
         closeButton.snp.makeConstraints { (make) in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(16)
-            make.trailing.equalToSuperview().inset(16)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(Constants.spacingConstant)
+            make.trailing.equalToSuperview().inset(Constants.spacingConstant)
             make.height.width.equalTo(44)
         }
     }
@@ -255,7 +255,7 @@ extension UpdatedLearnMoreViewController: Animatable {
         }
         
         // Common view does not need to worry about the safe area anymore. Just restore the original value.
-        commonView.topConstraintValue = 16
+        commonView.topConstraintValue = Constants.spacingConstant
         
         // Animate the height of the common view to be the same size as the TO frame.
         // Also animate hiding the close button

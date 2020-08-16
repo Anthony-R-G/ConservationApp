@@ -12,27 +12,31 @@ class CommonView: UIView {
     //MARK: -- UI Element Initialization
     
     private lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 28, weight: .semibold)
-        label.lineBreakMode = .byTruncatingTail
-        label.text = "HI"
-        label.textColor = .black
+        let label = Factory.makeLabel(title: nil,
+                                      weight: .bold,
+                                      size: 28,
+                                      color: .black,
+                                      alignment: .left)
         label.numberOfLines = 0
         return label
     }()
     
     private lazy var subtitleLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 16)
-        label.textColor = #colorLiteral(red: 0.4823529412, green: 0.4823529412, blue: 0.4823529412, alpha: 1)
+        let label = Factory.makeLabel(title: nil,
+                                      weight: .bold,
+                                      size: 16,
+                                      color: #colorLiteral(red: 0.4823529412, green: 0.4823529412, blue: 0.4823529412, alpha: 1),
+                                      alignment: .left)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     private lazy var blurbLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 16)
-        label.textColor = .darkGray
+        let label = Factory.makeLabel(title: nil,
+                                      weight: .regular,
+                                      size: 16,
+                                      color: .darkGray,
+                                      alignment: .left)
         label.lineBreakMode = .byTruncatingTail
         label.numberOfLines = 0
         return label
@@ -41,7 +45,7 @@ class CommonView: UIView {
     private lazy var backgroundImage: UIImageView = {
         let iv = UIImageView()
         iv.image = #imageLiteral(resourceName: "wwdc")
-        iv.backgroundColor = .clear
+        iv.backgroundColor = .black
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
         return iv
@@ -51,7 +55,8 @@ class CommonView: UIView {
     var strategy: LearnMoreVCStrategy!
     
     private lazy var topConstraint: NSLayoutConstraint = {
-        return subtitleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 16)
+        return subtitleLabel.topAnchor.constraint(equalTo: topAnchor,
+                                                  constant: Constants.spacingConstant)
     }()
     
     var topConstraintValue: CGFloat {
@@ -70,7 +75,6 @@ class CommonView: UIView {
         super.init(frame: frame)
         insetsLayoutMarginsFromSafeArea = false
         addSubviews()
-        backgroundColor = .clear
         setConstraints()
     }
     
@@ -97,15 +101,15 @@ fileprivate extension CommonView {
     func setTitleLabelConstraints() {
         titleLabel.snp.makeConstraints { [weak self] (make) in
             guard let self = self else { return }
-            make.top.equalTo(subtitleLabel.snp.bottom).offset(8)
-            make.leading.trailing.equalTo(self).inset(16)
+            make.top.equalTo(subtitleLabel.snp.bottom).offset(Constants.spacingConstant/2)
+            make.leading.trailing.equalTo(self).inset(Constants.spacingConstant)
         }
     }
     
     func setSubtitleLabelConstraints() {
         subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            subtitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            subtitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.spacingConstant),
             topConstraint
         ])
     }
@@ -113,7 +117,7 @@ fileprivate extension CommonView {
     func setBlurbLabelConstraints() {
         blurbLabel.snp.makeConstraints { [weak self] (make) in
             guard let self = self else { return }
-            make.leading.bottom.trailing.equalTo(self).inset(16)
+            make.leading.bottom.trailing.equalTo(self).inset(Constants.spacingConstant)
         }
     }
     
