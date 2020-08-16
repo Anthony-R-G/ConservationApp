@@ -85,7 +85,7 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
         layout.sectionInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
         
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.backgroundColor = .blue
+        cv.backgroundColor = .clear
         cv.dataSource = self
         cv.delegate = self
         cv.register(CardCell.self, forCellWithReuseIdentifier: "cellId")

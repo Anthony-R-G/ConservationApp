@@ -72,6 +72,7 @@
 		976F68C824E8AE2500277F79 /* CommonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976F68C724E8AE2500277F79 /* CommonView.swift */; };
 		976F68CA24E8AE8600277F79 /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976F68C924E8AE8600277F79 /* ShadowView.swift */; };
 		976F68CC24E8B01E00277F79 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976F68CB24E8B01E00277F79 /* NavigationController.swift */; };
+		976F68CE24E8B1C300277F79 /* Animatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976F68CD24E8B1C300277F79 /* Animatable.swift */; };
 		976FB55324D367AE00848E35 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 97591FE124CCDC28002EAC96 /* Roboto-Regular.ttf */; };
 		976FB55524D367E400848E35 /* Roboto-Light-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 976FB55424D367E400848E35 /* Roboto-Light-Italic.ttf */; };
 		9772515724DF66A90052A3F6 /* CustomAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9772515624DF66A90052A3F6 /* CustomAnnotationView.swift */; };
@@ -193,6 +194,7 @@
 		976F68C724E8AE2500277F79 /* CommonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonView.swift; sourceTree = "<group>"; };
 		976F68C924E8AE8600277F79 /* ShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
 		976F68CB24E8B01E00277F79 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
+		976F68CD24E8B1C300277F79 /* Animatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animatable.swift; sourceTree = "<group>"; };
 		976FB55424D367E400848E35 /* Roboto-Light-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light-Italic.ttf"; sourceTree = "<group>"; };
 		9772515624DF66A90052A3F6 /* CustomAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotationView.swift; sourceTree = "<group>"; };
 		9772515824DF7F9C0052A3F6 /* NewsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsResponse.swift; sourceTree = "<group>"; };
@@ -288,6 +290,7 @@
 				97452E4723E1EEE9005636E0 /* GradientView.swift */,
 				972BBF7624C01FA900B6F7C0 /* PSORoundedVisualEffectView.swift */,
 				977D877524CE1F3700AE5E51 /* UIRoundedButtonWithGradientAndShadow.swift */,
+				976F68CD24E8B1C300277F79 /* Animatable.swift */,
 			);
 			path = "Third Party Code";
 			sourceTree = "<group>";
@@ -496,15 +499,15 @@
 			isa = PBXGroup;
 			children = (
 				97FAD4E624D75B20007FEFD8 /* TabBarController.swift */,
+				976F68CB24E8B01E00277F79 /* NavigationController.swift */,
 				97BF745223DF42F90058F2D7 /* SpeciesListViewController.swift */,
 				976F68C124E8A62C00277F79 /* UpdatedSpeciesDetailViewController.swift */,
-				97B406A624E1FDED00A79E98 /* LearnMoreViewController.swift */,
+				976F68C324E8AADD00277F79 /* UpdatedLearnMoreViewController.swift */,
 				97FAD4E824D75DBD007FEFD8 /* NewsViewController.swift */,
 				97997F2B24DCE18B00981087 /* MGLMapViewController.swift */,
 				970B172424C2699E007F32E0 /* SpeciesDetailViewController.swift */,
 				97A6DE8124E631970067D784 /* AlternateSpeciesDetailViewController.swift */,
-				976F68C324E8AADD00277F79 /* UpdatedLearnMoreViewController.swift */,
-				976F68CB24E8B01E00277F79 /* NavigationController.swift */,
+				97B406A624E1FDED00A79E98 /* LearnMoreViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -772,6 +775,7 @@
 				97A24D2424E49A4100958AB9 /* TaxonomyView.swift in Sources */,
 				97CDF11724E4A9970055FE78 /* LearnMoreTaxonomyStrategy.swift in Sources */,
 				976F68CC24E8B01E00277F79 /* NavigationController.swift in Sources */,
+				976F68CE24E8B1C300277F79 /* Animatable.swift in Sources */,
 				97FAD4E724D75B20007FEFD8 /* TabBarController.swift in Sources */,
 				9772515D24DF80FB0052A3F6 /* APIClient.swift in Sources */,
 				970B172524C2699E007F32E0 /* SpeciesDetailViewController.swift in Sources */,
