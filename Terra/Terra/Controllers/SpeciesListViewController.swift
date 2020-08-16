@@ -216,10 +216,10 @@ extension SpeciesListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let specificAnimal = viewModel.specificSpecies(at: indexPath.row)
         let detailVC = UpdatedSpeciesDetailViewController()
-        detailVC.modalPresentationStyle = .fullScreen
         detailVC.currentSpecies = specificAnimal
-        
-        presentModally(detailVC)
+        let navVC = NavigationController(rootViewController: detailVC)
+        navVC.modalPresentationStyle = .fullScreen
+        presentModally(navVC)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
