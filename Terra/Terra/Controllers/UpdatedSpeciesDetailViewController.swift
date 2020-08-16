@@ -40,7 +40,6 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
         var frame = hiv.frame
         frame.size.height = UIScreen.main.bounds.height * 0.30
         hiv.frame = frame
-        hiv.backgroundColor = .red
         return hiv
     }()
     
@@ -230,8 +229,9 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
     }
     
     private func updateHeaderTopAnchor(scrollOffset: CGFloat) {
-        let headerTopAnchorConstantOffset = (UIScreen.main.bounds.height * 0.48) - scrollOffset
-        let newHeaderTopAnchorConstant = max(90, headerTopAnchorConstantOffset)
+        let screenHeight = UIScreen.main.bounds.height
+        let headerTopAnchorConstantOffset = (screenHeight * 0.48) - scrollOffset
+        let newHeaderTopAnchorConstant = max(screenHeight * 0.10, headerTopAnchorConstantOffset)
         headerNameViewTopAnchorConstraint.constant = newHeaderTopAnchorConstant
     }
     
@@ -242,7 +242,7 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
     }
     
     private func checkHeaderLock() {
-        if headerNameViewTopAnchorConstraint.constant == 90 {
+        if headerNameViewTopAnchorConstraint.constant == UIScreen.main.bounds.height * 0.10 {
             headerPinnedToTop = true
         } else {
             headerPinnedToTop = false
