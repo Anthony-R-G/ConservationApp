@@ -223,8 +223,9 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
     }
     
     private func updateHeaderViewHeight(scrollOffset: CGFloat) {
-        let headerNameViewOffset = (UIScreen.main.bounds.height * 0.30) - (scrollOffset)
-        let newHeaderNameViewHeight = max(110, headerNameViewOffset)
+        let screenHeight = UIScreen.main.bounds.height
+        let headerNameViewOffset = (screenHeight * 0.30) - (scrollOffset)
+        let newHeaderNameViewHeight = max(screenHeight * 0.123, headerNameViewOffset)
         headerNameViewHeightConstraint.constant = newHeaderNameViewHeight
     }
     
