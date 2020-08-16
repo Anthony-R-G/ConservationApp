@@ -72,8 +72,8 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
     
     private lazy var donateButton: DonateButton = {
         let btn = DonateButton(gradientColors: [#colorLiteral(red: 1, green: 0.2914688587, blue: 0.3886995912, alpha: 0.9019156678), #colorLiteral(red: 0.5421239734, green: 0.1666001081, blue: 0.2197911441, alpha: 0.8952536387)],
-                            startPoint: CGPoint(x: 0, y: 0),
-                            endPoint: CGPoint(x: 1, y: 1))
+                               startPoint: CGPoint(x: 0, y: 0),
+                               endPoint: CGPoint(x: 1, y: 1))
         btn.alpha = 0
         return btn
     }()
@@ -84,7 +84,7 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 30
         layout.sectionInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-    
+        
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.backgroundColor = .clear
         cv.alpha = 0
@@ -307,6 +307,22 @@ extension UpdatedSpeciesDetailViewController: UICollectionViewDelegate {
         learnMoreVC.strategy = specificStrategy
         navigationController?.pushViewController(learnMoreVC, animated: true)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+        
+        print("didHighlight")
+        let cell = collectionView.cellForItem(at: indexPath)
+        UIView.animate(withDuration: 0.3) {
+            cell?.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath)
+        UIView.animate(withDuration: 0.3) {
+            cell?.transform = CGAffineTransform(scaleX: 1, y: 1)
+        }
+    }
 }
 
 //MARK: -- Custom Delegate Implementation
@@ -420,7 +436,7 @@ extension UpdatedSpeciesDetailViewController: Animatable {
     var containerView: UIView? {
         return collectionView
     }
-
+    
     var childView: UIView? {
         return selectedCell
     }

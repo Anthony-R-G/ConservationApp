@@ -16,7 +16,7 @@ struct LearnMoreVCHabitatStrategy: LearnMoreVCStrategy {
     }
     
     func subtitle() -> String {
-        return "Habitat"
+        return "HABITAT"
     }
     
     func firebaseStorageManager() -> FirebaseStorageService {
