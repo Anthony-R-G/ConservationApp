@@ -31,12 +31,28 @@ class UpdatedLearnMoreViewController: UIViewController {
         return sv
     }()
     
+    private lazy var backgroundImageView: UIImageView = {
+        let iv = UIImageView(frame: UIScreen.main.bounds)
+        iv.backgroundColor = .black
+        iv.contentMode = UIView.ContentMode.scaleAspectFill
+
+        return iv
+    }()
+    
+    private lazy var backgroundBlurEffectView: UIVisualEffectView = {
+        let blurEffect = UIBlurEffect(style: .systemUltraThinMaterialDark)
+        let bev = UIVisualEffectView(effect: blurEffect)
+        bev.frame = view.bounds
+        return bev
+    }()
+    
     private lazy var commonView: CommonView = {
         return CommonView()
     }()
     
     private lazy var bodyView: UIView = {
         let view = UIView()
+        view.backgroundColor = .clear
         return view
     }()
     
@@ -47,7 +63,8 @@ I am not to blame for that crown upon your head, Maggie! Giving grape juice to t
 """
         label.numberOfLines = 0
         label.text = text + text + text + text
-        label.textColor = .black
+        label.textColor = .white
+        label.backgroundColor = .clear
         return label
     }()
     
@@ -65,6 +82,8 @@ I am not to blame for that crown upon your head, Maggie! Giving grape juice to t
             commonView.configureView(title: strategy.subtitle())
         }
     }
+    
+    var currentSpecies: Species!
     
     private lazy var topConstraint: NSLayoutConstraint = {
         return commonView.topAnchor.constraint(equalTo: maskView.topAnchor)
@@ -90,6 +109,12 @@ I am not to blame for that crown upon your head, Maggie! Giving grape juice to t
         }
     }
     
+    private func loadImages() {
+//          strategy.firebaseStorageManager().getImage(for: currentSpecies.commonName, setTo: headerImageView)
+          
+          FirebaseStorageService.detailImageManager.getImage(for: currentSpecies.commonName, setTo: backgroundImageView)
+      }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         scrollView.scrollIndicatorInsets = view.safeAreaInsets
@@ -98,10 +123,11 @@ I am not to blame for that crown upon your head, Maggie! Giving grape juice to t
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .clear
         navigationController?.navigationBar.isHidden = true
         addSubviews()
         setConstraints()
+        loadImages()
     }
 }
 
@@ -111,7 +137,9 @@ extension UpdatedLearnMoreViewController {
     func addSubviews() {
         view.addSubview(shadowView)
         shadowView.addSubview(maskView)
-        maskView.addSubview(scrollView)
+        maskView.addSubview(backgroundImageView)
+        maskView.addSubview(backgroundBlurEffectView)
+        backgroundBlurEffectView.contentView.addSubview(scrollView)
         
         scrollView.addSubview(bodyView)
         scrollView.addSubview(commonView)
@@ -133,6 +161,7 @@ extension UpdatedLearnMoreViewController {
         setBodyTextConstraints()
         
         setCloseButtonConstraints()
+        setBackgroundImageConstraints()
     }
     
     func setShadowViewConstraints() {
@@ -182,6 +211,12 @@ extension UpdatedLearnMoreViewController {
             make.height.width.equalTo(44)
         }
     }
+    
+    func setBackgroundImageConstraints() {
+          backgroundImageView.snp.makeConstraints { (make) in
+              make.edges.equalTo(view)
+          }
+      }
 }
 
 //MARK: -- Animatable Methods

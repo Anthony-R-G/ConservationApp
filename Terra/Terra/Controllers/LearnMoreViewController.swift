@@ -98,15 +98,15 @@ final class LearnMoreViewController: UIViewController {
         return stackView
     }()
     
-    private lazy var containerStackView: UIStackView = {
-        return strategy.arrangedSubviews()
-    }()
-    
     private lazy var headerImageBottomGradient: GradientView = {
         let gv = GradientView()
         gv.startColor = .clear
         gv.endColor = #colorLiteral(red: 0.2408030033, green: 0.2476645112, blue: 0.2501021922, alpha: 0.4022902398)
         return gv
+    }()
+    
+    private lazy var containerStackView: UIStackView = {
+        return strategy.arrangedSubviews()
     }()
     
     //MARK: -- Properties

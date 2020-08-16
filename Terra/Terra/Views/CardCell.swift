@@ -18,7 +18,6 @@ class CardCell: UICollectionViewCell {
     
     private lazy var commonView: CommonView = {
         let cv = CommonView()
-//        cv.configureView(title: strategy.subtitle())
         cv.layer.cornerRadius = 10
         cv.layer.masksToBounds = true
         return cv

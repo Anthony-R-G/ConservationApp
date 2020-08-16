@@ -305,6 +305,7 @@ extension UpdatedSpeciesDetailViewController: UICollectionViewDelegate {
         selectedCell = collectionView.cellForItem(at: indexPath)
         let learnMoreVC = UpdatedLearnMoreViewController()
         let specificStrategy = strategies[indexPath.row]
+        learnMoreVC.currentSpecies = currentSpecies
         learnMoreVC.strategy = specificStrategy
         navigationController?.pushViewController(learnMoreVC, animated: true)
     }

@@ -27,7 +27,6 @@ class CommonView: UIView {
                                       size: 16,
                                       color: #colorLiteral(red: 0.4823529412, green: 0.4823529412, blue: 0.4823529412, alpha: 1),
                                       alignment: .left)
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
