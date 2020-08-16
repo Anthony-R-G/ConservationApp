@@ -38,7 +38,7 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
     private lazy var headerNameView: DetailHeaderNameView = {
         let hiv = DetailHeaderNameView()
         var frame = hiv.frame
-        frame.size.height = 275
+        frame.size.height = UIScreen.main.bounds.height * 0.30
         hiv.frame = frame
         return hiv
     }()
@@ -46,7 +46,7 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
     private lazy var subheaderInfoView: DetailSubheaderView = {
         let siv = DetailSubheaderView()
         var frame = siv.frame
-        frame.size.height = 80
+        frame.size.height = headerNameView.frame.height * 0.30
         siv.frame = frame
         return siv
     }()
@@ -75,6 +75,7 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
                                startPoint: CGPoint(x: 0, y: 0),
                                endPoint: CGPoint(x: 1, y: 1))
         btn.alpha = 0
+        btn.delegate = self
         return btn
     }()
     
@@ -102,7 +103,7 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
     
     var headerPinnedToTop: Bool = false {
         didSet {
-            headerPinnedToTop ? animateStackIn() : animateStackOut()
+            headerPinnedToTop ? animateCollectionViewIn() : animateCollectionViewOut()
         }
     }
     
@@ -115,7 +116,7 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
     }()
     
     private lazy var headerNameViewTopAnchorConstraint: NSLayoutConstraint = {
-        return headerNameView.topAnchor.constraint(equalTo: view.topAnchor, constant: 430)
+        return headerNameView.topAnchor.constraint(equalTo: view.topAnchor, constant: UIScreen.main.bounds.height * 0.48)
     }()
     
     private lazy var subheaderInfoViewHeightConstraint: NSLayoutConstraint = {
@@ -165,7 +166,8 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
         FirebaseStorageService.detailImageManager.getImage(for: currentSpecies.commonName, setTo: backgroundImageView)
     }
     
-    private func animateStackIn() {
+    private func animateCollectionViewIn() {
+        
         DispatchQueue.main.async {
             UIView.animate(withDuration: 1.0) {
                 [weak self] in guard let self = self else { return }
@@ -175,7 +177,7 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
         }
     }
     
-    private func animateStackOut() {
+    private func animateCollectionViewOut() {
         DispatchQueue.main.async {
             UIView.animate(withDuration: 0.3) {
                 [weak self] in guard let self = self else { return }
@@ -253,11 +255,13 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
         exploreButton.startShimmeringAnimation(animationSpeed: 2,
                                                direction: .leftToRight,
                                                repeatCount: .infinity)
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         animator?.stopAnimation(true)
         animator?.finishAnimation(at: .current)
+
     }
     
     override func viewDidLoad() {

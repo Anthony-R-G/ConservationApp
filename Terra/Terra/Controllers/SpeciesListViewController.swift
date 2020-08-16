@@ -208,6 +208,24 @@ extension SpeciesListViewController: UICollectionViewDataSource {
 
 //MARK: -- CollectionView Delegate Methods
 
+extension SpeciesListViewController: UICollectionViewDelegate {
+     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+           let cell = collectionView.cellForItem(at: indexPath)
+           let generator = UIImpactFeedbackGenerator(style: .medium)
+           generator.impactOccurred()
+           UIView.animate(withDuration: 0.3) {
+            cell?.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
+           }
+       }
+    
+    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+           let cell = collectionView.cellForItem(at: indexPath)
+           UIView.animate(withDuration: 0.3) {
+               cell?.transform = CGAffineTransform(scaleX: 1, y: 1)
+           }
+       }
+}
+
 extension SpeciesListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.width, height: 227)
