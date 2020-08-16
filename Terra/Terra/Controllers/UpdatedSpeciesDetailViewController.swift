@@ -397,3 +397,13 @@ fileprivate extension UpdatedSpeciesDetailViewController {
         }
     }
 }
+
+extension UpdatedSpeciesDetailViewController: Animatable {
+    var containerView: UIView? {
+        return collectionView
+    }
+
+    var childView: UIView? {
+        return selectedCell
+    }
+}
