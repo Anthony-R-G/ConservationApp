@@ -218,7 +218,7 @@ extension SpeciesListViewController: UICollectionViewDelegateFlowLayout {
         let detailVC = UpdatedSpeciesDetailViewController()
         detailVC.currentSpecies = specificAnimal
         let navVC = NavigationController(rootViewController: detailVC)
-//        navVC.modalPresentationStyle = .fullScreen
+        navVC.modalPresentationStyle = .fullScreen
         presentModally(navVC)
     }
     

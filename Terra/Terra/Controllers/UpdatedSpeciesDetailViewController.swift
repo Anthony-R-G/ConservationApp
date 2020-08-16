@@ -17,7 +17,6 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
     private lazy var verticalScrollView: UIScrollView = {
         let sv = UIScrollView()
         sv.showsVerticalScrollIndicator = false
-        sv.delegate = self
         return sv
     }()
     
@@ -86,6 +85,7 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
         
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.backgroundColor = .clear
+        cv.alpha = 0
         cv.dataSource = self
         cv.delegate = self
         cv.register(CardCell.self, forCellWithReuseIdentifier: "cellId")
@@ -113,7 +113,7 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
     }()
     
     private lazy var headerNameViewTopAnchorConstraint: NSLayoutConstraint = {
-        return headerNameView.topAnchor.constraint(equalTo: view.topAnchor, constant: 400)
+        return headerNameView.topAnchor.constraint(equalTo: view.topAnchor, constant: 430)
     }()
     
     private lazy var subheaderInfoViewHeightConstraint: NSLayoutConstraint = {
@@ -155,7 +155,7 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
         DispatchQueue.main.async {
             UIView.animate(withDuration: 1.5) {
                 [weak self] in guard let self = self else { return }
-//                self.collectionView.alpha = 1
+                self.collectionView.alpha = 1
             }
         }
     }
@@ -164,7 +164,7 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
         DispatchQueue.main.async {
             UIView.animate(withDuration: 0.5) {
                 [weak self] in guard let self = self else { return }
-//                self.collectionView.alpha = 0
+                self.collectionView.alpha = 0
             }
         }
     }
@@ -206,7 +206,7 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
     
     private func updateHeaderTopAnchor(scrollOffset: CGFloat) {
         let headerTopAnchorConstantOffset = 400 - scrollOffset
-        let newHeaderTopAnchorConstant = max(45, headerTopAnchorConstantOffset)
+        let newHeaderTopAnchorConstant = max(90, headerTopAnchorConstantOffset)
         headerNameViewTopAnchorConstraint.constant = newHeaderTopAnchorConstant
     }
     
@@ -217,7 +217,7 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
     }
     
     private func checkHeaderLock() {
-        if headerNameViewTopAnchorConstraint.constant == 35 {
+        if headerNameViewTopAnchorConstraint.constant == 90 {
             headerPinnedToTop = true
         } else {
             headerPinnedToTop = false
@@ -233,6 +233,7 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
         super.viewDidLayoutSubviews()
         setVerticalScrollViewConstraints()
         verticalScrollView.contentSize.height = UIScreen.main.bounds.height + 400
+        verticalScrollView.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -255,7 +256,8 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
         setupBackgroundVisualEffectBlur()
         setBackground()
         setViewElementsFromSpeciesData()
-        strategies = [LearnMoreVCOverviewStrategy(species: currentSpecies), LearnMoreVCHabitatStrategy(species: currentSpecies), LearnMoreVCHabitatStrategy(species: currentSpecies)]
+        
+        strategies = [LearnMoreVCOverviewStrategy(species: currentSpecies), LearnMoreVCHabitatStrategy(species: currentSpecies), LearnMoreVCThreatsStrategy(species: currentSpecies)]
     }
 }
 
@@ -264,6 +266,7 @@ extension UpdatedSpeciesDetailViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         switch scrollView {
         case verticalScrollView:
+            print("I'm called")
             let offsetY = scrollView.contentOffset.y
             updateBackgroundAnimator(with: offsetY)
             updateTopGradientAlpha(scrollOffset: offsetY)
@@ -350,7 +353,6 @@ fileprivate extension UpdatedSpeciesDetailViewController {
             make.edges.equalToSuperview()
         }
     }
-    
     
     func setBackgroundImageViewConstraints() {
         backgroundImageView.snp.makeConstraints { (make) in
