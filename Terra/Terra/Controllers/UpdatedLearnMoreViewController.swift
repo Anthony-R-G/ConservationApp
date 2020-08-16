@@ -91,7 +91,7 @@ class UpdatedLearnMoreViewController: UIViewController {
     func asCard(_ value: Bool) {
         if value {
             // Round the corners
-            maskView.layer.cornerRadius = 20
+            maskView.layer.cornerRadius = Constants.cornerRadius
         } else {
             // Round the corners
             maskView.layer.cornerRadius = 0
@@ -105,7 +105,10 @@ class UpdatedLearnMoreViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         scrollView.scrollIndicatorInsets = view.safeAreaInsets
-        scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: view.safeAreaInsets.bottom, right: 0)
+        scrollView.contentInset = UIEdgeInsets(top: 0,
+                                               left: 0,
+                                               bottom: view.safeAreaInsets.bottom,
+                                               right: 0)
     }
     
     override func viewDidLoad() {

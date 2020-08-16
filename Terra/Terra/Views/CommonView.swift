@@ -14,8 +14,8 @@ final class CommonView: UIView {
     private lazy var titleLabel: UILabel = {
         let label = Factory.makeLabel(title: nil,
                                       weight: .bold,
-                                      size: 28,
-                                      color: .black,
+                                      size: 36,
+                                      color: .white,
                                       alignment: .left)
         label.numberOfLines = 0
         return label
@@ -52,7 +52,7 @@ final class CommonView: UIView {
     
     private lazy var headerStatusBarGradient: GradientView = {
         let gv = GradientView()
-        gv.startColor = #colorLiteral(red: 0.09561876208, green: 0.09505801648, blue: 0.09605474025, alpha: 0.5088827055)
+        gv.startColor = #colorLiteral(red: 0.05166878551, green: 0.05191607028, blue: 0.05249153823, alpha: 0.6392069777)
         gv.endColor = .clear
         return gv
     }()
@@ -74,8 +74,8 @@ final class CommonView: UIView {
     func configureView(from strategy: LearnMoreVCStrategy) {
         titleLabel.text = strategy.subtitle()
         strategy.firebaseStorageManager().getImage(for: strategy.species.commonName, setTo: backgroundImage)
-        subtitleLabel.text = "NOW TRENDING"
-        blurbLabel.text = "The event brings together creators and dreamers of all ages"
+//        subtitleLabel.text = "NOW TRENDING"
+//        blurbLabel.text = "The event brings together creators and dreamers of all ages"
     }
     
     override init(frame: CGRect) {
@@ -96,6 +96,7 @@ final class CommonView: UIView {
 fileprivate extension CommonView {
     func addSubviews() {
         [backgroundImage, titleLabel, subtitleLabel, blurbLabel].forEach { addSubview($0) }
+        backgroundImage.addSubview(headerStatusBarGradient)
     }
     
     func setConstraints() {
@@ -103,6 +104,7 @@ fileprivate extension CommonView {
         setSubtitleLabelConstraints()
         setBlurbLabelConstraints()
         setBackgroundImageConstraints()
+        setHeaderStatusBarGradientConstraints()
     }
     
     func setTitleLabelConstraints() {
@@ -133,6 +135,13 @@ fileprivate extension CommonView {
             guard let self = self else { return }
             make.centerY.centerX.equalTo(self)
             make.height.width.equalTo(Constants.commonViewImageDimension)
+        }
+    }
+    
+    func setHeaderStatusBarGradientConstraints() {
+        headerStatusBarGradient.snp.makeConstraints { (make) in
+            make.top.left.right.equalTo(backgroundImage)
+            make.height.equalTo(backgroundImage.snp.height).multipliedBy(0.30)
         }
     }
 }
