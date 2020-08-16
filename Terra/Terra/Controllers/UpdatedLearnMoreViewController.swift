@@ -91,7 +91,7 @@ class UpdatedLearnMoreViewController: UIViewController {
     func asCard(_ value: Bool) {
         if value {
             // Round the corners
-            maskView.layer.cornerRadius = 10
+            maskView.layer.cornerRadius = 20
         } else {
             // Round the corners
             maskView.layer.cornerRadius = 0

@@ -50,6 +50,13 @@ final class CommonView: UIView {
         return iv
     }()
     
+    private lazy var headerStatusBarGradient: GradientView = {
+        let gv = GradientView()
+        gv.startColor = #colorLiteral(red: 0.09561876208, green: 0.09505801648, blue: 0.09605474025, alpha: 0.5088827055)
+        gv.endColor = .clear
+        return gv
+    }()
+    
     //MARK: -- Properties
     var strategy: LearnMoreVCStrategy!
     
