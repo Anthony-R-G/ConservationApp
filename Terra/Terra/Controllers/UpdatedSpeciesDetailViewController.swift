@@ -70,6 +70,13 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
         return btn
     }()
     
+    //To set donate button equally between view & cv bottom
+    private lazy var donateButtonContainer: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        return view
+    }()
+    
     private lazy var donateButton: DonateButton = {
         let btn = DonateButton(gradientColors: [#colorLiteral(red: 1, green: 0.2914688587, blue: 0.3886995912, alpha: 0.9019156678), #colorLiteral(red: 0.5421239734, green: 0.1666001081, blue: 0.2197911441, alpha: 0.8952536387)],
                                startPoint: CGPoint(x: 0, y: 0),
@@ -81,18 +88,24 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
     
     private lazy var collectionView: UICollectionView = {
         let screen = UIScreen.main.bounds
+        let collectionViewFrame = CGRect(origin: .zero,
+                                         size: CGSize(
+                                            width: screen.width,
+                                            height: screen.height * 0.468))
     
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: screen.width * 0.833,
-                                 height: screen.height * 0.445)
+                                 height:  collectionViewFrame.height * 0.89)
+        
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 30
-        layout.sectionInset = UIEdgeInsets(top: Constants.spacingConstant,
+        layout.sectionInset = UIEdgeInsets(top: Constants.spacingConstant / 2,
                                            left: Constants.spacingConstant,
-                                           bottom: Constants.spacingConstant,
+                                           bottom: Constants.spacingConstant / 2,
                                            right: Constants.spacingConstant)
         
-        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        let cv = UICollectionView(frame: collectionViewFrame,
+                                  collectionViewLayout: layout)
         cv.backgroundColor = .clear
         cv.alpha = 0
         cv.dataSource = self
@@ -259,7 +272,6 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
         exploreButton.startShimmeringAnimation(animationSpeed: 2,
                                                direction: .leftToRight,
                                                repeatCount: .infinity)
@@ -269,7 +281,6 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         animator?.stopAnimation(true)
         animator?.finishAnimation(at: .current)
-
     }
     
     override func viewDidLoad() {
@@ -372,22 +383,27 @@ fileprivate extension UpdatedSpeciesDetailViewController {
         backgroundImageView.addSubview(backgroundVisualEffectBlur)
         
         view.addSubview(collectionView)
-        view.addSubview(donateButton)
+        view.addSubview(donateButtonContainer)
         view.addSubview(closeButton)
+        
+        donateButtonContainer.addSubview(donateButton)
     }
     
     func setConstraints() {
         setBackgroundImageViewConstraints()
+        setBackgroundVisualEffectBlurConstraints()
         setBackgroundGradientOverlayConstraints()
         
+        setCloseButtonConstraints()
         setHeaderInfoViewConstraints()
         setSubheaderInfoViewConstraints()
         setDiscoverButtonConstraints()
         
-        setBackgroundVisualEffectBlurConstraints()
+        
         setCollectionViewConstraints()
+        setDonateButtonContainerConstraints()
         setDonateButtonConstraints()
-        setCloseButtonConstraints()
+        
     }
     
     func setVerticalScrollViewConstraints() {
@@ -443,18 +459,24 @@ fileprivate extension UpdatedSpeciesDetailViewController {
     
     func setCollectionViewConstraints() {
         collectionView.snp.makeConstraints { (make) in
-            make.height.equalTo(450)
+            make.height.equalTo(collectionView.frame.height)
             make.leading.trailing.equalToSuperview()
             make.centerY.equalToSuperview().offset(70)
         }
     }
     
+    func setDonateButtonContainerConstraints() {
+        donateButtonContainer.snp.makeConstraints { (make) in
+            make.leading.trailing.bottom.equalToSuperview()
+            make.top.equalTo(collectionView.snp.bottom).inset(Constants.spacingConstant)
+        }
+    }
+    
     func setDonateButtonConstraints() {
         donateButton.snp.makeConstraints { (make) in
-            make.bottom.equalTo(view).inset(70)
+            make.centerX.centerY.equalTo(donateButtonContainer)
+            make.width.equalTo(view).multipliedBy(0.9)
             make.height.equalTo(50)
-            make.centerX.equalTo(view)
-            make.width.equalTo(375)
         }
     }
     
