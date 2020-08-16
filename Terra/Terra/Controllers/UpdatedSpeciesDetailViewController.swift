@@ -38,8 +38,9 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
     private lazy var headerNameView: DetailHeaderNameView = {
         let hiv = DetailHeaderNameView()
         var frame = hiv.frame
-        frame.size.height = UIScreen.main.bounds.height * 0.30
+        frame.size.height = screenSize.height * 0.30
         hiv.frame = frame
+        hiv.configureView(from: currentSpecies)
         return hiv
     }()
     
@@ -48,6 +49,7 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
         var frame = siv.frame
         frame.size.height = headerNameView.frame.height * 0.30
         siv.frame = frame
+        siv.configureView(from: currentSpecies)
         return siv
     }()
     
@@ -87,14 +89,14 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
     }()
     
     private lazy var collectionView: UICollectionView = {
-        let screen = UIScreen.main.bounds
+        
         let collectionViewFrame = CGRect(origin: .zero,
                                          size: CGSize(
-                                            width: screen.width,
-                                            height: screen.height * 0.468))
-    
+                                            width: screenSize.width,
+                                            height: screenSize.height * 0.468))
+        
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: screen.width * 0.833,
+        layout.itemSize = CGSize(width: screenSize.width * 0.833,
                                  height:  collectionViewFrame.height * 0.89)
         
         layout.scrollDirection = .horizontal
@@ -114,34 +116,6 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
         return cv
     }()
     
-    
-    //MARK: -- Properties
-    private var strategies: [LearnMoreVCStrategy]!
-    
-    var currentSpecies: Species!
-    
-    var headerPinnedToTop: Bool = false {
-        didSet {
-            headerPinnedToTop ? animateCollectionViewIn() : animateCollectionViewOut()
-        }
-    }
-    
-    private var selectedCell: UICollectionViewCell?
-    
-    private var animator: UIViewPropertyAnimator!
-    
-    private lazy var headerNameViewHeightConstraint: NSLayoutConstraint = {
-        return headerNameView.heightAnchor.constraint(equalToConstant: headerNameView.frame.height)
-    }()
-    
-    private lazy var headerNameViewTopAnchorConstraint: NSLayoutConstraint = {
-        return headerNameView.topAnchor.constraint(equalTo: view.topAnchor, constant: UIScreen.main.bounds.height * 0.48)
-    }()
-    
-    private lazy var subheaderInfoViewHeightConstraint: NSLayoutConstraint = {
-        return subheaderInfoView.heightAnchor.constraint(equalToConstant: subheaderInfoView.frame.height)
-    }()
-    
     private lazy var closeButton: UIButton = {
            let btn = UIButton()
            btn.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
@@ -151,15 +125,42 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
            return btn
        }()
     
+    
+    //MARK: -- Properties
+    private var strategies: [LearnMoreVCStrategy]!
+    
+    private var animator: UIViewPropertyAnimator!
+    
+    private var screenSize = UIScreen.main.bounds.size
+    
+    var currentSpecies: Species!
+    
+    private var headerPinnedToTop: Bool = false {
+        didSet {
+            headerPinnedToTop ? animateCollectionViewIn() : animateCollectionViewOut()
+        }
+    }
+    
+    fileprivate let reuseIdentifier = "cellId"
+    
+    private var selectedCell: UICollectionViewCell?
+    
+    private lazy var headerNameViewHeightConstraint: NSLayoutConstraint = {
+        return headerNameView.heightAnchor.constraint(equalToConstant: headerNameView.frame.height)
+    }()
+    
+    private lazy var headerNameViewTopAnchorConstraint: NSLayoutConstraint = {
+        return headerNameView.topAnchor.constraint(equalTo: view.topAnchor, constant: screenSize.height * 0.48)
+    }()
+    
+    private lazy var subheaderInfoViewHeightConstraint: NSLayoutConstraint = {
+        return subheaderInfoView.heightAnchor.constraint(equalToConstant: subheaderInfoView.frame.height)
+    }()
+    
     //MARK: -- Methods
     
     @objc private func closeButtonPressed() {
         dismiss(animated: true, completion: nil)
-    }
-    
-    private func setViewElementsFromSpeciesData() {
-        headerNameView.configureView(from: currentSpecies)
-        subheaderInfoView.configureView(from: currentSpecies)
     }
     
     private func setupBackgroundVisualEffectBlur() {
@@ -172,21 +173,108 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
         animator.fractionComplete = 0
     }
     
-    private func updateBackgroundAnimator(with offset: CGFloat) {
-        if offset <= 0 {
-            animator.fractionComplete = 0
-            return
-        }
-        animator.fractionComplete = abs(offset)/1000
-    }
-    
     private func setBackground() {
         view.backgroundColor = .black
         FirebaseStorageService.detailImageManager.getImage(for: currentSpecies.commonName, setTo: backgroundImageView)
     }
     
-    private func animateCollectionViewIn() {
+    private func presentWebBrowser(link: URL){
+        let config = SFSafariViewController.Configuration()
+        let safariVC = SFSafariViewController(url: link, configuration: config)
+        present(safariVC, animated: true)
+    }
+    
+    
+    //MARK: -- Life Cycle Methods
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        setVerticalScrollViewConstraints()
+        verticalScrollView.contentSize.height = UIScreen.main.bounds.height + 400
+        verticalScrollView.delegate = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        exploreButton.startShimmeringAnimation(animationSpeed: 2,
+                                               direction: .leftToRight,
+                                               repeatCount: .infinity)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        animator?.stopAnimation(true)
+        animator?.finishAnimation(at: .current)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        navigationController?.navigationBar.isHidden = true
+        addSubviews()
+        setConstraints()
+        setupBackgroundVisualEffectBlur()
+        setBackground()
         
+        strategies = [LearnMoreVCOverviewStrategy(species: currentSpecies), LearnMoreVCHabitatStrategy(species: currentSpecies), LearnMoreVCThreatsStrategy(species: currentSpecies)]
+        
+    }
+}
+
+//MARK: -- ScrollView Updates
+
+extension UpdatedSpeciesDetailViewController {
+    
+    private func updateBackgroundAnimator(from offsetY: CGFloat) {
+        if offsetY <= 0 {
+            animator.fractionComplete = 0
+            return
+        }
+        animator.fractionComplete = abs(offsetY)/1000
+    }
+    
+    private func updateTopGradientAlpha(from offsetY: CGFloat) {
+        let alphaOffset = (offsetY/400)
+        let newAlpha = max(0, min(alphaOffset, 0.38))
+        backgroundGradientOverlay.startColor = #colorLiteral(red: 0.06859237701, green: 0.08213501424, blue: 0.2409383953, alpha: Float(newAlpha))
+    }
+    
+    private func updateExploreLabelAlpha(from offsetY: CGFloat) {
+        var newAlpha = CGFloat()
+        newAlpha = offsetY <= (screenSize.height * 0.04) ? 0.6 : 0
+        
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.8,
+                           delay: 0,
+                           options: .curveEaseInOut,
+                           animations: { [weak self] in
+                            guard let self = self else { return }
+                            self.exploreButton.alpha = newAlpha
+                },
+                           completion: nil)
+        }
+    }
+    
+    private func updateHeaderViewHeight(from offsetY: CGFloat) {
+        let headerNameViewOffset = (screenSize.height * 0.30) - (offsetY)
+        let newHeaderNameViewHeight = max(screenSize.height * 0.123, headerNameViewOffset)
+        headerNameViewHeightConstraint.constant = newHeaderNameViewHeight
+    }
+    
+    private func updateHeaderTopAnchor(from offsetY: CGFloat) {
+        let headerTopAnchorConstantOffset = (screenSize.height * 0.48) - offsetY
+        let newHeaderTopAnchorConstant = max(screenSize.height * 0.10, headerTopAnchorConstantOffset)
+        headerNameViewTopAnchorConstraint.constant = newHeaderTopAnchorConstant
+    }
+    
+    private func updateSubheaderHeight(from offsetY: CGFloat) {
+        let subheaderViewOffset = (headerNameView.frame.height * 0.30) - (offsetY)
+        let newSubheaderViewHeight = max(50, subheaderViewOffset)
+        subheaderInfoViewHeightConstraint.constant = newSubheaderViewHeight
+    }
+    
+    private func checkHeaderLock() {
+        headerPinnedToTop = headerNameViewTopAnchorConstraint.constant == (screenSize.height * 0.10) ? true : false
+    }
+    
+    private func animateCollectionViewIn() {
         DispatchQueue.main.async {
             UIView.animate(withDuration: 1.0) {
                 [weak self] in guard let self = self else { return }
@@ -205,96 +293,6 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
             }
         }
     }
-    
-    private func presentWebBrowser(link: URL){
-        let config = SFSafariViewController.Configuration()
-        config.entersReaderIfAvailable = false
-        let safariVC = SFSafariViewController(url: link, configuration: config)
-        present(safariVC, animated: true)
-    }
-    
-    private func updateTopGradientAlpha(scrollOffset: CGFloat) {
-        let alphaOffset = (scrollOffset/400)
-        let newAlpha = max(0, min(alphaOffset, 0.38))
-        backgroundGradientOverlay.startColor = #colorLiteral(red: 0.06859237701, green: 0.08213501424, blue: 0.2409383953, alpha: Float(newAlpha))
-    }
-    
-    private func updateExploreLabelAlpha(scrollOffset: CGFloat) {
-        var newAlpha = CGFloat()
-        newAlpha = scrollOffset <= 40 ? 0.6 : 0
-        
-        DispatchQueue.main.async {
-            UIView.animate(withDuration: 1,
-                           delay: 0,
-                           options: .curveEaseInOut,
-                           animations: { [weak self] in
-                            guard let self = self else { return }
-                            self.exploreButton.alpha = newAlpha
-                },
-                           completion: nil)
-        }
-    }
-    
-    private func updateHeaderViewHeight(scrollOffset: CGFloat) {
-        let screenHeight = UIScreen.main.bounds.height
-        let headerNameViewOffset = (screenHeight * 0.30) - (scrollOffset)
-        let newHeaderNameViewHeight = max(screenHeight * 0.123, headerNameViewOffset)
-        headerNameViewHeightConstraint.constant = newHeaderNameViewHeight
-    }
-    
-    private func updateHeaderTopAnchor(scrollOffset: CGFloat) {
-        let screenHeight = UIScreen.main.bounds.height
-        let headerTopAnchorConstantOffset = (screenHeight * 0.48) - scrollOffset
-        let newHeaderTopAnchorConstant = max(screenHeight * 0.10, headerTopAnchorConstantOffset)
-        headerNameViewTopAnchorConstraint.constant = newHeaderTopAnchorConstant
-    }
-    
-    private func updateSubheaderHeight(scrollOffset: CGFloat) {
-        let subheaderViewOffset = (headerNameView.frame.height * 0.30) - (scrollOffset)
-        let newSubheaderViewHeight = max(50, subheaderViewOffset)
-        subheaderInfoViewHeightConstraint.constant = newSubheaderViewHeight
-    }
-    
-    private func checkHeaderLock() {
-        if headerNameViewTopAnchorConstraint.constant == UIScreen.main.bounds.height * 0.10 {
-            headerPinnedToTop = true
-        } else {
-            headerPinnedToTop = false
-        }
-    }
-    
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        setVerticalScrollViewConstraints()
-        verticalScrollView.contentSize.height = UIScreen.main.bounds.height + 400
-        verticalScrollView.delegate = self
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        exploreButton.startShimmeringAnimation(animationSpeed: 2,
-                                               direction: .leftToRight,
-                                               repeatCount: .infinity)
-        
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        animator?.stopAnimation(true)
-        animator?.finishAnimation(at: .current)
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        navigationController?.navigationBar.isHidden = true
-        addSubviews()
-        setConstraints()
-        setupBackgroundVisualEffectBlur()
-        setBackground()
-        setViewElementsFromSpeciesData()
-        
-        strategies = [LearnMoreVCOverviewStrategy(species: currentSpecies), LearnMoreVCHabitatStrategy(species: currentSpecies), LearnMoreVCThreatsStrategy(species: currentSpecies)]
-        
-    }
 }
 
 //MARK: -- ScrollView Methods
@@ -303,31 +301,30 @@ extension UpdatedSpeciesDetailViewController: UIScrollViewDelegate {
         switch scrollView {
         case verticalScrollView:
             let offsetY = scrollView.contentOffset.y
-            updateBackgroundAnimator(with: offsetY)
-            updateTopGradientAlpha(scrollOffset: offsetY)
-            updateExploreLabelAlpha(scrollOffset: offsetY)
-            updateHeaderViewHeight(scrollOffset: offsetY)
-            updateHeaderTopAnchor(scrollOffset: offsetY)
-            updateSubheaderHeight(scrollOffset: offsetY)
+            updateBackgroundAnimator(from: offsetY)
+            updateTopGradientAlpha(from: offsetY)
+            updateExploreLabelAlpha(from: offsetY)
+            updateHeaderViewHeight(from: offsetY)
+            updateHeaderTopAnchor(from: offsetY)
+            updateSubheaderHeight(from: offsetY)
             checkHeaderLock()
             
-        default:()
+        default:
+            ()
         }
     }
 }
 
 //MARK: -- Collection View Data Source
+
 extension UpdatedSpeciesDetailViewController: UICollectionViewDataSource {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return strategies.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! RoundedInfoCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! RoundedInfoCell
         let specificStrategy = strategies[indexPath.row]
         cell.strategy = specificStrategy
         return cell
@@ -335,6 +332,7 @@ extension UpdatedSpeciesDetailViewController: UICollectionViewDataSource {
 }
 
 //MARK: -- Collection View Delegate
+
 extension UpdatedSpeciesDetailViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedCell = collectionView.cellForItem(at: indexPath)
@@ -361,7 +359,7 @@ extension UpdatedSpeciesDetailViewController: UICollectionViewDelegate {
     }
 }
 
-//MARK: -- Custom Delegate Implementation
+//MARK: -- DonateButton Delegate Implementation
 
 extension UpdatedSpeciesDetailViewController: DonateButtonDelegate {
     func donateButtonPressed() {
@@ -375,17 +373,11 @@ extension UpdatedSpeciesDetailViewController: DonateButtonDelegate {
 
 fileprivate extension UpdatedSpeciesDetailViewController {
     func addSubviews() {
-        view.addSubview(verticalScrollView)
+        [verticalScrollView, collectionView, donateButtonContainer, closeButton, exploreButton].forEach { view.addSubview($0) }
         
-        let UIElements = [headerNameView, subheaderInfoView, exploreButton]
-        UIElements.forEach{ verticalScrollView.addSubview($0) }
-        UIElements.forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
+        [headerNameView, subheaderInfoView].forEach { verticalScrollView.addSubview($0) }
+        
         backgroundImageView.addSubview(backgroundVisualEffectBlur)
-        
-        view.addSubview(collectionView)
-        view.addSubview(donateButtonContainer)
-        view.addSubview(closeButton)
-        
         donateButtonContainer.addSubview(donateButton)
     }
     
@@ -397,13 +389,12 @@ fileprivate extension UpdatedSpeciesDetailViewController {
         setCloseButtonConstraints()
         setHeaderInfoViewConstraints()
         setSubheaderInfoViewConstraints()
-        setDiscoverButtonConstraints()
+        setExploreButtonConstraints()
         
         
         setCollectionViewConstraints()
         setDonateButtonContainerConstraints()
         setDonateButtonConstraints()
-        
     }
     
     func setVerticalScrollViewConstraints() {
@@ -418,43 +409,52 @@ fileprivate extension UpdatedSpeciesDetailViewController {
         }
     }
     
-    func setBackgroundGradientOverlayConstraints() {
-        backgroundGradientOverlay.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
-        }
-    }
-    
     func setBackgroundVisualEffectBlurConstraints() {
         backgroundVisualEffectBlur.snp.makeConstraints { (make) in
             make.edges.equalTo(backgroundImageView)
         }
     }
     
+    func setBackgroundGradientOverlayConstraints() {
+        backgroundGradientOverlay.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+    }
+    
+    func setCloseButtonConstraints() {
+        closeButton.snp.makeConstraints { (make) in
+            make.top.equalToSuperview().inset(5)
+            make.trailing.equalToSuperview().inset(5)
+            make.height.width.equalTo(66)
+        }
+    }
+    
+    
     func setHeaderInfoViewConstraints() {
-        NSLayoutConstraint.activate([
-            headerNameView.leadingAnchor.constraint(equalTo: verticalScrollView.leadingAnchor, constant: Constants.spacingConstant),
-            headerNameView.widthAnchor.constraint(equalTo: verticalScrollView.widthAnchor),
-            headerNameViewTopAnchorConstraint,
-            headerNameViewHeightConstraint
-        ])
+        headerNameView.snp.makeConstraints { (make) in
+            make.leading.equalTo(verticalScrollView).inset(Constants.spacingConstant)
+            make.width.equalTo(verticalScrollView)
+            headerNameViewTopAnchorConstraint.isActive = true
+            headerNameViewHeightConstraint.isActive = true
+        }
     }
     
     func setSubheaderInfoViewConstraints() {
-        NSLayoutConstraint.activate([
-            subheaderInfoView.leadingAnchor.constraint(equalTo: headerNameView.leadingAnchor),
-            subheaderInfoView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            subheaderInfoView.topAnchor.constraint(equalTo: headerNameView.bottomAnchor, constant: Constants.spacingConstant),
-            subheaderInfoViewHeightConstraint
-        ])
+        subheaderInfoView.snp.makeConstraints { (make) in
+            make.leading.equalTo(headerNameView)
+            make.trailing.equalTo(view)
+            make.top.equalTo(headerNameView.snp.bottom).offset(Constants.spacingConstant)
+            subheaderInfoViewHeightConstraint.isActive = true
+        }
     }
     
-    func setDiscoverButtonConstraints() {
-        NSLayoutConstraint.activate([
-            exploreButton.heightAnchor.constraint(equalToConstant: exploreButton.frame.size.height),
-            exploreButton.widthAnchor.constraint(equalToConstant: exploreButton.frame.size.width),
-            exploreButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            exploreButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10)
-        ])
+    func setExploreButtonConstraints() {
+        exploreButton.snp.makeConstraints { (make) in
+            make.height.equalTo(exploreButton.frame.height)
+            make.width.equalTo(exploreButton.frame.width)
+            make.centerX.equalTo(view)
+            make.bottom.equalTo(view).inset(10)
+        }
     }
     
     func setCollectionViewConstraints() {
@@ -477,14 +477,6 @@ fileprivate extension UpdatedSpeciesDetailViewController {
             make.centerX.centerY.equalTo(donateButtonContainer)
             make.width.equalTo(view).multipliedBy(0.9)
             make.height.equalTo(50)
-        }
-    }
-    
-    func setCloseButtonConstraints() {
-        closeButton.snp.makeConstraints { (make) in
-            make.top.equalToSuperview().inset(5)
-            make.trailing.equalToSuperview().inset(5)
-            make.height.width.equalTo(66)
         }
     }
 }
