@@ -94,6 +94,7 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
     
     
     //MARK: -- Properties
+    private var strategies: [LearnMoreVCStrategy]!
     
     var currentSpecies: Species!
     
@@ -142,6 +143,7 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
             return
         }
         animator.fractionComplete = abs(offset)/1000
+        print(animator.fractionComplete)
     }
     
     private func setBackground() {
@@ -253,6 +255,7 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
         setupBackgroundVisualEffectBlur()
         setBackground()
         setViewElementsFromSpeciesData()
+        strategies = [LearnMoreVCOverviewStrategy(species: currentSpecies), LearnMoreVCHabitatStrategy(species: currentSpecies), LearnMoreVCHabitatStrategy(species: currentSpecies)]
     }
 }
 
@@ -282,11 +285,14 @@ extension UpdatedSpeciesDetailViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return 3
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! CardCell
+        let specificStrategy = strategies[indexPath.row]
+        cell.strategy = specificStrategy
+        cell.species = currentSpecies
         return cell
     }
 }
@@ -296,6 +302,8 @@ extension UpdatedSpeciesDetailViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedCell = collectionView.cellForItem(at: indexPath)
         let learnMoreVC = UpdatedLearnMoreViewController()
+        let specificStrategy = strategies[indexPath.row]
+        learnMoreVC.strategy = specificStrategy
         navigationController?.pushViewController(learnMoreVC, animated: true)
     }
 }

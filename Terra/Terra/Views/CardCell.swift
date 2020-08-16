@@ -18,10 +18,18 @@ class CardCell: UICollectionViewCell {
     
     private lazy var commonView: CommonView = {
         let cv = CommonView()
+//        cv.configureView(title: strategy.subtitle())
         cv.layer.cornerRadius = 10
         cv.layer.masksToBounds = true
         return cv
     }()
+    
+    var species: Species!
+    var strategy: LearnMoreVCStrategy! {
+        didSet {
+            commonView.configureView(title: strategy.subtitle())
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)

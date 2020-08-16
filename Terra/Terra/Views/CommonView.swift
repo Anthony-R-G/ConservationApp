@@ -15,6 +15,8 @@ class CommonView: UIView {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 28, weight: .semibold)
         label.lineBreakMode = .byTruncatingTail
+        label.text = "HI"
+        label.textColor = .black
         label.numberOfLines = 0
         return label
     }()
@@ -39,12 +41,14 @@ class CommonView: UIView {
     private lazy var backgroundImage: UIImageView = {
         let iv = UIImageView()
         iv.image = #imageLiteral(resourceName: "wwdc")
+        iv.backgroundColor = .clear
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
         return iv
     }()
     
     //MARK: -- Properties
+    var strategy: LearnMoreVCStrategy!
     
     private lazy var topConstraint: NSLayoutConstraint = {
         return subtitleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 16)
@@ -56,8 +60,8 @@ class CommonView: UIView {
     }
     //MARK: -- Methods
     
-    func configureView() {
-        titleLabel.text = "Join the Developers of WWDC"
+    func configureView(title: String) {
+        titleLabel.text = title
         subtitleLabel.text = "NOW TRENDING"
         blurbLabel.text = "The event brings together creators and dreamers of all ages"
     }
@@ -66,8 +70,8 @@ class CommonView: UIView {
         super.init(frame: frame)
         insetsLayoutMarginsFromSafeArea = false
         addSubviews()
+        backgroundColor = .clear
         setConstraints()
-        configureView()
     }
     
     required init?(coder: NSCoder) {

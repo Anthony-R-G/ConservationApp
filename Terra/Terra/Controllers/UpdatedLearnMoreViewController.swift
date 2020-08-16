@@ -60,6 +60,12 @@ I am not to blame for that crown upon your head, Maggie! Giving grape juice to t
     
     //MARK: -- Properties
     
+    var strategy: LearnMoreVCStrategy! {
+        didSet {
+            commonView.configureView(title: strategy.subtitle())
+        }
+    }
+    
     private lazy var topConstraint: NSLayoutConstraint = {
         return commonView.topAnchor.constraint(equalTo: maskView.topAnchor)
     }()
