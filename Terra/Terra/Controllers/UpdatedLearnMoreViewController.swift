@@ -35,7 +35,6 @@ class UpdatedLearnMoreViewController: UIViewController {
         let iv = UIImageView(frame: UIScreen.main.bounds)
         iv.backgroundColor = .black
         iv.contentMode = UIView.ContentMode.scaleAspectFill
-
         return iv
     }()
     
@@ -56,16 +55,8 @@ class UpdatedLearnMoreViewController: UIViewController {
         return view
     }()
     
-    private lazy var textLabel: UILabel = {
-        let label = UILabel()
-        let text = """
-I am not to blame for that crown upon your head, Maggie! Giving grape juice to the juiceless. Now you pressure me, as if I might suffer the same in my unhinged soul. Maggie, there is no mercy for the juiceless. I do not even hear them. For you, Maggie, I answer only as to settle accounts and, in filling that final fraternal debit, I release you forever to your juiceless existence. All I hear now is that clockwork meowing, of yolk in those stomachs of four-headed dragons more full than mine! The Candy Mountains I must climb! The power I must grow! I do not know you, dear Maggie. Had you once who ever loved me, that Maggie would have cracked his shrinking egg open and let me feast on the yolk before begging for my share. There is much eating to be done. I must play catch up with the Sun and Moon. Do not pester me further, Maggie. Every word I speak is an grape I spill.\n\n
-"""
-        label.numberOfLines = 0
-        label.text = text + text + text + text
-        label.textColor = .white
-        label.backgroundColor = .clear
-        return label
+    private lazy var containerStackView: UIStackView = {
+        return strategy.arrangedSubviews()
     }()
     
     private lazy var closeButton: UIButton = {
@@ -110,10 +101,10 @@ I am not to blame for that crown upon your head, Maggie! Giving grape juice to t
     }
     
     private func loadImages() {
-//          strategy.firebaseStorageManager().getImage(for: currentSpecies.commonName, setTo: headerImageView)
-          
-          FirebaseStorageService.detailImageManager.getImage(for: currentSpecies.commonName, setTo: backgroundImageView)
-      }
+        //          strategy.firebaseStorageManager().getImage(for: currentSpecies.commonName, setTo: headerImageView)
+        
+        FirebaseStorageService.detailImageManager.getImage(for: currentSpecies.commonName, setTo: backgroundImageView)
+    }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -141,10 +132,9 @@ extension UpdatedLearnMoreViewController {
         maskView.addSubview(backgroundBlurEffectView)
         backgroundBlurEffectView.contentView.addSubview(scrollView)
         
-        scrollView.addSubview(bodyView)
+        scrollView.addSubview(containerStackView)
         scrollView.addSubview(commonView)
         
-        bodyView.addSubview(textLabel)
         
         view.addSubview(closeButton)
     }
@@ -155,11 +145,9 @@ extension UpdatedLearnMoreViewController {
         
         setScrollViewConstraints()
         
-        
         setCommonViewConstraints()
-        setBodyViewConstraints()
-        setBodyTextConstraints()
-        
+        setContainerStackView()
+      
         setCloseButtonConstraints()
         setBackgroundImageConstraints()
     }
@@ -190,17 +178,11 @@ extension UpdatedLearnMoreViewController {
         heightConstraint.isActive = true
     }
     
-    func setBodyViewConstraints() {
-        bodyView.snp.makeConstraints { (make) in
-            make.leading.trailing.equalTo(view)
-            make.top.equalTo(commonView.snp.bottom)
+    func setContainerStackView() {
+        containerStackView.snp.makeConstraints { (make) in
+            make.top.equalTo(commonView.snp.bottom).offset(20)
+            make.leading.trailing.equalTo(view).inset(20)
             make.bottom.greaterThanOrEqualTo(scrollView)
-        }
-    }
-    
-    func setBodyTextConstraints() {
-        textLabel.snp.makeConstraints { (make) in
-            make.edges.equalTo(bodyView).inset(16)
         }
     }
     
@@ -213,10 +195,10 @@ extension UpdatedLearnMoreViewController {
     }
     
     func setBackgroundImageConstraints() {
-          backgroundImageView.snp.makeConstraints { (make) in
-              make.edges.equalTo(view)
-          }
-      }
+        backgroundImageView.snp.makeConstraints { (make) in
+            make.edges.equalTo(view)
+        }
+    }
 }
 
 //MARK: -- Animatable Methods
