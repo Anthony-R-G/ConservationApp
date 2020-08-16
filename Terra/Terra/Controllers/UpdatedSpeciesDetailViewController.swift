@@ -99,7 +99,7 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
     
     var headerPinnedToTop: Bool = false {
         didSet {
-            print("Animate fade in/fade out")
+            headerPinnedToTop ? animateStackIn() : animateStackOut()
         }
     }
     
@@ -153,7 +153,7 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
         DispatchQueue.main.async {
             UIView.animate(withDuration: 1.5) {
                 [weak self] in guard let self = self else { return }
-                //Put view here
+//                self.collectionView.alpha = 1
             }
         }
     }
@@ -162,7 +162,7 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
         DispatchQueue.main.async {
             UIView.animate(withDuration: 0.5) {
                 [weak self] in guard let self = self else { return }
-                //Put view here
+//                self.collectionView.alpha = 0
             }
         }
     }
@@ -391,7 +391,7 @@ fileprivate extension UpdatedSpeciesDetailViewController {
     
     func setCollectionViewConstraints() {
         collectionView.snp.makeConstraints { (make) in
-            make.height.equalTo(540)
+            make.height.equalTo(450)
             make.leading.trailing.equalToSuperview()
             make.centerY.equalToSuperview().offset(70)
         }
