@@ -208,12 +208,12 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = true
+        view.backgroundColor = .black
         addSubviews()
         setConstraints()
         setupBackgroundVisualEffectBlur()
         setBackground()
         
-        print(headerNameViewTopAnchorConstraint.constant)
         strategies = [LearnMoreVCOverviewStrategy(species: currentSpecies),
                       LearnMoreVCHabitatStrategy(species: currentSpecies),
                       LearnMoreVCThreatsStrategy(species: currentSpecies)]
@@ -261,10 +261,9 @@ extension UpdatedSpeciesDetailViewController {
     }
     
     private func updateHeaderTopAnchor(from offsetY: CGFloat) {
-        let headerTopAnchorConstantOffset = (screenSize.height * 0.48) - offsetY
+        let headerTopAnchorConstantOffset = (screenSize.height * 0.48) - abs(offsetY)
         let newHeaderTopAnchorConstant = max(screenSize.height * 0.10, headerTopAnchorConstantOffset)
         headerNameViewTopAnchorConstraint.constant = newHeaderTopAnchorConstant
-        print(headerNameViewTopAnchorConstraint.constant)
     }
     
     private func updateSubheaderHeight(from offsetY: CGFloat) {

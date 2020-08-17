@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct Constants {
+enum Constants {
     static let spacingConstant: CGFloat = 20
     
     static let roundedInfoViewHeight: CGFloat = 440

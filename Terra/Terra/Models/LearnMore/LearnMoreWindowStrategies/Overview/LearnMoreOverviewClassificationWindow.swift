@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct LearnMoreTaxonomyStrategy: LearnMoreContentWindowStrategy {
+struct LearnMoreOverviewClassificationWindow: LearnMoreContentWindowStrategy {
 
     var species: Species
     

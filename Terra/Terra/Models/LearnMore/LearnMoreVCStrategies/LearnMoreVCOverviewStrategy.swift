@@ -25,12 +25,12 @@ struct LearnMoreVCOverviewStrategy: LearnMoreVCStrategy {
 
     mutating func arrangedSubviews() -> UIStackView {
         let stackView = UIStackView(arrangedSubviews: [
-            Factory.makeLearnMoreWindow(strategy: LearnMoreOverviewDescription(species: species)),
+            Factory.makeLearnMoreWindow(strategy: LearnMoreOverviewDescriptionWindow(species: species)),
             
-            Factory.makeLearnMoreWindow(strategy: LearnMoreTaxonomyStrategy(species: species))
+            Factory.makeLearnMoreWindow(strategy: LearnMoreOverviewClassificationWindow(species: species))
         ])
         stackView.axis = .vertical
-        stackView.spacing = 20
+        stackView.spacing = Constants.spacingConstant
         return stackView
     }
 }
