@@ -43,7 +43,6 @@ final class CommonView: UIView {
     
     private lazy var backgroundImage: UIImageView = {
         let iv = UIImageView()
-        iv.image = #imageLiteral(resourceName: "wwdc")
         iv.backgroundColor = .black
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
@@ -123,13 +122,6 @@ fileprivate extension CommonView {
             make.leading.trailing.equalTo(self).inset(Constants.spacingConstant)
         }
     }
-    
-//    func setTitleLabelConstraints() {
-//        titleLabel.snp.makeConstraints {[weak self] (make) in
-//            guard let self = self else { return }
-//            make.leading.trailing.bottom.equalTo(self).inset(Constants.spacingConstant)
-//        }
-//    }
     
     func setSubtitleLabelConstraints() {
         subtitleLabel.translatesAutoresizingMaskIntoConstraints = false

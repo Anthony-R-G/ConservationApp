@@ -112,7 +112,7 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
         cv.alpha = 0
         cv.dataSource = self
         cv.delegate = self
-        cv.register(RoundedInfoCell.self, forCellWithReuseIdentifier: "cellId")
+        cv.register(RoundedInfoCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         return cv
     }()
     
@@ -213,8 +213,10 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
         setupBackgroundVisualEffectBlur()
         setBackground()
         
-        strategies = [LearnMoreVCOverviewStrategy(species: currentSpecies), LearnMoreVCHabitatStrategy(species: currentSpecies), LearnMoreVCThreatsStrategy(species: currentSpecies)]
-        
+        print(headerNameViewTopAnchorConstraint.constant)
+        strategies = [LearnMoreVCOverviewStrategy(species: currentSpecies),
+                      LearnMoreVCHabitatStrategy(species: currentSpecies),
+                      LearnMoreVCThreatsStrategy(species: currentSpecies)]
     }
 }
 
@@ -262,6 +264,7 @@ extension UpdatedSpeciesDetailViewController {
         let headerTopAnchorConstantOffset = (screenSize.height * 0.48) - offsetY
         let newHeaderTopAnchorConstant = max(screenSize.height * 0.10, headerTopAnchorConstantOffset)
         headerNameViewTopAnchorConstraint.constant = newHeaderTopAnchorConstant
+        print(headerNameViewTopAnchorConstraint.constant)
     }
     
     private func updateSubheaderHeight(from offsetY: CGFloat) {

@@ -32,7 +32,7 @@ class UpdatedLearnMoreViewController: UIViewController {
     }()
     
     private lazy var backgroundImageView: UIImageView = {
-        let iv = UIImageView(frame: UIScreen.main.bounds)
+        let iv = UIImageView()
         iv.backgroundColor = .black
         iv.contentMode = UIView.ContentMode.scaleAspectFill
         return iv
@@ -47,12 +47,6 @@ class UpdatedLearnMoreViewController: UIViewController {
     
     private lazy var commonView: CommonView = {
         return CommonView()
-    }()
-    
-    private lazy var bodyView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .clear
-        return view
     }()
     
     private lazy var containerStackView: UIStackView = {
@@ -90,14 +84,8 @@ class UpdatedLearnMoreViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
-    func asCard(_ value: Bool) {
-        if value {
-            // Round the corners
-            maskView.layer.cornerRadius = Constants.cornerRadius
-        } else {
-            // Round the corners
-            maskView.layer.cornerRadius = 0
-        }
+    func renderViewAsCard(_ value: Bool) {
+        maskView.layer.cornerRadius = value ? Constants.cornerRadius : 0
     }
     
     private func loadImages() {
@@ -115,7 +103,6 @@ class UpdatedLearnMoreViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .clear
         navigationController?.navigationBar.isHidden = true
         addSubviews()
         setConstraints()
@@ -129,13 +116,12 @@ extension UpdatedLearnMoreViewController {
     func addSubviews() {
         view.addSubview(shadowView)
         shadowView.addSubview(maskView)
-        maskView.addSubview(backgroundImageView)
-        maskView.addSubview(backgroundBlurEffectView)
+        [backgroundImageView, backgroundBlurEffectView].forEach { maskView.addSubview($0) }
+        
         backgroundBlurEffectView.contentView.addSubview(scrollView)
         
         scrollView.addSubview(containerStackView)
         scrollView.addSubview(commonView)
-        
         
         view.addSubview(closeButton)
     }
@@ -175,14 +161,14 @@ extension UpdatedLearnMoreViewController {
         commonView.snp.makeConstraints { (make) in
             make.top.equalTo(scrollView)
             make.leading.trailing.equalTo(maskView)
+            heightConstraint.isActive = true
         }
-        heightConstraint.isActive = true
     }
     
     func setContainerStackView() {
         containerStackView.snp.makeConstraints { (make) in
-            make.top.equalTo(commonView.snp.bottom).offset(20)
-            make.leading.trailing.equalTo(view).inset(20)
+            make.top.equalTo(commonView.snp.bottom).offset(Constants.spacingConstant)
+            make.leading.trailing.equalTo(view).inset(Constants.spacingConstant)
             make.bottom.greaterThanOrEqualTo(scrollView)
         }
     }
@@ -225,7 +211,7 @@ extension UpdatedLearnMoreViewController: Animatable {
         closeButton.alpha = 1
         
         // Make the view look like a card
-        asCard(true)
+        renderViewAsCard(true)
         
         // Redraw the view to update the previous changes
         view.layoutIfNeeded()
@@ -237,10 +223,10 @@ extension UpdatedLearnMoreViewController: Animatable {
             .compactMap({$0})
             .first?.windows
             .filter({$0.isKeyWindow}).first?.safeAreaInsets.top ?? .zero
-        commonView.topConstraintValue = safeAreaTop + 16
+        commonView.topConstraintValue = safeAreaTop + 20
         
         // Animate the common view to a height of 500 points
-        heightConstraint.constant = 500
+        heightConstraint.constant = Constants.commonViewImageDimension
         sizeAnimator.addAnimations { [weak self] in
             guard let self = self else { return }
             self.view.layoutIfNeeded()
@@ -249,7 +235,7 @@ extension UpdatedLearnMoreViewController: Animatable {
         // Animate the view to not look like a card
         positionAnimator.addAnimations { [weak self] in
             guard let self = self else { return }
-            self.asCard(false)
+            self.renderViewAsCard(false)
         }
     }
     
@@ -287,7 +273,7 @@ extension UpdatedLearnMoreViewController: Animatable {
         // Animate the view to look like a card
         positionAnimator.addAnimations { [weak self] in
             guard let self = self else { return }
-            self.asCard(true)
+            self.renderViewAsCard(true)
         }
     }
 }
