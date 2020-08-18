@@ -13,24 +13,24 @@ import FirebaseUI
 class FirebaseStorageService {
     enum imageType {
         case cell
-        case detail
+        case cover
         case callout
-        case learnMoreOverview
-        case learnMoreHabitat
-        case learnMoreThreats
+        case detailOverview
+        case detailHabitat
+        case detailThreats
     }
     
     static var cellImageManager = FirebaseStorageService(type: .cell)
     
-    static var detailImageManager = FirebaseStorageService(type: .detail)
+    static var coverImageManager = FirebaseStorageService(type: .cover)
     
     static var calloutImageManager = FirebaseStorageService(type: .callout)
     
-    static var learnMoreOverviewImageManager = FirebaseStorageService(type: .learnMoreOverview)
+    static var detailOverviewImageManager = FirebaseStorageService(type: .detailOverview)
     
-    static var learnMoreHabitatImageManager = FirebaseStorageService(type: .learnMoreHabitat)
+    static var detailHabitatImageManager = FirebaseStorageService(type: .detailHabitat)
     
-    static var learnMoreThreatsImageManager = FirebaseStorageService(type: .learnMoreThreats)
+    static var detailThreatsImageManager = FirebaseStorageService(type: .detailThreats)
     
     
     private let storage: Storage!
@@ -45,30 +45,28 @@ class FirebaseStorageService {
         case .cell:
             imagesFolderReference = storageReference.child("Collection Cell Images")
             
-        case .detail:
-            imagesFolderReference = storageReference.child("Detail VC Images")
+        case .cover:
+            imagesFolderReference = storageReference.child("Cover VC Images")
             
         case .callout:
             imagesFolderReference = storageReference.child("Callout Images")
             
-        case .learnMoreOverview:
-            imagesFolderReference = storageReference.child("Learn More Overview Images")
+        case .detailOverview:
+            imagesFolderReference = storageReference.child("Detail Overview Images")
             
-        case .learnMoreHabitat:
-            imagesFolderReference = storageReference.child("Learn More Habitat Images")
+        case .detailHabitat:
+            imagesFolderReference = storageReference.child("Detail Habitat Images")
             
-        case .learnMoreThreats:
-            imagesFolderReference = storageReference.child("Learn More Threats Images")
+        case .detailThreats:
+            imagesFolderReference = storageReference.child("Detail Threats Images")
     
         }
-        
-        
     }
     
     func getImage(for speciesName: String, setTo imageView: UIImageView) {
         let cleanedStr = speciesName.lowercased().replacingOccurrences(of: " ", with: "")
         let animalImageReference = imagesFolderReference.child("\(cleanedStr).png")
-        imageView.sd_imageTransition = .fade
+        imageView.sd_imageTransition = .fade(duration: 1.2)
         imageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
         imageView.sd_setImage(with: animalImageReference, placeholderImage: UIImage(named: "black"))
     }

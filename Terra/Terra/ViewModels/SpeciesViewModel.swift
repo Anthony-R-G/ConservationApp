@@ -23,8 +23,7 @@ final class SpeciesViewModel {
     
     private var searchFilteredSpecies: [Species] {
         get {
-            guard let searchString = searchString else { return redListCategoryFilteredSpecies }
-            guard searchString != ""  else { return redListCategoryFilteredSpecies }
+            guard let searchString = searchString, !searchString.isEmpty else { return redListCategoryFilteredSpecies }
             return Species.getFilteredSpeciesByName(arr: redListCategoryFilteredSpecies, searchString: searchString)
         }
     }
@@ -40,7 +39,7 @@ final class SpeciesViewModel {
     }
     
     
-    //MARK: -- Properties
+    //MARK: -- Methods
     
     //Public Accessors
     func specificSpecies(at index: Int) -> Species {

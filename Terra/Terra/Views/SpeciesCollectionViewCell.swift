@@ -102,7 +102,6 @@ fileprivate extension SpeciesCollectionViewCell {
     func addSubviews() {
         let UIElements = [speciesNameLabel, conservationStatusLabel, populationNumbersLabel, speciesScientificNameLabel]
         UIElements.forEach{ contentView.addSubview($0) }
-        UIElements.forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
     }
     
     func setConstraints() {

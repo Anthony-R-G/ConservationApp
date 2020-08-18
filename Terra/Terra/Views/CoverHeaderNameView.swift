@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class DetailHeaderNameView: UIView {
+final class CoverHeaderNameView: UIView {
     //MARK: -- UI Element Initialization
     
     private lazy var conservationStatusLabel: UILabel = {
@@ -64,7 +64,7 @@ final class DetailHeaderNameView: UIView {
 
 //MARK: -- Add Subviews & Constraints
 
-fileprivate extension DetailHeaderNameView {
+fileprivate extension CoverHeaderNameView {
     
     func addSubviews() {
         let UIElements = [conservationStatusLabel, speciesCommonNameLabel, speciesScientificNameLabel]

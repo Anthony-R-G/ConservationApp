@@ -111,9 +111,6 @@ final class CustomToolBar: UIView {
         super.init(frame: frame)
         addSubviews()
         setConstraints()
-        if !strategy.blurHidden() {
-            addBlurToView()
-        }
     }
     
     required init?(coder: NSCoder) {
