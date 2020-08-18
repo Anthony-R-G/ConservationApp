@@ -35,6 +35,7 @@ final class NewsViewModel {
     
     
     //MARK: -- Methods
+    
     private func filterDuplicateArticles(from news: [NewsArticle]) -> [NewsArticle] {
         var seenHeadlines = Set<String>()
         

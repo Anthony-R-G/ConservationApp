@@ -11,11 +11,11 @@ import XCTest
 
 class TerraTests: XCTestCase {
     
-    func testJSONMapping() throws {
+    func testSpeciesJSONMapping() throws {
         let bundle = Bundle(for: type(of: self))
         
         guard let url = bundle.url(forResource: "speciesModelTestData", withExtension: "json") else {
-            XCTFail("Missing file: data.json")
+            XCTFail("Missing file: speciesModelTestaData.json")
             return
         }
         
@@ -25,20 +25,46 @@ class TerraTests: XCTestCase {
         XCTAssertEqual(animal.commonName, "Amur Leopard")
     }
     
-    func testFactoryLabelWorks() {
-        let labelTitle = "ASDF"
-        let label = Factory.makeLabel(title: labelTitle, weight: .bold, size: 15, color: .white, alignment: .left)
+    func testNewsResponseJSONMapping() throws {
+        let bundle = Bundle(for: type(of: self))
         
-        XCTAssert(label.text == labelTitle, "Factory method not assigning title correctly")
+        guard let url = bundle.url(forResource: "newsResponseTestData", withExtension: ".json") else {
+            XCTFail("Missing file: newsResponseTestData")
+            return
+        }
+        
+        let jsonData = try Data(contentsOf: url)
+        
+        do {
+            let newsResponse = try JSONDecoder().decode(NewsResponse.self, from: jsonData)
+            XCTAssertGreaterThan(newsResponse.articles.count, 0)
+        } catch {
+            XCTFail("Decoding error: \(error)")
+        }
     }
     
+ 
+    
+    func testFactoryLabelWorks() {
+        let labelTitle = "ASDF"
+        let label = Factory.makeLabel(title: labelTitle,
+                                      weight: .bold,
+                                      size: 15,
+                                      color: .white,
+                                      alignment: .left)
+        XCTAssert(label.text == labelTitle,
+                  "Factory method not assigning title correctly")
+    }
     
     func testISO8601Formatter() {
+        
         let testNewsArticle = NewsArticle(title: "",
                                           url: "",
-                                          urlToImage: "", publishedAt: "2020-08-08T00:33:22Z")
+                                          urlToImage: "",
+                                          publishedAt: "2020-08-08T00:33:22Z")
         
-        XCTAssert(testNewsArticle.formattedPublishDate == "Aug 7 2020, 8:33 PM", "Expected 'Aug 7 2020, 8:33 PM', but returned '\(testNewsArticle.formattedPublishDate)' instead")
+        
+        XCTAssertEqual(testNewsArticle.publishedAt, "Aug 7 2020, 8:33 PM", "Expected 'Aug 7 2020, 8:33 PM', but returned '\(testNewsArticle.publishedAt)' instead")
     }
     
     func testRemovingNonAlphabetCharsExtension() {
@@ -46,7 +72,8 @@ class TerraTests: XCTestCase {
         
         let expectedString = "jurongbirdparksconservationbreedingeffortssoarwithmorethannewhatchlings"
         
-        XCTAssert(testString.removingNonAlphabetChars == expectedString, "Expected '\(expectedString)', but returned '\(testString.removingNonAlphabetChars)' instead")
+        XCTAssertEqual(testString.removingNonAlphabetChars,  expectedString,
+                       "Expected '\(expectedString)', but returned '\(testString.removingNonAlphabetChars)' instead")
     }
     
     func testNewsArticleDuplicateRemoval() {
@@ -64,12 +91,35 @@ class TerraTests: XCTestCase {
         let testNewsArticleTitle = "Washington state officials slam Navy's changes to military testing program that would harm more orcas"
         
         let testNewsArticleArray: [NewsArticle] = [
-            NewsArticle(title: testNewsArticleTitle, url: "", urlToImage: "", publishedAt: ""),
-            NewsArticle(title: "Dummy Title", url: "", urlToImage: "", publishedAt: ""),
-            NewsArticle(title: testNewsArticleTitle, url: "", urlToImage: "", publishedAt: ""),
-            NewsArticle(title: testNewsArticleTitle, url: "", urlToImage: "", publishedAt: ""),
-            NewsArticle(title: testNewsArticleTitle, url: "", urlToImage: "", publishedAt: ""),
-            NewsArticle(title: "Other Dummy Title", url: "", urlToImage: "", publishedAt: "")
+            NewsArticle(title: testNewsArticleTitle,
+                        url: "",
+                        urlToImage: "",
+                        publishedAt: ""),
+            
+            NewsArticle(title: testNewsArticleTitle,
+                        url: "",
+                        urlToImage: "",
+                        publishedAt: ""),
+            
+            NewsArticle(title: testNewsArticleTitle,
+                        url: "",
+                        urlToImage: "",
+                        publishedAt: ""),
+            
+            NewsArticle(title: testNewsArticleTitle,
+                        url: "",
+                        urlToImage: "",
+                        publishedAt: ""),
+            
+            NewsArticle(title: testNewsArticleTitle,
+                        url: "",
+                        urlToImage: "",
+                        publishedAt: ""),
+            
+            NewsArticle(title: testNewsArticleTitle,
+                        url: "",
+                        urlToImage: "",
+                        publishedAt: "")
         ]
         
         var testNewsArrayWithFilterMethod: [NewsArticle] {
@@ -78,8 +128,10 @@ class TerraTests: XCTestCase {
         
         let testNewsArrayFilteredCount = testNewsArrayWithFilterMethod.filter{ $0.title == testNewsArticleTitle }.count
         
-        XCTAssert(testNewsArrayFilteredCount == 1, "Expected only 1 article to have this title, but returned \(testNewsArrayFilteredCount) instead")
+        XCTAssertEqual(testNewsArrayFilteredCount, 1,
+                       "Expected only 1 article to have this title, but returned \(testNewsArrayFilteredCount) instead")
     }
+    
     
     func testSpeciesRedListCategoryFilter() {
         

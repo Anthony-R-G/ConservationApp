@@ -10,10 +10,10 @@ import UIKit
 
 //Controls what's presented in the LearnMoreVC
 
-protocol LearnMoreVCStrategy {
+protocol DetailPageStrategy {
     var species: Species { get set }
-    func title() -> String
-    func subtitle() -> String
+    func speciesName() -> String
+    func pageName() -> String
     func firebaseStorageManager() -> FirebaseStorageService
     mutating func arrangedSubviews() -> UIStackView
 }

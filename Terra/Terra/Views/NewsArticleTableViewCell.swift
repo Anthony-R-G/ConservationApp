@@ -46,7 +46,7 @@ final class NewsArticleTableViewCell: UITableViewCell {
             return
         }
         articleTitleLabel.text = article.title
-        publishedDateLabel.text = article.formattedPublishDate
+        publishedDateLabel.text = article.publishedAt
         articleThumbImageView.sd_setImage(with: URL(string: articleImageURL), completed: nil)
     }
     

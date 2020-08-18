@@ -39,6 +39,16 @@ class Factory {
         return label
     }
     
+    static func makeLearnMoreWindowLabel(text: String) -> UILabel {
+        let label = makeLabel(title: text.replacingOccurrences(of: "\\n", with: "\n"),
+                                      weight: .regular,
+                                      size: 16,
+                                      color: .white,
+                                      alignment: .natural)
+        label.numberOfLines = 0
+        return label
+    }
+    
     static func makeToolBarButton(title: String) -> UIButton {
         let button = UIButton(type: .custom)
         button.setTitle(title, for: .normal)
@@ -57,19 +67,6 @@ class Factory {
         button.showsTouchWhenHighlighted = true
         button.titleLabel?.font = UIFont(name: weight.rawValue, size: 15)
         return button
-    }
-    
-    static func makeRoundedInfoView(strategy: SpeciesStrategy) -> RoundedInfoView {
-        let view = RoundedInfoView(frame: CGRect(), speciesStrategy: strategy)
-        return view
-    }
-    
-    static func makeTextBasedLearnMoreWindow(strategy: LearnMoreTextWindowStrategy) -> LearnMoreTextWindow {
-        return LearnMoreTextWindow(strategy: strategy)
-    }
-    
-    static func makeContentBasedLearnMoreWindow(height: CGFloat, strategy: LearnMoreContentWindowStrategy) -> LearnMoreContentViewWindow {
-        return LearnMoreContentViewWindow(height: height, strategy: strategy)
     }
 }
 

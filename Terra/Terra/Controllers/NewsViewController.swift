@@ -127,9 +127,7 @@ extension NewsViewController: UITableViewDataSourcePrefetching {
 fileprivate extension NewsViewController {
     
     func addSubviews() {
-        let UIElements = [tableView]
-        UIElements.forEach { view.addSubview($0) }
-        UIElements.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
+       [tableView].forEach { view.addSubview($0) }
     }
     
     func setConstraints() {
@@ -137,12 +135,10 @@ fileprivate extension NewsViewController {
     }
     
     func setTableViewConstraints() {
-        NSLayoutConstraint.activate([
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -60)
-        ])
+        tableView.snp.makeConstraints { (make) in
+            make.leading.top.trailing.equalTo(view)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(60)
+        }
     }
 }
 

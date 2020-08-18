@@ -11,7 +11,7 @@ import UIKit
 final class SpeciesListViewController: UIViewController {
     
     //MARK: -- UI Element Initialization
-    
+
     private lazy var searchBar: UISearchBar = {
         let sb = UISearchBar()
         sb.backgroundColor = .clear
@@ -87,7 +87,10 @@ final class SpeciesListViewController: UIViewController {
                                       size: 17,
                                       color: .red,
                                       alignment: .center)
-        label.frame = CGRect(x: 0, y: 0, width: collectionView.bounds.size.width, height: collectionView.bounds.size.height)
+        label.frame = CGRect(x: 0,
+                             y: 0,
+                             width: collectionView.bounds.size.width ,
+                             height: collectionView.bounds.size.height)
         collectionView.backgroundView = label
         label.isHidden = true
         return label
@@ -98,11 +101,13 @@ final class SpeciesListViewController: UIViewController {
     }()
     
     private lazy var searchBarLeadingAnchorConstraint: NSLayoutConstraint = {
-        return searchBar.leadingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.spacingConstant)
+        return searchBar.leadingAnchor.constraint(equalTo: view.trailingAnchor,
+                                                  constant: -Constants.spacingConstant)
     }()
     
     private lazy var terraTitleLabelLeadingAnchorConstraint: NSLayoutConstraint = {
-        return terraTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.spacingConstant)
+        return terraTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor,
+                                                        constant: Constants.spacingConstant)
     }()
     
     //MARK: -- Properties
@@ -178,7 +183,6 @@ final class SpeciesListViewController: UIViewController {
         
         setDatasourceAndDelegates()
         topToolBar.highlightButton(button: .buttonOne)
-        
     }
 }
 
@@ -195,7 +199,6 @@ extension SpeciesListViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let speciesCell = collectionView.dequeueReusableCell(withReuseIdentifier: "speciesCell", for: indexPath) as! SpeciesCollectionViewCell
-        
         let specificAnimal = viewModel.specificSpecies(at: indexPath.row)
         speciesCell.configureCell(from: specificAnimal)
         return speciesCell
@@ -204,18 +207,36 @@ extension SpeciesListViewController: UICollectionViewDataSource {
 
 //MARK: -- CollectionView Delegate Methods
 
+extension SpeciesListViewController: UICollectionViewDelegate {
+     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+           let cell = collectionView.cellForItem(at: indexPath)
+           let generator = UIImpactFeedbackGenerator(style: .medium)
+           generator.impactOccurred()
+           UIView.animate(withDuration: 0.3) {
+            cell?.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
+           }
+       }
+    
+    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+           let cell = collectionView.cellForItem(at: indexPath)
+           UIView.animate(withDuration: 0.3) {
+               cell?.transform = CGAffineTransform(scaleX: 1, y: 1)
+           }
+       }
+}
+
 extension SpeciesListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.width, height: 227)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let specificAnimal = viewModel.specificSpecies(at: indexPath.row)
-        
-        let detailVC = SpeciesDetailViewController()
-        detailVC.currentSpecies = specificAnimal
-        
-        presentModally(detailVC)
+        let selectedSpecies = viewModel.specificSpecies(at: indexPath.row)
+        let coverVC = SpeciesCoverViewController()
+        coverVC.selectedSpecies = selectedSpecies
+        let navVC = NavigationController(rootViewController: coverVC)
+        navVC.modalPresentationStyle = .fullScreen
+        presentModally(navVC)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

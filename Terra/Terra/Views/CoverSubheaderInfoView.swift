@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class DetailSubheaderView: UIView {
+final class CoverSubheaderInfoView: UIView {
     //MARK: -- UI Element Initialization
     
     private lazy var numbersTitleLabel: UILabel = {
@@ -111,7 +111,7 @@ final class DetailSubheaderView: UIView {
     }
 }
 
-fileprivate extension DetailSubheaderView {
+fileprivate extension CoverSubheaderInfoView {
     
     func setHorizontalStackConstraints() {
         horizontalStack.snp.makeConstraints { (make) in
