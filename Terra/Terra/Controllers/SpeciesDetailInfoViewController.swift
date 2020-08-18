@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UpdatedLearnMoreViewController: UIViewController {
+class SpeciesDetailInfoViewController: UIViewController {
     //MARK: -- UI Element Initialization
     
     private lazy var shadowView: ShadowView = {
@@ -33,6 +33,7 @@ class UpdatedLearnMoreViewController: UIViewController {
     
     private lazy var backgroundImageView: UIImageView = {
         let iv = UIImageView()
+         FirebaseStorageService.coverImageManager.getImage(for: strategy.species.commonName, setTo: iv)
         iv.backgroundColor = .black
         iv.contentMode = UIView.ContentMode.scaleAspectFill
         return iv
@@ -64,17 +65,17 @@ class UpdatedLearnMoreViewController: UIViewController {
     
     //MARK: -- Properties
     
-    var strategy: LearnMoreVCStrategy! {
+    var strategy: DetailPageStrategy! {
         didSet {
             commonView.configureView(from: strategy)
         }
     }
     
-    private lazy var topConstraint: NSLayoutConstraint = {
+    private lazy var commonViewToMaskViewTopAnchorConstraint: NSLayoutConstraint = {
         return commonView.topAnchor.constraint(equalTo: maskView.topAnchor)
     }()
     
-    private lazy var heightConstraint: NSLayoutConstraint = {
+    private lazy var commonViewHeightConstraint: NSLayoutConstraint = {
         return commonView.heightAnchor.constraint(equalToConstant: Constants.commonViewImageDimension)
     }()
     
@@ -88,10 +89,6 @@ class UpdatedLearnMoreViewController: UIViewController {
         maskView.layer.cornerRadius = value ? Constants.cornerRadius : 0
     }
     
-    private func loadImages() {
-        FirebaseStorageService.detailImageManager.getImage(for: strategy.species.commonName, setTo: backgroundImageView)
-    }
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         scrollView.scrollIndicatorInsets = view.safeAreaInsets
@@ -101,18 +98,22 @@ class UpdatedLearnMoreViewController: UIViewController {
                                                right: 0)
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        commonView.fadeSubtitleOut()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = true
         addSubviews()
         setConstraints()
-        loadImages()
+        commonView.fadeSubtitleIn()
     }
 }
 
 //MARK: -- Add Subviews & Constraints
 
-extension UpdatedLearnMoreViewController {
+extension SpeciesDetailInfoViewController {
     func addSubviews() {
         view.addSubview(shadowView)
         shadowView.addSubview(maskView)
@@ -161,7 +162,7 @@ extension UpdatedLearnMoreViewController {
         commonView.snp.makeConstraints { (make) in
             make.top.equalTo(scrollView)
             make.leading.trailing.equalTo(maskView)
-            heightConstraint.isActive = true
+            commonViewHeightConstraint.isActive = true
         }
     }
     
@@ -189,7 +190,7 @@ extension UpdatedLearnMoreViewController {
 }
 
 //MARK: -- Animatable Methods
-extension UpdatedLearnMoreViewController: Animatable {
+extension SpeciesDetailInfoViewController: Animatable {
     var containerView: UIView? {
         return view
     }
@@ -205,7 +206,7 @@ extension UpdatedLearnMoreViewController: Animatable {
         toFrame: CGRect
     ) {
         // Make the common view the same size as the initial frame
-        heightConstraint.constant = fromFrame.height
+        commonViewHeightConstraint.constant = fromFrame.height
         
         // Show the close button
         closeButton.alpha = 1
@@ -226,7 +227,7 @@ extension UpdatedLearnMoreViewController: Animatable {
         commonView.topConstraintValue = safeAreaTop + 20
         
         // Animate the common view to a height of 500 points
-        heightConstraint.constant = Constants.commonViewImageDimension
+        commonViewHeightConstraint.constant = Constants.commonViewImageDimension
         sizeAnimator.addAnimations { [weak self] in
             guard let self = self else { return }
             self.view.layoutIfNeeded()
@@ -246,16 +247,16 @@ extension UpdatedLearnMoreViewController: Animatable {
         toFrame: CGRect
     ) {
         // If the user has scrolled down in the content, force the common view to go to the top of the screen.
-        topConstraint.isActive = true
+        commonViewToMaskViewTopAnchorConstraint.isActive = true
         
         // If the top card is completely off screen, we move it to be JUST off screen.
         // This makes for a cleaner looking animation.
         if scrollView.contentOffset.y > commonView.frame.height {
-            topConstraint.constant = -commonView.frame.height
+            commonViewToMaskViewTopAnchorConstraint.constant = -commonView.frame.height
             view.layoutIfNeeded()
             
             // Still want to animate the common view getting pinned to the top of the view
-            topConstraint.constant = 0
+            commonViewToMaskViewTopAnchorConstraint.constant = 0
         }
         
         // Common view does not need to worry about the safe area anymore. Just restore the original value.
@@ -263,7 +264,7 @@ extension UpdatedLearnMoreViewController: Animatable {
         
         // Animate the height of the common view to be the same size as the TO frame.
         // Also animate hiding the close button
-        heightConstraint.constant = toFrame.height
+        commonViewHeightConstraint.constant = toFrame.height
         sizeAnimator.addAnimations { [weak self] in
             guard let self = self else { return }
             self.closeButton.alpha = 0

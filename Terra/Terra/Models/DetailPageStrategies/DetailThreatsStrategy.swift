@@ -1,5 +1,5 @@
 //
-//  LearnMoreVCThreatsStrategy.swift
+//  DetailThreatsStrategy.swift
 //  Terra
 //
 //  Created by Anthony Gonzalez on 8/12/20.
@@ -8,26 +8,29 @@
 
 import UIKit
 
-struct LearnMoreVCThreatsStrategy: LearnMoreVCStrategy {
+struct DetailThreatsStrategy: DetailPageStrategy {
     var species: Species
     
-    func title() -> String {
+    func speciesName() -> String {
         return species.commonName
     }
     
-    func subtitle() -> String {
+    func pageName() -> String {
         return "THREATS"
     }
     
     func firebaseStorageManager() -> FirebaseStorageService {
-        return FirebaseStorageService.learnMoreThreatsImageManager
+        return FirebaseStorageService.detailThreatsImageManager
     }
     
     mutating func arrangedSubviews() -> UIStackView {
         let stackView = UIStackView(arrangedSubviews: [
-            Factory.makeLearnMoreWindow(strategy: LearnMoreThreatsSummaryWindow(species: species)),
             
-            Factory.makeLearnMoreWindow(strategy: LearnMoreThreatsThreatsWindow(species: species))
+            DetailInfoWindow(title: "SUMMARY",
+                                         content: Factory.makeLearnMoreWindowLabel(text: species.population.summary)),
+            
+            DetailInfoWindow(title: "THREATS",
+                                         content: Factory.makeLearnMoreWindowLabel(text: species.population.threats))
         ])
         stackView.axis = .vertical
         stackView.spacing = Constants.spacingConstant

@@ -68,14 +68,5 @@ class Factory {
         button.titleLabel?.font = UIFont(name: weight.rawValue, size: 15)
         return button
     }
-    
-    static func makeRoundedInfoView(strategy: SpeciesStrategy) -> RoundedInfoView {
-        let view = RoundedInfoView(frame: CGRect(), speciesStrategy: strategy)
-        return view
-    }
-    
-    static func makeLearnMoreWindow(strategy: LearnMoreContentWindowStrategy) -> LearnMoreDynamicHeightWindow {
-        return LearnMoreDynamicHeightWindow(strategy: strategy)
-    }
 }
 

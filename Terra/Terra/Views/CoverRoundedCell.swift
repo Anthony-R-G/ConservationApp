@@ -5,10 +5,9 @@
 //  Created by Anthony Gonzalez on 8/15/20.
 //  Copyright © 2020 Antnee. All rights reserved.
 //
-
 import UIKit
 
-final class RoundedInfoCell: UICollectionViewCell {
+final class CoverRoundedCell: UICollectionViewCell {
     //MARK: -- UI Element Initialization
     
     private lazy var shadowView: ShadowView = {
@@ -27,7 +26,7 @@ final class RoundedInfoCell: UICollectionViewCell {
     
     //MARK: -- Properties
     
-    var strategy: LearnMoreVCStrategy! {
+    var strategy: DetailPageStrategy! {
         didSet {
             commonView.configureView(from: strategy)
         }
@@ -46,7 +45,7 @@ final class RoundedInfoCell: UICollectionViewCell {
 
 
 //MARK: -- Add Subviews & Constraints
-extension RoundedInfoCell {
+fileprivate extension CoverRoundedCell {
     func addSubviews() {
         contentView.addSubview(shadowView)
         shadowView.addSubview(commonView)

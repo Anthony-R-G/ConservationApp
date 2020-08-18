@@ -8,6 +8,7 @@
 
 import UIKit
 
+///Shared between DetailInfoVC and CoverRoundedCell
 final class CommonView: UIView {
     //MARK: -- UI Element Initialization
     
@@ -25,8 +26,9 @@ final class CommonView: UIView {
         let label = Factory.makeLabel(title: nil,
                                       weight: .bold,
                                       size: 16,
-                                      color: #colorLiteral(red: 0.4823529412, green: 0.4823529412, blue: 0.4823529412, alpha: 1),
+                                      color: .white,
                                       alignment: .left)
+        label.alpha = 0
         return label
     }()
     
@@ -51,38 +53,54 @@ final class CommonView: UIView {
     
     private lazy var backgroundImageTopGradient: GradientView = {
         let gv = GradientView()
-        gv.startColor = #colorLiteral(red: 0.05166878551, green: 0.05191607028, blue: 0.05249153823, alpha: 0.6392069777)
+        gv.startColor = #colorLiteral(red: 0.05166878551, green: 0.05191607028, blue: 0.05249153823, alpha: 0.7)
         gv.endColor = .clear
         return gv
     }()
     
     private lazy var backgroundImageBottomGradient: GradientView = {
-           let gv = GradientView()
-           gv.startColor = .clear
-           gv.endColor = #colorLiteral(red: 0.1944729984, green: 0.2008640766, blue: 0.2050628662, alpha: 0.5)
-           return gv
-       }()
+        let gv = GradientView()
+        gv.startColor = .clear
+        gv.endColor = #colorLiteral(red: 0.1944729984, green: 0.2008640766, blue: 0.2050628662, alpha: 0.5)
+        return gv
+    }()
     
     
     //MARK: -- Properties
-    var strategy: LearnMoreVCStrategy!
+   
     
-    private lazy var topConstraint: NSLayoutConstraint = {
+    var strategy: DetailPageStrategy!
+    
+    private lazy var subtitleTopConstraint: NSLayoutConstraint = {
         return subtitleLabel.topAnchor.constraint(equalTo: topAnchor,
                                                   constant: Constants.spacingConstant)
     }()
     
     var topConstraintValue: CGFloat {
-        get { return topConstraint.constant }
-        set { topConstraint.constant = newValue }
+        get { return subtitleTopConstraint.constant }
+        set { subtitleTopConstraint.constant = newValue }
     }
     //MARK: -- Methods
     
-    func configureView(from strategy: LearnMoreVCStrategy) {
-        titleLabel.text = strategy.subtitle()
+    func fadeSubtitleIn() {
+        UIView.animate(withDuration: 1) { [weak self] in
+            guard let self = self else { return }
+            self.subtitleLabel.alpha = 1
+        }
+    }
+    
+    func fadeSubtitleOut() {
+        UIView.animate(withDuration: 0.7) { [weak self] in
+            guard let self = self else { return }
+            self.subtitleLabel.alpha = 0
+        }
+    }
+
+    
+    func configureView(from strategy: DetailPageStrategy) {
+        titleLabel.text = strategy.pageName()
         strategy.firebaseStorageManager().getImage(for: strategy.species.commonName, setTo: backgroundImage)
-//        subtitleLabel.text = "NOW TRENDING"
-//        blurbLabel.text = "The event brings together creators and dreamers of all ages"
+        subtitleLabel.text = strategy.speciesName()
     }
     
     override init(frame: CGRect) {
@@ -112,7 +130,7 @@ fileprivate extension CommonView {
         setBlurbLabelConstraints()
         setBackgroundImageConstraints()
         setBackgroundImageTopGradientConstraints()
-//        setBackgroundImageBottomGradientConstraints()
+        //        setBackgroundImageBottomGradientConstraints()
     }
     
     func setTitleLabelConstraints() {
@@ -124,11 +142,11 @@ fileprivate extension CommonView {
     }
     
     func setSubtitleLabelConstraints() {
-        subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            subtitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.spacingConstant),
-            topConstraint
-        ])
+        subtitleLabel.snp.makeConstraints { [weak self] (make) in
+            guard let self = self else { return }
+            make.leading.equalTo(self).inset(Constants.spacingConstant)
+            subtitleTopConstraint.isActive = true
+        }
     }
     
     func setBlurbLabelConstraints() {
@@ -149,13 +167,13 @@ fileprivate extension CommonView {
     func setBackgroundImageTopGradientConstraints() {
         backgroundImageTopGradient.snp.makeConstraints { (make) in
             make.top.left.right.equalTo(backgroundImage)
-            make.height.equalTo(backgroundImage.snp.height).multipliedBy(0.30)
+            make.height.equalTo(backgroundImage.snp.height).multipliedBy(0.35)
         }
     }
     
     func setBackgroundImageBottomGradientConstraints() {
-         backgroundImageBottomGradient.snp.makeConstraints { (make) in
-             make.leading.top.bottom.trailing.equalTo(backgroundImage)
-         }
-     }
+        backgroundImageBottomGradient.snp.makeConstraints { (make) in
+            make.leading.top.bottom.trailing.equalTo(backgroundImage)
+        }
+    }
 }

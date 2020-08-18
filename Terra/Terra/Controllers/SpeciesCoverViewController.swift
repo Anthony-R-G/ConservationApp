@@ -10,11 +10,11 @@ import UIKit
 import SafariServices
 import FirebaseUI
 
-final class UpdatedSpeciesDetailViewController: UIViewController {
+final class SpeciesCoverViewController: UIViewController {
     
     //MARK: -- UI Element Initialization
     
-    private lazy var verticalScrollView: UIScrollView = {
+    private lazy var scrollView: UIScrollView = {
         let sv = UIScrollView()
         sv.showsVerticalScrollIndicator = false
         return sv
@@ -22,8 +22,9 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
     
     private lazy var backgroundImageView: UIImageView = {
         let iv = UIImageView()
-        iv.contentMode = UIView.ContentMode.scaleAspectFill
+        iv.contentMode = .scaleAspectFill
         view.insertSubview(iv, at: 0)
+        FirebaseStorageService.coverImageManager.getImage(for: currentSpecies.commonName, setTo: iv)
         return iv
     }()
     
@@ -35,8 +36,8 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
         return gv
     }()
     
-    private lazy var headerNameView: DetailHeaderNameView = {
-        let hiv = DetailHeaderNameView()
+    private lazy var headerNameView: CoverHeaderNameView = {
+        let hiv = CoverHeaderNameView()
         var frame = hiv.frame
         frame.size.height = screenSize.height * 0.30
         hiv.frame = frame
@@ -44,8 +45,8 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
         return hiv
     }()
     
-    private lazy var subheaderInfoView: DetailSubheaderView = {
-        let siv = DetailSubheaderView()
+    private lazy var subheaderInfoView: CoverSubheaderInfoView = {
+        let siv = CoverSubheaderInfoView()
         var frame = siv.frame
         frame.size.height = headerNameView.frame.height * 0.30
         siv.frame = frame
@@ -112,28 +113,30 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
         cv.alpha = 0
         cv.dataSource = self
         cv.delegate = self
-        cv.register(RoundedInfoCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        cv.register(CoverRoundedCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         return cv
     }()
     
     private lazy var closeButton: UIButton = {
-           let btn = UIButton()
-           btn.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
-           btn.transform = CGAffineTransform.init(scaleX: 1.5, y: 1.5)
-           btn.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.845703125)
-           btn.addTarget(self, action: #selector(closeButtonPressed), for: .touchUpInside)
-           return btn
-       }()
+        let btn = UIButton()
+        btn.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
+        btn.transform = CGAffineTransform.init(scaleX: 1.5, y: 1.5)
+        btn.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.845703125)
+        btn.addTarget(self, action: #selector(closeButtonPressed), for: .touchUpInside)
+        return btn
+    }()
     
     
     //MARK: -- Properties
-    private var strategies: [LearnMoreVCStrategy]!
+    private var strategies: [DetailPageStrategy]!
     
     private var animator: UIViewPropertyAnimator!
     
     private var screenSize = UIScreen.main.bounds.size
     
     var currentSpecies: Species!
+    
+    private var animatorFractionCompleteValue: CGFloat = 0
     
     private var headerPinnedToTop: Bool = false {
         didSet {
@@ -170,12 +173,7 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
         })
         animator.pausesOnCompletion = true
         animator.isReversed = true
-        animator.fractionComplete = 0
-    }
-    
-    private func setBackground() {
-        view.backgroundColor = .black
-        FirebaseStorageService.detailImageManager.getImage(for: currentSpecies.commonName, setTo: backgroundImageView)
+        animator.fractionComplete = animatorFractionCompleteValue
     }
     
     private func presentWebBrowser(link: URL){
@@ -189,20 +187,23 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        setVerticalScrollViewConstraints()
-        verticalScrollView.contentSize.height = UIScreen.main.bounds.height + 400
-        verticalScrollView.delegate = self
+        setScrollViewConstraints()
+        scrollView.contentSize.height = UIScreen.main.bounds.height + 400
+        scrollView.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        setupBackgroundVisualEffectBlur()
         exploreButton.startShimmeringAnimation(animationSpeed: 2,
                                                direction: .leftToRight,
                                                repeatCount: .infinity)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        animatorFractionCompleteValue = animator.fractionComplete
         animator?.stopAnimation(true)
         animator?.finishAnimation(at: .current)
+        backgroundVisualEffectBlur.effect = UIBlurEffect(style: .regular)
     }
     
     override func viewDidLoad() {
@@ -211,18 +212,30 @@ final class UpdatedSpeciesDetailViewController: UIViewController {
         view.backgroundColor = .black
         addSubviews()
         setConstraints()
-        setupBackgroundVisualEffectBlur()
-        setBackground()
         
-        strategies = [LearnMoreVCOverviewStrategy(species: currentSpecies),
-                      LearnMoreVCHabitatStrategy(species: currentSpecies),
-                      LearnMoreVCThreatsStrategy(species: currentSpecies)]
+        strategies = [DetailOverviewStrategy(species: currentSpecies),
+                      DetailHabitatStrategy(species: currentSpecies),
+                      DetailThreatsStrategy(species: currentSpecies)]
+    }
+}
+
+//MARK: -- ScrollView Methods
+extension SpeciesCoverViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = self.scrollView.contentOffset.y
+        updateBackgroundAnimator(from: offsetY)
+        updateTopGradientAlpha(from: offsetY)
+        updateExploreLabelAlpha(from: offsetY)
+        updateHeaderViewHeight(from: offsetY)
+        updateHeaderTopAnchor(from: offsetY)
+        updateSubheaderHeight(from: offsetY)
+        checkHeaderLock()
     }
 }
 
 //MARK: -- ScrollView Updates
 
-extension UpdatedSpeciesDetailViewController {
+extension SpeciesCoverViewController {
     
     private func updateBackgroundAnimator(from offsetY: CGFloat) {
         if offsetY <= 0 {
@@ -230,6 +243,7 @@ extension UpdatedSpeciesDetailViewController {
             return
         }
         animator.fractionComplete = abs(offsetY)/1000
+        print(animator.fractionComplete)
     }
     
     private func updateTopGradientAlpha(from offsetY: CGFloat) {
@@ -297,36 +311,17 @@ extension UpdatedSpeciesDetailViewController {
     }
 }
 
-//MARK: -- ScrollView Methods
-extension UpdatedSpeciesDetailViewController: UIScrollViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        switch scrollView {
-        case verticalScrollView:
-            let offsetY = scrollView.contentOffset.y
-            updateBackgroundAnimator(from: offsetY)
-            updateTopGradientAlpha(from: offsetY)
-            updateExploreLabelAlpha(from: offsetY)
-            updateHeaderViewHeight(from: offsetY)
-            updateHeaderTopAnchor(from: offsetY)
-            updateSubheaderHeight(from: offsetY)
-            checkHeaderLock()
-            
-        default:
-            ()
-        }
-    }
-}
 
 //MARK: -- Collection View Data Source
 
-extension UpdatedSpeciesDetailViewController: UICollectionViewDataSource {
+extension SpeciesCoverViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return strategies.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! RoundedInfoCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CoverRoundedCell
         let specificStrategy = strategies[indexPath.row]
         cell.strategy = specificStrategy
         return cell
@@ -335,13 +330,13 @@ extension UpdatedSpeciesDetailViewController: UICollectionViewDataSource {
 
 //MARK: -- Collection View Delegate
 
-extension UpdatedSpeciesDetailViewController: UICollectionViewDelegate {
+extension SpeciesCoverViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedCell = collectionView.cellForItem(at: indexPath)
-        let learnMoreVC = UpdatedLearnMoreViewController()
+        let detailInfoVC = SpeciesDetailInfoViewController()
         let specificStrategy = strategies[indexPath.row]
-        learnMoreVC.strategy = specificStrategy
-        navigationController?.pushViewController(learnMoreVC, animated: true)
+        detailInfoVC.strategy = specificStrategy
+        navigationController?.pushViewController(detailInfoVC, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
@@ -363,21 +358,20 @@ extension UpdatedSpeciesDetailViewController: UICollectionViewDelegate {
 
 //MARK: -- DonateButton Delegate Implementation
 
-extension UpdatedSpeciesDetailViewController: DonateButtonDelegate {
+extension SpeciesCoverViewController: DonateButtonDelegate {
     func donateButtonPressed() {
         guard let donationURL = URL(string: currentSpecies.donationLink) else { return }
         presentWebBrowser(link: donationURL)
     }
 }
 
-
 //MARK: -- Add Subviews & Constraints
 
-fileprivate extension UpdatedSpeciesDetailViewController {
+fileprivate extension SpeciesCoverViewController {
     func addSubviews() {
-        [verticalScrollView, collectionView, donateButtonContainer, closeButton, exploreButton].forEach { view.addSubview($0) }
+        [scrollView, collectionView, donateButtonContainer, closeButton, exploreButton].forEach { view.addSubview($0) }
         
-        [headerNameView, subheaderInfoView].forEach { verticalScrollView.addSubview($0) }
+        [headerNameView, subheaderInfoView].forEach { scrollView.addSubview($0) }
         
         backgroundImageView.addSubview(backgroundVisualEffectBlur)
         donateButtonContainer.addSubview(donateButton)
@@ -399,8 +393,8 @@ fileprivate extension UpdatedSpeciesDetailViewController {
         setDonateButtonConstraints()
     }
     
-    func setVerticalScrollViewConstraints() {
-        verticalScrollView.snp.makeConstraints { (make) in
+    func setScrollViewConstraints() {
+        scrollView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
     }
@@ -431,11 +425,10 @@ fileprivate extension UpdatedSpeciesDetailViewController {
         }
     }
     
-    
     func setHeaderInfoViewConstraints() {
         headerNameView.snp.makeConstraints { (make) in
-            make.leading.equalTo(verticalScrollView).inset(Constants.spacingConstant)
-            make.width.equalTo(verticalScrollView)
+            make.leading.equalTo(scrollView).inset(Constants.spacingConstant)
+            make.width.equalTo(scrollView)
             headerNameViewTopAnchorConstraint.isActive = true
             headerNameViewHeightConstraint.isActive = true
         }
@@ -483,7 +476,8 @@ fileprivate extension UpdatedSpeciesDetailViewController {
     }
 }
 
-extension UpdatedSpeciesDetailViewController: Animatable {
+//MARK: -- Animatable
+extension SpeciesCoverViewController: Animatable {
     var containerView: UIView? {
         return collectionView
     }
@@ -492,3 +486,5 @@ extension UpdatedSpeciesDetailViewController: Animatable {
         return selectedCell
     }
 }
+
+

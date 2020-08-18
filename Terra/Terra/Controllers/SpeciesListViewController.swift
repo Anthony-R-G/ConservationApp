@@ -11,7 +11,7 @@ import UIKit
 final class SpeciesListViewController: UIViewController {
     
     //MARK: -- UI Element Initialization
-    
+
     private lazy var searchBar: UISearchBar = {
         let sb = UISearchBar()
         sb.backgroundColor = .clear
@@ -199,7 +199,6 @@ extension SpeciesListViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let speciesCell = collectionView.dequeueReusableCell(withReuseIdentifier: "speciesCell", for: indexPath) as! SpeciesCollectionViewCell
-        
         let specificAnimal = viewModel.specificSpecies(at: indexPath.row)
         speciesCell.configureCell(from: specificAnimal)
         return speciesCell
@@ -233,9 +232,9 @@ extension SpeciesListViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let specificAnimal = viewModel.specificSpecies(at: indexPath.row)
-        let detailVC = UpdatedSpeciesDetailViewController()
-        detailVC.currentSpecies = specificAnimal
-        let navVC = NavigationController(rootViewController: detailVC)
+        let coverVC = SpeciesCoverViewController()
+        coverVC.currentSpecies = specificAnimal
+        let navVC = NavigationController(rootViewController: coverVC)
         navVC.modalPresentationStyle = .fullScreen
         presentModally(navVC)
     }

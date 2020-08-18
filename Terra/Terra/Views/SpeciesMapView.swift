@@ -16,7 +16,11 @@ final class SpeciesMapView: UIView {
         mv.styleURL = styleURL
         mv.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         mv.tintColor = .darkGray
-//        mv.zoomLevel = 2
+        mv.layer.cornerRadius = Constants.cornerRadius
+        mv.clipsToBounds = true
+        //        mv.zoomLevel = 8
+        //        mv.minimumZoomLevel = 2
+        //        mv.maximumZoomLevel = 1.8
         mv.delegate = self
         return mv
     }()
@@ -44,14 +48,14 @@ final class SpeciesMapView: UIView {
 
 extension SpeciesMapView: MGLMapViewDelegate {
     func mapViewDidFinishLoadingMap(_ mapView: MGLMapView) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            let camera = MGLMapCamera(lookingAtCenter: self.speciesLocation , altitude: 6000000, pitch: 15, heading: 0)
-            mapView.setCamera(camera,
-                              withDuration: 1.2,
-                              animationTimingFunction: CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut))
-        }
+        
+        let camera = MGLMapCamera(lookingAtCenter: self.speciesLocation , altitude: 6000000, pitch: 15, heading: 0)
+        mapView.setCamera(camera,
+                          withDuration: 1.0,
+                          animationTimingFunction: CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut))
     }
 }
+
 
 
 
@@ -66,10 +70,10 @@ extension SpeciesMapView {
     }
     
     func setMapConstraints() {
-        mapView.snp.makeConstraints { (make) in
+        mapView.snp.makeConstraints { [weak self] (make) in
+            guard let self = self else { return }
             make.edges.equalTo(self)
         }
     }
-    
 }
 

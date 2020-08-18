@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-final class TaxonomyView: UIView {
+final class ClassificationView: UIView {
     //MARK: -- UI Element Initialization
     private lazy var kingdomTitleLabel: UILabel = {
         return Factory.makeLabel(title: "Kingdom",
@@ -130,9 +130,9 @@ final class TaxonomyView: UIView {
             familyTitleLabel, familyDataLabel
         ])
         sv.axis = .vertical
-        sv.spacing = 10
-        sv.setCustomSpacing(20, after: kingdomDataLabel)
-        sv.setCustomSpacing(20, after: classDataLabel)
+        sv.spacing = Constants.spacingConstant/2
+        sv.setCustomSpacing(Constants.spacingConstant, after: kingdomDataLabel)
+        sv.setCustomSpacing(Constants.spacingConstant, after: classDataLabel)
         return sv
     }()
     
@@ -143,9 +143,9 @@ final class TaxonomyView: UIView {
             genusTitleLabel, genusDataLabel
         ])
         sv.axis = .vertical
-        sv.spacing = 10
-        sv.setCustomSpacing(20, after: phylumDataLabel)
-        sv.setCustomSpacing(20, after: orderDataLabel)
+        sv.spacing = Constants.spacingConstant/2
+        sv.setCustomSpacing(Constants.spacingConstant, after: phylumDataLabel)
+        sv.setCustomSpacing(Constants.spacingConstant, after: orderDataLabel)
         return sv
     }()
     
@@ -153,7 +153,7 @@ final class TaxonomyView: UIView {
         let sv = UIStackView(arrangedSubviews: [
             leftStack, rightStack
         ])
-        sv.spacing = 10
+        sv.spacing = Constants.spacingConstant/2
         sv.alignment = .center
         return sv
     }()
@@ -202,13 +202,21 @@ final class TaxonomyView: UIView {
     }
 }
 
+//MARK: -- Speech Synth Delegate
+
+extension ClassificationView: AVSpeechSynthesizerDelegate {
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
+        audioButton.isUserInteractionEnabled = true
+        audioButton.tintColor = .white
+    }
+}
+
 //MARK: -- Add Subviews & Constraints
 
-fileprivate extension TaxonomyView {
+fileprivate extension ClassificationView {
     func addSubviews() {
         let UIElements = [horizontalStack, separatorLine, scientificNameTitleLabel ,scientificNameDataLabel, audioButton]
         UIElements.forEach { addSubview($0) }
-        UIElements.forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
     }
     
     func setConstraints() {
@@ -257,10 +265,4 @@ fileprivate extension TaxonomyView {
     }
 }
 
-extension TaxonomyView: AVSpeechSynthesizerDelegate {
-    
-    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
-        audioButton.isUserInteractionEnabled = true
-        audioButton.tintColor = .white
-    }
-}
+

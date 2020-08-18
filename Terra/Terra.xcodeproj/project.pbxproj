@@ -10,7 +10,6 @@
 		27833538551D4B3E25CE217A /* Pods_Terra.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B1B9E327E92F328F158E466 /* Pods_Terra.framework */; };
 		7910BAB27095C746F49FFC42 /* Pods_TerraTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EB8ED79505BA0B1444EC48D /* Pods_TerraTests.framework */; };
 		9701B4EA24EAEAFB0083CFDC /* SpeciesMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9701B4E924EAEAFB0083CFDC /* SpeciesMapView.swift */; };
-		970B172524C2699E007F32E0 /* SpeciesDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970B172424C2699E007F32E0 /* SpeciesDetailViewController.swift */; };
 		9711D8F724BD199700C2E6F1 /* Species.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9711D8F624BD199700C2E6F1 /* Species.swift */; };
 		9711D8FC24BD42C800C2E6F1 /* FirestoresService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9711D8FB24BD42C800C2E6F1 /* FirestoresService.swift */; };
 		9723E7AA24D3505C0038ECB6 /* SpeciesAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9723E7A924D3505C0038ECB6 /* SpeciesAnnotation.swift */; };
@@ -20,13 +19,10 @@
 		972A615324C94C6E00A59AB6 /* Diet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D9E24A24C6470600524000 /* Diet.swift */; };
 		972A615424C94C7000A59AB6 /* PopulationTrend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974CC98324C64F0E00E4EF85 /* PopulationTrend.swift */; };
 		972A615724C94C7A00A59AB6 /* FirestoresService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9711D8FB24BD42C800C2E6F1 /* FirestoresService.swift */; };
-		972BBF7724C01FA900B6F7C0 /* PSORoundedVisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972BBF7624C01FA900B6F7C0 /* PSORoundedVisualEffectView.swift */; };
 		972BBF7924C0204600B6F7C0 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972BBF7824C0204600B6F7C0 /* UIViewExtensions.swift */; };
 		972BBF7E24C026CD00B6F7C0 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 972BBF7B24C0256F00B6F7C0 /* Roboto-Bold.ttf */; };
 		972BBF7F24C026CF00B6F7C0 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 972BBF7C24C0257600B6F7C0 /* Roboto-Medium.ttf */; };
 		972BBF8024C026D100B6F7C0 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 972BBF7D24C0257B00B6F7C0 /* Roboto-Light.ttf */; };
-		973C963E24EA224400C5E9ED /* LearnMoreThreatsSummaryWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973C963D24EA224400C5E9ED /* LearnMoreThreatsSummaryWindow.swift */; };
-		973C964024EA23E900C5E9ED /* LearnMoreThreatsThreatsWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973C963F24EA23E900C5E9ED /* LearnMoreThreatsThreatsWindow.swift */; };
 		97452E4623E1E6C7005636E0 /* SpeciesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97452E4523E1E6C7005636E0 /* SpeciesCollectionViewCell.swift */; };
 		97452E4823E1EEE9005636E0 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97452E4723E1EEE9005636E0 /* GradientView.swift */; };
 		974B752124DFFC72006C3D1D /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F4E00924D757C600509694 /* StringExtensions.swift */; };
@@ -40,18 +36,12 @@
 		974B752924E0058E006C3D1D /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9764D12A24D7DD820050AF37 /* Secrets.swift */; };
 		974B752A24E00595006C3D1D /* NewsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9772515824DF7F9C0052A3F6 /* NewsResponse.swift */; };
 		974CC98424C64F0F00E4EF85 /* PopulationTrend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974CC98324C64F0E00E4EF85 /* PopulationTrend.swift */; };
-		975812E924D4EDF900C09D56 /* SpeciesStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975812E824D4EDF900C09D56 /* SpeciesStrategy.swift */; };
-		975812EB24D4EF9400C09D56 /* SpeciesOverviewStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975812EA24D4EF9400C09D56 /* SpeciesOverviewStrategy.swift */; };
-		975812ED24D528E100C09D56 /* SpeciesThreatsStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975812EC24D528E100C09D56 /* SpeciesThreatsStrategy.swift */; };
-		975812F124D52F7B00C09D56 /* SpeciesHabitatStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975812F024D52F7B00C09D56 /* SpeciesHabitatStrategy.swift */; };
-		975812F324D530AA00C09D56 /* SpeciesGalleryStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975812F224D530AA00C09D56 /* SpeciesGalleryStrategy.swift */; };
 		975812F524D539D500C09D56 /* Biome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975812F424D539D500C09D56 /* Biome.swift */; };
-		97591FD424CB8D46002EAC96 /* RoundedInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FD324CB8D46002EAC96 /* RoundedInfoView.swift */; };
 		97591FDC24CC4524002EAC96 /* ToolBarSelectedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FDB24CC4524002EAC96 /* ToolBarSelectedButton.swift */; };
 		97591FDF24CCD14A002EAC96 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FDE24CCD14A002EAC96 /* Constants.swift */; };
 		97591FE024CCD2E9002EAC96 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FDE24CCD14A002EAC96 /* Constants.swift */; };
 		97591FE324CCDC48002EAC96 /* FontWeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FE224CCDC48002EAC96 /* FontWeight.swift */; };
-		975C8E5424E4F11500A0EB9D /* LearnMoreVCThreatsStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975C8E5324E4F11500A0EB9D /* LearnMoreVCThreatsStrategy.swift */; };
+		975C8E5424E4F11500A0EB9D /* DetailThreatsStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975C8E5324E4F11500A0EB9D /* DetailThreatsStrategy.swift */; };
 		9764D12924D7DC250050AF37 /* NewsArticle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9764D12824D7DC250050AF37 /* NewsArticle.swift */; };
 		9764D12B24D7DD820050AF37 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9764D12A24D7DD820050AF37 /* Secrets.swift */; };
 		9764D12E24D7E46E0050AF37 /* NewsArticleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9764D12D24D7E46E0050AF37 /* NewsArticleTableViewCell.swift */; };
@@ -61,18 +51,15 @@
 		97677BDD24E6FC4600AB400A /* ISO8601DateFormatted.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97677BDC24E6FC4600AB400A /* ISO8601DateFormatted.swift */; };
 		97677BDE24E7278D00AB400A /* ISO8601DateFormatted.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97677BDC24E6FC4600AB400A /* ISO8601DateFormatted.swift */; };
 		97677BE024E72B9300AB400A /* newsResponseTestData.json in Resources */ = {isa = PBXBuildFile; fileRef = 97677BDF24E72B9300AB400A /* newsResponseTestData.json */; };
-		9767D04C24C3EA9200384FCD /* DetailSubheaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9767D04B24C3EA9200384FCD /* DetailSubheaderView.swift */; };
+		9767D04C24C3EA9200384FCD /* CoverSubheaderInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9767D04B24C3EA9200384FCD /* CoverSubheaderInfoView.swift */; };
 		97682CC524D550BB000E5B30 /* Biome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975812F424D539D500C09D56 /* Biome.swift */; };
 		97682CC724D5EAA3000E5B30 /* Population.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97682CC624D5EAA3000E5B30 /* Population.swift */; };
 		97682CC824D5EB79000E5B30 /* Population.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97682CC624D5EAA3000E5B30 /* Population.swift */; };
-		97682CCA24D634AA000E5B30 /* RoundedInfoViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97682CC924D634AA000E5B30 /* RoundedInfoViewDelegate.swift */; };
-		9768795B24EAE580009E7713 /* LearnMoreHabitatLocationWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9768795A24EAE580009E7713 /* LearnMoreHabitatLocationWindow.swift */; };
 		976D585924CFA04400FC7458 /* UIButtonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976D585824CFA04400FC7458 /* UIButtonExtensions.swift */; };
 		976DA46624DFCAF9003F3197 /* SpeciesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976DA46524DFCAF9003F3197 /* SpeciesViewModel.swift */; };
 		976DA46824DFCB5F003F3197 /* SpeciesViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976DA46724DFCB5F003F3197 /* SpeciesViewModelDelegate.swift */; };
-		976F68C224E8A62C00277F79 /* UpdatedSpeciesDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976F68C124E8A62C00277F79 /* UpdatedSpeciesDetailViewController.swift */; };
-		976F68C424E8AADD00277F79 /* UpdatedLearnMoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976F68C324E8AADD00277F79 /* UpdatedLearnMoreViewController.swift */; };
-		976F68C624E8AB2600277F79 /* RoundedInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976F68C524E8AB2600277F79 /* RoundedInfoCell.swift */; };
+		976F68C224E8A62C00277F79 /* SpeciesCoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976F68C124E8A62C00277F79 /* SpeciesCoverViewController.swift */; };
+		976F68C424E8AADD00277F79 /* SpeciesDetailInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976F68C324E8AADD00277F79 /* SpeciesDetailInfoViewController.swift */; };
 		976F68C824E8AE2500277F79 /* CommonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976F68C724E8AE2500277F79 /* CommonView.swift */; };
 		976F68CA24E8AE8600277F79 /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976F68C924E8AE8600277F79 /* ShadowView.swift */; };
 		976F68CC24E8B01E00277F79 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976F68CB24E8B01E00277F79 /* NavigationController.swift */; };
@@ -101,7 +88,6 @@
 		97947F5324DD1F560047052B /* CustomCalloutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97947F5224DD1F560047052B /* CustomCalloutView.swift */; };
 		9794EF7C24E66EA700B72246 /* Roboto-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9794EF7A24E66EA600B72246 /* Roboto-Italic.ttf */; };
 		9794EF7D24E66EA700B72246 /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9794EF7B24E66EA700B72246 /* Roboto-Black.ttf */; };
-		9794EF7F24E6735D00B72246 /* AudioButtonDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9794EF7E24E6735D00B72246 /* AudioButtonDelegate.swift */; };
 		9794EF8524E68FD700B72246 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9794EF8424E68FD700B72246 /* Utilities.swift */; };
 		97997F2C24DCE18B00981087 /* MGLMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97997F2B24DCE18B00981087 /* MGLMapViewController.swift */; };
 		979C191423DE43E900651B2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979C191323DE43E900651B2B /* AppDelegate.swift */; };
@@ -109,25 +95,22 @@
 		979C191D23DE43EF00651B2B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 979C191C23DE43EF00651B2B /* Assets.xcassets */; };
 		979C192023DE43EF00651B2B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 979C191E23DE43EF00651B2B /* LaunchScreen.storyboard */; };
 		979C192B23DE43EF00651B2B /* TerraTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979C192A23DE43EF00651B2B /* TerraTests.swift */; };
-		97A24D2024E445A800958AB9 /* LearnMoreVCHabitatStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A24D1F24E445A800958AB9 /* LearnMoreVCHabitatStrategy.swift */; };
-		97A24D2424E49A4100958AB9 /* TaxonomyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A24D2324E49A4100958AB9 /* TaxonomyView.swift */; };
-		97A24D2824E4A52100958AB9 /* LearnMoreContentWindowStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A24D2724E4A52100958AB9 /* LearnMoreContentWindowStrategy.swift */; };
+		97A24D2024E445A800958AB9 /* DetailHabitatStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A24D1F24E445A800958AB9 /* DetailHabitatStrategy.swift */; };
+		97A24D2424E49A4100958AB9 /* ClassificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A24D2324E49A4100958AB9 /* ClassificationView.swift */; };
 		97A2BC7224CE5578000D6B2D /* FirestoreError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97928F7824CD11BF00AF90C5 /* FirestoreError.swift */; };
 		97A2BC7324CE559F000D6B2D /* FontWeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FE224CCDC48002EAC96 /* FontWeight.swift */; };
-		97B406A724E1FDED00A79E98 /* LearnMoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B406A624E1FDED00A79E98 /* LearnMoreViewController.swift */; };
-		97B68CD424BBB0AC005B8AB8 /* DetailHeaderNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B68CD324BBB0AC005B8AB8 /* DetailHeaderNameView.swift */; };
-		97B7C79724E440CE008BD6AD /* LearnMoreVCOverviewStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B7C79624E440CE008BD6AD /* LearnMoreVCOverviewStrategy.swift */; };
+		97B68CD424BBB0AC005B8AB8 /* CoverHeaderNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B68CD324BBB0AC005B8AB8 /* CoverHeaderNameView.swift */; };
+		97B7C79724E440CE008BD6AD /* DetailOverviewStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B7C79624E440CE008BD6AD /* DetailOverviewStrategy.swift */; };
 		97BF745323DF42F90058F2D7 /* SpeciesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BF745223DF42F90058F2D7 /* SpeciesListViewController.swift */; };
-		97CDF11524E4A86F0055FE78 /* LearnMoreOverviewDescriptionWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CDF11424E4A86F0055FE78 /* LearnMoreOverviewDescriptionWindow.swift */; };
-		97CDF11724E4A9970055FE78 /* LearnMoreOverviewClassificationWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CDF11624E4A9970055FE78 /* LearnMoreOverviewClassificationWindow.swift */; };
 		97D5946424CE7E49001BD566 /* CustomToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D5946324CE7E49001BD566 /* CustomToolBar.swift */; };
 		97D9E24B24C6470700524000 /* Diet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D9E24A24C6470600524000 /* Diet.swift */; };
+		97DC775224EB6C8700111245 /* CoverRoundedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DC775124EB6C8700111245 /* CoverRoundedCell.swift */; };
 		97DD101D24C69EB000A21DF4 /* ToolBarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DD101C24C69EB000A21DF4 /* ToolBarDelegate.swift */; };
 		97E61B8024CE54A100E83691 /* Habitat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977D877124CD7BFF00AE5E51 /* Habitat.swift */; };
 		97E61B8124CE54A800E83691 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977D876F24CD6A1200AE5E51 /* Group.swift */; };
 		97E9450424BE10C800550824 /* ConservationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E9450324BE10C800550824 /* ConservationStatus.swift */; };
-		97EA493C24E3BEC200C0FE64 /* LearnMoreDynamicHeightWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EA493B24E3BEC200C0FE64 /* LearnMoreDynamicHeightWindow.swift */; };
-		97EA494124E43FC500C0FE64 /* LearnMoreVCStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EA494024E43FC500C0FE64 /* LearnMoreVCStrategy.swift */; };
+		97EA493C24E3BEC200C0FE64 /* DetailInfoWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EA493B24E3BEC200C0FE64 /* DetailInfoWindow.swift */; };
+		97EA494124E43FC500C0FE64 /* DetailPageStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EA494024E43FC500C0FE64 /* DetailPageStrategy.swift */; };
 		97EDD4F024D36D0A00D30674 /* FirebaseStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EDD4EF24D36D0A00D30674 /* FirebaseStorageManager.swift */; };
 		97F0CCA924C56F5C00C581D3 /* UIScrollViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F0CCA824C56F5C00C581D3 /* UIScrollViewExtensions.swift */; };
 		97F4E00A24D757C600509694 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F4E00924D757C600509694 /* StringExtensions.swift */; };
@@ -153,34 +136,24 @@
 		5EB8ED79505BA0B1444EC48D /* Pods_TerraTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TerraTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B1B9E327E92F328F158E466 /* Pods_Terra.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Terra.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9701B4E924EAEAFB0083CFDC /* SpeciesMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesMapView.swift; sourceTree = "<group>"; };
-		970B172424C2699E007F32E0 /* SpeciesDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesDetailViewController.swift; sourceTree = "<group>"; };
 		9711D8F624BD199700C2E6F1 /* Species.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Species.swift; sourceTree = "<group>"; };
 		9711D8FB24BD42C800C2E6F1 /* FirestoresService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoresService.swift; sourceTree = "<group>"; };
 		9723E7A924D3505C0038ECB6 /* SpeciesAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesAnnotation.swift; sourceTree = "<group>"; };
 		9723E7AB24D353330038ECB6 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		9729736E24DC9E3400123C86 /* DoubleExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleExtensions.swift; sourceTree = "<group>"; };
-		972BBF7624C01FA900B6F7C0 /* PSORoundedVisualEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSORoundedVisualEffectView.swift; sourceTree = "<group>"; };
 		972BBF7824C0204600B6F7C0 /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		972BBF7B24C0256F00B6F7C0 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		972BBF7C24C0257600B6F7C0 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		972BBF7D24C0257B00B6F7C0 /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
-		973C963D24EA224400C5E9ED /* LearnMoreThreatsSummaryWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnMoreThreatsSummaryWindow.swift; sourceTree = "<group>"; };
-		973C963F24EA23E900C5E9ED /* LearnMoreThreatsThreatsWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnMoreThreatsThreatsWindow.swift; sourceTree = "<group>"; };
 		97452E4523E1E6C7005636E0 /* SpeciesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesCollectionViewCell.swift; sourceTree = "<group>"; };
 		97452E4723E1EEE9005636E0 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		974CC98324C64F0E00E4EF85 /* PopulationTrend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopulationTrend.swift; sourceTree = "<group>"; };
-		975812E824D4EDF900C09D56 /* SpeciesStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesStrategy.swift; sourceTree = "<group>"; };
-		975812EA24D4EF9400C09D56 /* SpeciesOverviewStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesOverviewStrategy.swift; sourceTree = "<group>"; };
-		975812EC24D528E100C09D56 /* SpeciesThreatsStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesThreatsStrategy.swift; sourceTree = "<group>"; };
-		975812F024D52F7B00C09D56 /* SpeciesHabitatStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesHabitatStrategy.swift; sourceTree = "<group>"; };
-		975812F224D530AA00C09D56 /* SpeciesGalleryStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesGalleryStrategy.swift; sourceTree = "<group>"; };
 		975812F424D539D500C09D56 /* Biome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Biome.swift; sourceTree = "<group>"; };
-		97591FD324CB8D46002EAC96 /* RoundedInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedInfoView.swift; sourceTree = "<group>"; };
 		97591FDB24CC4524002EAC96 /* ToolBarSelectedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolBarSelectedButton.swift; sourceTree = "<group>"; };
 		97591FDE24CCD14A002EAC96 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		97591FE124CCDC28002EAC96 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		97591FE224CCDC48002EAC96 /* FontWeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontWeight.swift; sourceTree = "<group>"; };
-		975C8E5324E4F11500A0EB9D /* LearnMoreVCThreatsStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnMoreVCThreatsStrategy.swift; sourceTree = "<group>"; };
+		975C8E5324E4F11500A0EB9D /* DetailThreatsStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailThreatsStrategy.swift; sourceTree = "<group>"; };
 		9764D12824D7DC250050AF37 /* NewsArticle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsArticle.swift; sourceTree = "<group>"; };
 		9764D12A24D7DD820050AF37 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		9764D12D24D7E46E0050AF37 /* NewsArticleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsArticleTableViewCell.swift; sourceTree = "<group>"; };
@@ -189,16 +162,13 @@
 		9764D13424D9D1A20050AF37 /* ToolBarDetailVCStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolBarDetailVCStrategy.swift; sourceTree = "<group>"; };
 		97677BDC24E6FC4600AB400A /* ISO8601DateFormatted.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISO8601DateFormatted.swift; sourceTree = "<group>"; };
 		97677BDF24E72B9300AB400A /* newsResponseTestData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = newsResponseTestData.json; path = ../../../../../Downloads/newsResponseTestData.json; sourceTree = "<group>"; };
-		9767D04B24C3EA9200384FCD /* DetailSubheaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSubheaderView.swift; sourceTree = "<group>"; };
+		9767D04B24C3EA9200384FCD /* CoverSubheaderInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverSubheaderInfoView.swift; sourceTree = "<group>"; };
 		97682CC624D5EAA3000E5B30 /* Population.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Population.swift; sourceTree = "<group>"; };
-		97682CC924D634AA000E5B30 /* RoundedInfoViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedInfoViewDelegate.swift; sourceTree = "<group>"; };
-		9768795A24EAE580009E7713 /* LearnMoreHabitatLocationWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnMoreHabitatLocationWindow.swift; sourceTree = "<group>"; };
 		976D585824CFA04400FC7458 /* UIButtonExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtensions.swift; sourceTree = "<group>"; };
 		976DA46524DFCAF9003F3197 /* SpeciesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesViewModel.swift; sourceTree = "<group>"; };
 		976DA46724DFCB5F003F3197 /* SpeciesViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesViewModelDelegate.swift; sourceTree = "<group>"; };
-		976F68C124E8A62C00277F79 /* UpdatedSpeciesDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatedSpeciesDetailViewController.swift; sourceTree = "<group>"; };
-		976F68C324E8AADD00277F79 /* UpdatedLearnMoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatedLearnMoreViewController.swift; sourceTree = "<group>"; };
-		976F68C524E8AB2600277F79 /* RoundedInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedInfoCell.swift; sourceTree = "<group>"; };
+		976F68C124E8A62C00277F79 /* SpeciesCoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesCoverViewController.swift; sourceTree = "<group>"; };
+		976F68C324E8AADD00277F79 /* SpeciesDetailInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesDetailInfoViewController.swift; sourceTree = "<group>"; };
 		976F68C724E8AE2500277F79 /* CommonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonView.swift; sourceTree = "<group>"; };
 		976F68C924E8AE8600277F79 /* ShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
 		976F68CB24E8B01E00277F79 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
@@ -223,7 +193,6 @@
 		97947F5224DD1F560047052B /* CustomCalloutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCalloutView.swift; sourceTree = "<group>"; };
 		9794EF7A24E66EA600B72246 /* Roboto-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Italic.ttf"; sourceTree = "<group>"; };
 		9794EF7B24E66EA700B72246 /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Black.ttf"; sourceTree = "<group>"; };
-		9794EF7E24E6735D00B72246 /* AudioButtonDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioButtonDelegate.swift; sourceTree = "<group>"; };
 		9794EF8424E68FD700B72246 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		97997F2B24DCE18B00981087 /* MGLMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MGLMapViewController.swift; sourceTree = "<group>"; };
 		979C191023DE43E900651B2B /* Terra.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Terra.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -235,21 +204,18 @@
 		979C192623DE43EF00651B2B /* TerraTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TerraTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		979C192A23DE43EF00651B2B /* TerraTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerraTests.swift; sourceTree = "<group>"; };
 		979C192C23DE43EF00651B2B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		97A24D1F24E445A800958AB9 /* LearnMoreVCHabitatStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnMoreVCHabitatStrategy.swift; sourceTree = "<group>"; };
-		97A24D2324E49A4100958AB9 /* TaxonomyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxonomyView.swift; sourceTree = "<group>"; };
-		97A24D2724E4A52100958AB9 /* LearnMoreContentWindowStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnMoreContentWindowStrategy.swift; sourceTree = "<group>"; };
-		97B406A624E1FDED00A79E98 /* LearnMoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnMoreViewController.swift; sourceTree = "<group>"; };
-		97B68CD324BBB0AC005B8AB8 /* DetailHeaderNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailHeaderNameView.swift; sourceTree = "<group>"; };
-		97B7C79624E440CE008BD6AD /* LearnMoreVCOverviewStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnMoreVCOverviewStrategy.swift; sourceTree = "<group>"; };
+		97A24D1F24E445A800958AB9 /* DetailHabitatStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailHabitatStrategy.swift; sourceTree = "<group>"; };
+		97A24D2324E49A4100958AB9 /* ClassificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassificationView.swift; sourceTree = "<group>"; };
+		97B68CD324BBB0AC005B8AB8 /* CoverHeaderNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverHeaderNameView.swift; sourceTree = "<group>"; };
+		97B7C79624E440CE008BD6AD /* DetailOverviewStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailOverviewStrategy.swift; sourceTree = "<group>"; };
 		97BF745223DF42F90058F2D7 /* SpeciesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesListViewController.swift; sourceTree = "<group>"; };
-		97CDF11424E4A86F0055FE78 /* LearnMoreOverviewDescriptionWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnMoreOverviewDescriptionWindow.swift; sourceTree = "<group>"; };
-		97CDF11624E4A9970055FE78 /* LearnMoreOverviewClassificationWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnMoreOverviewClassificationWindow.swift; sourceTree = "<group>"; };
 		97D5946324CE7E49001BD566 /* CustomToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomToolBar.swift; sourceTree = "<group>"; };
 		97D9E24A24C6470600524000 /* Diet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diet.swift; sourceTree = "<group>"; };
+		97DC775124EB6C8700111245 /* CoverRoundedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverRoundedCell.swift; sourceTree = "<group>"; };
 		97DD101C24C69EB000A21DF4 /* ToolBarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolBarDelegate.swift; sourceTree = "<group>"; };
 		97E9450324BE10C800550824 /* ConservationStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConservationStatus.swift; sourceTree = "<group>"; };
-		97EA493B24E3BEC200C0FE64 /* LearnMoreDynamicHeightWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnMoreDynamicHeightWindow.swift; sourceTree = "<group>"; };
-		97EA494024E43FC500C0FE64 /* LearnMoreVCStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnMoreVCStrategy.swift; sourceTree = "<group>"; };
+		97EA493B24E3BEC200C0FE64 /* DetailInfoWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInfoWindow.swift; sourceTree = "<group>"; };
+		97EA494024E43FC500C0FE64 /* DetailPageStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPageStrategy.swift; sourceTree = "<group>"; };
 		97EDD4EF24D36D0A00D30674 /* FirebaseStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStorageManager.swift; sourceTree = "<group>"; };
 		97F0CCA824C56F5C00C581D3 /* UIScrollViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScrollViewExtensions.swift; sourceTree = "<group>"; };
 		97F4E00924D757C600509694 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
@@ -296,7 +262,6 @@
 			isa = PBXGroup;
 			children = (
 				97452E4723E1EEE9005636E0 /* GradientView.swift */,
-				972BBF7624C01FA900B6F7C0 /* PSORoundedVisualEffectView.swift */,
 				977D877524CE1F3700AE5E51 /* UIRoundedButtonWithGradientAndShadow.swift */,
 				976F68CD24E8B1C300277F79 /* Animatable.swift */,
 				976F68CF24E8B21A00277F79 /* CustomTransitionAnimation.swift */,
@@ -319,10 +284,8 @@
 		9729736D24DC95AA00123C86 /* Custom Delegates */ = {
 			isa = PBXGroup;
 			children = (
-				9794EF7E24E6735D00B72246 /* AudioButtonDelegate.swift */,
 				97DD101C24C69EB000A21DF4 /* ToolBarDelegate.swift */,
 				97F7B42724C56886007AEE97 /* DonateButtonDelegate.swift */,
-				97682CC924D634AA000E5B30 /* RoundedInfoViewDelegate.swift */,
 				9772516124DFA6C40052A3F6 /* NewsViewModelDelegate.swift */,
 				976DA46724DFCB5F003F3197 /* SpeciesViewModelDelegate.swift */,
 			);
@@ -343,63 +306,25 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		973C963A24EA219E00C5E9ED /* Overview */ = {
-			isa = PBXGroup;
-			children = (
-				97CDF11424E4A86F0055FE78 /* LearnMoreOverviewDescriptionWindow.swift */,
-				97CDF11624E4A9970055FE78 /* LearnMoreOverviewClassificationWindow.swift */,
-			);
-			path = Overview;
-			sourceTree = "<group>";
-		};
-		973C963B24EA21A900C5E9ED /* Threats */ = {
-			isa = PBXGroup;
-			children = (
-				973C963D24EA224400C5E9ED /* LearnMoreThreatsSummaryWindow.swift */,
-				973C963F24EA23E900C5E9ED /* LearnMoreThreatsThreatsWindow.swift */,
-			);
-			path = Threats;
-			sourceTree = "<group>";
-		};
-		973C963C24EA21B600C5E9ED /* Habitat */ = {
-			isa = PBXGroup;
-			children = (
-				9768795A24EAE580009E7713 /* LearnMoreHabitatLocationWindow.swift */,
-			);
-			path = Habitat;
-			sourceTree = "<group>";
-		};
 		97452E4423E1E6A9005636E0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				97452E4523E1E6C7005636E0 /* SpeciesCollectionViewCell.swift */,
 				9764D12D24D7E46E0050AF37 /* NewsArticleTableViewCell.swift */,
-				97B68CD324BBB0AC005B8AB8 /* DetailHeaderNameView.swift */,
-				9767D04B24C3EA9200384FCD /* DetailSubheaderView.swift */,
+				97DC775124EB6C8700111245 /* CoverRoundedCell.swift */,
+				97B68CD324BBB0AC005B8AB8 /* CoverHeaderNameView.swift */,
+				9767D04B24C3EA9200384FCD /* CoverSubheaderInfoView.swift */,
 				977D877324CE0D8C00AE5E51 /* DonateButton.swift */,
 				97D5946324CE7E49001BD566 /* CustomToolBar.swift */,
-				97591FD324CB8D46002EAC96 /* RoundedInfoView.swift */,
 				97947F5224DD1F560047052B /* CustomCalloutView.swift */,
 				9772515624DF66A90052A3F6 /* CustomAnnotationView.swift */,
-				97EA493B24E3BEC200C0FE64 /* LearnMoreDynamicHeightWindow.swift */,
-				97A24D2324E49A4100958AB9 /* TaxonomyView.swift */,
-				976F68C524E8AB2600277F79 /* RoundedInfoCell.swift */,
+				97EA493B24E3BEC200C0FE64 /* DetailInfoWindow.swift */,
+				97A24D2324E49A4100958AB9 /* ClassificationView.swift */,
 				976F68C724E8AE2500277F79 /* CommonView.swift */,
 				976F68C924E8AE8600277F79 /* ShadowView.swift */,
 				9701B4E924EAEAFB0083CFDC /* SpeciesMapView.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		975C8E5224E4BD6400A0EB9D /* LearnMoreWindowStrategies */ = {
-			isa = PBXGroup;
-			children = (
-				97A24D2724E4A52100958AB9 /* LearnMoreContentWindowStrategy.swift */,
-				973C963A24EA219E00C5E9ED /* Overview */,
-				973C963C24EA21B600C5E9ED /* Habitat */,
-				973C963B24EA21A900C5E9ED /* Threats */,
-			);
-			path = LearnMoreWindowStrategies;
 			sourceTree = "<group>";
 		};
 		9764D12C24D7DE380050AF37 /* Networking */ = {
@@ -434,11 +359,6 @@
 				974CC98324C64F0E00E4EF85 /* PopulationTrend.swift */,
 				97D9E24A24C6470600524000 /* Diet.swift */,
 				977D876F24CD6A1200AE5E51 /* Group.swift */,
-				975812E824D4EDF900C09D56 /* SpeciesStrategy.swift */,
-				975812EA24D4EF9400C09D56 /* SpeciesOverviewStrategy.swift */,
-				975812F024D52F7B00C09D56 /* SpeciesHabitatStrategy.swift */,
-				975812EC24D528E100C09D56 /* SpeciesThreatsStrategy.swift */,
-				975812F224D530AA00C09D56 /* SpeciesGalleryStrategy.swift */,
 				9723E7A924D3505C0038ECB6 /* SpeciesAnnotation.swift */,
 			);
 			path = "Species Models";
@@ -459,8 +379,8 @@
 				9794EF8424E68FD700B72246 /* Utilities.swift */,
 				9764D12A24D7DD820050AF37 /* Secrets.swift */,
 				9764D12824D7DC250050AF37 /* NewsArticle.swift */,
+				97CDF11824E4AC050055FE78 /* DetailPageStrategies */,
 				97A24D2224E45D7300958AB9 /* ToolBarStrategies */,
-				97A24D2124E45D5B00958AB9 /* LearnMore */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -513,15 +433,6 @@
 			path = TerraTests;
 			sourceTree = "<group>";
 		};
-		97A24D2124E45D5B00958AB9 /* LearnMore */ = {
-			isa = PBXGroup;
-			children = (
-				97CDF11824E4AC050055FE78 /* LearnMoreVCStrategies */,
-				975C8E5224E4BD6400A0EB9D /* LearnMoreWindowStrategies */,
-			);
-			path = LearnMore;
-			sourceTree = "<group>";
-		};
 		97A24D2224E45D7300958AB9 /* ToolBarStrategies */ = {
 			isa = PBXGroup;
 			children = (
@@ -538,25 +449,23 @@
 				97FAD4E624D75B20007FEFD8 /* TabBarController.swift */,
 				976F68CB24E8B01E00277F79 /* NavigationController.swift */,
 				97BF745223DF42F90058F2D7 /* SpeciesListViewController.swift */,
-				976F68C124E8A62C00277F79 /* UpdatedSpeciesDetailViewController.swift */,
-				976F68C324E8AADD00277F79 /* UpdatedLearnMoreViewController.swift */,
+				976F68C124E8A62C00277F79 /* SpeciesCoverViewController.swift */,
+				976F68C324E8AADD00277F79 /* SpeciesDetailInfoViewController.swift */,
 				97FAD4E824D75DBD007FEFD8 /* NewsViewController.swift */,
 				97997F2B24DCE18B00981087 /* MGLMapViewController.swift */,
-				970B172424C2699E007F32E0 /* SpeciesDetailViewController.swift */,
-				97B406A624E1FDED00A79E98 /* LearnMoreViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		97CDF11824E4AC050055FE78 /* LearnMoreVCStrategies */ = {
+		97CDF11824E4AC050055FE78 /* DetailPageStrategies */ = {
 			isa = PBXGroup;
 			children = (
-				97EA494024E43FC500C0FE64 /* LearnMoreVCStrategy.swift */,
-				97B7C79624E440CE008BD6AD /* LearnMoreVCOverviewStrategy.swift */,
-				97A24D1F24E445A800958AB9 /* LearnMoreVCHabitatStrategy.swift */,
-				975C8E5324E4F11500A0EB9D /* LearnMoreVCThreatsStrategy.swift */,
+				97EA494024E43FC500C0FE64 /* DetailPageStrategy.swift */,
+				97B7C79624E440CE008BD6AD /* DetailOverviewStrategy.swift */,
+				97A24D1F24E445A800958AB9 /* DetailHabitatStrategy.swift */,
+				975C8E5324E4F11500A0EB9D /* DetailThreatsStrategy.swift */,
 			);
-			path = LearnMoreVCStrategies;
+			path = DetailPageStrategies;
 			sourceTree = "<group>";
 		};
 		97FAD4EA24D7783F007FEFD8 /* Supporting Files */ = {
@@ -768,15 +677,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				972BBF7924C0204600B6F7C0 /* UIViewExtensions.swift in Sources */,
-				97B7C79724E440CE008BD6AD /* LearnMoreVCOverviewStrategy.swift in Sources */,
+				97B7C79724E440CE008BD6AD /* DetailOverviewStrategy.swift in Sources */,
 				9764D13324D9D0E90050AF37 /* ToolBarListVCStrategy.swift in Sources */,
 				9764D12E24D7E46E0050AF37 /* NewsArticleTableViewCell.swift in Sources */,
+				97DC775224EB6C8700111245 /* CoverRoundedCell.swift in Sources */,
 				9711D8FC24BD42C800C2E6F1 /* FirestoresService.swift in Sources */,
 				9729736F24DC9E3400123C86 /* DoubleExtensions.swift in Sources */,
 				977D877224CD7BFF00AE5E51 /* Habitat.swift in Sources */,
 				9772515B24DF800C0052A3F6 /* NewsViewModel.swift in Sources */,
 				97D5946424CE7E49001BD566 /* CustomToolBar.swift in Sources */,
-				972BBF7724C01FA900B6F7C0 /* PSORoundedVisualEffectView.swift in Sources */,
 				9723E7AA24D3505C0038ECB6 /* SpeciesAnnotation.swift in Sources */,
 				975812F524D539D500C09D56 /* Biome.swift in Sources */,
 				976D585924CFA04400FC7458 /* UIButtonExtensions.swift in Sources */,
@@ -785,54 +694,41 @@
 				97677BDD24E6FC4600AB400A /* ISO8601DateFormatted.swift in Sources */,
 				977D876C24CD3A6100AE5E51 /* Taxonomy.swift in Sources */,
 				97E9450424BE10C800550824 /* ConservationStatus.swift in Sources */,
-				97CDF11524E4A86F0055FE78 /* LearnMoreOverviewDescriptionWindow.swift in Sources */,
 				97F4E00A24D757C600509694 /* StringExtensions.swift in Sources */,
 				97591FDF24CCD14A002EAC96 /* Constants.swift in Sources */,
 				97FAD4E924D75DBD007FEFD8 /* NewsViewController.swift in Sources */,
-				97682CCA24D634AA000E5B30 /* RoundedInfoViewDelegate.swift in Sources */,
 				9772515F24DF814A0052A3F6 /* NewsAPI.swift in Sources */,
-				975812E924D4EDF900C09D56 /* SpeciesStrategy.swift in Sources */,
-				975812ED24D528E100C09D56 /* SpeciesThreatsStrategy.swift in Sources */,
 				977D877624CE1F3800AE5E51 /* UIRoundedButtonWithGradientAndShadow.swift in Sources */,
 				976DA46624DFCAF9003F3197 /* SpeciesViewModel.swift in Sources */,
 				9772515924DF7F9C0052A3F6 /* NewsResponse.swift in Sources */,
 				97997F2C24DCE18B00981087 /* MGLMapViewController.swift in Sources */,
 				9772516224DFA6C40052A3F6 /* NewsViewModelDelegate.swift in Sources */,
-				97B406A724E1FDED00A79E98 /* LearnMoreViewController.swift in Sources */,
-				975812EB24D4EF9400C09D56 /* SpeciesOverviewStrategy.swift in Sources */,
 				97F7B42824C56886007AEE97 /* DonateButtonDelegate.swift in Sources */,
 				97EDD4F024D36D0A00D30674 /* FirebaseStorageManager.swift in Sources */,
-				97A24D2824E4A52100958AB9 /* LearnMoreContentWindowStrategy.swift in Sources */,
 				976F68CA24E8AE8600277F79 /* ShadowView.swift in Sources */,
 				9772515724DF66A90052A3F6 /* CustomAnnotationView.swift in Sources */,
-				9794EF7F24E6735D00B72246 /* AudioButtonDelegate.swift in Sources */,
 				9711D8F724BD199700C2E6F1 /* Species.swift in Sources */,
 				974CC98424C64F0F00E4EF85 /* PopulationTrend.swift in Sources */,
-				97A24D2424E49A4100958AB9 /* TaxonomyView.swift in Sources */,
-				97CDF11724E4A9970055FE78 /* LearnMoreOverviewClassificationWindow.swift in Sources */,
-				973C964024EA23E900C5E9ED /* LearnMoreThreatsThreatsWindow.swift in Sources */,
+				97A24D2424E49A4100958AB9 /* ClassificationView.swift in Sources */,
 				976F68CC24E8B01E00277F79 /* NavigationController.swift in Sources */,
 				976F68CE24E8B1C300277F79 /* Animatable.swift in Sources */,
 				97FAD4E724D75B20007FEFD8 /* TabBarController.swift in Sources */,
 				9772515D24DF80FB0052A3F6 /* APIClient.swift in Sources */,
-				970B172524C2699E007F32E0 /* SpeciesDetailViewController.swift in Sources */,
 				97FEAEAC24BE5FCC005BAEFE /* Factory.swift in Sources */,
-				97B68CD424BBB0AC005B8AB8 /* DetailHeaderNameView.swift in Sources */,
+				97B68CD424BBB0AC005B8AB8 /* CoverHeaderNameView.swift in Sources */,
 				976F68C824E8AE2500277F79 /* CommonView.swift in Sources */,
-				976F68C224E8A62C00277F79 /* UpdatedSpeciesDetailViewController.swift in Sources */,
+				976F68C224E8A62C00277F79 /* SpeciesCoverViewController.swift in Sources */,
 				9764D12B24D7DD820050AF37 /* Secrets.swift in Sources */,
 				97591FDC24CC4524002EAC96 /* ToolBarSelectedButton.swift in Sources */,
 				9794EF8524E68FD700B72246 /* Utilities.swift in Sources */,
-				97EA494124E43FC500C0FE64 /* LearnMoreVCStrategy.swift in Sources */,
+				97EA494124E43FC500C0FE64 /* DetailPageStrategy.swift in Sources */,
 				97D9E24B24C6470700524000 /* Diet.swift in Sources */,
-				97591FD424CB8D46002EAC96 /* RoundedInfoView.swift in Sources */,
 				97452E4623E1E6C7005636E0 /* SpeciesCollectionViewCell.swift in Sources */,
 				976DA46824DFCB5F003F3197 /* SpeciesViewModelDelegate.swift in Sources */,
 				976F68D024E8B21A00277F79 /* CustomTransitionAnimation.swift in Sources */,
-				9768795B24EAE580009E7713 /* LearnMoreHabitatLocationWindow.swift in Sources */,
 				979C191423DE43E900651B2B /* AppDelegate.swift in Sources */,
-				9767D04C24C3EA9200384FCD /* DetailSubheaderView.swift in Sources */,
-				976F68C424E8AADD00277F79 /* UpdatedLearnMoreViewController.swift in Sources */,
+				9767D04C24C3EA9200384FCD /* CoverSubheaderInfoView.swift in Sources */,
+				976F68C424E8AADD00277F79 /* SpeciesDetailInfoViewController.swift in Sources */,
 				97947F5324DD1F560047052B /* CustomCalloutView.swift in Sources */,
 				97BF745323DF42F90058F2D7 /* SpeciesListViewController.swift in Sources */,
 				979C191623DE43E900651B2B /* SceneDelegate.swift in Sources */,
@@ -841,17 +737,13 @@
 				9764D13124D9D07F0050AF37 /* ToolBarVCStrategy.swift in Sources */,
 				97F0CCA924C56F5C00C581D3 /* UIScrollViewExtensions.swift in Sources */,
 				97DD101D24C69EB000A21DF4 /* ToolBarDelegate.swift in Sources */,
-				975812F124D52F7B00C09D56 /* SpeciesHabitatStrategy.swift in Sources */,
-				97EA493C24E3BEC200C0FE64 /* LearnMoreDynamicHeightWindow.swift in Sources */,
-				975C8E5424E4F11500A0EB9D /* LearnMoreVCThreatsStrategy.swift in Sources */,
-				976F68C624E8AB2600277F79 /* RoundedInfoCell.swift in Sources */,
+				97EA493C24E3BEC200C0FE64 /* DetailInfoWindow.swift in Sources */,
+				975C8E5424E4F11500A0EB9D /* DetailThreatsStrategy.swift in Sources */,
 				977D877024CD6A1200AE5E51 /* Group.swift in Sources */,
-				97A24D2024E445A800958AB9 /* LearnMoreVCHabitatStrategy.swift in Sources */,
+				97A24D2024E445A800958AB9 /* DetailHabitatStrategy.swift in Sources */,
 				97591FE324CCDC48002EAC96 /* FontWeight.swift in Sources */,
 				97928F7924CD11BF00AF90C5 /* FirestoreError.swift in Sources */,
-				973C963E24EA224400C5E9ED /* LearnMoreThreatsSummaryWindow.swift in Sources */,
 				9701B4EA24EAEAFB0083CFDC /* SpeciesMapView.swift in Sources */,
-				975812F324D530AA00C09D56 /* SpeciesGalleryStrategy.swift in Sources */,
 				9764D13524D9D1A20050AF37 /* ToolBarDetailVCStrategy.swift in Sources */,
 				97928F7B24CD347200AF90C5 /* FirebaseConvertible.swift in Sources */,
 			);

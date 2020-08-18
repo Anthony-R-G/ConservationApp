@@ -1,5 +1,5 @@
 //
-//  LearnMoreHabitatStrategy.swift
+//  DetailHabitatStrategy.swift
 //  Terra
 //
 //  Created by Anthony Gonzalez on 8/12/20.
@@ -8,24 +8,25 @@
 
 import UIKit
 
-struct LearnMoreVCHabitatStrategy: LearnMoreVCStrategy {
+struct DetailHabitatStrategy: DetailPageStrategy {
     var species: Species
     
-    func title() -> String {
+    func speciesName() -> String {
         return species.commonName
     }
     
-    func subtitle() -> String {
+    func pageName() -> String {
         return "HABITAT"
     }
     
     func firebaseStorageManager() -> FirebaseStorageService {
-        return FirebaseStorageService.learnMoreHabitatImageManager
+        return FirebaseStorageService.detailHabitatImageManager
     }
     
     mutating func arrangedSubviews() -> UIStackView {
         let stackView = UIStackView(arrangedSubviews: [
-            Factory.makeLearnMoreWindow(strategy: LearnMoreHabitatLocationWindow(species: species))
+            DetailInfoWindow(title: "DISTRIBUTION",
+                                         content: SpeciesMapView(species: species))
         ])
         stackView.axis = .vertical
         stackView.spacing = Constants.spacingConstant
