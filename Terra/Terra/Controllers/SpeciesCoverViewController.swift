@@ -24,7 +24,7 @@ final class SpeciesCoverViewController: UIViewController {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
         view.insertSubview(iv, at: 0)
-        FirebaseStorageService.coverImageManager.getImage(for: currentSpecies.commonName, setTo: iv)
+        FirebaseStorageService.coverImageManager.getImage(for: selectedSpecies.commonName, setTo: iv)
         return iv
     }()
     
@@ -41,7 +41,7 @@ final class SpeciesCoverViewController: UIViewController {
         var frame = hiv.frame
         frame.size.height = screenSize.height * 0.30
         hiv.frame = frame
-        hiv.configureView(from: currentSpecies)
+        hiv.configureView(from: selectedSpecies)
         return hiv
     }()
     
@@ -50,7 +50,7 @@ final class SpeciesCoverViewController: UIViewController {
         var frame = siv.frame
         frame.size.height = headerNameView.frame.height * 0.30
         siv.frame = frame
-        siv.configureView(from: currentSpecies)
+        siv.configureView(from: selectedSpecies)
         return siv
     }()
     
@@ -134,7 +134,7 @@ final class SpeciesCoverViewController: UIViewController {
     
     private var screenSize = UIScreen.main.bounds.size
     
-    var currentSpecies: Species!
+    var selectedSpecies: Species!
     
     private var animatorFractionCompleteValue: CGFloat = 0
     
@@ -213,9 +213,9 @@ final class SpeciesCoverViewController: UIViewController {
         addSubviews()
         setConstraints()
         
-        strategies = [DetailOverviewStrategy(species: currentSpecies),
-                      DetailHabitatStrategy(species: currentSpecies),
-                      DetailThreatsStrategy(species: currentSpecies)]
+        strategies = [DetailOverviewStrategy(species: selectedSpecies),
+                      DetailHabitatStrategy(species: selectedSpecies),
+                      DetailThreatsStrategy(species: selectedSpecies)]
     }
 }
 
@@ -243,7 +243,6 @@ extension SpeciesCoverViewController {
             return
         }
         animator.fractionComplete = abs(offsetY)/1000
-        print(animator.fractionComplete)
     }
     
     private func updateTopGradientAlpha(from offsetY: CGFloat) {
@@ -360,7 +359,7 @@ extension SpeciesCoverViewController: UICollectionViewDelegate {
 
 extension SpeciesCoverViewController: DonateButtonDelegate {
     func donateButtonPressed() {
-        guard let donationURL = URL(string: currentSpecies.donationLink) else { return }
+        guard let donationURL = URL(string: selectedSpecies.donationLink) else { return }
         presentWebBrowser(link: donationURL)
     }
 }

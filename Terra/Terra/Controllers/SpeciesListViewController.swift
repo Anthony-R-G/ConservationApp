@@ -231,9 +231,9 @@ extension SpeciesListViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let specificAnimal = viewModel.specificSpecies(at: indexPath.row)
+        let selectedSpecies = viewModel.specificSpecies(at: indexPath.row)
         let coverVC = SpeciesCoverViewController()
-        coverVC.currentSpecies = specificAnimal
+        coverVC.selectedSpecies = selectedSpecies
         let navVC = NavigationController(rootViewController: coverVC)
         navVC.modalPresentationStyle = .fullScreen
         presentModally(navVC)
