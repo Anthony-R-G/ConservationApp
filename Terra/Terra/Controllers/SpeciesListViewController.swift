@@ -30,6 +30,7 @@ final class SpeciesListViewController: UIViewController {
                                              y: 0,
                                              width: view.frame.width,
                                              height: 30))
+        tb.selectedItem = tb.items![0]
         tb.delegate = self
         return tb
       }()
@@ -155,18 +156,13 @@ final class SpeciesListViewController: UIViewController {
         return .lightContent
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        viewModel.fetchSpeciesData()
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
         viewModel = SpeciesViewModel(delegate: self)
-        
+        viewModel.fetchSpeciesData()
         addSubviews()
         setConstraints()
-        
         setDatasourceAndDelegates()
        
     }

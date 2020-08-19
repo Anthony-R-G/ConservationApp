@@ -37,10 +37,6 @@ class RedListFilterTabBar: UITabBar {
     //MARK: -- Methods
 
     private func setAppearance() {
-        items = [allTab, criticalTab, endangeredTab, vulnerableTab]
-        selectedItem = items![0]
-        
-        
         if #available(iOS 13, *) {
             
             appearance.backgroundColor = .black
@@ -61,8 +57,8 @@ class RedListFilterTabBar: UITabBar {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        items = [allTab, criticalTab, endangeredTab, vulnerableTab]
         setAppearance()
-        
         
         selectionIndicatorImage = UIImage().createSelectionIndicator(color: .white, size: CGSize(width: frame.width/CGFloat(items!.count), height: frame.height), lineWidth: 2.0)
     }

@@ -72,7 +72,6 @@ final class NewsViewController: UIViewController {
         viewModel = NewsViewModel(delegate: self)
         addSubviews()
         setConstraints()
-        
     }
 }
 

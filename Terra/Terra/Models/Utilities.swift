@@ -6,7 +6,6 @@
 //  Copyright © 2020 Antnee. All rights reserved.
 //
 
-
 import UIKit
 
 struct Utilities {
