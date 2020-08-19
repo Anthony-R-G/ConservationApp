@@ -14,12 +14,6 @@ final class SpeciesCoverViewController: UIViewController {
     
     //MARK: -- UI Element Initialization
     
-    private lazy var scrollView: UIScrollView = {
-        let sv = UIScrollView()
-        sv.showsVerticalScrollIndicator = false
-        return sv
-    }()
-    
     private lazy var backgroundImageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
@@ -55,7 +49,7 @@ final class SpeciesCoverViewController: UIViewController {
     }()
     
     private lazy var backgroundVisualEffectBlur: UIVisualEffectView = {
-        return UIVisualEffectView(effect: UIBlurEffect(style: .regular))
+        return UIVisualEffectView(effect: nil)
     }()
     
     private lazy var exploreButton: UIButton = {
@@ -126,11 +120,10 @@ final class SpeciesCoverViewController: UIViewController {
         return btn
     }()
     
-    
     //MARK: -- Properties
     private var strategies: [DetailPageStrategy]!
     
-    private var animator: UIViewPropertyAnimator!
+    private var headerAnimator: UIViewPropertyAnimator!
     
     private var screenSize = UIScreen.main.bounds.size
     
@@ -138,11 +131,8 @@ final class SpeciesCoverViewController: UIViewController {
     
     private var animatorFractionCompleteValue: CGFloat = 0
     
-    private var headerPinnedToTop: Bool = false {
-        didSet {
-            headerPinnedToTop ? animateCollectionViewIn() : animateCollectionViewOut()
-        }
-    }
+    private var swipeUpGesture: UISwipeGestureRecognizer!
+    private var swipeDownGesture: UISwipeGestureRecognizer!
     
     fileprivate let reuseIdentifier = "cellId"
     
@@ -166,16 +156,6 @@ final class SpeciesCoverViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    private func setupBackgroundVisualEffectBlur() {
-        animator = UIViewPropertyAnimator(duration: 1.0, curve: .linear, animations: { [weak self] in
-            guard let self = self else { return }
-            self.backgroundVisualEffectBlur.effect = nil
-        })
-        animator.pausesOnCompletion = true
-        animator.isReversed = true
-        animator.fractionComplete = animatorFractionCompleteValue
-    }
-    
     private func presentWebBrowser(link: URL){
         let config = SFSafariViewController.Configuration()
         let safariVC = SFSafariViewController(url: link, configuration: config)
@@ -185,71 +165,97 @@ final class SpeciesCoverViewController: UIViewController {
     
     //MARK: -- Life Cycle Methods
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        setScrollViewConstraints()
-        scrollView.contentSize.height = UIScreen.main.bounds.height + 400
-        scrollView.delegate = self
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
-        setupBackgroundVisualEffectBlur()
+        setUpAnimator()
+        setUpOtherAnimator()
         exploreButton.startShimmeringAnimation(animationSpeed: 2,
                                                direction: .leftToRight,
                                                repeatCount: .infinity)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        animatorFractionCompleteValue = animator.fractionComplete
-        animator?.stopAnimation(true)
-        animator?.finishAnimation(at: .current)
+        animatorFractionCompleteValue = headerAnimator.fractionComplete
         backgroundVisualEffectBlur.effect = UIBlurEffect(style: .regular)
+    }
+    
+    @objc func handleSwipeGesture() {
+        headerNameView.speciesCommonNameLabel.animateToFont(UIFont(name: "Roboto-Bold", size: 40)!, withDuration: 0.5)
+        headerNameViewTopAnchorConstraint.constant = screenSize.height * 0.10
+        headerNameViewHeightConstraint.constant = screenSize.height * 0.123
+        subheaderInfoViewHeightConstraint.constant = 50
+        headerAnimator.startAnimation()
+        animateCollectionViewIn()
+    }
+    
+    @objc func handleSwipeDownGesture() {
+        headerNameView.speciesCommonNameLabel.animateToFont(UIFont(name: "Roboto-Bold", size: 56)!, withDuration: 0.5)
+        headerNameViewTopAnchorConstraint.constant = screenSize.height * 0.48
+        headerNameViewHeightConstraint.constant = screenSize.height * 0.30
+        subheaderInfoViewHeightConstraint.constant = (screenSize.height * 0.30) * 0.30
+        otherAnimator.startAnimation()
+        animateCollectionViewOut()
+    }
+    
+    var otherAnimator: UIViewPropertyAnimator!
+    
+    func setUpOtherAnimator() {
+        otherAnimator = UIViewPropertyAnimator.init(duration: 1.3, dampingRatio: 0.7, animations: {
+            self.view.layoutIfNeeded()
+        })
+        otherAnimator.addAnimations {
+            self.backgroundVisualEffectBlur.effect = nil
+        }
+        otherAnimator.addCompletion { (result) in
+         
+            self.swipeUpGesture.isEnabled = true
+            self.swipeDownGesture.isEnabled = false
+        }
+    }
+    
+    func setUpAnimator() {
+        headerAnimator = UIViewPropertyAnimator.init(duration: 1.3, dampingRatio: 0.7, animations: {
+            self.view.layoutIfNeeded()
+        })
+        headerAnimator.addAnimations {
+            self.backgroundVisualEffectBlur.effect = UIBlurEffect(style: .regular)
+        }
+        headerAnimator.addCompletion { (result) in
+                      print("""
+            Swipe up completed.
+                            HeaderAnimator: \(self.headerAnimator.fractionComplete)
+                            OtherAnimator: \(self.otherAnimator.fractionComplete)
+            """)
+            self.swipeUpGesture.isEnabled = false
+            self.swipeDownGesture.isEnabled = true
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = true
         view.backgroundColor = .black
+        strategies = [DetailOverviewStrategy(species: selectedSpecies),
+        DetailHabitatStrategy(species: selectedSpecies),
+        DetailThreatsStrategy(species: selectedSpecies)]
         addSubviews()
         setConstraints()
         
-        strategies = [DetailOverviewStrategy(species: selectedSpecies),
-                      DetailHabitatStrategy(species: selectedSpecies),
-                      DetailThreatsStrategy(species: selectedSpecies)]
+        swipeUpGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeGesture))
+        swipeUpGesture.direction = .up
+        
+        swipeDownGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeDownGesture))
+        swipeDownGesture.direction = .down
+        swipeDownGesture.isEnabled = false
+        view.addGestureRecognizer(swipeUpGesture)
+        view.addGestureRecognizer(swipeDownGesture)
     }
 }
 
-//MARK: -- ScrollView Methods
-extension SpeciesCoverViewController: UIScrollViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let offsetY = self.scrollView.contentOffset.y
-        updateBackgroundAnimator(from: offsetY)
-        updateTopGradientAlpha(from: offsetY)
-        updateExploreLabelAlpha(from: offsetY)
-        updateHeaderViewHeight(from: offsetY)
-        updateHeaderTopAnchor(from: offsetY)
-        updateSubheaderHeight(from: offsetY)
-        checkHeaderLock()
-    }
-}
 
 //MARK: -- ScrollView Updates
 
 extension SpeciesCoverViewController {
     
-    private func updateBackgroundAnimator(from offsetY: CGFloat) {
-        if offsetY <= 0 {
-            animator.fractionComplete = 0
-            return
-        }
-        animator.fractionComplete = abs(offsetY)/1000
-    }
-    
-    private func updateTopGradientAlpha(from offsetY: CGFloat) {
-        let alphaOffset = (offsetY/400)
-        let newAlpha = max(0, min(alphaOffset, 0.38))
-        backgroundGradientOverlay.startColor = #colorLiteral(red: 0.06859237701, green: 0.08213501424, blue: 0.2409383953, alpha: Float(newAlpha))
-    }
     
     private func updateExploreLabelAlpha(from offsetY: CGFloat) {
         var newAlpha = CGFloat()
@@ -267,31 +273,9 @@ extension SpeciesCoverViewController {
         }
     }
     
-    private func updateHeaderViewHeight(from offsetY: CGFloat) {
-        let headerNameViewOffset = (screenSize.height * 0.30) - (offsetY)
-        let newHeaderNameViewHeight = max(screenSize.height * 0.123, headerNameViewOffset)
-        headerNameViewHeightConstraint.constant = newHeaderNameViewHeight
-    }
-    
-    private func updateHeaderTopAnchor(from offsetY: CGFloat) {
-        let headerTopAnchorConstantOffset = (screenSize.height * 0.48) - abs(offsetY)
-        let newHeaderTopAnchorConstant = max(screenSize.height * 0.10, headerTopAnchorConstantOffset)
-        headerNameViewTopAnchorConstraint.constant = newHeaderTopAnchorConstant
-    }
-    
-    private func updateSubheaderHeight(from offsetY: CGFloat) {
-        let subheaderViewOffset = (headerNameView.frame.height * 0.30) - (offsetY)
-        let newSubheaderViewHeight = max(50, subheaderViewOffset)
-        subheaderInfoViewHeightConstraint.constant = newSubheaderViewHeight
-    }
-    
-    private func checkHeaderLock() {
-        headerPinnedToTop = headerNameViewTopAnchorConstraint.constant == (screenSize.height * 0.10) ? true : false
-    }
-    
     private func animateCollectionViewIn() {
         DispatchQueue.main.async {
-            UIView.animate(withDuration: 1.0) {
+            UIView.animate(withDuration: 0.8) {
                 [weak self] in guard let self = self else { return }
                 self.collectionView.alpha = 1
                 self.donateButton.alpha = 1
@@ -368,9 +352,9 @@ extension SpeciesCoverViewController: DonateButtonDelegate {
 
 fileprivate extension SpeciesCoverViewController {
     func addSubviews() {
-        [scrollView, collectionView, donateButtonContainer, closeButton, exploreButton].forEach { view.addSubview($0) }
+        [collectionView, donateButtonContainer, closeButton, exploreButton].forEach { view.addSubview($0) }
         
-        [headerNameView, subheaderInfoView].forEach { scrollView.addSubview($0) }
+        [headerNameView, subheaderInfoView].forEach { view.addSubview($0) }
         
         backgroundImageView.addSubview(backgroundVisualEffectBlur)
         donateButtonContainer.addSubview(donateButton)
@@ -392,11 +376,7 @@ fileprivate extension SpeciesCoverViewController {
         setDonateButtonConstraints()
     }
     
-    func setScrollViewConstraints() {
-        scrollView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
-        }
-    }
+    
     
     func setBackgroundImageViewConstraints() {
         backgroundImageView.snp.makeConstraints { (make) in
@@ -426,8 +406,8 @@ fileprivate extension SpeciesCoverViewController {
     
     func setHeaderInfoViewConstraints() {
         headerNameView.snp.makeConstraints { (make) in
-            make.leading.equalTo(scrollView).inset(Constants.spacingConstant)
-            make.width.equalTo(scrollView)
+            make.leading.equalTo(view).inset(Constants.spacingConstant)
+            make.width.equalTo(view).inset(30)
             headerNameViewTopAnchorConstraint.isActive = true
             headerNameViewHeightConstraint.isActive = true
         }
@@ -487,3 +467,32 @@ extension SpeciesCoverViewController: Animatable {
 }
 
 
+
+extension UILabel {
+    func copyLabel() -> UILabel {
+        let label = UILabel()
+        label.font = self.font
+        label.frame = self.frame
+        label.text = self.text
+        return label
+    }
+}
+
+extension UILabel {
+    func animateToFont(_ font: UIFont, withDuration duration: TimeInterval) {
+        let oldFont = self.font
+        self.font = font
+        let oldOrigin = frame.origin
+        let labelScale = oldFont!.pointSize / font.pointSize
+        let oldTransform = transform
+        transform = transform.scaledBy(x: labelScale, y: labelScale)
+        let newOrigin = frame.origin
+        frame.origin = oldOrigin
+        setNeedsUpdateConstraints()
+        UIView.animate(withDuration: duration) {
+            self.frame.origin = newOrigin
+            self.transform = oldTransform
+            self.layoutIfNeeded()
+        }
+    }
+}

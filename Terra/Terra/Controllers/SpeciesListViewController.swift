@@ -334,3 +334,5 @@ extension SpeciesListViewController: UITabBarDelegate {
         viewModel.updateRedListCategoryFilteredAnimals(from: item.tag)
     }
 }
+
+

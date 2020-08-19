@@ -23,7 +23,7 @@ final class CoverHeaderNameView: UIView {
         return label
     }()
     
-    private lazy var speciesCommonNameLabel: UILabel = {
+     lazy var speciesCommonNameLabel: UILabel = {
         let label = Factory.makeLabel(title: nil,
                                         weight: .bold,
                                         size: 56,
