@@ -122,9 +122,10 @@ final class SpeciesCoverViewController: UIViewController {
     
     //MARK: -- Properties
     
-    private lazy var tapGestureRecognizer: UITapGestureRecognizer = {
-        let recognizer = UITapGestureRecognizer()
-        recognizer.addTarget(self, action: #selector(handleTap(recognizer:)))
+    private lazy var swipeGestureRecognizer: UISwipeGestureRecognizer = {
+        let recognizer = UISwipeGestureRecognizer()
+        recognizer.direction = .up
+        recognizer.addTarget(self, action: #selector(handleSwipe(recognizer:)))
         return recognizer
     }()
     
@@ -180,7 +181,7 @@ final class SpeciesCoverViewController: UIViewController {
         backgroundVisualEffectBlur.effect = UIBlurEffect(style: .regular)
     }
     
-    @objc func handleTap(recognizer: UITapGestureRecognizer) {
+    @objc func handleSwipe(recognizer: UITapGestureRecognizer) {
         setUpAnimator()
     }
     
@@ -222,6 +223,7 @@ final class SpeciesCoverViewController: UIViewController {
             case .start:
                 self.headerState = state.opposite
             case .end:
+                self.swipeGestureRecognizer.direction = self.swipeGestureRecognizer.direction.opposite
                 self.headerState = state
             case .current:
                 ()
@@ -241,7 +243,7 @@ final class SpeciesCoverViewController: UIViewController {
                       DetailThreatsStrategy(species: selectedSpecies)]
         addSubviews()
         setConstraints()
-        view.addGestureRecognizer(tapGestureRecognizer)
+        view.addGestureRecognizer(swipeGestureRecognizer)
     }
 }
 
@@ -251,25 +253,11 @@ final class SpeciesCoverViewController: UIViewController {
 extension SpeciesCoverViewController {
     
     
-    private func updateExploreLabelAlpha(from offsetY: CGFloat) {
-        var newAlpha = CGFloat()
-        newAlpha = offsetY <= (screenSize.height * 0.04) ? 0.6 : 0
-        
-        DispatchQueue.main.async {
-            UIView.animate(withDuration: 0.8,
-                           delay: 0,
-                           options: .curveEaseInOut,
-                           animations: { [weak self] in
-                            guard let self = self else { return }
-                            self.exploreButton.alpha = newAlpha
-                },
-                           completion: nil)
-        }
-    }
+ 
     
     private func animateCollectionViewIn() {
         DispatchQueue.main.async {
-            UIView.animate(withDuration: 0.8) {
+            UIView.animate(withDuration: 0.9) {
                 [weak self] in guard let self = self else { return }
                 self.collectionView.alpha = 1
                 self.donateButton.alpha = 1
@@ -506,31 +494,14 @@ extension State {
     }
 }
 
-
-extension UIViewAnimatingState: CustomStringConvertible, CustomDebugStringConvertible {
-    var isValid: Bool {
+extension UISwipeGestureRecognizer.Direction {
+    var opposite: UISwipeGestureRecognizer.Direction {
         switch self {
-        case .inactive, .active, .stopped:
-            return true
+        case .up: return .down
+        case .down: return .up
         default:
-            return false
+            ()
         }
-    }
-    
-    public var description: String {
-        switch self {
-        case .inactive:
-            return "inactive"
-        case .active:
-            return "active"
-        case .stopped:
-            return "stopped"
-        default:
-            return "\(rawValue)"
-        }
-    }
-    
-    public var debugDescription: String {
-        return description
+        return self.opposite
     }
 }
