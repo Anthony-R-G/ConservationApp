@@ -121,18 +121,20 @@ final class SpeciesCoverViewController: UIViewController {
     }()
     
     //MARK: -- Properties
+    
+    private lazy var tapGestureRecognizer: UITapGestureRecognizer = {
+        let recognizer = UITapGestureRecognizer()
+        recognizer.addTarget(self, action: #selector(handleTap(recognizer:)))
+        return recognizer
+    }()
+    
     private var strategies: [DetailPageStrategy]!
     
-    private var headerAnimator: UIViewPropertyAnimator!
+//    private var headerAnimator: UIViewPropertyAnimator!
     
     private var screenSize = UIScreen.main.bounds.size
     
     var selectedSpecies: Species!
-    
-    private var animatorFractionCompleteValue: CGFloat = 0
-    
-    private var swipeUpGesture: UISwipeGestureRecognizer!
-    private var swipeDownGesture: UISwipeGestureRecognizer!
     
     fileprivate let reuseIdentifier = "cellId"
     
@@ -152,6 +154,8 @@ final class SpeciesCoverViewController: UIViewController {
     
     //MARK: -- Methods
     
+    private var headerState: State = .collapsed
+    
     @objc private func closeButtonPressed() {
         dismiss(animated: true, completion: nil)
     }
@@ -166,68 +170,66 @@ final class SpeciesCoverViewController: UIViewController {
     //MARK: -- Life Cycle Methods
     
     override func viewWillAppear(_ animated: Bool) {
-        setUpAnimator()
-        setUpOtherAnimator()
+//        setUpAnimator()
         exploreButton.startShimmeringAnimation(animationSpeed: 2,
                                                direction: .leftToRight,
                                                repeatCount: .infinity)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        animatorFractionCompleteValue = headerAnimator.fractionComplete
         backgroundVisualEffectBlur.effect = UIBlurEffect(style: .regular)
     }
     
-    @objc func handleSwipeGesture() {
+    @objc func handleTap(recognizer: UITapGestureRecognizer) {
+        setUpAnimator()
+    }
+    
+    private func collapseHeader() {
         headerNameView.speciesCommonNameLabel.animateToFont(UIFont(name: "Roboto-Bold", size: 40)!, withDuration: 0.5)
         headerNameViewTopAnchorConstraint.constant = screenSize.height * 0.10
         headerNameViewHeightConstraint.constant = screenSize.height * 0.123
         subheaderInfoViewHeightConstraint.constant = 50
-        headerAnimator.startAnimation()
-        animateCollectionViewIn()
     }
     
-    @objc func handleSwipeDownGesture() {
+    private func expandHeader() {
         headerNameView.speciesCommonNameLabel.animateToFont(UIFont(name: "Roboto-Bold", size: 56)!, withDuration: 0.5)
         headerNameViewTopAnchorConstraint.constant = screenSize.height * 0.48
         headerNameViewHeightConstraint.constant = screenSize.height * 0.30
         subheaderInfoViewHeightConstraint.constant = (screenSize.height * 0.30) * 0.30
-        otherAnimator.startAnimation()
-        animateCollectionViewOut()
     }
     
-    var otherAnimator: UIViewPropertyAnimator!
-    
-    func setUpOtherAnimator() {
-        otherAnimator = UIViewPropertyAnimator.init(duration: 1.3, dampingRatio: 0.7, animations: {
+    private func setUpAnimator() {
+        let state = headerState.opposite
+        let headerAnimator = UIViewPropertyAnimator(duration: 1.3, dampingRatio: 0.7, animations: {
+            switch state {
+            case .expanded:
+                print("Collapsing now")
+                self.backgroundVisualEffectBlur.effect = UIBlurEffect(style: .regular)
+                self.collapseHeader()
+                self.animateCollectionViewIn()
+                
+            case .collapsed:
+                print("Expanding now")
+                self.backgroundVisualEffectBlur.effect = nil
+                self.expandHeader()
+                self.animateCollectionViewOut()
+            }
             self.view.layoutIfNeeded()
         })
-        otherAnimator.addAnimations {
-            self.backgroundVisualEffectBlur.effect = nil
+        
+        headerAnimator.addCompletion { (position) in
+            switch position {
+            case .start:
+                self.headerState = state.opposite
+            case .end:
+                self.headerState = state
+            case .current:
+                ()
+            @unknown default:
+                ()
+            }
         }
-        otherAnimator.addCompletion { (result) in
-         
-            self.swipeUpGesture.isEnabled = true
-            self.swipeDownGesture.isEnabled = false
-        }
-    }
-    
-    func setUpAnimator() {
-        headerAnimator = UIViewPropertyAnimator.init(duration: 1.3, dampingRatio: 0.7, animations: {
-            self.view.layoutIfNeeded()
-        })
-        headerAnimator.addAnimations {
-            self.backgroundVisualEffectBlur.effect = UIBlurEffect(style: .regular)
-        }
-        headerAnimator.addCompletion { (result) in
-                      print("""
-            Swipe up completed.
-                            HeaderAnimator: \(self.headerAnimator.fractionComplete)
-                            OtherAnimator: \(self.otherAnimator.fractionComplete)
-            """)
-            self.swipeUpGesture.isEnabled = false
-            self.swipeDownGesture.isEnabled = true
-        }
+        headerAnimator.startAnimation()
     }
     
     override func viewDidLoad() {
@@ -235,19 +237,11 @@ final class SpeciesCoverViewController: UIViewController {
         navigationController?.navigationBar.isHidden = true
         view.backgroundColor = .black
         strategies = [DetailOverviewStrategy(species: selectedSpecies),
-        DetailHabitatStrategy(species: selectedSpecies),
-        DetailThreatsStrategy(species: selectedSpecies)]
+                      DetailHabitatStrategy(species: selectedSpecies),
+                      DetailThreatsStrategy(species: selectedSpecies)]
         addSubviews()
         setConstraints()
-        
-        swipeUpGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeGesture))
-        swipeUpGesture.direction = .up
-        
-        swipeDownGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeDownGesture))
-        swipeDownGesture.direction = .down
-        swipeDownGesture.isEnabled = false
-        view.addGestureRecognizer(swipeUpGesture)
-        view.addGestureRecognizer(swipeDownGesture)
+        view.addGestureRecognizer(tapGestureRecognizer)
     }
 }
 
@@ -494,5 +488,49 @@ extension UILabel {
             self.transform = oldTransform
             self.layoutIfNeeded()
         }
+    }
+}
+
+
+private enum State {
+    case expanded
+    case collapsed
+}
+
+extension State {
+    var opposite: State {
+        switch self {
+        case .collapsed: return .expanded
+        case .expanded: return .collapsed
+        }
+    }
+}
+
+
+extension UIViewAnimatingState: CustomStringConvertible, CustomDebugStringConvertible {
+    var isValid: Bool {
+        switch self {
+        case .inactive, .active, .stopped:
+            return true
+        default:
+            return false
+        }
+    }
+    
+    public var description: String {
+        switch self {
+        case .inactive:
+            return "inactive"
+        case .active:
+            return "active"
+        case .stopped:
+            return "stopped"
+        default:
+            return "\(rawValue)"
+        }
+    }
+    
+    public var debugDescription: String {
+        return description
     }
 }
