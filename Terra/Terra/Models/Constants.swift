@@ -11,8 +11,6 @@ import UIKit
 enum Constants {
     static let spacingConstant: CGFloat = 20
     
-    static let roundedInfoViewHeight: CGFloat = 440
-    static let roundedInfoViewWidth: CGFloat = 375
     
     static let commonViewImageDimension: CGFloat = 500
     

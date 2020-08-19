@@ -39,7 +39,7 @@ class Factory {
         return label
     }
     
-    static func makeLearnMoreWindowLabel(text: String) -> UILabel {
+    static func makeDetailInfoWindowLabel(text: String) -> UILabel {
         let label = makeLabel(title: text.replacingOccurrences(of: "\\n", with: "\n"),
                                       weight: .regular,
                                       size: 16,
@@ -49,17 +49,7 @@ class Factory {
         return label
     }
     
-    static func makeToolBarButton(title: String) -> UIButton {
-        let button = UIButton(type: .custom)
-        button.setTitle(title, for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.setTitleColor(Constants.buttonColor, for: .selected)
-        button.showsTouchWhenHighlighted = true
-        button.titleLabel?.font = UIFont(name: "Roboto-Medium", size: 15)
-        button.sizeToFit()
-        return button
-    }
-    
+
     static func makeButton(title: String, weight: FontWeight, color: UIColor) -> UIButton {
         let button = UIButton(type: .custom)
         button.setTitle(title, for: .normal)

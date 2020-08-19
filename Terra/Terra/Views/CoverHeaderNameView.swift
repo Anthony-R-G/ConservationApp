@@ -69,7 +69,6 @@ fileprivate extension CoverHeaderNameView {
     func addSubviews() {
         let UIElements = [conservationStatusLabel, speciesCommonNameLabel, speciesScientificNameLabel]
         UIElements.forEach { addSubview($0) }
-        UIElements.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
     }
     
     func setConstraints() {

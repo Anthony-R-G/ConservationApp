@@ -27,10 +27,10 @@ struct DetailThreatsStrategy: DetailPageStrategy {
         let stackView = UIStackView(arrangedSubviews: [
             
             DetailInfoWindow(title: "SUMMARY",
-                                         content: Factory.makeLearnMoreWindowLabel(text: species.population.summary)),
+                                         content: Factory.makeDetailInfoWindowLabel(text: species.population.summary)),
             
             DetailInfoWindow(title: "THREATS",
-                                         content: Factory.makeLearnMoreWindowLabel(text: species.population.threats))
+                                         content: Factory.makeDetailInfoWindowLabel(text: species.population.threats))
         ])
         stackView.axis = .vertical
         stackView.spacing = Constants.spacingConstant

@@ -25,10 +25,14 @@ final class SpeciesListViewController: UIViewController {
         return sb
     }()
     
-    private lazy var topToolBar: CustomToolBar = {
-        let tb = CustomToolBar(frame: .zero, strategy: ToolBarListVCStrategy())
+    private lazy var filterToolBar: RedListFilterTabBar = {
+        let tb = RedListFilterTabBar(frame: CGRect(x: 0,
+                                             y: 0,
+                                             width: view.frame.width,
+                                             height: 30))
+        tb.delegate = self
         return tb
-    }()
+      }()
     
     private lazy var searchBarButton: UIButton = {
         let btn = UIButton()
@@ -50,34 +54,10 @@ final class SpeciesListViewController: UIViewController {
     
     
     private lazy var terraTitleLabel: UILabel = {
-        return Factory.makeLabel(title: "Terra",
-                                 weight: .bold,
-                                 size: 36,
+        return Factory.makeLabel(title: "TERRA",
+                                 weight: .black,
+                                 size: 40,
                                  color: Constants.titleLabelColor,
-                                 alignment: .left)
-    }()
-    
-    private lazy var criticalSpeciesLabel: UILabel = {
-        return Factory.makeLabel(title: "CRITICALLY ENDANGERED",
-                                 weight: .medium,
-                                 size: 19,
-                                 color: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.7993899829),
-                                 alignment: .left)
-    }()
-    
-    private lazy var endangeredSpeciesLabel: UILabel = {
-        return Factory.makeLabel(title: "ENDANGERED",
-                                 weight: .medium,
-                                 size: 19,
-                                 color: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.7993899829),
-                                 alignment: .left)
-    }()
-    
-    private lazy var vulnerableSpeciesLabel: UILabel = {
-        return Factory.makeLabel(title: "VULNERABLE",
-                                 weight: .medium,
-                                 size: 19,
-                                 color: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.7993899829),
                                  alignment: .left)
     }()
     
@@ -115,6 +95,13 @@ final class SpeciesListViewController: UIViewController {
     private var viewModel: SpeciesViewModel!
     
     private var isSearching: Bool = false
+    
+    let normalTitleFont = UIFont(name: "Roboto-Regular", size: 15)
+    let selectedTitleFont = UIFont(name: "Roboto-Bold", size: 18)
+
+    //choose normal and selected colors here
+    let normalTitleColor = UIColor.white
+    let selectedTitleColor = Constants.titleLabelColor
     
     //MARK: -- Methods
     
@@ -161,7 +148,6 @@ final class SpeciesListViewController: UIViewController {
     private func setDatasourceAndDelegates() {
         collectionView.dataSource = self
         collectionView.delegate = self
-        topToolBar.delegate = self
         searchBar.delegate = self
     }
     
@@ -182,7 +168,7 @@ final class SpeciesListViewController: UIViewController {
         setConstraints()
         
         setDatasourceAndDelegates()
-        topToolBar.highlightButton(button: .buttonOne)
+       
     }
 }
 
@@ -270,20 +256,12 @@ extension SpeciesListViewController: SpeciesViewModelDelegate {
     }
 }
 
-extension SpeciesListViewController: CustomToolBarDelegate {
-    func buttonPressed(_ sender: UIButton) {
-        guard let buttonOption = ToolBarSelectedButton(rawValue: sender.tag) else { return }
-        topToolBar.highlightButton(button: buttonOption)
-        viewModel.updateRedListCategoryFilteredAnimals(from: buttonOption)
-    }
-}
-
 //MARK: -- Add Subviews & Constraints
 
 fileprivate extension SpeciesListViewController {
     
     func addSubviews() {
-        let UIElements = [terraTitleLabel, searchBarButton, searchBar, collectionView, topToolBar]
+        let UIElements = [terraTitleLabel, searchBarButton, searchBar, collectionView, filterToolBar]
         UIElements.forEach { view.addSubview($0) }
         UIElements.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
     }
@@ -311,7 +289,7 @@ fileprivate extension SpeciesListViewController {
     
     func setTerraTitleLabelConstraints() {
         NSLayoutConstraint.activate([
-            terraTitleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
+            terraTitleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
             terraTitleLabelLeadingAnchorConstraint,
             terraTitleLabel.heightAnchor.constraint(equalToConstant: 25),
             terraTitleLabel.widthAnchor.constraint(equalToConstant: 100)
@@ -337,19 +315,26 @@ fileprivate extension SpeciesListViewController {
     
     func setToolBarConstraints() {
         NSLayoutConstraint.activate([
-            topToolBar.topAnchor.constraint(equalTo: terraTitleLabel.bottomAnchor, constant: 10),
-            topToolBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            topToolBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            topToolBar.heightAnchor.constraint(equalToConstant: 40)
+            filterToolBar.topAnchor.constraint(equalTo: terraTitleLabel.bottomAnchor, constant: 10),
+            filterToolBar.widthAnchor.constraint(equalToConstant: filterToolBar.frame.width),
+            filterToolBar.heightAnchor.constraint(equalToConstant: filterToolBar.frame.height)
         ])
     }
     
     func setSpeciesCollectionViewConstraints() {
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: topToolBar.bottomAnchor, constant: 0),
+            collectionView.topAnchor.constraint(equalTo: filterToolBar.bottomAnchor, constant: 0),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50)
         ])
+    }
+}
+
+
+
+extension SpeciesListViewController: UITabBarDelegate {
+     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        viewModel.updateRedListCategoryFilteredAnimals(from: item.tag)
     }
 }
