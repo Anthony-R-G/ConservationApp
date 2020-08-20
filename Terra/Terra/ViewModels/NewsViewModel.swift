@@ -9,6 +9,11 @@
 import Foundation
 import Combine
 
+private enum FetchType {
+    case prefetch
+    case reload
+}
+
 final class NewsViewModel {
     //MARK: -- Properties
     
@@ -75,7 +80,8 @@ extension NewsViewModel {
             .sink(receiveCompletion: { _ in },
                   receiveValue: { [weak self] response in
                     guard let self = self else { return }
-                    self.newsArticles.append(contentsOf: response.articles)
+                    guard let articles = response.articles else { return }
+                    self.newsArticles.append(contentsOf: articles)
                     self.currentPage += 1
                     self.delegate?.fetchCompleted()
                     self.isFetchInProgress = false

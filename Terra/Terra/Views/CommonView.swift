@@ -58,13 +58,6 @@ final class CommonView: UIView {
         return gv
     }()
     
-    private lazy var backgroundImageBottomGradient: GradientView = {
-        let gv = GradientView()
-        gv.startColor = .clear
-        gv.endColor = #colorLiteral(red: 0.1944729984, green: 0.2008640766, blue: 0.2050628662, alpha: 0.5)
-        return gv
-    }()
-    
     
     //MARK: -- Properties
    
@@ -130,7 +123,6 @@ fileprivate extension CommonView {
         setBlurbLabelConstraints()
         setBackgroundImageConstraints()
         setBackgroundImageTopGradientConstraints()
-        //        setBackgroundImageBottomGradientConstraints()
     }
     
     func setTitleLabelConstraints() {
@@ -168,12 +160,6 @@ fileprivate extension CommonView {
         backgroundImageTopGradient.snp.makeConstraints { (make) in
             make.top.left.right.equalTo(backgroundImage)
             make.height.equalTo(backgroundImage.snp.height).multipliedBy(0.35)
-        }
-    }
-    
-    func setBackgroundImageBottomGradientConstraints() {
-        backgroundImageBottomGradient.snp.makeConstraints { (make) in
-            make.leading.top.bottom.trailing.equalTo(backgroundImage)
         }
     }
 }

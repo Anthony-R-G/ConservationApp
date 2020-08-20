@@ -26,7 +26,7 @@ struct DetailOverviewStrategy: DetailPageStrategy {
     mutating func arrangedSubviews() -> UIStackView {
         let stackView = UIStackView(arrangedSubviews: [
             DetailInfoWindow(title: "DESCRIPTION",
-                                         content: Factory.makeLearnMoreWindowLabel(text: species.overview)),
+                                         content: Factory.makeDetailInfoWindowLabel(text: species.overview)),
             
             DetailInfoWindow(title: "CLASSIFICATION",
                                          content: ClassificationView(species: species))
