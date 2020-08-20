@@ -80,6 +80,7 @@
 		97812F0124EDFB3400E7C421 /* UISwipeGestureRecognizerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97812F0024EDFB3400E7C421 /* UISwipeGestureRecognizerExtensions.swift */; };
 		97812F0324EDFD5D00E7C421 /* DetailPageStrategyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97812F0224EDFD5D00E7C421 /* DetailPageStrategyViewModel.swift */; };
 		9782524024DFFC3600B9F6FC /* NewsArticle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9764D12824D7DC250050AF37 /* NewsArticle.swift */; };
+		978AA0EC24EE63EB00B631E6 /* Measurements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978AA0EB24EE63EB00B631E6 /* Measurements.swift */; };
 		978E5CF223FB5CBC007BCD25 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 978E5CF123FB5CBC007BCD25 /* GoogleService-Info.plist */; };
 		97928F7924CD11BF00AF90C5 /* FirestoreError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97928F7824CD11BF00AF90C5 /* FirestoreError.swift */; };
 		97928F7B24CD347200AF90C5 /* FirebaseConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97928F7A24CD347200AF90C5 /* FirebaseConvertible.swift */; };
@@ -184,6 +185,7 @@
 		977D877724CE504C00AE5E51 /* speciesModelTestData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = speciesModelTestData.json; sourceTree = "<group>"; };
 		97812F0024EDFB3400E7C421 /* UISwipeGestureRecognizerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISwipeGestureRecognizerExtensions.swift; sourceTree = "<group>"; };
 		97812F0224EDFD5D00E7C421 /* DetailPageStrategyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPageStrategyViewModel.swift; sourceTree = "<group>"; };
+		978AA0EB24EE63EB00B631E6 /* Measurements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Measurements.swift; sourceTree = "<group>"; };
 		978E5CF123FB5CBC007BCD25 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		97928F7824CD11BF00AF90C5 /* FirestoreError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreError.swift; sourceTree = "<group>"; };
 		97928F7A24CD347200AF90C5 /* FirebaseConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseConvertible.swift; sourceTree = "<group>"; };
@@ -359,6 +361,7 @@
 				974CC98324C64F0E00E4EF85 /* PopulationTrend.swift */,
 				97D9E24A24C6470600524000 /* Diet.swift */,
 				977D876F24CD6A1200AE5E51 /* Group.swift */,
+				978AA0EB24EE63EB00B631E6 /* Measurements.swift */,
 				9723E7A924D3505C0038ECB6 /* SpeciesAnnotation.swift */,
 			);
 			path = "Species Models";
@@ -672,6 +675,7 @@
 				9711D8FC24BD42C800C2E6F1 /* FirestoresService.swift in Sources */,
 				9729736F24DC9E3400123C86 /* DoubleExtensions.swift in Sources */,
 				977D877224CD7BFF00AE5E51 /* Habitat.swift in Sources */,
+				978AA0EC24EE63EB00B631E6 /* Measurements.swift in Sources */,
 				9772515B24DF800C0052A3F6 /* NewsViewModel.swift in Sources */,
 				97812F0324EDFD5D00E7C421 /* DetailPageStrategyViewModel.swift in Sources */,
 				9723E7AA24D3505C0038ECB6 /* SpeciesAnnotation.swift in Sources */,
