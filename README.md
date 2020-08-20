@@ -25,7 +25,7 @@
 ## Technologies 
 •Swift 5
 
-•UIKit (UI is created programmatically, without Storyboards)
+•UIKit
 
 •Safari Services
 
