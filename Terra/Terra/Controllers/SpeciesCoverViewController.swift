@@ -18,6 +18,7 @@ final class SpeciesCoverViewController: UIViewController {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
         view.insertSubview(iv, at: 0)
+        iv.backgroundColor = .black
         FirebaseStorageService.coverImageManager.getImage(for: viewModel.selectedSpecies.commonName, setTo: iv)
         return iv
     }()
@@ -54,16 +55,24 @@ final class SpeciesCoverViewController: UIViewController {
     
     private lazy var exploreButton: UIButton = {
         let btn = UIButton(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
-        btn.isUserInteractionEnabled = false
         btn.setImage(UIImage(systemName: "chevron.down"), for: .normal)
         btn.setTitle("Explore", for: .normal)
         btn.titleLabel?.font = UIFont(name: "Roboto-Light", size: 16)
         btn.alignImageAndTitleVertically()
         btn.imageView?.transform = CGAffineTransform(scaleX: 1.2, y: 1)
-        
+        btn.addTarget(self, action: #selector(directionalButtonTapped), for: .touchUpInside)
         let color = UIColor(white: 1, alpha: 0.6)
         btn.setTitleColor(color, for: .normal)
         btn.tintColor = color
+        return btn
+    }()
+    
+    private lazy var upButton: UIButton = {
+        let btn = UIButton(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
+        btn.setImage(UIImage(systemName: "chevron.up"), for: .normal)
+        btn.imageView?.transform = CGAffineTransform(scaleX: 1.2, y: 1)
+        btn.addTarget(self, action: #selector(directionalButtonTapped), for: .touchUpInside)
+        btn.tintColor = UIColor(white: 1, alpha: 0.6)
         return btn
     }()
     
@@ -121,11 +130,11 @@ final class SpeciesCoverViewController: UIViewController {
     }()
     
     private lazy var swipeGestureRecognizer: UISwipeGestureRecognizer = {
-           let recognizer = UISwipeGestureRecognizer()
-           recognizer.direction = .up
-           recognizer.addTarget(self, action: #selector(handleSwipe(recognizer:)))
-           return recognizer
-       }()
+        let recognizer = UISwipeGestureRecognizer()
+        recognizer.direction = .up
+        recognizer.addTarget(self, action: #selector(handleSwipe(recognizer:)))
+        return recognizer
+    }()
     
     //MARK: -- Properties
     
@@ -157,6 +166,14 @@ final class SpeciesCoverViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    @objc private func directionalButtonTapped() {
+        animatePageState()
+    }
+    
+    @objc private func handleSwipe(recognizer: UITapGestureRecognizer) {
+        animatePageState()
+    }
+    
     private func presentWebBrowser(link: URL){
         let config = SFSafariViewController.Configuration()
         let safariVC = SFSafariViewController(url: link, configuration: config)
@@ -170,25 +187,19 @@ final class SpeciesCoverViewController: UIViewController {
         exploreButton.startShimmeringAnimation(animationSpeed: 2,
                                                direction: .leftToRight,
                                                repeatCount: .infinity)
+        upButton.startShimmeringAnimation(animationSpeed: 2,
+                                          direction: .leftToRight,
+                                          repeatCount: .infinity)
     }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        backgroundVisualEffectBlur.effect = UIBlurEffect(style: .regular)
-    }
-    
-    @objc func handleSwipe(recognizer: UITapGestureRecognizer) {
-        animatePageState()
-    }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = true
         view.backgroundColor = .black
+        upButton.alpha = 0
         addSubviews()
         setConstraints()
         view.addGestureRecognizer(swipeGestureRecognizer)
-        
     }
 }
 
@@ -216,14 +227,14 @@ extension SpeciesCoverViewController {
                 self.backgroundVisualEffectBlur.effect = UIBlurEffect(style: .regular)
                 self.collapseHeader()
                 self.animateExploreButton(state: state)
-                self.animateCollectionView(state: state)
+                self.animateMainContent(state: state)
                 
                 
             case .collapsed:
                 self.backgroundVisualEffectBlur.effect = nil
                 self.expandHeader()
                 self.animateExploreButton(state: state)
-                self.animateCollectionView(state: state)
+                self.animateMainContent(state: state)
                 
             }
             self.view.layoutIfNeeded()
@@ -261,17 +272,23 @@ extension SpeciesCoverViewController {
     }
     
     private func animateExploreButton(state: State) {
-        let newAlpha: CGFloat = state == .expanded ? 0.0 : 0.6
+        let newExploreButtonAlpha: CGFloat = state == .expanded ? 0.0 : 0.6
+        let newUpButtonAlpha: CGFloat = state == .expanded ? 0.6 : 0.0
         let duration: TimeInterval = state == .expanded ? 0.4 : 2.0
+        let upDuration: TimeInterval = state == .expanded ? 2.0 : 0.4
         DispatchQueue.main.async {
             UIView.animate(withDuration: duration) { [ weak self] in
                 guard let self = self else { return }
-                self.exploreButton.alpha = newAlpha
+                self.exploreButton.alpha = newExploreButtonAlpha
+            }
+            UIView.animate(withDuration: upDuration) { [weak self] in
+                guard let self = self else { return }
+                self.upButton.alpha = newUpButtonAlpha
             }
         }
     }
     
-    private func animateCollectionView(state: State) {
+    private func animateMainContent(state: State) {
         let newAlpha: CGFloat = state == .expanded ? 1.0 : 0.0
         let duration: TimeInterval = state == .expanded ? 0.9 : 0.3
         DispatchQueue.main.async {
@@ -341,7 +358,7 @@ extension SpeciesCoverViewController: DonateButtonDelegate {
 
 fileprivate extension SpeciesCoverViewController {
     func addSubviews() {
-        [collectionView, headerNameView, subheaderInfoView, donateButtonContainer, closeButton, exploreButton].forEach { view.addSubview($0) }
+        [collectionView, headerNameView, subheaderInfoView, donateButtonContainer, closeButton, exploreButton, upButton].forEach { view.addSubview($0) }
         backgroundImageView.addSubview(backgroundVisualEffectBlur)
         donateButtonContainer.addSubview(donateButton)
     }
@@ -355,6 +372,7 @@ fileprivate extension SpeciesCoverViewController {
         setHeaderInfoViewConstraints()
         setSubheaderInfoViewConstraints()
         setExploreButtonConstraints()
+        setUpButtonConstraints()
         
         setCollectionViewConstraints()
         setDonateButtonContainerConstraints()
@@ -411,6 +429,15 @@ fileprivate extension SpeciesCoverViewController {
             make.width.equalTo(exploreButton.frame.width)
             make.centerX.equalTo(view)
             make.bottom.equalTo(view).inset(10)
+        }
+    }
+    
+    func setUpButtonConstraints() {
+        upButton.snp.makeConstraints { (make) in
+            make.height.equalTo(upButton.frame.height)
+            make.width.equalTo(upButton.frame.width)
+            make.centerX.equalTo(view)
+            make.top.equalTo(view).inset(20)
         }
     }
     

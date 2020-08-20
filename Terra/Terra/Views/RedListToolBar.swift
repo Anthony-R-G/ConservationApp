@@ -54,7 +54,6 @@ class RedListFilterTabBar: UITabBar {
         
     }
     
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         items = [allTab, criticalTab, endangeredTab, vulnerableTab]
