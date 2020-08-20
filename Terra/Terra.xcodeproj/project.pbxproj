@@ -103,7 +103,6 @@
 		97D0AB2024ECC84D00D345A4 /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D0AB1F24ECC84D00D345A4 /* UIImageExtensions.swift */; };
 		97D9E24B24C6470700524000 /* Diet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D9E24A24C6470600524000 /* Diet.swift */; };
 		97DC775224EB6C8700111245 /* CoverRoundedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DC775124EB6C8700111245 /* CoverRoundedCell.swift */; };
-		97DD101D24C69EB000A21DF4 /* ToolBarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DD101C24C69EB000A21DF4 /* ToolBarDelegate.swift */; };
 		97E22D8A24EC7701008B76E2 /* RedListToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E22D8924EC7701008B76E2 /* RedListToolBar.swift */; };
 		97E61B8024CE54A100E83691 /* Habitat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977D877124CD7BFF00AE5E51 /* Habitat.swift */; };
 		97E61B8124CE54A800E83691 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977D876F24CD6A1200AE5E51 /* Group.swift */; };
@@ -210,7 +209,6 @@
 		97D0AB1F24ECC84D00D345A4 /* UIImageExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtensions.swift; sourceTree = "<group>"; };
 		97D9E24A24C6470600524000 /* Diet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diet.swift; sourceTree = "<group>"; };
 		97DC775124EB6C8700111245 /* CoverRoundedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverRoundedCell.swift; sourceTree = "<group>"; };
-		97DD101C24C69EB000A21DF4 /* ToolBarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolBarDelegate.swift; sourceTree = "<group>"; };
 		97E22D8924EC7701008B76E2 /* RedListToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedListToolBar.swift; sourceTree = "<group>"; };
 		97E9450324BE10C800550824 /* ConservationStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConservationStatus.swift; sourceTree = "<group>"; };
 		97EA493B24E3BEC200C0FE64 /* DetailInfoWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInfoWindow.swift; sourceTree = "<group>"; };
@@ -286,7 +284,6 @@
 		9729736D24DC95AA00123C86 /* Custom Delegates */ = {
 			isa = PBXGroup;
 			children = (
-				97DD101C24C69EB000A21DF4 /* ToolBarDelegate.swift */,
 				97F7B42724C56886007AEE97 /* DonateButtonDelegate.swift */,
 				9772516124DFA6C40052A3F6 /* NewsViewModelDelegate.swift */,
 				976DA46724DFCB5F003F3197 /* SpeciesViewModelDelegate.swift */,
@@ -728,7 +725,6 @@
 				97452E4823E1EEE9005636E0 /* GradientView.swift in Sources */,
 				9764D12924D7DC250050AF37 /* NewsArticle.swift in Sources */,
 				97F0CCA924C56F5C00C581D3 /* UIScrollViewExtensions.swift in Sources */,
-				97DD101D24C69EB000A21DF4 /* ToolBarDelegate.swift in Sources */,
 				97EA493C24E3BEC200C0FE64 /* DetailInfoWindow.swift in Sources */,
 				975C8E5424E4F11500A0EB9D /* DetailThreatsStrategy.swift in Sources */,
 				977D877024CD6A1200AE5E51 /* Group.swift in Sources */,

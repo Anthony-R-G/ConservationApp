@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RedListFilterTabBar: UITabBar {
+final class RedListFilterTabBar: UITabBar {
     //MARK: -- UI Element Initialization
     
     private lazy var allTab: UITabBarItem = {
@@ -32,6 +32,7 @@ class RedListFilterTabBar: UITabBar {
     }()
     
     //MARK: -- Properties
+    
     let appearance = UITabBarAppearance()
     
     //MARK: -- Methods

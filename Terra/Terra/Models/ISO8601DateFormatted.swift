@@ -21,8 +21,8 @@ struct ISO8601DateFormatted: Hashable {
         }
     }
     
-    init(wrappedValue: String) {
-        self.value = wrappedValue
+    init(wrappedValue initialValue: String) {
+        self.value = initialValue
     }
 }
 

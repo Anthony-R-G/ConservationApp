@@ -193,8 +193,9 @@ final class ClassificationView: UIView {
         addSubviews()
         setConstraints()
         speechSynthesizer.delegate = self
-        heightAnchor.constraint(equalToConstant: 260).isActive = true
-        translatesAutoresizingMaskIntoConstraints = false
+        self.snp.makeConstraints { (make) in
+            make.height.equalTo(260)
+        }
     }
     
     required init?(coder: NSCoder) {

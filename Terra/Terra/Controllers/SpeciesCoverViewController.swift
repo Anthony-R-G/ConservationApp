@@ -182,6 +182,7 @@ final class SpeciesCoverViewController: UIViewController {
     //MARK: -- Life Cycle Methods
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         exploreButton.startShimmeringAnimation(animationSpeed: 2,
                                                direction: .leftToRight,
                                                repeatCount: .infinity)
@@ -189,6 +190,8 @@ final class SpeciesCoverViewController: UIViewController {
                                           direction: .leftToRight,
                                           repeatCount: .infinity)
     }
+    
+  
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -405,7 +408,7 @@ fileprivate extension SpeciesCoverViewController {
     func setHeaderInfoViewConstraints() {
         headerNameView.snp.makeConstraints { (make) in
             make.leading.equalTo(view).inset(Constants.spacingConstant)
-            make.width.equalTo(view).inset(30)
+            make.trailing.equalTo(view)
             headerNameViewTopAnchorConstraint.isActive = true
             headerNameViewHeightConstraint.isActive = true
         }

@@ -56,7 +56,7 @@ final class CoverHeaderNameView: UIView {
     }
     
     func expandCommonNameLabel() {
-         speciesCommonNameLabel.animateToFont(UIFont(name: "Roboto-Bold", size: 56)!, withDuration: 0.5)
+        speciesCommonNameLabel.animateToFont(UIFont(name: "Roboto-Bold", size: 56)!, withDuration: 1.3)
     }
     
     override init(frame: CGRect) {
@@ -99,7 +99,7 @@ fileprivate extension CoverHeaderNameView {
             make.leading.equalToSuperview()
             make.bottom.equalTo(speciesScientificNameLabel.snp.top)
             make.width.equalToSuperview().multipliedBy(0.76)
-            make.height.equalToSuperview().multipliedBy(0.5)
+            
         }
     }
     
