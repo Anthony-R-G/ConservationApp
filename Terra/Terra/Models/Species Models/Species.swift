@@ -13,6 +13,7 @@ public struct Species: FirebaseConvertible {
     let overview: String
     let weight: String
     let height: String
+    let averageLifespan: String
     let donationLink: String
     let diet: Diet
     let taxonomy: Taxonomy
