@@ -49,7 +49,10 @@ final class SpeciesMapView: UIView {
 extension SpeciesMapView: MGLMapViewDelegate {
     func mapViewDidFinishLoadingMap(_ mapView: MGLMapView) {
         
-        let camera = MGLMapCamera(lookingAtCenter: self.speciesLocation , altitude: 6000000, pitch: 15, heading: 0)
+        let camera = MGLMapCamera(lookingAtCenter: self.speciesLocation ,
+                                  altitude: 6000000,
+                                  pitch: 15,
+                                  heading: 0)
         mapView.setCamera(camera,
                           withDuration: 1.0,
                           animationTimingFunction: CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut))
@@ -60,6 +63,7 @@ extension SpeciesMapView: MGLMapViewDelegate {
 
 
 //MARK: -- Add Subviews & Constraints
+
 extension SpeciesMapView {
     func addSubviews() {
         [mapView].forEach{ addSubview($0) }

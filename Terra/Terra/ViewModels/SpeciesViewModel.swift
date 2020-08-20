@@ -46,19 +46,21 @@ final class SpeciesViewModel {
         return searchFilteredSpecies[index]
     }
     
-    func updateRedListCategoryFilteredAnimals(from selectedButton: ToolBarSelectedButton) {
-        switch selectedButton {
-        case .buttonOne:
+    func updateRedListCategoryFilteredAnimals(from selectedTabTag: Int) {
+        switch selectedTabTag {
+        case 0:
             redListCategoryFilteredSpecies = animalData
             
-        case .buttonTwo:
+        case 1:
             redListCategoryFilteredSpecies = Species.getFilteredSpeciesByConservationStatus(arr: animalData, by: .critical)
             
-        case .buttonThree:
+        case 2:
             redListCategoryFilteredSpecies = Species.getFilteredSpeciesByConservationStatus(arr: animalData, by: .endangered)
             
-        case .buttonFour:
+        case 3:
             redListCategoryFilteredSpecies =  Species.getFilteredSpeciesByConservationStatus(arr: animalData, by: .vulnerable)
+            
+        default: ()
         }
     }
     

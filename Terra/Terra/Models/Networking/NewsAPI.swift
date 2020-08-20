@@ -30,8 +30,6 @@ extension NewsAPI {
         ]
         
         let request = URLRequest(url: urlComponents.url!.absoluteURL)
-        print(request)
-       
         return apiClient.run(request)
             .map(\.value)
             .eraseToAnyPublisher() 

@@ -1,0 +1,18 @@
+{
+   "status":"ok",
+   "totalResults":6225,
+   "articles":[
+      {
+         "source":{
+            "id":null,
+            "name":"CleanTechnica"
+         },
+         "author":"Tina Casey",
+         "title":"Savage Kingdom: Look Who’s Winning The Renewable Energy Battle In Botswana (#CleanTechnica Exclusive Interview)",
+         "description":"Nat Geo TV's Savage Kingdom is the life-and-death backdrop for a death match between renewable energy and coal power in Botswana.",
+         "url":"https://cleantechnica.com/2020/08/14/savage-kingdom-look-whos-winning-the-renewable-energy-battle-in-botswana-cleantechnica-exclusive-interview/",
+         "urlToImage":"https://cleantechnica.com/files/2020/08/renewable-energy-savage-kingdom-Botswana.png",
+         "publishedAt":"2020-08-14T16:06:42Z"
+      }
+   ]
+}

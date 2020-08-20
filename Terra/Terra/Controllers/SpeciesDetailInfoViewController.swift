@@ -76,7 +76,7 @@ class SpeciesDetailInfoViewController: UIViewController {
     }()
     
     private lazy var commonViewHeightConstraint: NSLayoutConstraint = {
-        return commonView.heightAnchor.constraint(equalToConstant: Constants.commonViewImageDimension)
+        return commonView.heightAnchor.constraint(equalToConstant: Constants.commonViewImageDimension.height)
     }()
     
     //MARK: -- Methods
@@ -227,7 +227,7 @@ extension SpeciesDetailInfoViewController: Animatable {
         commonView.topConstraintValue = safeAreaTop + 20
         
         // Animate the common view to a height of 500 points
-        commonViewHeightConstraint.constant = Constants.commonViewImageDimension
+        commonViewHeightConstraint.constant = Constants.commonViewImageDimension.height
         sizeAnimator.addAnimations { [weak self] in
             guard let self = self else { return }
             self.view.layoutIfNeeded()

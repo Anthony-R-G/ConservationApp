@@ -63,16 +63,16 @@ final class NewsViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        viewModel.fetchNews()
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
         viewModel = NewsViewModel(delegate: self)
+        viewModel.fetchNews()
         addSubviews()
         setConstraints()
-        
     }
 }
 
