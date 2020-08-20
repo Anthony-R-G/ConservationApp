@@ -96,14 +96,7 @@ final class SpeciesListViewController: UIViewController {
     private var viewModel: SpeciesViewModel!
     
     private var isSearching: Bool = false
-    
-    let normalTitleFont = UIFont(name: "Roboto-Regular", size: 15)
-    let selectedTitleFont = UIFont(name: "Roboto-Bold", size: 18)
-
-    //choose normal and selected colors here
-    let normalTitleColor = UIColor.white
-    let selectedTitleColor = Constants.titleLabelColor
-    
+  
     //MARK: -- Methods
     
     @objc private func expandSearchBar() {
@@ -164,7 +157,6 @@ final class SpeciesListViewController: UIViewController {
         addSubviews()
         setConstraints()
         setDatasourceAndDelegates()
-       
     }
 }
 
@@ -215,7 +207,7 @@ extension SpeciesListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedSpecies = viewModel.specificSpecies(at: indexPath.row)
         let coverVC = SpeciesCoverViewController()
-        coverVC.selectedSpecies = selectedSpecies
+        coverVC.viewModel =  DetailPageStrategyViewModel(species: selectedSpecies)
         let navVC = NavigationController(rootViewController: coverVC)
         navVC.modalPresentationStyle = .fullScreen
         presentModally(navVC)

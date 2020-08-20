@@ -18,7 +18,7 @@ final class SpeciesCoverViewController: UIViewController {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
         view.insertSubview(iv, at: 0)
-        FirebaseStorageService.coverImageManager.getImage(for: selectedSpecies.commonName, setTo: iv)
+        FirebaseStorageService.coverImageManager.getImage(for: viewModel.selectedSpecies.commonName, setTo: iv)
         return iv
     }()
     
@@ -35,7 +35,7 @@ final class SpeciesCoverViewController: UIViewController {
         var frame = hiv.frame
         frame.size.height = screenSize.height * 0.30
         hiv.frame = frame
-        hiv.configureView(from: selectedSpecies)
+        hiv.configureView(from: viewModel.selectedSpecies)
         return hiv
     }()
     
@@ -44,7 +44,7 @@ final class SpeciesCoverViewController: UIViewController {
         var frame = siv.frame
         frame.size.height = headerNameView.frame.height * 0.30
         siv.frame = frame
-        siv.configureView(from: selectedSpecies)
+        siv.configureView(from: viewModel.selectedSpecies)
         return siv
     }()
     
@@ -120,22 +120,18 @@ final class SpeciesCoverViewController: UIViewController {
         return btn
     }()
     
+    private lazy var swipeGestureRecognizer: UISwipeGestureRecognizer = {
+           let recognizer = UISwipeGestureRecognizer()
+           recognizer.direction = .up
+           recognizer.addTarget(self, action: #selector(handleSwipe(recognizer:)))
+           return recognizer
+       }()
+    
     //MARK: -- Properties
     
-    private lazy var swipeGestureRecognizer: UISwipeGestureRecognizer = {
-        let recognizer = UISwipeGestureRecognizer()
-        recognizer.direction = .up
-        recognizer.addTarget(self, action: #selector(handleSwipe(recognizer:)))
-        return recognizer
-    }()
-    
-    private var strategies: [DetailPageStrategy]!
-    
-    //    private var headerAnimator: UIViewPropertyAnimator!
+    var viewModel: DetailPageStrategyViewModel!
     
     private var screenSize = UIScreen.main.bounds.size
-    
-    var selectedSpecies: Species!
     
     fileprivate let reuseIdentifier = "cellId"
     
@@ -189,10 +185,10 @@ final class SpeciesCoverViewController: UIViewController {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = true
         view.backgroundColor = .black
-       
         addSubviews()
         setConstraints()
         view.addGestureRecognizer(swipeGestureRecognizer)
+        
     }
 }
 
@@ -294,12 +290,12 @@ extension SpeciesCoverViewController {
 extension SpeciesCoverViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return strategies.count
+        return viewModel.totalStrategiesCount
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CoverRoundedCell
-        let specificStrategy = strategies[indexPath.row]
+        let specificStrategy = viewModel.specificStrategy(at: indexPath.row)
         cell.strategy = specificStrategy
         return cell
     }
@@ -311,8 +307,7 @@ extension SpeciesCoverViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedCell = collectionView.cellForItem(at: indexPath)
         let detailInfoVC = SpeciesDetailInfoViewController()
-        let specificStrategy = strategies[indexPath.row]
-        detailInfoVC.strategy = specificStrategy
+        detailInfoVC.strategy = viewModel.specificStrategy(at: indexPath.row)
         navigationController?.pushViewController(detailInfoVC, animated: true)
     }
     
@@ -337,7 +332,7 @@ extension SpeciesCoverViewController: UICollectionViewDelegate {
 
 extension SpeciesCoverViewController: DonateButtonDelegate {
     func donateButtonPressed() {
-        guard let donationURL = URL(string: selectedSpecies.donationLink) else { return }
+        guard let donationURL = URL(string: viewModel.selectedSpecies.donationLink) else { return }
         presentWebBrowser(link: donationURL)
     }
 }
@@ -346,10 +341,7 @@ extension SpeciesCoverViewController: DonateButtonDelegate {
 
 fileprivate extension SpeciesCoverViewController {
     func addSubviews() {
-        [collectionView, donateButtonContainer, closeButton, exploreButton].forEach { view.addSubview($0) }
-        
-        [headerNameView, subheaderInfoView].forEach { view.addSubview($0) }
-        
+        [collectionView, headerNameView, subheaderInfoView, donateButtonContainer, closeButton, exploreButton].forEach { view.addSubview($0) }
         backgroundImageView.addSubview(backgroundVisualEffectBlur)
         donateButtonContainer.addSubview(donateButton)
     }
@@ -363,7 +355,6 @@ fileprivate extension SpeciesCoverViewController {
         setHeaderInfoViewConstraints()
         setSubheaderInfoViewConstraints()
         setExploreButtonConstraints()
-        
         
         setCollectionViewConstraints()
         setDonateButtonContainerConstraints()
