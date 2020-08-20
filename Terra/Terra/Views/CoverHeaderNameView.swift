@@ -23,7 +23,7 @@ final class CoverHeaderNameView: UIView {
         return label
     }()
     
-     lazy var speciesCommonNameLabel: UILabel = {
+     private lazy var speciesCommonNameLabel: UILabel = {
         let label = Factory.makeLabel(title: nil,
                                         weight: .bold,
                                         size: 56,
@@ -49,6 +49,14 @@ final class CoverHeaderNameView: UIView {
         conservationStatusLabel.text = species.population.conservationStatus.rawValue
         speciesCommonNameLabel.text = species.commonName
         speciesScientificNameLabel.text = "— \(species.taxonomy.scientificName)"
+    }
+        
+    func shrinkCommonNameLabel() {
+        speciesCommonNameLabel.animateToFont(UIFont(name: "Roboto-Bold", size: 40)!, withDuration: 0.5)
+    }
+    
+    func expandCommonNameLabel() {
+         speciesCommonNameLabel.animateToFont(UIFont(name: "Roboto-Bold", size: 56)!, withDuration: 0.5)
     }
     
     override init(frame: CGRect) {

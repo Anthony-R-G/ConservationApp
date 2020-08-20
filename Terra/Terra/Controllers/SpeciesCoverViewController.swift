@@ -131,7 +131,7 @@ final class SpeciesCoverViewController: UIViewController {
     
     private var strategies: [DetailPageStrategy]!
     
-//    private var headerAnimator: UIViewPropertyAnimator!
+    //    private var headerAnimator: UIViewPropertyAnimator!
     
     private var screenSize = UIScreen.main.bounds.size
     
@@ -155,7 +155,7 @@ final class SpeciesCoverViewController: UIViewController {
     
     //MARK: -- Methods
     
-    private var headerState: State = .collapsed
+    private var pageState: State = .collapsed
     
     @objc private func closeButtonPressed() {
         dismiss(animated: true, completion: nil)
@@ -171,7 +171,6 @@ final class SpeciesCoverViewController: UIViewController {
     //MARK: -- Life Cycle Methods
     
     override func viewWillAppear(_ animated: Bool) {
-//        setUpAnimator()
         exploreButton.startShimmeringAnimation(animationSpeed: 2,
                                                direction: .leftToRight,
                                                repeatCount: .infinity)
@@ -182,95 +181,108 @@ final class SpeciesCoverViewController: UIViewController {
     }
     
     @objc func handleSwipe(recognizer: UITapGestureRecognizer) {
-        setUpAnimator()
+        animatePageState()
     }
     
-    private func collapseHeader() {
-        headerNameView.speciesCommonNameLabel.animateToFont(UIFont(name: "Roboto-Bold", size: 40)!, withDuration: 0.5)
-        headerNameViewTopAnchorConstraint.constant = screenSize.height * 0.10
-        headerNameViewHeightConstraint.constant = screenSize.height * 0.123
-        subheaderInfoViewHeightConstraint.constant = 50
-    }
-    
-    private func expandHeader() {
-        headerNameView.speciesCommonNameLabel.animateToFont(UIFont(name: "Roboto-Bold", size: 56)!, withDuration: 0.5)
-        headerNameViewTopAnchorConstraint.constant = screenSize.height * 0.48
-        headerNameViewHeightConstraint.constant = screenSize.height * 0.30
-        subheaderInfoViewHeightConstraint.constant = (screenSize.height * 0.30) * 0.30
-    }
-    
-    private func setUpAnimator() {
-        let state = headerState.opposite
-        let headerAnimator = UIViewPropertyAnimator(duration: 1.3, dampingRatio: 0.7, animations: {
-            switch state {
-            case .expanded:
-                print("Collapsing now")
-                self.backgroundVisualEffectBlur.effect = UIBlurEffect(style: .regular)
-                self.collapseHeader()
-                self.animateCollectionViewIn()
-                
-            case .collapsed:
-                print("Expanding now")
-                self.backgroundVisualEffectBlur.effect = nil
-                self.expandHeader()
-                self.animateCollectionViewOut()
-            }
-            self.view.layoutIfNeeded()
-        })
-        
-        headerAnimator.addCompletion { (position) in
-            switch position {
-            case .start:
-                self.headerState = state.opposite
-            case .end:
-                self.swipeGestureRecognizer.direction = self.swipeGestureRecognizer.direction.opposite
-                self.headerState = state
-            case .current:
-                ()
-            @unknown default:
-                ()
-            }
-        }
-        headerAnimator.startAnimation()
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = true
         view.backgroundColor = .black
-        strategies = [DetailOverviewStrategy(species: selectedSpecies),
-                      DetailHabitatStrategy(species: selectedSpecies),
-                      DetailThreatsStrategy(species: selectedSpecies)]
+       
         addSubviews()
         setConstraints()
         view.addGestureRecognizer(swipeGestureRecognizer)
     }
 }
 
+//MARK: -- Animatable
+extension SpeciesCoverViewController: Animatable {
+    var containerView: UIView? {
+        return collectionView
+    }
+    
+    var childView: UIView? {
+        return selectedCell
+    }
+}
 
-//MARK: -- ScrollView Updates
+//MARK: -- State Animations
 
 extension SpeciesCoverViewController {
     
+    private func animatePageState() {
+        let state = pageState.opposite
+        let animator = UIViewPropertyAnimator(duration: 1.3, dampingRatio: 0.75, animations: { [weak self] in
+            guard let self = self else { return }
+            switch state {
+            case .expanded:
+                self.backgroundVisualEffectBlur.effect = UIBlurEffect(style: .regular)
+                self.collapseHeader()
+                self.animateExploreButton(state: state)
+                self.animateCollectionView(state: state)
+                
+                
+            case .collapsed:
+                self.backgroundVisualEffectBlur.effect = nil
+                self.expandHeader()
+                self.animateExploreButton(state: state)
+                self.animateCollectionView(state: state)
+                
+            }
+            self.view.layoutIfNeeded()
+        })
+        
+        animator.addCompletion { [weak self ] (position) in
+            guard let self = self else { return }
+            switch position {
+            case .start:
+                self.pageState = state.opposite
+            case .end:
+                self.swipeGestureRecognizer.direction = self.swipeGestureRecognizer.direction.opposite
+                self.pageState = state
+            case .current:
+                ()
+            @unknown default:
+                ()
+            }
+        }
+        animator.startAnimation()
+    }
     
- 
+    private func collapseHeader() {
+        headerNameView.shrinkCommonNameLabel()
+        headerNameViewTopAnchorConstraint.constant = screenSize.height * 0.10
+        headerNameViewHeightConstraint.constant = screenSize.height * 0.123
+        subheaderInfoViewHeightConstraint.constant = 60
+    }
     
-    private func animateCollectionViewIn() {
+    private func expandHeader() {
+        headerNameView.expandCommonNameLabel()
+        headerNameViewTopAnchorConstraint.constant = screenSize.height * 0.48
+        headerNameViewHeightConstraint.constant = screenSize.height * 0.30
+        subheaderInfoViewHeightConstraint.constant = (screenSize.height * 0.30) * 0.30
+    }
+    
+    private func animateExploreButton(state: State) {
+        let newAlpha: CGFloat = state == .expanded ? 0.0 : 0.6
+        let duration: TimeInterval = state == .expanded ? 0.4 : 2.0
         DispatchQueue.main.async {
-            UIView.animate(withDuration: 0.9) {
-                [weak self] in guard let self = self else { return }
-                self.collectionView.alpha = 1
-                self.donateButton.alpha = 1
+            UIView.animate(withDuration: duration) { [ weak self] in
+                guard let self = self else { return }
+                self.exploreButton.alpha = newAlpha
             }
         }
     }
     
-    private func animateCollectionViewOut() {
+    private func animateCollectionView(state: State) {
+        let newAlpha: CGFloat = state == .expanded ? 1.0 : 0.0
+        let duration: TimeInterval = state == .expanded ? 0.9 : 0.3
         DispatchQueue.main.async {
-            UIView.animate(withDuration: 0.3) {
-                [weak self] in guard let self = self else { return }
-                self.collectionView.alpha = 0
-                self.donateButton.alpha = 0
+            UIView.animate(withDuration: duration) { [weak self] in
+                guard let self = self else { return }
+                self.collectionView.alpha = newAlpha
+                self.donateButton.alpha = newAlpha
             }
         }
     }
@@ -358,8 +370,6 @@ fileprivate extension SpeciesCoverViewController {
         setDonateButtonConstraints()
     }
     
-    
-    
     func setBackgroundImageViewConstraints() {
         backgroundImageView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
@@ -437,49 +447,6 @@ fileprivate extension SpeciesCoverViewController {
     }
 }
 
-//MARK: -- Animatable
-extension SpeciesCoverViewController: Animatable {
-    var containerView: UIView? {
-        return collectionView
-    }
-    
-    var childView: UIView? {
-        return selectedCell
-    }
-}
-
-
-
-extension UILabel {
-    func copyLabel() -> UILabel {
-        let label = UILabel()
-        label.font = self.font
-        label.frame = self.frame
-        label.text = self.text
-        return label
-    }
-}
-
-extension UILabel {
-    func animateToFont(_ font: UIFont, withDuration duration: TimeInterval) {
-        let oldFont = self.font
-        self.font = font
-        let oldOrigin = frame.origin
-        let labelScale = oldFont!.pointSize / font.pointSize
-        let oldTransform = transform
-        transform = transform.scaledBy(x: labelScale, y: labelScale)
-        let newOrigin = frame.origin
-        frame.origin = oldOrigin
-        setNeedsUpdateConstraints()
-        UIView.animate(withDuration: duration) {
-            self.frame.origin = newOrigin
-            self.transform = oldTransform
-            self.layoutIfNeeded()
-        }
-    }
-}
-
-
 private enum State {
     case expanded
     case collapsed
@@ -494,14 +461,4 @@ extension State {
     }
 }
 
-extension UISwipeGestureRecognizer.Direction {
-    var opposite: UISwipeGestureRecognizer.Direction {
-        switch self {
-        case .up: return .down
-        case .down: return .up
-        default:
-            ()
-        }
-        return self.opposite
-    }
-}
+
