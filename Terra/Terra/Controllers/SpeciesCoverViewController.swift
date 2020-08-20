@@ -60,7 +60,7 @@ final class SpeciesCoverViewController: UIViewController {
         btn.titleLabel?.font = UIFont(name: "Roboto-Light", size: 16)
         btn.alignImageAndTitleVertically()
         btn.imageView?.transform = CGAffineTransform(scaleX: 1.2, y: 1)
-        btn.addTarget(self, action: #selector(directionalButtonTapped), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(handleScreenInteraction), for: .touchUpInside)
         let color = UIColor(white: 1, alpha: 0.6)
         btn.setTitleColor(color, for: .normal)
         btn.tintColor = color
@@ -71,8 +71,9 @@ final class SpeciesCoverViewController: UIViewController {
         let btn = UIButton(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
         btn.setImage(UIImage(systemName: "chevron.up"), for: .normal)
         btn.imageView?.transform = CGAffineTransform(scaleX: 1.2, y: 1)
-        btn.addTarget(self, action: #selector(directionalButtonTapped), for: .touchUpInside)
-        btn.tintColor = UIColor(white: 1, alpha: 0.6)
+        btn.addTarget(self, action: #selector(handleScreenInteraction), for: .touchUpInside)
+        btn.tintColor = .white
+        btn.alpha = 0
         return btn
     }()
     
@@ -132,7 +133,7 @@ final class SpeciesCoverViewController: UIViewController {
     private lazy var swipeGestureRecognizer: UISwipeGestureRecognizer = {
         let recognizer = UISwipeGestureRecognizer()
         recognizer.direction = .up
-        recognizer.addTarget(self, action: #selector(handleSwipe(recognizer:)))
+        recognizer.addTarget(self, action: #selector(handleScreenInteraction))
         return recognizer
     }()
     
@@ -166,11 +167,8 @@ final class SpeciesCoverViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    @objc private func directionalButtonTapped() {
-        animatePageState()
-    }
     
-    @objc private func handleSwipe(recognizer: UITapGestureRecognizer) {
+    @objc private func handleScreenInteraction() {
         animatePageState()
     }
     
@@ -196,7 +194,6 @@ final class SpeciesCoverViewController: UIViewController {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = true
         view.backgroundColor = .black
-        upButton.alpha = 0
         addSubviews()
         setConstraints()
         view.addGestureRecognizer(swipeGestureRecognizer)
