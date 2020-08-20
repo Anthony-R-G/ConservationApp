@@ -11,9 +11,9 @@ import Foundation
 struct Species: FirebaseConvertible {
     let commonName: String
     let overview: String
-    let measurements: Measurements
     let averageLifespan: String
     let donationLink: String
+    let measurements: Measurements
     let diet: Diet
     let taxonomy: Taxonomy
     let group: Group

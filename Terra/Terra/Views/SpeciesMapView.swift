@@ -12,12 +12,13 @@ final class SpeciesMapView: UIView {
     
     private lazy var mapView: MGLMapView = {
         let mv = MGLMapView()
-        let styleURL = URL(string: "mapbox://styles/anthonyg5195/ckdyqfk5g034c19pit394euia")
+        let styleURL = URL(string: species.habitat.mapboxStyleURL)
         mv.styleURL = styleURL
         mv.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        mv.tintColor = .darkGray
+        mv.tintColor = .white
         mv.layer.cornerRadius = Constants.cornerRadius
         mv.clipsToBounds = true
+//        mv.zoomLevel = 2.25
         //        mv.zoomLevel = 8
         //        mv.minimumZoomLevel = 2
         //        mv.maximumZoomLevel = 1.8
@@ -29,7 +30,6 @@ final class SpeciesMapView: UIView {
     
     private var speciesLocation = CLLocationCoordinate2D()
     
-    
     required init(species: Species) {
         self.species = species
         speciesLocation = CLLocationCoordinate2D(latitude: species.habitat.latitude, longitude: species.habitat.longitude)
@@ -37,7 +37,6 @@ final class SpeciesMapView: UIView {
         addSubviews()
         setConstraints()
         heightAnchor.constraint(equalToConstant: 460).isActive = true
-        translatesAutoresizingMaskIntoConstraints = false
     }
     
     required init?(coder: NSCoder) {
@@ -45,12 +44,11 @@ final class SpeciesMapView: UIView {
     }
 }
 
-
 extension SpeciesMapView: MGLMapViewDelegate {
     func mapViewDidFinishLoadingMap(_ mapView: MGLMapView) {
         
-        let camera = MGLMapCamera(lookingAtCenter: self.speciesLocation ,
-                                  altitude: 6000000,
+        let camera = MGLMapCamera(lookingAtCenter: speciesLocation,
+                                  altitude: species.habitat.mapboxZoomAltitude,
                                   pitch: 15,
                                   heading: 0)
         mapView.setCamera(camera,

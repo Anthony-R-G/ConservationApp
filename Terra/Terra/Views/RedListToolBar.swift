@@ -50,9 +50,8 @@ final class RedListFilterTabBar: UITabBar {
             appearance.stackedLayoutAppearance.selected.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Roboto-Regular", size: 13)!]
             appearance.stackedLayoutAppearance.selected.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: -5)
             
-            self.standardAppearance = appearance
+            standardAppearance = appearance
         }
-        
     }
     
     override init(frame: CGRect) {

@@ -224,7 +224,7 @@ extension SpeciesDetailInfoViewController: Animatable {
             .compactMap({$0})
             .first?.windows
             .filter({$0.isKeyWindow}).first?.safeAreaInsets.top ?? .zero
-        commonView.topConstraintValue = safeAreaTop + 20
+        commonView.topConstraintValue = safeAreaTop + Constants.spacingConstant
         
         // Animate the common view to a height of 500 points
         commonViewHeightConstraint.constant = Constants.commonViewImageDimension.height

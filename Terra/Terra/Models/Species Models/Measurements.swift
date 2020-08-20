@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Measurements: Codable {
+struct Measurements: FirebaseConvertible {
     let averageMaleHeight: String
     let averageMaleWeight: String
     let averageFemaleHeight: String

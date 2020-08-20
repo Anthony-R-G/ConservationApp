@@ -45,9 +45,13 @@ final class NewsViewModel {
         var seenHeadlines = Set<String>()
         
         return news.compactMap { (newsArticle) in
-            guard !seenHeadlines.contains(newsArticle.cleanedUpTitle)
-                else { return nil }
-            seenHeadlines.insert(newsArticle.cleanedUpTitle)
+            for title in newsArticle.cleanedUpTitle {
+                guard !seenHeadlines.contains(title) else { return nil }
+                
+                seenHeadlines.insert(title)
+                return newsArticle
+            }
+           
             return newsArticle
         }
     }
