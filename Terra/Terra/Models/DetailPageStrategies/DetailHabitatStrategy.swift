@@ -28,7 +28,9 @@ struct DetailHabitatStrategy: DetailPageStrategy {
             DetailInfoWindow(title: "DISTRIBUTION",
                                          content: SpeciesMapView(species: species)),
             
-            DetailInfoWindow(title: "SUMMARY", content:
+            DetailInfoWindow(title: "BIOME", content: BiomeView(species: species)),
+            
+            DetailInfoWindow(title: "DETAIL", content:
                 Factory.makeDetailInfoWindowLabel(text: species.habitat.summary))
         ])
         stackView.axis = .vertical

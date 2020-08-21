@@ -123,7 +123,7 @@ final class MeasurementsView: UIView {
 
 //MARK: -- Add Subviews & Constraints
 
-extension MeasurementsView {
+fileprivate extension MeasurementsView {
     func addSubviews() {
         addSubview(horizontalStack)
     }

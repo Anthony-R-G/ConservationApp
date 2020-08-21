@@ -56,7 +56,7 @@ final class ConservationStatusView: UIView {
 
 //MARK: -- Add Subviews & Constraints
 
-extension ConservationStatusView {
+fileprivate extension ConservationStatusView {
     func addSubviews() {
         addSubview(redListImage)
         addSubview(conservationStatusLabel)

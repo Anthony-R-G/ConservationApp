@@ -18,7 +18,7 @@ final class SpeciesMapView: UIView {
         mv.tintColor = .white
         mv.layer.cornerRadius = Constants.cornerRadius
         mv.clipsToBounds = true
-//        mv.zoomLevel = 2.25
+        //        mv.zoomLevel = 2.25
         //        mv.zoomLevel = 8
         //        mv.minimumZoomLevel = 2
         //        mv.maximumZoomLevel = 1.8
@@ -57,12 +57,9 @@ extension SpeciesMapView: MGLMapViewDelegate {
     }
 }
 
-
-
-
 //MARK: -- Add Subviews & Constraints
 
-extension SpeciesMapView {
+fileprivate extension SpeciesMapView {
     func addSubviews() {
         [mapView].forEach{ addSubview($0) }
     }
