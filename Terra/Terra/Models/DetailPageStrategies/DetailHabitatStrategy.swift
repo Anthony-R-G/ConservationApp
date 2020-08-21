@@ -26,7 +26,9 @@ struct DetailHabitatStrategy: DetailPageStrategy {
     mutating func arrangedSubviews() -> UIStackView {
         let stackView = UIStackView(arrangedSubviews: [
             DetailInfoWindow(title: "DISTRIBUTION",
-                                         content: SpeciesMapView(species: species))
+                                         content: SpeciesMapView(species: species)),
+            
+            DetailInfoWindow(title: "SUMMARY", content: Factory.makeDetailInfoWindowLabel(text: species.habitat.summary))
         ])
         stackView.axis = .vertical
         stackView.spacing = Constants.spacingConstant

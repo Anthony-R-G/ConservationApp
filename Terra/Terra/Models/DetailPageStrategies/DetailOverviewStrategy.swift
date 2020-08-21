@@ -29,8 +29,11 @@ struct DetailOverviewStrategy: DetailPageStrategy {
                                          content: Factory.makeDetailInfoWindowLabel(text: species.overview)),
             
             DetailInfoWindow(title: "CLASSIFICATION",
-                                         content: ClassificationView(species: species))
-            ])
+                                         content: ClassificationView(species: species)),
+            
+            DetailInfoWindow(title: "MEASUREMENTS", content: MeasurementsView(species: species))
+    
+        ])
         stackView.axis = .vertical
         stackView.spacing = Constants.spacingConstant
         return stackView
