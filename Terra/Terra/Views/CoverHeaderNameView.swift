@@ -8,19 +8,19 @@
 
 import UIKit
 
+
+
 final class CoverHeaderNameView: UIView {
     //MARK: -- UI Element Initialization
     
-    private lazy var conservationStatusLabel: UILabel = {
-        let label = Factory.makeLabel(title: nil,
-                                        weight: .regular,
-                                        size: 17,
-                                        color: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1),
-                                        alignment: .center)
-        label.layer.borderColor = UIColor.white.cgColor
-        label.layer.borderWidth = Constants.borderWidth
-        label.layer.cornerRadius = 10
-        return label
+    private lazy var conservationStatusLabel: UIButton = {
+        let button = UIButton()
+        button.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 17)
+        button.layer.borderColor = UIColor.white.cgColor
+        button.layer.borderWidth = Constants.borderWidth
+        button.layer.cornerRadius = 10
+        button.addTarget(self, action: #selector(handleTap), for: .touchUpInside)
+        return button
     }()
     
      private lazy var speciesCommonNameLabel: UILabel = {
@@ -44,9 +44,24 @@ final class CoverHeaderNameView: UIView {
         return label
     }()
     
+    private lazy var tapGesture: UITapGestureRecognizer = {
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        return gesture
+    }()
+    
+    
+    //MARK: -- Properties
+    
+    weak var delegate: ConservationStatusDelegate?
+    
     //MARK: -- Methods
+    
+    @objc private func handleTap() {
+        delegate?.conservationStatusTapped()
+    }
+    
     public func configureView(from species: Species) {
-        conservationStatusLabel.text = species.population.conservationStatus.rawValue
+        conservationStatusLabel.setTitle(species.population.conservationStatus.rawValue, for: .normal)
         speciesCommonNameLabel.text = species.commonName
         speciesScientificNameLabel.text = "— \(species.taxonomy.scientificName)"
     }
@@ -63,6 +78,7 @@ final class CoverHeaderNameView: UIView {
         super.init(frame: frame)
         addSubviews()
         setConstraints()
+        conservationStatusLabel.addGestureRecognizer(tapGesture)
     }
     
     required init?(coder: NSCoder) {

@@ -91,13 +91,49 @@ final class SpeciesListViewController: UIViewController {
                                                         constant: Constants.spacingConstant)
     }()
     
+    private lazy var rightSwipeGesture: UISwipeGestureRecognizer = {
+        let gesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
+        gesture.direction = .right
+        return gesture
+    }()
+    
+    private lazy var leftSwipeGesture: UISwipeGestureRecognizer = {
+        let gesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
+        gesture.direction = .left
+        return gesture
+    }()
+    
     //MARK: -- Properties
     
     private var viewModel: SpeciesViewModel!
     
     private var isSearching: Bool = false
+    
+    private var selectedTab = 0
   
     //MARK: -- Methods
+    
+    @objc private func handleSwipe(_ sender: UISwipeGestureRecognizer) {
+        
+        switch sender.direction {
+        case .left:
+            selectedTab += 1
+            if selectedTab == 4 {
+                selectedTab = 0
+            }
+            
+        case .right:
+            selectedTab -= 1
+            if selectedTab == -1 {
+                selectedTab = 3
+            }
+        default:
+            ()
+        }
+        print(selectedTab)
+        filterToolBar.selectedItem = filterToolBar.items![selectedTab]
+        viewModel.updateRedListCategoryFilteredAnimals(from: filterToolBar.selectedItem!.tag)
+    }
     
     @objc private func expandSearchBar() {
         searchBarLeadingAnchorConstraint.constant = -400
@@ -157,6 +193,8 @@ final class SpeciesListViewController: UIViewController {
         addSubviews()
         setConstraints()
         setDatasourceAndDelegates()
+        collectionView.addGestureRecognizer(rightSwipeGesture)
+        collectionView.addGestureRecognizer(leftSwipeGesture)
     }
 }
 
@@ -325,6 +363,7 @@ fileprivate extension SpeciesListViewController {
 
 extension SpeciesListViewController: UITabBarDelegate {
      func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        selectedTab = item.tag
         viewModel.updateRedListCategoryFilteredAnimals(from: item.tag)
     }
 }

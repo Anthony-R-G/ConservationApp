@@ -16,7 +16,8 @@ final class DetailPageStrategyViewModel {
     private lazy var detailPageStrategies: [DetailPageStrategy] = [
         DetailOverviewStrategy(species: species),
         DetailHabitatStrategy(species: species),
-        DetailThreatsStrategy(species: species)
+        DetailThreatsStrategy(species: species),
+        DetailHowToHelpStrategy(species: species)
     ]
     
     var totalStrategiesCount: Int {

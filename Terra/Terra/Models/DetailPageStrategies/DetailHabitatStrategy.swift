@@ -11,6 +11,8 @@ import UIKit
 struct DetailHabitatStrategy: DetailPageStrategy {
     var species: Species
     
+    weak var biomeViewDelegate: BiomeImageDelegate?
+    
     func speciesName() -> String {
         return species.commonName
     }
@@ -28,7 +30,7 @@ struct DetailHabitatStrategy: DetailPageStrategy {
             DetailInfoWindow(title: "DISTRIBUTION",
                                          content: SpeciesMapView(species: species)),
             
-            DetailInfoWindow(title: "BIOME", content: BiomeView(species: species)),
+            DetailInfoWindow(title: "BIOME", content: BiomeView(species: species, delegate: self.biomeViewDelegate)),
             
             DetailInfoWindow(title: "DETAIL", content:
                 Factory.makeDetailInfoWindowLabel(text: species.habitat.summary))
@@ -41,4 +43,13 @@ struct DetailHabitatStrategy: DetailPageStrategy {
     init(species: Species) {
         self.species = species
     }
+    
+    mutating func getDetailViewController() -> UIViewController {
+        let detailVC = SpeciesDetailInfoViewController()
+        detailVC.strategy = self
+        self.biomeViewDelegate = detailVC
+        return detailVC
+    }
 }
+
+

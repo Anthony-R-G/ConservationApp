@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol BiomeImageDelegate: AnyObject {
+    func biomeWasTapped()
+}
+
 final class BiomeView: UIView {
     //MARK: -- UI Element Initialization
     private lazy var biomeImage: UIImageView = {
@@ -17,7 +21,13 @@ final class BiomeView: UIView {
         iv.backgroundColor = .clear
         iv.layer.cornerRadius = 10
         iv.clipsToBounds = true
+        iv.isUserInteractionEnabled = true
         return iv
+    }()
+    
+    private lazy var tapGesture: UITapGestureRecognizer = {
+        return UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        
     }()
     private lazy var biomeTitleLabel: UILabel = {
         return Factory.makeLabel(title: "Biome",
@@ -82,9 +92,15 @@ final class BiomeView: UIView {
     
     //MARK: -- Properties
     
+    weak var delegate: BiomeImageDelegate?
+    
     private var species: Species
     
     //MARK: -- Methods
+    
+    @objc private func handleTap() {
+        delegate?.biomeWasTapped()
+    }
     
     private func setBottomConstraint() {
         if let lastSubview = subviews.last {
@@ -92,12 +108,14 @@ final class BiomeView: UIView {
         }
     }
     
-    required init(species: Species) {
+    required init(species: Species, delegate: BiomeImageDelegate?) {
         self.species = species
+        self.delegate = delegate
         super.init(frame: .zero)
         addSubviews()
         setConstraints()
         setBottomConstraint()
+        biomeImage.addGestureRecognizer(tapGesture)
     }
     
     required init?(coder: NSCoder) {

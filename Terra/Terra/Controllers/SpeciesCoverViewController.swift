@@ -37,6 +37,7 @@ final class SpeciesCoverViewController: UIViewController {
         frame.size.height = screenSize.height * 0.30
         hiv.frame = frame
         hiv.configureView(from: viewModel.selectedSpecies)
+        hiv.delegate = self
         return hiv
     }()
     
@@ -130,6 +131,14 @@ final class SpeciesCoverViewController: UIViewController {
         return btn
     }()
     
+    private lazy var earthButton: UIButton = {
+        let btn = UIButton()
+        btn.setImage(#imageLiteral(resourceName: "globe"), for: .normal)
+        btn.addTarget(self, action: #selector(earthButtonPressed), for: .touchUpInside)
+        btn.alpha = 0.6
+        return btn
+    }()
+    
     private lazy var swipeGestureRecognizer: UISwipeGestureRecognizer = {
         let recognizer = UISwipeGestureRecognizer()
         recognizer.direction = .up
@@ -167,6 +176,13 @@ final class SpeciesCoverViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    @objc private func earthButtonPressed() {
+        let mapVC = MGLMapViewController()
+        mapVC.currentSpecies = viewModel.selectedSpecies
+        mapVC.modalPresentationStyle = .fullScreen
+        present(mapVC, animated: true, completion: nil)
+    }
+    
     
     @objc private func handleScreenInteraction() {
         animatePageState()
@@ -192,7 +208,6 @@ final class SpeciesCoverViewController: UIViewController {
     }
     
   
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = true
@@ -280,6 +295,7 @@ extension SpeciesCoverViewController {
             UIView.animate(withDuration: duration) { [ weak self] in
                 guard let self = self else { return }
                 self.exploreButton.alpha = newExploreButtonAlpha
+                self.earthButton.alpha = newExploreButtonAlpha
             }
             UIView.animate(withDuration: upDuration) { [weak self] in
                 guard let self = self else { return }
@@ -323,9 +339,9 @@ extension SpeciesCoverViewController: UICollectionViewDataSource {
 extension SpeciesCoverViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedCell = collectionView.cellForItem(at: indexPath)
-        let detailInfoVC = SpeciesDetailInfoViewController()
-        detailInfoVC.strategy = viewModel.specificStrategy(at: indexPath.row)
-        navigationController?.pushViewController(detailInfoVC, animated: true)
+        var strategy = viewModel.specificStrategy(at: indexPath.row)
+        let detailVC = strategy.getDetailViewController()
+        navigationController?.pushViewController(detailVC, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
@@ -358,7 +374,7 @@ extension SpeciesCoverViewController: DonateButtonDelegate {
 
 fileprivate extension SpeciesCoverViewController {
     func addSubviews() {
-        [collectionView, headerNameView, subheaderInfoView, donateButtonContainer, closeButton, exploreButton, upButton].forEach { view.addSubview($0) }
+        [collectionView, headerNameView, subheaderInfoView, donateButtonContainer, closeButton, earthButton, exploreButton, upButton].forEach { view.addSubview($0) }
         backgroundImageView.addSubview(backgroundVisualEffectBlur)
         donateButtonContainer.addSubview(donateButton)
     }
@@ -369,6 +385,8 @@ fileprivate extension SpeciesCoverViewController {
         setBackgroundGradientOverlayConstraints()
         
         setCloseButtonConstraints()
+        setEarthButtonConstraints()
+        
         setHeaderInfoViewConstraints()
         setSubheaderInfoViewConstraints()
         setExploreButtonConstraints()
@@ -401,6 +419,14 @@ fileprivate extension SpeciesCoverViewController {
         closeButton.snp.makeConstraints { (make) in
             make.top.equalToSuperview().inset(5)
             make.trailing.equalToSuperview().inset(5)
+            make.height.width.equalTo(66)
+        }
+    }
+    
+    func setEarthButtonConstraints() {
+        earthButton.snp.makeConstraints { (make) in
+            make.top.equalTo(closeButton)
+            make.leading.equalToSuperview().inset(5)
             make.height.width.equalTo(66)
         }
     }
@@ -479,4 +505,9 @@ extension State {
     }
 }
 
+extension SpeciesCoverViewController: ConservationStatusDelegate {
+    func conservationStatusTapped() {
+        presentWebBrowser(link: URL(string: "https://www.sanbi.org/skep/the-iucn-red-list-explained/")!)
+    }
+}
 

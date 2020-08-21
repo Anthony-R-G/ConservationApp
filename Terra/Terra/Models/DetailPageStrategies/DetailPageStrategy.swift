@@ -8,12 +8,21 @@
 
 import UIKit
 
-//Controls what's presented in the LearnMoreVC
+//Controls what's presented in the DetailInfoVC
 
 protocol DetailPageStrategy {
     var species: Species { get set }
+    mutating func getDetailViewController() -> UIViewController
     func speciesName() -> String
     func pageName() -> String
     func firebaseStorageManager() -> FirebaseStorageService
     mutating func arrangedSubviews() -> UIStackView
+}
+
+extension DetailPageStrategy {
+     func getDetailViewController() -> UIViewController {
+        let detailVC = SpeciesDetailInfoViewController()
+        detailVC.strategy = self
+        return detailVC
+    }
 }

@@ -279,3 +279,9 @@ extension SpeciesDetailInfoViewController: Animatable {
     }
 }
 
+extension SpeciesDetailInfoViewController: BiomeImageDelegate {
+    func biomeWasTapped() {
+        fatalError("CRASHING UR APP")
+    }
+}
+
