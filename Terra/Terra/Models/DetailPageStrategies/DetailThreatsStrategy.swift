@@ -26,7 +26,9 @@ struct DetailThreatsStrategy: DetailPageStrategy {
     mutating func arrangedSubviews() -> UIStackView {
         let stackView = UIStackView(arrangedSubviews: [
             
-            DetailInfoWindow(title: "SUMMARY",
+            DetailInfoWindow(title: "CONSERVATION STATUS", content: ConservationStatusView(species: species)),
+            
+            DetailInfoWindow(title: "POPULATION SUMMARY",
                                          content: Factory.makeDetailInfoWindowLabel(text: species.population.summary)),
             
             DetailInfoWindow(title: "THREATS",

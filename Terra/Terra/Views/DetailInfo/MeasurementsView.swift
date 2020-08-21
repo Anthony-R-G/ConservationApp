@@ -37,7 +37,13 @@ final class MeasurementsView: UIView {
     }()
     
     private lazy var heightReferenceTitleLabel: UILabel = {
-        return Factory.makeLabel(title: "Adult, At Shoulder",
+        var measurementType = String()
+        if species.commonName == "Blue Whale" || species.commonName  == "Great White Shark" {
+            measurementType = "Body length"
+        } else {
+            measurementType = "Adult, At Shoulder"
+        }
+        return Factory.makeLabel(title: measurementType,
                                  weight: .regular,
                                  size: 15,
                                  color: .lightGray,
@@ -51,6 +57,7 @@ final class MeasurementsView: UIView {
         sv.axis = .vertical
         sv.distribution = .fillEqually
         sv.spacing = 20
+        sv.setCustomSpacing(10, after: femaleHeightDataLabel)
         return sv
     }()
     
