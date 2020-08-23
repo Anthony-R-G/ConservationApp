@@ -158,6 +158,7 @@ final class SpeciesCoverViewController: UIViewController {
         let btn = UIButton()
         btn.setImage(UIImage(systemName: "arkit"), for: .normal)
         btn.transform = CGAffineTransform.init(scaleX: 1.5, y: 1.5)
+        btn.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.845703125)
         btn.addTarget(self, action: #selector(augmentedRealityButtonPressed), for: .touchUpInside)
         return btn
     }()
@@ -328,7 +329,7 @@ extension SpeciesCoverViewController {
             UIView.animate(withDuration: duration) { [ weak self] in
                 guard let self = self else { return }
                 self.exploreButton.alpha = newExploreButtonAlpha
-                self.earthButton.alpha = newExploreButtonAlpha
+                self.augmentedRealityButton.alpha = newExploreButtonAlpha
             }
             UIView.animate(withDuration: upDuration) { [weak self] in
                 guard let self = self else { return }
@@ -415,7 +416,7 @@ extension SpeciesCoverViewController: ConservationStatusDelegate {
 
 fileprivate extension SpeciesCoverViewController {
     func addSubviews() {
-        [collectionView, headerNameView, subheaderInfoView, donateButtonContainer, closeButton, earthButton, exploreButton, upButton].forEach { view.addSubview($0) }
+        [collectionView, headerNameView, subheaderInfoView, donateButtonContainer, closeButton, augmentedRealityButton, exploreButton, upButton].forEach { view.addSubview($0) }
         backgroundImageView.addSubview(backgroundVisualEffectBlur)
         donateButtonContainer.addSubview(donateButton)
     }
@@ -426,7 +427,7 @@ fileprivate extension SpeciesCoverViewController {
         setBackgroundGradientOverlayConstraints()
         
         setCloseButtonConstraints()
-        setEarthButtonConstraints()
+        setARButtonConstraints()
         
         setHeaderInfoViewConstraints()
         setSubheaderInfoViewConstraints()
@@ -464,8 +465,8 @@ fileprivate extension SpeciesCoverViewController {
         }
     }
     
-    func setEarthButtonConstraints() {
-        earthButton.snp.makeConstraints { (make) in
+    func setARButtonConstraints() {
+        augmentedRealityButton.snp.makeConstraints { (make) in
             make.top.equalTo(closeButton)
             make.leading.equalToSuperview().inset(5)
             make.height.width.equalTo(66)
