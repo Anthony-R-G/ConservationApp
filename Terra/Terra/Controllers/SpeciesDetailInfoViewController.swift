@@ -64,7 +64,7 @@ class SpeciesDetailInfoViewController: UIViewController {
     }()
     
     //MARK: -- Properties
-    
+
     var strategy: DetailPageStrategy! {
         didSet {
             commonView.configureView(from: strategy)
@@ -279,9 +279,9 @@ extension SpeciesDetailInfoViewController: Animatable {
     }
 }
 
-extension SpeciesDetailInfoViewController: BiomeImageDelegate {
+extension SpeciesDetailInfoViewController: BiomeViewDelegate {
     func biomeWasTapped() {
-        fatalError("CRASHING UR APP")
+       print("Tappity tap")
     }
 }
 

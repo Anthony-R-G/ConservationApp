@@ -16,7 +16,7 @@ struct NewsArticle: Decodable, Hashable {
     
     var cleanedUpTitle: [String] {
         get {
-            let set = Set("abcdefghijklmnopqrstuvxwyz")
+//            let set = Set("abcdefghijklmnopqrstuvxwyz")
             var arr = [String]()
             
             var currentStr = ""

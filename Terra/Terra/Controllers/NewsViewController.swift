@@ -106,6 +106,8 @@ extension NewsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let specificArticle = viewModel.specificArticle(at: indexPath.row)
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        generator.impactOccurred()
         presentWebBrowser(link: URL(string: specificArticle.url)!)
     }
 }

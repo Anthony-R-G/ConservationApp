@@ -8,27 +8,28 @@
 
 import UIKit
 
-protocol BiomeImageDelegate: AnyObject {
+protocol BiomeViewDelegate: AnyObject {
     func biomeWasTapped()
 }
 
 final class BiomeView: UIView {
     //MARK: -- UI Element Initialization
-    private lazy var biomeImage: UIImageView = {
-        let iv = UIImageView()
-        iv.image = UIImage(named: species.habitat.biome.rawValue)
-        iv.contentMode = .scaleAspectFill
-        iv.backgroundColor = .clear
+    private lazy var biomeImage: UIButton = {
+        let iv = UIButton()
+        iv.setImage(UIImage(named: strategy.species.habitat.biome.rawValue), for: .normal)
+        iv.imageView!.contentMode = .scaleAspectFill
+        iv.backgroundColor = .black
         iv.layer.cornerRadius = 10
         iv.clipsToBounds = true
         iv.isUserInteractionEnabled = true
+        iv.addTarget(self, action: #selector(handleTap), for: .touchUpInside)
         return iv
     }()
     
-    private lazy var tapGesture: UITapGestureRecognizer = {
-        return UITapGestureRecognizer(target: self, action: #selector(handleTap))
-        
-    }()
+//    private lazy var tapGesture: UITapGestureRecognizer = {
+//        return UITapGestureRecognizer(target: self, action: #selector(handleTap))
+//
+//    }()
     private lazy var biomeTitleLabel: UILabel = {
         return Factory.makeLabel(title: "Biome",
                                  weight: .regular,
@@ -38,7 +39,7 @@ final class BiomeView: UIView {
     }()
     
     private lazy var biomeDataLabel: UILabel = {
-        return Factory.makeLabel(title: species.habitat.biome.rawValue,
+        return Factory.makeLabel(title: strategy.species.habitat.biome.rawValue,
                                  weight: .bold,
                                  size: 18,
                                  color: .white,
@@ -54,7 +55,7 @@ final class BiomeView: UIView {
     }()
     
     private lazy var areaDataLabel: UILabel = {
-        return Factory.makeLabel(title: species.habitat.area,
+        return Factory.makeLabel(title: strategy.species.habitat.area,
                                  weight: .bold,
                                  size: 18,
                                  color: .white,
@@ -70,7 +71,7 @@ final class BiomeView: UIView {
     }()
     
     private lazy var temperatureDataLabel: UILabel = {
-        return Factory.makeLabel(title: species.habitat.temperature,
+        return Factory.makeLabel(title: strategy.species.habitat.temperature,
                                  weight: .bold,
                                  size: 18,
                                  color: .white,
@@ -92,14 +93,13 @@ final class BiomeView: UIView {
     
     //MARK: -- Properties
     
-    weak var delegate: BiomeImageDelegate?
-    
-    private var species: Species
+    private var strategy: DetailPageStrategy!
     
     //MARK: -- Methods
     
     @objc private func handleTap() {
-        delegate?.biomeWasTapped()
+        guard let strategy = strategy as? DetailHabitatStrategy else { return }
+        strategy.biomeViewDelegate?.biomeWasTapped()
     }
     
     private func setBottomConstraint() {
@@ -108,14 +108,13 @@ final class BiomeView: UIView {
         }
     }
     
-    required init(species: Species, delegate: BiomeImageDelegate?) {
-        self.species = species
-        self.delegate = delegate
+    required init(strategy: DetailPageStrategy) {
+        self.strategy = strategy
         super.init(frame: .zero)
         addSubviews()
         setConstraints()
         setBottomConstraint()
-        biomeImage.addGestureRecognizer(tapGesture)
+//        biomeImage.addGestureRecognizer(tapGesture)
     }
     
     required init?(coder: NSCoder) {

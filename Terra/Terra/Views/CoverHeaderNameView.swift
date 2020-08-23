@@ -8,17 +8,16 @@
 
 import UIKit
 
-
-
 final class CoverHeaderNameView: UIView {
     //MARK: -- UI Element Initialization
     
     private lazy var conservationStatusLabel: UIButton = {
         let button = UIButton()
-        button.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 17)
-        button.layer.borderColor = UIColor.white.cgColor
+        button.titleLabel?.font = UIFont(name: "Roboto-Medium", size: 17)
+        button.layer.borderColor = Constants.red.cgColor
         button.layer.borderWidth = Constants.borderWidth
         button.layer.cornerRadius = 10
+        button.showsTouchWhenHighlighted = true
         button.addTarget(self, action: #selector(handleTap), for: .touchUpInside)
         return button
     }()
@@ -42,11 +41,6 @@ final class CoverHeaderNameView: UIView {
         let neededSize = label.sizeThatFits(CGSize(width: frame.size.width,
                                                    height: CGFloat.greatestFiniteMagnitude))
         return label
-    }()
-    
-    private lazy var tapGesture: UITapGestureRecognizer = {
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
-        return gesture
     }()
     
     
@@ -78,7 +72,6 @@ final class CoverHeaderNameView: UIView {
         super.init(frame: frame)
         addSubviews()
         setConstraints()
-        conservationStatusLabel.addGestureRecognizer(tapGesture)
     }
     
     required init?(coder: NSCoder) {
@@ -114,7 +107,7 @@ fileprivate extension CoverHeaderNameView {
         speciesCommonNameLabel.snp.makeConstraints { (make) in
             make.leading.equalToSuperview()
             make.bottom.equalTo(speciesScientificNameLabel.snp.top)
-            make.width.equalToSuperview().multipliedBy(0.76)
+            make.width.equalToSuperview().multipliedBy(0.80)
             
         }
     }

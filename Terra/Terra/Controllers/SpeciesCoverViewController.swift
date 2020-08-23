@@ -61,7 +61,7 @@ final class SpeciesCoverViewController: UIViewController {
         btn.titleLabel?.font = UIFont(name: "Roboto-Light", size: 16)
         btn.alignImageAndTitleVertically()
         btn.imageView?.transform = CGAffineTransform(scaleX: 1.2, y: 1)
-        btn.addTarget(self, action: #selector(handleScreenInteraction), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(handleSwipeInteraction), for: .touchUpInside)
         let color = UIColor(white: 1, alpha: 0.6)
         btn.setTitleColor(color, for: .normal)
         btn.tintColor = color
@@ -72,7 +72,7 @@ final class SpeciesCoverViewController: UIViewController {
         let btn = UIButton(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
         btn.setImage(UIImage(systemName: "chevron.up"), for: .normal)
         btn.imageView?.transform = CGAffineTransform(scaleX: 1.2, y: 1)
-        btn.addTarget(self, action: #selector(handleScreenInteraction), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(handleSwipeInteraction), for: .touchUpInside)
         btn.tintColor = .white
         btn.alpha = 0
         return btn
@@ -118,6 +118,7 @@ final class SpeciesCoverViewController: UIViewController {
         cv.alpha = 0
         cv.dataSource = self
         cv.delegate = self
+    
         cv.register(CoverRoundedCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         return cv
     }()
@@ -142,8 +143,16 @@ final class SpeciesCoverViewController: UIViewController {
     private lazy var swipeGestureRecognizer: UISwipeGestureRecognizer = {
         let recognizer = UISwipeGestureRecognizer()
         recognizer.direction = .up
-        recognizer.addTarget(self, action: #selector(handleScreenInteraction))
+        recognizer.addTarget(self, action: #selector(handleSwipeInteraction))
         return recognizer
+    }()
+    
+    private lazy var augmentedRealityButton: UIButton = {
+        let btn = UIButton()
+        btn.setImage(UIImage(systemName: "arkit"), for: .normal)
+        btn.transform = CGAffineTransform.init(scaleX: 1.5, y: 1.5)
+        btn.addTarget(self, action: #selector(augmentedRealityButtonPressed), for: .touchUpInside)
+        return btn
     }()
     
     //MARK: -- Properties
@@ -172,6 +181,10 @@ final class SpeciesCoverViewController: UIViewController {
     
     private var pageState: State = .collapsed
     
+    @objc private func augmentedRealityButtonPressed() {
+        print("now cool stuff happens")
+    }
+    
     @objc private func closeButtonPressed() {
         dismiss(animated: true, completion: nil)
     }
@@ -184,7 +197,7 @@ final class SpeciesCoverViewController: UIViewController {
     }
     
     
-    @objc private func handleScreenInteraction() {
+    @objc private func handleSwipeInteraction() {
         animatePageState()
     }
     
@@ -366,6 +379,8 @@ extension SpeciesCoverViewController: UICollectionViewDelegate {
 extension SpeciesCoverViewController: DonateButtonDelegate {
     func donateButtonPressed() {
         guard let donationURL = URL(string: viewModel.selectedSpecies.donationLink) else { return }
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        generator.impactOccurred()
         presentWebBrowser(link: donationURL)
     }
 }

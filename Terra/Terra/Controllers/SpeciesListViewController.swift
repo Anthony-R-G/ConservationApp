@@ -130,7 +130,6 @@ final class SpeciesListViewController: UIViewController {
         default:
             ()
         }
-        print(selectedTab)
         filterToolBar.selectedItem = filterToolBar.items![selectedTab]
         viewModel.updateRedListCategoryFilteredAnimals(from: filterToolBar.selectedItem!.tag)
     }
