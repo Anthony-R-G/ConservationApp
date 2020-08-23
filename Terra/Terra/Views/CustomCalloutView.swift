@@ -14,42 +14,39 @@ final class CustomCalloutView: UIView, MGLCalloutView {
     private lazy var speciesImageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
-        iv.translatesAutoresizingMaskIntoConstraints = false
         iv.clipsToBounds = true
         iv.isUserInteractionEnabled = false
-        mainBody.insertSubview(iv, at: 0)
         return iv
     }()
     
     private lazy var titleLabel: UILabel = {
-        return Factory.makeLabel(title: nil,
-                                 weight: .medium,
-                                 size: 19,
-                                 color: .white,
-                                 alignment: .left)
-    }()
-    
-    private lazy var subtitleLabel: UILabel = {
-        return Factory.makeLabel(title: nil,
-                                 weight: .regular,
-                                 size: 13,
+       return Factory.makeLabel(title: nil,
+                                 weight: .bold,
+                                 size: 17,
                                  color: Constants.titleLabelColor,
                                  alignment: .left)
     }()
     
-    private lazy var areaLabel: UILabel = {
-        return Factory.makeLabel(title: nil,
-                                 weight: .light,
-                                 size: 14,
-                                 color: .lightGray,
-                                 alignment: .right)
+    private lazy var subtitleLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont(name: "Roboto-Regular", size: 13)
+        label.textColor = .white
+        label.textAlignment = .left
+        label.adjustsFontSizeToFitWidth = false
+        label.lineBreakMode = .byTruncatingTail
+        return label
     }()
     
-    private lazy var blackBar: UIView = {
+    private lazy var infoButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "info.circle"), for: .normal)
+        return button
+    }()
+    
+    private lazy var textBackground: UIView = {
         let bar = UIView()
         bar.backgroundColor = .black
         bar.clipsToBounds = true
-        bar.translatesAutoresizingMaskIntoConstraints = false
         bar.isUserInteractionEnabled = false
         return bar
     }()
@@ -87,11 +84,10 @@ final class CustomCalloutView: UIView, MGLCalloutView {
     
     //MARK: -- Methods
     
-    private func configureUIElements(from annotation: SpeciesAnnotation) {
+    private func configureUIElements(from annotation: MGLAnnotation) {
         titleLabel.text = representedObject.title ?? ""
         subtitleLabel.text = representedObject.subtitle ?? ""
-        areaLabel.text = annotation.area
-        FirebaseStorageService.calloutImageManager.getImage(for: annotation.title!, setTo: speciesImageView)
+        FirebaseStorageService.calloutImageManager.getImage(for: annotation.title!!, setTo: speciesImageView)
     }
     
     private func configureCalloutAppearance() {
@@ -101,7 +97,7 @@ final class CustomCalloutView: UIView, MGLCalloutView {
         backgroundColor = .clear
     }
     
-    required init(annotation: SpeciesAnnotation) {
+    required init(annotation: MGLAnnotation) {
         representedObject = annotation
         mainBody = UIButton(frame: CGRect(x: 0, y: -15, width: UIScreen.main.bounds.width * 0.75, height: 180))
         
@@ -212,62 +208,51 @@ fileprivate extension CustomCalloutView {
     
     func addSubviews() {
         addSubview(mainBody)
-        let UIElements = [blackBar, titleLabel, subtitleLabel, areaLabel]
-        UIElements.forEach { mainBody.addSubview($0) }
-        UIElements.forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
+        [speciesImageView, textBackground, titleLabel, subtitleLabel, infoButton].forEach { mainBody.addSubview($0) }
     }
     
     func setConstraints() {
-        setBlackBarConstraints()
         setSpeciesImageConstraints()
+        setTextBackground()
         setTitleLabelConstraints()
         setSubtitleLabelConstraints()
-        setAreaLabelConstraints()
+        setInfoButtonConstraints()
     }
     
     func setSpeciesImageConstraints() {
-        NSLayoutConstraint.activate([
-            speciesImageView.leadingAnchor.constraint(equalTo: mainBody.leadingAnchor),
-            speciesImageView.trailingAnchor.constraint(equalTo: mainBody.trailingAnchor),
-            speciesImageView.topAnchor.constraint(equalTo: mainBody.topAnchor),
-            speciesImageView.bottomAnchor.constraint(equalTo: blackBar.topAnchor)
-        ])
+        speciesImageView.snp.makeConstraints { (make) in
+            make.leading.trailing.top.equalTo(mainBody)
+            make.bottom.equalTo(textBackground.snp.top)
+        }
     }
     
-    
     func setTitleLabelConstraints() {
-        NSLayoutConstraint.activate([
-            titleLabel.leadingAnchor.constraint(equalTo: mainBody.leadingAnchor, constant: Constants.spacingConstant),
-            titleLabel.topAnchor.constraint(equalTo: speciesImageView.bottomAnchor, constant: 5),
-            titleLabel.widthAnchor.constraint(equalTo: mainBody.widthAnchor),
-            titleLabel.heightAnchor.constraint(equalToConstant: 30)
-        ])
+        titleLabel.snp.makeConstraints { (make) in
+            make.leading.trailing.equalTo(mainBody).inset(Constants.spacingConstant)
+            make.top.equalTo(textBackground).inset(2)
+        }
     }
     
     func setSubtitleLabelConstraints() {
-        NSLayoutConstraint.activate([
-            subtitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.spacingConstant),
-            subtitleLabel.widthAnchor.constraint(equalTo: widthAnchor),
-            subtitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5),
-            subtitleLabel.heightAnchor.constraint(equalToConstant: 20)
-        ])
+        subtitleLabel.snp.makeConstraints { (make) in
+            make.leading.trailing.equalTo(titleLabel)
+            make.top.equalTo(titleLabel.snp.bottom).offset(5)
+            make.bottom.equalTo(textBackground.snp.bottom)
+        }
     }
     
-    func setAreaLabelConstraints() {
-        NSLayoutConstraint.activate([
-            areaLabel.trailingAnchor.constraint(equalTo: mainBody.trailingAnchor, constant: -Constants.spacingConstant),
-            areaLabel.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
-            areaLabel.widthAnchor.constraint(equalToConstant: 70),
-            areaLabel.heightAnchor.constraint(equalToConstant: 20)
-        ])
+    func setInfoButtonConstraints() {
+        infoButton.snp.makeConstraints { (make) in
+            make.trailing.equalTo(textBackground).inset(5)
+            make.centerY.equalTo(titleLabel)
+            make.width.height.equalTo(20)
+        }
     }
     
-    func setBlackBarConstraints() {
-        NSLayoutConstraint.activate([
-            blackBar.leadingAnchor.constraint(equalTo: mainBody.leadingAnchor),
-            blackBar.trailingAnchor.constraint(equalTo: mainBody.trailingAnchor),
-            blackBar.bottomAnchor.constraint(equalTo: mainBody.bottomAnchor),
-            blackBar.heightAnchor.constraint(equalTo: mainBody.heightAnchor, multiplier: 0.4)
-        ])
+    func setTextBackground() {
+        textBackground.snp.makeConstraints { (make) in
+            make.leading.trailing.bottom.equalTo(mainBody)
+            make.height.equalTo(mainBody).multipliedBy(0.4)
+        }
     }
 }

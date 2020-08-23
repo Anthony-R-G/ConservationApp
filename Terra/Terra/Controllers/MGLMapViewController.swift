@@ -50,7 +50,7 @@ final class MGLMapViewController: UIViewController {
         didSet {
             for species in speciesData {
                 let coordinate = CLLocationCoordinate2D(latitude: species.habitat.latitude, longitude: species.habitat.longitude)
-                addAnnotation(from: coordinate, title: species.commonName, subtitle: species.taxonomy.scientificName)
+                addAnnotation(from: coordinate, title: species.commonName, subtitle: species.habitat.summary)
             }
         }
     }
@@ -104,7 +104,6 @@ final class MGLMapViewController: UIViewController {
 //MARK: -- MapView Delegate Methods
 extension MGLMapViewController: MGLMapViewDelegate {
   
-
     func mapView(_ mapView: MGLMapView, viewFor annotation: MGLAnnotation) -> MGLAnnotationView? {
         
         guard annotation is MGLPointAnnotation else { return nil }
@@ -117,7 +116,7 @@ extension MGLMapViewController: MGLMapViewDelegate {
             annotationView = CustomAnnotationView(reuseIdentifier: reuseIdentifier)
             annotationView!.bounds = CGRect(x: 0, y: 0, width: 25, height: 25)
             
-            let hue = CGFloat(annotation.coordinate.longitude) / 100
+            let hue = CGFloat(annotation.coordinate.longitude + annotation.coordinate.latitude) / 100
             annotationView!.backgroundColor = UIColor(hue: hue, saturation: 0.5, brightness: 1, alpha: 1)
         }
         
@@ -139,8 +138,12 @@ extension MGLMapViewController: MGLMapViewDelegate {
         let title = annotation.title ?? nil
 //        let subtitle = "Distance from you: \(distance.rounded(toPlaces: 1)) miles"
         let subtitle = (annotation.subtitle ?? nil) ?? ""
-        let customAnnotation = SpeciesAnnotation(coordinate: annotation.coordinate, title: title ?? "no title", subtitle: subtitle, area: "")
-        let callout = CustomCalloutView(annotation: customAnnotation)
+//        let customAnnotation = MGLPointAnnotation(coordinate: annotation.coordinate, title: title ?? "no title", subtitle: subtitle)
+        let pointAnnotation = MGLPointAnnotation()
+        pointAnnotation.title = title
+        pointAnnotation.subtitle = subtitle
+        pointAnnotation.coordinate = annotation.coordinate
+        let callout = CustomCalloutView(annotation: pointAnnotation)
 //        callout.delegate = self
         return callout
     }

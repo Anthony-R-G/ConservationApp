@@ -132,14 +132,6 @@ final class SpeciesCoverViewController: UIViewController {
         return btn
     }()
     
-    private lazy var earthButton: UIButton = {
-        let btn = UIButton()
-        btn.setImage(#imageLiteral(resourceName: "globe"), for: .normal)
-        btn.addTarget(self, action: #selector(earthButtonPressed), for: .touchUpInside)
-        btn.alpha = 0.6
-        return btn
-    }()
-    
     private lazy var pageStateSwipeGesture: UISwipeGestureRecognizer = {
         let recognizer = UISwipeGestureRecognizer()
         recognizer.direction = .up
@@ -195,13 +187,6 @@ final class SpeciesCoverViewController: UIViewController {
     
     @objc private func closeButtonPressed() {
         dismiss(animated: true, completion: nil)
-    }
-    
-    @objc private func earthButtonPressed() {
-        let mapVC = MGLMapViewController()
-//        mapVC.currentSpecies = viewModel.selectedSpecies
-//        mapVC.modalPresentationStyle = .fullScreen
-        present(mapVC, animated: true, completion: nil)
     }
     
     @objc private func handlePageStateSwipeGesture() {
