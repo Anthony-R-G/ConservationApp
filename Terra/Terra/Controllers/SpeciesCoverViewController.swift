@@ -61,7 +61,7 @@ final class SpeciesCoverViewController: UIViewController {
         btn.titleLabel?.font = UIFont(name: "Roboto-Light", size: 16)
         btn.alignImageAndTitleVertically()
         btn.imageView?.transform = CGAffineTransform(scaleX: 1.2, y: 1)
-        btn.addTarget(self, action: #selector(handleSwipeInteraction), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(handlePageStateSwipeGesture), for: .touchUpInside)
         let color = UIColor(white: 1, alpha: 0.6)
         btn.setTitleColor(color, for: .normal)
         btn.tintColor = color
@@ -72,7 +72,7 @@ final class SpeciesCoverViewController: UIViewController {
         let btn = UIButton(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
         btn.setImage(UIImage(systemName: "chevron.up"), for: .normal)
         btn.imageView?.transform = CGAffineTransform(scaleX: 1.2, y: 1)
-        btn.addTarget(self, action: #selector(handleSwipeInteraction), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(handlePageStateSwipeGesture), for: .touchUpInside)
         btn.tintColor = .white
         btn.alpha = 0
         return btn
@@ -118,7 +118,7 @@ final class SpeciesCoverViewController: UIViewController {
         cv.alpha = 0
         cv.dataSource = self
         cv.delegate = self
-    
+        
         cv.register(CoverRoundedCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         return cv
     }()
@@ -140,10 +140,17 @@ final class SpeciesCoverViewController: UIViewController {
         return btn
     }()
     
-    private lazy var swipeGestureRecognizer: UISwipeGestureRecognizer = {
+    private lazy var pageStateSwipeGesture: UISwipeGestureRecognizer = {
         let recognizer = UISwipeGestureRecognizer()
         recognizer.direction = .up
-        recognizer.addTarget(self, action: #selector(handleSwipeInteraction))
+        recognizer.addTarget(self, action: #selector(handlePageStateSwipeGesture))
+        return recognizer
+    }()
+    
+    private lazy var dismissPageSwipeGesture: UISwipeGestureRecognizer = {
+        let recognizer = UISwipeGestureRecognizer()
+        recognizer.direction = .down
+        recognizer.addTarget(self, action: #selector(handleDismissSwipeGesture))
         return recognizer
     }()
     
@@ -158,6 +165,8 @@ final class SpeciesCoverViewController: UIViewController {
     //MARK: -- Properties
     
     var viewModel: DetailPageStrategyViewModel!
+    
+    private var pageState: State = .collapsed
     
     private var screenSize = UIScreen.main.bounds.size
     
@@ -179,8 +188,6 @@ final class SpeciesCoverViewController: UIViewController {
     
     //MARK: -- Methods
     
-    private var pageState: State = .collapsed
-    
     @objc private func augmentedRealityButtonPressed() {
         print("now cool stuff happens")
     }
@@ -197,14 +204,23 @@ final class SpeciesCoverViewController: UIViewController {
     }
     
     
-    @objc private func handleSwipeInteraction() {
+    @objc private func handlePageStateSwipeGesture() {
         animatePageState()
+    }
+    
+    @objc private func handleDismissSwipeGesture() {
+        dismiss(animated: true, completion: nil)
     }
     
     private func presentWebBrowser(link: URL){
         let config = SFSafariViewController.Configuration()
         let safariVC = SFSafariViewController(url: link, configuration: config)
         present(safariVC, animated: true)
+    }
+    
+    private func addGestureRecognizers() {
+        view.addGestureRecognizer(pageStateSwipeGesture)
+        view.addGestureRecognizer(dismissPageSwipeGesture)
     }
     
     
@@ -220,14 +236,14 @@ final class SpeciesCoverViewController: UIViewController {
                                           repeatCount: .infinity)
     }
     
-  
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = true
         view.backgroundColor = .black
         addSubviews()
         setConstraints()
-        view.addGestureRecognizer(swipeGestureRecognizer)
+        addGestureRecognizers()
     }
 }
 
@@ -252,6 +268,7 @@ extension SpeciesCoverViewController {
             guard let self = self else { return }
             switch state {
             case .expanded:
+                self.dismissPageSwipeGesture.isEnabled = false
                 self.backgroundVisualEffectBlur.effect = UIBlurEffect(style: .regular)
                 self.collapseHeader()
                 self.animateExploreButton(state: state)
@@ -259,6 +276,10 @@ extension SpeciesCoverViewController {
                 
                 
             case .collapsed:
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+                    guard let self = self else { return }
+                    self.dismissPageSwipeGesture.isEnabled = true
+                }
                 self.backgroundVisualEffectBlur.effect = nil
                 self.expandHeader()
                 self.animateExploreButton(state: state)
@@ -274,7 +295,7 @@ extension SpeciesCoverViewController {
             case .start:
                 self.pageState = state.opposite
             case .end:
-                self.swipeGestureRecognizer.direction = self.swipeGestureRecognizer.direction.opposite
+                self.pageStateSwipeGesture.direction = self.pageStateSwipeGesture.direction.opposite
                 self.pageState = state
             case .current:
                 ()
@@ -374,7 +395,7 @@ extension SpeciesCoverViewController: UICollectionViewDelegate {
     }
 }
 
-//MARK: -- DonateButton Delegate Implementation
+//MARK: -- Custom Delegate Implementation
 
 extension SpeciesCoverViewController: DonateButtonDelegate {
     func donateButtonPressed() {
@@ -382,6 +403,12 @@ extension SpeciesCoverViewController: DonateButtonDelegate {
         let generator = UIImpactFeedbackGenerator(style: .medium)
         generator.impactOccurred()
         presentWebBrowser(link: donationURL)
+    }
+}
+
+extension SpeciesCoverViewController: ConservationStatusDelegate {
+    func conservationStatusTapped() {
+        presentWebBrowser(link: URL(string: "https://www.sanbi.org/skep/the-iucn-red-list-explained/")!)
     }
 }
 
@@ -520,9 +547,5 @@ extension State {
     }
 }
 
-extension SpeciesCoverViewController: ConservationStatusDelegate {
-    func conservationStatusTapped() {
-        presentWebBrowser(link: URL(string: "https://www.sanbi.org/skep/the-iucn-red-list-explained/")!)
-    }
-}
+
 
