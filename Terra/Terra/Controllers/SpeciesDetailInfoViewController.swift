@@ -33,7 +33,7 @@ class SpeciesDetailInfoViewController: UIViewController {
     
     private lazy var backgroundImageView: UIImageView = {
         let iv = UIImageView()
-         FirebaseStorageService.coverImageManager.getImage(for: strategy.species.commonName, setTo: iv)
+        FirebaseStorageService.coverImageManager.getImage(for: strategy.species.commonName, setTo: iv)
         iv.backgroundColor = .black
         iv.contentMode = UIView.ContentMode.scaleAspectFill
         return iv
@@ -64,7 +64,7 @@ class SpeciesDetailInfoViewController: UIViewController {
     }()
     
     //MARK: -- Properties
-
+    
     var strategy: DetailPageStrategy! {
         didSet {
             commonView.configureView(from: strategy)
@@ -281,7 +281,9 @@ extension SpeciesDetailInfoViewController: Animatable {
 
 extension SpeciesDetailInfoViewController: BiomeViewDelegate {
     func biomeWasTapped() {
-       print("Tappity tap")
+        let generator = UIImpactFeedbackGenerator(style: .light)
+        generator.impactOccurred()
+        print("Tappity tap")
     }
 }
 

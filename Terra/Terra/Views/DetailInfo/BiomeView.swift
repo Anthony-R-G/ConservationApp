@@ -14,22 +14,21 @@ protocol BiomeViewDelegate: AnyObject {
 
 final class BiomeView: UIView {
     //MARK: -- UI Element Initialization
-    private lazy var biomeImage: UIButton = {
-        let iv = UIButton()
-        iv.setImage(UIImage(named: strategy.species.habitat.biome.rawValue), for: .normal)
-        iv.imageView!.contentMode = .scaleAspectFill
-        iv.backgroundColor = .black
+    private lazy var biomeImage: UIImageView = {
+        let iv = UIImageView()
+        iv.image = UIImage(named: strategy.species.habitat.biome.rawValue)
+        iv.contentMode = .scaleAspectFill
+        iv.backgroundColor = .clear
         iv.layer.cornerRadius = 10
         iv.clipsToBounds = true
         iv.isUserInteractionEnabled = true
-        iv.addTarget(self, action: #selector(handleTap), for: .touchUpInside)
         return iv
     }()
     
-//    private lazy var tapGesture: UITapGestureRecognizer = {
-//        return UITapGestureRecognizer(target: self, action: #selector(handleTap))
-//
-//    }()
+    private lazy var tapGesture: UITapGestureRecognizer = {
+        return UITapGestureRecognizer(target: self, action: #selector(handleTap))
+
+    }()
     private lazy var biomeTitleLabel: UILabel = {
         return Factory.makeLabel(title: "Biome",
                                  weight: .regular,
@@ -99,6 +98,7 @@ final class BiomeView: UIView {
     
     @objc private func handleTap() {
         guard let strategy = strategy as? DetailHabitatStrategy else { return }
+        
         strategy.biomeViewDelegate?.biomeWasTapped()
     }
     
@@ -114,7 +114,7 @@ final class BiomeView: UIView {
         addSubviews()
         setConstraints()
         setBottomConstraint()
-//        biomeImage.addGestureRecognizer(tapGesture)
+        biomeImage.addGestureRecognizer(tapGesture)
     }
     
     required init?(coder: NSCoder) {
