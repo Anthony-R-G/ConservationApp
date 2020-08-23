@@ -34,6 +34,10 @@ final class SpeciesViewModel {
         }
     }
     
+    var species: [Species] {
+        return animalData
+    }
+    
     var totalSpeciesCount: Int {
         return searchFilteredSpecies.count
     }

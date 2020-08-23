@@ -18,7 +18,6 @@ final class MGLMapViewController: UIViewController {
         mv.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         mv.tintColor = .darkGray
         mv.delegate = self
-        mv.userTrackingMode = .none
         mv.showsUserLocation = true
         return mv
     }()
@@ -47,15 +46,12 @@ final class MGLMapViewController: UIViewController {
     
     //MARK: -- Properties
     
-    var currentSpecies: Species! {
+    var speciesData: [Species] = [] {
         didSet {
-            speciesLocation = CLLocationCoordinate2D(latitude: currentSpecies.habitat.latitude, longitude: currentSpecies.habitat.longitude)
-        }
-    }
-    
-    private var speciesLocation = CLLocationCoordinate2D() {
-        didSet {
-            addAnnotation(from: speciesLocation, title: currentSpecies.commonName, subtitle: currentSpecies.taxonomy.scientificName)
+            for species in speciesData {
+                let coordinate = CLLocationCoordinate2D(latitude: species.habitat.latitude, longitude: species.habitat.longitude)
+                addAnnotation(from: coordinate, title: species.commonName, subtitle: species.taxonomy.scientificName)
+            }
         }
     }
     
@@ -93,7 +89,6 @@ final class MGLMapViewController: UIViewController {
         return true
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         addSubviews()
@@ -108,14 +103,8 @@ final class MGLMapViewController: UIViewController {
 
 //MARK: -- MapView Delegate Methods
 extension MGLMapViewController: MGLMapViewDelegate {
-    func mapViewDidFinishLoadingMap(_ mapView: MGLMapView) {
-        let camera = MGLMapCamera(lookingAtCenter: speciesLocation , altitude: 100000, pitch: 15, heading: 0)
-        mapView.setCamera(camera,
-                          withDuration: 3,
-                          animationTimingFunction: CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut))
-    }
-    
-    
+  
+
     func mapView(_ mapView: MGLMapView, viewFor annotation: MGLAnnotation) -> MGLAnnotationView? {
         
         guard annotation is MGLPointAnnotation else { return nil }
@@ -126,7 +115,7 @@ extension MGLMapViewController: MGLMapViewDelegate {
         
         if annotationView == nil {
             annotationView = CustomAnnotationView(reuseIdentifier: reuseIdentifier)
-            annotationView!.bounds = CGRect(x: 0, y: 0, width: 40, height: 40)
+            annotationView!.bounds = CGRect(x: 0, y: 0, width: 25, height: 25)
             
             let hue = CGFloat(annotation.coordinate.longitude) / 100
             annotationView!.backgroundColor = UIColor(hue: hue, saturation: 0.5, brightness: 1, alpha: 1)
@@ -142,34 +131,35 @@ extension MGLMapViewController: MGLMapViewDelegate {
     
     
     func mapView(_ mapView: MGLMapView, calloutViewFor annotation: MGLAnnotation) -> MGLCalloutView? {
-        let locationOne = CLLocation(latitude: userLocation.latitude, longitude: userLocation.longitude)
-        let locationTwo = CLLocation(latitude: speciesLocation.latitude, longitude: speciesLocation.longitude)
-        
-        let distance = locationOne.distance(from: locationTwo) * 0.000621371
-        
+//        let locationOne = CLLocation(latitude: userLocation.latitude, longitude: userLocation.longitude)
+//        let locationTwo = CLLocation(latitude: speciesLocation.latitude, longitude: speciesLocation.longitude)
+//
+//        let distance = locationOne.distance(from: locationTwo) * 0.000621371
+//
         let title = annotation.title ?? nil
-        let subtitle = "Distance from you: \(distance.rounded(toPlaces: 1)) miles"
-        let customAnnotation = SpeciesAnnotation(coordinate: annotation.coordinate, title: title ?? "no title", subtitle: subtitle, area: currentSpecies.habitat.area)
+//        let subtitle = "Distance from you: \(distance.rounded(toPlaces: 1)) miles"
+        let subtitle = (annotation.subtitle ?? nil) ?? ""
+        let customAnnotation = SpeciesAnnotation(coordinate: annotation.coordinate, title: title ?? "no title", subtitle: subtitle, area: "")
         let callout = CustomCalloutView(annotation: customAnnotation)
-        callout.delegate = self
+//        callout.delegate = self
         return callout
     }
 }
 
 //MARK: -- CalloutView Delegate Methods
-extension MGLMapViewController: MGLCalloutViewDelegate {
-    func calloutViewWillAppear(_ calloutView: UIView & MGLCalloutView) {
-        print("I will appear")
-    }
-    
-    func calloutViewDidAppear(_ calloutView: UIView & MGLCalloutView) {
-        print("I appeared")
-    }
-    
-    func calloutViewTapped(_ calloutView: UIView & MGLCalloutView) {
-        print("I was tapped")
-    }
-}
+//extension MGLMapViewController: MGLCalloutViewDelegate {
+//    func calloutViewWillAppear(_ calloutView: UIView & MGLCalloutView) {
+//        print("I will appear")
+//    }
+//
+//    func calloutViewDidAppear(_ calloutView: UIView & MGLCalloutView) {
+//        print("I appeared")
+//    }
+//
+//    func calloutViewTapped(_ calloutView: UIView & MGLCalloutView) {
+//        print("I was tapped")
+//    }
+//}
 
 
 //MARK: -- Add Subviews & Constraints
@@ -209,3 +199,4 @@ fileprivate extension MGLMapViewController {
         NSLayoutConstraint.activate([NSLayoutConstraint(item: styleToggle, attribute: .bottom, relatedBy: .equal, toItem: mapView.logoView, attribute: .top, multiplier: 1, constant: -20)])
     }
 }
+

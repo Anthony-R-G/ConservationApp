@@ -199,8 +199,8 @@ final class SpeciesCoverViewController: UIViewController {
     
     @objc private func earthButtonPressed() {
         let mapVC = MGLMapViewController()
-        mapVC.currentSpecies = viewModel.selectedSpecies
-        mapVC.modalPresentationStyle = .fullScreen
+//        mapVC.currentSpecies = viewModel.selectedSpecies
+//        mapVC.modalPresentationStyle = .fullScreen
         present(mapVC, animated: true, completion: nil)
     }
     

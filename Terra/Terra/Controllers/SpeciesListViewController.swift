@@ -87,8 +87,7 @@ final class SpeciesListViewController: UIViewController {
     }()
     
     private lazy var terraTitleLabelLeadingAnchorConstraint: NSLayoutConstraint = {
-        return terraTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor,
-                                                        constant: Constants.spacingConstant)
+        return terraTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 70)
     }()
     
     private lazy var rightSwipeGesture: UISwipeGestureRecognizer = {
@@ -103,6 +102,14 @@ final class SpeciesListViewController: UIViewController {
         return gesture
     }()
     
+    private lazy var earthButton: UIButton = {
+         let btn = UIButton()
+         btn.setImage(#imageLiteral(resourceName: "globe"), for: .normal)
+         btn.addTarget(self, action: #selector(earthButtonPressed), for: .touchUpInside)
+         btn.alpha = 0.6
+         return btn
+     }()
+    
     //MARK: -- Properties
     
     private var viewModel: SpeciesViewModel!
@@ -112,6 +119,13 @@ final class SpeciesListViewController: UIViewController {
     private var selectedTab = 0
   
     //MARK: -- Methods
+    
+    @objc private func earthButtonPressed() {
+        let mapVC = MGLMapViewController()
+        mapVC.speciesData = viewModel.species
+        mapVC.modalPresentationStyle = .fullScreen
+        presentModally(mapVC)
+    }
     
     @objc private func handleSwipe(_ sender: UISwipeGestureRecognizer) {
         
@@ -153,7 +167,7 @@ final class SpeciesListViewController: UIViewController {
     
     private func dismissSearchBar() {
         searchBarLeadingAnchorConstraint.constant = -Constants.spacingConstant
-        terraTitleLabelLeadingAnchorConstraint.constant = Constants.spacingConstant
+        terraTitleLabelLeadingAnchorConstraint.constant = 70
         searchBar.alpha = 0
         searchBarButton.alpha = 1
         UIView.animate(withDuration: 0.3, animations: { [weak self] in
@@ -288,7 +302,7 @@ extension SpeciesListViewController: SpeciesViewModelDelegate {
 fileprivate extension SpeciesListViewController {
     
     func addSubviews() {
-        let UIElements = [terraTitleLabel, searchBarButton, searchBar, collectionView, filterToolBar]
+        let UIElements = [terraTitleLabel, searchBarButton, searchBar, collectionView, filterToolBar, earthButton]
         UIElements.forEach { view.addSubview($0) }
         UIElements.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
     }
@@ -296,6 +310,7 @@ fileprivate extension SpeciesListViewController {
     func setConstraints() {
         setHeaderImageViewConstraints()
         
+        setEarthButtonConstraints()
         setTerraTitleLabelConstraints()
         setSearchBarButtonConstraints()
         setSearchBarConstraints()
@@ -355,6 +370,14 @@ fileprivate extension SpeciesListViewController {
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50)
         ])
+    }
+    
+    func setEarthButtonConstraints() {
+        earthButton.snp.makeConstraints { (make) in
+            make.leading.equalTo(view).inset(20)
+            make.height.width.equalTo(40)
+            make.centerY.equalTo(terraTitleLabel)
+        }
     }
 }
 
