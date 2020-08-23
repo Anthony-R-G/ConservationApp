@@ -203,7 +203,6 @@ final class SpeciesCoverViewController: UIViewController {
         present(mapVC, animated: true, completion: nil)
     }
     
-    
     @objc private func handlePageStateSwipeGesture() {
         animatePageState()
     }
@@ -270,7 +269,7 @@ extension SpeciesCoverViewController {
             case .expanded:
                 self.dismissPageSwipeGesture.isEnabled = false
                 self.backgroundVisualEffectBlur.effect = UIBlurEffect(style: .regular)
-                self.collapseHeader()
+                self.shrinkHeader()
                 self.animateExploreButton(state: state)
                 self.animateMainContent(state: state)
                 
@@ -281,7 +280,7 @@ extension SpeciesCoverViewController {
                     self.dismissPageSwipeGesture.isEnabled = true
                 }
                 self.backgroundVisualEffectBlur.effect = nil
-                self.expandHeader()
+                self.enlargeHeader()
                 self.animateExploreButton(state: state)
                 self.animateMainContent(state: state)
                 
@@ -306,14 +305,14 @@ extension SpeciesCoverViewController {
         animator.startAnimation()
     }
     
-    private func collapseHeader() {
+    private func shrinkHeader() {
         headerNameView.shrinkCommonNameLabel()
         headerNameViewTopAnchorConstraint.constant = screenSize.height * 0.10
         headerNameViewHeightConstraint.constant = screenSize.height * 0.123
         subheaderInfoViewHeightConstraint.constant = 60
     }
     
-    private func expandHeader() {
+    private func enlargeHeader() {
         headerNameView.expandCommonNameLabel()
         headerNameViewTopAnchorConstraint.constant = screenSize.height * 0.48
         headerNameViewHeightConstraint.constant = screenSize.height * 0.30
@@ -527,7 +526,7 @@ fileprivate extension SpeciesCoverViewController {
     func setDonateButtonConstraints() {
         donateButton.snp.makeConstraints { (make) in
             make.centerX.centerY.equalTo(donateButtonContainer)
-            make.width.equalTo(view).multipliedBy(0.9)
+            make.leading.trailing.equalToSuperview().inset(20)
             make.height.equalTo(50)
         }
     }
