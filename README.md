@@ -121,9 +121,9 @@ Coming:
 
 •The purpose of this is to make an alternative fun way to discover animals and feel more immersed in the content.
 
-| Blue-Throated Macaw | Cheetah | Cheetah Hypsometric | Giant Panda |
+| Blue-Throated Macaw | Bornean Orangutan | Cheetah Hypsometric | Great White Shark |
 | :------: | :------: | :------: | :------: |
-|![screen 1](https://i.imgur.com/sHmn7Ac.png) | ![screen 2](https://i.imgur.com/yNt86y6.png) |![screen 3](https://i.imgur.com/axdhtdh.png)|![screen 4](https://i.imgur.com/nYUa4EL.png)|
+|![screen 1](https://i.imgur.com/FfiqdNY.png) | ![screen 2](https://i.imgur.com/Z6W90KH.png) |![screen 3](https://i.imgur.com/kYMtJIP.png)|![screen 4](https://i.imgur.com/Fl7LRci.png)|
 
 
 ### Donating
