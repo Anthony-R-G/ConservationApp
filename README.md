@@ -107,15 +107,14 @@ Coming:
 
 
 ## Map Exploration 
-*Experimental feature for post v1.0.0*
 
-•A fully interactive map using Mapbox SDK that allows you to explore the earth.
+•Tap the globe icon next to the Terra title label to see a fully interactive map using Mapbox SDK that allows you to explore the earth.
 
-•The map will have the coordinates of each animal placed in the area they live. (Note: this will be updated to encompass larger polygon regions since not every species has one specific coordinate they reside in)
+•The map has coordinates of each animal placed in the area they live. (Note: this will be updated to encompass larger polygon regions since not every species has one specific coordinate they reside in)
 
 •Each coordinate annotation can be tapped to bring up a callout view.
 
-•The callout view will contain information such as the animal's name, the distance that coordinate is away from you (if location access granted), and will enable you to visit that animal's individual species page.
+•The callout view will contain information such as the animal's name, a small habitat summary, the distance that coordinate is away from you (if location access granted), and will enable you to visit that animal's individual species page.
 
 •There are two map options: a default satellite street style map and a custom-made hypsometric map to see color-coordinated 3D elevation levels.
 
