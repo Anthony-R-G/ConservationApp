@@ -12,10 +12,12 @@ final class CustomCalloutView: UIView, MGLCalloutView {
     //MARK: -- UI Element Initialization
     
     private lazy var speciesImageView: UIImageView = {
-        let iv = UIImageView()
+        let iv = UIImageView(frame: CGRect(origin: .zero, size: CGSize(width: 80, height: 80)))
         iv.contentMode = .scaleAspectFill
+        iv.layer.cornerRadius = iv.frame.size.width/2
+        iv.layer.borderColor = UIColor.white.cgColor
+        iv.layer.borderWidth = Constants.borderWidth
         iv.clipsToBounds = true
-        iv.isUserInteractionEnabled = false
         return iv
     }()
     
@@ -32,6 +34,7 @@ final class CustomCalloutView: UIView, MGLCalloutView {
         label.font = UIFont(name: "Roboto-Regular", size: 13)
         label.textColor = .white
         label.textAlignment = .left
+        label.numberOfLines = 0
         label.adjustsFontSizeToFitWidth = false
         label.lineBreakMode = .byTruncatingTail
         return label
@@ -40,15 +43,15 @@ final class CustomCalloutView: UIView, MGLCalloutView {
     private lazy var infoButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "info.circle"), for: .normal)
+        button.tintColor = .systemBlue
         return button
     }()
     
-    private lazy var textBackground: UIView = {
-        let bar = UIView()
-        bar.backgroundColor = .black
-        bar.clipsToBounds = true
-        bar.isUserInteractionEnabled = false
-        return bar
+  private lazy var backgroundBlurEffectView: UIVisualEffectView = {
+        let blurEffect = UIBlurEffect(style: .regular)
+        let bev = UIVisualEffectView(effect: blurEffect)
+        bev.frame = mainBody.bounds
+        return bev
     }()
     
     
@@ -84,27 +87,27 @@ final class CustomCalloutView: UIView, MGLCalloutView {
     
     //MARK: -- Methods
     
-    private func configureUIElements(from annotation: MGLAnnotation) {
+    private func setupUI(from annotation: MGLAnnotation) {
         titleLabel.text = representedObject.title ?? ""
         subtitleLabel.text = representedObject.subtitle ?? ""
         FirebaseStorageService.calloutImageManager.getImage(for: annotation.title!!, setTo: speciesImageView)
     }
     
     private func configureCalloutAppearance() {
-        mainBody.backgroundColor = .black
+        backgroundColor = .clear
+        mainBody.backgroundColor = .clear
         mainBody.clipsToBounds = true
         mainBody.layer.cornerRadius = 10.0
-        backgroundColor = .clear
     }
     
     required init(annotation: MGLAnnotation) {
         representedObject = annotation
-        mainBody = UIButton(frame: CGRect(x: 0, y: -15, width: UIScreen.main.bounds.width * 0.75, height: 180))
+        mainBody = UIButton(frame: CGRect(x: 0, y: -15, width: UIScreen.main.bounds.width * 0.60, height: 160))
         
         super.init(frame: .zero)
         addSubviews()
         setConstraints()
-        configureUIElements(from: annotation)
+        setupUI(from: annotation)
         configureCalloutAppearance()
     }
     
@@ -183,7 +186,7 @@ final class CustomCalloutView: UIView, MGLCalloutView {
     
     override func draw(_ rect: CGRect) {
         // Draw the pointed tip at the bottom.
-        let fillColor: UIColor = .black
+        let fillColor: UIColor = .darkGray
         
         let tipLeft = rect.origin.x + (rect.size.width / 2.0) - (tipWidth / 2.0)
         let tipBottom = CGPoint(x: rect.origin.x + (rect.size.width / 2.0), y: rect.origin.y + rect.size.height)
@@ -208,12 +211,13 @@ fileprivate extension CustomCalloutView {
     
     func addSubviews() {
         addSubview(mainBody)
-        [speciesImageView, textBackground, titleLabel, subtitleLabel, infoButton].forEach { mainBody.addSubview($0) }
+        mainBody.addSubview(backgroundBlurEffectView)
+    
+        [speciesImageView, titleLabel, subtitleLabel, infoButton].forEach { backgroundBlurEffectView.contentView.addSubview($0) }
     }
     
     func setConstraints() {
         setSpeciesImageConstraints()
-        setTextBackground()
         setTitleLabelConstraints()
         setSubtitleLabelConstraints()
         setInfoButtonConstraints()
@@ -221,38 +225,32 @@ fileprivate extension CustomCalloutView {
     
     func setSpeciesImageConstraints() {
         speciesImageView.snp.makeConstraints { (make) in
-            make.leading.trailing.top.equalTo(mainBody)
-            make.bottom.equalTo(textBackground.snp.top)
+            make.leading.top.equalTo(mainBody).inset(10)
+            make.height.width.equalTo(speciesImageView.frame.size)
         }
     }
     
     func setTitleLabelConstraints() {
         titleLabel.snp.makeConstraints { (make) in
-            make.leading.trailing.equalTo(mainBody).inset(Constants.spacingConstant)
-            make.top.equalTo(textBackground).inset(2)
+            make.centerY.equalTo(speciesImageView)
+            make.leading.equalTo(speciesImageView.snp.trailing).offset(10)
+            make.trailing.equalTo(mainBody).inset(10)
         }
     }
     
     func setSubtitleLabelConstraints() {
         subtitleLabel.snp.makeConstraints { (make) in
-            make.leading.trailing.equalTo(titleLabel)
-            make.top.equalTo(titleLabel.snp.bottom).offset(5)
-            make.bottom.equalTo(textBackground.snp.bottom)
+            make.leading.trailing.equalTo(mainBody).inset(10)
+            make.top.equalTo(speciesImageView.snp.bottom).offset(5)
+            make.bottom.equalTo(mainBody.snp.bottom)
         }
     }
     
     func setInfoButtonConstraints() {
         infoButton.snp.makeConstraints { (make) in
-            make.trailing.equalTo(textBackground).inset(5)
-            make.centerY.equalTo(titleLabel)
+            make.trailing.equalTo(mainBody).inset(5)
+            make.top.equalTo(mainBody).inset(5)
             make.width.height.equalTo(20)
-        }
-    }
-    
-    func setTextBackground() {
-        textBackground.snp.makeConstraints { (make) in
-            make.leading.trailing.bottom.equalTo(mainBody)
-            make.height.equalTo(mainBody).multipliedBy(0.4)
         }
     }
 }
