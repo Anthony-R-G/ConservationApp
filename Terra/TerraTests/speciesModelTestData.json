@@ -1,34 +1,42 @@
 {
-   "weight":"70 - 105 lbs",
-   "donationLink":"https://support.wwf.org.uk/adopt-a-leopard",
-   "taxonomy":{
-      "scientificName":"Panthers pardus orientalis",
-      "kingdom":"Animalia",
-      "genus":"Panthera",
-      "classTaxonomy":"Mammalia",
-      "order":"Carnivora",
-      "family":"Felidae",
-      "phylum":"Chordata"
-   },
-   "commonName":"Amur Leopard",
-   "habitat":{
-      "latitude":43.1332,
-      "summary":"Amur leopards live in the Amur Heilong Landscape, which spans both the Russian Far East and adjacent areas of China. This rare subspecies of leopard has adapted to life in the temperate forests that make up the northernmost part of the species' range.",
-      "biome":"Temperate Forest",
-      "area":"Amur-Heilong",
-      "longitude":130,
-      "temperature":"34.7 °F"
-   },
-   "height":"2.4 feet",
-   "overview":"People  usually think of leopards in the savannas of Africa but in the Russian Far East, a rare subspecies has adapted to life in the temperate forests that make up the northern-most part of the species’ range. Similar to other leopards, the Amur leopard can run at speeds of up to 37 miles per hour. This incredible animal has been reported to leap more than 19 feet horizontally and up to 10 feet vertically.  The Amur leopard is solitary. Nimble-footed and strong, it carries and hides unfinished kills so that they are not taken by other predators. It has been reported that some males stay with females after mating, and may even help with rearing the young. Several males sometimes follow and fight over a female. They live for 10-15 years, and in captivity up to 20 years. The Amur leopard is also known as the Far East leopard, the Manchurian leopard or the Korean leopard.",
-   "population":{
-      "conservationStatus":"Critical",
-      "assessmentDate":2019,
-      "summary":"The IUCN Species Survival Commission has considered Amur leopards Critically Endangered (IUCN 1996) since 1996. As of 2019, more than 84 individuals remain in the wild (mostly in protected areas) and 170 to 180 live in captivity.",
-      "trend":"Decreasing",
-      "numbers":"~260",
-      "threats":"The Amur leopard is poached largely for its beautiful, spotted fur. In 1999, an undercover investigation team recovered a female and a male Amur leopard skin, which were being sold for $500 and $1,000 respectively in the village of Barabash, not far from the Kedrovaya Pad reserve in Russia. Agriculture and villages surround the forests where the leopards live. As a result the forests are relatively accessible, making poaching a problem—not only for the leopards themselves, but also for important prey species, such as roe deer, sika deer and hare, which are hunted by the villagers both for food and cash."
-   },
-   "group":"Mammal",
-   "diet":"Carnivore"
+    "diet": "Herbivore",
+    "group": "Mammal",
+    "commonName": "African Elephant",
+    "population": {
+        "threatsList": ["Habitat Loss % sdjakdsajdalksdjasdl", "sadjaskdlasjsldkj", "sdoajdaslkdjsadoiasjasoi"],
+        "trend": "Decreasing",
+        "numbers": "~400,000",
+        "assessmentDate": 2016,
+        "summary": "Numbering three to five million in the last century, African elephant populations were severely reduced to its current levels because of hunting. In the 1980s, an estimated 100,000 elephants were killed each year and up to 80% of herds were lost in some regions. In recent years, growing demand for ivory, particularly from Asia, has led to a surge in poaching. Populations of elephants—especially in southern and eastern Africa—that once showed promising signs of recovery could be at risk due to the recent surge in poaching for the illegal ivory trade.",
+        "threats": "Poaching for ivory and meat has traditionally been the major cause of the species' decline. Although illegal hunting remains a significant factor in some areas, particularly in Central Africa, currently the most important perceived threat is the loss and fragmentation of habitat caused by ongoing human population expansion and rapid land conversion. A specific manifestation of this trend is the reported increase in human-elephant conflict, which further aggravates the threat to elephant populations.",
+        "conservationStatus": "Vulnerable"
+    },
+    "averageLifespan": "60 - 70 years",
+    "taxonomy": {
+        "genus": "Loxodonta",
+        "scientificName": "Loxodonta africana",
+        "kingdom": "Animalia",
+        "order": "Proboscidea",
+        "phylum": "Chordata",
+        "classTaxonomy": "Mammalia",
+        "family": "Elephantidae"
+    },
+    "donationLink": "http://www.savetheelephants.org/new-donate-page-US/",
+    "habitat": {
+        "biome": "Savanna",
+        "latitude": 5.755,
+        "temperature": "72°F",
+        "summary": "The African Elephant is very catholic in its range, and tends to move between a variety of habitats. It is found in dense forest, open and closed savanna, grassland and, at considerably lower densities, in the arid deserts of Namibia and Mali. They are also found over wide altitudinal and latitudinal ranges – from mountain slopes to oceanic beaches, and from the northern tropics to the southern temperate zone (approximately between 16.5° North and 34° South).",
+        "mapboxStyleURL": "mapbox://styles/anthonyg5195/cke3743br03rl19kyi7i84gtc",
+        "area": "Africa",
+        "mapboxZoomAltitude": 21500000,
+        "longitude": 23.35
+    },
+    "measurements": {
+        "averageMaleWeight": "12,000 - 14,000 lbs",
+        "averageMaleHeight": "12 - 14 feet",
+        "averageFemaleWeight": "6,000 - 8,000 lbs",
+        "averageFemaleHeight": "9 - 13 feet"
+    },
+    "overview": "The African elephant is the largest animal walking the Earth. Their herds wander through 37 countries in Africa. They are easily recognized by their trunk that is used for communication and handling objects. And their large ears allow them to radiate excess heat. Upper incisor teeth develop into tusks in African elephants and grow throughout their lifetime."
 }

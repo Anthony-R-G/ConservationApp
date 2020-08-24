@@ -18,3 +18,5 @@ struct Habitat: FirebaseConvertible {
     let mapboxStyleURL: String
     let mapboxZoomAltitude: Double
 }
+
+

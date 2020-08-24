@@ -138,7 +138,6 @@ extension MGLMapViewController: MGLMapViewDelegate {
         let title = annotation.title ?? nil
 //        let subtitle = "Distance from you: \(distance.rounded(toPlaces: 1)) miles"
         let subtitle = (annotation.subtitle ?? nil) ?? ""
-//        let customAnnotation = MGLPointAnnotation(coordinate: annotation.coordinate, title: title ?? "no title", subtitle: subtitle)
         let pointAnnotation = MGLPointAnnotation()
         pointAnnotation.title = title
         pointAnnotation.subtitle = subtitle

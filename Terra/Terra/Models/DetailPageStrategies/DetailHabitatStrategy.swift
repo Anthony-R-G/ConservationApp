@@ -22,8 +22,10 @@ class DetailHabitatStrategy: DetailPageStrategy {
     }
     
     func firebaseStorageManager() -> FirebaseStorageService {
+        
         return FirebaseStorageService.detailHabitatImageManager
     }
+
     
     func arrangedSubviews() -> UIStackView {
         let stackView = UIStackView(arrangedSubviews: [
@@ -33,10 +35,14 @@ class DetailHabitatStrategy: DetailPageStrategy {
             DetailInfoWindow(title: "BIOME", content: BiomeView(strategy: self)),
             
             DetailInfoWindow(title: "DETAIL", content:
-                Factory.makeDetailInfoWindowLabel(text: species.habitat.summary))
+                Factory.makeDetailInfoWindowLabel(text: species.habitat.summary)),
+            
+            
+        
         ])
         stackView.axis = .vertical
         stackView.spacing = Constants.spacingConstant
+        
         return stackView
     }
     

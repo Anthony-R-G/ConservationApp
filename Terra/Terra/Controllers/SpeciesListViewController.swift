@@ -106,7 +106,8 @@ final class SpeciesListViewController: UIViewController {
          let btn = UIButton()
          btn.setImage(#imageLiteral(resourceName: "globe"), for: .normal)
          btn.addTarget(self, action: #selector(earthButtonPressed), for: .touchUpInside)
-         btn.alpha = 0.6
+        btn.alpha = 1.0
+        btn.tintColor = .systemBlue
          return btn
      }()
     
@@ -196,6 +197,10 @@ final class SpeciesListViewController: UIViewController {
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
     }
     
     override func viewDidLoad() {

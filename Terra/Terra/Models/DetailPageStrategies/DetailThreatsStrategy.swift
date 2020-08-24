@@ -29,13 +29,16 @@ struct DetailThreatsStrategy: DetailPageStrategy {
             DetailInfoWindow(title: "CONSERVATION STATUS", content: ConservationStatusView(species: species)),
             
             DetailInfoWindow(title: "POPULATION SUMMARY",
-                                         content: Factory.makeDetailInfoWindowLabel(text: species.population.summary)),
-            
-            DetailInfoWindow(title: "THREATS",
-                                         content: Factory.makeDetailInfoWindowLabel(text: species.population.threats))
+                             content: Factory.makeDetailInfoWindowLabel(text: species.population.summary)),
         ])
+        
+        for threat in species.population.threats {
+            let threatsComponents = threat.components(separatedBy: "%title")
+            stackView.addArrangedSubview(DetailInfoWindow(title: threatsComponents[0], content: Factory.makeDetailInfoWindowLabel(text: threatsComponents[1])))
+        }
         stackView.axis = .vertical
         stackView.spacing = Constants.spacingConstant
         return stackView
     }
 }
+

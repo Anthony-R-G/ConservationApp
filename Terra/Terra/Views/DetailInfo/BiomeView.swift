@@ -62,7 +62,7 @@ final class BiomeView: UIView {
     }()
     
     private lazy var temperatureTitleLabel: UILabel = {
-        return Factory.makeLabel(title: "Temperature",
+        return Factory.makeLabel(title: "Average Temperature",
                                  weight: .regular,
                                  size: 15,
                                  color: .lightGray,

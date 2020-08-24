@@ -87,6 +87,7 @@
 		978E5CF223FB5CBC007BCD25 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 978E5CF123FB5CBC007BCD25 /* GoogleService-Info.plist */; };
 		97928F7924CD11BF00AF90C5 /* FirestoreError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97928F7824CD11BF00AF90C5 /* FirestoreError.swift */; };
 		97928F7B24CD347200AF90C5 /* FirebaseConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97928F7A24CD347200AF90C5 /* FirebaseConvertible.swift */; };
+		97947D4D24F38ABF00470402 /* Measurements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978AA0EB24EE63EB00B631E6 /* Measurements.swift */; };
 		97947F5324DD1F560047052B /* CustomCalloutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97947F5224DD1F560047052B /* CustomCalloutView.swift */; };
 		9794EF7C24E66EA700B72246 /* Roboto-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9794EF7A24E66EA600B72246 /* Roboto-Italic.ttf */; };
 		9794EF7D24E66EA700B72246 /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9794EF7B24E66EA700B72246 /* Roboto-Black.ttf */; };
@@ -779,6 +780,7 @@
 				974B752324E002B2006C3D1D /* SpeciesViewModel.swift in Sources */,
 				974B752524E00544006C3D1D /* SpeciesViewModelDelegate.swift in Sources */,
 				972A615424C94C7000A59AB6 /* PopulationTrend.swift in Sources */,
+				97947D4D24F38ABF00470402 /* Measurements.swift in Sources */,
 				974B752A24E00595006C3D1D /* NewsResponse.swift in Sources */,
 				974B752424E0053F006C3D1D /* NewsViewModelDelegate.swift in Sources */,
 				97A2BC7224CE5578000D6B2D /* FirestoreError.swift in Sources */,
