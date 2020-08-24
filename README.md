@@ -78,9 +78,9 @@ Coming:
 
 
 ### Individual Species Page 
-| Amur Leopard | Blue Whale | Lion | Mountain Gorilla |
+| Amur Leopard | Blue-throated Macaw | Lion | Mountain Gorilla |
 | :------: | :------: | :------: | :------: |
-|![screen 1](https://i.imgur.com/4LOHr9o.png) | ![screen 2](https://i.imgur.com/E4Ayd80.png) |![screen 3](https://i.imgur.com/h6s1IGG.png)|![screen 4](https://i.imgur.com/HEA6LRg.png)|
+|![screen 1](https://i.imgur.com/QjrPBUG.png) | ![screen 2](https://i.imgur.com/Gh06jD8.png) |![screen 3](https://i.imgur.com/FxQyKcm.png)|![screen 4](https://i.imgur.com/SWMSCj1.png)|
 
 •The initial appearance of this page is a cover page for the selected animal with minimal text.
 
