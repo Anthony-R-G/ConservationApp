@@ -26,7 +26,7 @@ final class SpeciesListViewController: UIViewController {
         return sb
     }()
     
-    private lazy var filterToolBar: RedListFilterTabBar = {
+    private lazy var filterTabBar: RedListFilterTabBar = {
         let tb = RedListFilterTabBar(frame: CGRect(x: 0,
                                                    y: 0,
                                                    width: view.frame.width,
@@ -46,11 +46,9 @@ final class SpeciesListViewController: UIViewController {
     
     private lazy var headerImageView: UIImageView = {
         let iv = UIImageView()
-        iv.translatesAutoresizingMaskIntoConstraints = false
         iv.image = #imageLiteral(resourceName: "listVCbackground")
         iv.contentMode = UIView.ContentMode.scaleAspectFill
         iv.clipsToBounds = true
-        view.insertSubview(iv, at: 0)
         return iv
     }()
     
@@ -150,8 +148,8 @@ final class SpeciesListViewController: UIViewController {
         default:
             ()
         }
-        filterToolBar.selectedItem = filterToolBar.items![selectedTab]
-        viewModel.updateRedListCategoryFilteredAnimals(from: filterToolBar.selectedItem!.tag)
+        filterTabBar.selectedItem = filterTabBar.items![selectedTab]
+        viewModel.updateRedListCategoryFilteredAnimals(from: filterTabBar.selectedItem!.tag)
     }
     
     @objc private func expandSearchBar() {
@@ -307,9 +305,7 @@ extension SpeciesListViewController: SpeciesViewModelDelegate {
 fileprivate extension SpeciesListViewController {
     
     func addSubviews() {
-        let UIElements = [terraTitleLabel, searchBarButton, searchBar, collectionView, filterToolBar, earthButton]
-        UIElements.forEach { view.addSubview($0) }
-        UIElements.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
+       [headerImageView, earthButton, terraTitleLabel, searchBarButton, searchBar, collectionView, filterTabBar].forEach { view.addSubview($0) }
     }
     
     func setConstraints() {
@@ -325,22 +321,20 @@ fileprivate extension SpeciesListViewController {
     }
     
     func setHeaderImageViewConstraints() {
-        NSLayoutConstraint.activate([
-            headerImageView.topAnchor.constraint(equalTo: view.topAnchor),
-            headerImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            headerImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            headerImageView.bottomAnchor.constraint(equalTo: collectionView.topAnchor)
-        ])
+        headerImageView.snp.makeConstraints { (make) in
+            make.top.leading.trailing.equalToSuperview()
+            make.bottom.equalTo(collectionView.snp.top)
+        }
     }
     
     
     func setTerraTitleLabelConstraints() {
-        NSLayoutConstraint.activate([
-            terraTitleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
-            terraTitleLabel.leadingAnchor.constraint(equalTo: earthButton.trailingAnchor, constant: Constants.spacingConstant/2),
-            terraTitleLabel.heightAnchor.constraint(equalToConstant: 25),
-            terraTitleLabel.widthAnchor.constraint(equalToConstant: 100)
-        ])
+        terraTitleLabel.snp.makeConstraints { (make) in
+            make.top.equalToSuperview().inset(50)
+            make.leading.equalTo(earthButton.snp.trailing).offset(Constants.spacingConstant/2)
+            make.height.equalTo(25)
+            make.width.equalTo(100)
+        }
     }
     
     func setEarthButtonConstraints() {
@@ -352,37 +346,34 @@ fileprivate extension SpeciesListViewController {
     }
     
     func setSearchBarButtonConstraints() {
-        NSLayoutConstraint.activate([
-            searchBarButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.spacingConstant),
-            searchBarButton.centerYAnchor.constraint(equalTo: terraTitleLabel.centerYAnchor),
-            searchBarButton.heightAnchor.constraint(equalToConstant: 40),
-            searchBarButton.widthAnchor.constraint(equalToConstant: 40)
-        ])
+        searchBarButton.snp.makeConstraints { (make) in
+            make.height.width.equalTo(40)
+            make.centerY.equalTo(terraTitleLabel)
+            make.trailing.equalToSuperview().inset(Constants.spacingConstant)
+        }
     }
     
     func setSearchBarConstraints() {
-        NSLayoutConstraint.activate([
-            searchBarLeadingAnchorConstraint,
-            searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.spacingConstant),
-            searchBar.centerYAnchor.constraint(equalTo: searchBarButton.centerYAnchor),
-        ])
+        searchBar.snp.makeConstraints { (make) in
+            searchBarLeadingAnchorConstraint.isActive = true
+            make.trailing.equalToSuperview().inset(Constants.spacingConstant)
+            make.centerY.equalTo(searchBarButton)
+        }
     }
     
     func setFilterTabBarConstraints() {
-        NSLayoutConstraint.activate([
-            filterToolBar.topAnchor.constraint(equalTo: terraTitleLabel.bottomAnchor, constant: 10),
-            filterToolBar.widthAnchor.constraint(equalToConstant: filterToolBar.frame.width),
-            filterToolBar.heightAnchor.constraint(equalToConstant: filterToolBar.frame.height)
-        ])
+        filterTabBar.snp.makeConstraints { (make) in
+            make.top.equalTo(terraTitleLabel.snp.bottom).offset(10)
+            make.height.width.equalTo(filterTabBar.frame.size)
+        }
     }
     
     func setSpeciesCollectionViewConstraints() {
-        NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: filterToolBar.bottomAnchor, constant: 0),
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50)
-        ])
+        collectionView.snp.makeConstraints { (make) in
+            make.leading.trailing.equalToSuperview()
+            make.top.equalTo(filterTabBar.snp.bottom)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(50)
+        }
     }
 }
 
