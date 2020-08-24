@@ -88,6 +88,8 @@ class SpeciesDetailInfoViewController: UIViewController {
         maskView.layer.cornerRadius = value ? Constants.cornerRadius : 0
     }
     
+    //MARK: -- Life Cycle methods
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         scrollView.scrollIndicatorInsets = view.safeAreaInsets
@@ -103,7 +105,6 @@ class SpeciesDetailInfoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.isHidden = true
         addSubviews()
         setConstraints()
         commonView.fadeSubtitleIn()

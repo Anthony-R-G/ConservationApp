@@ -16,6 +16,7 @@ class NavigationController: UINavigationController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationBar.isHidden = true
         delegate = self
     }
 }

@@ -210,7 +210,7 @@ final class SpeciesCoverViewController: UIViewController {
     
     
     //MARK: -- Life Cycle Methods
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         exploreButton.startShimmeringAnimation(animationSpeed: 2,
@@ -221,11 +221,8 @@ final class SpeciesCoverViewController: UIViewController {
                                           repeatCount: .infinity)
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.isHidden = true
-        view.backgroundColor = .black
         addSubviews()
         setConstraints()
         addGestureRecognizers()
