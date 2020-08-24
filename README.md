@@ -4,6 +4,8 @@
 
 *Note: Still a WIP!*
 
+*Note: Gifs still need to be updated to match the new design*
+
 •Terra is an iOS application meant to educate people on biodiversity and the importance of conserving it. 
 
 •Data is packaged from multiple sources, among which include the [International Union for Conservation of Nature](https://www.iucnredlist.org/) and [World Wide Fund for Nature](https://www.worldwildlife.org/). This is to ensure that the data is accurate and up-to-date.
