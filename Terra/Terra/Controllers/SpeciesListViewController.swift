@@ -47,11 +47,10 @@ final class SpeciesListViewController: UIViewController {
     private lazy var headerImageView: UIImageView = {
         let iv = UIImageView()
         iv.image = #imageLiteral(resourceName: "listVCbackground")
-        iv.contentMode = UIView.ContentMode.scaleAspectFill
+        iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
         return iv
     }()
-    
     
     private lazy var terraTitleLabel: UILabel = {
         return Factory.makeLabel(title: "TERRA",
@@ -77,7 +76,18 @@ final class SpeciesListViewController: UIViewController {
     }()
     
     private lazy var collectionView: UICollectionView = {
-        return Factory.makeCollectionView()
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        
+        let cv = UICollectionView(frame: .zero,
+                                    collectionViewLayout: layout)
+        
+        cv.backgroundColor = .clear
+        cv.register(SpeciesCollectionViewCell.self,
+                    forCellWithReuseIdentifier: reuseIdentifier)
+        cv.dataSource = self
+        cv.delegate = self
+        return cv
     }()
     
     private lazy var searchBarLeadingAnchorConstraint: NSLayoutConstraint = {
@@ -117,6 +127,8 @@ final class SpeciesListViewController: UIViewController {
     private var isSearching: Bool = false
     
     private var selectedTab = 0
+    
+    fileprivate let reuseIdentifier = "cellId"
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -190,11 +202,11 @@ final class SpeciesListViewController: UIViewController {
         rootViewController?.present(viewController, animated: true, completion: nil)
     }
     
-    private func setDatasourceAndDelegates() {
-        collectionView.dataSource = self
-        collectionView.delegate = self
+    private func addGestureRecognizers() {
+        collectionView.addGestureRecognizer(rightSwipeGesture)
+        collectionView.addGestureRecognizer(leftSwipeGesture)
     }
-    
+
     //MARK: --Life Cycle Methods
     
     override func viewWillAppear(_ animated: Bool) {
@@ -208,9 +220,7 @@ final class SpeciesListViewController: UIViewController {
         viewModel.fetchSpeciesData()
         addSubviews()
         setConstraints()
-        setDatasourceAndDelegates()
-        collectionView.addGestureRecognizer(rightSwipeGesture)
-        collectionView.addGestureRecognizer(leftSwipeGesture)
+        addGestureRecognizers()
     }
 }
 
@@ -218,15 +228,16 @@ final class SpeciesListViewController: UIViewController {
 
 extension SpeciesListViewController: UICollectionViewDataSource {
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView,
+                        numberOfItemsInSection section: Int) -> Int {
         noResultsFoundLabel.isHidden = viewModel.totalSpeciesCount == 0 && isSearching ? false : true
-        
         return viewModel.totalSpeciesCount
     }
     
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let speciesCell = collectionView.dequeueReusableCell(withReuseIdentifier: "speciesCell", for: indexPath) as! SpeciesCollectionViewCell
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let speciesCell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! SpeciesCollectionViewCell
         let specificAnimal = viewModel.specificSpecies(at: indexPath.row)
         speciesCell.configureCell(from: specificAnimal)
         return speciesCell
@@ -236,7 +247,8 @@ extension SpeciesListViewController: UICollectionViewDataSource {
 //MARK: -- CollectionView Delegate Methods
 
 extension SpeciesListViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView,
+                        didHighlightItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath)
         let generator = UIImpactFeedbackGenerator(style: .medium)
         generator.impactOccurred()
@@ -245,7 +257,8 @@ extension SpeciesListViewController: UICollectionViewDelegate {
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView,
+                        didUnhighlightItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath)
         UIView.animate(withDuration: 0.3) {
             cell?.transform = CGAffineTransform(scaleX: 1, y: 1)
@@ -254,11 +267,15 @@ extension SpeciesListViewController: UICollectionViewDelegate {
 }
 
 extension SpeciesListViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: 227)
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.frame.width,
+                      height: 227)
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView,
+                        didSelectItemAt indexPath: IndexPath) {
         let selectedSpecies = viewModel.specificSpecies(at: indexPath.row)
         let coverVC = SpeciesCoverViewController()
         coverVC.viewModel =  DetailPageStrategyViewModel(species: selectedSpecies)
@@ -287,6 +304,14 @@ extension SpeciesListViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         viewModel.updateSearchString(newString: searchText)
+    }
+}
+
+//MARK: -- Tab Bar Delegate
+extension SpeciesListViewController: UITabBarDelegate {
+    func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        selectedTab = item.tag
+        viewModel.updateRedListCategoryFilteredAnimals(from: item.tag)
     }
 }
 
@@ -377,13 +402,5 @@ fileprivate extension SpeciesListViewController {
     }
 }
 
-
-
-extension SpeciesListViewController: UITabBarDelegate {
-    func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        selectedTab = item.tag
-        viewModel.updateRedListCategoryFilteredAnimals(from: item.tag)
-    }
-}
 
 

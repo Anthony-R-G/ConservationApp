@@ -9,19 +9,6 @@
 import UIKit
 
 class Factory {
-    
-    static func makeCollectionView() -> UICollectionView {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        
-        let collectionView = UICollectionView(frame: .zero,
-                                              collectionViewLayout: layout)
-        
-        collectionView.backgroundColor = .clear
-        collectionView.register(SpeciesCollectionViewCell.self, forCellWithReuseIdentifier: "speciesCell")
-        return collectionView
-    }
-    
     static func makeLabel(title: String?,
                           weight: FontWeight,
                           size: CGFloat,
