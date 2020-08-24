@@ -33,7 +33,9 @@ class SpeciesDetailInfoViewController: UIViewController {
     
     private lazy var backgroundImageView: UIImageView = {
         let iv = UIImageView()
-        FirebaseStorageService.coverImageManager.getImage(for: strategy.species.commonName, setTo: iv)
+        FirebaseStorageService.coverImageManager.getImage(
+            for: strategy.species.commonName,
+            setTo: iv)
         iv.contentMode = .scaleAspectFill
         return iv
     }()
@@ -55,10 +57,16 @@ class SpeciesDetailInfoViewController: UIViewController {
     
     private lazy var closeButton: UIButton = {
         let btn = UIButton()
-        btn.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
-        btn.transform = CGAffineTransform.init(scaleX: 1.5, y: 1.5)
+        btn.setImage(UIImage(systemName: "xmark.circle.fill"),
+                     for: .normal)
+        
+        btn.transform = CGAffineTransform(scaleX: 1.5,
+                                          y: 1.5)
         btn.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.845703125)
-        btn.addTarget(self, action: #selector(closeButtonPressed), for: .touchUpInside)
+        btn.addTarget(
+            self,
+            action: #selector(closeButtonPressed),
+            for: .touchUpInside)
         return btn
     }()
     
@@ -77,6 +85,10 @@ class SpeciesDetailInfoViewController: UIViewController {
     private lazy var commonViewHeightConstraint: NSLayoutConstraint = {
         return commonView.heightAnchor.constraint(equalToConstant: Constants.commonViewImageDimension.height)
     }()
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
     
     //MARK: -- Methods
     

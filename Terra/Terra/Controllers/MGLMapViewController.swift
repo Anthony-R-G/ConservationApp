@@ -23,24 +23,40 @@ final class MGLMapViewController: UIViewController {
     }()
     
     private lazy var backButton: UIButton = {
-        let btn = Factory.makeButton(title: "Back", weight: .medium, color: .white)
+        let btn = Factory.makeButton(title: "Back",
+                                     weight: .medium,
+                                     color: .white)
         btn.layer.cornerRadius = 10
-        btn.tintColor = UIColor(red: 0.976, green: 0.843, blue: 0.831, alpha: 1)
+        btn.tintColor = UIColor(red: 0.976,
+                                green: 0.843,
+                                blue: 0.831,
+                                alpha: 1)
         btn.backgroundColor = Constants.red
-        btn.addTarget(self, action: #selector(backButtonPressed), for: .touchUpInside)
+        btn.addTarget(
+            self,
+            action: #selector(backButtonPressed),
+            for: .touchUpInside)
         return btn
     }()
     
     private lazy var styleToggle: UISegmentedControl = {
         let sc = UISegmentedControl(items: ["Normal", "Hypsometric"])
-        sc.tintColor = UIColor(red: 0.976, green: 0.843, blue: 0.831, alpha: 1)
+        sc.tintColor = UIColor(red: 0.976,
+                               green: 0.843,
+                               blue: 0.831,
+                               alpha: 1)
         sc.backgroundColor = Constants.red
         sc.layer.cornerRadius = 10
         sc.clipsToBounds = true
         sc.selectedSegmentIndex = 0
         sc.translatesAutoresizingMaskIntoConstraints = false
-        sc.addTarget(self, action: #selector(changeStyle(sender:)), for: .valueChanged)
-        view.insertSubview(sc, aboveSubview: mapView)
+        sc.addTarget(
+            self,
+            action: #selector(changeStyle(sender:)),
+            for: .valueChanged)
+        
+        view.insertSubview(sc,
+                           aboveSubview: mapView)
         return sc
     }()
     
@@ -49,8 +65,14 @@ final class MGLMapViewController: UIViewController {
     var speciesData: [Species] = [] {
         didSet {
             for species in speciesData {
-                let coordinate = CLLocationCoordinate2D(latitude: species.habitat.latitude, longitude: species.habitat.longitude)
-                addAnnotation(from: coordinate, title: species.commonName, subtitle: species.habitat.summary)
+                let coordinate = CLLocationCoordinate2D(
+                    latitude: species.habitat.latitude,
+                    longitude: species.habitat.longitude)
+                
+                addAnnotation(
+                    from: coordinate,
+                    title: species.commonName,
+                    subtitle: species.habitat.summary)
             }
         }
     }
@@ -71,12 +93,20 @@ final class MGLMapViewController: UIViewController {
         }
     }
     
-    private func addAnnotation(from coordinate: CLLocationCoordinate2D, title: String, subtitle: String) {
+    private func addAnnotation(from coordinate: CLLocationCoordinate2D,
+                               title: String,
+                               subtitle: String) {
         let annotation = MGLPointAnnotation()
-        annotation.coordinate = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
+        
+        annotation.coordinate = CLLocationCoordinate2D(
+            latitude: coordinate.latitude,
+            longitude: coordinate.longitude)
+        
         annotation.title = title
         annotation.subtitle = subtitle
-        mapView.selectAnnotation(annotation, animated: true, completionHandler: nil)
+        mapView.selectAnnotation(annotation,
+                                 animated: true,
+                                 completionHandler: nil)
         mapView.addAnnotation(annotation)
     }
     
@@ -93,7 +123,7 @@ final class MGLMapViewController: UIViewController {
         super.viewDidLoad()
         addSubviews()
         setConstraints()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) { [weak self] in
             guard let self = self else { return }
             self.userLocation = self.mapView.userLocation!.coordinate
         }
@@ -103,7 +133,7 @@ final class MGLMapViewController: UIViewController {
 
 //MARK: -- MapView Delegate Methods
 extension MGLMapViewController: MGLMapViewDelegate {
-  
+    
     func mapView(_ mapView: MGLMapView, viewFor annotation: MGLAnnotation) -> MGLAnnotationView? {
         
         guard annotation is MGLPointAnnotation else { return nil }
@@ -114,10 +144,17 @@ extension MGLMapViewController: MGLMapViewDelegate {
         
         if annotationView == nil {
             annotationView = CustomAnnotationView(reuseIdentifier: reuseIdentifier)
-            annotationView!.bounds = CGRect(x: 0, y: 0, width: 25, height: 25)
+            annotationView!.bounds = CGRect(
+                origin: .zero,
+                size: CGSize(width: 25,
+                             height: 25))
             
             let hue = CGFloat(annotation.coordinate.longitude + annotation.coordinate.latitude) / 100
-            annotationView!.backgroundColor = UIColor(hue: hue, saturation: 0.5, brightness: 1, alpha: 1)
+            annotationView!.backgroundColor = UIColor(
+                hue: hue,
+                saturation: 0.5,
+                brightness: 1,
+                alpha: 1)
         }
         
         return annotationView
@@ -130,20 +167,20 @@ extension MGLMapViewController: MGLMapViewDelegate {
     
     
     func mapView(_ mapView: MGLMapView, calloutViewFor annotation: MGLAnnotation) -> MGLCalloutView? {
-//        let locationOne = CLLocation(latitude: userLocation.latitude, longitude: userLocation.longitude)
-//        let locationTwo = CLLocation(latitude: speciesLocation.latitude, longitude: speciesLocation.longitude)
-//
-//        let distance = locationOne.distance(from: locationTwo) * 0.000621371
-//
+        //        let locationOne = CLLocation(latitude: userLocation.latitude, longitude: userLocation.longitude)
+        //        let locationTwo = CLLocation(latitude: speciesLocation.latitude, longitude: speciesLocation.longitude)
+        //
+        //        let distance = locationOne.distance(from: locationTwo) * 0.000621371
+        //
         let title = annotation.title ?? nil
-//        let subtitle = "Distance from you: \(distance.rounded(toPlaces: 1)) miles"
+        //        let subtitle = "Distance from you: \(distance.rounded(toPlaces: 1)) miles"
         let subtitle = (annotation.subtitle ?? nil) ?? ""
         let pointAnnotation = MGLPointAnnotation()
         pointAnnotation.title = title
         pointAnnotation.subtitle = subtitle
         pointAnnotation.coordinate = annotation.coordinate
         let callout = CustomCalloutView(annotation: pointAnnotation)
-//        callout.delegate = self
+        //        callout.delegate = self
         return callout
     }
 }

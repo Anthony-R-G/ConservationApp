@@ -62,9 +62,8 @@ final class NewsViewController: UIViewController {
         showModally(safariVC)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        
-    }
+    
+    //MARK: -- Life Cycle Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
