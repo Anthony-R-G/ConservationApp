@@ -123,7 +123,7 @@ Coming:
 
 | Blue-Throated Macaw | Bornean Orangutan | Cheetah Hypsometric | Great White Shark |
 | :------: | :------: | :------: | :------: |
-|![screen 1](https://i.imgur.com/FfiqdNY.png) | ![screen 2](https://i.imgur.com/Z6W90KH.png) |![screen 3](https://i.imgur.com/kYMtJIP.png)|![screen 4](https://i.imgur.com/Fl7LRci.png)|
+|![screen 1](https://i.imgur.com/FfiqdNY.png) | ![screen 2](https://i.imgur.com/Z6W90KH.png) |![screen 3](https://i.imgur.com/kYMtJIP.png)|![screen 4](https://i.imgur.com/1F1HbSL.png)|
 
 
 ### Donating
@@ -134,7 +134,7 @@ Coming:
 
 •This will redirect you in-app to the relevant conservation/project for that specific animal. Getting involved is just a tap away.
 
-| African Elephant Donation | Bornean Orangutan Donation |Chimpanzee Donation| Great White Shark Donation |
+| Bornean Orangutan Donation |Chimpanzee Donation| Great White Shark Donation | Hawksbill Sea Turtle Donation |
 | :------: | :------: | :------: | :------: |
-| ![screen 2](https://i.imgur.com/SvsfysX.png) | ![screen 3](https://i.imgur.com/3x6d1IV.png) | ![screen 4](https://i.imgur.com/JxLGNa8.png)|![screen 5](https://i.imgur.com/5rljCyK.png)
+| ![screen 1](https://i.imgur.com/3x6d1IV.png) | ![screen 2](https://i.imgur.com/H0JdxYr.png)|![screen 3](https://i.imgur.com/5rljCyK.png) | ![screen 4](https://i.imgur.com/xwvYHaH.png) |
 
