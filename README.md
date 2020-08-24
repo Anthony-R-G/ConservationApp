@@ -8,11 +8,11 @@
 
 •Data is packaged from multiple sources, among which include the [International Union for Conservation of Nature](https://www.iucnredlist.org/) and [World Wide Fund for Nature](https://www.worldwildlife.org/). This is to ensure that the data is accurate and up-to-date.
 
-•Clicking on any animal brings you to a page where you can learn more about that specific animal. 
+•Tapping on any animal brings you to a page where you can learn more about that specific animal. 
 
-•Each page also has a large red donation button that will redirect you to a site to help support conservation efforts. 
+•Each page also has a large donation button which, when tapped, will redirect you in-app to a conservation/project for that specific animal. You can then opt to donate.
 
-•One major design principle behind the app is keeping the look of it clean and visually appealing. Learning should be fun! 
+•One major design principle behind the app is keeping the look of it clean and visually appealing. Information should be interesting!
 
 •Studies have shown the importance of imagery in the learning process. Interest in a subject wanes if it's presented in a way that's unstimulating and flat. 
 
