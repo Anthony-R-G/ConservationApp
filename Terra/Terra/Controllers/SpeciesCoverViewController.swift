@@ -57,44 +57,42 @@ final class SpeciesCoverViewController: UIViewController {
     }()
     
     private lazy var exploreButton: UIButton = {
-        let btn = UIButton(frame: CGRect(origin: .zero,
-                                         size: CGSize(width: 80,
-                                                      height: 80)))
+        let btn = UIButton(frame: CGRect(
+            origin: .zero,
+            size: CGSize(
+                width: 80,
+                height: 80)))
         
-        btn.setImage(UIImage(systemName: "chevron.down"),
-                     for: .normal)
-        btn.setTitle("Explore",
-                     for: .normal)
+        btn.setImage(UIImage(systemName: "chevron.down"), for: .normal)
+        btn.setTitle("Explore", for: .normal)
         btn.titleLabel?.font = UIFont(name: "Roboto-Light",
                                       size: 16)
         btn.alignImageAndTitleVertically()
         btn.imageView?.transform = CGAffineTransform(scaleX: 1.2,
                                                      y: 1)
-        btn.addTarget(self,
-                      action: #selector(handlePageStateSwipeGesture),
-                      for: .touchUpInside)
+        btn.addTarget(
+            self,
+            action: #selector(handlePageStateSwipeGesture),
+            for: .touchUpInside)
         
-        let color = UIColor(white: 1,
-                            alpha: 0.6)
-        btn.setTitleColor(color,
-                          for: .normal)
+        let color = UIColor(white: 1, alpha: 0.6)
+        btn.setTitleColor(color, for: .normal)
         btn.tintColor = color
         return btn
     }()
     
     private lazy var upButton: UIButton = {
-        let btn = UIButton(frame: CGRect(origin: .zero,
-                                         size: CGSize(width: 80,
-                                                      height: 80)))
+        let btn = UIButton(frame: CGRect(
+            origin: .zero,
+            size: CGSize(width: 80, height: 80)))
         
-        btn.setImage(UIImage(systemName: "chevron.up"),
-                     for: .normal)
+        btn.setImage(UIImage(systemName: "chevron.up"), for: .normal)
         
-        btn.imageView?.transform = CGAffineTransform(scaleX: 1.2,
-                                                     y: 1)
-        btn.addTarget(self,
-                      action: #selector(handlePageStateSwipeGesture),
-                      for: .touchUpInside)
+        btn.imageView?.transform = CGAffineTransform(scaleX: 1.2, y: 1)
+        btn.addTarget(
+            self,
+            action: #selector(handlePageStateSwipeGesture),
+            for: .touchUpInside)
         
         btn.tintColor = .white
         btn.alpha = 0
@@ -121,24 +119,29 @@ final class SpeciesCoverViewController: UIViewController {
     
     private lazy var collectionView: UICollectionView = {
         
-        let collectionViewFrame = CGRect(origin: .zero,
-                                         size: CGSize(
-                                            width: screenSize.width,
-                                            height: screenSize.height * 0.468))
+        let collectionViewFrame = CGRect(
+            origin: .zero,
+            size: CGSize(
+                width: screenSize.width,
+                height: screenSize.height * 0.468))
         
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: screenSize.width * 0.833,
-                                 height:  collectionViewFrame.height * 0.89)
+        layout.itemSize = CGSize(
+            width: screenSize.width * 0.833,
+            height:  collectionViewFrame.height * 0.89)
         
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 30
-        layout.sectionInset = UIEdgeInsets(top: Constants.spacingConstant / 2,
-                                           left: Constants.spacingConstant,
-                                           bottom: Constants.spacingConstant / 2,
-                                           right: Constants.spacingConstant)
+        layout.sectionInset = UIEdgeInsets(
+            top: Constants.spacingConstant / 2,
+            left: Constants.spacingConstant,
+            bottom: Constants.spacingConstant / 2,
+            right: Constants.spacingConstant)
         
-        let cv = UICollectionView(frame: collectionViewFrame,
-                                  collectionViewLayout: layout)
+        let cv = UICollectionView(
+            frame: collectionViewFrame,
+            collectionViewLayout: layout)
+        
         cv.backgroundColor = .clear
         cv.alpha = 0
         cv.dataSource = self
@@ -151,10 +154,8 @@ final class SpeciesCoverViewController: UIViewController {
     
     private lazy var closeButton: UIButton = {
         let btn = UIButton()
-        btn.setImage(UIImage(systemName: "xmark.circle.fill"),
-                     for: .normal)
-        btn.transform = CGAffineTransform(scaleX: 1.5,
-                                               y: 1.5)
+        btn.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
+        btn.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
         btn.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.845703125)
         btn.addTarget(
             self,
@@ -184,8 +185,10 @@ final class SpeciesCoverViewController: UIViewController {
         btn.setImage(UIImage(systemName: "arkit"), for: .normal)
         btn.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
         btn.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.845703125)
-        btn.addTarget(self, action: #selector(augmentedRealityButtonPressed),
-                      for: .touchUpInside)
+        btn.addTarget(
+            self,
+            action: #selector(augmentedRealityButtonPressed),
+            for: .touchUpInside)
         return btn
     }()
     
@@ -215,7 +218,7 @@ final class SpeciesCoverViewController: UIViewController {
     }()
     
     override var prefersStatusBarHidden: Bool {
-        return true 
+        return true
     }
     
     //MARK: -- Methods

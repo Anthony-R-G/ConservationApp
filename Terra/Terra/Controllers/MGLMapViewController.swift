@@ -22,10 +22,9 @@ final class MGLMapViewController: UIViewController {
         return mv
     }()
     
-    private lazy var backButton: UIButton = {
-        let btn = Factory.makeButton(title: "Back",
-                                     weight: .medium,
-                                     color: .white)
+    private lazy var listButton: UIButton = {
+        let btn = UIButton()
+        btn.setImage(UIImage(named: "list"), for: .normal)
         btn.layer.cornerRadius = 10
         btn.tintColor = UIColor(red: 0.976,
                                 green: 0.843,
@@ -55,8 +54,7 @@ final class MGLMapViewController: UIViewController {
             action: #selector(changeStyle(sender:)),
             for: .valueChanged)
         
-        view.insertSubview(sc,
-                           aboveSubview: mapView)
+        view.insertSubview(sc, aboveSubview: mapView)
         return sc
     }()
     
@@ -127,7 +125,6 @@ final class MGLMapViewController: UIViewController {
             guard let self = self else { return }
             self.userLocation = self.mapView.userLocation!.coordinate
         }
-        
     }
 }
 
@@ -204,38 +201,49 @@ extension MGLMapViewController: MGLMapViewDelegate {
 //MARK: -- Add Subviews & Constraints
 fileprivate extension MGLMapViewController {
     func addSubviews() {
-        let UIElements = [mapView, backButton]
-        UIElements.forEach { view.addSubview($0) }
-        UIElements.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
+        [mapView, listButton].forEach { view.addSubview($0) }
     }
     
     func setConstraints() {
         setMapViewConstraints()
-        setBackButtonConstraints()
+        setListButtonConstraints()
         setStyleToggleConstraints()
     }
     
-    func setBackButtonConstraints() {
-        NSLayoutConstraint.activate([
-            backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            backButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 30),
-            backButton.heightAnchor.constraint(equalToConstant: 40),
-            backButton.widthAnchor.constraint(equalToConstant: 80)
-        ])
+    func setListButtonConstraints() {
+        listButton.snp.makeConstraints { (make) in
+            make.leading.equalTo(view).inset(Constants.spacingConstant)
+            make.top.equalToSuperview().inset(40)
+            make.height.width.equalTo(40)
+        }
     }
     
     func setMapViewConstraints() {
-        NSLayoutConstraint.activate([
-            mapView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            mapView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            mapView.heightAnchor.constraint(equalToConstant: view.bounds.size.height),
-            mapView.widthAnchor.constraint(equalToConstant: view.bounds.size.width)
-        ])
+        mapView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
     }
     
     func setStyleToggleConstraints() {
-        NSLayoutConstraint.activate([NSLayoutConstraint(item: styleToggle, attribute: NSLayoutConstraint.Attribute.centerX, relatedBy: NSLayoutConstraint.Relation.equal, toItem: mapView, attribute: NSLayoutConstraint.Attribute.centerX, multiplier: 1.0, constant: 0.0)])
-        NSLayoutConstraint.activate([NSLayoutConstraint(item: styleToggle, attribute: .bottom, relatedBy: .equal, toItem: mapView.logoView, attribute: .top, multiplier: 1, constant: -20)])
+        NSLayoutConstraint.activate([
+            NSLayoutConstraint(
+                item: styleToggle,
+                attribute: NSLayoutConstraint.Attribute.centerX,
+                relatedBy: NSLayoutConstraint.Relation.equal,
+                toItem: mapView,
+                attribute: NSLayoutConstraint.Attribute.centerX,
+                multiplier: 1.0,
+                constant: 0.0)])
+        NSLayoutConstraint.activate([
+            NSLayoutConstraint(
+                item: styleToggle,
+                attribute: .bottom,
+                relatedBy: .equal,
+                toItem: mapView.logoView,
+                attribute: .top,
+                multiplier: 1,
+                constant: -20)])
     }
 }
+
 

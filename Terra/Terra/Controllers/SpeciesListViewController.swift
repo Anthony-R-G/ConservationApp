@@ -40,7 +40,10 @@ final class SpeciesListViewController: UIViewController {
         let btn = UIButton()
         btn.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
         btn.tintColor = .white
-        btn.addTarget(self, action: #selector(expandSearchBar), for: .touchUpInside)
+        btn.addTarget(
+            self,
+            action: #selector(expandSearchBar),
+            for: .touchUpInside)
         return btn
     }()
     
@@ -66,10 +69,12 @@ final class SpeciesListViewController: UIViewController {
                                       size: 17,
                                       color: .red,
                                       alignment: .center)
-        label.frame = CGRect(x: 0,
-                             y: 0,
-                             width: collectionView.bounds.size.width ,
-                             height: collectionView.bounds.size.height)
+        label.frame = CGRect(
+            origin: .zero,
+            size: CGSize(
+                width: collectionView.bounds.width,
+                height: collectionView.bounds.height))
+        
         collectionView.backgroundView = label
         label.isHidden = true
         return label
@@ -79,8 +84,9 @@ final class SpeciesListViewController: UIViewController {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         
-        let cv = UICollectionView(frame: .zero,
-                                    collectionViewLayout: layout)
+        let cv = UICollectionView(
+            frame: .zero,
+            collectionViewLayout: layout)
         
         cv.backgroundColor = .clear
         cv.register(SpeciesCollectionViewCell.self,
@@ -91,22 +97,29 @@ final class SpeciesListViewController: UIViewController {
     }()
     
     private lazy var searchBarLeadingAnchorConstraint: NSLayoutConstraint = {
-        return searchBar.leadingAnchor.constraint(equalTo: view.trailingAnchor,
-                                                  constant: -Constants.spacingConstant)
+        return searchBar.leadingAnchor.constraint(
+            equalTo: view.trailingAnchor,
+            constant: -Constants.spacingConstant)
     }()
     
     private lazy var earthButtonLeadingAnchorConstraint: NSLayoutConstraint = {
-        return earthButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.spacingConstant)
+        return earthButton.leadingAnchor.constraint(
+            equalTo: view.leadingAnchor,
+            constant: Constants.spacingConstant)
     }()
     
     private lazy var rightSwipeGesture: UISwipeGestureRecognizer = {
-        let gesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
+        let gesture = UISwipeGestureRecognizer(
+            target: self,
+            action: #selector(handleSwipe(_:)))
         gesture.direction = .right
         return gesture
     }()
     
     private lazy var leftSwipeGesture: UISwipeGestureRecognizer = {
-        let gesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
+        let gesture = UISwipeGestureRecognizer(
+            target: self,
+            action: #selector(handleSwipe(_:)))
         gesture.direction = .left
         return gesture
     }()
@@ -114,7 +127,10 @@ final class SpeciesListViewController: UIViewController {
     private lazy var earthButton: UIButton = {
         let btn = UIButton()
         btn.setImage(#imageLiteral(resourceName: "globe"), for: .normal)
-        btn.addTarget(self, action: #selector(earthButtonPressed), for: .touchUpInside)
+        btn.addTarget(
+            self,
+            action: #selector(earthButtonPressed),
+            for: .touchUpInside)
         btn.alpha = 1.0
         btn.tintColor = .systemBlue
         return btn
@@ -206,7 +222,7 @@ final class SpeciesListViewController: UIViewController {
         collectionView.addGestureRecognizer(rightSwipeGesture)
         collectionView.addGestureRecognizer(leftSwipeGesture)
     }
-
+    
     //MARK: --Life Cycle Methods
     
     override func viewWillAppear(_ animated: Bool) {
@@ -330,7 +346,7 @@ extension SpeciesListViewController: SpeciesViewModelDelegate {
 fileprivate extension SpeciesListViewController {
     
     func addSubviews() {
-       [headerImageView, earthButton, terraTitleLabel, searchBarButton, searchBar, collectionView, filterTabBar].forEach { view.addSubview($0) }
+        [headerImageView, earthButton, terraTitleLabel, searchBarButton, searchBar, collectionView, filterTabBar].forEach { view.addSubview($0) }
     }
     
     func setConstraints() {
