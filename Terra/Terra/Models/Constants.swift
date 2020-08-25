@@ -20,4 +20,6 @@ enum Constants {
     static let titleLabelColor = #colorLiteral(red: 0.9257398248, green: 1, blue: 0.7623538375, alpha: 1)
     static let buttonColor = #colorLiteral(red: 0.9257398248, green: 1, blue: 0.7623538375, alpha: 1)
     static let red = #colorLiteral(red: 1, green: 0.2901960784, blue: 0.3882352941, alpha: 0.9485498716)
+    static let screenHeight = UIScreen.main.bounds.size.height
+    static let screenWidth = UIScreen.main.bounds.size.width
 }

@@ -181,8 +181,8 @@ final class SpeciesListViewController: UIViewController {
     }
     
     @objc private func expandSearchBar() {
-        searchBarLeadingAnchorConstraint.constant = -(UIScreen.main.bounds.width * 0.9661835748792271)
-        earthButtonLeadingAnchorConstraint.constant = -200
+        searchBarLeadingAnchorConstraint.constant = -400.deviceAdjusted
+        earthButtonLeadingAnchorConstraint.constant = -200.deviceAdjusted
         searchBar.alpha = 1
         searchBarButton.alpha = 0
         UIView.animate(withDuration: 0.3, animations: { [weak self] in
@@ -287,7 +287,7 @@ extension SpeciesListViewController: UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize(width: view.frame.width, height: 227)
+        return CGSize(width: view.frame.width, height: 227.deviceAdjusted)
     }
     
     func collectionView(_ collectionView: UICollectionView,

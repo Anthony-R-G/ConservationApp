@@ -81,8 +81,7 @@ final class CoverHeaderNameView: UIView {
 fileprivate extension CoverHeaderNameView {
     
     func addSubviews() {
-        let UIElements = [conservationStatusButton, speciesCommonNameLabel, speciesScientificNameLabel]
-        UIElements.forEach { addSubview($0) }
+        [conservationStatusButton, speciesCommonNameLabel, speciesScientificNameLabel].forEach { addSubview($0) }
     }
     
     func setConstraints() {

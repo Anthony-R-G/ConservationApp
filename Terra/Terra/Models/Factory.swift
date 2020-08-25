@@ -21,13 +21,13 @@ class Factory {
         label.textAlignment = alignment
         label.textColor = color
         label.adjustsFontSizeToFitWidth = true
-//        label.clipsToBounds = true
         label.sizeToFit()
         return label
     }
     
     static func makeDetailInfoWindowLabel(text: String) -> UILabel {
-        let label = makeLabel(title: text.replacingOccurrences(of: "\\n", with: "\n"),
+        let label = makeLabel(
+            title: text.replacingOccurrences(of: "\\n", with: "\n"),
                                       weight: .regular,
                                       size: 16,
                                       color: .white,

@@ -12,7 +12,9 @@ final class CustomCalloutView: UIView, MGLCalloutView {
     //MARK: -- UI Element Initialization
     
     private lazy var speciesImageView: UIImageView = {
-        let iv = UIImageView(frame: CGRect(origin: .zero, size: CGSize(width: 80, height: 80)))
+        let iv = UIImageView(frame: CGRect(
+            origin: .zero,
+            size: CGSize(width: 80.deviceAdjusted, height: 80.deviceAdjusted)))
         iv.contentMode = .scaleAspectFill
         iv.layer.cornerRadius = iv.frame.size.width/2
         iv.layer.borderColor = UIColor.white.cgColor
@@ -30,10 +32,11 @@ final class CustomCalloutView: UIView, MGLCalloutView {
     }()
     
     private lazy var subtitleLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont(name: "Roboto-Regular", size: 13)
-        label.textColor = .white
-        label.textAlignment = .left
+        let label = Factory.makeLabel(title: nil,
+                                      weight: .regular,
+                                      size: 13,
+                                      color: .white,
+                                      alignment: .left)
         label.numberOfLines = 0
         label.adjustsFontSizeToFitWidth = false
         label.lineBreakMode = .byTruncatingTail
@@ -102,7 +105,11 @@ final class CustomCalloutView: UIView, MGLCalloutView {
     
     required init(annotation: MGLAnnotation) {
         representedObject = annotation
-        mainBody = UIButton(frame: CGRect(x: 0, y: -15, width: UIScreen.main.bounds.width * 0.60, height: 160))
+        mainBody = UIButton(frame: CGRect(
+            x: 0,
+            y: -15,
+            width: UIScreen.main.bounds.width * 0.60,
+            height: 160.deviceAdjusted))
         
         super.init(frame: .zero)
         addSubviews()

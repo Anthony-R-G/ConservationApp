@@ -36,7 +36,7 @@ final class SpeciesCoverViewController: UIViewController {
     private lazy var headerNameView: CoverHeaderNameView = {
         let hiv = CoverHeaderNameView()
         var frame = hiv.frame
-        frame.size.height = screenSize.height * 0.30
+        frame.size.height = headerNameViewEnlargedHeight
         hiv.frame = frame
         hiv.configureView(from: viewModel.selectedSpecies)
         hiv.delegate = self
@@ -46,7 +46,7 @@ final class SpeciesCoverViewController: UIViewController {
     private lazy var subheaderInfoView: CoverSubheaderInfoView = {
         let siv = CoverSubheaderInfoView()
         var frame = siv.frame
-        frame.size.height = headerNameView.frame.height * 0.30
+        frame.size.height = subheaderInfoViewEnlargedHeight
         siv.frame = frame
         siv.configureView(from: viewModel.selectedSpecies)
         return siv
@@ -119,8 +119,8 @@ final class SpeciesCoverViewController: UIViewController {
         let collectionViewFrame = CGRect(
             origin: .zero,
             size: CGSize(
-                width: screenSize.width,
-                height: screenSize.height * 0.468))
+                width: Constants.screenWidth,
+                height: Constants.screenHeight * 0.468))
         
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(
@@ -128,7 +128,7 @@ final class SpeciesCoverViewController: UIViewController {
             height:  collectionViewFrame.height * 0.89)
         
         layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 30
+        layout.minimumLineSpacing = 30.deviceAdjusted
         layout.sectionInset = UIEdgeInsets(
             top: Constants.spacingConstant / 2,
             left: Constants.spacingConstant,
@@ -193,13 +193,23 @@ final class SpeciesCoverViewController: UIViewController {
     
     var viewModel: DetailPageStrategyViewModel!
     
-    private var pageState: State = .collapsed
-    
-    private var screenSize = UIScreen.main.bounds.size
-    
     fileprivate let reuseIdentifier = "cellId"
     
+    private var pageState: State = .collapsed
+    
     private var selectedCell: UICollectionViewCell?
+    
+    private var headerNameViewEnlargedHeight: CGFloat = Constants.screenHeight * 0.30
+    
+    private var headerNameViewShrinkHeight: CGFloat = Constants.screenHeight * 0.11
+    
+    private var headerNameViewEnlargedTopAnchor: CGFloat = Constants.screenHeight * 0.48
+    
+    private var headerNameViewShrinkTopAnchor: CGFloat = Constants.screenHeight * 0.130
+    
+    private lazy var subheaderInfoViewEnlargedHeight: CGFloat = headerNameViewEnlargedHeight * 0.30
+    
+    private lazy var subheaderInfoViewShrinkHeight: CGFloat = 60.deviceAdjusted
     
     private lazy var headerNameViewHeightConstraint: NSLayoutConstraint = {
         return headerNameView.heightAnchor.constraint(equalToConstant: headerNameView.frame.height)
@@ -207,7 +217,7 @@ final class SpeciesCoverViewController: UIViewController {
     
     private lazy var headerNameViewTopAnchorConstraint: NSLayoutConstraint = {
         return headerNameView.topAnchor.constraint(
-            equalTo: view.topAnchor, constant: screenSize.height * 0.48)
+            equalTo: view.topAnchor, constant: headerNameViewEnlargedTopAnchor)
     }()
     
     private lazy var subheaderInfoViewHeightConstraint: NSLayoutConstraint = {
@@ -333,16 +343,16 @@ extension SpeciesCoverViewController {
     
     private func shrinkHeader() {
         headerNameView.shrinkCommonNameLabel()
-        headerNameViewTopAnchorConstraint.constant = screenSize.height * 0.11
-        headerNameViewHeightConstraint.constant = screenSize.height * 0.130
-        subheaderInfoViewHeightConstraint.constant = 60.deviceAdjusted
+        headerNameViewTopAnchorConstraint.constant = headerNameViewShrinkHeight
+        headerNameViewHeightConstraint.constant = headerNameViewShrinkTopAnchor
+        subheaderInfoViewHeightConstraint.constant = subheaderInfoViewShrinkHeight
     }
     
     private func enlargeHeader() {
         headerNameView.expandCommonNameLabel()
-        headerNameViewTopAnchorConstraint.constant = screenSize.height * 0.48
-        headerNameViewHeightConstraint.constant = screenSize.height * 0.30
-        subheaderInfoViewHeightConstraint.constant = headerNameViewHeightConstraint.constant * 0.30
+        headerNameViewTopAnchorConstraint.constant = headerNameViewEnlargedTopAnchor
+        headerNameViewHeightConstraint.constant = headerNameViewEnlargedHeight
+        subheaderInfoViewHeightConstraint.constant = subheaderInfoViewEnlargedHeight
     }
     
     private func animateExploreButton(state: State) {
@@ -561,7 +571,7 @@ fileprivate extension SpeciesCoverViewController {
     func setDonateButtonConstraints() {
         donateButton.snp.makeConstraints { (make) in
             make.centerX.centerY.equalTo(donateButtonContainer)
-            make.leading.trailing.equalToSuperview().inset(Constants.spacingConstant.deviceAdjusted)
+            make.leading.trailing.equalToSuperview().inset(Constants.spacingConstant)
             make.height.equalTo(50.deviceAdjusted)
         }
     }

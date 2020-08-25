@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Device {
+final class Device {
     //Width of iPhone 11 Pro Max
     static let base: CGFloat = 414
     
