@@ -302,7 +302,7 @@ PODS:
   - SnapKit (5.0.1)
 
 DEPENDENCIES:
-  - BATabBarController (~> 2.0.0)
+  - BATabBarController (~> 2.0.2)
   - Firebase/Firestore
   - Firebase/Storage
   - FirebaseUI/Storage
@@ -355,6 +355,6 @@ SPEC CHECKSUMS:
   SDWebImage: cf6922231e95550934da2ada0f20f2becf2ceba9
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
 
-PODFILE CHECKSUM: 1d077162f19e1322da3415f30fc058a96830a70a
+PODFILE CHECKSUM: 95d74b9b107fcdce903b7b6ab8deec371414c9df
 
 COCOAPODS: 1.9.3

@@ -44,7 +44,9 @@ final class SpeciesCoverViewController: UIViewController {
     }()
     
     private lazy var backgroundVisualEffectBlur: UIVisualEffectView = {
-        return UIVisualEffectView(effect: nil)
+        let blur = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
+        blur.alpha = 0
+        return blur
     }()
     
     private lazy var exploreButton: UIButton = {
@@ -162,7 +164,7 @@ final class SpeciesCoverViewController: UIViewController {
     private lazy var dismissPageSwipeGesture: UISwipeGestureRecognizer = {
         let recognizer = UISwipeGestureRecognizer(
             target: self,
-            action: #selector(handlePageStateSwipeGesture))
+            action: #selector(handleDismissSwipeGesture))
         recognizer.direction = .down
         return recognizer
     }()
@@ -293,7 +295,6 @@ extension SpeciesCoverViewController {
             switch state {
             case .expanded:
                 self.dismissPageSwipeGesture.isEnabled = false
-                self.backgroundVisualEffectBlur.effect = UIBlurEffect(style: .regular)
                 self.shrinkHeader()
                 self.animateExploreButton(state: state)
                 self.animateMainContent(state: state)
@@ -304,7 +305,6 @@ extension SpeciesCoverViewController {
                     guard let self = self else { return }
                     self.dismissPageSwipeGesture.isEnabled = true
                 }
-                self.backgroundVisualEffectBlur.effect = nil
                 self.enlargeHeader()
                 self.animateExploreButton(state: state)
                 self.animateMainContent(state: state)
@@ -364,12 +364,15 @@ extension SpeciesCoverViewController {
     
     private func animateMainContent(state: State) {
         let newAlpha: CGFloat = state == .expanded ? 1.0 : 0.0
+        let reverseAlpha: CGFloat = state == .expanded ? 0.0 : 1.0
         let duration: TimeInterval = state == .expanded ? 0.9 : 0.3
         DispatchQueue.main.async {
             UIView.animate(withDuration: duration) { [weak self] in
                 guard let self = self else { return }
                 self.collectionView.alpha = newAlpha
                 self.donateButton.alpha = newAlpha
+                self.backgroundVisualEffectBlur.alpha = newAlpha
+                self.backgroundGradientOverlay.alpha = reverseAlpha
             }
         }
     }
