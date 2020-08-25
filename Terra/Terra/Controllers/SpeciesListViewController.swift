@@ -286,12 +286,13 @@ extension SpeciesListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width,
-                      height: 227)
+        
+        return CGSize(width: view.frame.width, height: 227)
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         didSelectItemAt indexPath: IndexPath) {
+        
         let selectedSpecies = viewModel.specificSpecies(at: indexPath.row)
         let coverVC = SpeciesCoverViewController()
         coverVC.viewModel =  DetailPageStrategyViewModel(species: selectedSpecies)

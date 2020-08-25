@@ -534,7 +534,7 @@ fileprivate extension SpeciesCoverViewController {
             make.height.equalTo(exploreButton.frame.height)
             make.width.equalTo(exploreButton.frame.width)
             make.centerX.equalTo(view)
-            make.bottom.equalTo(view).inset(10)
+            make.bottom.equalTo(view).inset(view.bounds.height * 0.011160714285714286)
         }
     }
     
@@ -543,7 +543,7 @@ fileprivate extension SpeciesCoverViewController {
             make.height.equalTo(upButton.frame.height)
             make.width.equalTo(upButton.frame.width)
             make.centerX.equalTo(view)
-            make.top.equalTo(view).inset(Constants.spacingConstant)
+            make.top.equalTo(view).inset(screenSize.height * 0.02232142857142857)
         }
     }
     

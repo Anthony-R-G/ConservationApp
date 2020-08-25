@@ -25,10 +25,11 @@ final class CoverHeaderNameView: UIView {
      private lazy var speciesCommonNameLabel: UILabel = {
         let label = Factory.makeLabel(title: nil,
                                         weight: .bold,
-                                        size: 56,
+                                        size: UIScreen.main.bounds.height * 0.0625,
                                         color: .white,
                                         alignment: .left)
         label.numberOfLines = 2
+        
         return label
     }()
     
@@ -61,11 +62,11 @@ final class CoverHeaderNameView: UIView {
     }
         
     func shrinkCommonNameLabel() {
-        speciesCommonNameLabel.animateToFont(UIFont(name: "Roboto-Bold", size: 40)!, withDuration: 0.5)
+        speciesCommonNameLabel.animateToFont(UIFont(name: "Roboto-Bold", size: UIScreen.main.bounds.height * 0.04464285714285714)!, withDuration: 0.5)
     }
     
     func expandCommonNameLabel() {
-        speciesCommonNameLabel.animateToFont(UIFont(name: "Roboto-Bold", size: 56)!, withDuration: 1.3)
+        speciesCommonNameLabel.animateToFont(UIFont(name: "Roboto-Bold", size: UIScreen.main.bounds.height * 0.0625)!, withDuration: 1.3)
     }
     
     override init(frame: CGRect) {
