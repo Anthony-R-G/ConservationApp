@@ -135,7 +135,7 @@ final class SpeciesCoverViewController: UIViewController {
         cv.dataSource = self
         cv.delegate = self
         
-        cv.register(CoverRoundedCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        cv.register(CoverRoundedCell.self, forCellWithReuseIdentifier: Constants.reuseIdentifier)
         return cv
     }()
     
@@ -184,30 +184,30 @@ final class SpeciesCoverViewController: UIViewController {
     
     var viewModel: DetailPageStrategyViewModel!
     
-    fileprivate let reuseIdentifier = "cellId"
+    private let generator = UIImpactFeedbackGenerator(style: .medium)
     
     private var pageState: State = .collapsed
     
     private var selectedCell: UICollectionViewCell?
     
-    private var headerNameViewEnlargedHeight: CGFloat = Constants.screenHeight * 0.30
+    private let headerNameViewEnlargedHeight: CGFloat = Constants.screenHeight * 0.30
     
-    private var headerNameViewShrinkHeight: CGFloat = Constants.screenHeight * 0.11
+    private let headerNameViewShrinkHeight: CGFloat = Constants.screenHeight * 0.10
     
-    private var headerNameViewEnlargedTopAnchor: CGFloat = Constants.screenHeight * 0.48
+    private let headerNameViewEnlargedTopAnchor: CGFloat = Constants.screenHeight * 0.48
     
-    private var headerNameViewShrinkTopAnchor: CGFloat = Constants.screenHeight * 0.130
+    private let headerNameViewShrinkTopAnchor: CGFloat = Constants.screenHeight * 0.135
     
     private lazy var subheaderInfoViewEnlargedHeight: CGFloat = headerNameViewEnlargedHeight * 0.30
     
-    private lazy var subheaderInfoViewShrinkHeight: CGFloat = 60.deviceAdjusted
+    private let subheaderInfoViewShrinkHeight: CGFloat = 60.deviceAdjusted
     
     private lazy var headerNameViewHeightConstraint: NSLayoutConstraint = {
         return headerNameView.heightAnchor.constraint(equalToConstant: headerNameViewEnlargedHeight)
     }()
     
     private lazy var headerNameViewTopAnchorConstraint: NSLayoutConstraint = {
-        return headerNameView.topAnchor.constraint( equalTo: view.topAnchor, constant: headerNameViewEnlargedTopAnchor)
+        return headerNameView.topAnchor.constraint(equalTo: view.topAnchor, constant: headerNameViewEnlargedTopAnchor)
     }()
     
     private lazy var subheaderInfoViewHeightConstraint: NSLayoutConstraint = {
@@ -389,7 +389,7 @@ extension SpeciesCoverViewController: UICollectionViewDataSource {
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: reuseIdentifier,
+            withReuseIdentifier: Constants.reuseIdentifier,
             for: indexPath) as! CoverRoundedCell
         
         let specificStrategy = viewModel.specificStrategy(at: indexPath.row)
@@ -412,7 +412,6 @@ extension SpeciesCoverViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView,
                         didHighlightItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath)
-        let generator = UIImpactFeedbackGenerator(style: .medium)
         generator.impactOccurred()
         UIView.animate(withDuration: 0.3) {
             cell?.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
@@ -433,7 +432,6 @@ extension SpeciesCoverViewController: UICollectionViewDelegate {
 extension SpeciesCoverViewController: DonateButtonDelegate {
     func donateButtonPressed() {
         guard let donationURL = URL(string: viewModel.selectedSpecies.donationLink) else { return }
-        let generator = UIImpactFeedbackGenerator(style: .medium)
         generator.impactOccurred()
         presentWebBrowser(link: donationURL)
     }
@@ -508,8 +506,8 @@ fileprivate extension SpeciesCoverViewController {
     
     func setHeaderInfoViewConstraints() {
         headerNameView.snp.makeConstraints { (make) in
-            make.leading.equalTo(view).inset(Constants.spacingConstant)
-            make.trailing.equalTo(view)
+            make.leading.equalToSuperview().inset(Constants.spacingConstant)
+            make.trailing.equalToSuperview()
             headerNameViewTopAnchorConstraint.isActive = true
             headerNameViewHeightConstraint.isActive = true
         }
@@ -518,7 +516,7 @@ fileprivate extension SpeciesCoverViewController {
     func setSubheaderInfoViewConstraints() {
         subheaderInfoView.snp.makeConstraints { (make) in
             make.leading.equalTo(headerNameView)
-            make.trailing.equalTo(view)
+            make.trailing.equalToSuperview()
             make.top.equalTo(headerNameView.snp.bottom).offset(Constants.spacingConstant)
             subheaderInfoViewHeightConstraint.isActive = true
         }
@@ -526,8 +524,7 @@ fileprivate extension SpeciesCoverViewController {
     
     func setExploreButtonConstraints() {
         exploreButton.snp.makeConstraints { (make) in
-            make.height.equalTo(exploreButton.frame.height)
-            make.width.equalTo(exploreButton.frame.width)
+            make.height.width.equalTo(exploreButton.frame.size)
             make.centerX.equalTo(view)
             make.bottom.equalTo(view).inset(10.deviceAdjusted)
         }
@@ -535,8 +532,7 @@ fileprivate extension SpeciesCoverViewController {
     
     func setUpButtonConstraints() {
         upButton.snp.makeConstraints { (make) in
-            make.height.equalTo(upButton.frame.height)
-            make.width.equalTo(upButton.frame.width)
+            make.height.width.equalTo(upButton.frame.size)
             make.centerX.equalTo(view)
             make.top.equalTo(view).inset(Constants.spacingConstant)
         }

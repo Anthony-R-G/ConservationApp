@@ -22,4 +22,5 @@ enum Constants {
     static let red = #colorLiteral(red: 1, green: 0.2901960784, blue: 0.3882352941, alpha: 0.9485498716)
     static let screenHeight = UIScreen.main.bounds.size.height
     static let screenWidth = UIScreen.main.bounds.size.width
+    static let reuseIdentifier = "cellId"
 }

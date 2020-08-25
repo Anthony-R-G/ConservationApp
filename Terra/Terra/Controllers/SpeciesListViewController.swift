@@ -89,8 +89,7 @@ final class SpeciesListViewController: UIViewController {
             collectionViewLayout: layout)
         
         cv.backgroundColor = .clear
-        cv.register(SpeciesCollectionViewCell.self,
-                    forCellWithReuseIdentifier: reuseIdentifier)
+        cv.register(SpeciesCollectionViewCell.self, forCellWithReuseIdentifier: Constants.reuseIdentifier)
         cv.dataSource = self
         cv.delegate = self
         return cv
@@ -143,9 +142,7 @@ final class SpeciesListViewController: UIViewController {
     private var isSearching: Bool = false
     
     private var selectedTab = 0
-    
-    fileprivate let reuseIdentifier = "cellId"
-    
+        
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -253,7 +250,7 @@ extension SpeciesListViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let speciesCell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! SpeciesCollectionViewCell
+        let speciesCell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.reuseIdentifier, for: indexPath) as! SpeciesCollectionViewCell
         let specificAnimal = viewModel.specificSpecies(at: indexPath.row)
         speciesCell.configureCell(from: specificAnimal)
         return speciesCell
