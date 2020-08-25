@@ -53,7 +53,7 @@ Coming:
 
 ### Species List Page
 | See All Species | Filtered By Critical Status | Filtered by Endangered Status | Filtered by Vulnerable Status |
-| :------: | :------: | :------: | :------: |
+| :---: | :---: | :---: | :---: |
 |![screen 1](https://i.imgur.com/xrJUAcs.png) | ![screen 2](https://i.imgur.com/Pu9QLSc.png) | ![screen 3](https://i.imgur.com/wB5Ziou.png) | ![screen 4](https://i.imgur.com/oBdkkog.png) |
 
 •This page contains a list of animals that are currently considered threatened. 
