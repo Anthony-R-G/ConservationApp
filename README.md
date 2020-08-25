@@ -87,7 +87,7 @@ Planned:
 
 •Each coordinate annotation can be tapped to bring up a customized callout view.
 
-•The callout view will contain information such as the animal's name, a small habitat summary, the distance that animal is away from you (if location access is granted), and will enable you to visit that animal's individual species page.
+•The callout view will contain information such as the animal's name, a small habitat summary, the distance that animal is away from you (if location access is granted), and will enable you to visit that animal's specific detail page.
 
 •There are two map options: a default satellite street style map and a custom-made hypsometric map to see color-coordinated 3D elevation levels.
 
