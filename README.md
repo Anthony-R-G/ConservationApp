@@ -101,13 +101,13 @@ Coming:
 
 
 #### Getting Detailed Information
-| Blue Whale Overview | Cheetah Threats | Giant Panda Habitat | Panamanian Golden Frog Overview |
+| African Elephant Overview | Cheetah Threats | Giant Panda Habitat | Panamanian Golden Frog Overview |
 | :------: | :------: | :------: | :------: |
-|![screen 1](https://i.imgur.com/ocYCyf6.png) | ![screen 2](https://i.imgur.com/RT2EqWV.png)|![screen 3](https://i.imgur.com/ybKqBrb.png)| ![screen 4](https://i.imgur.com/VYs6n4s.png) |
+|![screen 1](https://i.imgur.com/ossYwUj.png) | ![screen 2](https://i.imgur.com/RT2EqWV.png)|![screen 3](https://i.imgur.com/ybKqBrb.png)| ![screen 4](https://i.imgur.com/VYs6n4s.png) |
 
 |  |  |  |  |
 | :------: | :------: | :------: | :------: |
-|![screen 1](https://i.imgur.com/RdQBGV9.png) | ![screen 2](https://i.imgur.com/N4zgxVn.png)|![screen 3](https://i.imgur.com/qxsmoWP.png)| ![screen 4](https://i.imgur.com/dTLfYtN.png) |
+|![screen 1](https://i.imgur.com/WMEjkmx.png) | ![screen 2](https://i.imgur.com/N4zgxVn.png)|![screen 3](https://i.imgur.com/qxsmoWP.png)| ![screen 4](https://i.imgur.com/dTLfYtN.png) |
 
 
 ## Map Exploration 
@@ -126,7 +126,7 @@ Coming:
 
 | Blue-Throated Macaw | Bornean Orangutan | Cheetah Hypsometric | Great White Shark |
 | :------: | :------: | :------: | :------: |
-|![screen 1](https://i.imgur.com/FfiqdNY.png) | ![screen 2](https://i.imgur.com/Z6W90KH.png) |![screen 3](https://i.imgur.com/kYMtJIP.png)|![screen 4](https://i.imgur.com/Fl7LRci.png)|
+|![screen 1](https://i.imgur.com/ZHzTsSj.png) | ![screen 2](https://i.imgur.com/F0eVnTl.png) |![screen 3](https://i.imgur.com/jD50BwP.png)|![screen 4](https://i.imgur.com/O8uLfRB.png)|
 
 
 ### Donating
