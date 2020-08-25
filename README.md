@@ -147,7 +147,7 @@ Coming:
 
 ### Multiple Screen Size Support
 
-| iPhone SE | iPhone 7 Plus | iPhone 8 | iPhone X/Pro |
+| iPhone SE | iPhone 8 | iPhone 7 Plus | iPhone X/Pro |
 | :------:| :------: | :------: | :------: |
-|![screen 1](https://i.imgur.com/MaaFJw8.png ) | ![screen 2](https://i.imgur.com/AVzEPD6.png) |![screen 3](https://i.imgur.com/p30RuzW.png)|![screen 4](https://i.imgur.com/aRX6NeA.png)|
+|![screen 1](https://i.imgur.com/MaaFJw8.png ) | ![screen 2](https://i.imgur.com/p30RuzW.png)| ![screen 3](https://i.imgur.com/AVzEPD6.png) |![screen 4](https://i.imgur.com/aRX6NeA.png)|
 
