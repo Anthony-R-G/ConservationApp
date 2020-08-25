@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		27833538551D4B3E25CE217A /* Pods_Terra.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B1B9E327E92F328F158E466 /* Pods_Terra.framework */; };
-		7910BAB27095C746F49FFC42 /* Pods_TerraTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EB8ED79505BA0B1444EC48D /* Pods_TerraTests.framework */; };
+		491D56E1885457C85535C401 /* Pods_Terra.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88356D01F6229A8DBBA87B09 /* Pods_Terra.framework */; };
+		68EC89012B0A54BDCA88C8D3 /* Pods_TerraTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4E3F63A6E4CE06FDAAA4E9D /* Pods_TerraTests.framework */; };
 		9701B4EA24EAEAFB0083CFDC /* SpeciesMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9701B4E924EAEAFB0083CFDC /* SpeciesMapView.swift */; };
 		9706C32F24EC6CC9005831A7 /* newsResponseTestData.json in Resources */ = {isa = PBXBuildFile; fileRef = 9706C32E24EC6CC9005831A7 /* newsResponseTestData.json */; };
 		970E657F24EDF9D900E850F7 /* UILabelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970E657E24EDF9D900E850F7 /* UILabelExtensions.swift */; };
@@ -25,6 +25,10 @@
 		972BBF7E24C026CD00B6F7C0 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 972BBF7B24C0256F00B6F7C0 /* Roboto-Bold.ttf */; };
 		972BBF7F24C026CF00B6F7C0 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 972BBF7C24C0257600B6F7C0 /* Roboto-Medium.ttf */; };
 		972BBF8024C026D100B6F7C0 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 972BBF7D24C0257B00B6F7C0 /* Roboto-Light.ttf */; };
+		9743BAB124EFBEDF0090A2E4 /* ConservationStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9743BAB024EFBEDF0090A2E4 /* ConservationStatusView.swift */; };
+		9743BAB324F026710090A2E4 /* BiomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9743BAB224F026710090A2E4 /* BiomeView.swift */; };
+		9743BAB624F036C20090A2E4 /* DetailHowToHelpStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9743BAB524F036C20090A2E4 /* DetailHowToHelpStrategy.swift */; };
+		9743BAB824F03FE10090A2E4 /* ConservationStatusDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9743BAB724F03FE10090A2E4 /* ConservationStatusDelegate.swift */; };
 		97452E4623E1E6C7005636E0 /* SpeciesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97452E4523E1E6C7005636E0 /* SpeciesCollectionViewCell.swift */; };
 		97452E4823E1EEE9005636E0 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97452E4723E1EEE9005636E0 /* GradientView.swift */; };
 		974B752124DFFC72006C3D1D /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F4E00924D757C600509694 /* StringExtensions.swift */; };
@@ -42,6 +46,8 @@
 		97591FE024CCD2E9002EAC96 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FDE24CCD14A002EAC96 /* Constants.swift */; };
 		97591FE324CCDC48002EAC96 /* FontWeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FE224CCDC48002EAC96 /* FontWeight.swift */; };
 		975C8E5424E4F11500A0EB9D /* DetailThreatsStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975C8E5324E4F11500A0EB9D /* DetailThreatsStrategy.swift */; };
+		975CBFC924EFA9CE00951CD3 /* MeasurementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975CBFC824EFA9CE00951CD3 /* MeasurementsView.swift */; };
+		97637B3E24F4A60200CF4C72 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97637B3D24F4A60200CF4C72 /* Device.swift */; };
 		9764D12924D7DC250050AF37 /* NewsArticle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9764D12824D7DC250050AF37 /* NewsArticle.swift */; };
 		9764D12B24D7DD820050AF37 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9764D12A24D7DD820050AF37 /* Secrets.swift */; };
 		9764D12E24D7E46E0050AF37 /* NewsArticleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9764D12D24D7E46E0050AF37 /* NewsArticleTableViewCell.swift */; };
@@ -80,9 +86,11 @@
 		97812F0124EDFB3400E7C421 /* UISwipeGestureRecognizerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97812F0024EDFB3400E7C421 /* UISwipeGestureRecognizerExtensions.swift */; };
 		97812F0324EDFD5D00E7C421 /* DetailPageStrategyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97812F0224EDFD5D00E7C421 /* DetailPageStrategyViewModel.swift */; };
 		9782524024DFFC3600B9F6FC /* NewsArticle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9764D12824D7DC250050AF37 /* NewsArticle.swift */; };
+		978AA0EC24EE63EB00B631E6 /* Measurements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978AA0EB24EE63EB00B631E6 /* Measurements.swift */; };
 		978E5CF223FB5CBC007BCD25 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 978E5CF123FB5CBC007BCD25 /* GoogleService-Info.plist */; };
 		97928F7924CD11BF00AF90C5 /* FirestoreError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97928F7824CD11BF00AF90C5 /* FirestoreError.swift */; };
 		97928F7B24CD347200AF90C5 /* FirebaseConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97928F7A24CD347200AF90C5 /* FirebaseConvertible.swift */; };
+		97947D4D24F38ABF00470402 /* Measurements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978AA0EB24EE63EB00B631E6 /* Measurements.swift */; };
 		97947F5324DD1F560047052B /* CustomCalloutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97947F5224DD1F560047052B /* CustomCalloutView.swift */; };
 		9794EF7C24E66EA700B72246 /* Roboto-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9794EF7A24E66EA600B72246 /* Roboto-Italic.ttf */; };
 		9794EF7D24E66EA700B72246 /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9794EF7B24E66EA700B72246 /* Roboto-Black.ttf */; };
@@ -129,10 +137,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2833A5B261D67E39A847FF79 /* Pods-TerraTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TerraTests.release.xcconfig"; path = "Target Support Files/Pods-TerraTests/Pods-TerraTests.release.xcconfig"; sourceTree = "<group>"; };
-		334B87203A8052381927433F /* Pods-Terra.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Terra.debug.xcconfig"; path = "Target Support Files/Pods-Terra/Pods-Terra.debug.xcconfig"; sourceTree = "<group>"; };
-		5EB8ED79505BA0B1444EC48D /* Pods_TerraTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TerraTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6B1B9E327E92F328F158E466 /* Pods_Terra.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Terra.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6DD03BCFE619437A7D64F27C /* Pods-Terra.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Terra.debug.xcconfig"; path = "Target Support Files/Pods-Terra/Pods-Terra.debug.xcconfig"; sourceTree = "<group>"; };
+		88356D01F6229A8DBBA87B09 /* Pods_Terra.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Terra.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9701B4E924EAEAFB0083CFDC /* SpeciesMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesMapView.swift; sourceTree = "<group>"; };
 		9706C32E24EC6CC9005831A7 /* newsResponseTestData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = newsResponseTestData.json; sourceTree = "<group>"; };
 		970E657E24EDF9D900E850F7 /* UILabelExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExtensions.swift; sourceTree = "<group>"; };
@@ -145,6 +151,10 @@
 		972BBF7B24C0256F00B6F7C0 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		972BBF7C24C0257600B6F7C0 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		972BBF7D24C0257B00B6F7C0 /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
+		9743BAB024EFBEDF0090A2E4 /* ConservationStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConservationStatusView.swift; sourceTree = "<group>"; };
+		9743BAB224F026710090A2E4 /* BiomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiomeView.swift; sourceTree = "<group>"; };
+		9743BAB524F036C20090A2E4 /* DetailHowToHelpStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailHowToHelpStrategy.swift; sourceTree = "<group>"; };
+		9743BAB724F03FE10090A2E4 /* ConservationStatusDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConservationStatusDelegate.swift; sourceTree = "<group>"; };
 		97452E4523E1E6C7005636E0 /* SpeciesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesCollectionViewCell.swift; sourceTree = "<group>"; };
 		97452E4723E1EEE9005636E0 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		974CC98324C64F0E00E4EF85 /* PopulationTrend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopulationTrend.swift; sourceTree = "<group>"; };
@@ -153,6 +163,8 @@
 		97591FE124CCDC28002EAC96 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		97591FE224CCDC48002EAC96 /* FontWeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontWeight.swift; sourceTree = "<group>"; };
 		975C8E5324E4F11500A0EB9D /* DetailThreatsStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailThreatsStrategy.swift; sourceTree = "<group>"; };
+		975CBFC824EFA9CE00951CD3 /* MeasurementsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementsView.swift; sourceTree = "<group>"; };
+		97637B3D24F4A60200CF4C72 /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		9764D12824D7DC250050AF37 /* NewsArticle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsArticle.swift; sourceTree = "<group>"; };
 		9764D12A24D7DD820050AF37 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		9764D12D24D7E46E0050AF37 /* NewsArticleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsArticleTableViewCell.swift; sourceTree = "<group>"; };
@@ -184,6 +196,7 @@
 		977D877724CE504C00AE5E51 /* speciesModelTestData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = speciesModelTestData.json; sourceTree = "<group>"; };
 		97812F0024EDFB3400E7C421 /* UISwipeGestureRecognizerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISwipeGestureRecognizerExtensions.swift; sourceTree = "<group>"; };
 		97812F0224EDFD5D00E7C421 /* DetailPageStrategyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPageStrategyViewModel.swift; sourceTree = "<group>"; };
+		978AA0EB24EE63EB00B631E6 /* Measurements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Measurements.swift; sourceTree = "<group>"; };
 		978E5CF123FB5CBC007BCD25 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		97928F7824CD11BF00AF90C5 /* FirestoreError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreError.swift; sourceTree = "<group>"; };
 		97928F7A24CD347200AF90C5 /* FirebaseConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseConvertible.swift; sourceTree = "<group>"; };
@@ -220,8 +233,10 @@
 		97FAD4E624D75B20007FEFD8 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		97FAD4E824D75DBD007FEFD8 /* NewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
 		97FEAEAB24BE5FCC005BAEFE /* Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Factory.swift; sourceTree = "<group>"; };
-		FE1A69B50BCF145EA0042553 /* Pods-Terra.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Terra.release.xcconfig"; path = "Target Support Files/Pods-Terra/Pods-Terra.release.xcconfig"; sourceTree = "<group>"; };
-		FE5183F41F77A47240C9CDF6 /* Pods-TerraTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TerraTests.debug.xcconfig"; path = "Target Support Files/Pods-TerraTests/Pods-TerraTests.debug.xcconfig"; sourceTree = "<group>"; };
+		99B6D5FAEA9593F6D2C60E23 /* Pods-TerraTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TerraTests.release.xcconfig"; path = "Target Support Files/Pods-TerraTests/Pods-TerraTests.release.xcconfig"; sourceTree = "<group>"; };
+		B8AAADDC0143C2D1250AC232 /* Pods-TerraTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TerraTests.debug.xcconfig"; path = "Target Support Files/Pods-TerraTests/Pods-TerraTests.debug.xcconfig"; sourceTree = "<group>"; };
+		E4E3F63A6E4CE06FDAAA4E9D /* Pods_TerraTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TerraTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EE5DEF24088766726F9393C7 /* Pods-Terra.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Terra.release.xcconfig"; path = "Target Support Files/Pods-Terra/Pods-Terra.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -229,7 +244,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				27833538551D4B3E25CE217A /* Pods_Terra.framework in Frameworks */,
+				491D56E1885457C85535C401 /* Pods_Terra.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,7 +252,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7910BAB27095C746F49FFC42 /* Pods_TerraTests.framework in Frameworks */,
+				68EC89012B0A54BDCA88C8D3 /* Pods_TerraTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,6 +302,7 @@
 				97F7B42724C56886007AEE97 /* DonateButtonDelegate.swift */,
 				9772516124DFA6C40052A3F6 /* NewsViewModelDelegate.swift */,
 				976DA46724DFCB5F003F3197 /* SpeciesViewModelDelegate.swift */,
+				9743BAB724F03FE10090A2E4 /* ConservationStatusDelegate.swift */,
 			);
 			path = "Custom Delegates";
 			sourceTree = "<group>";
@@ -305,6 +321,19 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		9743BAB424F026780090A2E4 /* DetailInfo */ = {
+			isa = PBXGroup;
+			children = (
+				97EA493B24E3BEC200C0FE64 /* DetailInfoWindow.swift */,
+				9701B4E924EAEAFB0083CFDC /* SpeciesMapView.swift */,
+				975CBFC824EFA9CE00951CD3 /* MeasurementsView.swift */,
+				9743BAB024EFBEDF0090A2E4 /* ConservationStatusView.swift */,
+				97A24D2324E49A4100958AB9 /* ClassificationView.swift */,
+				9743BAB224F026710090A2E4 /* BiomeView.swift */,
+			);
+			path = DetailInfo;
+			sourceTree = "<group>";
+		};
 		97452E4423E1E6A9005636E0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -316,12 +345,10 @@
 				977D877324CE0D8C00AE5E51 /* DonateButton.swift */,
 				97947F5224DD1F560047052B /* CustomCalloutView.swift */,
 				9772515624DF66A90052A3F6 /* CustomAnnotationView.swift */,
-				97EA493B24E3BEC200C0FE64 /* DetailInfoWindow.swift */,
-				97A24D2324E49A4100958AB9 /* ClassificationView.swift */,
 				976F68C724E8AE2500277F79 /* CommonView.swift */,
 				976F68C924E8AE8600277F79 /* ShadowView.swift */,
-				9701B4E924EAEAFB0083CFDC /* SpeciesMapView.swift */,
 				97E22D8924EC7701008B76E2 /* RedListToolBar.swift */,
+				9743BAB424F026780090A2E4 /* DetailInfo */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -359,6 +386,7 @@
 				974CC98324C64F0E00E4EF85 /* PopulationTrend.swift */,
 				97D9E24A24C6470600524000 /* Diet.swift */,
 				977D876F24CD6A1200AE5E51 /* Group.swift */,
+				978AA0EB24EE63EB00B631E6 /* Measurements.swift */,
 				9723E7A924D3505C0038ECB6 /* SpeciesAnnotation.swift */,
 			);
 			path = "Species Models";
@@ -378,6 +406,7 @@
 				9794EF8424E68FD700B72246 /* Utilities.swift */,
 				9764D12A24D7DD820050AF37 /* Secrets.swift */,
 				9764D12824D7DC250050AF37 /* NewsArticle.swift */,
+				97637B3D24F4A60200CF4C72 /* Device.swift */,
 				97CDF11824E4AC050055FE78 /* DetailPageStrategies */,
 			);
 			path = Models;
@@ -452,6 +481,7 @@
 				97B7C79624E440CE008BD6AD /* DetailOverviewStrategy.swift */,
 				97A24D1F24E445A800958AB9 /* DetailHabitatStrategy.swift */,
 				975C8E5324E4F11500A0EB9D /* DetailThreatsStrategy.swift */,
+				9743BAB524F036C20090A2E4 /* DetailHowToHelpStrategy.swift */,
 			);
 			path = DetailPageStrategies;
 			sourceTree = "<group>";
@@ -469,10 +499,10 @@
 		A579569CDD33F6897BA63C97 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				334B87203A8052381927433F /* Pods-Terra.debug.xcconfig */,
-				FE1A69B50BCF145EA0042553 /* Pods-Terra.release.xcconfig */,
-				FE5183F41F77A47240C9CDF6 /* Pods-TerraTests.debug.xcconfig */,
-				2833A5B261D67E39A847FF79 /* Pods-TerraTests.release.xcconfig */,
+				6DD03BCFE619437A7D64F27C /* Pods-Terra.debug.xcconfig */,
+				EE5DEF24088766726F9393C7 /* Pods-Terra.release.xcconfig */,
+				B8AAADDC0143C2D1250AC232 /* Pods-TerraTests.debug.xcconfig */,
+				99B6D5FAEA9593F6D2C60E23 /* Pods-TerraTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -481,8 +511,8 @@
 			isa = PBXGroup;
 			children = (
 				9723E7AB24D353330038ECB6 /* MapKit.framework */,
-				6B1B9E327E92F328F158E466 /* Pods_Terra.framework */,
-				5EB8ED79505BA0B1444EC48D /* Pods_TerraTests.framework */,
+				88356D01F6229A8DBBA87B09 /* Pods_Terra.framework */,
+				E4E3F63A6E4CE06FDAAA4E9D /* Pods_TerraTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -494,11 +524,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 979C192F23DE43EF00651B2B /* Build configuration list for PBXNativeTarget "Terra" */;
 			buildPhases = (
-				C51F5EC18D01C27223932CFA /* [CP] Check Pods Manifest.lock */,
+				F18D4CB4D07FDD81C1A8B57B /* [CP] Check Pods Manifest.lock */,
 				979C190C23DE43E900651B2B /* Sources */,
 				979C190D23DE43E900651B2B /* Frameworks */,
 				979C190E23DE43E900651B2B /* Resources */,
-				B7A773EEE0514C1AF56308F3 /* [CP] Embed Pods Frameworks */,
+				E77FD5247809ADFBB650EC91 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -513,7 +543,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 979C193223DE43EF00651B2B /* Build configuration list for PBXNativeTarget "TerraTests" */;
 			buildPhases = (
-				0B982A88C36A815E79B095EE /* [CP] Check Pods Manifest.lock */,
+				11ADE77A1DCC40659616B0E9 /* [CP] Check Pods Manifest.lock */,
 				979C192223DE43EF00651B2B /* Sources */,
 				979C192323DE43EF00651B2B /* Frameworks */,
 				979C192423DE43EF00651B2B /* Resources */,
@@ -596,7 +626,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0B982A88C36A815E79B095EE /* [CP] Check Pods Manifest.lock */ = {
+		11ADE77A1DCC40659616B0E9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -618,7 +648,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B7A773EEE0514C1AF56308F3 /* [CP] Embed Pods Frameworks */ = {
+		E77FD5247809ADFBB650EC91 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -635,7 +665,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Terra/Pods-Terra-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C51F5EC18D01C27223932CFA /* [CP] Check Pods Manifest.lock */ = {
+		F18D4CB4D07FDD81C1A8B57B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -670,8 +700,11 @@
 				97DC775224EB6C8700111245 /* CoverRoundedCell.swift in Sources */,
 				970E657F24EDF9D900E850F7 /* UILabelExtensions.swift in Sources */,
 				9711D8FC24BD42C800C2E6F1 /* FirestoresService.swift in Sources */,
+				9743BAB624F036C20090A2E4 /* DetailHowToHelpStrategy.swift in Sources */,
 				9729736F24DC9E3400123C86 /* DoubleExtensions.swift in Sources */,
 				977D877224CD7BFF00AE5E51 /* Habitat.swift in Sources */,
+				978AA0EC24EE63EB00B631E6 /* Measurements.swift in Sources */,
+				9743BAB124EFBEDF0090A2E4 /* ConservationStatusView.swift in Sources */,
 				9772515B24DF800C0052A3F6 /* NewsViewModel.swift in Sources */,
 				97812F0324EDFD5D00E7C421 /* DetailPageStrategyViewModel.swift in Sources */,
 				9723E7AA24D3505C0038ECB6 /* SpeciesAnnotation.swift in Sources */,
@@ -690,6 +723,7 @@
 				977D877624CE1F3800AE5E51 /* UIRoundedButtonWithGradientAndShadow.swift in Sources */,
 				976DA46624DFCAF9003F3197 /* SpeciesViewModel.swift in Sources */,
 				9772515924DF7F9C0052A3F6 /* NewsResponse.swift in Sources */,
+				9743BAB324F026710090A2E4 /* BiomeView.swift in Sources */,
 				97997F2C24DCE18B00981087 /* MGLMapViewController.swift in Sources */,
 				9772516224DFA6C40052A3F6 /* NewsViewModelDelegate.swift in Sources */,
 				97D0AB2024ECC84D00D345A4 /* UIImageExtensions.swift in Sources */,
@@ -708,12 +742,15 @@
 				97B68CD424BBB0AC005B8AB8 /* CoverHeaderNameView.swift in Sources */,
 				976F68C824E8AE2500277F79 /* CommonView.swift in Sources */,
 				976F68C224E8A62C00277F79 /* SpeciesCoverViewController.swift in Sources */,
+				9743BAB824F03FE10090A2E4 /* ConservationStatusDelegate.swift in Sources */,
 				9764D12B24D7DD820050AF37 /* Secrets.swift in Sources */,
 				9794EF8524E68FD700B72246 /* Utilities.swift in Sources */,
+				97637B3E24F4A60200CF4C72 /* Device.swift in Sources */,
 				97EA494124E43FC500C0FE64 /* DetailPageStrategy.swift in Sources */,
 				97D9E24B24C6470700524000 /* Diet.swift in Sources */,
 				97452E4623E1E6C7005636E0 /* SpeciesCollectionViewCell.swift in Sources */,
 				976DA46824DFCB5F003F3197 /* SpeciesViewModelDelegate.swift in Sources */,
+				975CBFC924EFA9CE00951CD3 /* MeasurementsView.swift in Sources */,
 				976F68D024E8B21A00277F79 /* CustomTransitionAnimation.swift in Sources */,
 				979C191423DE43E900651B2B /* AppDelegate.swift in Sources */,
 				97E22D8A24EC7701008B76E2 /* RedListToolBar.swift in Sources */,
@@ -747,6 +784,7 @@
 				974B752324E002B2006C3D1D /* SpeciesViewModel.swift in Sources */,
 				974B752524E00544006C3D1D /* SpeciesViewModelDelegate.swift in Sources */,
 				972A615424C94C7000A59AB6 /* PopulationTrend.swift in Sources */,
+				97947D4D24F38ABF00470402 /* Measurements.swift in Sources */,
 				974B752A24E00595006C3D1D /* NewsResponse.swift in Sources */,
 				974B752424E0053F006C3D1D /* NewsViewModelDelegate.swift in Sources */,
 				97A2BC7224CE5578000D6B2D /* FirestoreError.swift in Sources */,
@@ -907,7 +945,7 @@
 		};
 		979C193023DE43EF00651B2B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 334B87203A8052381927433F /* Pods-Terra.debug.xcconfig */;
+			baseConfigurationReference = 6DD03BCFE619437A7D64F27C /* Pods-Terra.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -926,7 +964,7 @@
 		};
 		979C193123DE43EF00651B2B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FE1A69B50BCF145EA0042553 /* Pods-Terra.release.xcconfig */;
+			baseConfigurationReference = EE5DEF24088766726F9393C7 /* Pods-Terra.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -945,7 +983,7 @@
 		};
 		979C193323DE43EF00651B2B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FE5183F41F77A47240C9CDF6 /* Pods-TerraTests.debug.xcconfig */;
+			baseConfigurationReference = B8AAADDC0143C2D1250AC232 /* Pods-TerraTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -968,7 +1006,7 @@
 		};
 		979C193423DE43EF00651B2B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2833A5B261D67E39A847FF79 /* Pods-TerraTests.release.xcconfig */;
+			baseConfigurationReference = 99B6D5FAEA9593F6D2C60E23 /* Pods-TerraTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";

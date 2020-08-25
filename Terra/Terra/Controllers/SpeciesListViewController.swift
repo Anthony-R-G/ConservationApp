@@ -11,7 +11,7 @@ import UIKit
 final class SpeciesListViewController: UIViewController {
     
     //MARK: -- UI Element Initialization
-
+    
     private lazy var searchBar: UISearchBar = {
         let sb = UISearchBar()
         sb.backgroundColor = .clear
@@ -21,38 +21,39 @@ final class SpeciesListViewController: UIViewController {
         sb.keyboardAppearance = .dark
         sb.showsCancelButton = true
         sb.placeholder = "Search species..."
-        sb.tintColor = Constants.red
+        sb.tintColor = .systemBlue
+        sb.delegate = self
         return sb
     }()
     
-    private lazy var filterToolBar: RedListFilterTabBar = {
+    private lazy var filterTabBar: RedListFilterTabBar = {
         let tb = RedListFilterTabBar(frame: CGRect(x: 0,
-                                             y: 0,
-                                             width: view.frame.width,
-                                             height: 30))
+                                                   y: 0,
+                                                   width: view.frame.width,
+                                                   height: 30.deviceAdjusted))
         tb.selectedItem = tb.items![0]
         tb.delegate = self
         return tb
-      }()
+    }()
     
     private lazy var searchBarButton: UIButton = {
         let btn = UIButton()
         btn.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
         btn.tintColor = .white
-        btn.addTarget(self, action: #selector(expandSearchBar), for: .touchUpInside)
+        btn.addTarget(
+            self,
+            action: #selector(expandSearchBar),
+            for: .touchUpInside)
         return btn
     }()
     
     private lazy var headerImageView: UIImageView = {
         let iv = UIImageView()
-        iv.translatesAutoresizingMaskIntoConstraints = false
         iv.image = #imageLiteral(resourceName: "listVCbackground")
-        iv.contentMode = UIView.ContentMode.scaleAspectFill
+        iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
-        view.insertSubview(iv, at: 0)
         return iv
     }()
-    
     
     private lazy var terraTitleLabel: UILabel = {
         return Factory.makeLabel(title: "TERRA",
@@ -68,27 +69,70 @@ final class SpeciesListViewController: UIViewController {
                                       size: 17,
                                       color: .red,
                                       alignment: .center)
-        label.frame = CGRect(x: 0,
-                             y: 0,
-                             width: collectionView.bounds.size.width ,
-                             height: collectionView.bounds.size.height)
+        label.frame = CGRect(
+            origin: .zero,
+            size: CGSize(
+                width: collectionView.bounds.width,
+                height: collectionView.bounds.height))
+        
         collectionView.backgroundView = label
         label.isHidden = true
         return label
     }()
     
     private lazy var collectionView: UICollectionView = {
-        return Factory.makeCollectionView()
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        
+        let cv = UICollectionView(
+            frame: .zero,
+            collectionViewLayout: layout)
+        
+        cv.backgroundColor = .clear
+        cv.register(SpeciesCollectionViewCell.self, forCellWithReuseIdentifier: Constants.reuseIdentifier)
+        cv.dataSource = self
+        cv.delegate = self
+        return cv
     }()
     
     private lazy var searchBarLeadingAnchorConstraint: NSLayoutConstraint = {
-        return searchBar.leadingAnchor.constraint(equalTo: view.trailingAnchor,
-                                                  constant: -Constants.spacingConstant)
+        return searchBar.leadingAnchor.constraint(
+            equalTo: view.trailingAnchor,
+            constant: -Constants.spacingConstant)
     }()
     
-    private lazy var terraTitleLabelLeadingAnchorConstraint: NSLayoutConstraint = {
-        return terraTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor,
-                                                        constant: Constants.spacingConstant)
+    private lazy var earthButtonLeadingAnchorConstraint: NSLayoutConstraint = {
+        return earthButton.leadingAnchor.constraint(
+            equalTo: view.leadingAnchor,
+            constant: Constants.spacingConstant)
+    }()
+    
+    private lazy var rightSwipeGesture: UISwipeGestureRecognizer = {
+        let gesture = UISwipeGestureRecognizer(
+            target: self,
+            action: #selector(handleSwipe(_:)))
+        gesture.direction = .right
+        return gesture
+    }()
+    
+    private lazy var leftSwipeGesture: UISwipeGestureRecognizer = {
+        let gesture = UISwipeGestureRecognizer(
+            target: self,
+            action: #selector(handleSwipe(_:)))
+        gesture.direction = .left
+        return gesture
+    }()
+    
+    private lazy var earthButton: UIButton = {
+        let btn = UIButton()
+        btn.setImage(#imageLiteral(resourceName: "globe"), for: .normal)
+        btn.addTarget(
+            self,
+            action: #selector(earthButtonPressed),
+            for: .touchUpInside)
+        btn.alpha = 1.0
+        btn.tintColor = .systemBlue
+        return btn
     }()
     
     //MARK: -- Properties
@@ -96,12 +140,46 @@ final class SpeciesListViewController: UIViewController {
     private var viewModel: SpeciesViewModel!
     
     private var isSearching: Bool = false
-  
+    
+    private var selectedTab = 0
+        
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     //MARK: -- Methods
     
+    @objc private func earthButtonPressed() {
+        let mapVC = MGLMapViewController()
+        mapVC.speciesData = viewModel.species
+        mapVC.modalPresentationStyle = .fullScreen
+        presentModally(mapVC)
+    }
+    
+    @objc private func handleSwipe(_ sender: UISwipeGestureRecognizer) {
+        
+        switch sender.direction {
+        case .left:
+            selectedTab += 1
+            if selectedTab == 4 {
+                selectedTab = 0
+            }
+            
+        case .right:
+            selectedTab -= 1
+            if selectedTab == -1 {
+                selectedTab = 3
+            }
+        default:
+            ()
+        }
+        filterTabBar.selectedItem = filterTabBar.items![selectedTab]
+        viewModel.updateRedListCategoryFilteredAnimals(from: filterTabBar.selectedItem!.tag)
+    }
+    
     @objc private func expandSearchBar() {
-        searchBarLeadingAnchorConstraint.constant = -400
-        terraTitleLabelLeadingAnchorConstraint.constant = -100
+        searchBarLeadingAnchorConstraint.constant = -400.deviceAdjusted
+        earthButtonLeadingAnchorConstraint.constant = -200.deviceAdjusted
         searchBar.alpha = 1
         searchBarButton.alpha = 0
         UIView.animate(withDuration: 0.3, animations: { [weak self] in
@@ -112,13 +190,12 @@ final class SpeciesListViewController: UIViewController {
             guard let self = self else { return }
             self.searchBar.becomeFirstResponder()
         }
-        
         isSearching = true
     }
     
     private func dismissSearchBar() {
         searchBarLeadingAnchorConstraint.constant = -Constants.spacingConstant
-        terraTitleLabelLeadingAnchorConstraint.constant = Constants.spacingConstant
+        earthButtonLeadingAnchorConstraint.constant = Constants.spacingConstant
         searchBar.alpha = 0
         searchBarButton.alpha = 1
         UIView.animate(withDuration: 0.3, animations: { [weak self] in
@@ -129,7 +206,6 @@ final class SpeciesListViewController: UIViewController {
             guard let self = self else { return }
             self.searchBar.resignFirstResponder()
         }
-        
         isSearching = false
     }
     
@@ -139,14 +215,15 @@ final class SpeciesListViewController: UIViewController {
         rootViewController?.present(viewController, animated: true, completion: nil)
     }
     
-    private func setDatasourceAndDelegates() {
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        searchBar.delegate = self
+    private func addGestureRecognizers() {
+        collectionView.addGestureRecognizer(rightSwipeGesture)
+        collectionView.addGestureRecognizer(leftSwipeGesture)
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+    //MARK: --Life Cycle Methods
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
     }
     
     override func viewDidLoad() {
@@ -156,7 +233,7 @@ final class SpeciesListViewController: UIViewController {
         viewModel.fetchSpeciesData()
         addSubviews()
         setConstraints()
-        setDatasourceAndDelegates()
+        addGestureRecognizers()
     }
 }
 
@@ -164,15 +241,16 @@ final class SpeciesListViewController: UIViewController {
 
 extension SpeciesListViewController: UICollectionViewDataSource {
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView,
+                        numberOfItemsInSection section: Int) -> Int {
         noResultsFoundLabel.isHidden = viewModel.totalSpeciesCount == 0 && isSearching ? false : true
-        
         return viewModel.totalSpeciesCount
     }
     
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let speciesCell = collectionView.dequeueReusableCell(withReuseIdentifier: "speciesCell", for: indexPath) as! SpeciesCollectionViewCell
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let speciesCell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.reuseIdentifier, for: indexPath) as! SpeciesCollectionViewCell
         let specificAnimal = viewModel.specificSpecies(at: indexPath.row)
         speciesCell.configureCell(from: specificAnimal)
         return speciesCell
@@ -182,29 +260,36 @@ extension SpeciesListViewController: UICollectionViewDataSource {
 //MARK: -- CollectionView Delegate Methods
 
 extension SpeciesListViewController: UICollectionViewDelegate {
-     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
-           let cell = collectionView.cellForItem(at: indexPath)
-           let generator = UIImpactFeedbackGenerator(style: .medium)
-           generator.impactOccurred()
-           UIView.animate(withDuration: 0.3) {
+    func collectionView(_ collectionView: UICollectionView,
+                        didHighlightItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath)
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        generator.impactOccurred()
+        UIView.animate(withDuration: 0.3) {
             cell?.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
-           }
-       }
+        }
+    }
     
-    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
-           let cell = collectionView.cellForItem(at: indexPath)
-           UIView.animate(withDuration: 0.3) {
-               cell?.transform = CGAffineTransform(scaleX: 1, y: 1)
-           }
-       }
+    func collectionView(_ collectionView: UICollectionView,
+                        didUnhighlightItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath)
+        UIView.animate(withDuration: 0.3) {
+            cell?.transform = CGAffineTransform(scaleX: 1, y: 1)
+        }
+    }
 }
 
 extension SpeciesListViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: 227)
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        return CGSize(width: view.frame.width, height: 227.deviceAdjusted)
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView,
+                        didSelectItemAt indexPath: IndexPath) {
+        
         let selectedSpecies = viewModel.specificSpecies(at: indexPath.row)
         let coverVC = SpeciesCoverViewController()
         coverVC.viewModel =  DetailPageStrategyViewModel(species: selectedSpecies)
@@ -236,6 +321,14 @@ extension SpeciesListViewController: UISearchBarDelegate {
     }
 }
 
+//MARK: -- Tab Bar Delegate
+extension SpeciesListViewController: UITabBarDelegate {
+    func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        selectedTab = item.tag
+        viewModel.updateRedListCategoryFilteredAnimals(from: item.tag)
+    }
+}
+
 //MARK: -- Custom Delegate Implementations
 extension SpeciesListViewController: SpeciesViewModelDelegate {
     func fetchCompleted() {
@@ -251,82 +344,76 @@ extension SpeciesListViewController: SpeciesViewModelDelegate {
 fileprivate extension SpeciesListViewController {
     
     func addSubviews() {
-        let UIElements = [terraTitleLabel, searchBarButton, searchBar, collectionView, filterToolBar]
-        UIElements.forEach { view.addSubview($0) }
-        UIElements.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
+        [headerImageView, earthButton, terraTitleLabel, searchBarButton, searchBar, collectionView, filterTabBar].forEach { view.addSubview($0) }
     }
     
     func setConstraints() {
         setHeaderImageViewConstraints()
         
+        setEarthButtonConstraints()
         setTerraTitleLabelConstraints()
         setSearchBarButtonConstraints()
         setSearchBarConstraints()
         
         setSpeciesCollectionViewConstraints()
-        setToolBarConstraints()
+        setFilterTabBarConstraints()
     }
     
     func setHeaderImageViewConstraints() {
-        NSLayoutConstraint.activate([
-            headerImageView.topAnchor.constraint(equalTo: view.topAnchor),
-            headerImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            headerImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            headerImageView.bottomAnchor.constraint(equalTo: collectionView.topAnchor)
-        ])
+        headerImageView.snp.makeConstraints { (make) in
+            make.top.leading.trailing.equalToSuperview()
+            make.bottom.equalTo(collectionView.snp.top)
+        }
     }
     
-    
     func setTerraTitleLabelConstraints() {
-        NSLayoutConstraint.activate([
-            terraTitleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
-            terraTitleLabelLeadingAnchorConstraint,
-            terraTitleLabel.heightAnchor.constraint(equalToConstant: 25),
-            terraTitleLabel.widthAnchor.constraint(equalToConstant: 100)
-        ])
+        terraTitleLabel.snp.makeConstraints { (make) in
+            make.top.equalToSuperview().inset(50.deviceAdjusted)
+            make.leading.equalTo(earthButton.snp.trailing).offset(Constants.spacingConstant/2)
+            make.height.equalTo(25.deviceAdjusted)
+            make.width.equalTo(100.deviceAdjusted)
+        }
+    }
+    
+    func setEarthButtonConstraints() {
+        earthButton.snp.makeConstraints { (make) in
+            earthButtonLeadingAnchorConstraint.isActive = true
+            make.height.width.equalTo(40.deviceAdjusted)
+            make.centerY.equalTo(terraTitleLabel)
+        }
     }
     
     func setSearchBarButtonConstraints() {
-        NSLayoutConstraint.activate([
-            searchBarButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.spacingConstant),
-            searchBarButton.centerYAnchor.constraint(equalTo: terraTitleLabel.centerYAnchor),
-            searchBarButton.heightAnchor.constraint(equalToConstant: 40),
-            searchBarButton.widthAnchor.constraint(equalToConstant: 40)
-        ])
+        searchBarButton.snp.makeConstraints { (make) in
+            make.height.width.equalTo(40.deviceAdjusted)
+            make.centerY.equalTo(terraTitleLabel)
+            make.trailing.equalToSuperview().inset(Constants.spacingConstant)
+        }
     }
     
     func setSearchBarConstraints() {
-        NSLayoutConstraint.activate([
-            searchBarLeadingAnchorConstraint,
-            searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.spacingConstant),
-            searchBar.centerYAnchor.constraint(equalTo: searchBarButton.centerYAnchor),
-        ])
+        searchBar.snp.makeConstraints { (make) in
+            searchBarLeadingAnchorConstraint.isActive = true
+            make.trailing.equalToSuperview().inset(Constants.spacingConstant)
+            make.centerY.equalTo(searchBarButton)
+        }
     }
     
-    func setToolBarConstraints() {
-        NSLayoutConstraint.activate([
-            filterToolBar.topAnchor.constraint(equalTo: terraTitleLabel.bottomAnchor, constant: 10),
-            filterToolBar.widthAnchor.constraint(equalToConstant: filterToolBar.frame.width),
-            filterToolBar.heightAnchor.constraint(equalToConstant: filterToolBar.frame.height)
-        ])
+    func setFilterTabBarConstraints() {
+        filterTabBar.snp.makeConstraints { (make) in
+            make.top.equalTo(terraTitleLabel.snp.bottom).offset(10.deviceAdjusted)
+            make.height.width.equalTo(filterTabBar.frame.size)
+        }
     }
     
     func setSpeciesCollectionViewConstraints() {
-        NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: filterToolBar.bottomAnchor, constant: 0),
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50)
-        ])
+        collectionView.snp.makeConstraints { (make) in
+            make.leading.trailing.equalToSuperview()
+            make.top.equalTo(filterTabBar.snp.bottom)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(50)
+        }
     }
 }
 
-
-
-extension SpeciesListViewController: UITabBarDelegate {
-     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        viewModel.updateRedListCategoryFilteredAnimals(from: item.tag)
-    }
-}
 
 

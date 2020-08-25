@@ -61,12 +61,12 @@ final class CommonView: UIView {
     
     //MARK: -- Properties
    
-    
     var strategy: DetailPageStrategy!
     
     private lazy var subtitleTopConstraint: NSLayoutConstraint = {
-        return subtitleLabel.topAnchor.constraint(equalTo: topAnchor,
-                                                  constant: Constants.spacingConstant)
+        return subtitleLabel.topAnchor.constraint(
+            equalTo: topAnchor,
+            constant: Constants.spacingConstant)
     }()
     
     var topConstraintValue: CGFloat {
@@ -89,7 +89,7 @@ final class CommonView: UIView {
         }
     }
 
-    
+
     func configureView(from strategy: DetailPageStrategy) {
         titleLabel.text = strategy.pageName()
         strategy.firebaseStorageManager().getImage(for: strategy.species.commonName, setTo: backgroundImage)
@@ -134,9 +134,8 @@ fileprivate extension CommonView {
     }
     
     func setSubtitleLabelConstraints() {
-        subtitleLabel.snp.makeConstraints { [weak self] (make) in
-            guard let self = self else { return }
-            make.leading.equalTo(self).inset(Constants.spacingConstant)
+        subtitleLabel.snp.makeConstraints { (make) in 
+            make.leading.equalTo(titleLabel).inset(2)
             subtitleTopConstraint.isActive = true
         }
     }

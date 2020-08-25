@@ -33,9 +33,10 @@ class SpeciesDetailInfoViewController: UIViewController {
     
     private lazy var backgroundImageView: UIImageView = {
         let iv = UIImageView()
-         FirebaseStorageService.coverImageManager.getImage(for: strategy.species.commonName, setTo: iv)
-        iv.backgroundColor = .black
-        iv.contentMode = UIView.ContentMode.scaleAspectFill
+        FirebaseStorageService.coverImageManager.getImage(
+            for: strategy.species.commonName,
+            setTo: iv)
+        iv.contentMode = .scaleAspectFill
         return iv
     }()
     
@@ -56,10 +57,16 @@ class SpeciesDetailInfoViewController: UIViewController {
     
     private lazy var closeButton: UIButton = {
         let btn = UIButton()
-        btn.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
-        btn.transform = CGAffineTransform.init(scaleX: 1.5, y: 1.5)
+        btn.setImage(UIImage(systemName: "xmark.circle.fill"),
+                     for: .normal)
+        
+        btn.transform = CGAffineTransform(scaleX: 1.5,
+                                          y: 1.5)
         btn.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.845703125)
-        btn.addTarget(self, action: #selector(closeButtonPressed), for: .touchUpInside)
+        btn.addTarget(
+            self,
+            action: #selector(closeButtonPressed),
+            for: .touchUpInside)
         return btn
     }()
     
@@ -79,6 +86,10 @@ class SpeciesDetailInfoViewController: UIViewController {
         return commonView.heightAnchor.constraint(equalToConstant: Constants.commonViewImageDimension.height)
     }()
     
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
     //MARK: -- Methods
     
     @objc private func closeButtonPressed() {
@@ -88,6 +99,8 @@ class SpeciesDetailInfoViewController: UIViewController {
     func renderViewAsCard(_ value: Bool) {
         maskView.layer.cornerRadius = value ? Constants.cornerRadius : 0
     }
+    
+    //MARK: -- Life Cycle methods
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -104,7 +117,6 @@ class SpeciesDetailInfoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.isHidden = true
         addSubviews()
         setConstraints()
         commonView.fadeSubtitleIn()
@@ -224,7 +236,7 @@ extension SpeciesDetailInfoViewController: Animatable {
             .compactMap({$0})
             .first?.windows
             .filter({$0.isKeyWindow}).first?.safeAreaInsets.top ?? .zero
-        commonView.topConstraintValue = safeAreaTop + 20
+        commonView.topConstraintValue = safeAreaTop + Constants.spacingConstant
         
         // Animate the common view to a height of 500 points
         commonViewHeightConstraint.constant = Constants.commonViewImageDimension.height
@@ -276,6 +288,14 @@ extension SpeciesDetailInfoViewController: Animatable {
             guard let self = self else { return }
             self.renderViewAsCard(true)
         }
+    }
+}
+
+extension SpeciesDetailInfoViewController: BiomeViewDelegate {
+    func biomeWasTapped() {
+        let generator = UIImpactFeedbackGenerator(style: .light)
+        generator.impactOccurred()
+        print("Tappity tap")
     }
 }
 

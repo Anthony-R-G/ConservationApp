@@ -14,9 +14,25 @@ struct NewsArticle: Decodable, Hashable {
     let urlToImage: String?
     @ISO8601DateFormatted var publishedAt: String
     
-    var cleanedUpTitle: String {
+    var cleanedUpTitle: [String] {
         get {
-            title.removingNonAlphabetChars
+//            let set = Set("abcdefghijklmnopqrstuvxwyz")
+            var arr = [String]()
+            
+            var currentStr = ""
+            
+            for char in title.lowercased() {
+                if char != " "  {
+                    currentStr += String(char)
+                    continue
+                }
+                arr.append(currentStr)
+                currentStr = ""
+            }
+            arr.append(currentStr)
+            return arr
         }
+        
     }
 }
+

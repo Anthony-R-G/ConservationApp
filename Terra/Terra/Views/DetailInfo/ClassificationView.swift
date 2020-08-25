@@ -172,13 +172,15 @@ final class ClassificationView: UIView {
         return btn
     }()
     
-    let speechSynthesizer = AVSpeechSynthesizer()
+    //MARK: -- Properties
     
-    
-    //MARK: -- Methods
+    private let speechSynthesizer = AVSpeechSynthesizer()
     
     private var species: Species!
     
+    
+    //MARK: -- Methods
+
     @objc private func audioButtonPressed() {
         let speechUtterance: AVSpeechUtterance = AVSpeechUtterance(string: species.taxonomy.scientificName)
         speechUtterance.rate = AVSpeechUtteranceMaximumSpeechRate / 2.0
@@ -194,7 +196,7 @@ final class ClassificationView: UIView {
         setConstraints()
         speechSynthesizer.delegate = self
         self.snp.makeConstraints { (make) in
-            make.height.equalTo(260)
+            make.height.equalTo(260.deviceAdjusted)
         }
     }
     
@@ -216,8 +218,7 @@ extension ClassificationView: AVSpeechSynthesizerDelegate {
 
 fileprivate extension ClassificationView {
     func addSubviews() {
-        let UIElements = [horizontalStack, separatorLine, scientificNameTitleLabel ,scientificNameDataLabel, audioButton]
-        UIElements.forEach { addSubview($0) }
+       [horizontalStack, separatorLine, scientificNameTitleLabel ,scientificNameDataLabel, audioButton].forEach { addSubview($0) }
     }
     
     func setConstraints() {

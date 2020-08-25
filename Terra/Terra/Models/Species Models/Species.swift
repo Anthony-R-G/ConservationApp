@@ -8,12 +8,12 @@
 
 import Foundation
 
-public struct Species: FirebaseConvertible {
+struct Species: FirebaseConvertible {
     let commonName: String
     let overview: String
-    let weight: String
-    let height: String
+    let averageLifespan: String
     let donationLink: String
+    let measurements: Measurements
     let diet: Diet
     let taxonomy: Taxonomy
     let group: Group

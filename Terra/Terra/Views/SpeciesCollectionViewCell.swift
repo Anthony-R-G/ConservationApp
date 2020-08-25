@@ -23,12 +23,11 @@ final class SpeciesCollectionViewCell: UICollectionViewCell {
     }()
     
     private lazy var speciesScientificNameLabel: UILabel = {
-        let label = Factory.makeLabel(title: nil,
+        return Factory.makeLabel(title: nil,
                                       weight: .lightItalic,
                                       size: 16,
                                       color: .white,
                                       alignment: .left)
-        return label
     }()
     
     private lazy var conservationStatusLabel: UILabel = {
@@ -44,18 +43,16 @@ final class SpeciesCollectionViewCell: UICollectionViewCell {
     }()
     
     private lazy var populationNumbersLabel: UILabel = {
-        let label = Factory.makeLabel(title: nil,
+        return Factory.makeLabel(title: nil,
                                       weight: .regular,
                                       size: 16,
                                       color: .white,
                                       alignment: .right)
-        return label
     }()
     
     private lazy var backgroundImageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
-        iv.translatesAutoresizingMaskIntoConstraints = false
         insertSubview(iv, at: 0)
         return iv
     }()
@@ -100,8 +97,7 @@ final class SpeciesCollectionViewCell: UICollectionViewCell {
 
 fileprivate extension SpeciesCollectionViewCell {
     func addSubviews() {
-        let UIElements = [speciesNameLabel, conservationStatusLabel, populationNumbersLabel, speciesScientificNameLabel]
-        UIElements.forEach{ contentView.addSubview($0) }
+        [speciesNameLabel, conservationStatusLabel, populationNumbersLabel, speciesScientificNameLabel].forEach{ contentView.addSubview($0) }
     }
     
     func setConstraints() {
@@ -148,7 +144,7 @@ fileprivate extension SpeciesCollectionViewCell {
         conservationStatusLabel.snp.makeConstraints { (make) in
             make.centerY.equalTo(speciesScientificNameLabel)
             make.trailing.equalToSuperview().inset(10)
-            make.height.width.equalTo(40)
+            make.height.width.equalTo(40.deviceAdjusted)
         }
     }
     

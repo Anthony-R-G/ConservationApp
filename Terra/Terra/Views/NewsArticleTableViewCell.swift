@@ -73,9 +73,7 @@ final class NewsArticleTableViewCell: UITableViewCell {
 fileprivate extension NewsArticleTableViewCell {
     
     func addSubviews() {
-        let UIElements = [articleThumbImageView, articleTitleLabel, publishedDateLabel]
-        UIElements.forEach{ addSubview($0) }
-        UIElements.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
+        [articleThumbImageView, articleTitleLabel, publishedDateLabel].forEach{ addSubview($0) }
     }
     
     func setConstraints() {
