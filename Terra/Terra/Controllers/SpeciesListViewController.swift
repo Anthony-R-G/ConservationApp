@@ -181,7 +181,7 @@ final class SpeciesListViewController: UIViewController {
     }
     
     @objc private func expandSearchBar() {
-        searchBarLeadingAnchorConstraint.constant = -400
+        searchBarLeadingAnchorConstraint.constant = -(UIScreen.main.bounds.width * 0.9661835748792271)
         earthButtonLeadingAnchorConstraint.constant = -200
         searchBar.alpha = 1
         searchBarButton.alpha = 0
