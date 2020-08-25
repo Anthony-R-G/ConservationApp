@@ -53,7 +53,7 @@ Coming:
 
 ### Species List Page
 | See All Species | Filtered By Critical Status | Filtered by Endangered Status | Filtered by Vulnerable Status |
-| :---: | :---: | :---: | :---: |
+| :-----: | :-----: | :-----: | :-----: |
 |![screen 1](https://i.imgur.com/xrJUAcs.png) | ![screen 2](https://i.imgur.com/Pu9QLSc.png) | ![screen 3](https://i.imgur.com/wB5Ziou.png) | ![screen 4](https://i.imgur.com/oBdkkog.png) |
 
 •This page contains a list of animals that are currently considered threatened. 
@@ -84,7 +84,7 @@ Coming:
 ### Individual Species Page 
 | Amur Leopard | Blue-throated Macaw | Lion | Mountain Gorilla |
 | :------: | :------: | :------: | :------: |
-|![screen 1](https://i.imgur.com/Hp6qOf1.png) | ![screen 2](https://i.imgur.com/q8pCzvh.png) |![screen 3](https://i.imgur.com/toXpav9.png)|![screen 4](https://i.imgur.com/ZFpRQDK.png)| 
+|![screen 1](https://i.imgur.com/s3RxKAu.png) | ![screen 2](https://i.imgur.com/ZysMEc9.png) |![screen 3](https://i.imgur.com/4TD1UO6.png)|![screen 4](https://i.imgur.com/Hy75RXk.png)| 
 
 •The initial appearance of this page is a cover page for the selected animal with minimal text.
 
