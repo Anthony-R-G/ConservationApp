@@ -15,7 +15,6 @@ final class MGLMapViewController: UIViewController {
         let mv = MGLMapView()
         let styleURL = URL(string: "mapbox://styles/anthonyg5195/ckdkz8h2n0uri1ir58rf4o707")
         mv.styleURL = MGLStyle.satelliteStreetsStyleURL
-        mv.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         mv.tintColor = .darkGray
         mv.delegate = self
         mv.showsUserLocation = true
@@ -25,14 +24,10 @@ final class MGLMapViewController: UIViewController {
     private lazy var listButton: UIButton = {
         let btn = UIButton()
         btn.setImage(UIImage(named: "list"), for: .normal)
-        btn.layer.cornerRadius = 10
-        btn.tintColor = UIColor(red: 0.976,
-                                green: 0.843,
-                                blue: 0.831,
-                                alpha: 1)
+        btn.layer.cornerRadius = Constants.cornerRadius/2
+        btn.tintColor = #colorLiteral(red: 0.976, green: 0.843, blue: 0.831, alpha: 1.0)
         btn.backgroundColor = Constants.red
-        btn.addTarget(
-            self,
+        btn.addTarget(self,
             action: #selector(backButtonPressed),
             for: .touchUpInside)
         return btn
@@ -40,20 +35,15 @@ final class MGLMapViewController: UIViewController {
     
     private lazy var styleToggle: UISegmentedControl = {
         let sc = UISegmentedControl(items: ["Normal", "Hypsometric"])
-        sc.tintColor = UIColor(red: 0.976,
-                               green: 0.843,
-                               blue: 0.831,
-                               alpha: 1)
+        sc.tintColor = #colorLiteral(red: 0.976, green: 0.843, blue: 0.831, alpha: 1.0)
         sc.backgroundColor = Constants.red
-        sc.layer.cornerRadius = 10
+        sc.layer.cornerRadius = Constants.cornerRadius/2
         sc.clipsToBounds = true
         sc.selectedSegmentIndex = 0
         sc.translatesAutoresizingMaskIntoConstraints = false
-        sc.addTarget(
-            self,
+        sc.addTarget(self,
             action: #selector(changeStyle(sender:)),
             for: .valueChanged)
-        
         view.insertSubview(sc, aboveSubview: mapView)
         return sc
     }()
@@ -85,9 +75,8 @@ final class MGLMapViewController: UIViewController {
             mapView.styleURL = MGLStyle.satelliteStreetsStyleURL
         case 1:
             mapView.styleURL = URL(string: "mapbox://styles/anthonyg5195/ckdkz8h2n0uri1ir58rf4o707")
-            
         default:
-            mapView.styleURL = MGLStyle.streetsStyleURL
+            ()
         }
     }
     
@@ -111,7 +100,6 @@ final class MGLMapViewController: UIViewController {
     @objc private func backButtonPressed() {
         dismiss(animated: true, completion: nil)
     }
-    
     
     override var prefersStatusBarHidden: Bool {
         return true
@@ -141,10 +129,7 @@ extension MGLMapViewController: MGLMapViewDelegate {
         
         if annotationView == nil {
             annotationView = CustomAnnotationView(reuseIdentifier: reuseIdentifier)
-            annotationView!.bounds = CGRect(
-                origin: .zero,
-                size: CGSize(width: 25,
-                             height: 25))
+            annotationView!.bounds = CGRect(origin: .zero, size: CGSize(width: 25, height: 25))
             
             let hue = CGFloat(annotation.coordinate.longitude + annotation.coordinate.latitude) / 100
             annotationView!.backgroundColor = UIColor(
@@ -213,8 +198,8 @@ fileprivate extension MGLMapViewController {
     func setListButtonConstraints() {
         listButton.snp.makeConstraints { (make) in
             make.leading.equalTo(view).inset(Constants.spacingConstant)
-            make.top.equalToSuperview().inset(40)
-            make.height.width.equalTo(40)
+            make.top.equalToSuperview().inset(40.deviceAdjusted)
+            make.height.width.equalTo(40.deviceAdjusted)
         }
     }
     

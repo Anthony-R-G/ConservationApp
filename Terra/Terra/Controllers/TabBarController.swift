@@ -44,7 +44,6 @@ final class TabBarViewController: UIViewController {
         tabBarVC.viewControllers = [ listVC, newsVC,]
         tabBarVC.tabBarItems = [ listVCTabBarItem, newsVCTabBarItem ]
         tabBarVC.tabBarBackgroundColor = .black
-        
         view.addSubview(tabBarVC.view)
     }
 }

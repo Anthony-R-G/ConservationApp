@@ -37,7 +37,7 @@ final class ConservationStatusView: UIView {
     
     private func setBottomConstraint() {
           if let lastSubview = subviews.last {
-              bottomAnchor.constraint(equalTo: lastSubview.bottomAnchor, constant: Constants.spacingConstant).isActive = true
+              bottomAnchor.constraint(equalTo: lastSubview.bottomAnchor).isActive = true
           }
       }
     

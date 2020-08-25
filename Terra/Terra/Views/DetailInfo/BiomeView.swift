@@ -98,13 +98,12 @@ final class BiomeView: UIView {
     
     @objc private func handleTap() {
         guard let strategy = strategy as? DetailHabitatStrategy else { return }
-        
         strategy.biomeViewDelegate?.biomeWasTapped()
     }
     
     private func setBottomConstraint() {
         if let lastSubview = subviews.last {
-            bottomAnchor.constraint(equalTo: lastSubview.bottomAnchor, constant: Constants.spacingConstant).isActive = true
+            bottomAnchor.constraint(equalTo: lastSubview.bottomAnchor).isActive = true
         }
     }
     

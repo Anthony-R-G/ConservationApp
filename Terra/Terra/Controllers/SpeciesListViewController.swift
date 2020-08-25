@@ -30,7 +30,7 @@ final class SpeciesListViewController: UIViewController {
         let tb = RedListFilterTabBar(frame: CGRect(x: 0,
                                                    y: 0,
                                                    width: view.frame.width,
-                                                   height: 30))
+                                                   height: 30.deviceAdjusted))
         tb.selectedItem = tb.items![0]
         tb.delegate = self
         return tb
@@ -366,27 +366,26 @@ fileprivate extension SpeciesListViewController {
         }
     }
     
-    
     func setTerraTitleLabelConstraints() {
         terraTitleLabel.snp.makeConstraints { (make) in
-            make.top.equalToSuperview().inset(50)
+            make.top.equalToSuperview().inset(50.deviceAdjusted)
             make.leading.equalTo(earthButton.snp.trailing).offset(Constants.spacingConstant/2)
-            make.height.equalTo(25)
-            make.width.equalTo(100)
+            make.height.equalTo(25.deviceAdjusted)
+            make.width.equalTo(100.deviceAdjusted)
         }
     }
     
     func setEarthButtonConstraints() {
         earthButton.snp.makeConstraints { (make) in
             earthButtonLeadingAnchorConstraint.isActive = true
-            make.height.width.equalTo(40)
+            make.height.width.equalTo(40.deviceAdjusted)
             make.centerY.equalTo(terraTitleLabel)
         }
     }
     
     func setSearchBarButtonConstraints() {
         searchBarButton.snp.makeConstraints { (make) in
-            make.height.width.equalTo(40)
+            make.height.width.equalTo(40.deviceAdjusted)
             make.centerY.equalTo(terraTitleLabel)
             make.trailing.equalToSuperview().inset(Constants.spacingConstant)
         }
@@ -402,7 +401,7 @@ fileprivate extension SpeciesListViewController {
     
     func setFilterTabBarConstraints() {
         filterTabBar.snp.makeConstraints { (make) in
-            make.top.equalTo(terraTitleLabel.snp.bottom).offset(10)
+            make.top.equalTo(terraTitleLabel.snp.bottom).offset(10.deviceAdjusted)
             make.height.width.equalTo(filterTabBar.frame.size)
         }
     }

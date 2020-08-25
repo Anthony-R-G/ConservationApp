@@ -9,6 +9,7 @@
 import Mapbox
 
 final class SpeciesMapView: UIView {
+    //MARK: -- UI Element Initialization
     
     private lazy var mapView: MGLMapView = {
         let mv = MGLMapView()
@@ -26,9 +27,12 @@ final class SpeciesMapView: UIView {
         return mv
     }()
     
+    //MARK: -- Properties
     private var species: Species!
     
     private var speciesLocation = CLLocationCoordinate2D()
+    
+    //MARK: -- Methods
     
     required init(species: Species) {
         self.species = species
@@ -36,7 +40,7 @@ final class SpeciesMapView: UIView {
         super.init(frame: .zero)
         addSubviews()
         setConstraints()
-        heightAnchor.constraint(equalToConstant: 460).isActive = true
+        heightAnchor.constraint(equalToConstant: 460.deviceAdjusted).isActive = true
     }
     
     required init?(coder: NSCoder) {
@@ -44,6 +48,7 @@ final class SpeciesMapView: UIView {
     }
 }
 
+//MARK: -- Map View Delegate
 extension SpeciesMapView: MGLMapViewDelegate {
     func mapViewDidFinishLoadingMap(_ mapView: MGLMapView) {
         

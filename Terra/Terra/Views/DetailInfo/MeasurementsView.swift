@@ -108,10 +108,12 @@ final class MeasurementsView: UIView {
     
     private var species: Species!
     
+    //MARK: -- Methods
+    
     required init(species: Species) {
         self.species = species
         super.init(frame: .zero)
-        self.heightAnchor.constraint(equalToConstant: 150).isActive = true
+        self.heightAnchor.constraint(equalToConstant: 140.deviceAdjusted).isActive = true
         addSubviews()
         setConstraints()
     }
