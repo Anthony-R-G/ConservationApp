@@ -15,7 +15,7 @@ final class CommonView: UIView {
     private lazy var titleLabel: UILabel = {
         let label = Factory.makeLabel(title: nil,
                                       weight: .black,
-                                      size: UIScreen.main.bounds.height * 0.04017857142857143,
+                                      size: 36,
                                       color: .white,
                                       alignment: .left)
         label.numberOfLines = 0
@@ -66,7 +66,7 @@ final class CommonView: UIView {
     private lazy var subtitleTopConstraint: NSLayoutConstraint = {
         return subtitleLabel.topAnchor.constraint(
             equalTo: topAnchor,
-            constant: UIScreen.main.bounds.size.height * 0.02232142857142857)
+            constant: Constants.spacingConstant)
     }()
     
     var topConstraintValue: CGFloat {
@@ -128,7 +128,7 @@ fileprivate extension CommonView {
     func setTitleLabelConstraints() {
         titleLabel.snp.makeConstraints { [weak self] (make) in
             guard let self = self else { return }
-            make.top.equalTo(subtitleLabel.snp.bottom).offset(UIScreen.main.bounds.height * 0.011160714285714286)
+            make.top.equalTo(subtitleLabel.snp.bottom).offset(Constants.spacingConstant/2)
             make.leading.trailing.equalTo(self).inset(Constants.spacingConstant)
         }
     }

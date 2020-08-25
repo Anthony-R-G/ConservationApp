@@ -9,7 +9,7 @@
 import UIKit
 
 enum Constants {
-    static let spacingConstant: CGFloat = 20
+    static let spacingConstant: CGFloat = 20.deviceAdjusted
     
     static let commonViewImageDimension: CGSize = CGSize(
         width: UIScreen.main.bounds.size.width * 1.2077,

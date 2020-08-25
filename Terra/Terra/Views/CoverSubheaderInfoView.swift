@@ -88,7 +88,6 @@ final class CoverSubheaderInfoView: UIView {
         numbersStack, trendStack, lastAssessedStack
         ])
         stackView.distribution = .fillEqually
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
     

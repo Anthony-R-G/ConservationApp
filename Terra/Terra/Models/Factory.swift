@@ -17,11 +17,11 @@ class Factory {
         
         let label = UILabel()
         label.text = title
-        label.font = UIFont(name: weight.rawValue, size: size)
+        label.font = UIFont(name: weight.rawValue, size: size.deviceAdjusted)
         label.textAlignment = alignment
         label.textColor = color
         label.adjustsFontSizeToFitWidth = true
-        label.clipsToBounds = true
+//        label.clipsToBounds = true
         label.sizeToFit()
         return label
     }
@@ -42,7 +42,7 @@ class Factory {
         button.setTitle(title, for: .normal)
         button.setTitleColor(color, for: .normal)
         button.showsTouchWhenHighlighted = true
-        button.titleLabel?.font = UIFont(name: weight.rawValue, size: 15)
+        button.titleLabel?.font = UIFont(name: weight.rawValue, size: 15.deviceAdjusted)
         return button
     }
 }

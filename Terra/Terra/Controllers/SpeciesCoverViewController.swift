@@ -59,14 +59,11 @@ final class SpeciesCoverViewController: UIViewController {
     private lazy var exploreButton: UIButton = {
         let btn = UIButton(frame: CGRect(
             origin: .zero,
-            size: CGSize(
-                width: 80,
-                height: 80)))
+            size: CGSize(width: 80.deviceAdjusted, height: 80.deviceAdjusted)))
         
         btn.setImage(UIImage(systemName: "chevron.down"), for: .normal)
         btn.setTitle("Explore", for: .normal)
-        btn.titleLabel?.font = UIFont(name: "Roboto-Light",
-                                      size: 16)
+        btn.titleLabel?.font = UIFont(name: "Roboto-Light", size: 16)
         btn.alignImageAndTitleVertically()
         btn.imageView?.transform = CGAffineTransform(scaleX: 1.2,
                                                      y: 1)
@@ -84,7 +81,7 @@ final class SpeciesCoverViewController: UIViewController {
     private lazy var upButton: UIButton = {
         let btn = UIButton(frame: CGRect(
             origin: .zero,
-            size: CGSize(width: 80, height: 80)))
+            size: CGSize(width: 80.deviceAdjusted, height: 80.deviceAdjusted)))
         
         btn.setImage(UIImage(systemName: "chevron.up"), for: .normal)
         
@@ -127,7 +124,7 @@ final class SpeciesCoverViewController: UIViewController {
         
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(
-            width: screenSize.width * 0.833,
+            width: 345.deviceAdjusted,
             height:  collectionViewFrame.height * 0.89)
         
         layout.scrollDirection = .horizontal
@@ -209,12 +206,13 @@ final class SpeciesCoverViewController: UIViewController {
     }()
     
     private lazy var headerNameViewTopAnchorConstraint: NSLayoutConstraint = {
-        return headerNameView.topAnchor.constraint(equalTo: view.topAnchor,
-                                                   constant: screenSize.height * 0.48)
+        return headerNameView.topAnchor.constraint(
+            equalTo: view.topAnchor, constant: screenSize.height * 0.48)
     }()
     
     private lazy var subheaderInfoViewHeightConstraint: NSLayoutConstraint = {
-        return subheaderInfoView.heightAnchor.constraint(equalToConstant: subheaderInfoView.frame.height)
+        return subheaderInfoView.heightAnchor.constraint(
+            equalToConstant: subheaderInfoView.frame.height)
     }()
     
     override var prefersStatusBarHidden: Bool {
@@ -228,8 +226,7 @@ final class SpeciesCoverViewController: UIViewController {
     }
     
     @objc private func closeButtonPressed() {
-        dismiss(animated: true,
-                completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
     @objc private func handlePageStateSwipeGesture() {
@@ -237,8 +234,7 @@ final class SpeciesCoverViewController: UIViewController {
     }
     
     @objc private func handleDismissSwipeGesture() {
-        dismiss(animated: true,
-                completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
     private func presentWebBrowser(link: URL){
@@ -337,16 +333,16 @@ extension SpeciesCoverViewController {
     
     private func shrinkHeader() {
         headerNameView.shrinkCommonNameLabel()
-        headerNameViewTopAnchorConstraint.constant = screenSize.height * 0.12
+        headerNameViewTopAnchorConstraint.constant = screenSize.height * 0.11
         headerNameViewHeightConstraint.constant = screenSize.height * 0.130
-        subheaderInfoViewHeightConstraint.constant = 60
+        subheaderInfoViewHeightConstraint.constant = 60.deviceAdjusted
     }
     
     private func enlargeHeader() {
         headerNameView.expandCommonNameLabel()
         headerNameViewTopAnchorConstraint.constant = screenSize.height * 0.48
         headerNameViewHeightConstraint.constant = screenSize.height * 0.30
-        subheaderInfoViewHeightConstraint.constant = (screenSize.height * 0.30) * 0.30
+        subheaderInfoViewHeightConstraint.constant = headerNameViewHeightConstraint.constant * 0.30
     }
     
     private func animateExploreButton(state: State) {
@@ -499,7 +495,7 @@ fileprivate extension SpeciesCoverViewController {
         closeButton.snp.makeConstraints { (make) in
             make.top.equalToSuperview().inset(5)
             make.trailing.equalToSuperview().inset(5)
-            make.height.width.equalTo(66)
+            make.height.width.equalTo(66.deviceAdjusted)
         }
     }
     
@@ -507,7 +503,7 @@ fileprivate extension SpeciesCoverViewController {
         augmentedRealityButton.snp.makeConstraints { (make) in
             make.top.equalTo(closeButton)
             make.leading.equalToSuperview().inset(5)
-            make.height.width.equalTo(66)
+            make.height.width.equalTo(66.deviceAdjusted)
         }
     }
     
@@ -534,7 +530,7 @@ fileprivate extension SpeciesCoverViewController {
             make.height.equalTo(exploreButton.frame.height)
             make.width.equalTo(exploreButton.frame.width)
             make.centerX.equalTo(view)
-            make.bottom.equalTo(view).inset(view.bounds.height * 0.011160714285714286)
+            make.bottom.equalTo(view).inset(10.deviceAdjusted)
         }
     }
     
@@ -543,7 +539,7 @@ fileprivate extension SpeciesCoverViewController {
             make.height.equalTo(upButton.frame.height)
             make.width.equalTo(upButton.frame.width)
             make.centerX.equalTo(view)
-            make.top.equalTo(view).inset(screenSize.height * 0.02232142857142857)
+            make.top.equalTo(view).inset(Constants.spacingConstant)
         }
     }
     
@@ -551,7 +547,7 @@ fileprivate extension SpeciesCoverViewController {
         collectionView.snp.makeConstraints { (make) in
             make.height.equalTo(collectionView.frame.height)
             make.leading.trailing.equalToSuperview()
-            make.centerY.equalToSuperview().offset(70)
+            make.centerY.equalToSuperview().offset(70.deviceAdjusted)
         }
     }
     
@@ -565,8 +561,8 @@ fileprivate extension SpeciesCoverViewController {
     func setDonateButtonConstraints() {
         donateButton.snp.makeConstraints { (make) in
             make.centerX.centerY.equalTo(donateButtonContainer)
-            make.leading.trailing.equalToSuperview().inset(20)
-            make.height.equalTo(50)
+            make.leading.trailing.equalToSuperview().inset(Constants.spacingConstant.deviceAdjusted)
+            make.height.equalTo(50.deviceAdjusted)
         }
     }
 }

@@ -148,7 +148,7 @@ fileprivate extension SpeciesCollectionViewCell {
         conservationStatusLabel.snp.makeConstraints { (make) in
             make.centerY.equalTo(speciesScientificNameLabel)
             make.trailing.equalToSuperview().inset(10)
-            make.height.width.equalTo(40)
+            make.height.width.equalTo(40.deviceAdjusted)
         }
     }
     
