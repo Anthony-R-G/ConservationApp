@@ -18,6 +18,7 @@ class FirebaseStorageService {
         case detailOverview
         case detailHabitat
         case detailThreats
+        case howToHelp
     }
     
     static var cellImageManager = FirebaseStorageService(type: .cell)
@@ -31,6 +32,8 @@ class FirebaseStorageService {
     static var detailHabitatImageManager = FirebaseStorageService(type: .detailHabitat)
     
     static var detailThreatsImageManager = FirebaseStorageService(type: .detailThreats)
+    
+    static var howToHelpImageManager = FirebaseStorageService(type: .howToHelp)
     
     
     private let storage: Storage!
@@ -60,6 +63,8 @@ class FirebaseStorageService {
         case .detailThreats:
             imagesFolderReference = storageReference.child("Detail Threats Images")
     
+        case .howToHelp:
+            imagesFolderReference = storageReference.child("How To Help")
         }
     }
     

@@ -11,20 +11,20 @@ import UIKit
 final class CoverHeaderNameView: UIView {
     //MARK: -- UI Element Initialization
     
-    private lazy var conservationStatusLabel: UILabel = {
-        let label = Factory.makeLabel(title: nil,
-                                        weight: .regular,
-                                        size: 17,
-                                        color: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1),
-                                        alignment: .center)
-        label.layer.borderColor = UIColor.white.cgColor
-        label.layer.borderWidth = Constants.borderWidth
-        label.layer.cornerRadius = 10
-        return label
+    private lazy var conservationStatusButton: UIButton = {
+        let button = UIButton()
+        button.titleLabel?.font = UIFont(name: "Roboto-Medium", size: 17.deviceAdjusted)
+        button.setTitle(species.population.conservationStatus.rawValue, for: .normal)
+        button.layer.borderColor = Constants.red.cgColor
+        button.layer.borderWidth = Constants.borderWidth
+        button.layer.cornerRadius = 10
+        button.showsTouchWhenHighlighted = true
+        button.addTarget(self, action: #selector(handleTap), for: .touchUpInside)
+        return button
     }()
     
      private lazy var speciesCommonNameLabel: UILabel = {
-        let label = Factory.makeLabel(title: nil,
+        let label = Factory.makeLabel(title: species.commonName,
                                         weight: .bold,
                                         size: 56,
                                         color: .white,
@@ -34,33 +34,43 @@ final class CoverHeaderNameView: UIView {
     }()
     
     private lazy var speciesScientificNameLabel: UILabel = {
-        let label = Factory.makeLabel(title: nil,
+        return Factory.makeLabel(title: species.taxonomy.scientificName,
                                         weight: .lightItalic,
                                         size: 17,
                                         color: .white,
                                         alignment: .left)
-        let neededSize = label.sizeThatFits(CGSize(width: frame.size.width,
-                                                   height: CGFloat.greatestFiniteMagnitude))
-        return label
     }()
     
+    
+    //MARK: -- Properties
+    
+    weak var delegate: ConservationStatusDelegate?
+    
+    var species: Species!
+    
     //MARK: -- Methods
+    
+    @objc private func handleTap() {
+        delegate?.conservationStatusTapped()
+    }
+    
     public func configureView(from species: Species) {
-        conservationStatusLabel.text = species.population.conservationStatus.rawValue
+        conservationStatusButton.setTitle(species.population.conservationStatus.rawValue, for: .normal)
         speciesCommonNameLabel.text = species.commonName
         speciesScientificNameLabel.text = "— \(species.taxonomy.scientificName)"
     }
         
     func shrinkCommonNameLabel() {
-        speciesCommonNameLabel.animateToFont(UIFont(name: "Roboto-Bold", size: 40)!, withDuration: 0.5)
+        speciesCommonNameLabel.animateToFont(UIFont(name: "Roboto-Bold", size: Constants.screenHeight * 0.04352678571428571)!, withDuration: 0.5)
     }
     
     func expandCommonNameLabel() {
-        speciesCommonNameLabel.animateToFont(UIFont(name: "Roboto-Bold", size: 56)!, withDuration: 1.3)
+        speciesCommonNameLabel.animateToFont(UIFont(name: "Roboto-Bold", size: 56.deviceAdjusted)!, withDuration: 1.3)
     }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    required init(species: Species) {
+        self.species = species
+        super.init(frame: .zero)
         addSubviews()
         setConstraints()
     }
@@ -75,21 +85,20 @@ final class CoverHeaderNameView: UIView {
 fileprivate extension CoverHeaderNameView {
     
     func addSubviews() {
-        let UIElements = [conservationStatusLabel, speciesCommonNameLabel, speciesScientificNameLabel]
-        UIElements.forEach { addSubview($0) }
+        [conservationStatusButton, speciesCommonNameLabel, speciesScientificNameLabel].forEach { addSubview($0) }
     }
     
     func setConstraints() {
-        setConservationStatusLabelConstraints()
+        setConservationStatusButtonConstraints()
         setSpeciesCommonNameLabelConstraints()
         setSpeciesScientificNameLabelConstraints()
     }
     
-    func setConservationStatusLabelConstraints() {
-        conservationStatusLabel.snp.makeConstraints { (make) in
+    func setConservationStatusButtonConstraints() {
+        conservationStatusButton.snp.makeConstraints { (make) in
             make.leading.equalTo(speciesCommonNameLabel).inset(5)
             make.bottom.equalTo(speciesCommonNameLabel.snp.top).inset(-10)
-            make.height.equalTo(25)
+            make.height.equalTo(25.deviceAdjusted)
             make.width.equalToSuperview().multipliedBy(0.3)
         }
     }
@@ -98,8 +107,7 @@ fileprivate extension CoverHeaderNameView {
         speciesCommonNameLabel.snp.makeConstraints { (make) in
             make.leading.equalToSuperview()
             make.bottom.equalTo(speciesScientificNameLabel.snp.top)
-            make.width.equalToSuperview().multipliedBy(0.76)
-            
+            make.width.equalToSuperview().multipliedBy(0.80)
         }
     }
     

@@ -13,6 +13,6 @@ struct Population: FirebaseConvertible {
     let conservationStatus: ConservationStatus
     let numbers: String
     let summary: String
-    let threats: String
+    let threats: [String]
     let trend: PopulationTrend
 }

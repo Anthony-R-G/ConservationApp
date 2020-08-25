@@ -20,7 +20,7 @@ final class CoverSubheaderInfoView: UIView {
     }()
     
     private lazy var numbersDataLabel: UILabel = {
-        return Factory.makeLabel(title: nil,
+        return Factory.makeLabel(title: species.population.numbers,
                                  weight: .medium,
                                  size: 18,
                                  color: .white,
@@ -36,10 +36,10 @@ final class CoverSubheaderInfoView: UIView {
     }()
     
     private lazy var trendDataLabel: UILabel = {
-        return Factory.makeLabel(title: nil,
+        return Factory.makeLabel(title: species.population.trend.rawValue,
                                  weight: .medium,
                                  size: 18,
-                                 color: .white,
+                                 color: species.population.trend == .decreasing ? #colorLiteral(red: 1, green: 0.4507741928, blue: 0.5112823844, alpha: 1) : #colorLiteral(red: 0.7970843911, green: 1, blue: 0.5273691416, alpha: 1),
                                  alignment: .left)
     }()
     
@@ -52,7 +52,7 @@ final class CoverSubheaderInfoView: UIView {
     }()
     
     private lazy var lastAssessedDataLabel: UILabel = {
-        return Factory.makeLabel(title: nil,
+        return Factory.makeLabel(title: "\(species.population.assessmentDate)",
                                  weight: .medium,
                                  size: 18,
                                  color: .white,
@@ -88,20 +88,17 @@ final class CoverSubheaderInfoView: UIView {
         numbersStack, trendStack, lastAssessedStack
         ])
         stackView.distribution = .fillEqually
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
     
-    //MARK: -- Methods
-    public func configureView(from species: Species) {
-        numbersDataLabel.text = species.population.numbers
-        trendDataLabel.text = species.population.trend.rawValue
-        trendDataLabel.textColor = species.population.trend == .decreasing ? #colorLiteral(red: 1, green: 0.4507741928, blue: 0.5112823844, alpha: 1) : #colorLiteral(red: 0.7970843911, green: 1, blue: 0.5273691416, alpha: 1)
-        lastAssessedDataLabel.text = "\(species.population.assessmentDate)"
-    }
+    //MARK: -- Properties
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    private var species: Species!
+    
+    //MARK: -- Methods
+    required init(species: Species) {
+        self.species = species
+        super.init(frame: .zero)
         addSubview(horizontalStack)
         setHorizontalStackConstraints()
     }

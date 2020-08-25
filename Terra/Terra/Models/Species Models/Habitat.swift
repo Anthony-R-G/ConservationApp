@@ -15,4 +15,8 @@ struct Habitat: FirebaseConvertible {
     let longitude: Double
     let summary: String
     let temperature: String
+    let mapboxStyleURL: String
+    let mapboxZoomAltitude: Double
 }
+
+

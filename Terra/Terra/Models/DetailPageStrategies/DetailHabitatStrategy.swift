@@ -8,8 +8,10 @@
 
 import UIKit
 
-struct DetailHabitatStrategy: DetailPageStrategy {
+class DetailHabitatStrategy: DetailPageStrategy {
     var species: Species
+    
+    weak var biomeViewDelegate: BiomeViewDelegate?
     
     func speciesName() -> String {
         return species.commonName
@@ -20,20 +22,40 @@ struct DetailHabitatStrategy: DetailPageStrategy {
     }
     
     func firebaseStorageManager() -> FirebaseStorageService {
+        
         return FirebaseStorageService.detailHabitatImageManager
     }
+
     
-    mutating func arrangedSubviews() -> UIStackView {
+    func arrangedSubviews() -> UIStackView {
         let stackView = UIStackView(arrangedSubviews: [
             DetailInfoWindow(title: "DISTRIBUTION",
-                                         content: SpeciesMapView(species: species))
+                             content: SpeciesMapView(species: species)),
+            
+            DetailInfoWindow(title: "BIOME", content: BiomeView(strategy: self)),
+            
+            DetailInfoWindow(title: "DETAIL", content:
+                Factory.makeDetailInfoWindowLabel(text: species.habitat.summary)),
+            
+            
+        
         ])
         stackView.axis = .vertical
         stackView.spacing = Constants.spacingConstant
+        
         return stackView
     }
     
     init(species: Species) {
         self.species = species
     }
+    
+    func getDetailViewController() -> UIViewController {
+        let detailVC = SpeciesDetailInfoViewController()
+        detailVC.strategy = self
+        self.biomeViewDelegate = detailVC
+        return detailVC
+    }
 }
+
+

@@ -26,11 +26,16 @@ struct DetailOverviewStrategy: DetailPageStrategy {
     mutating func arrangedSubviews() -> UIStackView {
         let stackView = UIStackView(arrangedSubviews: [
             DetailInfoWindow(title: "DESCRIPTION",
-                                         content: Factory.makeDetailInfoWindowLabel(text: species.overview)),
+                             content: Factory.makeDetailInfoWindowLabel(text: species.overview)),
             
             DetailInfoWindow(title: "CLASSIFICATION",
-                                         content: ClassificationView(species: species))
-            ])
+                             content: ClassificationView(species: species)),
+            
+            DetailInfoWindow(title: "MEASUREMENTS", content: MeasurementsView(species: species)),
+            
+            DetailInfoWindow(title: "AVERAGE LIFESPAN", content: Factory.makeDetailInfoWindowLabel(text: "\(species.averageLifespan) in the wild"))
+            
+        ])
         stackView.axis = .vertical
         stackView.spacing = Constants.spacingConstant
         return stackView

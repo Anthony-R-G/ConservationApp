@@ -12,14 +12,12 @@ final class DetailInfoWindow: UIView {
     //MARK: -- UI Element Initialization
     
     private lazy var titleLabel: UILabel = {
-        let label = Factory.makeLabel(title: nil,
-                                      weight: .bold,
-                                      size: 24,
-                                      color: Constants.titleLabelColor,
-                                      alignment: .left)
-        return label
+        return Factory.makeLabel(title: nil,
+                                 weight: .bold,
+                                 size: 24,
+                                 color: Constants.titleLabelColor,
+                                 alignment: .left)
     }()
-    
     
     private var contentView = UIView()
     
@@ -32,7 +30,7 @@ final class DetailInfoWindow: UIView {
     }
     
     private func configureAppearance() {
-        translatesAutoresizingMaskIntoConstraints = false
+//        translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.2452108305)
         layer.cornerRadius = Constants.cornerRadius
     }
@@ -61,7 +59,6 @@ fileprivate extension DetailInfoWindow {
         let UIElements = [titleLabel, contentView]
         UIElements.forEach { addSubview($0) }
     }
-    
     
     func setTitleLabelConstraints() {
         titleLabel.snp.makeConstraints { (make) in

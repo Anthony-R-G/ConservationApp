@@ -23,7 +23,7 @@ final class NewsViewController: UIViewController {
     
     private lazy var tableView: UITableView = {
         let tv = UITableView()
-        tv.register(NewsArticleTableViewCell.self, forCellReuseIdentifier: "newsCell")
+        tv.register(NewsArticleTableViewCell.self, forCellReuseIdentifier: Constants.reuseIdentifier)
         tv.scrollsToTop = true
         tv.backgroundColor = .clear
         tv.refreshControl = refreshControl
@@ -62,9 +62,8 @@ final class NewsViewController: UIViewController {
         showModally(safariVC)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        
-    }
+    
+    //MARK: -- Life Cycle Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -92,7 +91,7 @@ extension NewsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let newsCell = tableView.dequeueReusableCell(withIdentifier: "newsCell", for: indexPath) as! NewsArticleTableViewCell
+        let newsCell = tableView.dequeueReusableCell(withIdentifier: Constants.reuseIdentifier, for: indexPath) as! NewsArticleTableViewCell
         let specificArticle = viewModel.specificArticle(at: indexPath.row)
         newsCell.configureCell(from: specificArticle)
         return newsCell
@@ -101,11 +100,13 @@ extension NewsViewController: UITableViewDataSource {
 
 extension NewsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 180
+        return 180.deviceAdjusted
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let specificArticle = viewModel.specificArticle(at: indexPath.row)
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        generator.impactOccurred()
         presentWebBrowser(link: URL(string: specificArticle.url)!)
     }
 }

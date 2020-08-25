@@ -9,15 +9,17 @@
 import Mapbox
 
 final class SpeciesMapView: UIView {
+    //MARK: -- UI Element Initialization
     
     private lazy var mapView: MGLMapView = {
         let mv = MGLMapView()
-        let styleURL = URL(string: "mapbox://styles/anthonyg5195/ckdyqfk5g034c19pit394euia")
+        let styleURL = URL(string: species.habitat.mapboxStyleURL)
         mv.styleURL = styleURL
         mv.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        mv.tintColor = .darkGray
+        mv.tintColor = .white
         mv.layer.cornerRadius = Constants.cornerRadius
         mv.clipsToBounds = true
+        //        mv.zoomLevel = 2.25
         //        mv.zoomLevel = 8
         //        mv.minimumZoomLevel = 2
         //        mv.maximumZoomLevel = 1.8
@@ -25,10 +27,12 @@ final class SpeciesMapView: UIView {
         return mv
     }()
     
+    //MARK: -- Properties
     private var species: Species!
     
     private var speciesLocation = CLLocationCoordinate2D()
     
+    //MARK: -- Methods
     
     required init(species: Species) {
         self.species = species
@@ -36,8 +40,7 @@ final class SpeciesMapView: UIView {
         super.init(frame: .zero)
         addSubviews()
         setConstraints()
-        heightAnchor.constraint(equalToConstant: 460).isActive = true
-        translatesAutoresizingMaskIntoConstraints = false
+        heightAnchor.constraint(equalToConstant: 460.deviceAdjusted).isActive = true
     }
     
     required init?(coder: NSCoder) {
@@ -45,12 +48,12 @@ final class SpeciesMapView: UIView {
     }
 }
 
-
+//MARK: -- Map View Delegate
 extension SpeciesMapView: MGLMapViewDelegate {
     func mapViewDidFinishLoadingMap(_ mapView: MGLMapView) {
         
-        let camera = MGLMapCamera(lookingAtCenter: self.speciesLocation ,
-                                  altitude: 6000000,
+        let camera = MGLMapCamera(lookingAtCenter: speciesLocation,
+                                  altitude: species.habitat.mapboxZoomAltitude,
                                   pitch: 15,
                                   heading: 0)
         mapView.setCamera(camera,
@@ -59,12 +62,9 @@ extension SpeciesMapView: MGLMapViewDelegate {
     }
 }
 
-
-
-
 //MARK: -- Add Subviews & Constraints
 
-extension SpeciesMapView {
+fileprivate extension SpeciesMapView {
     func addSubviews() {
         [mapView].forEach{ addSubview($0) }
     }
