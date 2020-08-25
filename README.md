@@ -103,7 +103,7 @@ Coming:
 #### Getting Detailed Information
 | African Elephant Overview | Cheetah Threats | Giant Panda Habitat | Panamanian Golden Frog Overview |
 | :------: | :------: | :------: | :------: |
-|![screen 1](https://i.imgur.com/xfVRJuB.png) | ![screen 2](hhttps://i.imgur.com/0W0iTcL.png)|![screen 3](https://i.imgur.com/68puLAh.png)| ![screen 4](https://i.imgur.com/1eR55nK.png) |
+|![screen 1](https://i.imgur.com/xfVRJuB.png) | ![screen 2](https://i.imgur.com/0W0iTcL.png)|![screen 3](https://i.imgur.com/68puLAh.png)| ![screen 4](https://i.imgur.com/1eR55nK.png) |
 
 |  |  |  |  |
 | :------: | :------: | :------: | :------: |
