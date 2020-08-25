@@ -236,7 +236,7 @@ extension SpeciesDetailInfoViewController: Animatable {
             .compactMap({$0})
             .first?.windows
             .filter({$0.isKeyWindow}).first?.safeAreaInsets.top ?? .zero
-        commonView.topConstraintValue = safeAreaTop + Constants.spacingConstant
+        commonView.topConstraintValue = safeAreaTop + UIScreen.main.bounds.size.height * 0.02232142857142857
         
         // Animate the common view to a height of 500 points
         commonViewHeightConstraint.constant = Constants.commonViewImageDimension.height
@@ -272,7 +272,7 @@ extension SpeciesDetailInfoViewController: Animatable {
         }
         
         // Common view does not need to worry about the safe area anymore. Just restore the original value.
-        commonView.topConstraintValue = Constants.spacingConstant
+        commonView.topConstraintValue = UIScreen.main.bounds.size.height * 0.02232142857142857
         
         // Animate the height of the common view to be the same size as the TO frame.
         // Also animate hiding the close button

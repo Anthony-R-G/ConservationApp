@@ -39,8 +39,9 @@ final class CoverHeaderNameView: UIView {
                                         size: 17,
                                         color: .white,
                                         alignment: .left)
-        let neededSize = label.sizeThatFits(CGSize(width: frame.size.width,
-                                                   height: CGFloat.greatestFiniteMagnitude))
+        let neededSize = label.sizeThatFits( CGSize(
+                width: frame.size.width,
+                height: CGFloat.greatestFiniteMagnitude))
         return label
     }()
     
@@ -63,6 +64,7 @@ final class CoverHeaderNameView: UIView {
         
     func shrinkCommonNameLabel() {
         speciesCommonNameLabel.animateToFont(UIFont(name: "Roboto-Bold", size: UIScreen.main.bounds.height * 0.04464285714285714)!, withDuration: 0.5)
+        
     }
     
     func expandCommonNameLabel() {
