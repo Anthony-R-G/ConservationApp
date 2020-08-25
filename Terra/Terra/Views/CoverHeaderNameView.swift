@@ -14,6 +14,7 @@ final class CoverHeaderNameView: UIView {
     private lazy var conservationStatusButton: UIButton = {
         let button = UIButton()
         button.titleLabel?.font = UIFont(name: "Roboto-Medium", size: 17.deviceAdjusted)
+        button.setTitle(species.population.conservationStatus.rawValue, for: .normal)
         button.layer.borderColor = Constants.red.cgColor
         button.layer.borderWidth = Constants.borderWidth
         button.layer.cornerRadius = 10
@@ -23,7 +24,7 @@ final class CoverHeaderNameView: UIView {
     }()
     
      private lazy var speciesCommonNameLabel: UILabel = {
-        let label = Factory.makeLabel(title: nil,
+        let label = Factory.makeLabel(title: species.commonName,
                                         weight: .bold,
                                         size: 56,
                                         color: .white,
@@ -33,7 +34,7 @@ final class CoverHeaderNameView: UIView {
     }()
     
     private lazy var speciesScientificNameLabel: UILabel = {
-        return Factory.makeLabel(title: nil,
+        return Factory.makeLabel(title: species.taxonomy.scientificName,
                                         weight: .lightItalic,
                                         size: 17,
                                         color: .white,
@@ -44,6 +45,8 @@ final class CoverHeaderNameView: UIView {
     //MARK: -- Properties
     
     weak var delegate: ConservationStatusDelegate?
+    
+    var species: Species!
     
     //MARK: -- Methods
     
@@ -65,8 +68,9 @@ final class CoverHeaderNameView: UIView {
         speciesCommonNameLabel.animateToFont(UIFont(name: "Roboto-Bold", size: 56.deviceAdjusted)!, withDuration: 1.3)
     }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    required init(species: Species) {
+        self.species = species
+        super.init(frame: .zero)
         addSubviews()
         setConstraints()
     }

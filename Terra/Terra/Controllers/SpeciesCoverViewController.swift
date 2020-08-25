@@ -34,22 +34,13 @@ final class SpeciesCoverViewController: UIViewController {
     }()
     
     private lazy var headerNameView: CoverHeaderNameView = {
-        let hiv = CoverHeaderNameView()
-        var frame = hiv.frame
-        frame.size.height = headerNameViewEnlargedHeight
-        hiv.frame = frame
-        hiv.configureView(from: viewModel.selectedSpecies)
+        let hiv = CoverHeaderNameView(species: viewModel.selectedSpecies)
         hiv.delegate = self
         return hiv
     }()
     
     private lazy var subheaderInfoView: CoverSubheaderInfoView = {
-        let siv = CoverSubheaderInfoView()
-        var frame = siv.frame
-        frame.size.height = subheaderInfoViewEnlargedHeight
-        siv.frame = frame
-        siv.configureView(from: viewModel.selectedSpecies)
-        return siv
+        return CoverSubheaderInfoView(species: viewModel.selectedSpecies)
     }()
     
     private lazy var backgroundVisualEffectBlur: UIVisualEffectView = {
@@ -63,7 +54,7 @@ final class SpeciesCoverViewController: UIViewController {
         
         btn.setImage(UIImage(systemName: "chevron.down"), for: .normal)
         btn.setTitle("Explore", for: .normal)
-        btn.titleLabel?.font = UIFont(name: "Roboto-Light", size: 16)
+        btn.titleLabel?.font = UIFont(name: "Roboto-Light", size: 16.deviceAdjusted)
         btn.alignImageAndTitleVertically()
         btn.imageView?.transform = CGAffineTransform(scaleX: 1.2,
                                                      y: 1)
@@ -144,8 +135,7 @@ final class SpeciesCoverViewController: UIViewController {
         cv.dataSource = self
         cv.delegate = self
         
-        cv.register(CoverRoundedCell.self,
-                    forCellWithReuseIdentifier: reuseIdentifier)
+        cv.register(CoverRoundedCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         return cv
     }()
     
@@ -180,6 +170,7 @@ final class SpeciesCoverViewController: UIViewController {
     private lazy var augmentedRealityButton: UIButton = {
         let btn = UIButton()
         btn.setImage(UIImage(systemName: "arkit"), for: .normal)
+        btn.alpha = 0.6
         btn.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
         btn.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.845703125)
         btn.addTarget(
@@ -212,17 +203,15 @@ final class SpeciesCoverViewController: UIViewController {
     private lazy var subheaderInfoViewShrinkHeight: CGFloat = 60.deviceAdjusted
     
     private lazy var headerNameViewHeightConstraint: NSLayoutConstraint = {
-        return headerNameView.heightAnchor.constraint(equalToConstant: headerNameView.frame.height)
+        return headerNameView.heightAnchor.constraint(equalToConstant: headerNameViewEnlargedHeight)
     }()
     
     private lazy var headerNameViewTopAnchorConstraint: NSLayoutConstraint = {
-        return headerNameView.topAnchor.constraint(
-            equalTo: view.topAnchor, constant: headerNameViewEnlargedTopAnchor)
+        return headerNameView.topAnchor.constraint( equalTo: view.topAnchor, constant: headerNameViewEnlargedTopAnchor)
     }()
     
     private lazy var subheaderInfoViewHeightConstraint: NSLayoutConstraint = {
-        return subheaderInfoView.heightAnchor.constraint(
-            equalToConstant: subheaderInfoView.frame.height)
+        return subheaderInfoView.heightAnchor.constraint(equalToConstant: subheaderInfoViewEnlargedHeight)
     }()
     
     override var prefersStatusBarHidden: Bool {
