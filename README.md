@@ -101,13 +101,13 @@ Coming:
 
 
 #### Getting Detailed Information
-| African Elephant Overview | Cheetah Threats | Giant Panda Habitat | Panamanian Golden Frog Overview |
+| Blue Whale Overview | Cheetah Threats | Giant Panda Habitat | Panamanian Golden Frog Overview |
 | :------: | :------: | :------: | :------: |
-|![screen 1](https://i.imgur.com/P3KWBPK.png) | ![screen 2](https://i.imgur.com/7VUSOXp.png)|![screen 3](https://i.imgur.com/MbR9rte.png)| ![screen 4](https://i.imgur.com/qaBtmeo.png) |
+|![screen 1](https://i.imgur.com/ocYCyf6.png) | ![screen 2](https://i.imgur.com/RT2EqWV.png)|![screen 3](https://i.imgur.com/ybKqBrb.png)| ![screen 4](https://i.imgur.com/VYs6n4s.png) |
 
 |  |  |  |  |
 | :------: | :------: | :------: | :------: |
-|![screen 1](https://i.imgur.com/0hHEP6b.png) | ![screen 2](https://i.imgur.com/y8xq9CH.png)|![screen 3](https://i.imgur.com/JibFWR2.png)| ![screen 4](https://i.imgur.com/Ou2tTbz.png) |
+|![screen 1](https://i.imgur.com/RdQBGV9.png) | ![screen 2](https://i.imgur.com/N4zgxVn.png)|![screen 3](https://i.imgur.com/qxsmoWP.png)| ![screen 4](https://i.imgur.com/dTLfYtN.png) |
 
 
 ## Map Exploration 
