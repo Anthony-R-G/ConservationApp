@@ -21,15 +21,9 @@ final class MGLMapViewController: UIViewController {
         return mv
     }()
     
-    private lazy var listButton: UIButton = {
-        let btn = UIButton()
-        btn.setImage(UIImage(named: "list"), for: .normal)
-        btn.layer.cornerRadius = Constants.cornerRadius/2
-        btn.tintColor = #colorLiteral(red: 0.976, green: 0.843, blue: 0.831, alpha: 1.0)
-        btn.backgroundColor = Constants.red
-        btn.addTarget(self,
-            action: #selector(backButtonPressed),
-            for: .touchUpInside)
+    private lazy var listButton: CircleBlurButton = {
+        let btn = Factory.makeBlurredCircleButton(image: .list, style: .dark)
+        btn.addTarget(self, action: #selector(backButtonPressed), for: .touchUpInside)
         return btn
     }()
     
@@ -70,6 +64,7 @@ final class MGLMapViewController: UIViewController {
     //MARK: -- Methods
     
     @objc private func changeStyle(sender: UISegmentedControl) {
+        Utilities.sendHapticFeedback(action: .selectionChanged)
         switch sender.selectedSegmentIndex {
         case 0:
             mapView.styleURL = MGLStyle.satelliteStreetsStyleURL
@@ -98,6 +93,7 @@ final class MGLMapViewController: UIViewController {
     }
     
     @objc private func backButtonPressed() {
+        Utilities.sendHapticFeedback(action: .pageDismissed)
         dismiss(animated: true, completion: nil)
     }
     
@@ -199,7 +195,6 @@ fileprivate extension MGLMapViewController {
         listButton.snp.makeConstraints { (make) in
             make.leading.equalTo(view).inset(Constants.spacingConstant)
             make.top.equalToSuperview().inset(40.deviceAdjusted)
-            make.height.width.equalTo(40.deviceAdjusted)
         }
     }
     

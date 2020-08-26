@@ -32,12 +32,16 @@ final class CircleBlurButton: UIButton {
         clipsToBounds = true
     }
     
-    required init(frame: CGRect, image: UIImage) {
+    required init(frame: CGRect, image: UIImage, style: ButtonStyle) {
         super.init(frame: frame)
         self.buttonImage.image = image
         commonInit()
         addSubviews()
         setConstraints()
+        if style == .dark {
+            visualEffectView.effect = UIBlurEffect(style: .dark)
+            buttonImage.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.8504387842)
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -76,4 +80,9 @@ fileprivate extension CircleBlurButton {
             }
         }
     }
+}
+
+enum ButtonStyle {
+    case light
+    case dark
 }

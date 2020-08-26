@@ -349,9 +349,9 @@
 				9772515624DF66A90052A3F6 /* CustomAnnotationView.swift */,
 				976F68C724E8AE2500277F79 /* CommonView.swift */,
 				976F68C924E8AE8600277F79 /* ShadowView.swift */,
+				975742E824F61A8700D203B8 /* CircleBlurButton.swift */,
 				97E22D8924EC7701008B76E2 /* RedListToolBar.swift */,
 				9743BAB424F026780090A2E4 /* DetailInfo */,
-				975742E824F61A8700D203B8 /* CircleBlurButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";

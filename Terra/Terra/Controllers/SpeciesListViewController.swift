@@ -150,7 +150,7 @@ final class SpeciesListViewController: UIViewController {
         let mapVC = MGLMapViewController()
         mapVC.speciesData = viewModel.species
         mapVC.modalPresentationStyle = .fullScreen
-        Utilities.generator.impactOccurred()
+        Utilities.sendHapticFeedback(action: .itemSelected)
         presentModally(mapVC)
     }
     
@@ -258,7 +258,7 @@ extension SpeciesListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView,
                         didHighlightItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath)
-            Utilities.generator.impactOccurred()
+        Utilities.sendHapticFeedback(action: .itemSelected)
         UIView.animate(withDuration: 0.3) {
             cell?.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
         }

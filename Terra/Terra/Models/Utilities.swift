@@ -9,9 +9,7 @@
 import UIKit
 
 struct Utilities {
-    
-    static let generator = UIImpactFeedbackGenerator(style: .medium)
-    
+
     static func addParallaxToView(view: UIView) {
         let amount = 40
         
@@ -27,4 +25,24 @@ struct Utilities {
         group.motionEffects = [horizontalMotion, verticalMotion]
         view.addMotionEffect(group)
     }
+    
+    static func sendHapticFeedback(action: UserAction) {
+        let itemSelectedFeedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
+        let pageDismissedFeedbackGenerator = UIImpactFeedbackGenerator(style: .light)
+        let changedSelectionFeedbackGenerator = UISelectionFeedbackGenerator()
+       
+        switch action {
+        case .itemSelected: itemSelectedFeedbackGenerator.impactOccurred()
+        case .pageDismissed: pageDismissedFeedbackGenerator.impactOccurred()
+        case .selectionChanged: changedSelectionFeedbackGenerator.selectionChanged()
+        }
+    }
+    
+    private init() {}
+}
+
+enum UserAction {
+    case itemSelected
+    case pageDismissed
+    case selectionChanged
 }

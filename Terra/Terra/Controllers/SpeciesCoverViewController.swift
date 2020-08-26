@@ -124,15 +124,13 @@ final class SpeciesCoverViewController: UIViewController {
     }()
     
     private lazy var closeButton: CircleBlurButton = {
-        let btn = Factory.makeRoundBlurButton(image: .close, frame: CGRect(origin: .zero, size: .init(width: 30, height: 30)))
-        
+        let btn = Factory.makeBlurredCircleButton(image: .close, style: .light)
         btn.addTarget(self, action: #selector(dismissPage), for: .touchUpInside)
         return btn
     }()
     
     private lazy var augmentedRealityButton: UIButton = {
-        let btn = Factory.makeRoundBlurButton(image: .augmentedReality, frame: CGRect(origin: .zero, size: .init(width: 30, height: 30)))
-     
+        let btn = Factory.makeBlurredCircleButton(image: .augmentedReality, style: .light)
         btn.addTarget(self, action: #selector(augmentedRealityButtonPressed), for: .touchUpInside)
         return btn
     }()
@@ -191,6 +189,7 @@ final class SpeciesCoverViewController: UIViewController {
     }
     
     @objc private func dismissPage() {
+        Utilities.sendHapticFeedback(action: .pageDismissed)
         dismiss(animated: true, completion: nil)
     }
     
@@ -396,7 +395,7 @@ extension SpeciesCoverViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
         
         selectedCell = collectionView.cellForItem(at: indexPath)
-        Utilities.generator.impactOccurred()
+        Utilities.sendHapticFeedback(action: .itemSelected)
         UIView.animate(withDuration: 0.3) { [weak self] in guard let self = self else { return }
             self.selectedCell?.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
         }
@@ -416,7 +415,7 @@ extension SpeciesCoverViewController: UICollectionViewDelegate {
 extension SpeciesCoverViewController: DonateButtonDelegate {
     func donateButtonPressed() {
         guard let donationURL = URL(string: viewModel.selectedSpecies.donationLink) else { return }
-        Utilities.generator.impactOccurred()
+        Utilities.sendHapticFeedback(action: .itemSelected)
         presentWebBrowser(link: donationURL)
     }
 }
@@ -481,14 +480,12 @@ fileprivate extension SpeciesCoverViewController {
     func setCloseButtonConstraints() {
         closeButton.snp.makeConstraints { (make) in
             make.top.trailing.equalToSuperview().inset(Constants.spacingConstant)
-            make.height.width.equalTo(closeButton.frame.size)
         }
     }
     
     func setARButtonConstraints() {
         augmentedRealityButton.snp.makeConstraints { (make) in
             make.top.leading.equalToSuperview().inset(Constants.spacingConstant)
-            make.height.width.equalTo(30.deviceAdjusted)
         }
     }
     

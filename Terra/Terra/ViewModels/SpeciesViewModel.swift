@@ -51,6 +51,7 @@ final class SpeciesViewModel {
     }
     
     func updateRedListCategoryFilteredAnimals(from selectedTabTag: Int) {
+        Utilities.sendHapticFeedback(action: .selectionChanged)
         switch selectedTabTag {
         case 0:
             redListCategoryFilteredSpecies = animalData

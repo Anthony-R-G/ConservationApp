@@ -46,16 +46,26 @@ class Factory {
         return button
     }
     
-    static func makeRoundBlurButton(image: imageType, frame: CGRect) -> CircleBlurButton {
-        let systemImage = UIImage(systemName: image.rawValue)
-        let button = CircleBlurButton(frame: frame, image: systemImage!)
-        return button
+    static func makeBlurredCircleButton(image: systemImage, style: ButtonStyle) -> CircleBlurButton {
+        let button = CircleBlurButton(frame: CGRect(
+            origin: .zero,
+            size: CGSize(
+                width: 35.deviceAdjusted,
+                height: 35.deviceAdjusted))
+            ,image: UIImage(systemName: image.rawValue)!,
+             style: style)
         
+        button.snp.makeConstraints { (make) in
+            make.height.width.equalTo(button.frame.size) }
+        return button
     }
 }
 
-enum imageType: String {
+enum systemImage: String {
     case close = "xmark"
     case augmentedReality = "arkit"
+    case list = "list.dash"
 }
+
+
 
