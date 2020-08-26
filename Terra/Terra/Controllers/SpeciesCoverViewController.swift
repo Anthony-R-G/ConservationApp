@@ -430,7 +430,7 @@ extension SpeciesCoverViewController: ConservationStatusDelegate {
 
 fileprivate extension SpeciesCoverViewController {
     func addSubviews() {
-        [backgroundImageView, backgroundGradientOverlay, headerNameView, subheaderInfoView, downChevronContainer, upChevron, donateButtonContainer, collectionView, augmentedRealityButton, closeButton]
+        [backgroundImageView, backgroundGradientOverlay, subheaderInfoView, downChevronContainer, upChevron, donateButtonContainer, headerNameView, collectionView, augmentedRealityButton, closeButton]
             .forEach { view.addSubview($0) }
         
         backgroundImageView.addSubview(backgroundVisualEffectBlur)
