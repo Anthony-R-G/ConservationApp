@@ -39,6 +39,8 @@ final class NewsViewController: UIViewController {
     
     private var viewModel: NewsViewModel!
     
+    private var activityIndicator = UIActivityIndicatorView(style: .large)
+    
     
     //MARK: -- Methods
     
@@ -48,20 +50,6 @@ final class NewsViewController: UIViewController {
             self.refreshControl.endRefreshing()
         }
     }
-    
-    private func showModally(_ viewController: UIViewController) {
-        let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
-        let rootViewController = window?.rootViewController
-        rootViewController?.present(viewController, animated: true, completion: nil)
-    }
-    
-    private func presentWebBrowser(link: URL){
-        let config = SFSafariViewController.Configuration()
-        config.entersReaderIfAvailable = false
-        let safariVC = SFSafariViewController(url: link, configuration: config)
-        showModally(safariVC)
-    }
-    
     
     //MARK: -- Life Cycle Methods
     
@@ -76,6 +64,7 @@ final class NewsViewController: UIViewController {
 }
 
 extension NewsViewController: NewsViewModelDelegate {
+    
     func fetchCompleted() {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
@@ -104,9 +93,23 @@ extension NewsViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let specificArticle = viewModel.specificArticle(at: indexPath.row)
+        let selectedArticle = viewModel.specificArticle(at: indexPath.row)
+        Utilities.presentWebBrowser(on: self, link: URL(string: selectedArticle.url)!)
+    }
+    
+    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath)
         Utilities.sendHapticFeedback(action: .itemSelected)
-        presentWebBrowser(link: URL(string: specificArticle.url)!)
+        UIView.animate(withDuration: 0.3) {
+            cell?.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath)
+        UIView.animate(withDuration: 0.3) {
+            cell?.transform = CGAffineTransform(scaleX: 1, y: 1)
+        }
     }
 }
 
@@ -127,17 +130,24 @@ extension NewsViewController: UITableViewDataSourcePrefetching {
 fileprivate extension NewsViewController {
     
     func addSubviews() {
-       [tableView].forEach { view.addSubview($0) }
+        [tableView, activityIndicator].forEach { view.addSubview($0) }
     }
     
     func setConstraints() {
+        setActivityIndicatorConstraints()
         setTableViewConstraints()
     }
     
     func setTableViewConstraints() {
         tableView.snp.makeConstraints { (make) in
             make.leading.top.trailing.equalTo(view)
-            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(60)
+            make.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+    }
+    
+    func setActivityIndicatorConstraints() {
+        activityIndicator.snp.makeConstraints { (make) in
+            make.center.equalToSuperview()
         }
     }
 }

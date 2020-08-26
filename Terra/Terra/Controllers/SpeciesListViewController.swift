@@ -27,10 +27,9 @@ final class SpeciesListViewController: UIViewController {
     }()
     
     private lazy var filterTabBar: RedListFilterTabBar = {
-        let tb = RedListFilterTabBar(frame: CGRect(x: 0,
-                                                   y: 0,
+        let tb = RedListFilterTabBar(frame: CGRect(origin: .zero, size: CGSize(
                                                    width: view.frame.width,
-                                                   height: 30.deviceAdjusted))
+                                                   height: 30.deviceAdjusted)))
         tb.selectedItem = tb.items![0]
         tb.delegate = self
         return tb
@@ -219,13 +218,13 @@ final class SpeciesListViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        viewModel.fetchSpeciesData()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
         viewModel = SpeciesViewModel(delegate: self)
-        viewModel.fetchSpeciesData()
         addSubviews()
         setConstraints()
         addGestureRecognizers()
@@ -245,6 +244,7 @@ extension SpeciesListViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         let speciesCell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.reuseIdentifier, for: indexPath) as! SpeciesCollectionViewCell
         let specificAnimal = viewModel.specificSpecies(at: indexPath.row)
         speciesCell.configureCell(from: specificAnimal)
@@ -372,7 +372,7 @@ fileprivate extension SpeciesListViewController {
     func setEarthButtonConstraints() {
         earthButton.snp.makeConstraints { (make) in
             earthButtonLeadingAnchorConstraint.isActive = true
-            make.height.width.equalTo(40.deviceAdjusted)
+            make.height.width.equalTo(25.deviceAdjusted)
             make.centerY.equalTo(terraTitleLabel)
         }
     }
@@ -396,6 +396,7 @@ fileprivate extension SpeciesListViewController {
     func setFilterTabBarConstraints() {
         filterTabBar.snp.makeConstraints { (make) in
             make.top.equalTo(terraTitleLabel.snp.bottom).offset(10.deviceAdjusted)
+            make.centerX.equalToSuperview()
             make.height.width.equalTo(filterTabBar.frame.size)
         }
     }
@@ -404,7 +405,7 @@ fileprivate extension SpeciesListViewController {
         collectionView.snp.makeConstraints { (make) in
             make.leading.trailing.equalToSuperview()
             make.top.equalTo(filterTabBar.snp.bottom)
-            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(50)
+            make.bottom.equalTo(view.safeAreaLayoutGuide)
         }
     }
 }

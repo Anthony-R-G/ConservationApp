@@ -197,12 +197,6 @@ final class SpeciesCoverViewController: UIViewController {
         animatePageStateTransition()
     }
     
-    private func presentWebBrowser(link: URL){
-        let config = SFSafariViewController.Configuration()
-        let safariVC = SFSafariViewController(url: link, configuration: config)
-        present(safariVC, animated: true)
-    }
-    
     private func addGestureRecognizers() {
         view.addGestureRecognizer(pageStateSwipeGesture)
         view.addGestureRecognizer(dismissPageSwipeGesture)
@@ -416,13 +410,13 @@ extension SpeciesCoverViewController: DonateButtonDelegate {
     func donateButtonPressed() {
         guard let donationURL = URL(string: viewModel.selectedSpecies.donationLink) else { return }
         Utilities.sendHapticFeedback(action: .itemSelected)
-        presentWebBrowser(link: donationURL)
+        Utilities.presentWebBrowser(on: self, link: donationURL)
     }
 }
 
 extension SpeciesCoverViewController: ConservationStatusDelegate {
     func conservationStatusTapped() {
-        presentWebBrowser(link: URL(string: "https://www.sanbi.org/skep/the-iucn-red-list-explained/")!)
+        Utilities.presentWebBrowser(on: self, link: URL(string: "https://www.sanbi.org/skep/the-iucn-red-list-explained/")!)
     }
 }
 

@@ -11,6 +11,7 @@ target 'Terra' do
  pod 'FirebaseUI/Storage'
  pod 'BATabBarController', '~> 2.0.2'
  pod 'Mapbox-iOS-SDK', '~> 6.0.0'
+ pod 'MaterialComponents/BottomNavigation'
  
 
   target 'TerraTests' do

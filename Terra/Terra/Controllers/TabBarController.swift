@@ -9,7 +9,7 @@
 import Foundation
 import BATabBarController
 
-final class TabBarViewController: UIViewController {
+final class TabBarController: UITabBarController {
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -22,14 +22,15 @@ final class TabBarViewController: UIViewController {
         
         let listVC = SpeciesListViewController()
         
-        let newsVC = UINavigationController(rootViewController: NewsViewController())
-        newsVC.navigationBar.prefersLargeTitles = true
-        newsVC.navigationBar.topItem?.title = "Wildlife News"
-        newsVC.navigationBar.barStyle = .black
+//        let newsVC = UINavigationController(rootViewController: NewsViewController())
+        let newsVC = NewsViewController()
+//        newsVC.navigationBar.prefersLargeTitles = true
+//        newsVC.navigationBar.topItem?.title = "Wildlife News"
+//        newsVC.navigationBar.barStyle = .black
         
-        let textAttributes = [NSAttributedString.Key.foregroundColor: Constants.titleLabelColor]
-        newsVC.navigationBar.largeTitleTextAttributes = textAttributes
-        newsVC.navigationBar.titleTextAttributes = textAttributes
+//        let textAttributes = [NSAttributedString.Key.foregroundColor: Constants.titleLabelColor]
+//        newsVC.navigationBar.largeTitleTextAttributes = textAttributes
+//        newsVC.navigationBar.titleTextAttributes = textAttributes
         
         
         let listVCTabBarItem = BATabBarItem(image: UIImage(named: "listVCUnselected")!, selectedImage: UIImage(named: "listVCSelected")!)
@@ -51,7 +52,7 @@ final class TabBarViewController: UIViewController {
 
 
 
-extension TabBarViewController: BATabBarControllerDelegate {
+extension TabBarController: BATabBarControllerDelegate {
     func tabBarController(_ tabBarController: BATabBarController, didSelect: UIViewController) {
         
     }

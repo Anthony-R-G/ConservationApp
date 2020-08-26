@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import SafariServices
 
 struct Utilities {
-
+    
     static func addParallaxToView(view: UIView) {
         let amount = 40
         
@@ -30,12 +31,19 @@ struct Utilities {
         let itemSelectedFeedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
         let pageDismissedFeedbackGenerator = UIImpactFeedbackGenerator(style: .light)
         let changedSelectionFeedbackGenerator = UISelectionFeedbackGenerator()
-       
+        
         switch action {
         case .itemSelected: itemSelectedFeedbackGenerator.impactOccurred()
         case .pageDismissed: pageDismissedFeedbackGenerator.impactOccurred()
         case .selectionChanged: changedSelectionFeedbackGenerator.selectionChanged()
         }
+    }
+    
+    
+    static func presentWebBrowser(on viewController: UIViewController, link: URL) {
+        let config = SFSafariViewController.Configuration()
+        let safariVC = SFSafariViewController(url: link, configuration: config)
+        viewController.present(safariVC, animated: true, completion: nil)
     }
     
     private init() {}
