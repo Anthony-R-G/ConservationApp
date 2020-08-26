@@ -68,8 +68,9 @@ final class CoverHeaderNameView: UIView {
         speciesCommonNameLabel.animateToFont(UIFont(name: "Roboto-Bold", size: 56.deviceAdjusted)!, withDuration: 1.3)
     }
     
-    required init(species: Species) {
+    required init(species: Species, delegate: ConservationStatusDelegate) {
         self.species = species
+        self.delegate = delegate
         super.init(frame: .zero)
         addSubviews()
         setConstraints()

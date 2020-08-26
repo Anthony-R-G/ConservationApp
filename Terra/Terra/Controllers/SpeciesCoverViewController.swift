@@ -34,9 +34,7 @@ final class SpeciesCoverViewController: UIViewController {
     }()
     
     private lazy var headerNameView: CoverHeaderNameView = {
-        let header = CoverHeaderNameView(species: viewModel.selectedSpecies)
-        header.delegate = self
-        return header
+        return CoverHeaderNameView(species: viewModel.selectedSpecies, delegate: self)
     }()
     
     private lazy var subheaderInfoView: CoverSubheaderInfoView = {
@@ -164,8 +162,6 @@ final class SpeciesCoverViewController: UIViewController {
     
     var viewModel: DetailPageStrategyViewModel!
     
-    private let generator = UIImpactFeedbackGenerator(style: .medium)
-    
     private var pageState: State = .collapsed
     
     private var selectedCell: UICollectionViewCell?
@@ -194,9 +190,7 @@ final class SpeciesCoverViewController: UIViewController {
         return subheaderInfoView.heightAnchor.constraint(equalToConstant: subheaderInfoViewEnlargedHeight)
     }()
     
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
+    override var prefersStatusBarHidden: Bool { return true }
     
     //MARK: -- Methods
     
@@ -214,8 +208,7 @@ final class SpeciesCoverViewController: UIViewController {
     
     private func presentWebBrowser(link: URL){
         let config = SFSafariViewController.Configuration()
-        let safariVC = SFSafariViewController(url: link,
-                                              configuration: config)
+        let safariVC = SFSafariViewController(url: link, configuration: config)
         present(safariVC, animated: true)
     }
     
@@ -398,28 +391,25 @@ extension SpeciesCoverViewController: UICollectionViewDataSource {
 //MARK: -- Collection View Delegate
 
 extension SpeciesCoverViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView,
-                        didSelectItemAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedCell = collectionView.cellForItem(at: indexPath)
         var strategy = viewModel.specificStrategy(at: indexPath.row)
         let detailVC = strategy.getDetailViewController()
         navigationController?.pushViewController(detailVC, animated: true)
     }
     
-    func collectionView(_ collectionView: UICollectionView,
-                        didHighlightItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath)
-        generator.impactOccurred()
-        UIView.animate(withDuration: 0.3) {
-            cell?.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+        selectedCell = collectionView.cellForItem(at: indexPath)
+        Utilities.generator.impactOccurred()
+        UIView.animate(withDuration: 0.3) { [weak self] in guard let self = self else { return }
+            self.selectedCell?.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView,
-                        didUnhighlightItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath)
-        UIView.animate(withDuration: 0.3) {
-            cell?.transform = CGAffineTransform(scaleX: 1, y: 1)
+    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+        selectedCell = collectionView.cellForItem(at: indexPath)
+        UIView.animate(withDuration: 0.3) { [weak self] in guard let self = self else { return }
+            self.selectedCell?.transform = CGAffineTransform(scaleX: 1, y: 1)
         }
     }
 }
@@ -429,7 +419,7 @@ extension SpeciesCoverViewController: UICollectionViewDelegate {
 extension SpeciesCoverViewController: DonateButtonDelegate {
     func donateButtonPressed() {
         guard let donationURL = URL(string: viewModel.selectedSpecies.donationLink) else { return }
-        generator.impactOccurred()
+        Utilities.generator.impactOccurred()
         presentWebBrowser(link: donationURL)
     }
 }
