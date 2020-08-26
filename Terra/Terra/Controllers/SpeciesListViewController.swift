@@ -40,10 +40,7 @@ final class SpeciesListViewController: UIViewController {
         let btn = UIButton()
         btn.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
         btn.tintColor = .white
-        btn.addTarget(
-            self,
-            action: #selector(expandSearchBar),
-            for: .touchUpInside)
+        btn.addTarget(self, action: #selector(expandSearchBar), for: .touchUpInside)
         return btn
     }()
     
@@ -110,7 +107,7 @@ final class SpeciesListViewController: UIViewController {
     private lazy var rightSwipeGesture: UISwipeGestureRecognizer = {
         let gesture = UISwipeGestureRecognizer(
             target: self,
-            action: #selector(handleSwipe(_:)))
+            action: #selector(handleCollectionViewSwipe(_:)))
         gesture.direction = .right
         return gesture
     }()
@@ -118,7 +115,7 @@ final class SpeciesListViewController: UIViewController {
     private lazy var leftSwipeGesture: UISwipeGestureRecognizer = {
         let gesture = UISwipeGestureRecognizer(
             target: self,
-            action: #selector(handleSwipe(_:)))
+            action: #selector(handleCollectionViewSwipe(_:)))
         gesture.direction = .left
         return gesture
     }()
@@ -157,23 +154,20 @@ final class SpeciesListViewController: UIViewController {
         presentModally(mapVC)
     }
     
-    @objc private func handleSwipe(_ sender: UISwipeGestureRecognizer) {
+    @objc private func handleCollectionViewSwipe(_ sender: UISwipeGestureRecognizer) {
         
         switch sender.direction {
         case .left:
             selectedTab += 1
-            if selectedTab == 4 {
-                selectedTab = 0
-            }
+            if selectedTab == 4 { selectedTab = 0 }
             
         case .right:
             selectedTab -= 1
-            if selectedTab == -1 {
-                selectedTab = 3
-            }
-        default:
-            ()
+            if selectedTab == -1 { selectedTab = 3 }
+            
+        default: ()
         }
+        
         filterTabBar.selectedItem = filterTabBar.items![selectedTab]
         viewModel.updateRedListCategoryFilteredAnimals(from: filterTabBar.selectedItem!.tag)
     }

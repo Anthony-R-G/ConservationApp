@@ -17,7 +17,6 @@ final class SpeciesCoverViewController: UIViewController {
     private lazy var backgroundImageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
-        view.insertSubview(iv, at: 0)
         iv.backgroundColor = .black
         FirebaseStorageService.coverImageManager.getImage(
             for: viewModel.selectedSpecies.commonName,
@@ -29,7 +28,6 @@ final class SpeciesCoverViewController: UIViewController {
         let gv = GradientView()
         gv.startColor = #colorLiteral(red: 0.06859237701, green: 0.08213501424, blue: 0.2409383953, alpha: 0.0)
         gv.endColor = #colorLiteral(red: 0.06859237701, green: 0.08213501424, blue: 0.2409383953, alpha: 0.8456228596)
-        view.insertSubview(gv, at: 1)
         return gv
     }()
     
@@ -125,22 +123,16 @@ final class SpeciesCoverViewController: UIViewController {
         return cv
     }()
     
-    private lazy var closeButton: UIButton = {
-        let btn = UIButton()
-        btn.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
-        btn.contentVerticalAlignment = .fill
-        btn.contentHorizontalAlignment = .fill
-        btn.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.845703125)
+    private lazy var closeButton: CircleBlurButton = {
+        let btn = Factory.makeRoundBlurButton(image: .close, frame: CGRect(origin: .zero, size: .init(width: 30, height: 30)))
+        
         btn.addTarget(self, action: #selector(dismissPage), for: .touchUpInside)
         return btn
     }()
     
     private lazy var augmentedRealityButton: UIButton = {
-        let btn = UIButton()
-        btn.setImage(UIImage(systemName: "arkit"), for: .normal)
-        btn.contentVerticalAlignment = .fill
-        btn.contentHorizontalAlignment = .fill
-        btn.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.845703125)
+        let btn = Factory.makeRoundBlurButton(image: .augmentedReality, frame: CGRect(origin: .zero, size: .init(width: 30, height: 30)))
+     
         btn.addTarget(self, action: #selector(augmentedRealityButtonPressed), for: .touchUpInside)
         return btn
     }()
@@ -217,15 +209,18 @@ final class SpeciesCoverViewController: UIViewController {
         view.addGestureRecognizer(dismissPageSwipeGesture)
     }
     
+    private func startShimmerAnimationOnViews() {
+        [downChevron, upChevron].forEach { $0.startShimmeringAnimation(
+            animationSpeed: 2,
+            direction: .leftToRight,
+            repeatCount: .infinity) }
+    }
     
     //MARK: -- Life Cycle Methods
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        [downChevron, upChevron].forEach { $0.startShimmeringAnimation(
-            animationSpeed: 2,
-            direction: .leftToRight,
-            repeatCount: .infinity) }
+        startShimmerAnimationOnViews()
     }
     
     override func viewDidLoad() {
@@ -262,18 +257,18 @@ extension SpeciesCoverViewController {
                     self.dismissPageSwipeGesture.isEnabled = false
                     self.resizeHeader(state: state)
                     self.toggleContainerInteractability(state: state)
-                    self.animateButtonControls(state: state)
-                    self.animateInfoOptions(state: state)
-                
+                    self.animateInfoOptionsVisibility(state: state)
+                    self.animateButtonControlsVisibility(state: state)
+                    
                 case .collapsed:
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
                         guard let self = self else { return }
                         self.dismissPageSwipeGesture.isEnabled = true
                     }
-                    self.toggleContainerInteractability(state: state)
                     self.resizeHeader(state: state)
-                    self.animateButtonControls(state: state)
-                    self.animateInfoOptions(state: state)
+                    self.toggleContainerInteractability(state: state)
+                    self.animateButtonControlsVisibility(state: state)
+                    self.animateInfoOptionsVisibility(state: state)
                 }
                 
                 self.view.layoutIfNeeded()
@@ -316,7 +311,7 @@ extension SpeciesCoverViewController {
     }
     
     
-    private func animateButtonControls(state: State) {
+    private func animateButtonControlsVisibility(state: State) {
         let newDownChevronAlpha: CGFloat = state == .expanded ? 0.0 : 0.6
         let newUpChevronAlpha: CGFloat = state == .expanded ? 0.6 : 0.0
         let newARButtonAlpha: CGFloat = state == .expanded ? 0.0 : 1.0
@@ -337,7 +332,7 @@ extension SpeciesCoverViewController {
         }
     }
     
-    private func animateInfoOptions(state: State) {
+    private func animateInfoOptionsVisibility(state: State) {
         let newAlpha: CGFloat = state == .expanded ? 1.0 : 0.0
         let reverseAlpha: CGFloat = state == .expanded ? 0.0 : 1.0
         let duration: TimeInterval = state == .expanded ? 0.9 : 0.3
@@ -370,8 +365,7 @@ extension SpeciesCoverViewController {
 
 extension SpeciesCoverViewController: UICollectionViewDataSource {
     
-    func collectionView(_ collectionView: UICollectionView,
-                        numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.totalStrategiesCount
     }
     
@@ -392,6 +386,7 @@ extension SpeciesCoverViewController: UICollectionViewDataSource {
 
 extension SpeciesCoverViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
         selectedCell = collectionView.cellForItem(at: indexPath)
         var strategy = viewModel.specificStrategy(at: indexPath.row)
         let detailVC = strategy.getDetailViewController()
@@ -399,6 +394,7 @@ extension SpeciesCoverViewController: UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+        
         selectedCell = collectionView.cellForItem(at: indexPath)
         Utilities.generator.impactOccurred()
         UIView.animate(withDuration: 0.3) { [weak self] in guard let self = self else { return }
@@ -407,6 +403,7 @@ extension SpeciesCoverViewController: UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+        
         selectedCell = collectionView.cellForItem(at: indexPath)
         UIView.animate(withDuration: 0.3) { [weak self] in guard let self = self else { return }
             self.selectedCell?.transform = CGAffineTransform(scaleX: 1, y: 1)
@@ -434,10 +431,10 @@ extension SpeciesCoverViewController: ConservationStatusDelegate {
 
 fileprivate extension SpeciesCoverViewController {
     func addSubviews() {
+        [backgroundImageView, backgroundGradientOverlay, headerNameView, subheaderInfoView, downChevronContainer, upChevron, donateButtonContainer, collectionView, augmentedRealityButton, closeButton]
+            .forEach { view.addSubview($0) }
+        
         backgroundImageView.addSubview(backgroundVisualEffectBlur)
-        
-        [headerNameView, subheaderInfoView, downChevronContainer, upChevron, donateButtonContainer, collectionView, augmentedRealityButton, closeButton].forEach { view.addSubview($0) }
-        
         donateButtonContainer.addSubview(donateButton)
         downChevronContainer.addSubview(downChevron)
     }
@@ -484,14 +481,14 @@ fileprivate extension SpeciesCoverViewController {
     func setCloseButtonConstraints() {
         closeButton.snp.makeConstraints { (make) in
             make.top.trailing.equalToSuperview().inset(Constants.spacingConstant)
-            make.height.width.equalTo(35.deviceAdjusted)
+            make.height.width.equalTo(closeButton.frame.size)
         }
     }
     
     func setARButtonConstraints() {
         augmentedRealityButton.snp.makeConstraints { (make) in
             make.top.leading.equalToSuperview().inset(Constants.spacingConstant)
-            make.height.width.equalTo(35.deviceAdjusted)
+            make.height.width.equalTo(30.deviceAdjusted)
         }
     }
     

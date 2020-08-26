@@ -28,15 +28,15 @@ class Factory {
     static func makeDetailInfoWindowLabel(text: String) -> UILabel {
         let label = makeLabel(
             title: text.replacingOccurrences(of: "\\n", with: "\n"),
-                                      weight: .regular,
-                                      size: 16,
-                                      color: .white,
-                                      alignment: .natural)
+            weight: .regular,
+            size: 16,
+            color: .white,
+            alignment: .natural)
         label.numberOfLines = 0
         return label
     }
     
-
+    
     static func makeButton(title: String, weight: FontWeight, color: UIColor) -> UIButton {
         let button = UIButton(type: .custom)
         button.setTitle(title, for: .normal)
@@ -45,5 +45,17 @@ class Factory {
         button.titleLabel?.font = UIFont(name: weight.rawValue, size: 15.deviceAdjusted)
         return button
     }
+    
+    static func makeRoundBlurButton(image: imageType, frame: CGRect) -> CircleBlurButton {
+        let systemImage = UIImage(systemName: image.rawValue)
+        let button = CircleBlurButton(frame: frame, image: systemImage!)
+        return button
+        
+    }
+}
+
+enum imageType: String {
+    case close = "xmark"
+    case augmentedReality = "arkit"
 }
 

@@ -53,7 +53,6 @@ final class SpeciesCollectionViewCell: UICollectionViewCell {
     private lazy var backgroundImageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
-        insertSubview(iv, at: 0)
         return iv
     }()
     
@@ -61,8 +60,6 @@ final class SpeciesCollectionViewCell: UICollectionViewCell {
         let gv = GradientView()
         gv.startColor = .clear
         gv.endColor = #colorLiteral(red: 0.06859237701, green: 0.08213501424, blue: 0.2409383953, alpha: 0.7227097603)
-        gv.translatesAutoresizingMaskIntoConstraints = false
-        insertSubview(gv, at: 1)
         return gv
     }()
     
@@ -97,7 +94,8 @@ final class SpeciesCollectionViewCell: UICollectionViewCell {
 
 fileprivate extension SpeciesCollectionViewCell {
     func addSubviews() {
-        [speciesNameLabel, conservationStatusLabel, populationNumbersLabel, speciesScientificNameLabel].forEach{ contentView.addSubview($0) }
+        [backgroundImageView, backgroundGradientOverlay, speciesNameLabel, conservationStatusLabel, populationNumbersLabel, speciesScientificNameLabel]
+            .forEach{ contentView.addSubview($0) }
     }
     
     func setConstraints() {

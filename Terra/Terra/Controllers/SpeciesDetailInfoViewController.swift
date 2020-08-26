@@ -55,12 +55,8 @@ class SpeciesDetailInfoViewController: UIViewController {
         return strategy.arrangedSubviews()
     }()
     
-    private lazy var closeButton: UIButton = {
-        let btn = UIButton()
-        btn.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
-        btn.contentVerticalAlignment = .fill
-        btn.contentHorizontalAlignment = .fill
-        btn.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.845703125)
+  private lazy var closeButton: CircleBlurButton = {
+        let btn = Factory.makeRoundBlurButton(image: .close, frame: CGRect(origin: .zero, size: .init(width: 30, height: 30)))
         btn.addTarget(self, action: #selector(dismissPage), for: .touchUpInside)
         return btn
     }()
@@ -156,6 +152,7 @@ extension SpeciesDetailInfoViewController {
     func setMaskViewConstraints() {
         maskView.snp.makeConstraints { (make) in
             make.edges.equalTo(shadowView)
+             
         }
     }
     
@@ -184,7 +181,7 @@ extension SpeciesDetailInfoViewController {
     func setCloseButtonConstraints() {
         closeButton.snp.makeConstraints { (make) in
             make.top.trailing.equalToSuperview().inset(Constants.spacingConstant)
-            make.height.width.equalTo(35.deviceAdjusted)
+            make.height.width.equalTo(closeButton.frame.size)
         }
     }
     

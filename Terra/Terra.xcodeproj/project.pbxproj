@@ -41,6 +41,7 @@
 		974B752924E0058E006C3D1D /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9764D12A24D7DD820050AF37 /* Secrets.swift */; };
 		974B752A24E00595006C3D1D /* NewsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9772515824DF7F9C0052A3F6 /* NewsResponse.swift */; };
 		974CC98424C64F0F00E4EF85 /* PopulationTrend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974CC98324C64F0E00E4EF85 /* PopulationTrend.swift */; };
+		975742E924F61A8800D203B8 /* CircleBlurButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975742E824F61A8700D203B8 /* CircleBlurButton.swift */; };
 		975812F524D539D500C09D56 /* Biome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975812F424D539D500C09D56 /* Biome.swift */; };
 		97591FDF24CCD14A002EAC96 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FDE24CCD14A002EAC96 /* Constants.swift */; };
 		97591FE024CCD2E9002EAC96 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97591FDE24CCD14A002EAC96 /* Constants.swift */; };
@@ -158,6 +159,7 @@
 		97452E4523E1E6C7005636E0 /* SpeciesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesCollectionViewCell.swift; sourceTree = "<group>"; };
 		97452E4723E1EEE9005636E0 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		974CC98324C64F0E00E4EF85 /* PopulationTrend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopulationTrend.swift; sourceTree = "<group>"; };
+		975742E824F61A8700D203B8 /* CircleBlurButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleBlurButton.swift; sourceTree = "<group>"; };
 		975812F424D539D500C09D56 /* Biome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Biome.swift; sourceTree = "<group>"; };
 		97591FDE24CCD14A002EAC96 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		97591FE124CCDC28002EAC96 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
@@ -349,6 +351,7 @@
 				976F68C924E8AE8600277F79 /* ShadowView.swift */,
 				97E22D8924EC7701008B76E2 /* RedListToolBar.swift */,
 				9743BAB424F026780090A2E4 /* DetailInfo */,
+				975742E824F61A8700D203B8 /* CircleBlurButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -728,6 +731,7 @@
 				9772516224DFA6C40052A3F6 /* NewsViewModelDelegate.swift in Sources */,
 				97D0AB2024ECC84D00D345A4 /* UIImageExtensions.swift in Sources */,
 				97F7B42824C56886007AEE97 /* DonateButtonDelegate.swift in Sources */,
+				975742E924F61A8800D203B8 /* CircleBlurButton.swift in Sources */,
 				97EDD4F024D36D0A00D30674 /* FirebaseStorageManager.swift in Sources */,
 				976F68CA24E8AE8600277F79 /* ShadowView.swift in Sources */,
 				9772515724DF66A90052A3F6 /* CustomAnnotationView.swift in Sources */,

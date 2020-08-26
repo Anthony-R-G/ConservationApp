@@ -30,11 +30,9 @@ final class DetailInfoWindow: UIView {
     }
     
     private func configureAppearance() {
-//        translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.2452108305)
         layer.cornerRadius = Constants.cornerRadius
     }
-    
     
     init(title: String, content: UIView) {
         super.init(frame: .zero)
