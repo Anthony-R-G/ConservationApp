@@ -153,6 +153,7 @@ final class SpeciesListViewController: UIViewController {
         let mapVC = MGLMapViewController()
         mapVC.speciesData = viewModel.species
         mapVC.modalPresentationStyle = .fullScreen
+        Utilities.generator.impactOccurred()
         presentModally(mapVC)
     }
     
@@ -263,8 +264,7 @@ extension SpeciesListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView,
                         didHighlightItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath)
-        let generator = UIImpactFeedbackGenerator(style: .medium)
-        generator.impactOccurred()
+            Utilities.generator.impactOccurred()
         UIView.animate(withDuration: 0.3) {
             cell?.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
         }

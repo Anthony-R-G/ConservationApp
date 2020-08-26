@@ -57,16 +57,11 @@ class SpeciesDetailInfoViewController: UIViewController {
     
     private lazy var closeButton: UIButton = {
         let btn = UIButton()
-        btn.setImage(UIImage(systemName: "xmark.circle.fill"),
-                     for: .normal)
-        
-        btn.transform = CGAffineTransform(scaleX: 1.5,
-                                          y: 1.5)
+        btn.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
+        btn.contentVerticalAlignment = .fill
+        btn.contentHorizontalAlignment = .fill
         btn.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.845703125)
-        btn.addTarget(
-            self,
-            action: #selector(closeButtonPressed),
-            for: .touchUpInside)
+        btn.addTarget(self, action: #selector(dismissPage), for: .touchUpInside)
         return btn
     }()
     
@@ -92,7 +87,7 @@ class SpeciesDetailInfoViewController: UIViewController {
     
     //MARK: -- Methods
     
-    @objc private func closeButtonPressed() {
+    @objc private func dismissPage() {
         navigationController?.popViewController(animated: true)
     }
     
@@ -188,9 +183,8 @@ extension SpeciesDetailInfoViewController {
     
     func setCloseButtonConstraints() {
         closeButton.snp.makeConstraints { (make) in
-            make.top.equalToSuperview().inset(5)
-            make.trailing.equalToSuperview().inset(5)
-            make.height.width.equalTo(66)
+            make.top.trailing.equalToSuperview().inset(Constants.spacingConstant)
+            make.height.width.equalTo(35.deviceAdjusted)
         }
     }
     

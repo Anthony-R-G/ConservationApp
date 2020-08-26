@@ -16,7 +16,7 @@ final class CoverHeaderNameView: UIView {
         button.titleLabel?.font = UIFont(name: "Roboto-Medium", size: 17.deviceAdjusted)
         button.setTitle(species.population.conservationStatus.rawValue, for: .normal)
         button.layer.borderColor = Constants.red.cgColor
-        button.layer.borderWidth = Constants.borderWidth
+        button.layer.borderWidth = 2
         button.layer.cornerRadius = 10
         button.showsTouchWhenHighlighted = true
         button.addTarget(self, action: #selector(handleTap), for: .touchUpInside)
@@ -34,7 +34,7 @@ final class CoverHeaderNameView: UIView {
     }()
     
     private lazy var speciesScientificNameLabel: UILabel = {
-        return Factory.makeLabel(title: species.taxonomy.scientificName,
+        return Factory.makeLabel(title: "— \(species.taxonomy.scientificName)",
                                         weight: .lightItalic,
                                         size: 17,
                                         color: .white,
