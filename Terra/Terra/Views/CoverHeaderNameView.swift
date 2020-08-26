@@ -64,7 +64,7 @@ final class CoverHeaderNameView: UIView {
         speciesCommonNameLabel.animateToFont(UIFont(name: "Roboto-Bold", size: Constants.screenHeight * 0.04352678571428571)!, withDuration: 0.5)
     }
     
-    func expandCommonNameLabel() {
+    func enlargeCommonNameLabel() {
         speciesCommonNameLabel.animateToFont(UIFont(name: "Roboto-Bold", size: 56.deviceAdjusted)!, withDuration: 1.3)
     }
     

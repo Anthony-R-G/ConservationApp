@@ -73,7 +73,9 @@ final class SpeciesCoverViewController: UIViewController {
     
     //Sets donate button centerY between view bottom & collectionview
     private lazy var donateButtonContainer: UIView = {
-        return UIView()
+        let view = UIView()
+        view.isUserInteractionEnabled = false
+        return view
     }()
     
     //Sets chevron centerY between view bottom & subheader
@@ -238,7 +240,6 @@ final class SpeciesCoverViewController: UIViewController {
         addSubviews()
         setConstraints()
         addGestureRecognizers()
-        donateButtonContainer.isHidden = true
     }
 }
 
@@ -257,68 +258,70 @@ extension SpeciesCoverViewController: Animatable {
 
 extension SpeciesCoverViewController {
     
-     private func animatePageStateTransition() {
-           let state = pageState.opposite
-           let animator = UIViewPropertyAnimator(duration: 1.3,
-                                                 dampingRatio: 0.75,
-                                                 animations: { [weak self] in
-               guard let self = self else { return }
-               switch state {
-               case .expanded:
-                   self.dismissPageSwipeGesture.isEnabled = false
-                   self.shrinkHeader()
-                   self.toggleContainerVisibility(state: state)
-                   self.animateButtonControls(state: state)
-                   self.animateInfoOptions(state: state)
-                   
-                   
-               case .collapsed:
-                   DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
-                       guard let self = self else { return }
-                       self.dismissPageSwipeGesture.isEnabled = true
-                   }
-                   self.toggleContainerVisibility(state: state)
-                   self.enlargeHeader()
-                   self.animateButtonControls(state: state)
-                   self.animateInfoOptions(state: state)
-                   
-               }
-               self.view.layoutIfNeeded()
-           })
-           
-           animator.addCompletion { [weak self ] (position) in
-               guard let self = self else { return }
-               switch position {
-               case .start:
-                   self.pageState = state.opposite
+    private func animatePageStateTransition() {
+        let state = pageState.opposite
+        let animator = UIViewPropertyAnimator(
+            duration: 1.3,
+            dampingRatio: 0.75,
+            animations: { [weak self] in guard let self = self else { return }
+                switch state {
+                case .expanded:
+                    self.dismissPageSwipeGesture.isEnabled = false
+                    self.resizeHeader(state: state)
+                    self.toggleContainerInteractability(state: state)
+                    self.animateButtonControls(state: state)
+                    self.animateInfoOptions(state: state)
                 
-               case .end:
-                   self.pageStateSwipeGesture.direction = self.pageStateSwipeGesture.direction.opposite
-                   self.pageState = state
-                   self.toggleContainerVisibility(state: state)
+                case .collapsed:
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+                        guard let self = self else { return }
+                        self.dismissPageSwipeGesture.isEnabled = true
+                    }
+                    self.toggleContainerInteractability(state: state)
+                    self.resizeHeader(state: state)
+                    self.animateButtonControls(state: state)
+                    self.animateInfoOptions(state: state)
+                }
                 
-               case .current:
-                   ()
-               @unknown default:
-                   ()
-               }
-           }
-           animator.startAnimation()
-       }
-    
-    private func shrinkHeader() {
-        headerNameView.shrinkCommonNameLabel()
-        headerNameViewTopAnchorConstraint.constant = headerNameViewShrinkHeight
-        headerNameViewHeightConstraint.constant = headerNameViewShrinkTopAnchor
-        subheaderInfoViewHeightConstraint.constant = subheaderInfoViewShrinkHeight
+                self.view.layoutIfNeeded()
+        })
+        
+        animator.addCompletion { [weak self ] (position) in
+            guard let self = self else { return }
+            switch position {
+            case .start:
+                self.pageState = state.opposite
+                
+            case .end:
+                self.pageStateSwipeGesture.direction = self.pageStateSwipeGesture.direction.opposite
+                self.pageState = state
+                self.toggleContainerInteractability(state: state)
+                
+            case .current:
+                ()
+            @unknown default:
+                ()
+            }
+        }
+        animator.startAnimation()
     }
     
-    private func enlargeHeader() {
-        headerNameView.expandCommonNameLabel()
-        headerNameViewTopAnchorConstraint.constant = headerNameViewEnlargedTopAnchor
-        headerNameViewHeightConstraint.constant = headerNameViewEnlargedHeight
-        subheaderInfoViewHeightConstraint.constant = subheaderInfoViewEnlargedHeight
+    private func resizeHeader(state: State) {
+        switch state {
+        case .expanded:
+            headerNameView.shrinkCommonNameLabel()
+            headerNameViewTopAnchorConstraint.constant = headerNameViewShrinkHeight
+            headerNameViewHeightConstraint.constant = headerNameViewShrinkTopAnchor
+            subheaderInfoViewHeightConstraint.constant = subheaderInfoViewShrinkHeight
+            
+        case .collapsed:
+            headerNameView.enlargeCommonNameLabel()
+            headerNameViewTopAnchorConstraint.constant = headerNameViewEnlargedTopAnchor
+            headerNameViewHeightConstraint.constant = headerNameViewEnlargedHeight
+            subheaderInfoViewHeightConstraint.constant = subheaderInfoViewEnlargedHeight
+        }
     }
+    
     
     private func animateButtonControls(state: State) {
         let newDownChevronAlpha: CGFloat = state == .expanded ? 0.0 : 0.6
@@ -356,15 +359,15 @@ extension SpeciesCoverViewController {
         }
     }
     
-    private func toggleContainerVisibility(state: State) {
+    private func toggleContainerInteractability(state: State) {
         switch state {
         case .expanded:
-            donateButtonContainer.isHidden = false
-            downChevronContainer.isHidden = true
+            donateButtonContainer.isUserInteractionEnabled = true
+            downChevronContainer.isUserInteractionEnabled = false
             
         case .collapsed:
-            donateButtonContainer.isHidden = true
-            downChevronContainer.isHidden = false
+            donateButtonContainer.isUserInteractionEnabled = false
+            downChevronContainer.isUserInteractionEnabled = true
         }
     }
 }
