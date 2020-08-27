@@ -28,8 +28,6 @@ Active. Planned September release.
 
 •Studies have shown the importance of imagery in the learning process. Interest wanes if the topic is presented dryly with minimal stimulation. 
 
-•When it comes to UI, it's the little things that matter. This means haptic feedback, consistent spacing, clean fonts, color schemes, etc. 
-
 •Using a phone is a more intimate experience than using a computer browser. An app should package content in such a way that there's preference to use it as opposed to just getting the data from a website. 
 
 
