@@ -24,30 +24,30 @@ final class SpeciesCollectionViewCell: UICollectionViewCell {
     
     private lazy var speciesScientificNameLabel: UILabel = {
         return Factory.makeLabel(title: nil,
-                                      weight: .lightItalic,
-                                      size: 16,
-                                      color: .white,
-                                      alignment: .left)
+                                 weight: .lightItalic,
+                                 size: 16,
+                                 color: .white,
+                                 alignment: .left)
     }()
     
     private lazy var conservationStatusLabel: UILabel = {
-        let label = Factory.makeLabel(title: nil,
-                                      weight: .bold,
-                                      size: 16,
-                                      color: .white,
-                                      alignment: .center)
-        label.layer.cornerRadius = 10
-        label.backgroundColor = Constants.red
+        let label = UILabel(frame: CGRect(origin: .zero, size: .init(width: 35, height: 35)))
+        label.font = UIFont(name: "Roboto-Bold", size: 14)
+        label.textAlignment = .center
+        label.textColor = .white
+        label.layer.cornerRadius = 0.5 * label.bounds.size.width
+        //        label.layer.borderWidth = 1.0
+        //        label.layer.borderColor = #colorLiteral(red: 0.3999579549, green: 0.4000213742, blue: 0.3999492526, alpha: 1)
         label.clipsToBounds = true
         return label
     }()
     
     private lazy var populationNumbersLabel: UILabel = {
         return Factory.makeLabel(title: nil,
-                                      weight: .regular,
-                                      size: 16,
-                                      color: .white,
-                                      alignment: .right)
+                                 weight: .regular,
+                                 size: 16,
+                                 color: .white,
+                                 alignment: .right)
     }()
     
     private lazy var backgroundImageView: UIImageView = {
@@ -72,10 +72,22 @@ final class SpeciesCollectionViewCell: UICollectionViewCell {
         populationNumbersLabel.text = species.population.numbers.replacingOccurrences(of: "~", with: "")
         
         switch species.population.conservationStatus {
-        case .critical: conservationStatusLabel.text = "CR"
-        case .endangered: conservationStatusLabel.text = "EN"
-        case .vulnerable: conservationStatusLabel.text = "VU"
+        case .critical:
+            conservationStatusLabel.text = "CR"
+            conservationStatusLabel.backgroundColor = Constants.red
+            conservationStatusLabel.textColor = #colorLiteral(red: 0.997191608, green: 0.8045830131, blue: 0.8038765788, alpha: 1)
+            
+        case .endangered:
+            conservationStatusLabel.text = "EN"
+            conservationStatusLabel.backgroundColor = #colorLiteral(red: 0.9961758256, green: 0.3767263889, blue: 0.1716631651, alpha: 1)
+            conservationStatusLabel.textColor = #colorLiteral(red: 1, green: 0.8029765487, blue: 0.6047396064, alpha: 1)
+            
+        case .vulnerable:
+            conservationStatusLabel.text = "VU"
+            conservationStatusLabel.backgroundColor = #colorLiteral(red: 0.6861364245, green: 0.6420921087, blue: 0.08179389685, alpha: 1)
+            conservationStatusLabel.textColor = #colorLiteral(red: 0.9976391196, green: 0.998760879, blue: 0.8034237027, alpha: 1)
         }
+        
     }
     
     override init(frame: CGRect) {
@@ -141,8 +153,8 @@ fileprivate extension SpeciesCollectionViewCell {
     func setConservationStatusLabelConstraints() {
         conservationStatusLabel.snp.makeConstraints { (make) in
             make.centerY.equalTo(speciesScientificNameLabel)
-            make.trailing.equalToSuperview().inset(10)
-            make.height.width.equalTo(40.deviceAdjusted)
+            make.trailing.equalToSuperview().inset(20)
+            make.height.width.equalTo(conservationStatusLabel.frame.size)
         }
     }
     

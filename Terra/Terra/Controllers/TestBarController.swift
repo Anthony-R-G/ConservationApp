@@ -38,11 +38,11 @@ final class MaterialTabBarController: UITabBarController {
     
     private func configureTabBarItems() {
         let listVCTabBarItem = UITabBarItem(title: nil,
-                                            image: #imageLiteral(resourceName: "listVCSelected"),
+                                            image: #imageLiteral(resourceName: "ListVCTabBarItemGlyph"),
                                             tag: 0)
         
         let newsVCTabBarItem = UITabBarItem(title: nil,
-                                            image: #imageLiteral(resourceName: "newsVCSelected"),
+                                            image: #imageLiteral(resourceName: "MapVCGlyph"),
                                             tag: 1)
         
         bottomNavigationBar.items = [ listVCTabBarItem, newsVCTabBarItem ]

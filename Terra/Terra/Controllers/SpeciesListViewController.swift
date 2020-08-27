@@ -45,7 +45,7 @@ final class SpeciesListViewController: UIViewController {
     
     private lazy var headerImageView: UIImageView = {
         let iv = UIImageView()
-        iv.image = #imageLiteral(resourceName: "listVCbackground")
+        iv.image = #imageLiteral(resourceName: "Species List Header")
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
         return iv
@@ -54,7 +54,7 @@ final class SpeciesListViewController: UIViewController {
     private lazy var terraTitleLabel: UILabel = {
         return Factory.makeLabel(title: "TERRA",
                                  weight: .black,
-                                 size: 40,
+                                 size: 30,
                                  color: Constants.titleLabelColor,
                                  alignment: .left)
     }()
@@ -121,7 +121,7 @@ final class SpeciesListViewController: UIViewController {
     
     private lazy var earthButton: UIButton = {
         let btn = UIButton()
-        btn.setImage(#imageLiteral(resourceName: "globe"), for: .normal)
+        btn.setImage(#imageLiteral(resourceName: "MapVCGlyph"), for: .normal)
         btn.addTarget(
             self,
             action: #selector(earthButtonPressed),
@@ -150,7 +150,7 @@ final class SpeciesListViewController: UIViewController {
         mapVC.speciesData = viewModel.species
         mapVC.modalPresentationStyle = .fullScreen
         Utilities.sendHapticFeedback(action: .itemSelected)
-        presentModally(mapVC)
+        present(mapVC, animated: true, completion: nil)
     }
     
     @objc private func handleCollectionViewSwipe(_ sender: UISwipeGestureRecognizer) {
@@ -203,12 +203,6 @@ final class SpeciesListViewController: UIViewController {
         isSearching = false
     }
     
-    private func presentModally(_ viewController: UIViewController) {
-        let window = UIApplication.shared.windows.filter { $0.isKeyWindow }.first
-        let rootViewController = window?.rootViewController
-        rootViewController?.present(viewController, animated: true, completion: nil)
-    }
-    
     private func addGestureRecognizers() {
         collectionView.addGestureRecognizer(rightSwipeGesture)
         collectionView.addGestureRecognizer(leftSwipeGesture)
@@ -216,15 +210,11 @@ final class SpeciesListViewController: UIViewController {
     
     //MARK: --Life Cycle Methods
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        viewModel.fetchSpeciesData()
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
         viewModel = SpeciesViewModel(delegate: self)
+        viewModel.fetchSpeciesData()
         addSubviews()
         setConstraints()
         addGestureRecognizers()
@@ -289,7 +279,8 @@ extension SpeciesListViewController: UICollectionViewDelegateFlowLayout {
         coverVC.viewModel =  DetailPageStrategyViewModel(species: selectedSpecies)
         let navVC = NavigationController(rootViewController: coverVC)
         navVC.modalPresentationStyle = .fullScreen
-        presentModally(navVC)
+        print(terraTitleLabel.font.pointSize)
+        present(navVC, animated: true, completion: nil)
     }
     
     func collectionView(_ collectionView: UICollectionView,

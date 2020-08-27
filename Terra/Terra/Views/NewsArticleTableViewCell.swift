@@ -42,7 +42,7 @@ final class NewsArticleTableViewCell: UITableViewCell {
     
     func configureCell(from article: NewsArticle) {
         guard let articleImageURL = article.urlToImage else {
-            articleThumbImageView.image = #imageLiteral(resourceName: "newsImagePlaceholder")
+            articleThumbImageView.image = #imageLiteral(resourceName: "News Image Placeholder")
             return
         }
         articleTitleLabel.text = article.title
