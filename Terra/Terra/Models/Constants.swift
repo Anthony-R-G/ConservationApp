@@ -9,11 +9,12 @@
 import UIKit
 
 struct Constants {
-    static let spacing: CGFloat = 20.deviceAdjusted
-    static let cornerRadius: CGFloat = 20
+    static let reuseIdentifier = "cellId"
+    static let spacing: CGFloat = 20.deviceScaled
+    static let cornerRadius: CGFloat = 20.deviceScaled
     static let screenHeight = UIScreen.main.bounds.size.height
     static let screenWidth = UIScreen.main.bounds.size.width
-    static let reuseIdentifier = "cellId"
+    static let buttonSize = CGSize(width: 35.deviceScaled, height: 35.deviceScaled)
     static let commonViewSize: CGSize = CGSize(
     width: UIScreen.main.bounds.size.width * 1.2077,
     height: UIScreen.main.bounds.size.height * 0.558)

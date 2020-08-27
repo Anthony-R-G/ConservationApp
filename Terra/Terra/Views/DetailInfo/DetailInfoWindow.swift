@@ -14,7 +14,7 @@ final class DetailInfoWindow: UIView {
     private lazy var titleLabel: UILabel = {
         return Factory.makeLabel(title: nil,
                                  weight: .bold,
-                                 size: 24,
+                                 size: 27,
                                  color: Constants.Color.titleLabelColor,
                                  alignment: .left)
     }()
@@ -25,7 +25,8 @@ final class DetailInfoWindow: UIView {
     
     private func setBottomConstraint() {
         if let lastSubview = subviews.last {
-            bottomAnchor.constraint(equalTo: lastSubview.bottomAnchor, constant: Constants.spacing).isActive = true
+            bottomAnchor.constraint(equalTo: lastSubview.bottomAnchor,
+                                    constant: Constants.spacing).isActive = true
         }
     }
     

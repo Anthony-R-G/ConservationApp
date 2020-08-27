@@ -13,8 +13,9 @@ final class CoverHeaderNameView: UIView {
     
     private lazy var conservationStatusButton: UIButton = {
         let button = UIButton()
-        button.titleLabel?.font = UIFont(name: "Roboto-Regular", size: 16.deviceAdjusted)
+        button.titleLabel?.font = UIFont(name: FontWeight.regular.rawValue, size: 16.deviceScaled)
         button.setTitle(species.population.conservationStatus.rawValue.uppercased(), for: .normal)
+        
         switch species.population.conservationStatus {
         case .critical:
             button.layer.borderColor = Constants.Color.criticalStatusColor.cgColor
@@ -66,11 +67,19 @@ final class CoverHeaderNameView: UIView {
     
     
     func shrinkCommonNameLabel() {
-        speciesCommonNameLabel.animateToFont(UIFont(name: "Roboto-Bold", size: Constants.screenHeight * 0.04352678571428571)!, withDuration: 0.5)
+        speciesCommonNameLabel.animateToFont(
+            UIFont(
+                name: FontWeight.bold.rawValue,
+                size: Constants.screenHeight * 0.04352678571428571)!,
+            withDuration: 0.5)
     }
     
     func enlargeCommonNameLabel() {
-        speciesCommonNameLabel.animateToFont(UIFont(name: "Roboto-Bold", size: 56.deviceAdjusted)!, withDuration: 1.3)
+        speciesCommonNameLabel.animateToFont(
+            UIFont(
+                name: FontWeight.bold.rawValue,
+                size: 56.deviceScaled)!,
+            withDuration: 1.3)
     }
     
     required init(species: Species, delegate: ConservationStatusDelegate) {
@@ -104,7 +113,7 @@ fileprivate extension CoverHeaderNameView {
         conservationStatusButton.snp.makeConstraints { (make) in
             make.leading.equalTo(speciesCommonNameLabel).inset(5)
             make.bottom.equalTo(speciesCommonNameLabel.snp.top).inset(-10)
-            make.height.equalTo(30.deviceAdjusted)
+            make.height.equalTo(30.deviceScaled)
             make.width.equalToSuperview().multipliedBy(0.33)
         }
     }

@@ -14,7 +14,7 @@ final class CustomCalloutView: UIView, MGLCalloutView {
     private lazy var speciesImageView: UIImageView = {
         let iv = UIImageView(frame: CGRect(
             origin: .zero,
-            size: CGSize(width: 80.deviceAdjusted, height: 80.deviceAdjusted)))
+            size: CGSize(width: 80.deviceScaled, height: 80.deviceScaled)))
         iv.contentMode = .scaleAspectFill
         iv.layer.cornerRadius = iv.frame.size.width/2
         iv.layer.borderColor = UIColor.white.cgColor
@@ -109,7 +109,7 @@ final class CustomCalloutView: UIView, MGLCalloutView {
             x: 0,
             y: -15,
             width: UIScreen.main.bounds.width * 0.60,
-            height: 160.deviceAdjusted))
+            height: 160.deviceScaled))
         
         super.init(frame: .zero)
         addSubviews()

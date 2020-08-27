@@ -89,7 +89,7 @@ extension NewsViewController: UITableViewDataSource {
 
 extension NewsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 180.deviceAdjusted
+        return 180.deviceScaled
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -42,7 +42,7 @@ final class RootTabBarController: UITabBarController {
                                             tag: 0)
         
         let newsVCTabBarItem = UITabBarItem(title: nil,
-                                            image: #imageLiteral(resourceName: "MapVCGlyph"),
+                                            image: #imageLiteral(resourceName: "NewsVCTabBarItemGlyph"),
                                             tag: 1)
         
         bottomNavigationBar.items = [ listVCTabBarItem, newsVCTabBarItem ]
@@ -60,14 +60,15 @@ final class RootTabBarController: UITabBarController {
         
         let largeTitleTextAttributes = [
             NSAttributedString.Key.foregroundColor: Constants.Color.titleLabelColor,
-            NSAttributedString.Key.font: UIFont(name: "Roboto-Black", size: 40.deviceAdjusted)]
+            NSAttributedString.Key.font: UIFont(name: "Roboto-Black", size: 40.deviceScaled)]
         
         let regularTitleTextAttributes = [
             NSAttributedString.Key.foregroundColor: Constants.Color.titleLabelColor,
-        NSAttributedString.Key.font: UIFont(name: "Roboto-Medium", size: 20.deviceAdjusted)]
+        NSAttributedString.Key.font: UIFont(name: "Roboto-Medium", size: 20.deviceScaled)]
         
         newsVC.navigationBar.largeTitleTextAttributes = largeTitleTextAttributes as [NSAttributedString.Key : Any]
         newsVC.navigationBar.titleTextAttributes = regularTitleTextAttributes as [NSAttributedString.Key : Any]
+        
         viewControllers = [listVC, newsVC]
     }
     

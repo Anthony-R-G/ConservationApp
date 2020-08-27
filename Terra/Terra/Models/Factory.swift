@@ -9,15 +9,16 @@
 import UIKit
 
 class Factory {
-    static func makeLabel(title: String?,
-                          weight: FontWeight,
-                          size: CGFloat,
-                          color: UIColor,
-                          alignment: NSTextAlignment) -> UILabel {
+    static func makeLabel(
+        title: String?,
+        weight: FontWeight,
+        size: CGFloat,
+        color: UIColor,
+        alignment: NSTextAlignment) -> UILabel {
         
         let label = UILabel()
         label.text = title
-        label.font = UIFont(name: weight.rawValue, size: size.deviceAdjusted)
+        label.font = UIFont(name: weight.rawValue, size: size.deviceScaled)
         label.textAlignment = alignment
         label.textColor = color
         label.adjustsFontSizeToFitWidth = true
@@ -36,24 +37,15 @@ class Factory {
         return label
     }
     
-    
-    static func makeButton(title: String, weight: FontWeight, color: UIColor) -> UIButton {
-        let button = UIButton(type: .custom)
-        button.setTitle(title, for: .normal)
-        button.setTitleColor(color, for: .normal)
-        button.showsTouchWhenHighlighted = true
-        button.titleLabel?.font = UIFont(name: weight.rawValue, size: 15.deviceAdjusted)
-        return button
-    }
-    
+        
     static func makeBlurredCircleButton(image: systemImage, style: ButtonStyle) -> CircleBlurButton {
-        let button = CircleBlurButton(frame: CGRect(
-            origin: .zero,
-            size: CGSize(
-                width: 35.deviceAdjusted,
-                height: 35.deviceAdjusted))
-            ,image: UIImage(systemName: image.rawValue)!,
-             style: style)
+        let button = CircleBlurButton(
+            frame: CGRect(
+                origin: .zero,
+                size: Constants.buttonSize),
+            
+            image: UIImage(systemName: image.rawValue)!,
+            style: style)
         
         button.snp.makeConstraints { (make) in
             make.height.width.equalTo(button.frame.size) }

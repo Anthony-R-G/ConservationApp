@@ -113,7 +113,7 @@ final class MeasurementsView: UIView {
     required init(species: Species) {
         self.species = species
         super.init(frame: .zero)
-        self.heightAnchor.constraint(equalToConstant: 140.deviceAdjusted).isActive = true
+        self.heightAnchor.constraint(equalToConstant: 140.deviceScaled).isActive = true
         addSubviews()
         setConstraints()
     }

@@ -14,7 +14,7 @@ final class SpeciesCollectionViewCell: UICollectionViewCell {
     
     private lazy var speciesNameLabel: UILabel = {
         let label = Factory.makeLabel(title: nil,
-                                      weight: .medium,
+                                      weight: .bold,
                                       size: 27,
                                       color: .white,
                                       alignment: .left)
@@ -31,10 +31,9 @@ final class SpeciesCollectionViewCell: UICollectionViewCell {
     }()
     
     private lazy var conservationStatusLabel: UILabel = {
-        let label = UILabel(frame: CGRect(origin: .zero, size: .init(width: 35, height: 35)))
-        label.font = UIFont(name: "Roboto-Bold", size: 14)
+        let label = UILabel(frame: CGRect(origin: .zero, size: Constants.buttonSize))
+        label.font = UIFont(name: FontWeight.bold.rawValue, size: 15)
         label.textAlignment = .center
-        label.textColor = .white
         label.layer.cornerRadius = 0.5 * label.bounds.size.width
         label.clipsToBounds = true
         return label

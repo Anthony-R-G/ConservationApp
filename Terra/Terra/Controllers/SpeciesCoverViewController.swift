@@ -46,7 +46,7 @@ final class SpeciesCoverViewController: UIViewController {
     }()
     
     private lazy var downChevron: UIButton = {
-        let btn = UIButton(frame: CGRect(origin: .zero, size: CGSize(width: 30.deviceAdjusted, height: 15.deviceAdjusted)))
+        let btn = UIButton(frame: CGRect(origin: .zero, size: CGSize(width: 30.deviceScaled, height: 15.deviceScaled)))
         btn.setImage(UIImage(systemName: "chevron.down"), for: .normal)
         btn.contentVerticalAlignment = .fill
         btn.contentHorizontalAlignment = .fill
@@ -57,7 +57,7 @@ final class SpeciesCoverViewController: UIViewController {
     }()
     
     private lazy var upChevron: UIButton = {
-        let btn = UIButton(frame: CGRect(origin: .zero, size: CGSize(width: 30.deviceAdjusted, height: 15.deviceAdjusted)))
+        let btn = UIButton(frame: CGRect(origin: .zero, size: CGSize(width: 30.deviceScaled, height: 15.deviceScaled)))
         btn.setImage(UIImage(systemName: "chevron.up"), for: .normal)
         btn.contentVerticalAlignment = .fill
         btn.contentHorizontalAlignment = .fill
@@ -81,7 +81,7 @@ final class SpeciesCoverViewController: UIViewController {
     
     private lazy var donateButton: DonateButton = {
         let btn = DonateButton(
-            gradientColors: [#colorLiteral(red: 1, green: 0.2914688587, blue: 0.3886995912, alpha: 0.9019156678), #colorLiteral(red: 0.5421239734, green: 0.1666001081, blue: 0.2197911441, alpha: 0.8952536387)],
+            gradientColors: [#colorLiteral(red: 1, green: 0.2914688587, blue: 0.3886995912, alpha: 0.9019156678), #colorLiteral(red: 0.3837335624, green: 0.1666001081, blue: 0.1801935414, alpha: 0.8952536387)],
             startPoint: CGPoint(x: 0, y: 0),
             endPoint: CGPoint(x: 1, y: 1))
         btn.alpha = 0
@@ -99,11 +99,11 @@ final class SpeciesCoverViewController: UIViewController {
         
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(
-            width: 345.deviceAdjusted,
+            width: 345.deviceScaled,
             height:  collectionViewFrame.height * 0.89)
         
         layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 30.deviceAdjusted
+        layout.minimumLineSpacing = 30.deviceScaled
         layout.sectionInset = UIEdgeInsets(
             top: Constants.spacing / 2,
             left: Constants.spacing,
@@ -166,7 +166,7 @@ final class SpeciesCoverViewController: UIViewController {
     
     private lazy var subheaderInfoViewEnlargedHeight: CGFloat = headerNameViewEnlargedHeight * 0.30
     
-    private let subheaderInfoViewShrinkHeight: CGFloat = 60.deviceAdjusted
+    private let subheaderInfoViewShrinkHeight: CGFloat = 60.deviceScaled
     
     private lazy var headerNameViewHeightConstraint: NSLayoutConstraint = {
         return headerNameView.heightAnchor.constraint(equalToConstant: headerNameViewEnlargedHeight)
@@ -527,7 +527,7 @@ fileprivate extension SpeciesCoverViewController {
         collectionView.snp.makeConstraints { (make) in
             make.height.equalTo(collectionView.frame.height)
             make.leading.trailing.equalToSuperview()
-            make.centerY.equalToSuperview().offset(70.deviceAdjusted)
+            make.centerY.equalToSuperview().offset(70.deviceScaled)
         }
     }
     
@@ -542,7 +542,7 @@ fileprivate extension SpeciesCoverViewController {
         donateButton.snp.makeConstraints { (make) in
             make.centerX.centerY.equalTo(donateButtonContainer)
             make.leading.trailing.equalToSuperview().inset(Constants.spacing)
-            make.height.equalTo(50.deviceAdjusted)
+            make.height.equalTo(50.deviceScaled)
         }
     }
 }
