@@ -8,7 +8,7 @@
 
 import MaterialComponents.MaterialBottomNavigation
 
-final class MaterialTabBarController: UITabBarController {
+final class RootTabBarController: UITabBarController {
     
     //MARK: -- UI Elements
     
@@ -59,11 +59,11 @@ final class MaterialTabBarController: UITabBarController {
         newsVC.navigationBar.barStyle = .black
         
         let largeTitleTextAttributes = [
-            NSAttributedString.Key.foregroundColor: Constants.titleLabelColor,
+            NSAttributedString.Key.foregroundColor: Constants.Color.titleLabelColor,
             NSAttributedString.Key.font: UIFont(name: "Roboto-Black", size: 40.deviceAdjusted)]
         
         let regularTitleTextAttributes = [
-        NSAttributedString.Key.foregroundColor: Constants.titleLabelColor,
+            NSAttributedString.Key.foregroundColor: Constants.Color.titleLabelColor,
         NSAttributedString.Key.font: UIFont(name: "Roboto-Medium", size: 20.deviceAdjusted)]
         
         newsVC.navigationBar.largeTitleTextAttributes = largeTitleTextAttributes as [NSAttributedString.Key : Any]
@@ -87,7 +87,7 @@ final class MaterialTabBarController: UITabBarController {
 
 //MARK: -- MDC Bottom Nav Bar Delegate
 
-extension MaterialTabBarController: MDCBottomNavigationBarDelegate {
+extension RootTabBarController: MDCBottomNavigationBarDelegate {
     
     func bottomNavigationBar(_ bottomNavigationBar: MDCBottomNavigationBar, didSelect item: UITabBarItem) {
         guard

@@ -105,10 +105,10 @@ final class SpeciesCoverViewController: UIViewController {
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 30.deviceAdjusted
         layout.sectionInset = UIEdgeInsets(
-            top: Constants.spacingConstant / 2,
-            left: Constants.spacingConstant,
-            bottom: Constants.spacingConstant / 2,
-            right: Constants.spacingConstant)
+            top: Constants.spacing / 2,
+            left: Constants.spacing,
+            bottom: Constants.spacing / 2,
+            right: Constants.spacing)
         
         let cv = UICollectionView(
             frame: collectionViewFrame,
@@ -473,19 +473,19 @@ fileprivate extension SpeciesCoverViewController {
     
     func setCloseButtonConstraints() {
         closeButton.snp.makeConstraints { (make) in
-            make.top.trailing.equalToSuperview().inset(Constants.spacingConstant)
+            make.top.trailing.equalToSuperview().inset(Constants.spacing)
         }
     }
     
     func setARButtonConstraints() {
         augmentedRealityButton.snp.makeConstraints { (make) in
-            make.top.leading.equalToSuperview().inset(Constants.spacingConstant)
+            make.top.leading.equalToSuperview().inset(Constants.spacing)
         }
     }
     
     func setHeaderInfoViewConstraints() {
         headerNameView.snp.makeConstraints { (make) in
-            make.leading.equalToSuperview().inset(Constants.spacingConstant)
+            make.leading.equalToSuperview().inset(Constants.spacing)
             make.trailing.equalToSuperview()
             headerNameViewTopAnchorConstraint.isActive = true
             headerNameViewHeightConstraint.isActive = true
@@ -496,7 +496,7 @@ fileprivate extension SpeciesCoverViewController {
         subheaderInfoView.snp.makeConstraints { (make) in
             make.leading.equalTo(headerNameView)
             make.trailing.equalToSuperview()
-            make.top.equalTo(headerNameView.snp.bottom).offset(Constants.spacingConstant)
+            make.top.equalTo(headerNameView.snp.bottom).offset(Constants.spacing)
             subheaderInfoViewHeightConstraint.isActive = true
         }
     }
@@ -504,7 +504,7 @@ fileprivate extension SpeciesCoverViewController {
     func setDownChevronContainerConstraints() {
         downChevronContainer.snp.makeConstraints { (make) in
             make.leading.trailing.bottom.equalToSuperview()
-            make.top.equalTo(subheaderInfoView.snp.bottom).inset(Constants.spacingConstant)
+            make.top.equalTo(subheaderInfoView.snp.bottom).inset(Constants.spacing)
         }
     }
     
@@ -519,7 +519,7 @@ fileprivate extension SpeciesCoverViewController {
         upChevron.snp.makeConstraints { (make) in
             make.height.width.equalTo(upChevron.frame.size)
             make.centerX.equalTo(view)
-            make.top.equalTo(view.safeAreaLayoutGuide).inset(Constants.spacingConstant)
+            make.top.equalTo(view.safeAreaLayoutGuide).inset(Constants.spacing)
         }
     }
     
@@ -534,14 +534,14 @@ fileprivate extension SpeciesCoverViewController {
     func setDonateButtonContainerConstraints() {
         donateButtonContainer.snp.makeConstraints { (make) in
             make.leading.trailing.bottom.equalToSuperview()
-            make.top.equalTo(collectionView.snp.bottom).inset(Constants.spacingConstant)
+            make.top.equalTo(collectionView.snp.bottom).inset(Constants.spacing)
         }
     }
     
     func setDonateButtonConstraints() {
         donateButton.snp.makeConstraints { (make) in
             make.centerX.centerY.equalTo(donateButtonContainer)
-            make.leading.trailing.equalToSuperview().inset(Constants.spacingConstant)
+            make.leading.trailing.equalToSuperview().inset(Constants.spacing)
             make.height.equalTo(50.deviceAdjusted)
         }
     }

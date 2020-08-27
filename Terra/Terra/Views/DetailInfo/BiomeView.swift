@@ -84,9 +84,9 @@ final class BiomeView: UIView {
             temperatureTitleLabel, temperatureDataLabel
         ])
         sv.axis = .vertical
-        sv.spacing = Constants.spacingConstant/2
-        sv.setCustomSpacing(Constants.spacingConstant, after: biomeDataLabel)
-        sv.setCustomSpacing(Constants.spacingConstant, after: areaDataLabel)
+        sv.spacing = Constants.spacing/2
+        sv.setCustomSpacing(Constants.spacing, after: biomeDataLabel)
+        sv.setCustomSpacing(Constants.spacing, after: areaDataLabel)
         return sv
     }()
     

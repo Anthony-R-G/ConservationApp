@@ -74,7 +74,7 @@ class SpeciesDetailInfoViewController: UIViewController {
     }()
     
     private lazy var commonViewHeightConstraint: NSLayoutConstraint = {
-        return commonView.heightAnchor.constraint(equalToConstant: Constants.commonViewImageDimension.height)
+        return commonView.heightAnchor.constraint(equalToConstant: Constants.commonViewSize.height)
     }()
     
     override var prefersStatusBarHidden: Bool {
@@ -173,15 +173,15 @@ extension SpeciesDetailInfoViewController {
     
     func setContainerStackView() {
         containerStackView.snp.makeConstraints { (make) in
-            make.top.equalTo(commonView.snp.bottom).offset(Constants.spacingConstant)
-            make.leading.trailing.equalTo(view).inset(Constants.spacingConstant)
+            make.top.equalTo(commonView.snp.bottom).offset(Constants.spacing)
+            make.leading.trailing.equalTo(view).inset(Constants.spacing)
             make.bottom.greaterThanOrEqualTo(scrollView)
         }
     }
     
     func setCloseButtonConstraints() {
         closeButton.snp.makeConstraints { (make) in
-            make.top.trailing.equalToSuperview().inset(Constants.spacingConstant)
+            make.top.trailing.equalToSuperview().inset(Constants.spacing)
         }
     }
     
@@ -227,10 +227,10 @@ extension SpeciesDetailInfoViewController: Animatable {
             .compactMap({$0})
             .first?.windows
             .filter({$0.isKeyWindow}).first?.safeAreaInsets.top ?? .zero
-        commonView.topConstraintValue = safeAreaTop + Constants.spacingConstant
+        commonView.topConstraintValue = safeAreaTop + Constants.spacing
         
         // Animate the common view to a height of 500 points
-        commonViewHeightConstraint.constant = Constants.commonViewImageDimension.height
+        commonViewHeightConstraint.constant = Constants.commonViewSize.height
         sizeAnimator.addAnimations { [weak self] in
             guard let self = self else { return }
             self.view.layoutIfNeeded()
@@ -263,7 +263,7 @@ extension SpeciesDetailInfoViewController: Animatable {
         }
         
         // Common view does not need to worry about the safe area anymore. Just restore the original value.
-        commonView.topConstraintValue = Constants.spacingConstant
+        commonView.topConstraintValue = Constants.spacing
         
         // Animate the height of the common view to be the same size as the TO frame.
         // Also animate hiding the close button

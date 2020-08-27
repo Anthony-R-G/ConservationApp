@@ -55,7 +55,7 @@ final class SpeciesListViewController: UIViewController {
         return Factory.makeLabel(title: "TERRA",
                                  weight: .black,
                                  size: 30,
-                                 color: Constants.titleLabelColor,
+                                 color: Constants.Color.titleLabelColor,
                                  alignment: .left)
     }()
     
@@ -94,13 +94,13 @@ final class SpeciesListViewController: UIViewController {
     private lazy var searchBarLeadingAnchorConstraint: NSLayoutConstraint = {
         return searchBar.leadingAnchor.constraint(
             equalTo: view.trailingAnchor,
-            constant: -Constants.spacingConstant)
+            constant: -Constants.spacing)
     }()
     
     private lazy var earthButtonLeadingAnchorConstraint: NSLayoutConstraint = {
         return earthButton.leadingAnchor.constraint(
             equalTo: view.leadingAnchor,
-            constant: Constants.spacingConstant)
+            constant: Constants.spacing)
     }()
     
     private lazy var rightSwipeGesture: UISwipeGestureRecognizer = {
@@ -188,8 +188,8 @@ final class SpeciesListViewController: UIViewController {
     }
     
     private func dismissSearchBar() {
-        searchBarLeadingAnchorConstraint.constant = -Constants.spacingConstant
-        earthButtonLeadingAnchorConstraint.constant = Constants.spacingConstant
+        searchBarLeadingAnchorConstraint.constant = -Constants.spacing
+        earthButtonLeadingAnchorConstraint.constant = Constants.spacing
         searchBar.alpha = 0
         searchBarButton.alpha = 1
         UIView.animate(withDuration: 0.3, animations: { [weak self] in
@@ -354,7 +354,7 @@ fileprivate extension SpeciesListViewController {
     func setTerraTitleLabelConstraints() {
         terraTitleLabel.snp.makeConstraints { (make) in
             make.top.equalToSuperview().inset(50.deviceAdjusted)
-            make.leading.equalTo(earthButton.snp.trailing).offset(Constants.spacingConstant/2)
+            make.leading.equalTo(earthButton.snp.trailing).offset(Constants.spacing/2)
             make.height.equalTo(25.deviceAdjusted)
             make.width.equalTo(100.deviceAdjusted)
         }
@@ -372,14 +372,14 @@ fileprivate extension SpeciesListViewController {
         searchBarButton.snp.makeConstraints { (make) in
             make.height.width.equalTo(40.deviceAdjusted)
             make.centerY.equalTo(terraTitleLabel)
-            make.trailing.equalToSuperview().inset(Constants.spacingConstant)
+            make.trailing.equalToSuperview().inset(Constants.spacing)
         }
     }
     
     func setSearchBarConstraints() {
         searchBar.snp.makeConstraints { (make) in
             searchBarLeadingAnchorConstraint.isActive = true
-            make.trailing.equalToSuperview().inset(Constants.spacingConstant)
+            make.trailing.equalToSuperview().inset(Constants.spacing)
             make.centerY.equalTo(searchBarButton)
         }
     }

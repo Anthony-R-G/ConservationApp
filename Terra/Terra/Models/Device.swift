@@ -15,6 +15,8 @@ final class Device {
     static var ratio: CGFloat {
         return UIScreen.main.bounds.width / base
     }
+    
+    private init() {}
 }
 
 extension CGFloat {

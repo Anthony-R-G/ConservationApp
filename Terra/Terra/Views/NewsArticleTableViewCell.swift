@@ -84,7 +84,7 @@ fileprivate extension NewsArticleTableViewCell {
     
     func setArticleThumbImageViewConstraints() {
         articleThumbImageView.snp.makeConstraints { (make) in
-            make.leading.equalToSuperview().inset(Constants.spacingConstant)
+            make.leading.equalToSuperview().inset(Constants.spacing)
             make.centerY.equalToSuperview()
             make.height.equalTo(120)
             make.width.equalTo(140)
@@ -93,8 +93,8 @@ fileprivate extension NewsArticleTableViewCell {
     
     func setArticleTitleLabelConstraints() {
         articleTitleLabel.snp.makeConstraints { (make) in
-            make.leading.equalTo(articleThumbImageView.snp.trailing).offset(Constants.spacingConstant)
-            make.top.trailing.equalToSuperview().inset(Constants.spacingConstant)
+            make.leading.equalTo(articleThumbImageView.snp.trailing).offset(Constants.spacing)
+            make.top.trailing.equalToSuperview().inset(Constants.spacing)
             make.height.equalToSuperview().multipliedBy(0.6)
         }
     }

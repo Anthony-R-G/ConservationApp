@@ -15,7 +15,7 @@ final class DetailInfoWindow: UIView {
         return Factory.makeLabel(title: nil,
                                  weight: .bold,
                                  size: 24,
-                                 color: Constants.titleLabelColor,
+                                 color: Constants.Color.titleLabelColor,
                                  alignment: .left)
     }()
     
@@ -25,7 +25,7 @@ final class DetailInfoWindow: UIView {
     
     private func setBottomConstraint() {
         if let lastSubview = subviews.last {
-            bottomAnchor.constraint(equalTo: lastSubview.bottomAnchor, constant: Constants.spacingConstant).isActive = true
+            bottomAnchor.constraint(equalTo: lastSubview.bottomAnchor, constant: Constants.spacing).isActive = true
         }
     }
     
@@ -60,15 +60,15 @@ fileprivate extension DetailInfoWindow {
     
     func setTitleLabelConstraints() {
         titleLabel.snp.makeConstraints { (make) in
-            make.leading.trailing.equalToSuperview().inset(Constants.spacingConstant)
-            make.top.equalToSuperview().inset(Constants.spacingConstant)
+            make.leading.trailing.equalToSuperview().inset(Constants.spacing)
+            make.top.equalToSuperview().inset(Constants.spacing)
         }
     }
     
     func setContentViewConstraints() {
         contentView.snp.makeConstraints { (make) in
-            make.top.equalTo(titleLabel.snp.bottom).offset(Constants.spacingConstant/2)
-            make.leading.trailing.equalToSuperview().inset(Constants.spacingConstant)
+            make.top.equalTo(titleLabel.snp.bottom).offset(Constants.spacing/2)
+            make.leading.trailing.equalToSuperview().inset(Constants.spacing)
         }
     }
 }

@@ -99,7 +99,7 @@ final class MeasurementsView: UIView {
         let sv = UIStackView(arrangedSubviews: [
             heightStackView, weightStackView
         ])
-        sv.spacing = Constants.spacingConstant/2
+        sv.spacing = Constants.spacing/2
         sv.alignment = .leading
         return sv
     }()

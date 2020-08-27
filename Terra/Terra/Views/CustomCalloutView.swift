@@ -18,7 +18,7 @@ final class CustomCalloutView: UIView, MGLCalloutView {
         iv.contentMode = .scaleAspectFill
         iv.layer.cornerRadius = iv.frame.size.width/2
         iv.layer.borderColor = UIColor.white.cgColor
-        iv.layer.borderWidth = Constants.borderWidth
+        iv.layer.borderWidth = 2
         iv.clipsToBounds = true
         return iv
     }()
@@ -27,7 +27,7 @@ final class CustomCalloutView: UIView, MGLCalloutView {
        return Factory.makeLabel(title: nil,
                                  weight: .bold,
                                  size: 17,
-                                 color: Constants.titleLabelColor,
+                                 color: Constants.Color.titleLabelColor,
                                  alignment: .left)
     }()
     

@@ -17,16 +17,15 @@ final class CoverHeaderNameView: UIView {
         button.setTitle(species.population.conservationStatus.rawValue.uppercased(), for: .normal)
         switch species.population.conservationStatus {
         case .critical:
-            button.layer.borderColor = #colorLiteral(red: 0.8047913313, green: 0.187119931, blue: 0.1884009838, alpha: 1)
+            button.layer.borderColor = Constants.Color.criticalStatusColor.cgColor
             
         case .endangered:
-            button.layer.borderColor = #colorLiteral(red: 0.8046235442, green: 0.4002874494, blue: 0.1868667603, alpha: 1)
+            button.layer.borderColor = Constants.Color.endangeredStatusColor.cgColor
             
         case .vulnerable:
-            button.layer.borderColor = #colorLiteral(red: 0.8025047183, green: 0.6042078137, blue: 0.006835817825, alpha: 1)
-            
+            button.layer.borderColor = Constants.Color.vulnerableStatusColor.cgColor
         }
-        button.layer.borderColor = Constants.red.cgColor
+        
         button.layer.borderWidth = 2
         button.layer.cornerRadius = 10
         button.showsTouchWhenHighlighted = true

@@ -36,8 +36,6 @@ final class SpeciesCollectionViewCell: UICollectionViewCell {
         label.textAlignment = .center
         label.textColor = .white
         label.layer.cornerRadius = 0.5 * label.bounds.size.width
-        //        label.layer.borderWidth = 1.0
-        //        label.layer.borderColor = #colorLiteral(red: 0.3999579549, green: 0.4000213742, blue: 0.3999492526, alpha: 1)
         label.clipsToBounds = true
         return label
     }()
@@ -74,17 +72,17 @@ final class SpeciesCollectionViewCell: UICollectionViewCell {
         switch species.population.conservationStatus {
         case .critical:
             conservationStatusLabel.text = "CR"
-            conservationStatusLabel.backgroundColor = Constants.red
+            conservationStatusLabel.backgroundColor = Constants.Color.criticalStatusColor
             conservationStatusLabel.textColor = #colorLiteral(red: 0.997191608, green: 0.8045830131, blue: 0.8038765788, alpha: 1)
             
         case .endangered:
             conservationStatusLabel.text = "EN"
-            conservationStatusLabel.backgroundColor = #colorLiteral(red: 0.9961758256, green: 0.3767263889, blue: 0.1716631651, alpha: 1)
+            conservationStatusLabel.backgroundColor = Constants.Color.endangeredStatusColor
             conservationStatusLabel.textColor = #colorLiteral(red: 1, green: 0.8029765487, blue: 0.6047396064, alpha: 1)
             
         case .vulnerable:
             conservationStatusLabel.text = "VU"
-            conservationStatusLabel.backgroundColor = #colorLiteral(red: 0.6861364245, green: 0.6420921087, blue: 0.08179389685, alpha: 1)
+            conservationStatusLabel.backgroundColor = Constants.Color.vulnerableStatusColor
             conservationStatusLabel.textColor = #colorLiteral(red: 0.9976391196, green: 0.998760879, blue: 0.8034237027, alpha: 1)
         }
         
@@ -135,7 +133,7 @@ fileprivate extension SpeciesCollectionViewCell {
     
     func setSpeciesNameLabelConstraints(){
         speciesNameLabel.snp.makeConstraints { (make) in
-            make.leading.bottom.equalToSuperview().inset(Constants.spacingConstant)
+            make.leading.bottom.equalToSuperview().inset(Constants.spacing)
             make.width.equalToSuperview().multipliedBy(0.8)
             make.height.equalTo(90)
         }
