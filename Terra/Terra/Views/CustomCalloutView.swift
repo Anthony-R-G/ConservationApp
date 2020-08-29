@@ -18,7 +18,7 @@ final class CustomCalloutView: UIView, MGLCalloutView {
         iv.contentMode = .scaleAspectFill
         iv.layer.cornerRadius = iv.frame.size.width/2
         iv.layer.borderColor = UIColor.white.cgColor
-        iv.layer.borderWidth = 2
+        iv.layer.borderWidth = Constants.borderWidth
         iv.clipsToBounds = true
         return iv
     }()
@@ -26,7 +26,7 @@ final class CustomCalloutView: UIView, MGLCalloutView {
     private lazy var titleLabel: UILabel = {
        return Factory.makeLabel(title: nil,
                                  weight: .bold,
-                                 size: 17,
+                                 size: Constants.FontHierarchy.secondaryContentFontSize,
                                  color: Constants.Color.titleLabelColor,
                                  alignment: .left)
     }()
@@ -146,12 +146,10 @@ final class CustomCalloutView: UIView, MGLCalloutView {
         if animated {
             alpha = 0
             UIView.animate(withDuration: 0.2) { [weak self] in
-                guard let strongSelf = self else {
-                    return
-                }
+                guard let self = self else { return }
                 
-                strongSelf.alpha = 1
-                strongSelf.delegate?.calloutViewDidAppear?(strongSelf)
+                self.alpha = 1
+                self.delegate?.calloutViewDidAppear?(self)
             }
         } else {
             delegate?.calloutViewDidAppear?(self)

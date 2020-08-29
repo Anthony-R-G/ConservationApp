@@ -15,7 +15,7 @@ final class SpeciesCollectionViewCell: UICollectionViewCell {
     private lazy var speciesNameLabel: UILabel = {
         let label = Factory.makeLabel(title: nil,
                                       weight: .bold,
-                                      size: Constants.FontHierarchy.primaryContentSize,
+                                      size: Constants.FontHierarchy.primaryContentFontSize,
                                       color: .white,
                                       alignment: .left)
         label.numberOfLines = 0
@@ -25,7 +25,7 @@ final class SpeciesCollectionViewCell: UICollectionViewCell {
     private lazy var speciesScientificNameLabel: UILabel = {
         return Factory.makeLabel(title: nil,
                                  weight: .lightItalic,
-                                 size: Constants.FontHierarchy.secondaryContentSize,
+                                 size: Constants.FontHierarchy.secondaryContentFontSize,
                                  color: .white,
                                  alignment: .left)
     }()
@@ -33,7 +33,7 @@ final class SpeciesCollectionViewCell: UICollectionViewCell {
     private lazy var conservationStatusLabel: UILabel = {
         let label = UILabel(frame: CGRect(origin: .zero, size: Constants.buttonSize))
         label.font = UIFont(name: FontWeight.bold.rawValue,
-                            size: Constants.FontHierarchy.secondaryContentSize)
+                            size: Constants.FontHierarchy.secondaryContentFontSize)
         label.textAlignment = .center
         label.layer.cornerRadius = 0.5 * label.bounds.size.width
         label.clipsToBounds = true
@@ -43,7 +43,7 @@ final class SpeciesCollectionViewCell: UICollectionViewCell {
     private lazy var populationNumbersLabel: UILabel = {
         return Factory.makeLabel(title: nil,
                                  weight: .regular,
-                                 size: Constants.FontHierarchy.secondaryContentSize,
+                                 size: Constants.FontHierarchy.secondaryContentFontSize,
                                  color: .white,
                                  alignment: .right)
     }()

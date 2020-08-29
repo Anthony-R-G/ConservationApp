@@ -12,6 +12,7 @@ struct Constants {
     static let reuseIdentifier = "cellId"
     static let spacing: CGFloat = 20.deviceScaled
     static let cornerRadius: CGFloat = 20.deviceScaled
+    static let borderWidth: CGFloat = 2.0
     static let screenHeight = UIScreen.main.bounds.size.height
     static let screenWidth = UIScreen.main.bounds.size.width
     static let buttonSize = CGSize(width: 35.deviceScaled, height: 35.deviceScaled)
@@ -20,8 +21,8 @@ struct Constants {
     height: UIScreen.main.bounds.size.height * 0.558)
     
     struct FontHierarchy {
-        static let primaryContentSize = 27.deviceScaled
-        static let secondaryContentSize = 16.deviceScaled
+        static let primaryContentFontSize = 27.deviceScaled
+        static let secondaryContentFontSize = 16.deviceScaled
         
     }
     

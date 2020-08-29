@@ -42,7 +42,7 @@ final class CircleBlurButton: UIButton {
     
     //MARK: -- Methods
     
-    private func commonInit() {
+    private func configureAppearance() {
         layer.cornerRadius = 0.5 * bounds.size.width
         clipsToBounds = true
     }
@@ -50,7 +50,7 @@ final class CircleBlurButton: UIButton {
     required init(frame: CGRect, image: UIImage, style: ButtonStyle) {
         super.init(frame: frame)
         self.buttonImage.image = image
-        commonInit()
+        configureAppearance()
         addSubviews()
         setConstraints()
         if style == .dark {

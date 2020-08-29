@@ -406,10 +406,10 @@
 				97677BDC24E6FC4600AB400A /* ISO8601DateFormatted.swift */,
 				97591FE224CCDC48002EAC96 /* FontWeight.swift */,
 				97591FDE24CCD14A002EAC96 /* Constants.swift */,
-				97FEAEAB24BE5FCC005BAEFE /* Factory.swift */,
 				9794EF8424E68FD700B72246 /* Utilities.swift */,
-				9764D12A24D7DD820050AF37 /* Secrets.swift */,
+				97FEAEAB24BE5FCC005BAEFE /* Factory.swift */,
 				97637B3D24F4A60200CF4C72 /* Device.swift */,
+				9764D12A24D7DD820050AF37 /* Secrets.swift */,
 				97CDF11824E4AC050055FE78 /* DetailPageStrategies */,
 			);
 			path = Models;

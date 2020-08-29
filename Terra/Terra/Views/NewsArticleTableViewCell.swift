@@ -21,21 +21,23 @@ final class NewsArticleTableViewCell: UITableViewCell {
     }()
     
     lazy var articleTitleLabel: UILabel = {
-        let label = Factory.makeLabel(title: nil,
-                                      weight: .bold,
-                                      size: 18,
-                                      color: .white,
-                                      alignment: .left)
+        let label = UILabel()
+        label.font = UIFont(name: FontWeight.bold.rawValue, size: 18)
+        label.textAlignment = .left
+        label.textColor = .white
+        label.lineBreakMode = .byTruncatingTail
         label.numberOfLines = 0
         return label
     }()
     
     lazy var publishedDateLabel: UILabel = {
-        return Factory.makeLabel(title: nil,
-                                 weight: .medium,
-                                 size: 15,
-                                 color: #colorLiteral(red: 0.6783636212, green: 0.6784659028, blue: 0.6783496737, alpha: 1),
+        let label = Factory.makeLabel(title: nil,
+                                 weight: .regular,
+                                 size: 14,
+                                 color: #colorLiteral(red: 0.7764157653, green: 0.7718015909, blue: 0.7799633741, alpha: 1),
                                  alignment: .left)
+//        label.backgroundColor = .purple
+        return label
     }()
     
     //MARK: -- Methods
@@ -94,16 +96,16 @@ fileprivate extension NewsArticleTableViewCell {
     func setArticleTitleLabelConstraints() {
         articleTitleLabel.snp.makeConstraints { (make) in
             make.leading.equalTo(articleThumbImageView.snp.trailing).offset(Constants.spacing)
-            make.top.trailing.equalToSuperview().inset(Constants.spacing)
-            make.height.equalToSuperview().multipliedBy(0.6)
+            make.trailing.equalToSuperview().inset(Constants.spacing)
+            make.bottom.equalTo(articleThumbImageView).inset(Constants.spacing)
+            make.top.equalTo(articleThumbImageView)
         }
     }
     
     func setPublishedDateLabelConstraints() {
         publishedDateLabel.snp.makeConstraints { (make) in
             make.leading.trailing.equalTo(articleTitleLabel)
-            make.height.equalTo(40)
-            make.bottom.equalToSuperview().inset(10)
+            make.bottom.equalTo(articleThumbImageView)
         }
     }
 }

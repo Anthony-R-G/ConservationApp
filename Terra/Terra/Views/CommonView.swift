@@ -13,19 +13,18 @@ final class CommonView: UIView {
     //MARK: -- UI Element Initialization
     
     private lazy var titleLabel: UILabel = {
-        let label = Factory.makeLabel(title: nil,
-                                      weight: .black,
-                                      size: 36,
-                                      color: .white,
-                                      alignment: .left)
-        label.numberOfLines = 0
-        return label
+        return Factory.makeLabel(title: nil,
+                                 weight: .black,
+                                 size: 36,
+                                 color: .white,
+                                 alignment: .left)
+        
     }()
     
     private lazy var subtitleLabel: UILabel = {
         let label = Factory.makeLabel(title: nil,
                                       weight: .bold,
-                                      size: 16,
+                                      size: Constants.FontHierarchy.secondaryContentFontSize,
                                       color: .white,
                                       alignment: .left)
         label.alpha = 0
@@ -35,7 +34,7 @@ final class CommonView: UIView {
     private lazy var blurbLabel: UILabel = {
         let label = Factory.makeLabel(title: nil,
                                       weight: .regular,
-                                      size: 16,
+                                      size: Constants.FontHierarchy.secondaryContentFontSize,
                                       color: .darkGray,
                                       alignment: .left)
         label.lineBreakMode = .byTruncatingTail
@@ -60,7 +59,7 @@ final class CommonView: UIView {
     
     
     //MARK: -- Properties
-   
+    
     var strategy: DetailPageStrategy!
     
     private lazy var subtitleTopConstraint: NSLayoutConstraint = {
@@ -88,8 +87,8 @@ final class CommonView: UIView {
             self.subtitleLabel.alpha = 0
         }
     }
-
-
+    
+    
     func configureView(from strategy: DetailPageStrategy) {
         titleLabel.text = strategy.pageName()
         strategy.firebaseStorageManager().getImage(for: strategy.species.commonName, setTo: backgroundImage)

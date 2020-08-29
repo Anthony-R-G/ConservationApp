@@ -35,9 +35,7 @@ final class MGLMapViewController: UIViewController {
         sc.clipsToBounds = true
         sc.selectedSegmentIndex = 0
         sc.translatesAutoresizingMaskIntoConstraints = false
-        sc.addTarget(self,
-            action: #selector(changeStyle(sender:)),
-            for: .valueChanged)
+        sc.addTarget(self, action: #selector(changeStyle(sender:)), for: .valueChanged)
         view.insertSubview(sc, aboveSubview: mapView)
         return sc
     }()
