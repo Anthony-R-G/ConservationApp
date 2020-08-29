@@ -57,6 +57,7 @@ enum systemImage: String {
     case close = "xmark"
     case augmentedReality = "arkit"
     case list = "list.dash"
+    case share = "square.and.arrow.up"
 }
 
 

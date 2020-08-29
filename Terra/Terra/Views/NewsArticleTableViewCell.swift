@@ -8,10 +8,14 @@
 
 import UIKit
 
+protocol ShareButtonDelegate: AnyObject {
+    func shareButtonTapped(sender: UIButton)
+}
+
 final class NewsArticleTableViewCell: UITableViewCell {
     //MARK: -- UI Element Initialization
     
-    lazy var articleThumbImageView: UIImageView = {
+    private lazy var articleThumbImageView: UIImageView = {
         let iv = UIImageView()
         iv.layer.cornerRadius = 10
         iv.clipsToBounds = true
@@ -20,7 +24,7 @@ final class NewsArticleTableViewCell: UITableViewCell {
         return iv
     }()
     
-    lazy var articleTitleLabel: UILabel = {
+    private lazy var articleTitleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: FontWeight.bold.rawValue, size: 18)
         label.textAlignment = .left
@@ -30,17 +34,31 @@ final class NewsArticleTableViewCell: UITableViewCell {
         return label
     }()
     
-    lazy var publishedDateLabel: UILabel = {
-        let label = Factory.makeLabel(title: nil,
+    private lazy var publishedDateLabel: UILabel = {
+        return Factory.makeLabel(title: nil,
                                  weight: .regular,
                                  size: 14,
                                  color: #colorLiteral(red: 0.7764157653, green: 0.7718015909, blue: 0.7799633741, alpha: 1),
                                  alignment: .left)
-//        label.backgroundColor = .purple
-        return label
+        
     }()
     
+    lazy var shareButton: UIButton = {
+        let button = Factory.makeBlurredCircleButton(image: .share, style: .dark)
+        button.addTarget(self, action: #selector(shareButtonTapped(sender:)), for: .touchUpInside)
+        return button
+    }()
+    
+    //MARK: -- Properties
+    
+    weak var delegate: ShareButtonDelegate?
+    
+    
     //MARK: -- Methods
+    
+    @objc private func shareButtonTapped(sender: UIButton) {
+        delegate?.shareButtonTapped(sender: sender)
+    }
     
     func configureCell(from article: NewsArticle) {
         guard let articleImageURL = article.urlToImage else {
@@ -75,13 +93,14 @@ final class NewsArticleTableViewCell: UITableViewCell {
 fileprivate extension NewsArticleTableViewCell {
     
     func addSubviews() {
-        [articleThumbImageView, articleTitleLabel, publishedDateLabel].forEach{ addSubview($0) }
+        [articleThumbImageView, articleTitleLabel, publishedDateLabel, shareButton].forEach{ addSubview($0) }
     }
     
     func setConstraints() {
         setArticleThumbImageViewConstraints()
         setArticleTitleLabelConstraints()
         setPublishedDateLabelConstraints()
+        setShareButtonConstraints()
     }
     
     func setArticleThumbImageViewConstraints() {
@@ -106,6 +125,13 @@ fileprivate extension NewsArticleTableViewCell {
         publishedDateLabel.snp.makeConstraints { (make) in
             make.leading.trailing.equalTo(articleTitleLabel)
             make.bottom.equalTo(articleThumbImageView)
+        }
+    }
+    
+    func setShareButtonConstraints() {
+        shareButton.snp.makeConstraints { (make) in
+            make.trailing.equalToSuperview().inset(Constants.spacing)
+            make.centerY.equalTo(publishedDateLabel)
         }
     }
 }

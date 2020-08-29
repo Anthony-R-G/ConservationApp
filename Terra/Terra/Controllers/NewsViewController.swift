@@ -81,6 +81,8 @@ extension NewsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let newsCell = tableView.dequeueReusableCell(withIdentifier: Constants.reuseIdentifier, for: indexPath) as! NewsArticleTableViewCell
+        newsCell.delegate = self
+        newsCell.shareButton.tag = indexPath.row
         let specificArticle = viewModel.specificArticle(at: indexPath.row)
         newsCell.configureCell(from: specificArticle)
         return newsCell
@@ -152,5 +154,12 @@ fileprivate extension NewsViewController {
     }
 }
 
-
-
+extension NewsViewController: ShareButtonDelegate {
+    func shareButtonTapped(sender: UIButton) {
+        let cellIndex = sender.tag
+        let selectedArticle = viewModel.specificArticle(at: cellIndex)
+        let items = [URL(string: selectedArticle.url)!]
+        let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        present(ac, animated: true)
+    }
+}
