@@ -81,7 +81,8 @@ class UIRoundedButtonWithGradientAndShadow: UIButton {
             
             let xScale : CGFloat = isHighlighted ? 1.025 : 1.0
             let yScale : CGFloat = isHighlighted ? 1.05 : 1.0
-            UIView.animate(withDuration: 0.1) {
+            UIView.animate(withDuration: 0.1) { [weak self] in
+                guard let self = self else { return }
                 let transformation = CGAffineTransform(scaleX: xScale, y: yScale)
                 self.transform = transformation
             }

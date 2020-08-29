@@ -15,7 +15,7 @@ final class SpeciesCollectionViewCell: UICollectionViewCell {
     private lazy var speciesNameLabel: UILabel = {
         let label = Factory.makeLabel(title: nil,
                                       weight: .bold,
-                                      size: 27,
+                                      size: Constants.FontHierarchy.primaryContentSize,
                                       color: .white,
                                       alignment: .left)
         label.numberOfLines = 0
@@ -25,14 +25,15 @@ final class SpeciesCollectionViewCell: UICollectionViewCell {
     private lazy var speciesScientificNameLabel: UILabel = {
         return Factory.makeLabel(title: nil,
                                  weight: .lightItalic,
-                                 size: 16,
+                                 size: Constants.FontHierarchy.secondaryContentSize,
                                  color: .white,
                                  alignment: .left)
     }()
     
     private lazy var conservationStatusLabel: UILabel = {
         let label = UILabel(frame: CGRect(origin: .zero, size: Constants.buttonSize))
-        label.font = UIFont(name: FontWeight.bold.rawValue, size: 15)
+        label.font = UIFont(name: FontWeight.bold.rawValue,
+                            size: Constants.FontHierarchy.secondaryContentSize)
         label.textAlignment = .center
         label.layer.cornerRadius = 0.5 * label.bounds.size.width
         label.clipsToBounds = true
@@ -42,7 +43,7 @@ final class SpeciesCollectionViewCell: UICollectionViewCell {
     private lazy var populationNumbersLabel: UILabel = {
         return Factory.makeLabel(title: nil,
                                  weight: .regular,
-                                 size: 16,
+                                 size: Constants.FontHierarchy.secondaryContentSize,
                                  color: .white,
                                  alignment: .right)
     }()
@@ -84,7 +85,6 @@ final class SpeciesCollectionViewCell: UICollectionViewCell {
             conservationStatusLabel.backgroundColor = Constants.Color.vulnerableStatusColor
             conservationStatusLabel.textColor = #colorLiteral(red: 0.9976391196, green: 0.998760879, blue: 0.8034237027, alpha: 1)
         }
-        
     }
     
     override init(frame: CGRect) {

@@ -19,9 +19,15 @@ struct Constants {
     width: UIScreen.main.bounds.size.width * 1.2077,
     height: UIScreen.main.bounds.size.height * 0.558)
     
+    struct FontHierarchy {
+        static let primaryContentSize = 27.deviceScaled
+        static let secondaryContentSize = 16.deviceScaled
+        
+    }
+    
     struct Color {
         static let titleLabelColor = #colorLiteral(red: 0.9257398248, green: 1, blue: 0.7623538375, alpha: 1)
-        static let criticalStatusColor = #colorLiteral(red: 1, green: 0.2901960784, blue: 0.3882352941, alpha: 0.9485498716)
+        static let criticalStatusColor = #colorLiteral(red: 1, green: 0.2901960784, blue: 0.3882352941, alpha: 1)
         static let endangeredStatusColor = #colorLiteral(red: 0.9961758256, green: 0.3767263889, blue: 0.1716631651, alpha: 1)
         static let vulnerableStatusColor = #colorLiteral(red: 0.6861364245, green: 0.6420921087, blue: 0.08179389685, alpha: 1)
         static let red = #colorLiteral(red: 1, green: 0.2901960784, blue: 0.3882352941, alpha: 0.9485498716)

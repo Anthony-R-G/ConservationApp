@@ -44,10 +44,10 @@ final class RedListFilterTabBar: UITabBar {
             appearance.shadowImage = UIImage()
             appearance.shadowColor = .black
     
-            appearance.stackedLayoutAppearance.normal.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Roboto-Light", size: 12)!, NSAttributedString.Key.foregroundColor: UIColor.white]
+            appearance.stackedLayoutAppearance.normal.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: FontWeight.light.rawValue, size: 12)!, NSAttributedString.Key.foregroundColor: UIColor.white]
             appearance.stackedLayoutAppearance.normal.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: -5)
 
-            appearance.stackedLayoutAppearance.selected.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Roboto-Regular", size: 13)!]
+            appearance.stackedLayoutAppearance.selected.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: FontWeight.regular.rawValue, size: 13)!]
             appearance.stackedLayoutAppearance.selected.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: -5)
             
             standardAppearance = appearance

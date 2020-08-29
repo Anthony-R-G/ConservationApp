@@ -275,10 +275,10 @@
 		9711D8FD24BD469B00C2E6F1 /* Third Party Code */ = {
 			isa = PBXGroup;
 			children = (
-				97452E4723E1EEE9005636E0 /* GradientView.swift */,
-				977D877524CE1F3700AE5E51 /* UIRoundedButtonWithGradientAndShadow.swift */,
 				976F68CD24E8B1C300277F79 /* Animatable.swift */,
 				976F68CF24E8B21A00277F79 /* CustomTransitionAnimation.swift */,
+				97452E4723E1EEE9005636E0 /* GradientView.swift */,
+				977D877524CE1F3700AE5E51 /* UIRoundedButtonWithGradientAndShadow.swift */,
 			);
 			path = "Third Party Code";
 			sourceTree = "<group>";

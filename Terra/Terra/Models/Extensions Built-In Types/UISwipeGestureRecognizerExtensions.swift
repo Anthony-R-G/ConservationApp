@@ -13,8 +13,7 @@ extension UISwipeGestureRecognizer.Direction {
         switch self {
         case .up: return .down
         case .down: return .up
-        default:
-            ()
+        default: ()
         }
         return self.opposite
     }

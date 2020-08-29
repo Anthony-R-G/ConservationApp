@@ -60,11 +60,13 @@ final class RootTabBarController: UITabBarController {
         
         let largeTitleTextAttributes = [
             NSAttributedString.Key.foregroundColor: Constants.Color.titleLabelColor,
-            NSAttributedString.Key.font: UIFont(name: "Roboto-Black", size: 40.deviceScaled)]
+            NSAttributedString.Key.font: UIFont(name: FontWeight.black.rawValue,
+                                                size: 40.deviceScaled)]
         
         let regularTitleTextAttributes = [
             NSAttributedString.Key.foregroundColor: Constants.Color.titleLabelColor,
-        NSAttributedString.Key.font: UIFont(name: "Roboto-Medium", size: 20.deviceScaled)]
+            NSAttributedString.Key.font: UIFont(name: FontWeight.medium.rawValue,
+                                                size: 20.deviceScaled)]
         
         newsVC.navigationBar.largeTitleTextAttributes = largeTitleTextAttributes as [NSAttributedString.Key : Any]
         newsVC.navigationBar.titleTextAttributes = regularTitleTextAttributes as [NSAttributedString.Key : Any]

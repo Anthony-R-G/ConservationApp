@@ -62,7 +62,7 @@ final class SpeciesListViewController: UIViewController {
     private lazy var noResultsFoundLabel: UILabel = {
         let label = Factory.makeLabel(title: "No Species Found",
                                       weight: .regular,
-                                      size: 17,
+                                      size: 16,
                                       color: .red,
                                       alignment: .center)
         label.frame = CGRect(

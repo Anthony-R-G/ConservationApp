@@ -23,16 +23,20 @@ final class CoverHeaderNameView: UIView {
         case .endangered:
             button.layer.borderColor = Constants.Color.endangeredStatusColor.cgColor
             
+            
         case .vulnerable:
             button.layer.borderColor = Constants.Color.vulnerableStatusColor.cgColor
+            
         }
         
         button.layer.borderWidth = 2
-        button.layer.cornerRadius = 10
+        button.layer.cornerRadius = 15
         button.showsTouchWhenHighlighted = true
         button.addTarget(self, action: #selector(handleTap), for: .touchUpInside)
         return button
     }()
+    
+    
     
     private lazy var speciesCommonNameLabel: UILabel = {
         let label = Factory.makeLabel(title: species.commonName,
@@ -52,6 +56,8 @@ final class CoverHeaderNameView: UIView {
             alignment: .left)
     }()
     
+ 
+    
     
     //MARK: -- Properties
     
@@ -64,7 +70,6 @@ final class CoverHeaderNameView: UIView {
     @objc private func handleTap() {
         delegate?.conservationStatusTapped()
     }
-    
     
     func shrinkCommonNameLabel() {
         speciesCommonNameLabel.animateToFont(
@@ -104,7 +109,7 @@ fileprivate extension CoverHeaderNameView {
     }
     
     func setConstraints() {
-        setConservationStatusButtonConstraints()
+       setConservationStatusButtonConstraints()
         setSpeciesCommonNameLabelConstraints()
         setSpeciesScientificNameLabelConstraints()
     }
@@ -114,10 +119,10 @@ fileprivate extension CoverHeaderNameView {
             make.leading.equalTo(speciesCommonNameLabel).inset(5)
             make.bottom.equalTo(speciesCommonNameLabel.snp.top).inset(-10)
             make.height.equalTo(30.deviceScaled)
-            make.width.equalToSuperview().multipliedBy(0.33)
+            make.width.equalToSuperview().multipliedBy(0.35)
         }
     }
-    
+
     func setSpeciesCommonNameLabelConstraints(){
         speciesCommonNameLabel.snp.makeConstraints { (make) in
             make.leading.equalToSuperview()

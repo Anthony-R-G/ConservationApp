@@ -25,10 +25,25 @@ final class CircleBlurButton: UIButton {
         return iv
     }()
     
+    //MARK: -- Properties
+    
+    override var isHighlighted: Bool {
+        didSet {
+            let xScale : CGFloat = isHighlighted ? 1.045 : 1.0
+            let yScale : CGFloat = isHighlighted ? 1.10 : 1.0
+            
+            UIView.animate(withDuration: 0.1) { [weak self] in
+                guard let self = self else { return }
+                let transformation = CGAffineTransform(scaleX: xScale, y: yScale)
+                self.transform = transformation
+            }
+        }
+    }
+    
     //MARK: -- Methods
     
     private func commonInit() {
-        layer.cornerRadius = 0.5 * self.bounds.size.width
+        layer.cornerRadius = 0.5 * bounds.size.width
         clipsToBounds = true
     }
     
