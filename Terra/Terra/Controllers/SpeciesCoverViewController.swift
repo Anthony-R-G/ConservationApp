@@ -119,7 +119,7 @@ final class SpeciesCoverViewController: UIViewController {
         cv.dataSource = self
         cv.delegate = self
         
-        cv.register(CoverRoundedCell.self, forCellWithReuseIdentifier: Constants.reuseIdentifier)
+        cv.register(CoverRoundedCell.self, forCellWithReuseIdentifier: Constants.cellReuseIdentifier)
         return cv
     }()
     
@@ -366,7 +366,7 @@ extension SpeciesCoverViewController: UICollectionViewDataSource {
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: Constants.reuseIdentifier,
+            withReuseIdentifier: Constants.cellReuseIdentifier,
             for: indexPath) as! CoverRoundedCell
         
         let specificStrategy = viewModel.specificStrategy(at: indexPath.row)

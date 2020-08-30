@@ -33,7 +33,7 @@ final class RedListFilterTabBar: UITabBar {
     
     //MARK: -- Properties
     
-    let appearance = UITabBarAppearance()
+    private let appearance = UITabBarAppearance()
     
     //MARK: -- Methods
 
@@ -44,10 +44,18 @@ final class RedListFilterTabBar: UITabBar {
             appearance.shadowImage = UIImage()
             appearance.shadowColor = .black
     
-            appearance.stackedLayoutAppearance.normal.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: FontWeight.light.rawValue, size: 12.deviceScaled)!, NSAttributedString.Key.foregroundColor: UIColor.white]
+            appearance.stackedLayoutAppearance.normal.titleTextAttributes = [
+                NSAttributedString.Key.font:
+                    UIFont(name: FontWeight.light.rawValue,
+                           size: 12.deviceScaled)!,
+                NSAttributedString.Key.foregroundColor: UIColor.white]
+        
+            appearance.stackedLayoutAppearance.selected.titleTextAttributes = [
+                NSAttributedString.Key.font:
+                    UIFont(name: FontWeight.regular.rawValue,
+                           size: 13.deviceScaled)!]
+            
             appearance.stackedLayoutAppearance.normal.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: -5)
-
-            appearance.stackedLayoutAppearance.selected.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: FontWeight.regular.rawValue, size: 13.deviceScaled)!]
             appearance.stackedLayoutAppearance.selected.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: -5)
             
             standardAppearance = appearance
@@ -59,7 +67,11 @@ final class RedListFilterTabBar: UITabBar {
         items = [allTab, criticalTab, endangeredTab, vulnerableTab]
         setAppearance()
         
-        selectionIndicatorImage = UIImage().createSelectionIndicator(color: .white, size: CGSize(width: frame.width/CGFloat(items!.count), height: frame.height), lineWidth: 2.0)
+        selectionIndicatorImage = UIImage().createSelectionIndicator(
+            color: .white,
+            size: CGSize(
+                width: frame.width/CGFloat(items!.count),
+                height: frame.height), lineWidth: 2.0)
     }
     
     required init?(coder: NSCoder) {

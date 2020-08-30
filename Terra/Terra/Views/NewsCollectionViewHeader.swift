@@ -11,23 +11,23 @@ import UIKit
 final class NewsCollectionViewHeader: UICollectionReusableView {
     //MARK: UI Element Initialization
     
-    private lazy var headerImageView: UIImageView = {
+    private lazy var backgroundImageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
         return iv
     }()
     
-    private lazy var visualEffectView: UIVisualEffectView = {
+    private lazy var backgroundVisualEffectView: UIVisualEffectView = {
         return UIVisualEffectView(effect: UIBlurEffect(style: .regular))
     }()
     
-    private lazy var headerDarkOverlay: UIView = {
+    private lazy var backgroundDarkOverlay: UIView = {
         let view = UIView()
         view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.4008989726)
         return view
     }()
     
-    private lazy var headerTitle: UILabel = {
+    private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: FontWeight.bold.rawValue, size: 32)
         label.textColor = .white
@@ -37,7 +37,7 @@ final class NewsCollectionViewHeader: UICollectionReusableView {
         return label
     }()
     
-    private lazy var headerPublishedDate: UILabel = {
+    private lazy var subtitleLabel: UILabel = {
         return Factory.makeLabel(title: nil,
                                  weight: .regular,
                                  size: 14,
@@ -53,10 +53,10 @@ final class NewsCollectionViewHeader: UICollectionReusableView {
     //MARK: -- Properties
     var animator: UIViewPropertyAnimator!
     
-    private func setupVisualEffectBlur() {
+     func setupVisualEffectBlur() {
         animator = UIViewPropertyAnimator(duration: 1.0, curve: .linear, animations: { [weak self] in
             guard let self = self else { return }
-            self.visualEffectView.effect = nil
+            self.backgroundVisualEffectView.effect = nil
         })
         
         animator.isReversed = true
@@ -64,11 +64,10 @@ final class NewsCollectionViewHeader: UICollectionReusableView {
     }
     
     func configureHeader(from article: NewsArticle) {
-        headerTitle.text = article.title
-        headerPublishedDate.text = article.publishedAt
-        headerImageView.sd_setImage(with: URL(string: article.urlToImage!), placeholderImage: #imageLiteral(resourceName: "black"))
+        titleLabel.text = article.title
+        subtitleLabel.text = article.publishedAt
+        backgroundImageView.sd_setImage(with: URL(string: article.urlToImage!), placeholderImage: #imageLiteral(resourceName: "black"))
     }
-    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -87,7 +86,8 @@ final class NewsCollectionViewHeader: UICollectionReusableView {
 fileprivate extension NewsCollectionViewHeader {
     
     func addSubviews() {
-        [headerImageView, visualEffectView, headerDarkOverlay, headerTitle, headerPublishedDate, headerShareButton].forEach { addSubview($0) }
+        [backgroundImageView, backgroundVisualEffectView, backgroundDarkOverlay, titleLabel, subtitleLabel, headerShareButton]
+            .forEach { addSubview($0) }
     }
     
     func setConstraints() {
@@ -101,41 +101,41 @@ fileprivate extension NewsCollectionViewHeader {
     
     
     func setHeaderImageViewConstraints() {
-        headerImageView.snp.makeConstraints { (make) in
+        backgroundImageView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
     }
     
     func setHeaderDarkOverlayConstraints() {
-        headerDarkOverlay.snp.makeConstraints { (make) in
+        backgroundDarkOverlay.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
     }
     
     func setHeaderTitleConstraints() {
-        headerTitle.snp.makeConstraints { (make) in
+        titleLabel.snp.makeConstraints { (make) in
             make.leading.top.trailing.equalToSuperview().inset(Constants.spacing)
-            make.bottom.equalTo(headerPublishedDate.snp.top).inset(Constants.spacing)
+            make.bottom.equalTo(subtitleLabel.snp.top).inset(Constants.spacing)
             make.centerY.equalToSuperview()
         }
     }
     
     func setHeaderPublishedDateConstraints() {
-        headerPublishedDate.snp.makeConstraints { (make) in
-            make.leading.equalTo(headerTitle)
+        subtitleLabel.snp.makeConstraints { (make) in
+            make.leading.equalTo(titleLabel)
             make.bottom.equalToSuperview().inset(Constants.spacing)
         }
     }
     
     func setHeaderShareButtonConstraints() {
         headerShareButton.snp.makeConstraints { (make) in
-            make.leading.equalTo(headerPublishedDate.snp.trailing).offset(Constants.spacing)
-            make.centerY.equalTo(headerPublishedDate)
+            make.leading.equalTo(subtitleLabel.snp.trailing).offset(Constants.spacing)
+            make.centerY.equalTo(subtitleLabel)
         }
     }
     
     func setHeaderVisualEffectViewConstraints() {
-        visualEffectView.snp.makeConstraints { (make) in
+        backgroundVisualEffectView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
     }

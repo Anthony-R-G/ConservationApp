@@ -9,21 +9,21 @@
 import UIKit
 
 struct Constants {
-    static let reuseIdentifier = "cellId"
+    static let cellReuseIdentifier = "cellId"
     static let spacing: CGFloat = 20.deviceScaled
     static let cornerRadius: CGFloat = 20.deviceScaled
     static let borderWidth: CGFloat = 2.0
     static let screenHeight = UIScreen.main.bounds.size.height
     static let screenWidth = UIScreen.main.bounds.size.width
     static let buttonSize = CGSize(width: 35.deviceScaled, height: 35.deviceScaled)
+    
     static let commonViewSize: CGSize = CGSize(
-    width: UIScreen.main.bounds.size.width * 1.2077,
-    height: UIScreen.main.bounds.size.height * 0.558)
+        width: Constants.screenWidth * 1.2077,
+        height: Constants.screenHeight * 0.558)
     
     struct FontHierarchy {
         static let primaryContentFontSize = 27.deviceScaled
         static let secondaryContentFontSize = 16.deviceScaled
-        
     }
     
     struct Color {

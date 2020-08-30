@@ -85,7 +85,7 @@ final class SpeciesListViewController: UIViewController {
             collectionViewLayout: layout)
         
         cv.backgroundColor = .clear
-        cv.register(SpeciesCollectionViewCell.self, forCellWithReuseIdentifier: Constants.reuseIdentifier)
+        cv.register(SpeciesCollectionViewCell.self, forCellWithReuseIdentifier: Constants.cellReuseIdentifier)
         cv.dataSource = self
         cv.delegate = self
         return cv
@@ -235,7 +235,7 @@ extension SpeciesListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let speciesCell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.reuseIdentifier, for: indexPath) as! SpeciesCollectionViewCell
+        let speciesCell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.cellReuseIdentifier, for: indexPath) as! SpeciesCollectionViewCell
         let specificAnimal = viewModel.specificSpecies(at: indexPath.row)
         speciesCell.configureCell(from: specificAnimal)
         return speciesCell

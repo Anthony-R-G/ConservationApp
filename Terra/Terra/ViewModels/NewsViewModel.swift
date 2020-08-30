@@ -31,6 +31,8 @@ final class NewsViewModel {
     
     private var isFetchInProgress: Bool = false
     
+    var firstArticle: NewsArticle!
+    
     var totalNewsArticlesCount: Int {
         return filteredNewsArticles.count
     }
@@ -38,8 +40,6 @@ final class NewsViewModel {
     var newsFetchIsUnderway: Bool {
         return isFetchInProgress
     }
-    
-    var firstArticle: NewsArticle!
     
     
     //MARK: -- Methods
@@ -88,11 +88,11 @@ extension NewsViewModel {
                   receiveValue: { [weak self] response in
                     guard let self = self else { return }
                     guard let articles = response.articles else { return }
+                    self.firstArticle = articles[0]
                     self.newsArticles.append(contentsOf: articles.dropFirst())
                     self.currentPage += 1
                     self.delegate?.fetchCompleted()
                     self.isFetchInProgress = false
-                    self.firstArticle = articles[0]
             })
     }
 }

@@ -8,13 +8,13 @@
 
 import UIKit
 
-class StretchyCollectionViewHeaderLayout: UICollectionViewFlowLayout {
+final class StretchyCollectionViewHeaderLayout: UICollectionViewFlowLayout {
 
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         
         let layoutAttributes = super.layoutAttributesForElements(in: rect)
         
-        layoutAttributes?.forEach({ (attributes) in
+        layoutAttributes?.forEach( { (attributes) in
             
             if attributes.representedElementKind == UICollectionView.elementKindSectionHeader && attributes.indexPath.section == 0 {
                 
@@ -22,9 +22,7 @@ class StretchyCollectionViewHeaderLayout: UICollectionViewFlowLayout {
                 
                 let contentOffsetY = collectionView.contentOffset.y
                 
-                if contentOffsetY > 0 {
-                    return
-                }
+                guard contentOffsetY < 0  else { return }
                 
                 let width = collectionView.frame.width
                 
@@ -33,7 +31,7 @@ class StretchyCollectionViewHeaderLayout: UICollectionViewFlowLayout {
                 // header
                 attributes.frame = CGRect(x: 0, y: contentOffsetY, width: width, height: height)
             }
-        })
+        } )
         
         return layoutAttributes
     }
@@ -41,5 +39,4 @@ class StretchyCollectionViewHeaderLayout: UICollectionViewFlowLayout {
     override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
         return true
     }
-    
 }

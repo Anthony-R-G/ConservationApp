@@ -42,6 +42,7 @@ struct Utilities {
     static func presentWebBrowser(on viewController: UIViewController, link: URL) {
         let config = SFSafariViewController.Configuration()
         let safariVC = SFSafariViewController(url: link, configuration: config)
+        
         viewController.present(safariVC, animated: true, completion: nil)
     }
     

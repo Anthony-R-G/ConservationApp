@@ -53,7 +53,7 @@ final class RootTabBarController: UITabBarController {
         let listVC = SpeciesListViewController()
         
 //        let newsVC = UINavigationController(rootViewController: NewsViewController())
-        let newsVC = NewsCollectionViewController(collectionViewLayout: StretchyCollectionViewHeaderLayout())
+        let newsVC = NewsViewController()
         
 //        newsVC.navigationBar.prefersLargeTitles = true
 //        newsVC.navigationBar.topItem?.title = "Wildlife News"
