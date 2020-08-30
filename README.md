@@ -96,9 +96,9 @@ Planned:
 
 
 ### News Updates Page
-| Transitioning Between Tabs | Selecting Articles to Read |
-| :------: | :------: |
-|![screen 1](https://media.giphy.com/media/ieaU0z4wACLIYrWIey/giphy.gif) | ![screen 2](https://media.giphy.com/media/IejPdlUw4B2Yj2cfVp/giphy.gif) |
+| Browsing | Selecting An Article | Sharing | 
+| :------: | :------: | :------: |
+|![screen 1](https://i.imgur.com/ca2YBi4.png) | ![screen 2](https://i.imgur.com/kqGRs4a.png) | ![screen 3](https://i.imgur.com/pE02PJf.png) |
 
 •The second tab on the home screen, this page gets data from [NewsAPI](https://newsapi.org/) with the endpoint specifically tailored for wildlife/animal conservation related news. 
 
@@ -106,6 +106,7 @@ Planned:
 
 •Pagination is handled by using Apple's data source prefetching protocol so that more news articles are loaded as you scroll down.
 
+•Each row has a share button, which can be used to share the website URL with others.
 
 
 ### Learn More About An Individual Species
