@@ -23,6 +23,8 @@
 		972BBF7E24C026CD00B6F7C0 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 972BBF7B24C0256F00B6F7C0 /* Roboto-Bold.ttf */; };
 		972BBF7F24C026CF00B6F7C0 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 972BBF7C24C0257600B6F7C0 /* Roboto-Medium.ttf */; };
 		972BBF8024C026D100B6F7C0 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 972BBF7D24C0257B00B6F7C0 /* Roboto-Light.ttf */; };
+		973DF94224FB3F970082E122 /* StretchyCollectionViewHeaderLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973DF94124FB3F970082E122 /* StretchyCollectionViewHeaderLayout.swift */; };
+		973DF94424FB3FEF0082E122 /* NewsCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973DF94324FB3FEF0082E122 /* NewsCollectionViewHeader.swift */; };
 		9743BAB124EFBEDF0090A2E4 /* ConservationStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9743BAB024EFBEDF0090A2E4 /* ConservationStatusView.swift */; };
 		9743BAB324F026710090A2E4 /* BiomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9743BAB224F026710090A2E4 /* BiomeView.swift */; };
 		9743BAB624F036C20090A2E4 /* DetailHowToHelpStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9743BAB524F036C20090A2E4 /* DetailHowToHelpStrategy.swift */; };
@@ -154,6 +156,8 @@
 		972BBF7B24C0256F00B6F7C0 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		972BBF7C24C0257600B6F7C0 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		972BBF7D24C0257B00B6F7C0 /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
+		973DF94124FB3F970082E122 /* StretchyCollectionViewHeaderLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StretchyCollectionViewHeaderLayout.swift; sourceTree = "<group>"; };
+		973DF94324FB3FEF0082E122 /* NewsCollectionViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCollectionViewHeader.swift; sourceTree = "<group>"; };
 		9743BAB024EFBEDF0090A2E4 /* ConservationStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConservationStatusView.swift; sourceTree = "<group>"; };
 		9743BAB224F026710090A2E4 /* BiomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiomeView.swift; sourceTree = "<group>"; };
 		9743BAB524F036C20090A2E4 /* DetailHowToHelpStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailHowToHelpStrategy.swift; sourceTree = "<group>"; };
@@ -339,6 +343,7 @@
 		97452E4423E1E6A9005636E0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				9743BAB424F026780090A2E4 /* DetailInfo */,
 				97452E4523E1E6C7005636E0 /* SpeciesCollectionViewCell.swift */,
 				9764D12D24D7E46E0050AF37 /* NewsArticleTableViewCell.swift */,
 				97DC775124EB6C8700111245 /* CoverRoundedCell.swift */,
@@ -351,7 +356,8 @@
 				976F68C924E8AE8600277F79 /* ShadowView.swift */,
 				975742E824F61A8700D203B8 /* CircleBlurButton.swift */,
 				97E22D8924EC7701008B76E2 /* RedListToolBar.swift */,
-				9743BAB424F026780090A2E4 /* DetailInfo */,
+				973DF94124FB3F970082E122 /* StretchyCollectionViewHeaderLayout.swift */,
+				973DF94324FB3FEF0082E122 /* NewsCollectionViewHeader.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -719,6 +725,7 @@
 				977D876C24CD3A6100AE5E51 /* Taxonomy.swift in Sources */,
 				97E9450424BE10C800550824 /* ConservationStatus.swift in Sources */,
 				97F4E00A24D757C600509694 /* StringExtensions.swift in Sources */,
+				973DF94424FB3FEF0082E122 /* NewsCollectionViewHeader.swift in Sources */,
 				97812F0124EDFB3400E7C421 /* UISwipeGestureRecognizerExtensions.swift in Sources */,
 				97591FDF24CCD14A002EAC96 /* Constants.swift in Sources */,
 				97FAD4E924D75DBD007FEFD8 /* NewsViewController.swift in Sources */,
@@ -767,6 +774,7 @@
 				9764D12924D7DC250050AF37 /* NewsArticle.swift in Sources */,
 				97F0CCA924C56F5C00C581D3 /* UIScrollViewExtensions.swift in Sources */,
 				97EA493C24E3BEC200C0FE64 /* DetailInfoWindow.swift in Sources */,
+				973DF94224FB3F970082E122 /* StretchyCollectionViewHeaderLayout.swift in Sources */,
 				975C8E5424E4F11500A0EB9D /* DetailThreatsStrategy.swift in Sources */,
 				977D877024CD6A1200AE5E51 /* Group.swift in Sources */,
 				97A24D2024E445A800958AB9 /* DetailHabitatStrategy.swift in Sources */,

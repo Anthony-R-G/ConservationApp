@@ -22,6 +22,7 @@ final class NewsViewModel {
     private var cancellable: AnyCancellable?
     
     private var newsArticles: [NewsArticle] = []
+    
     private var filteredNewsArticles: [NewsArticle] {
         return filterDuplicateArticles(from: newsArticles)
     }
@@ -38,6 +39,8 @@ final class NewsViewModel {
         return isFetchInProgress
     }
     
+    var firstArticle: NewsArticle!
+    
     
     //MARK: -- Methods
     
@@ -51,7 +54,7 @@ final class NewsViewModel {
                 seenHeadlines.insert(title)
                 return newsArticle
             }
-           
+            
             return newsArticle
         }
     }
@@ -85,10 +88,11 @@ extension NewsViewModel {
                   receiveValue: { [weak self] response in
                     guard let self = self else { return }
                     guard let articles = response.articles else { return }
-                    self.newsArticles.append(contentsOf: articles)
+                    self.newsArticles.append(contentsOf: articles.dropFirst())
                     self.currentPage += 1
                     self.delegate?.fetchCompleted()
                     self.isFetchInProgress = false
+                    self.firstArticle = articles[0]
             })
     }
 }

@@ -12,7 +12,7 @@ protocol ShareButtonDelegate: AnyObject {
     func shareButtonTapped(sender: UIButton)
 }
 
-final class NewsArticleTableViewCell: UITableViewCell {
+final class NewsArticleTableViewCell: UICollectionViewCell {
     //MARK: -- UI Element Initialization
     
     private lazy var articleThumbImageView: UIImageView = {
@@ -38,7 +38,7 @@ final class NewsArticleTableViewCell: UITableViewCell {
         return Factory.makeLabel(title: nil,
                                  weight: .regular,
                                  size: 14,
-                                 color: #colorLiteral(red: 0.7764157653, green: 0.7718015909, blue: 0.7799633741, alpha: 1),
+                                 color: .lightGray,
                                  alignment: .left)
         
     }()
@@ -76,9 +76,9 @@ final class NewsArticleTableViewCell: UITableViewCell {
         bgColorView.backgroundColor = #colorLiteral(red: 0.08120436221, green: 0.09556283802, blue: 0.1183818057, alpha: 1)
         selectedBackgroundView = bgColorView
     }
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+ 
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         addSubviews()
         setConstraints()
         setAppearance()
