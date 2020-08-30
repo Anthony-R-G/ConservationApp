@@ -32,16 +32,15 @@ class DetailHabitatStrategy: DetailPageStrategy {
             DetailInfoWindow(title: "DISTRIBUTION",
                              content: SpeciesMapView(species: species)),
             
-            DetailInfoWindow(title: "BIOME", content: BiomeView(strategy: self)),
+            DetailInfoWindow(title: "BIOME",
+                             content: BiomeView(strategy: self)),
             
-            DetailInfoWindow(title: "DETAIL", content:
-                Factory.makeDetailInfoWindowLabel(text: species.habitat.summary)),
-            
-            
+            DetailInfoWindow(title: "DETAIL",
+                             content: Factory.makeDetailInfoWindowLabel(text: species.habitat.summary)),
         
         ])
         stackView.axis = .vertical
-        stackView.spacing = Constants.spacingConstant
+        stackView.spacing = Constants.spacing
         
         return stackView
     }

@@ -21,29 +21,21 @@ final class MGLMapViewController: UIViewController {
         return mv
     }()
     
-    private lazy var listButton: UIButton = {
-        let btn = UIButton()
-        btn.setImage(UIImage(named: "list"), for: .normal)
-        btn.layer.cornerRadius = Constants.cornerRadius/2
-        btn.tintColor = #colorLiteral(red: 0.976, green: 0.843, blue: 0.831, alpha: 1.0)
-        btn.backgroundColor = Constants.red
-        btn.addTarget(self,
-            action: #selector(backButtonPressed),
-            for: .touchUpInside)
+    private lazy var listButton: CircleBlurButton = {
+        let btn = Factory.makeBlurredCircleButton(image: .list, style: .dark, size: .regular)
+        btn.addTarget(self, action: #selector(backButtonPressed), for: .touchUpInside)
         return btn
     }()
     
     private lazy var styleToggle: UISegmentedControl = {
         let sc = UISegmentedControl(items: ["Normal", "Hypsometric"])
         sc.tintColor = #colorLiteral(red: 0.976, green: 0.843, blue: 0.831, alpha: 1.0)
-        sc.backgroundColor = Constants.red
+        sc.backgroundColor = Constants.Color.red
         sc.layer.cornerRadius = Constants.cornerRadius/2
         sc.clipsToBounds = true
         sc.selectedSegmentIndex = 0
         sc.translatesAutoresizingMaskIntoConstraints = false
-        sc.addTarget(self,
-            action: #selector(changeStyle(sender:)),
-            for: .valueChanged)
+        sc.addTarget(self, action: #selector(changeStyle(sender:)), for: .valueChanged)
         view.insertSubview(sc, aboveSubview: mapView)
         return sc
     }()
@@ -70,6 +62,7 @@ final class MGLMapViewController: UIViewController {
     //MARK: -- Methods
     
     @objc private func changeStyle(sender: UISegmentedControl) {
+        Utilities.sendHapticFeedback(action: .selectionChanged)
         switch sender.selectedSegmentIndex {
         case 0:
             mapView.styleURL = MGLStyle.satelliteStreetsStyleURL
@@ -98,6 +91,7 @@ final class MGLMapViewController: UIViewController {
     }
     
     @objc private func backButtonPressed() {
+        Utilities.sendHapticFeedback(action: .pageDismissed)
         dismiss(animated: true, completion: nil)
     }
     
@@ -197,9 +191,8 @@ fileprivate extension MGLMapViewController {
     
     func setListButtonConstraints() {
         listButton.snp.makeConstraints { (make) in
-            make.leading.equalTo(view).inset(Constants.spacingConstant)
-            make.top.equalToSuperview().inset(40.deviceAdjusted)
-            make.height.width.equalTo(40.deviceAdjusted)
+            make.leading.equalTo(view).inset(Constants.spacing)
+            make.top.equalToSuperview().inset(40.deviceScaled)
         }
     }
     

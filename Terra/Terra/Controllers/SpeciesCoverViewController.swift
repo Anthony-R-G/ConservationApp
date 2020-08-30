@@ -17,7 +17,6 @@ final class SpeciesCoverViewController: UIViewController {
     private lazy var backgroundImageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
-        view.insertSubview(iv, at: 0)
         iv.backgroundColor = .black
         FirebaseStorageService.coverImageManager.getImage(
             for: viewModel.selectedSpecies.commonName,
@@ -29,14 +28,11 @@ final class SpeciesCoverViewController: UIViewController {
         let gv = GradientView()
         gv.startColor = #colorLiteral(red: 0.06859237701, green: 0.08213501424, blue: 0.2409383953, alpha: 0.0)
         gv.endColor = #colorLiteral(red: 0.06859237701, green: 0.08213501424, blue: 0.2409383953, alpha: 0.8456228596)
-        view.insertSubview(gv, at: 1)
         return gv
     }()
     
     private lazy var headerNameView: CoverHeaderNameView = {
-        let hiv = CoverHeaderNameView(species: viewModel.selectedSpecies)
-        hiv.delegate = self
-        return hiv
+        return CoverHeaderNameView(species: viewModel.selectedSpecies, delegate: self)
     }()
     
     private lazy var subheaderInfoView: CoverSubheaderInfoView = {
@@ -49,59 +45,45 @@ final class SpeciesCoverViewController: UIViewController {
         return blur
     }()
     
-    private lazy var exploreButton: UIButton = {
-        let btn = UIButton(frame: CGRect(
-            origin: .zero,
-            size: CGSize(width: 80.deviceAdjusted, height: 80.deviceAdjusted)))
-        
+    private lazy var downChevron: UIButton = {
+        let btn = UIButton(frame: CGRect(origin: .zero, size: CGSize(width: 30.deviceScaled, height: 15.deviceScaled)))
         btn.setImage(UIImage(systemName: "chevron.down"), for: .normal)
-        btn.setTitle("Explore", for: .normal)
-        btn.titleLabel?.font = UIFont(name: "Roboto-Light", size: 16.deviceAdjusted)
-        btn.alignImageAndTitleVertically()
-        btn.imageView?.transform = CGAffineTransform(scaleX: 1.2,
-                                                     y: 1)
-        btn.addTarget(
-            self,
-            action: #selector(handlePageStateSwipeGesture),
-            for: .touchUpInside)
-        
-        let color = UIColor(white: 1, alpha: 0.6)
-        btn.setTitleColor(color, for: .normal)
-        btn.tintColor = color
+        btn.contentVerticalAlignment = .fill
+        btn.contentHorizontalAlignment = .fill
+        btn.addTarget(self, action: #selector(handlePageTransitionGesture), for: .touchUpInside)
+        btn.tintColor = .white
+        btn.alpha = 0.6
         return btn
     }()
     
-    private lazy var upButton: UIButton = {
-        let btn = UIButton(frame: CGRect(
-            origin: .zero,
-            size: CGSize(width: 80.deviceAdjusted, height: 80.deviceAdjusted)))
-        
+    private lazy var upChevron: UIButton = {
+        let btn = UIButton(frame: CGRect(origin: .zero, size: CGSize(width: 30.deviceScaled, height: 15.deviceScaled)))
         btn.setImage(UIImage(systemName: "chevron.up"), for: .normal)
-        
-        btn.imageView?.transform = CGAffineTransform(scaleX: 1.2, y: 1)
-        btn.addTarget(
-            self,
-            action: #selector(handlePageStateSwipeGesture),
-            for: .touchUpInside)
-        
+        btn.contentVerticalAlignment = .fill
+        btn.contentHorizontalAlignment = .fill
+        btn.addTarget(self, action: #selector(handlePageTransitionGesture), for: .touchUpInside)
         btn.tintColor = .white
         btn.alpha = 0
         return btn
     }()
     
-    //To set donate button equally between view & cv bottom
+    //Sets donate button centerY between view bottom & collectionview
     private lazy var donateButtonContainer: UIView = {
         let view = UIView()
-        view.backgroundColor = .clear
+        view.isUserInteractionEnabled = false
         return view
     }()
     
+    //Sets chevron centerY between view bottom & subheader
+    private lazy var downChevronContainer: UIView = {
+        return UIView()
+    }()
+    
     private lazy var donateButton: DonateButton = {
-        let btn = DonateButton(gradientColors: [#colorLiteral(red: 1, green: 0.2914688587, blue: 0.3886995912, alpha: 0.9019156678), #colorLiteral(red: 0.5421239734, green: 0.1666001081, blue: 0.2197911441, alpha: 0.8952536387)],
-                               startPoint: CGPoint(x: 0,
-                                                   y: 0),
-                               endPoint: CGPoint(x: 1,
-                                                 y: 1))
+        let btn = DonateButton(
+            gradientColors: [#colorLiteral(red: 1, green: 0.2914688587, blue: 0.3886995912, alpha: 0.9019156678), #colorLiteral(red: 0.3837335624, green: 0.1666001081, blue: 0.1801935414, alpha: 0.8952536387)],
+            startPoint: CGPoint(x: 0, y: 0),
+            endPoint: CGPoint(x: 1, y: 1))
         btn.alpha = 0
         btn.delegate = self
         return btn
@@ -117,16 +99,16 @@ final class SpeciesCoverViewController: UIViewController {
         
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(
-            width: 345.deviceAdjusted,
+            width: 345.deviceScaled,
             height:  collectionViewFrame.height * 0.89)
         
         layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 30.deviceAdjusted
+        layout.minimumLineSpacing = 30.deviceScaled
         layout.sectionInset = UIEdgeInsets(
-            top: Constants.spacingConstant / 2,
-            left: Constants.spacingConstant,
-            bottom: Constants.spacingConstant / 2,
-            right: Constants.spacingConstant)
+            top: Constants.spacing / 2,
+            left: Constants.spacing,
+            bottom: Constants.spacing / 2,
+            right: Constants.spacing)
         
         let cv = UICollectionView(
             frame: collectionViewFrame,
@@ -137,56 +119,38 @@ final class SpeciesCoverViewController: UIViewController {
         cv.dataSource = self
         cv.delegate = self
         
-        cv.register(CoverRoundedCell.self, forCellWithReuseIdentifier: Constants.reuseIdentifier)
+        cv.register(CoverRoundedCell.self, forCellWithReuseIdentifier: Constants.cellReuseIdentifier)
         return cv
     }()
     
-    private lazy var closeButton: UIButton = {
-        let btn = UIButton()
-        btn.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
-        btn.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
-        btn.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.845703125)
-        btn.addTarget(
-            self,
-            action: #selector(closeButtonPressed),
-            for: .touchUpInside)
+    private lazy var closeButton: CircleBlurButton = {
+        let btn = Factory.makeBlurredCircleButton(image: .close, style: .light, size: .regular)
+        btn.addTarget(self, action: #selector(dismissPage), for: .touchUpInside)
+        return btn
+    }()
+    
+    private lazy var augmentedRealityButton: UIButton = {
+        let btn = Factory.makeBlurredCircleButton(image: .augmentedReality, style: .light, size: .regular)
+        btn.addTarget(self, action: #selector(augmentedRealityButtonPressed), for: .touchUpInside)
         return btn
     }()
     
     private lazy var pageStateSwipeGesture: UISwipeGestureRecognizer = {
-        let recognizer = UISwipeGestureRecognizer(
-            target: self,
-            action: #selector(handlePageStateSwipeGesture))
+        let recognizer = UISwipeGestureRecognizer(target: self, action: #selector(handlePageTransitionGesture))
         recognizer.direction = .up
         return recognizer
     }()
     
     private lazy var dismissPageSwipeGesture: UISwipeGestureRecognizer = {
-        let recognizer = UISwipeGestureRecognizer(
-            target: self,
-            action: #selector(handleDismissSwipeGesture))
+        let recognizer = UISwipeGestureRecognizer(target: self, action: #selector(dismissPage))
         recognizer.direction = .down
         return recognizer
     }()
     
-    private lazy var augmentedRealityButton: UIButton = {
-        let btn = UIButton()
-        btn.setImage(UIImage(systemName: "arkit"), for: .normal)
-        btn.alpha = 0.6
-        btn.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
-        btn.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.845703125)
-        btn.addTarget(
-            self,
-            action: #selector(augmentedRealityButtonPressed),
-            for: .touchUpInside)
-        return btn
-    }()
     
     //MARK: -- Properties
     
     var viewModel: DetailPageStrategyViewModel!
-    
-    private let generator = UIImpactFeedbackGenerator(style: .medium)
     
     private var pageState: State = .collapsed
     
@@ -202,7 +166,7 @@ final class SpeciesCoverViewController: UIViewController {
     
     private lazy var subheaderInfoViewEnlargedHeight: CGFloat = headerNameViewEnlargedHeight * 0.30
     
-    private let subheaderInfoViewShrinkHeight: CGFloat = 60.deviceAdjusted
+    private let subheaderInfoViewShrinkHeight: CGFloat = 60.deviceScaled
     
     private lazy var headerNameViewHeightConstraint: NSLayoutConstraint = {
         return headerNameView.heightAnchor.constraint(equalToConstant: headerNameViewEnlargedHeight)
@@ -216,9 +180,7 @@ final class SpeciesCoverViewController: UIViewController {
         return subheaderInfoView.heightAnchor.constraint(equalToConstant: subheaderInfoViewEnlargedHeight)
     }()
     
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
+    override var prefersStatusBarHidden: Bool { return true }
     
     //MARK: -- Methods
     
@@ -226,23 +188,13 @@ final class SpeciesCoverViewController: UIViewController {
         print("now cool stuff happens")
     }
     
-    @objc private func closeButtonPressed() {
+    @objc private func dismissPage() {
+        Utilities.sendHapticFeedback(action: .pageDismissed)
         dismiss(animated: true, completion: nil)
     }
     
-    @objc private func handlePageStateSwipeGesture() {
-        animatePageState()
-    }
-    
-    @objc private func handleDismissSwipeGesture() {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    private func presentWebBrowser(link: URL){
-        let config = SFSafariViewController.Configuration()
-        let safariVC = SFSafariViewController(url: link,
-                                              configuration: config)
-        present(safariVC, animated: true)
+    @objc private func handlePageTransitionGesture() {
+        animatePageStateTransition()
     }
     
     private func addGestureRecognizers() {
@@ -250,17 +202,18 @@ final class SpeciesCoverViewController: UIViewController {
         view.addGestureRecognizer(dismissPageSwipeGesture)
     }
     
+    private func startShimmerAnimationOnViews() {
+        [downChevron, upChevron].forEach { $0.startShimmeringAnimation(
+            animationSpeed: 2,
+            direction: .leftToRight,
+            repeatCount: .infinity) }
+    }
     
     //MARK: -- Life Cycle Methods
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        exploreButton.startShimmeringAnimation(animationSpeed: 2,
-                                               direction: .leftToRight,
-                                               repeatCount: .infinity)
-        upButton.startShimmeringAnimation(animationSpeed: 2,
-                                          direction: .leftToRight,
-                                          repeatCount: .infinity)
+        startShimmerAnimationOnViews()
     }
     
     override func viewDidLoad() {
@@ -286,31 +239,32 @@ extension SpeciesCoverViewController: Animatable {
 
 extension SpeciesCoverViewController {
     
-    private func animatePageState() {
+    private func animatePageStateTransition() {
         let state = pageState.opposite
-        let animator = UIViewPropertyAnimator(duration: 1.3,
-                                              dampingRatio: 0.75,
-                                              animations: { [weak self] in
-            guard let self = self else { return }
-            switch state {
-            case .expanded:
-                self.dismissPageSwipeGesture.isEnabled = false
-                self.shrinkHeader()
-                self.animateExploreButton(state: state)
-                self.animateMainContent(state: state)
-                
-                
-            case .collapsed:
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
-                    guard let self = self else { return }
-                    self.dismissPageSwipeGesture.isEnabled = true
+        let animator = UIViewPropertyAnimator(
+            duration: 1.3,
+            dampingRatio: 0.75,
+            animations: { [weak self] in guard let self = self else { return }
+                switch state {
+                case .expanded:
+                    self.dismissPageSwipeGesture.isEnabled = false
+                    self.resizeHeader(state: state)
+                    self.toggleContainerInteractability(state: state)
+                    self.animateInfoOptionsVisibility(state: state)
+                    self.animateButtonControlsVisibility(state: state)
+                    
+                case .collapsed:
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+                        guard let self = self else { return }
+                        self.dismissPageSwipeGesture.isEnabled = true
+                    }
+                    self.resizeHeader(state: state)
+                    self.toggleContainerInteractability(state: state)
+                    self.animateButtonControlsVisibility(state: state)
+                    self.animateInfoOptionsVisibility(state: state)
                 }
-                self.enlargeHeader()
-                self.animateExploreButton(state: state)
-                self.animateMainContent(state: state)
                 
-            }
-            self.view.layoutIfNeeded()
+                self.view.layoutIfNeeded()
         })
         
         animator.addCompletion { [weak self ] (position) in
@@ -318,9 +272,12 @@ extension SpeciesCoverViewController {
             switch position {
             case .start:
                 self.pageState = state.opposite
+                
             case .end:
                 self.pageStateSwipeGesture.direction = self.pageStateSwipeGesture.direction.opposite
                 self.pageState = state
+                self.toggleContainerInteractability(state: state)
+                
             case .current:
                 ()
             @unknown default:
@@ -330,39 +287,45 @@ extension SpeciesCoverViewController {
         animator.startAnimation()
     }
     
-    private func shrinkHeader() {
-        headerNameView.shrinkCommonNameLabel()
-        headerNameViewTopAnchorConstraint.constant = headerNameViewShrinkHeight
-        headerNameViewHeightConstraint.constant = headerNameViewShrinkTopAnchor
-        subheaderInfoViewHeightConstraint.constant = subheaderInfoViewShrinkHeight
+    private func resizeHeader(state: State) {
+        switch state {
+        case .expanded:
+            headerNameView.shrinkCommonNameLabel()
+            headerNameViewTopAnchorConstraint.constant = headerNameViewShrinkHeight
+            headerNameViewHeightConstraint.constant = headerNameViewShrinkTopAnchor
+            subheaderInfoViewHeightConstraint.constant = subheaderInfoViewShrinkHeight
+            
+        case .collapsed:
+            headerNameView.enlargeCommonNameLabel()
+            headerNameViewTopAnchorConstraint.constant = headerNameViewEnlargedTopAnchor
+            headerNameViewHeightConstraint.constant = headerNameViewEnlargedHeight
+            subheaderInfoViewHeightConstraint.constant = subheaderInfoViewEnlargedHeight
+        }
     }
     
-    private func enlargeHeader() {
-        headerNameView.expandCommonNameLabel()
-        headerNameViewTopAnchorConstraint.constant = headerNameViewEnlargedTopAnchor
-        headerNameViewHeightConstraint.constant = headerNameViewEnlargedHeight
-        subheaderInfoViewHeightConstraint.constant = subheaderInfoViewEnlargedHeight
-    }
     
-    private func animateExploreButton(state: State) {
-        let newExploreButtonAlpha: CGFloat = state == .expanded ? 0.0 : 0.6
-        let newUpButtonAlpha: CGFloat = state == .expanded ? 0.6 : 0.0
-        let duration: TimeInterval = state == .expanded ? 0.4 : 2.0
-        let upDuration: TimeInterval = state == .expanded ? 2.0 : 0.4
+    private func animateButtonControlsVisibility(state: State) {
+        let newDownChevronAlpha: CGFloat = state == .expanded ? 0.0 : 0.6
+        let newUpChevronAlpha: CGFloat = state == .expanded ? 0.6 : 0.0
+        let newARButtonAlpha: CGFloat = state == .expanded ? 0.0 : 1.0
+        
+        let downChevronDuration: TimeInterval = state == .expanded ? 0.4 : 2.0
+        let upChevronDuration: TimeInterval = state == .expanded ? 2.0 : 0.4
+        
         DispatchQueue.main.async {
-            UIView.animate(withDuration: duration) { [ weak self] in
+            UIView.animate(withDuration: downChevronDuration) { [ weak self] in
                 guard let self = self else { return }
-                self.exploreButton.alpha = newExploreButtonAlpha
-                self.augmentedRealityButton.alpha = newExploreButtonAlpha
+                self.downChevron.alpha = newDownChevronAlpha
+                self.augmentedRealityButton.alpha = newARButtonAlpha
             }
-            UIView.animate(withDuration: upDuration) { [weak self] in
+            UIView.animate(withDuration: upChevronDuration) { [weak self] in
                 guard let self = self else { return }
-                self.upButton.alpha = newUpButtonAlpha
+                self.upChevron.alpha = newUpChevronAlpha
             }
         }
     }
     
-    private func animateMainContent(state: State) {
+    private func animateInfoOptionsVisibility(state: State) {
         let newAlpha: CGFloat = state == .expanded ? 1.0 : 0.0
         let reverseAlpha: CGFloat = state == .expanded ? 0.0 : 1.0
         let duration: TimeInterval = state == .expanded ? 0.9 : 0.3
@@ -376,6 +339,18 @@ extension SpeciesCoverViewController {
             }
         }
     }
+    
+    private func toggleContainerInteractability(state: State) {
+        switch state {
+        case .expanded:
+            donateButtonContainer.isUserInteractionEnabled = true
+            downChevronContainer.isUserInteractionEnabled = false
+            
+        case .collapsed:
+            donateButtonContainer.isUserInteractionEnabled = false
+            downChevronContainer.isUserInteractionEnabled = true
+        }
+    }
 }
 
 
@@ -383,8 +358,7 @@ extension SpeciesCoverViewController {
 
 extension SpeciesCoverViewController: UICollectionViewDataSource {
     
-    func collectionView(_ collectionView: UICollectionView,
-                        numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.totalStrategiesCount
     }
     
@@ -392,7 +366,7 @@ extension SpeciesCoverViewController: UICollectionViewDataSource {
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: Constants.reuseIdentifier,
+            withReuseIdentifier: Constants.cellReuseIdentifier,
             for: indexPath) as! CoverRoundedCell
         
         let specificStrategy = viewModel.specificStrategy(at: indexPath.row)
@@ -404,28 +378,28 @@ extension SpeciesCoverViewController: UICollectionViewDataSource {
 //MARK: -- Collection View Delegate
 
 extension SpeciesCoverViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView,
-                        didSelectItemAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
         selectedCell = collectionView.cellForItem(at: indexPath)
         var strategy = viewModel.specificStrategy(at: indexPath.row)
         let detailVC = strategy.getDetailViewController()
         navigationController?.pushViewController(detailVC, animated: true)
     }
     
-    func collectionView(_ collectionView: UICollectionView,
-                        didHighlightItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath)
-        generator.impactOccurred()
-        UIView.animate(withDuration: 0.3) {
-            cell?.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+        
+        selectedCell = collectionView.cellForItem(at: indexPath)
+        Utilities.sendHapticFeedback(action: .itemSelected)
+        UIView.animate(withDuration: 0.3) { [weak self] in guard let self = self else { return }
+            self.selectedCell?.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView,
-                        didUnhighlightItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath)
-        UIView.animate(withDuration: 0.3) {
-            cell?.transform = CGAffineTransform(scaleX: 1, y: 1)
+    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+        
+        selectedCell = collectionView.cellForItem(at: indexPath)
+        UIView.animate(withDuration: 0.3) { [weak self] in guard let self = self else { return }
+            self.selectedCell?.transform = CGAffineTransform(scaleX: 1, y: 1)
         }
     }
 }
@@ -435,14 +409,14 @@ extension SpeciesCoverViewController: UICollectionViewDelegate {
 extension SpeciesCoverViewController: DonateButtonDelegate {
     func donateButtonPressed() {
         guard let donationURL = URL(string: viewModel.selectedSpecies.donationLink) else { return }
-        generator.impactOccurred()
-        presentWebBrowser(link: donationURL)
+        Utilities.sendHapticFeedback(action: .itemSelected)
+        Utilities.presentWebBrowser(on: self, link: donationURL)
     }
 }
 
 extension SpeciesCoverViewController: ConservationStatusDelegate {
     func conservationStatusTapped() {
-        presentWebBrowser(link: URL(string: "https://www.sanbi.org/skep/the-iucn-red-list-explained/")!)
+        Utilities.presentWebBrowser(on: self, link: URL(string: "https://www.sanbi.org/skep/the-iucn-red-list-explained/")!)
     }
 }
 
@@ -450,9 +424,12 @@ extension SpeciesCoverViewController: ConservationStatusDelegate {
 
 fileprivate extension SpeciesCoverViewController {
     func addSubviews() {
-        [collectionView, headerNameView, subheaderInfoView, donateButtonContainer, closeButton, augmentedRealityButton, exploreButton, upButton].forEach { view.addSubview($0) }
+        [backgroundImageView, backgroundGradientOverlay, subheaderInfoView, downChevronContainer, upChevron, donateButtonContainer, headerNameView, collectionView, augmentedRealityButton, closeButton]
+            .forEach { view.addSubview($0) }
+        
         backgroundImageView.addSubview(backgroundVisualEffectBlur)
         donateButtonContainer.addSubview(donateButton)
+        downChevronContainer.addSubview(downChevron)
     }
     
     func setConstraints() {
@@ -465,12 +442,15 @@ fileprivate extension SpeciesCoverViewController {
         
         setHeaderInfoViewConstraints()
         setSubheaderInfoViewConstraints()
-        setExploreButtonConstraints()
-        setUpButtonConstraints()
+        
+        setDownChevronContainerConstraints()
+        setDownChevronConstraints()
+        setUpChevronConstraints()
         
         setCollectionViewConstraints()
         setDonateButtonContainerConstraints()
         setDonateButtonConstraints()
+        
     }
     
     func setBackgroundImageViewConstraints() {
@@ -493,23 +473,19 @@ fileprivate extension SpeciesCoverViewController {
     
     func setCloseButtonConstraints() {
         closeButton.snp.makeConstraints { (make) in
-            make.top.equalToSuperview().inset(5)
-            make.trailing.equalToSuperview().inset(5)
-            make.height.width.equalTo(66.deviceAdjusted)
+            make.top.trailing.equalToSuperview().inset(Constants.spacing)
         }
     }
     
     func setARButtonConstraints() {
         augmentedRealityButton.snp.makeConstraints { (make) in
-            make.top.equalTo(closeButton)
-            make.leading.equalToSuperview().inset(5)
-            make.height.width.equalTo(66.deviceAdjusted)
+            make.top.leading.equalToSuperview().inset(Constants.spacing)
         }
     }
     
     func setHeaderInfoViewConstraints() {
         headerNameView.snp.makeConstraints { (make) in
-            make.leading.equalToSuperview().inset(Constants.spacingConstant)
+            make.leading.equalToSuperview().inset(Constants.spacing)
             make.trailing.equalToSuperview()
             headerNameViewTopAnchorConstraint.isActive = true
             headerNameViewHeightConstraint.isActive = true
@@ -520,24 +496,30 @@ fileprivate extension SpeciesCoverViewController {
         subheaderInfoView.snp.makeConstraints { (make) in
             make.leading.equalTo(headerNameView)
             make.trailing.equalToSuperview()
-            make.top.equalTo(headerNameView.snp.bottom).offset(Constants.spacingConstant)
+            make.top.equalTo(headerNameView.snp.bottom).offset(Constants.spacing)
             subheaderInfoViewHeightConstraint.isActive = true
         }
     }
     
-    func setExploreButtonConstraints() {
-        exploreButton.snp.makeConstraints { (make) in
-            make.height.width.equalTo(exploreButton.frame.size)
-            make.centerX.equalTo(view)
-            make.bottom.equalTo(view).inset(10.deviceAdjusted)
+    func setDownChevronContainerConstraints() {
+        downChevronContainer.snp.makeConstraints { (make) in
+            make.leading.trailing.bottom.equalToSuperview()
+            make.top.equalTo(subheaderInfoView.snp.bottom).inset(Constants.spacing)
         }
     }
     
-    func setUpButtonConstraints() {
-        upButton.snp.makeConstraints { (make) in
-            make.height.width.equalTo(upButton.frame.size)
+    func setDownChevronConstraints() {
+        downChevron.snp.makeConstraints { (make) in
+            make.height.width.equalTo(downChevron.frame.size)
+            make.centerX.centerY.equalTo(downChevronContainer)
+        }
+    }
+    
+    func setUpChevronConstraints() {
+        upChevron.snp.makeConstraints { (make) in
+            make.height.width.equalTo(upChevron.frame.size)
             make.centerX.equalTo(view)
-            make.top.equalTo(view).inset(Constants.spacingConstant)
+            make.top.equalTo(view.safeAreaLayoutGuide).inset(Constants.spacing)
         }
     }
     
@@ -545,22 +527,22 @@ fileprivate extension SpeciesCoverViewController {
         collectionView.snp.makeConstraints { (make) in
             make.height.equalTo(collectionView.frame.height)
             make.leading.trailing.equalToSuperview()
-            make.centerY.equalToSuperview().offset(70.deviceAdjusted)
+            make.centerY.equalToSuperview().offset(70.deviceScaled)
         }
     }
     
     func setDonateButtonContainerConstraints() {
         donateButtonContainer.snp.makeConstraints { (make) in
             make.leading.trailing.bottom.equalToSuperview()
-            make.top.equalTo(collectionView.snp.bottom).inset(Constants.spacingConstant)
+            make.top.equalTo(collectionView.snp.bottom).inset(Constants.spacing)
         }
     }
     
     func setDonateButtonConstraints() {
         donateButton.snp.makeConstraints { (make) in
             make.centerX.centerY.equalTo(donateButtonContainer)
-            make.leading.trailing.equalToSuperview().inset(Constants.spacingConstant)
-            make.height.equalTo(50.deviceAdjusted)
+            make.leading.trailing.equalToSuperview().inset(Constants.spacing)
+            make.height.equalTo(50.deviceScaled)
         }
     }
 }
@@ -578,6 +560,3 @@ extension State {
         }
     }
 }
-
-
-

@@ -13,57 +13,47 @@ final class NewsViewController: UIViewController {
     
     //MARK: -- UI Element Initialization
     
-    private lazy var refreshControl: UIRefreshControl = {
-        let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
-        refreshControl.tintColor = .lightGray
-        refreshControl.attributedTitle = NSAttributedString(string: "Fetching News Data ...", attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray])
-        return refreshControl
-    }()
-    
-    private lazy var tableView: UITableView = {
-        let tv = UITableView()
-        tv.register(NewsArticleTableViewCell.self, forCellReuseIdentifier: Constants.reuseIdentifier)
-        tv.scrollsToTop = true
-        tv.backgroundColor = .clear
-        tv.refreshControl = refreshControl
-        tv.separatorColor = .white
-        tv.dataSource = self
-        tv.delegate = self
-        tv.prefetchDataSource = self
-        tv.indicatorStyle = .white
-        return tv
+    private lazy var collectionView: UICollectionView = {
+        let cv = UICollectionView(frame: CGRect(origin: .zero, size: CGSize(width: Constants.screenWidth, height: Constants.screenHeight)), collectionViewLayout: StretchyCollectionViewHeaderLayout())
+        if let layout = cv.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.sectionInset = .init(top: Constants.spacing,
+                                        left: Constants.spacing,
+                                        bottom: Constants.spacing,
+                                        right: Constants.spacing)
+        }
+        cv.contentInsetAdjustmentBehavior = .never
+        cv.register(NewsCollectionViewHeader.self,
+                    forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                    withReuseIdentifier: headerID)
+        cv.register(NewsArticleCollectionViewCell.self,
+                    forCellWithReuseIdentifier: Constants.cellReuseIdentifier)
+        cv.scrollsToTop = true
+        cv.dataSource = self
+        cv.prefetchDataSource = self
+        cv.delegate = self
+        return cv
     }()
     
     //MARK: -- Properties
     
+    fileprivate let headerID = "headerID"
+    
     private var viewModel: NewsViewModel!
     
+    private var headerView: NewsCollectionViewHeader!
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
     
     //MARK: -- Methods
     
-    @objc private func handleRefresh() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [weak self] in
-            guard let self = self else { return }
-            self.refreshControl.endRefreshing()
-        }
-    }
-    
-    private func showModally(_ viewController: UIViewController) {
-        let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
-        let rootViewController = window?.rootViewController
-        rootViewController?.present(viewController, animated: true, completion: nil)
-    }
-    
-    private func presentWebBrowser(link: URL){
+    func presentWebBrowser(link: URL) {
         let config = SFSafariViewController.Configuration()
-        config.entersReaderIfAvailable = false
         let safariVC = SFSafariViewController(url: link, configuration: config)
-        showModally(safariVC)
+        safariVC.delegate = self
+        present(safariVC, animated: true, completion: nil)
     }
-    
-    
-    //MARK: -- Life Cycle Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,44 +65,26 @@ final class NewsViewController: UIViewController {
     }
 }
 
-extension NewsViewController: NewsViewModelDelegate {
-    func fetchCompleted() {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.tableView.reloadData()
-        }
-    }
-}
+//MARK: -- Collection View Data Source Methods
 
-extension NewsViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension NewsViewController: UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.totalNewsArticlesCount
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let newsCell = tableView.dequeueReusableCell(withIdentifier: Constants.reuseIdentifier, for: indexPath) as! NewsArticleTableViewCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let newsCell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.cellReuseIdentifier, for: indexPath) as! NewsArticleCollectionViewCell
+        newsCell.delegate = self
+        newsCell.shareButton.tag = indexPath.row
         let specificArticle = viewModel.specificArticle(at: indexPath.row)
         newsCell.configureCell(from: specificArticle)
         return newsCell
     }
 }
 
-extension NewsViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 180.deviceAdjusted
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let specificArticle = viewModel.specificArticle(at: indexPath.row)
-        let generator = UIImpactFeedbackGenerator(style: .medium)
-        generator.impactOccurred()
-        presentWebBrowser(link: URL(string: specificArticle.url)!)
-    }
-}
-
-extension NewsViewController: UITableViewDataSourcePrefetching {
-    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+extension NewsViewController: UICollectionViewDataSourcePrefetching {
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         for index in indexPaths {
             if index.row > viewModel.totalNewsArticlesCount - 3 && !viewModel.newsFetchIsUnderway {
                 viewModel.fetchNews()
@@ -123,25 +95,126 @@ extension NewsViewController: UITableViewDataSourcePrefetching {
 }
 
 
-//MARK: -- Add Subviews & Constraints
+//MARK: -- Collection View Delegate Methods
 
-fileprivate extension NewsViewController {
+extension NewsViewController: UICollectionViewDelegate {
     
-    func addSubviews() {
-       [tableView].forEach { view.addSubview($0) }
+    func collectionView(_ collectionView: UICollectionView,
+                        viewForSupplementaryElementOfKind kind: String,
+                        at indexPath: IndexPath) -> UICollectionReusableView {
+        headerView = (collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerID, for: indexPath) as? NewsCollectionViewHeader)!
+        headerView.delegate = self
+        return headerView
     }
     
-    func setConstraints() {
-        setTableViewConstraints()
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: Constants.screenWidth, height: 290.deviceScaled)
     }
     
-    func setTableViewConstraints() {
-        tableView.snp.makeConstraints { (make) in
-            make.leading.top.trailing.equalTo(view)
-            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(60)
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        didHighlightItemAt indexPath: IndexPath) {
+        Utilities.sendHapticFeedback(action: .itemSelected)
+        let cell = collectionView.cellForItem(at: indexPath)
+        UIView.animate(withDuration: 0.3) {
+            cell?.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        didUnhighlightItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath)
+        UIView.animate(withDuration: 0.3) {
+            cell?.transform = CGAffineTransform(scaleX: 1, y: 1)
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let selectedArticle = viewModel.specificArticle(at: indexPath.row)
+       presentWebBrowser(link: URL(string: selectedArticle.url)!)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                           layout collectionViewLayout: UICollectionViewLayout,
+                           minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return Constants.spacing
+       }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let contentOffsetY = scrollView.contentOffset.y
+        
+        if contentOffsetY > 0 {
+            headerView.animator.fractionComplete = 0
+            return
+        }
+        
+        headerView.animator.fractionComplete = abs(contentOffsetY) / 100
+    }
+}
+
+extension NewsViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width - 2 * Constants.spacing, height: 160.deviceScaled)
+    }
+}
+
+extension NewsViewController: SFSafariViewControllerDelegate {
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        print("boom")
+    }
+}
+
+//MARK: -- Custom Delegates
+extension NewsViewController: NewsViewModelDelegate {
+    func fetchCompleted() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.collectionView.reloadData()
+            self.headerView.configureHeader(from: self.viewModel.firstArticle)
         }
     }
 }
 
+extension NewsViewController: NewsCellDelegate {
+    func shareButtonTapped(sender: UIButton) {
+        let cellIndex = sender.tag
+        let selectedArticle = viewModel.specificArticle(at: cellIndex)
+        let items = [URL(string: selectedArticle.url)!]
+        let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        present(ac, animated: true)
+    }
+}
+
+extension NewsViewController: NewsHeaderDelegate {
+    func shareButtonTapped() {
+        let selectedArticle = viewModel.firstArticle
+        let items = [URL(string: selectedArticle!.url)!]
+        let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        present(ac, animated: true)
+    }
+    
+    func refreshButtonTapped() {
+        print("refresh")
+    }
+    
+    func headerLabelTapped() {
+        Utilities.presentWebBrowser(on: self, link: URL(string: viewModel.firstArticle.url)!)
+    }
+}
 
 
+//MARK: -- Add Subviews & Constraints
+
+fileprivate extension NewsViewController {
+    func addSubviews() {
+        view.addSubview(collectionView)
+    }
+    
+    func setConstraints() {
+        collectionView.snp.makeConstraints { (make) in
+            make.leading.top.trailing.equalToSuperview()
+            make.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+    }
+}

@@ -15,20 +15,22 @@ final class Device {
     static var ratio: CGFloat {
         return UIScreen.main.bounds.width / base
     }
+    
+    private init() {}
 }
 
 extension CGFloat {
-    var deviceAdjusted: CGFloat {
+    var deviceScaled: CGFloat {
         return self * Device.ratio
     }
 }
 extension Double {
-    var deviceAdjusted: CGFloat {
+    var deviceScaled: CGFloat {
         return CGFloat(self) * Device.ratio
     }
 }
 extension Int {
-    var deviceAdjusted: CGFloat {
+    var deviceScaled: CGFloat {
         return CGFloat(self) * Device.ratio
     }
 }

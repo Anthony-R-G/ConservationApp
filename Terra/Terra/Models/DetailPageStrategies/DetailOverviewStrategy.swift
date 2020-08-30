@@ -37,7 +37,7 @@ struct DetailOverviewStrategy: DetailPageStrategy {
             
         ])
         stackView.axis = .vertical
-        stackView.spacing = Constants.spacingConstant
+        stackView.spacing = Constants.spacing
         return stackView
     }
 }
