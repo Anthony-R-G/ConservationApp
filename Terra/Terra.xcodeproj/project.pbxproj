@@ -25,6 +25,7 @@
 		972BBF8024C026D100B6F7C0 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 972BBF7D24C0257B00B6F7C0 /* Roboto-Light.ttf */; };
 		973DF94224FB3F970082E122 /* StretchyCollectionViewHeaderLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973DF94124FB3F970082E122 /* StretchyCollectionViewHeaderLayout.swift */; };
 		973DF94424FB3FEF0082E122 /* NewsCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973DF94324FB3FEF0082E122 /* NewsCollectionViewHeader.swift */; };
+		973DF94624FB4F640082E122 /* NewsCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973DF94524FB4F640082E122 /* NewsCellDelegate.swift */; };
 		9743BAB124EFBEDF0090A2E4 /* ConservationStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9743BAB024EFBEDF0090A2E4 /* ConservationStatusView.swift */; };
 		9743BAB324F026710090A2E4 /* BiomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9743BAB224F026710090A2E4 /* BiomeView.swift */; };
 		9743BAB624F036C20090A2E4 /* DetailHowToHelpStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9743BAB524F036C20090A2E4 /* DetailHowToHelpStrategy.swift */; };
@@ -158,6 +159,7 @@
 		972BBF7D24C0257B00B6F7C0 /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
 		973DF94124FB3F970082E122 /* StretchyCollectionViewHeaderLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StretchyCollectionViewHeaderLayout.swift; sourceTree = "<group>"; };
 		973DF94324FB3FEF0082E122 /* NewsCollectionViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCollectionViewHeader.swift; sourceTree = "<group>"; };
+		973DF94524FB4F640082E122 /* NewsCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCellDelegate.swift; sourceTree = "<group>"; };
 		9743BAB024EFBEDF0090A2E4 /* ConservationStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConservationStatusView.swift; sourceTree = "<group>"; };
 		9743BAB224F026710090A2E4 /* BiomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiomeView.swift; sourceTree = "<group>"; };
 		9743BAB524F036C20090A2E4 /* DetailHowToHelpStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailHowToHelpStrategy.swift; sourceTree = "<group>"; };
@@ -309,6 +311,7 @@
 				9772516124DFA6C40052A3F6 /* NewsViewModelDelegate.swift */,
 				976DA46724DFCB5F003F3197 /* SpeciesViewModelDelegate.swift */,
 				9743BAB724F03FE10090A2E4 /* ConservationStatusDelegate.swift */,
+				973DF94524FB4F640082E122 /* NewsCellDelegate.swift */,
 			);
 			path = "Custom Delegates";
 			sourceTree = "<group>";
@@ -712,6 +715,7 @@
 				9743BAB624F036C20090A2E4 /* DetailHowToHelpStrategy.swift in Sources */,
 				9729736F24DC9E3400123C86 /* DoubleExtensions.swift in Sources */,
 				977D877224CD7BFF00AE5E51 /* Habitat.swift in Sources */,
+				973DF94624FB4F640082E122 /* NewsCellDelegate.swift in Sources */,
 				978AA0EC24EE63EB00B631E6 /* Measurements.swift in Sources */,
 				9743BAB124EFBEDF0090A2E4 /* ConservationStatusView.swift in Sources */,
 				9772515B24DF800C0052A3F6 /* NewsViewModel.swift in Sources */,

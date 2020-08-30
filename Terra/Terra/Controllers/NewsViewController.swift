@@ -164,7 +164,7 @@ extension NewsViewController: NewsViewModelDelegate {
     }
 }
 
-extension NewsViewController: ShareButtonDelegate {
+extension NewsViewController: NewsCellDelegate {
     func shareButtonTapped(sender: UIButton) {
         let cellIndex = sender.tag
         let selectedArticle = viewModel.specificArticle(at: cellIndex)

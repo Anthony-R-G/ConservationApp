@@ -8,10 +8,6 @@
 
 import UIKit
 
-protocol ShareButtonDelegate: AnyObject {
-    func shareButtonTapped(sender: UIButton)
-}
-
 final class NewsArticleTableViewCell: UICollectionViewCell {
     //MARK: -- UI Element Initialization
     
@@ -51,8 +47,7 @@ final class NewsArticleTableViewCell: UICollectionViewCell {
     
     //MARK: -- Properties
     
-    weak var delegate: ShareButtonDelegate?
-    
+    weak var delegate: NewsCellDelegate?
     
     //MARK: -- Methods
     
