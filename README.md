@@ -66,7 +66,7 @@ Planned:
 
 •The main three categories are: Critically Endangered, Endangered, and Vulnerable. 
 
-•This system comes from the [IUCN Red List of Threatened Species](https://www.sanbi.org/skep/the-iucn-red-list-explained/), and is intended to be an easily and widely understood system for classifying species at high risk of global extinction.
+•This system originates from the [IUCN Red List of Threatened Species](https://www.sanbi.org/skep/the-iucn-red-list-explained/), and is intended to be an easily and widely understood system for classifying species at high risk of global extinction.
 
 •Each row contains the animal's common name, scientific name, conservation status, and the estimated population number according to the most recent census.
 
