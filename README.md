@@ -159,5 +159,5 @@ Planned:
 
 | iPhone SE | iPhone 8 | iPhone 7 Plus | iPhone X/Pro |
 | :------:| :------: | :------: | :------: |
-|![screen 1](https://i.imgur.com/1VMfpew.png) | ![screen 2](https://i.imgur.com/pMQjM2C.png)| ![screen 3](https://i.imgur.com/VRxmmLU.png) |![screen 4](https://i.imgur.com/ored1J4.png)|
+|![screen 1](https://i.imgur.com/CHy828U.png) | ![screen 2](https://i.imgur.com/qiwq7yV.png)| ![screen 3](https://i.imgur.com/IwewYsE.png) |![screen 4](https://i.imgur.com/WyXPu6l.png)|
 
