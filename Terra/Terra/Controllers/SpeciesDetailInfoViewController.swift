@@ -56,7 +56,7 @@ class SpeciesDetailInfoViewController: UIViewController {
     }()
     
   private lazy var closeButton: CircleBlurButton = {
-    let btn = Factory.makeBlurredCircleButton(image: .close, style: .light)
+    let btn = Factory.makeBlurredCircleButton(image: .close, style: .light, size: .regular)
         btn.addTarget(self, action: #selector(dismissPage), for: .touchUpInside)
         return btn
     }()

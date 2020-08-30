@@ -46,7 +46,7 @@ final class NewsArticleCollectionViewCell: UICollectionViewCell {
     }()
     
     lazy var shareButton: UIButton = {
-        let button = Factory.makeBlurredCircleButton(image: .share, style: .dark)
+        let button = Factory.makeBlurredCircleButton(image: .share, style: .dark, size: .small)
         button.addTarget(self, action: #selector(shareButtonTapped(sender:)), for: .touchUpInside)
         return button
     }()

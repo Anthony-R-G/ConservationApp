@@ -124,13 +124,13 @@ final class SpeciesCoverViewController: UIViewController {
     }()
     
     private lazy var closeButton: CircleBlurButton = {
-        let btn = Factory.makeBlurredCircleButton(image: .close, style: .light)
+        let btn = Factory.makeBlurredCircleButton(image: .close, style: .light, size: .regular)
         btn.addTarget(self, action: #selector(dismissPage), for: .touchUpInside)
         return btn
     }()
     
     private lazy var augmentedRealityButton: UIButton = {
-        let btn = Factory.makeBlurredCircleButton(image: .augmentedReality, style: .light)
+        let btn = Factory.makeBlurredCircleButton(image: .augmentedReality, style: .light, size: .regular)
         btn.addTarget(self, action: #selector(augmentedRealityButtonPressed), for: .touchUpInside)
         return btn
     }()

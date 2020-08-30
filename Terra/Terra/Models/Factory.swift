@@ -38,11 +38,12 @@ class Factory {
     }
     
         
-    static func makeBlurredCircleButton(image: systemImage, style: ButtonStyle) -> CircleBlurButton {
+    static func makeBlurredCircleButton(image: systemImage, style: ButtonStyle, size: ButtonSize ) -> CircleBlurButton {
+        let size: CGSize = size == .regular ? CGSize(width: 35, height: 35) : CGSize(width: 30, height: 30)
         let button = CircleBlurButton(
             frame: CGRect(
                 origin: .zero,
-                size: Constants.buttonSize),
+                size: size),
             
             image: UIImage(systemName: image.rawValue)!,
             style: style)
@@ -59,6 +60,11 @@ enum systemImage: String {
     case list = "list.dash"
     case share = "square.and.arrow.up"
     case refresh = "arrow.clockwise"
+}
+
+enum ButtonSize {
+    case small
+    case regular
 }
 
 

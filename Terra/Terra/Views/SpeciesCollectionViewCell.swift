@@ -31,7 +31,7 @@ final class SpeciesCollectionViewCell: UICollectionViewCell {
     }()
     
     private lazy var conservationStatusLabel: UILabel = {
-        let label = UILabel(frame: CGRect(origin: .zero, size: Constants.buttonSize))
+        let label = UILabel(frame: CGRect(origin: .zero, size: Constants.buttonSizeRegular))
         label.font = UIFont(name: FontWeight.bold.rawValue,
                             size: Constants.FontHierarchy.secondaryContentFontSize)
         label.textAlignment = .center
