@@ -48,13 +48,6 @@ final class NewsViewController: UIViewController {
     
     //MARK: -- Methods
     
-    func presentWebBrowser(link: URL) {
-        let config = SFSafariViewController.Configuration()
-        let safariVC = SFSafariViewController(url: link, configuration: config)
-        safariVC.delegate = self
-        present(safariVC, animated: true, completion: nil)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
@@ -132,7 +125,7 @@ extension NewsViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let selectedArticle = viewModel.specificArticle(at: indexPath.row)
-       presentWebBrowser(link: URL(string: selectedArticle.url)!)
+        Utilities.presentWebBrowser(on: self, link: URL(string: selectedArticle.url)!, delegate: self)
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -180,18 +173,14 @@ extension NewsViewController: NewsCellDelegate {
     func shareButtonTapped(sender: UIButton) {
         let cellIndex = sender.tag
         let selectedArticle = viewModel.specificArticle(at: cellIndex)
-        let items = [URL(string: selectedArticle.url)!]
-        let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
-        present(ac, animated: true)
+        Utilities.presentActivityController(on: self, items: [URL(string: selectedArticle.url)!])
     }
 }
 
 extension NewsViewController: NewsHeaderDelegate {
     func shareButtonTapped() {
         let selectedArticle = viewModel.firstArticle
-        let items = [URL(string: selectedArticle!.url)!]
-        let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
-        present(ac, animated: true)
+        Utilities.presentActivityController(on: self, items: [URL(string: selectedArticle!.url)!])
     }
     
     func refreshButtonTapped() {
@@ -199,7 +188,7 @@ extension NewsViewController: NewsHeaderDelegate {
     }
     
     func headerLabelTapped() {
-        Utilities.presentWebBrowser(on: self, link: URL(string: viewModel.firstArticle.url)!)
+        Utilities.presentWebBrowser(on: self, link: URL(string: viewModel.firstArticle.url)!, delegate: self)
     }
 }
 
