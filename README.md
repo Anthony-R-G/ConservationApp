@@ -118,7 +118,7 @@ Planned:
 
 •Each animal has its own cover page when selected from the list or map.
 
-•Swiping up on this page will expand it and present different reading options, such as Overview or Threats.
+•Swiping up on this page or tapping the directional arrow chevron will expand it and present different reading options, such as Overview or Threats.
 
 •Selecting any of the panels will animate the transition to a full-sized screen that lays information out in digestible snippets.
 
