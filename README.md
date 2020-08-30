@@ -8,7 +8,7 @@ Active. Planned September release.
 
 •It's estimated that [by 2100, 50% of life on Earth could become extinct](https://www.worldanimalprotection.ca/news/climate-change-silent-terminator-could-make-50-worlds-species-go-extinct-2100). 
 
-•Biodiversity is what makes Earth special, and is absolutely worth preserving. No child in the distant future should have to ask their grandparent what a lion was like.
+•Biodiversity is what makes Earth special, and is absolutely worth preserving. No child in the distant future should have to sit and wonder what a Lion was like.
 
 •Extinction is as old as life itself. But the current extinction crisis is largely our own doing.
 
