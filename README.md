@@ -128,11 +128,11 @@ Planned:
 
 | African Elephant Overview | Cheetah Threats | Giant Panda Habitat | Panamanian Golden Frog Overview |
 | :------: | :------: | :------: | :------: |
-|![screen 1](https://i.imgur.com/DE3YgcR.png) | ![screen 2](https://i.imgur.com/oRbQb09.png)|![screen 3](https://i.imgur.com/FmHyXRU.png)| ![screen 4](https://i.imgur.com/w3KIQ5g.png) |
+|![screen 1](https://i.imgur.com/DE3YgcR.png) | ![screen 2](https://i.imgur.com/oRbQb09.png)|![screen 3](https://i.imgur.com/u3WSaCo.png)| ![screen 4](https://i.imgur.com/w3KIQ5g.png) |
 
 |  |  |  |  |
 | :------: | :------: | :------: | :------: |
-|![screen 1](https://i.imgur.com/J7B6zjK.png) | ![screen 2](https://i.imgur.com/Vwy9Nde.png)|![screen 3](https://i.imgur.com/u3WSaCo.png)| ![screen 4](https://i.imgur.com/KxWxo9o.png) |
+|![screen 1](https://i.imgur.com/J7B6zjK.png) | ![screen 2](https://i.imgur.com/Vwy9Nde.png)|![screen 3](https://i.imgur.com/djh4zT8.png)| ![screen 4](https://i.imgur.com/KxWxo9o.png) |
 
 
 
