@@ -139,7 +139,6 @@ Planned:
 |![screen 1](https://i.imgur.com/J7B6zjK.png) | ![screen 2](https://i.imgur.com/Vwy9Nde.png)|![screen 3](https://i.imgur.com/djh4zT8.png)| ![screen 4](https://i.imgur.com/KxWxo9o.png) |
 
 
-
 ### Donating
 ![screen 1](https://media.giphy.com/media/Rm2YUtHLivpcvSU0Yg/giphy.gif)
 
