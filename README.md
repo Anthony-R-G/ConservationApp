@@ -6,8 +6,6 @@ Active. Planned September release.
 
 ## Introduction
 
-*Note: Gifs still need to be updated to match the new design*
-
 •It's estimated that [by 2100, 50% of life on Earth could become extinct](https://www.worldanimalprotection.ca/news/climate-change-silent-terminator-could-make-50-worlds-species-go-extinct-2100). 
 
 •Biodiversity is what makes Earth special, and is absolutely worth preserving. No child in the distant future should have to ask their grandparent what a lion was like.
