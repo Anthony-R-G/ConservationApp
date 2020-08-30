@@ -126,7 +126,7 @@ Planned:
 ![screen 1](https://media.giphy.com/media/iIoxEOe632nhzJz6Lq/giphy.gif)
 | | |
 |:---: | :---: |
-|![gif 1](https://media.giphy.com/media/hs0ClwPZRKGOw4UPy3/giphy.gif) | [gif 2](https://media.giphy.com/media/gHPpn8rErsWQw4lnXm/giphy.gif)
+|![gif 1](https://media.giphy.com/media/hs0ClwPZRKGOw4UPy3/giphy.gif) | [gif 2](https://media.giphy.com/media/WTFRv9qAXxonVmHHA7/giphy.gif)
 
 
 
