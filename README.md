@@ -57,7 +57,7 @@ Planned:
 
 •There are two main pages: the page containing the list of threatened animals, and a page that has recent wildlife-related news updates.
 
-•On launch, the app will load into the Species List page. 
+•On launch, the list of threatened species is presented.
 
 ### Threatened Species List Page
 | See All Species | Filtered By Critical Status | Filtered by Endangered Status | Filtered by Vulnerable Status |
@@ -70,9 +70,9 @@ Planned:
 
 •This system comes from the [IUCN Red List of Threatened Species](https://www.sanbi.org/skep/the-iucn-red-list-explained/), and is intended to be an easily and widely understood system for classifying species at high risk of global extinction.
 
-•Each "cell" contains the animal's common name, scientific name, conservation status, and the estimated population number according to the most recent census.
+•Each row contains the animal's common name, scientific name, conservation status, and the estimated population number according to the most recent census.
 
-•Tapping any one cell transitions to a page for that specific animal to read more about in-depth.
+•Tapping any one row transitions to a page for that specific animal to read more about in-depth.
 
 •Alternatively, tapping the earth glyph to the left of the title label presents the Map Exploration page.
 
@@ -95,14 +95,14 @@ Planned:
 
 
 
-### News Page
+### News Updates Page
 | Transitioning Between Tabs | Selecting Articles to Read |
 | :------: | :------: |
 |![screen 1](https://media.giphy.com/media/ieaU0z4wACLIYrWIey/giphy.gif) | ![screen 2](https://media.giphy.com/media/IejPdlUw4B2Yj2cfVp/giphy.gif) |
 
 •The second tab on the home screen, this page gets data from [NewsAPI](https://newsapi.org/) with the endpoint specifically tailored for wildlife/animal conservation related news. 
 
-•Each cell can be pressed to read the article at its source. 
+•Each row can be pressed to read the article at its source. 
 
 •Pagination is handled by using Apple's data source prefetching protocol so that more news articles are loaded as you scroll down.
 
