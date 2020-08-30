@@ -49,13 +49,13 @@ Active. Planned September release.
 
 Planned:
 
-•ARKit (some animals will have the option to "View in AR" which will use iPhone's rear camera for plane detection. Tapping on the screen will place a 3D model at that position and the model can then be manipulated with gestures.)
+•[ARKit](https://developer.apple.com/augmented-reality/) (some animals will have the option to "View in AR" which will use iPhone's rear camera for plane detection. Tapping on the screen will place a 3D model at that position and the model can then be manipulated with gestures.)
 
 ## App Demo
 
-•There are two main pages: the page containing the list of threatened animals, and a page that has recent wildlife-related news updates.
+•There are two main pages: the page containing the list of threatened animals, and a page that has recent wildlife & conservation-related news updates.
 
-•On launch, the list of threatened species is presented.
+•On launch, the list of threatened animals is presented.
 
 ### Threatened Species List Page
 | See All Species | Filtered By Critical Status | Filtered by Endangered Status | Filtered by Vulnerable Status |
@@ -70,7 +70,7 @@ Planned:
 
 •Each row contains the animal's common name, scientific name, conservation status, and the estimated population number according to the most recent census.
 
-•Tapping any one row transitions to a page for that specific animal to read more about in-depth.
+•Tapping any one row transitions to an individual page for that specific animal to read more about in-depth.
 
 •Alternatively, tapping the earth glyph to the left of the title label presents the Map Exploration page.
 
@@ -81,9 +81,9 @@ Planned:
 
 •The map has coordinates of each animal placed in the area they live. (Note: this will be updated to encompass larger polygon regions since not every species has one specific coordinate they reside in)
 
-•Each coordinate annotation can be tapped to bring up a customized callout view.
+•Each coordinate annotation can be tapped to reveal a custom popup view..
 
-•The callout view will contain information such as the animal's name, a small habitat summary, the distance that animal is away from you (if location access is granted), and will enable you to visit that animal's specific detail page.
+•The popup displays information such as the animal's name, a small habitat summary, the distance that animal is away from you (if location access is granted), and will enable you to visit that animal's specific detail page.
 
 •There are two map options: a default satellite street style map and a custom-made hypsometric map to see color-coordinated 3D elevation levels.
 
@@ -100,13 +100,14 @@ Planned:
 
 •The second tab on the home screen, this page gets data from [NewsAPI](https://newsapi.org/) with the endpoint specifically tailored for wildlife/animal conservation related news. 
 
-•Each row can be pressed to read the article at its source. 
+•Each row can be tapped to read the article at its source. 
 
-•Pagination is handled by using Apple's data source prefetching protocol so that more news articles are loaded as you scroll down.
+•Each row also has a share button, which can be used to share the website URL with others.
 
-•Each row has a share button, which can be used to share the website URL with others.
+•Pagination is handled by using [Apple's data source prefetching protocol](https://developer.apple.com/documentation/uikit/uicollectionviewdatasourceprefetching/prefetching_collection_view_data) so that more news articles are loaded as you scroll down.
 
 ![gif 1](https://media.giphy.com/media/RfT1ZmL0UD3DoEF0ZT/giphy.gif)
+
 
 
 ### Learn More About An Individual Species
@@ -117,9 +118,9 @@ Planned:
 
 •Each animal has its own cover page when selected from the list or map.
 
-•Swiping up on this page will expand it and bring up different options to read about, such as Overview or Threats.
+•Swiping up on this page will expand it and present different reading options, such as Overview or Threats.
 
-•Selecting either of these presented panels will animate the transition to a full-sized screen that lays information out in digestible snippets.
+•Selecting any of the panels will animate the transition to a full-sized screen that lays information out in digestible snippets.
 
 •Blur effects and light transparency are used so that the color from the background image leaks through, making each page feel more aesthetically unique. 
 
@@ -140,7 +141,7 @@ Planned:
 ### Donating
 ![screen 1](https://media.giphy.com/media/TdRL73btVxWARhxpVO/giphy.gif)
 
-•You can show your support for animal conservation efforts by clicking on the large donate button found on every individual animal's page. 
+•You can show your support for animal conservation efforts by tapping on the large donate button found on every individual animal's page. 
 
 •This will redirect you in-app to the relevant conservation/project for that specific animal. Getting involved is just a tap away.
 
