@@ -108,6 +108,8 @@ Planned:
 
 •Each row has a share button, which can be used to share the website URL with others.
 
+![gif 1](https://media.giphy.com/media/RfT1ZmL0UD3DoEF0ZT/giphy.gif)
+
 
 ### Learn More About An Individual Species
 
@@ -122,8 +124,6 @@ Planned:
 •Selecting either of these presented panels will animate the transition to a full-sized screen that lays information out in digestible snippets.
 
 •Blur effects and light transparency are used so that the color from the background image leaks through, making each page feel more aesthetically unique. 
-
-![screen 1](https://media.giphy.com/media/iIoxEOe632nhzJz6Lq/giphy.gif)
 
 ![gif 1](https://media.giphy.com/media/hs0ClwPZRKGOw4UPy3/giphy.gif)
 ![gif 2](https://media.giphy.com/media/WTFRv9qAXxonVmHHA7/giphy.gif)
