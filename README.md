@@ -111,8 +111,6 @@ Planned:
 
 ### Learn More About An Individual Species
 
-![gif 1](https://media.giphy.com/media/hs0ClwPZRKGOw4UPy3/giphy.gif)
-
 | Amur Leopard | Blue-throated Macaw | Lion | Mountain Gorilla |
 | :------: | :------: | :------: | :------: |
 |![screen 1](https://i.imgur.com/Jpp3VVL.png) | ![screen 2](https://i.imgur.com/1gqqfCz.png) |![screen 3](https://i.imgur.com/zE7he7a.png)|![screen 4](https://i.imgur.com/mJ9PFDR.png)| 
@@ -126,6 +124,9 @@ Planned:
 •Blur effects and light transparency are used so that the color from the background image leaks through, making each page feel more aesthetically unique. 
 
 ![screen 1](https://media.giphy.com/media/iIoxEOe632nhzJz6Lq/giphy.gif)
+| | |
+|:---: | :---: |
+|![gif 1](https://media.giphy.com/media/hs0ClwPZRKGOw4UPy3/giphy.gif) | [gif 2](https://media.giphy.com/media/gHPpn8rErsWQw4lnXm/giphy.gif)
 
 
 
