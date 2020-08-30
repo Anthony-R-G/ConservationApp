@@ -106,7 +106,7 @@ Planned:
 
 •Pagination is handled by using [Apple's data source prefetching protocol](https://developer.apple.com/documentation/uikit/uicollectionviewdatasourceprefetching/prefetching_collection_view_data) so that more news articles are loaded as you scroll down.
 
-![gif 1](https://media.giphy.com/media/RfT1ZmL0UD3DoEF0ZT/giphy.gif)
+![gif 1](https://media.giphy.com/media/QZPEvTdxH70KeocD3g/giphy.gif)
 
 
 
