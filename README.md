@@ -62,7 +62,7 @@ Planned:
 ### Threatened Species List Page
 | See All Species | Filtered By Critical Status | Filtered by Endangered Status | Filtered by Vulnerable Status |
 | :-----: | :-----: | :-----: | :-----: |
-|![screen 1](https://i.imgur.com/HxvBpZt.png) | ![screen 2](https://i.imgur.com/6f0PHHK.png) | ![screen 3](https://i.imgur.com/ntSuVUF.png) | ![screen 4](https://i.imgur.com/ORsMVlO.png) |
+|![screen 1](https://i.imgur.com/zmhpKxL.png) | ![screen 2](https://i.imgur.com/9dRdea4.png) | ![screen 3](https://i.imgur.com/u9Ezqte.png) | ![screen 4](https://i.imgur.com/av5CRZp.png) |
 
 •This page contains a list of animals that are currently considered threatened. 
 
