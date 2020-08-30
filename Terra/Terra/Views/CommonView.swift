@@ -13,19 +13,18 @@ final class CommonView: UIView {
     //MARK: -- UI Element Initialization
     
     private lazy var titleLabel: UILabel = {
-        let label = Factory.makeLabel(title: nil,
-                                      weight: .black,
-                                      size: 36,
-                                      color: .white,
-                                      alignment: .left)
-        label.numberOfLines = 0
-        return label
+        return Factory.makeLabel(title: nil,
+                                 weight: .black,
+                                 size: 36,
+                                 color: .white,
+                                 alignment: .left)
+        
     }()
     
     private lazy var subtitleLabel: UILabel = {
         let label = Factory.makeLabel(title: nil,
                                       weight: .bold,
-                                      size: 16,
+                                      size: Constants.FontHierarchy.secondaryContentFontSize,
                                       color: .white,
                                       alignment: .left)
         label.alpha = 0
@@ -35,7 +34,7 @@ final class CommonView: UIView {
     private lazy var blurbLabel: UILabel = {
         let label = Factory.makeLabel(title: nil,
                                       weight: .regular,
-                                      size: 16,
+                                      size: Constants.FontHierarchy.secondaryContentFontSize,
                                       color: .darkGray,
                                       alignment: .left)
         label.lineBreakMode = .byTruncatingTail
@@ -60,13 +59,13 @@ final class CommonView: UIView {
     
     
     //MARK: -- Properties
-   
+    
     var strategy: DetailPageStrategy!
     
     private lazy var subtitleTopConstraint: NSLayoutConstraint = {
         return subtitleLabel.topAnchor.constraint(
             equalTo: topAnchor,
-            constant: Constants.spacingConstant)
+            constant: Constants.spacing)
     }()
     
     var topConstraintValue: CGFloat {
@@ -88,8 +87,8 @@ final class CommonView: UIView {
             self.subtitleLabel.alpha = 0
         }
     }
-
-
+    
+    
     func configureView(from strategy: DetailPageStrategy) {
         titleLabel.text = strategy.pageName()
         strategy.firebaseStorageManager().getImage(for: strategy.species.commonName, setTo: backgroundImage)
@@ -128,14 +127,14 @@ fileprivate extension CommonView {
     func setTitleLabelConstraints() {
         titleLabel.snp.makeConstraints { [weak self] (make) in
             guard let self = self else { return }
-            make.top.equalTo(subtitleLabel.snp.bottom).offset(Constants.spacingConstant/2)
-            make.leading.trailing.equalTo(self).inset(Constants.spacingConstant)
+            make.top.equalTo(subtitleLabel.snp.bottom).offset(Constants.spacing/2)
+            make.leading.trailing.equalTo(self).inset(Constants.spacing)
         }
     }
     
     func setSubtitleLabelConstraints() {
         subtitleLabel.snp.makeConstraints { (make) in 
-            make.leading.equalTo(titleLabel).inset(2)
+            make.leading.equalTo(titleLabel).inset(3.5)
             subtitleTopConstraint.isActive = true
         }
     }
@@ -143,7 +142,7 @@ fileprivate extension CommonView {
     func setBlurbLabelConstraints() {
         blurbLabel.snp.makeConstraints { [weak self] (make) in
             guard let self = self else { return }
-            make.leading.bottom.trailing.equalTo(self).inset(Constants.spacingConstant)
+            make.leading.bottom.trailing.equalTo(self).inset(Constants.spacing)
         }
     }
     
@@ -151,7 +150,7 @@ fileprivate extension CommonView {
         backgroundImage.snp.makeConstraints { [weak self] (make) in
             guard let self = self else { return }
             make.centerY.centerX.equalTo(self)
-            make.height.width.equalTo(Constants.commonViewImageDimension)
+            make.height.width.equalTo(Constants.commonViewSize)
         }
     }
     

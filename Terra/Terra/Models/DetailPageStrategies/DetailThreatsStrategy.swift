@@ -37,7 +37,7 @@ struct DetailThreatsStrategy: DetailPageStrategy {
             stackView.addArrangedSubview(DetailInfoWindow(title: threatsComponents[0], content: Factory.makeDetailInfoWindowLabel(text: threatsComponents[1])))
         }
         stackView.axis = .vertical
-        stackView.spacing = Constants.spacingConstant
+        stackView.spacing = Constants.spacing
         return stackView
     }
 }

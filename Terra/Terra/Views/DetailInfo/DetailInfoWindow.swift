@@ -14,8 +14,8 @@ final class DetailInfoWindow: UIView {
     private lazy var titleLabel: UILabel = {
         return Factory.makeLabel(title: nil,
                                  weight: .bold,
-                                 size: 24,
-                                 color: Constants.titleLabelColor,
+                                 size: Constants.FontHierarchy.primaryContentFontSize,
+                                 color: Constants.Color.titleLabelColor,
                                  alignment: .left)
     }()
     
@@ -25,16 +25,15 @@ final class DetailInfoWindow: UIView {
     
     private func setBottomConstraint() {
         if let lastSubview = subviews.last {
-            bottomAnchor.constraint(equalTo: lastSubview.bottomAnchor, constant: Constants.spacingConstant).isActive = true
+            bottomAnchor.constraint(equalTo: lastSubview.bottomAnchor,
+                                    constant: Constants.spacing).isActive = true
         }
     }
     
     private func configureAppearance() {
-//        translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.2452108305)
         layer.cornerRadius = Constants.cornerRadius
     }
-    
     
     init(title: String, content: UIView) {
         super.init(frame: .zero)
@@ -62,15 +61,15 @@ fileprivate extension DetailInfoWindow {
     
     func setTitleLabelConstraints() {
         titleLabel.snp.makeConstraints { (make) in
-            make.leading.trailing.equalToSuperview().inset(Constants.spacingConstant)
-            make.top.equalToSuperview().inset(Constants.spacingConstant)
+            make.leading.trailing.equalToSuperview().inset(Constants.spacing)
+            make.top.equalToSuperview().inset(Constants.spacing)
         }
     }
     
     func setContentViewConstraints() {
         contentView.snp.makeConstraints { (make) in
-            make.top.equalTo(titleLabel.snp.bottom).offset(Constants.spacingConstant/2)
-            make.leading.trailing.equalToSuperview().inset(Constants.spacingConstant)
+            make.top.equalTo(titleLabel.snp.bottom).offset(Constants.spacing/2)
+            make.leading.trailing.equalToSuperview().inset(Constants.spacing)
         }
     }
 }

@@ -55,18 +55,9 @@ class SpeciesDetailInfoViewController: UIViewController {
         return strategy.arrangedSubviews()
     }()
     
-    private lazy var closeButton: UIButton = {
-        let btn = UIButton()
-        btn.setImage(UIImage(systemName: "xmark.circle.fill"),
-                     for: .normal)
-        
-        btn.transform = CGAffineTransform(scaleX: 1.5,
-                                          y: 1.5)
-        btn.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.845703125)
-        btn.addTarget(
-            self,
-            action: #selector(closeButtonPressed),
-            for: .touchUpInside)
+  private lazy var closeButton: CircleBlurButton = {
+    let btn = Factory.makeBlurredCircleButton(image: .close, style: .light, size: .regular)
+        btn.addTarget(self, action: #selector(dismissPage), for: .touchUpInside)
         return btn
     }()
     
@@ -83,7 +74,7 @@ class SpeciesDetailInfoViewController: UIViewController {
     }()
     
     private lazy var commonViewHeightConstraint: NSLayoutConstraint = {
-        return commonView.heightAnchor.constraint(equalToConstant: Constants.commonViewImageDimension.height)
+        return commonView.heightAnchor.constraint(equalToConstant: Constants.commonViewSize.height)
     }()
     
     override var prefersStatusBarHidden: Bool {
@@ -92,7 +83,8 @@ class SpeciesDetailInfoViewController: UIViewController {
     
     //MARK: -- Methods
     
-    @objc private func closeButtonPressed() {
+    @objc private func dismissPage() {
+        Utilities.sendHapticFeedback(action: .pageDismissed)
         navigationController?.popViewController(animated: true)
     }
     
@@ -161,6 +153,7 @@ extension SpeciesDetailInfoViewController {
     func setMaskViewConstraints() {
         maskView.snp.makeConstraints { (make) in
             make.edges.equalTo(shadowView)
+             
         }
     }
     
@@ -180,17 +173,15 @@ extension SpeciesDetailInfoViewController {
     
     func setContainerStackView() {
         containerStackView.snp.makeConstraints { (make) in
-            make.top.equalTo(commonView.snp.bottom).offset(Constants.spacingConstant)
-            make.leading.trailing.equalTo(view).inset(Constants.spacingConstant)
+            make.top.equalTo(commonView.snp.bottom).offset(Constants.spacing)
+            make.leading.trailing.equalTo(view).inset(Constants.spacing)
             make.bottom.greaterThanOrEqualTo(scrollView)
         }
     }
     
     func setCloseButtonConstraints() {
         closeButton.snp.makeConstraints { (make) in
-            make.top.equalToSuperview().inset(5)
-            make.trailing.equalToSuperview().inset(5)
-            make.height.width.equalTo(66)
+            make.top.trailing.equalToSuperview().inset(Constants.spacing)
         }
     }
     
@@ -236,10 +227,10 @@ extension SpeciesDetailInfoViewController: Animatable {
             .compactMap({$0})
             .first?.windows
             .filter({$0.isKeyWindow}).first?.safeAreaInsets.top ?? .zero
-        commonView.topConstraintValue = safeAreaTop + Constants.spacingConstant
+        commonView.topConstraintValue = safeAreaTop + Constants.spacing
         
         // Animate the common view to a height of 500 points
-        commonViewHeightConstraint.constant = Constants.commonViewImageDimension.height
+        commonViewHeightConstraint.constant = Constants.commonViewSize.height
         sizeAnimator.addAnimations { [weak self] in
             guard let self = self else { return }
             self.view.layoutIfNeeded()
@@ -272,7 +263,7 @@ extension SpeciesDetailInfoViewController: Animatable {
         }
         
         // Common view does not need to worry about the safe area anymore. Just restore the original value.
-        commonView.topConstraintValue = Constants.spacingConstant
+        commonView.topConstraintValue = Constants.spacing
         
         // Animate the height of the common view to be the same size as the TO frame.
         // Also animate hiding the close button

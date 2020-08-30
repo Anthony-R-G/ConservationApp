@@ -99,7 +99,7 @@ final class MeasurementsView: UIView {
         let sv = UIStackView(arrangedSubviews: [
             heightStackView, weightStackView
         ])
-        sv.spacing = Constants.spacingConstant/2
+        sv.spacing = Constants.spacing/2
         sv.alignment = .leading
         return sv
     }()
@@ -113,7 +113,7 @@ final class MeasurementsView: UIView {
     required init(species: Species) {
         self.species = species
         super.init(frame: .zero)
-        self.heightAnchor.constraint(equalToConstant: 140.deviceAdjusted).isActive = true
+        self.heightAnchor.constraint(equalToConstant: 140.deviceScaled).isActive = true
         addSubviews()
         setConstraints()
     }

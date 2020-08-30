@@ -40,7 +40,7 @@ final class SpeciesMapView: UIView {
         super.init(frame: .zero)
         addSubviews()
         setConstraints()
-        heightAnchor.constraint(equalToConstant: 460.deviceAdjusted).isActive = true
+        heightAnchor.constraint(equalToConstant: 460.deviceScaled).isActive = true
     }
     
     required init?(coder: NSCoder) {

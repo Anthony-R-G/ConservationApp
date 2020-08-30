@@ -8,12 +8,14 @@
 
 import UIKit
 import Firebase
+import SnapKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
+        UIApplication.shared.isIdleTimerDisabled = false
         return true
     }
 

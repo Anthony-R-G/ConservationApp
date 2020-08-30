@@ -14,7 +14,7 @@ final class CustomCalloutView: UIView, MGLCalloutView {
     private lazy var speciesImageView: UIImageView = {
         let iv = UIImageView(frame: CGRect(
             origin: .zero,
-            size: CGSize(width: 80.deviceAdjusted, height: 80.deviceAdjusted)))
+            size: CGSize(width: 80.deviceScaled, height: 80.deviceScaled)))
         iv.contentMode = .scaleAspectFill
         iv.layer.cornerRadius = iv.frame.size.width/2
         iv.layer.borderColor = UIColor.white.cgColor
@@ -26,8 +26,8 @@ final class CustomCalloutView: UIView, MGLCalloutView {
     private lazy var titleLabel: UILabel = {
        return Factory.makeLabel(title: nil,
                                  weight: .bold,
-                                 size: 17,
-                                 color: Constants.titleLabelColor,
+                                 size: Constants.FontHierarchy.secondaryContentFontSize,
+                                 color: Constants.Color.titleLabelColor,
                                  alignment: .left)
     }()
     
@@ -109,7 +109,7 @@ final class CustomCalloutView: UIView, MGLCalloutView {
             x: 0,
             y: -15,
             width: UIScreen.main.bounds.width * 0.60,
-            height: 160.deviceAdjusted))
+            height: 160.deviceScaled))
         
         super.init(frame: .zero)
         addSubviews()
@@ -146,12 +146,10 @@ final class CustomCalloutView: UIView, MGLCalloutView {
         if animated {
             alpha = 0
             UIView.animate(withDuration: 0.2) { [weak self] in
-                guard let strongSelf = self else {
-                    return
-                }
+                guard let self = self else { return }
                 
-                strongSelf.alpha = 1
-                strongSelf.delegate?.calloutViewDidAppear?(strongSelf)
+                self.alpha = 1
+                self.delegate?.calloutViewDidAppear?(self)
             }
         } else {
             delegate?.calloutViewDidAppear?(self)

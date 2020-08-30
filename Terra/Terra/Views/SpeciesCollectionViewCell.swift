@@ -14,8 +14,8 @@ final class SpeciesCollectionViewCell: UICollectionViewCell {
     
     private lazy var speciesNameLabel: UILabel = {
         let label = Factory.makeLabel(title: nil,
-                                      weight: .medium,
-                                      size: 27,
+                                      weight: .bold,
+                                      size: Constants.FontHierarchy.primaryContentFontSize,
                                       color: .white,
                                       alignment: .left)
         label.numberOfLines = 0
@@ -24,36 +24,33 @@ final class SpeciesCollectionViewCell: UICollectionViewCell {
     
     private lazy var speciesScientificNameLabel: UILabel = {
         return Factory.makeLabel(title: nil,
-                                      weight: .lightItalic,
-                                      size: 16,
-                                      color: .white,
-                                      alignment: .left)
+                                 weight: .lightItalic,
+                                 size: Constants.FontHierarchy.secondaryContentFontSize,
+                                 color: .white,
+                                 alignment: .left)
     }()
     
     private lazy var conservationStatusLabel: UILabel = {
-        let label = Factory.makeLabel(title: nil,
-                                      weight: .bold,
-                                      size: 16,
-                                      color: .white,
-                                      alignment: .center)
-        label.layer.cornerRadius = 10
-        label.backgroundColor = Constants.red
+        let label = UILabel(frame: CGRect(origin: .zero, size: Constants.buttonSizeRegular))
+        label.font = UIFont(name: FontWeight.bold.rawValue,
+                            size: Constants.FontHierarchy.secondaryContentFontSize)
+        label.textAlignment = .center
+        label.layer.cornerRadius = 0.5 * label.bounds.size.width
         label.clipsToBounds = true
         return label
     }()
     
     private lazy var populationNumbersLabel: UILabel = {
         return Factory.makeLabel(title: nil,
-                                      weight: .regular,
-                                      size: 16,
-                                      color: .white,
-                                      alignment: .right)
+                                 weight: .regular,
+                                 size: Constants.FontHierarchy.secondaryContentFontSize,
+                                 color: .white,
+                                 alignment: .right)
     }()
     
     private lazy var backgroundImageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
-        insertSubview(iv, at: 0)
         return iv
     }()
     
@@ -61,8 +58,6 @@ final class SpeciesCollectionViewCell: UICollectionViewCell {
         let gv = GradientView()
         gv.startColor = .clear
         gv.endColor = #colorLiteral(red: 0.06859237701, green: 0.08213501424, blue: 0.2409383953, alpha: 0.7227097603)
-        gv.translatesAutoresizingMaskIntoConstraints = false
-        insertSubview(gv, at: 1)
         return gv
     }()
     
@@ -75,9 +70,20 @@ final class SpeciesCollectionViewCell: UICollectionViewCell {
         populationNumbersLabel.text = species.population.numbers.replacingOccurrences(of: "~", with: "")
         
         switch species.population.conservationStatus {
-        case .critical: conservationStatusLabel.text = "CR"
-        case .endangered: conservationStatusLabel.text = "EN"
-        case .vulnerable: conservationStatusLabel.text = "VU"
+        case .critical:
+            conservationStatusLabel.text = "CR"
+            conservationStatusLabel.backgroundColor = Constants.Color.criticalStatusColor
+            conservationStatusLabel.textColor = #colorLiteral(red: 0.997191608, green: 0.8045830131, blue: 0.8038765788, alpha: 1)
+            
+        case .endangered:
+            conservationStatusLabel.text = "EN"
+            conservationStatusLabel.backgroundColor = Constants.Color.endangeredStatusColor
+            conservationStatusLabel.textColor = #colorLiteral(red: 1, green: 0.8029765487, blue: 0.6047396064, alpha: 1)
+            
+        case .vulnerable:
+            conservationStatusLabel.text = "VU"
+            conservationStatusLabel.backgroundColor = Constants.Color.vulnerableStatusColor
+            conservationStatusLabel.textColor = #colorLiteral(red: 0.9976391196, green: 0.998760879, blue: 0.8034237027, alpha: 1)
         }
     }
     
@@ -97,7 +103,8 @@ final class SpeciesCollectionViewCell: UICollectionViewCell {
 
 fileprivate extension SpeciesCollectionViewCell {
     func addSubviews() {
-        [speciesNameLabel, conservationStatusLabel, populationNumbersLabel, speciesScientificNameLabel].forEach{ contentView.addSubview($0) }
+        [backgroundImageView, backgroundGradientOverlay, speciesNameLabel, conservationStatusLabel, populationNumbersLabel, speciesScientificNameLabel]
+            .forEach{ contentView.addSubview($0) }
     }
     
     func setConstraints() {
@@ -125,7 +132,7 @@ fileprivate extension SpeciesCollectionViewCell {
     
     func setSpeciesNameLabelConstraints(){
         speciesNameLabel.snp.makeConstraints { (make) in
-            make.leading.bottom.equalToSuperview().inset(Constants.spacingConstant)
+            make.leading.bottom.equalToSuperview().inset(Constants.spacing)
             make.width.equalToSuperview().multipliedBy(0.8)
             make.height.equalTo(90)
         }
@@ -143,8 +150,8 @@ fileprivate extension SpeciesCollectionViewCell {
     func setConservationStatusLabelConstraints() {
         conservationStatusLabel.snp.makeConstraints { (make) in
             make.centerY.equalTo(speciesScientificNameLabel)
-            make.trailing.equalToSuperview().inset(10)
-            make.height.width.equalTo(40.deviceAdjusted)
+            make.trailing.equalToSuperview().inset(20)
+            make.height.width.equalTo(conservationStatusLabel.frame.size)
         }
     }
     
