@@ -140,7 +140,7 @@ Planned:
 
 
 ### Donating
-![screen 1](https://media.giphy.com/media/Rm2YUtHLivpcvSU0Yg/giphy.gif)
+![screen 1](https://media.giphy.com/media/TdRL73btVxWARhxpVO/giphy.gif)
 
 •You can show your support for animal conservation efforts by clicking on the large donate button found on every individual animal's page. 
 
