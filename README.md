@@ -110,6 +110,9 @@ Planned:
 
 
 ### Learn More About An Individual Species
+
+![gif 1](https://media.giphy.com/media/hs0ClwPZRKGOw4UPy3/giphy.gif)
+
 | Amur Leopard | Blue-throated Macaw | Lion | Mountain Gorilla |
 | :------: | :------: | :------: | :------: |
 |![screen 1](https://i.imgur.com/Jpp3VVL.png) | ![screen 2](https://i.imgur.com/1gqqfCz.png) |![screen 3](https://i.imgur.com/zE7he7a.png)|![screen 4](https://i.imgur.com/mJ9PFDR.png)| 
