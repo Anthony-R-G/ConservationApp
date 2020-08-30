@@ -14,12 +14,18 @@ final class NewsViewController: UIViewController {
     //MARK: -- UI Element Initialization
     
     private lazy var collectionView: UICollectionView = {
-        let cv = UICollectionView(frame: .zero, collectionViewLayout: StretchyCollectionViewHeaderLayout())
+        let cv = UICollectionView(frame: CGRect(origin: .zero, size: CGSize(width: Constants.screenWidth, height: Constants.screenHeight)), collectionViewLayout: StretchyCollectionViewHeaderLayout())
+        if let layout = cv.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.sectionInset = .init(top: Constants.spacing,
+                                        left: Constants.spacing,
+                                        bottom: Constants.spacing,
+                                        right: Constants.spacing)
+        }
         cv.contentInsetAdjustmentBehavior = .never
         cv.register(NewsCollectionViewHeader.self,
                     forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                     withReuseIdentifier: headerID)
-        cv.register(NewsArticleTableViewCell.self,
+        cv.register(NewsArticleCollectionViewCell.self,
                     forCellWithReuseIdentifier: Constants.cellReuseIdentifier)
         cv.scrollsToTop = true
         cv.dataSource = self
@@ -68,7 +74,7 @@ extension NewsViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let newsCell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.cellReuseIdentifier, for: indexPath) as! NewsArticleTableViewCell
+        let newsCell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.cellReuseIdentifier, for: indexPath) as! NewsArticleCollectionViewCell
         newsCell.delegate = self
         newsCell.shareButton.tag = indexPath.row
         let specificArticle = viewModel.specificArticle(at: indexPath.row)
@@ -97,19 +103,19 @@ extension NewsViewController: UICollectionViewDelegate {
                         viewForSupplementaryElementOfKind kind: String,
                         at indexPath: IndexPath) -> UICollectionReusableView {
         headerView = (collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerID, for: indexPath) as? NewsCollectionViewHeader)!
+        headerView.delegate = self
         return headerView
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: Constants.screenWidth, height: 280.deviceScaled)
+        return CGSize(width: Constants.screenWidth, height: 290.deviceScaled)
     }
     
     
     func collectionView(_ collectionView: UICollectionView,
                         didHighlightItemAt indexPath: IndexPath) {
-        
-        let cell = collectionView.cellForItem(at: indexPath)
         Utilities.sendHapticFeedback(action: .itemSelected)
+        let cell = collectionView.cellForItem(at: indexPath)
         UIView.animate(withDuration: 0.3) {
             cell?.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
         }
@@ -124,9 +130,16 @@ extension NewsViewController: UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
         let selectedArticle = viewModel.specificArticle(at: indexPath.row)
        presentWebBrowser(link: URL(string: selectedArticle.url)!)
     }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                           layout collectionViewLayout: UICollectionViewLayout,
+                           minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return Constants.spacing
+       }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let contentOffsetY = scrollView.contentOffset.y
@@ -142,7 +155,7 @@ extension NewsViewController: UICollectionViewDelegate {
 
 extension NewsViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: Constants.screenWidth, height: 180.deviceScaled)
+        return CGSize(width: collectionView.frame.width - 2 * Constants.spacing, height: 160.deviceScaled)
     }
 }
 
@@ -170,6 +183,23 @@ extension NewsViewController: NewsCellDelegate {
         let items = [URL(string: selectedArticle.url)!]
         let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
         present(ac, animated: true)
+    }
+}
+
+extension NewsViewController: NewsHeaderDelegate {
+    func shareButtonTapped() {
+        let selectedArticle = viewModel.firstArticle
+        let items = [URL(string: selectedArticle!.url)!]
+        let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        present(ac, animated: true)
+    }
+    
+    func refreshButtonTapped() {
+        print("refresh")
+    }
+    
+    func headerLabelTapped() {
+        Utilities.presentWebBrowser(on: self, link: URL(string: viewModel.firstArticle.url)!)
     }
 }
 

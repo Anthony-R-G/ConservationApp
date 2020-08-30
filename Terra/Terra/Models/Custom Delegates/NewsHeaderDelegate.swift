@@ -11,4 +11,5 @@ import Foundation
 protocol NewsHeaderDelegate: AnyObject {
     func shareButtonTapped()
     func refreshButtonTapped()
+    func headerLabelTapped()
 }

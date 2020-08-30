@@ -43,7 +43,9 @@ final class NewsCollectionViewHeader: UICollectionReusableView {
     }()
     
     private lazy var headlineTitleContainer: UIView = {
-        return UIView()
+        let view = UIView()
+        view.isUserInteractionEnabled = true
+        return view
     }()
     
     private lazy var headlineTitleLabel: UILabel = {
@@ -52,7 +54,7 @@ final class NewsCollectionViewHeader: UICollectionReusableView {
         label.textColor = .white
         label.textAlignment = .left
         label.lineBreakMode = .byTruncatingTail
-        label.numberOfLines = 0
+        label.numberOfLines = 4
         return label
     }()
     
@@ -65,21 +67,44 @@ final class NewsCollectionViewHeader: UICollectionReusableView {
     }()
     
     private lazy var shareButton: UIButton = {
-        return Factory.makeBlurredCircleButton(image: .share, style: .dark)
+        let btn = Factory.makeBlurredCircleButton(image: .share, style: .dark)
+        btn.addTarget(self, action: #selector(shareButtonTapped), for: .touchUpInside)
+        return btn
     }()
     
     private lazy var refreshButton: UIButton = {
-       let button = UIButton()
-        button.setImage(UIImage(systemName: "arrow.clockwise"), for: .normal)
-        button.contentVerticalAlignment = .fill
-        button.contentHorizontalAlignment = .fill
-        button.tintColor = .white
-        return button
+       let btn = UIButton()
+        btn.setImage(UIImage(systemName: "arrow.clockwise"), for: .normal)
+        btn.contentVerticalAlignment = .fill
+        btn.contentHorizontalAlignment = .fill
+        btn.tintColor = .white
+        btn.addTarget(self, action: #selector(refreshButtonTapped), for: .touchUpInside)
+        return btn
+    }()
+    
+    private lazy var tapGesture: UITapGestureRecognizer = {
+        return UITapGestureRecognizer(target: self, action: #selector(headerTapped))
     }()
     
     
     //MARK: -- Properties
     var animator: UIViewPropertyAnimator!
+    
+    weak var delegate: NewsHeaderDelegate?
+    
+    //MARK: -- Methods
+    
+    @objc private func shareButtonTapped() {
+        delegate?.shareButtonTapped()
+    }
+    
+    @objc private func refreshButtonTapped() {
+        delegate?.refreshButtonTapped()
+    }
+    
+    @objc private func headerTapped() {
+        delegate?.headerLabelTapped()
+    }
     
     func setupVisualEffectBlur() {
         animator = UIViewPropertyAnimator(duration: 1.0, curve: .linear, animations: { [weak self] in
@@ -94,6 +119,10 @@ final class NewsCollectionViewHeader: UICollectionReusableView {
     func configureHeader(from article: NewsArticle) {
         headlineTitleLabel.text = article.title
         headlinePublishedDateLabel.text = article.publishedAt
+        guard article.urlToImage != nil else {
+            backgroundImageView.image = #imageLiteral(resourceName: "african-savannah_cropped")
+            return
+        }
         backgroundImageView.sd_setImage(with: URL(string: article.urlToImage!), placeholderImage: #imageLiteral(resourceName: "black"))
     }
     
@@ -104,6 +133,7 @@ final class NewsCollectionViewHeader: UICollectionReusableView {
         setupVisualEffectBlur()
         addSubviews()
         setConstraints()
+        headlineTitleContainer.addGestureRecognizer(tapGesture)
     }
     
     required init?(coder: NSCoder) {
@@ -157,14 +187,14 @@ fileprivate extension NewsCollectionViewHeader {
         todayLabel.snp.makeConstraints { (make) in
             make.top.equalTo(safeAreaLayoutGuide).inset(Constants.spacing)
             make.leading.equalToSuperview().inset(Constants.spacing)
+            make.height.equalTo(30)
         }
     }
     
     func setSeparatorLineConstraints() {
         separatorLine.snp.makeConstraints { (make) in
-            make.width.equalToSuperview().multipliedBy(0.90)
+            make.leading.trailing.equalToSuperview().inset(Constants.spacing)
             make.height.equalTo(1)
-            make.centerX.equalToSuperview()
             make.top.equalTo(todayLabel.snp.bottom).offset(Constants.spacing/2)
         }
     }
@@ -173,14 +203,13 @@ fileprivate extension NewsCollectionViewHeader {
         headlineTitleContainer.snp.makeConstraints { (make) in
             make.leading.trailing.equalToSuperview().inset(Constants.spacing)
             make.top.equalTo(separatorLine.snp.bottom)
-            make.bottom.equalTo(headlinePublishedDateLabel.snp.top)
+            make.bottom.equalTo(headlinePublishedDateLabel.snp.top).inset(-Constants.spacing/2)
         }
     }
     
     func setHeadlineTitleLabelConstraints() {
         headlineTitleLabel.snp.makeConstraints { (make) in
-            make.leading.trailing.equalToSuperview()
-            make.centerY.equalToSuperview()
+            make.leading.centerY.height.trailing.equalToSuperview()
         }
     }
     
@@ -201,7 +230,7 @@ fileprivate extension NewsCollectionViewHeader {
         refreshButton.snp.makeConstraints { (make) in
             make.trailing.equalToSuperview().inset(Constants.spacing)
             make.centerY.equalTo(todayLabel)
-            make.height.width.equalTo(35)
+            make.height.width.equalTo(30)
         }
     }
 }

@@ -8,13 +8,14 @@
 
 import UIKit
 
-final class NewsArticleTableViewCell: UICollectionViewCell {
+final class NewsArticleCollectionViewCell: UICollectionViewCell {
     //MARK: -- UI Element Initialization
     
     private lazy var articleThumbImageView: UIImageView = {
         let iv = UIImageView()
         iv.layer.cornerRadius = 10
         iv.clipsToBounds = true
+        iv.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMinXMinYCorner]
         iv.contentMode = .scaleAspectFill
         iv.backgroundColor = .black
         return iv
@@ -25,8 +26,8 @@ final class NewsArticleTableViewCell: UICollectionViewCell {
         label.font = UIFont(name: FontWeight.bold.rawValue, size: 18)
         label.textAlignment = .left
         label.textColor = .white
-        label.lineBreakMode = .byTruncatingTail
         label.numberOfLines = 0
+        label.lineBreakMode = .byTruncatingTail
         return label
     }()
     
@@ -37,6 +38,11 @@ final class NewsArticleTableViewCell: UICollectionViewCell {
                                  color: .lightGray,
                                  alignment: .left)
         
+    }()
+    
+    private lazy var articleTitleContainer: UIView = {
+        let view = UIView()
+        return view
     }()
     
     lazy var shareButton: UIButton = {
@@ -66,12 +72,14 @@ final class NewsArticleTableViewCell: UICollectionViewCell {
     }
     
     private func setAppearance() {
-        backgroundColor = .black
+        backgroundColor = #colorLiteral(red: 0.1333159208, green: 0.1333422065, blue: 0.1333123744, alpha: 1)
+        layer.cornerRadius = 10
+        clipsToBounds = true
         let bgColorView = UIView()
         bgColorView.backgroundColor = #colorLiteral(red: 0.08120436221, green: 0.09556283802, blue: 0.1183818057, alpha: 1)
         selectedBackgroundView = bgColorView
     }
- 
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubviews()
@@ -85,14 +93,17 @@ final class NewsArticleTableViewCell: UICollectionViewCell {
 }
 
 //MARK: -- Add Subviews & Constraints
-fileprivate extension NewsArticleTableViewCell {
+fileprivate extension NewsArticleCollectionViewCell {
     
     func addSubviews() {
-        [articleThumbImageView, articleTitleLabel, publishedDateLabel, shareButton].forEach{ addSubview($0) }
+        [articleThumbImageView, articleTitleContainer, publishedDateLabel, shareButton]
+            .forEach{ addSubview($0) }
+        articleTitleContainer.addSubview(articleTitleLabel)
     }
     
     func setConstraints() {
         setArticleThumbImageViewConstraints()
+        setArticleTitleContainerConstraints()
         setArticleTitleLabelConstraints()
         setPublishedDateLabelConstraints()
         setShareButtonConstraints()
@@ -100,26 +111,32 @@ fileprivate extension NewsArticleTableViewCell {
     
     func setArticleThumbImageViewConstraints() {
         articleThumbImageView.snp.makeConstraints { (make) in
-            make.leading.equalToSuperview().inset(Constants.spacing)
-            make.centerY.equalToSuperview()
-            make.height.equalTo(120)
-            make.width.equalTo(140)
+            make.leading.top.bottom.equalToSuperview()
+            make.width.equalTo(160)
+        }
+    }
+    
+    func setArticleTitleContainerConstraints() {
+        articleTitleContainer.snp.makeConstraints { (make) in
+            make.leading.equalTo(articleThumbImageView.snp.trailing).offset(Constants.spacing/2)
+            make.top.trailing.equalToSuperview().inset(Constants.spacing/2)
+            make.bottom.equalTo(publishedDateLabel.snp.top).inset(-Constants.spacing/2)
         }
     }
     
     func setArticleTitleLabelConstraints() {
         articleTitleLabel.snp.makeConstraints { (make) in
-            make.leading.equalTo(articleThumbImageView.snp.trailing).offset(Constants.spacing)
-            make.trailing.equalToSuperview().inset(Constants.spacing)
-            make.bottom.equalTo(articleThumbImageView).inset(Constants.spacing)
-            make.top.equalTo(articleThumbImageView)
+            make.leading.trailing.equalTo(articleTitleContainer)
+            make.height.equalToSuperview()
+            make.centerY.equalTo(articleTitleContainer)
         }
     }
     
     func setPublishedDateLabelConstraints() {
         publishedDateLabel.snp.makeConstraints { (make) in
-            make.leading.trailing.equalTo(articleTitleLabel)
-            make.bottom.equalTo(articleThumbImageView)
+            make.leading.trailing.equalTo(articleTitleContainer)
+            make.height.equalTo(20)
+            make.bottom.equalToSuperview().inset(Constants.spacing/2)
         }
     }
     

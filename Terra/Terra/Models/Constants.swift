@@ -15,7 +15,7 @@ struct Constants {
     static let borderWidth: CGFloat = 2.0
     static let screenHeight = UIScreen.main.bounds.size.height
     static let screenWidth = UIScreen.main.bounds.size.width
-    static let buttonSize = CGSize(width: 35.deviceScaled, height: 35.deviceScaled)
+    static let buttonSize = CGSize(width: 30.deviceScaled, height: 30.deviceScaled)
     
     static let commonViewSize: CGSize = CGSize(
         width: Constants.screenWidth * 1.2077,
