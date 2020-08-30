@@ -58,6 +58,7 @@ enum systemImage: String {
     case augmentedReality = "arkit"
     case list = "list.dash"
     case share = "square.and.arrow.up"
+    case refresh = "arrow.clockwise"
 }
 
 

@@ -101,7 +101,7 @@ extension NewsViewController: UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: Constants.screenWidth, height: 320.deviceScaled)
+        return CGSize(width: Constants.screenWidth, height: 280.deviceScaled)
     }
     
     
@@ -149,7 +149,6 @@ extension NewsViewController: UICollectionViewDelegateFlowLayout {
 extension NewsViewController: SFSafariViewControllerDelegate {
     func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
         print("boom")
-        headerView.setupVisualEffectBlur()
     }
 }
 
@@ -159,7 +158,7 @@ extension NewsViewController: NewsViewModelDelegate {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.collectionView.reloadData()
-            self.headerView.configureHeader(from: self.viewModel.specificArticle(at: 0))
+            self.headerView.configureHeader(from: self.viewModel.firstArticle)
         }
     }
 }
