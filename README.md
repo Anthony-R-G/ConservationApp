@@ -112,7 +112,7 @@ Planned:
 ### Learn More About An Individual Species
 | Amur Leopard | Blue-throated Macaw | Lion | Mountain Gorilla |
 | :------: | :------: | :------: | :------: |
-|![screen 1](https://i.imgur.com/g3PRCTW.png) | ![screen 2](https://i.imgur.com/5lMRdil.png) |![screen 3](https://i.imgur.com/GB0ALHf.png)|![screen 4](https://i.imgur.com/M2Zkcgz.png)| 
+|![screen 1](https://i.imgur.com/Jpp3VVL.png) | ![screen 2](https://i.imgur.com/1gqqfCz.png) |![screen 3](https://i.imgur.com/zE7he7a.png)|![screen 4](https://i.imgur.com/mJ9PFDR.png)| 
 
 •Each animal has its own cover page when selected from the list or map.
 
