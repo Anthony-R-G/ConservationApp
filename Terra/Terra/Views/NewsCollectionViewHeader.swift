@@ -30,7 +30,7 @@ final class NewsCollectionViewHeader: UICollectionReusableView {
     private lazy var todayLabel: UILabel = {
         let label = UILabel()
         label.text = "TODAY"
-        label.font = UIFont(name: FontWeight.black.rawValue, size: 36)
+        label.font = UIFont(name: FontWeight.black.rawValue, size: 36.deviceScaled)
         label.textAlignment = .left
         label.textColor = Constants.Color.titleLabelColor
         return label
@@ -50,7 +50,7 @@ final class NewsCollectionViewHeader: UICollectionReusableView {
     
     private lazy var headlineTitleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: FontWeight.bold.rawValue, size: 27)
+        label.font = UIFont(name: FontWeight.bold.rawValue, size: 27.deviceScaled)
         label.textColor = .white
         label.textAlignment = .left
         label.lineBreakMode = .byTruncatingTail

@@ -37,7 +37,6 @@ final class NewsArticleCollectionViewCell: UICollectionViewCell {
                                  size: 14,
                                  color: .lightGray,
                                  alignment: .left)
-        
     }()
     
     private lazy var articleTitleContainer: UIView = {
@@ -112,7 +111,7 @@ fileprivate extension NewsArticleCollectionViewCell {
     func setArticleThumbImageViewConstraints() {
         articleThumbImageView.snp.makeConstraints { (make) in
             make.leading.top.bottom.equalToSuperview()
-            make.width.equalTo(160)
+            make.width.equalTo(160.deviceScaled)
         }
     }
     

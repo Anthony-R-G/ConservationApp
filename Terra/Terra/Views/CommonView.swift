@@ -134,7 +134,7 @@ fileprivate extension CommonView {
     
     func setSubtitleLabelConstraints() {
         subtitleLabel.snp.makeConstraints { (make) in 
-            make.leading.equalTo(titleLabel).inset(2)
+            make.leading.equalTo(titleLabel).inset(3.5)
             subtitleTopConstraint.isActive = true
         }
     }

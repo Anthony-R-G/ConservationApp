@@ -37,11 +37,11 @@ final class RootTabBarController: UITabBarController {
     }
     
     private func configureTabBarItems() {
-        let listVCTabBarItem = UITabBarItem(title: "Terra",
+        let listVCTabBarItem = UITabBarItem(title: nil,
                                             image: #imageLiteral(resourceName: "ListVCTabBarItemGlyph"),
                                             tag: 0)
         
-        let newsVCTabBarItem = UITabBarItem(title: "News",
+        let newsVCTabBarItem = UITabBarItem(title: nil,
                                             image: #imageLiteral(resourceName: "NewsVCTabBarItemGlyph"),
                                             tag: 1)
         

@@ -30,7 +30,7 @@ final class CoverHeaderNameView: UIView {
         }
         
         button.layer.borderWidth = Constants.borderWidth
-        button.layer.cornerRadius = 15
+        button.layer.cornerRadius = 15.deviceScaled
         button.showsTouchWhenHighlighted = true
         button.addTarget(self, action: #selector(handleTap), for: .touchUpInside)
         return button
