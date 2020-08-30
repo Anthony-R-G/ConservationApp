@@ -279,7 +279,6 @@ extension SpeciesListViewController: UICollectionViewDelegateFlowLayout {
         coverVC.viewModel =  DetailPageStrategyViewModel(species: selectedSpecies)
         let navVC = NavigationController(rootViewController: coverVC)
         navVC.modalPresentationStyle = .fullScreen
-        print(terraTitleLabel.font.pointSize)
         present(navVC, animated: true, completion: nil)
     }
     
