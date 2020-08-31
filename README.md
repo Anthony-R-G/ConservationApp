@@ -83,7 +83,7 @@ Planned:
 
 •The map has coordinates of each animal placed in the area they live. (Note: this will be updated to encompass larger polygon regions since not every species has one specific coordinate they reside in)
 
-•Each coordinate annotation can be tapped to reveal a custom popup view..
+•Each coordinate annotation can be tapped to reveal a custom popup view.
 
 •The popup displays information such as the animal's name, a small habitat summary, the distance that animal is away from you (if location access is granted), and will enable you to visit that animal's specific detail page.
 
