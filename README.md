@@ -57,6 +57,8 @@ Planned:
 
 •On launch, the list of threatened animals is presented.
 
+![gif 1](https://media.giphy.com/media/QZPEvTdxH70KeocD3g/giphy.gif)
+
 ### Threatened Species List Page
 | See All Species | Filtered By Critical Status | Filtered by Endangered Status | Filtered by Vulnerable Status |
 | :-----: | :-----: | :-----: | :-----: |
@@ -105,9 +107,6 @@ Planned:
 •Each row also has a share button, which can be used to share the website URL with others.
 
 •Pagination is handled by using [Apple's data source prefetching protocol](https://developer.apple.com/documentation/uikit/uicollectionviewdatasourceprefetching/prefetching_collection_view_data) so that more news articles are loaded in the background as the page is scrolled down.
-
-![gif 1](https://media.giphy.com/media/QZPEvTdxH70KeocD3g/giphy.gif)
-
 
 
 ### Learn More About An Individual Species
