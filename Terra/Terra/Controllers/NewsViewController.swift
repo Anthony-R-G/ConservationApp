@@ -48,18 +48,16 @@ final class NewsViewController: UIViewController {
     
     //MARK: -- Methods
     
-    func presentWebBrowser(link: URL) {
-        let config = SFSafariViewController.Configuration()
-        let safariVC = SFSafariViewController(url: link, configuration: config)
-        safariVC.delegate = self
-        present(safariVC, animated: true, completion: nil)
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        viewModel = NewsViewModel(delegate: self)
+        viewModel.fetchNews(fetchType: .replace)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
-        viewModel = NewsViewModel(delegate: self)
-        viewModel.fetchNews()
         addSubviews()
         setConstraints()
     }
@@ -87,8 +85,8 @@ extension NewsViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         for index in indexPaths {
             if index.row > viewModel.totalNewsArticlesCount - 3 && !viewModel.newsFetchIsUnderway {
-                viewModel.fetchNews()
-                break
+                viewModel.fetchNews(fetchType: .append)
+                
             }
         }
     }
@@ -132,14 +130,14 @@ extension NewsViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let selectedArticle = viewModel.specificArticle(at: indexPath.row)
-       presentWebBrowser(link: URL(string: selectedArticle.url)!)
+        Utilities.presentWebBrowser(on: self, link: URL(string: selectedArticle.url)!, delegate: self)
     }
     
     func collectionView(_ collectionView: UICollectionView,
-                           layout collectionViewLayout: UICollectionViewLayout,
-                           minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return Constants.spacing
-       }
+    }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let contentOffsetY = scrollView.contentOffset.y
@@ -172,6 +170,7 @@ extension NewsViewController: NewsViewModelDelegate {
             guard let self = self else { return }
             self.collectionView.reloadData()
             self.headerView.configureHeader(from: self.viewModel.firstArticle)
+            self.headerView.stopRefreshButton()
         }
     }
 }
@@ -180,26 +179,22 @@ extension NewsViewController: NewsCellDelegate {
     func shareButtonTapped(sender: UIButton) {
         let cellIndex = sender.tag
         let selectedArticle = viewModel.specificArticle(at: cellIndex)
-        let items = [URL(string: selectedArticle.url)!]
-        let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
-        present(ac, animated: true)
+        Utilities.presentActivityController(on: self, items: [URL(string: selectedArticle.url)!])
     }
 }
 
 extension NewsViewController: NewsHeaderDelegate {
     func shareButtonTapped() {
         let selectedArticle = viewModel.firstArticle
-        let items = [URL(string: selectedArticle!.url)!]
-        let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
-        present(ac, animated: true)
+        Utilities.presentActivityController(on: self, items: [URL(string: selectedArticle!.url)!])
     }
     
     func refreshButtonTapped() {
-        print("refresh")
+        viewModel.fetchNews(fetchType: .replace)
     }
     
     func headerLabelTapped() {
-        Utilities.presentWebBrowser(on: self, link: URL(string: viewModel.firstArticle.url)!)
+        Utilities.presentWebBrowser(on: self, link: URL(string: viewModel.firstArticle.url)!, delegate: self)
     }
 }
 

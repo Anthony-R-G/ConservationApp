@@ -39,11 +39,17 @@ struct Utilities {
         }
     }
     
-    static func presentWebBrowser(on viewController: UIViewController, link: URL) {
+    static func presentWebBrowser(on viewController: UIViewController, link: URL, delegate: SFSafariViewControllerDelegate?) {
         let config = SFSafariViewController.Configuration()
         let safariVC = SFSafariViewController(url: link, configuration: config)
-        
+        safariVC.delegate = delegate
         viewController.present(safariVC, animated: true, completion: nil)
+    }
+    
+    static func presentActivityController(on viewController: UIViewController, items: [Any]) {
+        let items = items
+        let activityVC = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        viewController.present(activityVC, animated: true)
     }
     
     private init() {}

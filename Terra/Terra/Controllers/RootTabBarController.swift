@@ -52,25 +52,7 @@ final class RootTabBarController: UITabBarController {
     private func configureViewControllers() {
         let listVC = SpeciesListViewController()
         
-//        let newsVC = UINavigationController(rootViewController: NewsViewController())
         let newsVC = NewsViewController()
-        
-//        newsVC.navigationBar.prefersLargeTitles = true
-//        newsVC.navigationBar.topItem?.title = "Wildlife News"
-//        newsVC.navigationBar.barStyle = .black
-//
-//        let largeTitleTextAttributes = [
-//            NSAttributedString.Key.foregroundColor: Constants.Color.titleLabelColor,
-//            NSAttributedString.Key.font: UIFont(name: FontWeight.black.rawValue,
-//                                                size: 40.deviceScaled)]
-//
-//        let regularTitleTextAttributes = [
-//            NSAttributedString.Key.foregroundColor: Constants.Color.titleLabelColor,
-//            NSAttributedString.Key.font: UIFont(name: FontWeight.medium.rawValue,
-//                                                size: 20.deviceScaled)]
-//
-//        newsVC.navigationBar.largeTitleTextAttributes = largeTitleTextAttributes as [NSAttributedString.Key : Any]
-//        newsVC.navigationBar.titleTextAttributes = regularTitleTextAttributes as [NSAttributedString.Key : Any]
         
         viewControllers = [listVC, newsVC]
     }

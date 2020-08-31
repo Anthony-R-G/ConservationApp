@@ -99,7 +99,22 @@ final class NewsCollectionViewHeader: UICollectionReusableView {
     }
     
     @objc private func refreshButtonTapped() {
+        animateRefreshButton()
         delegate?.refreshButtonTapped()
+    }
+    
+    func animateRefreshButton() {
+        let rotateAnimation = CABasicAnimation(keyPath: "transform.rotation")
+        rotateAnimation.fromValue = 0.0
+        rotateAnimation.toValue = CGFloat(.pi * 2.0)
+        rotateAnimation.duration = 0.3
+        rotateAnimation.repeatCount = Float.greatestFiniteMagnitude
+
+        refreshButton.layer.add(rotateAnimation, forKey: "rotate")
+    }
+    
+    func stopRefreshButton() {
+       refreshButton.layer.removeAnimation(forKey: "rotate")
     }
     
     @objc private func headerTapped() {
