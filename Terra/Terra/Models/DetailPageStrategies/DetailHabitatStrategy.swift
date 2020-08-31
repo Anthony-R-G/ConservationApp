@@ -30,7 +30,7 @@ class DetailHabitatStrategy: DetailPageStrategy {
     func arrangedSubviews() -> UIStackView {
         let stackView = UIStackView(arrangedSubviews: [
             DetailInfoWindow(title: "DISTRIBUTION",
-                             content: SpeciesMapView(species: species)),
+                             content: DistributionView(species: species)),
             
             DetailInfoWindow(title: "BIOME",
                              content: BiomeView(strategy: self)),

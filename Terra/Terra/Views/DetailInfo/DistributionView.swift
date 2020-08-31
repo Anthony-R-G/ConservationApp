@@ -8,7 +8,7 @@
 
 import Mapbox
 
-final class SpeciesMapView: UIView {
+final class DistributionView: UIView {
     //MARK: -- UI Element Initialization
     
     private lazy var mapView: MGLMapView = {
@@ -49,7 +49,7 @@ final class SpeciesMapView: UIView {
 }
 
 //MARK: -- Map View Delegate
-extension SpeciesMapView: MGLMapViewDelegate {
+extension DistributionView: MGLMapViewDelegate {
     func mapViewDidFinishLoadingMap(_ mapView: MGLMapView) {
         
         let camera = MGLMapCamera(lookingAtCenter: speciesLocation,
@@ -64,7 +64,7 @@ extension SpeciesMapView: MGLMapViewDelegate {
 
 //MARK: -- Add Subviews & Constraints
 
-fileprivate extension SpeciesMapView {
+fileprivate extension DistributionView {
     func addSubviews() {
         [mapView].forEach{ addSubview($0) }
     }

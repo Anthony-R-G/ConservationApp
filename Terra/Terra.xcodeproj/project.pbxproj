@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9701B4EA24EAEAFB0083CFDC /* SpeciesMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9701B4E924EAEAFB0083CFDC /* SpeciesMapView.swift */; };
+		9701B4EA24EAEAFB0083CFDC /* DistributionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9701B4E924EAEAFB0083CFDC /* DistributionView.swift */; };
 		9706C32F24EC6CC9005831A7 /* newsResponseTestData.json in Resources */ = {isa = PBXBuildFile; fileRef = 9706C32E24EC6CC9005831A7 /* newsResponseTestData.json */; };
 		970E657F24EDF9D900E850F7 /* UILabelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970E657E24EDF9D900E850F7 /* UILabelExtensions.swift */; };
 		9711D8F724BD199700C2E6F1 /* Species.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9711D8F624BD199700C2E6F1 /* Species.swift */; };
@@ -147,7 +147,7 @@
 		509A3AC14716ECE9FE9D6E12 /* Pods-TerraTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TerraTests.release.xcconfig"; path = "Target Support Files/Pods-TerraTests/Pods-TerraTests.release.xcconfig"; sourceTree = "<group>"; };
 		7DD7D159FC9C2ED54588B886 /* Pods-Terra.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Terra.debug.xcconfig"; path = "Target Support Files/Pods-Terra/Pods-Terra.debug.xcconfig"; sourceTree = "<group>"; };
 		89E21ADBDACEDEEF3E3D95B9 /* Pods_Terra.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Terra.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9701B4E924EAEAFB0083CFDC /* SpeciesMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesMapView.swift; sourceTree = "<group>"; };
+		9701B4E924EAEAFB0083CFDC /* DistributionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistributionView.swift; sourceTree = "<group>"; };
 		9706C32E24EC6CC9005831A7 /* newsResponseTestData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = newsResponseTestData.json; sourceTree = "<group>"; };
 		970E657E24EDF9D900E850F7 /* UILabelExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExtensions.swift; sourceTree = "<group>"; };
 		9711D8F624BD199700C2E6F1 /* Species.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Species.swift; sourceTree = "<group>"; };
@@ -340,7 +340,7 @@
 			isa = PBXGroup;
 			children = (
 				97EA493B24E3BEC200C0FE64 /* DetailInfoWindow.swift */,
-				9701B4E924EAEAFB0083CFDC /* SpeciesMapView.swift */,
+				9701B4E924EAEAFB0083CFDC /* DistributionView.swift */,
 				975CBFC824EFA9CE00951CD3 /* MeasurementsView.swift */,
 				9743BAB024EFBEDF0090A2E4 /* ConservationStatusView.swift */,
 				97A24D2324E49A4100958AB9 /* ClassificationView.swift */,
@@ -792,7 +792,7 @@
 				97A24D2024E445A800958AB9 /* DetailHabitatStrategy.swift in Sources */,
 				97591FE324CCDC48002EAC96 /* FontWeight.swift in Sources */,
 				97928F7924CD11BF00AF90C5 /* FirestoreError.swift in Sources */,
-				9701B4EA24EAEAFB0083CFDC /* SpeciesMapView.swift in Sources */,
+				9701B4EA24EAEAFB0083CFDC /* DistributionView.swift in Sources */,
 				97928F7B24CD347200AF90C5 /* FirebaseConvertible.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

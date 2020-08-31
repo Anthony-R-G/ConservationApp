@@ -65,8 +65,14 @@ final class CustomCalloutView: UIView, MGLCalloutView {
         return bev
     }()
     
+    lazy var leftAccessoryView = UIView() /* unused */
+    lazy var rightAccessoryView = UIView() /* unused */
+    
     
     //MARK: -- Properties
+    
+    weak var delegate: MGLCalloutViewDelegate?
+    
     var representedObject: MGLAnnotation
     
     // Allow the callout to remain open during panning.
@@ -85,10 +91,8 @@ final class CustomCalloutView: UIView, MGLCalloutView {
         }
     }
     
-    lazy var leftAccessoryView = UIView() /* unused */
-    lazy var rightAccessoryView = UIView() /* unused */
     
-    weak var delegate: MGLCalloutViewDelegate?
+    
     
     let tipHeight: CGFloat = 30.0
     let tipWidth: CGFloat = 40.0
@@ -124,6 +128,7 @@ final class CustomCalloutView: UIView, MGLCalloutView {
         setConstraints()
         setupUI(from: annotation)
         configureCalloutAppearance()
+        mainBody.addTarget(self, action: #selector(CustomCalloutView.calloutTapped), for: .touchUpInside)
     }
     
     required init?(coder decoder: NSCoder) {

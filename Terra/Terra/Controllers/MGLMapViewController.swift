@@ -6,17 +6,15 @@
 //  Copyright © 2020 Antnee. All rights reserved.
 //
 
-import UIKit
+
 import Mapbox
 
 final class MGLMapViewController: UIViewController {
     
-    private lazy var mapView: MGLMapView = {
-        let mv = MGLMapView()
-        let styleURL = URL(string: "mapbox://styles/anthonyg5195/ckdkz8h2n0uri1ir58rf4o707")
+    let mapView: MGLMapView = {
+        let mv = MGLMapView(frame: .init(origin: .zero, size: .init(width: Constants.screenWidth, height: Constants.screenHeight)))
         mv.styleURL = MGLStyle.satelliteStreetsStyleURL
         mv.tintColor = .darkGray
-        mv.delegate = self
         mv.showsUserLocation = true
         return mv
     }()
@@ -59,6 +57,10 @@ final class MGLMapViewController: UIViewController {
     
     private var userLocation = CLLocationCoordinate2D()
     
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
     //MARK: -- Methods
     
     @objc private func changeStyle(sender: UISegmentedControl) {
@@ -95,14 +97,11 @@ final class MGLMapViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         addSubviews()
         setConstraints()
+        mapView.delegate = self
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) { [weak self] in
             guard let self = self else { return }
             self.userLocation = self.mapView.userLocation!.coordinate
@@ -156,12 +155,24 @@ extension MGLMapViewController: MGLMapViewDelegate {
         return callout
     }
     
+    func mapView(_ mapView: MGLMapView, didSelect annotation: MGLAnnotation) {
+        func showCallout(feature: MGLPointFeature) {
+        let point = MGLPointFeature()
+        point.title = feature.attributes["name"] as? String
+        point.coordinate = feature.coordinate
+            mapView.selectAnnotation(annotation, animated: true) {
+                mapView.setCenter(annotation.coordinate, zoomLevel: 0, animated: true)
+            }
+        }
+    }
+    
 }
 
 //MARK: -- CalloutView Delegate Methods
 extension MGLMapView: MGLCalloutViewDelegate {
     public func calloutViewWillAppear(_ calloutView: UIView & MGLCalloutView) {
         print("I will appear")
+        
     }
 
     public func calloutViewDidAppear(_ calloutView: UIView & MGLCalloutView) {
@@ -189,13 +200,14 @@ fileprivate extension MGLMapViewController {
     func setListButtonConstraints() {
         listButton.snp.makeConstraints { (make) in
             make.leading.equalTo(view).inset(Constants.spacing)
-            make.top.equalToSuperview().inset(40.deviceScaled)
+            make.top.equalToSuperview().inset(60.deviceScaled)
         }
     }
     
     func setMapViewConstraints() {
         mapView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
+            make.height.width.equalTo(mapView.frame.size)
         }
     }
     
