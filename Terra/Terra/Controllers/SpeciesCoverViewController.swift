@@ -410,13 +410,13 @@ extension SpeciesCoverViewController: DonateButtonDelegate {
     func donateButtonPressed() {
         guard let donationURL = URL(string: viewModel.selectedSpecies.donationLink) else { return }
         Utilities.sendHapticFeedback(action: .itemSelected)
-        Utilities.presentWebBrowser(on: self, link: donationURL)
+        Utilities.presentWebBrowser(on: self, link: donationURL, delegate: nil)
     }
 }
 
 extension SpeciesCoverViewController: ConservationStatusDelegate {
     func conservationStatusTapped() {
-        Utilities.presentWebBrowser(on: self, link: URL(string: "https://www.sanbi.org/skep/the-iucn-red-list-explained/")!)
+        Utilities.presentWebBrowser(on: self, link: URL(string: "https://www.sanbi.org/skep/the-iucn-red-list-explained/")!, delegate: nil)
     }
 }
 

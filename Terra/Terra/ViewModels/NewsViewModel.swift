@@ -9,9 +9,9 @@
 import Foundation
 import Combine
 
-private enum FetchType {
-    case prefetch
-    case reload
+enum FetchType {
+    case replace
+    case append
 }
 
 final class NewsViewModel {
@@ -29,7 +29,11 @@ final class NewsViewModel {
     
     private var currentPage: Int = 1
     
-    private var isFetchInProgress: Bool = false
+    private var isFetchInProgress: Bool = false {
+        didSet {
+            print(isFetchInProgress)
+        }
+    }
     
     var firstArticle: NewsArticle!
     
@@ -70,12 +74,22 @@ final class NewsViewModel {
 
 extension NewsViewModel {
     
-    func fetchNews() {
-        guard !isFetchInProgress else {
-            return
-        }
+    func fetchNews(fetchType: FetchType) {
+        guard !isFetchInProgress else { return }
         
         isFetchInProgress = true
+        
+        if fetchType == .replace {
+            currentPage = 1
+        } else {
+            //News API has a dev plan cap of 100.
+            guard currentPage <= 5 else {
+                isFetchInProgress = false
+                delegate?.fetchCompleted()
+                return
+            }
+            currentPage += 1
+        }
         
         cancellable = NewsAPI.makeRequest(page: currentPage)
             .mapError({ [weak self] (error) -> Error in
@@ -88,13 +102,20 @@ extension NewsViewModel {
                   receiveValue: { [weak self] response in
                     guard let self = self else { return }
                     guard let articles = response.articles else { return }
-                    self.firstArticle = articles[0]
-                    self.newsArticles.append(contentsOf: articles.dropFirst())
-                    self.currentPage += 1
+                    switch fetchType {
+                        
+                    case .append:
+                        self.newsArticles.append(contentsOf: articles)
+                        
+                    case .replace:
+                        self.firstArticle = articles[0]
+                        self.newsArticles = Array(articles.dropFirst())
+                        self.currentPage = 1
+                        
+                    }
                     self.delegate?.fetchCompleted()
                     self.isFetchInProgress = false
             })
     }
 }
-
 

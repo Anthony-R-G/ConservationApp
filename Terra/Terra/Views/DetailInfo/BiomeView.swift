@@ -8,10 +8,6 @@
 
 import UIKit
 
-protocol BiomeViewDelegate: AnyObject {
-    func biomeWasTapped()
-}
-
 final class BiomeView: UIView {
     //MARK: -- UI Element Initialization
     private lazy var biomeImage: UIImageView = {

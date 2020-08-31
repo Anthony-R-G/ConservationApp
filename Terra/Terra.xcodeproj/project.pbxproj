@@ -23,6 +23,7 @@
 		972BBF7E24C026CD00B6F7C0 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 972BBF7B24C0256F00B6F7C0 /* Roboto-Bold.ttf */; };
 		972BBF7F24C026CF00B6F7C0 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 972BBF7C24C0257600B6F7C0 /* Roboto-Medium.ttf */; };
 		972BBF8024C026D100B6F7C0 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 972BBF7D24C0257B00B6F7C0 /* Roboto-Light.ttf */; };
+		972D5CDC24FC5CB7000BC184 /* BiomeViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972D5CDB24FC5CB7000BC184 /* BiomeViewDelegate.swift */; };
 		973DF94224FB3F970082E122 /* StretchyCollectionViewHeaderLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973DF94124FB3F970082E122 /* StretchyCollectionViewHeaderLayout.swift */; };
 		973DF94424FB3FEF0082E122 /* NewsCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973DF94324FB3FEF0082E122 /* NewsCollectionViewHeader.swift */; };
 		973DF94624FB4F640082E122 /* NewsCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973DF94524FB4F640082E122 /* NewsCellDelegate.swift */; };
@@ -158,6 +159,7 @@
 		972BBF7B24C0256F00B6F7C0 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		972BBF7C24C0257600B6F7C0 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		972BBF7D24C0257B00B6F7C0 /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
+		972D5CDB24FC5CB7000BC184 /* BiomeViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiomeViewDelegate.swift; sourceTree = "<group>"; };
 		973DF94124FB3F970082E122 /* StretchyCollectionViewHeaderLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StretchyCollectionViewHeaderLayout.swift; sourceTree = "<group>"; };
 		973DF94324FB3FEF0082E122 /* NewsCollectionViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCollectionViewHeader.swift; sourceTree = "<group>"; };
 		973DF94524FB4F640082E122 /* NewsCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCellDelegate.swift; sourceTree = "<group>"; };
@@ -315,6 +317,7 @@
 				9743BAB724F03FE10090A2E4 /* ConservationStatusDelegate.swift */,
 				973DF94524FB4F640082E122 /* NewsCellDelegate.swift */,
 				973DF94724FB50260082E122 /* NewsHeaderDelegate.swift */,
+				972D5CDB24FC5CB7000BC184 /* BiomeViewDelegate.swift */,
 			);
 			path = "Custom Delegates";
 			sourceTree = "<group>";
@@ -759,6 +762,7 @@
 				9772515D24DF80FB0052A3F6 /* APIClient.swift in Sources */,
 				97FEAEAC24BE5FCC005BAEFE /* Factory.swift in Sources */,
 				97B68CD424BBB0AC005B8AB8 /* CoverHeaderNameView.swift in Sources */,
+				972D5CDC24FC5CB7000BC184 /* BiomeViewDelegate.swift in Sources */,
 				976F68C824E8AE2500277F79 /* CommonView.swift in Sources */,
 				976F68C224E8A62C00277F79 /* SpeciesCoverViewController.swift in Sources */,
 				9743BAB824F03FE10090A2E4 /* ConservationStatusDelegate.swift in Sources */,
