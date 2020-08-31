@@ -11,8 +11,8 @@ import Mapbox
 
 final class MGLMapViewController: UIViewController {
     
-    let mapView: MGLMapView = {
-        let mv = MGLMapView(frame: .init(origin: .zero, size: .init(width: Constants.screenWidth, height: Constants.screenHeight)))
+    private let mapView: MGLMapView = {
+        let mv = MGLMapView()
         mv.styleURL = MGLStyle.satelliteStreetsStyleURL
         mv.tintColor = .darkGray
         mv.showsUserLocation = true
@@ -43,17 +43,28 @@ final class MGLMapViewController: UIViewController {
     var speciesData: [Species] = [] {
         didSet {
             for species in speciesData {
+                var coordinates = [CLLocationCoordinate2D]()
+                
                 let coordinate = CLLocationCoordinate2D(
                     latitude: species.habitat.latitude,
                     longitude: species.habitat.longitude)
+                coordinates.append(coordinate)
                 
-                addAnnotation(
-                    from: coordinate,
-                    title: species.commonName,
-                    subtitle: species.habitat.summary)
+                
+                var pointAnnotations = [MGLPointAnnotation]()
+                for coordinate in coordinates {
+                    let point = MGLPointAnnotation()
+                    point.coordinate = coordinate
+                    point.title = species.commonName
+                    point.subtitle = species.habitat.summary
+                    pointAnnotations.append(point)
+                }
+                
+                mapView.addAnnotations(pointAnnotations)
             }
         }
     }
+    
     
     private var userLocation = CLLocationCoordinate2D()
     
@@ -75,22 +86,6 @@ final class MGLMapViewController: UIViewController {
         }
     }
     
-    private func addAnnotation(from coordinate: CLLocationCoordinate2D,
-                               title: String,
-                               subtitle: String) {
-        let annotation = MGLPointAnnotation()
-        
-        annotation.coordinate = CLLocationCoordinate2D(
-            latitude: coordinate.latitude,
-            longitude: coordinate.longitude)
-        
-        annotation.title = title
-        annotation.subtitle = subtitle
-        mapView.selectAnnotation(annotation,
-                                 animated: true,
-                                 completionHandler: nil)
-        mapView.addAnnotation(annotation)
-    }
     
     @objc private func backButtonPressed() {
         Utilities.sendHapticFeedback(action: .pageDismissed)
@@ -99,6 +94,7 @@ final class MGLMapViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        mapView.frame = view.bounds
         addSubviews()
         setConstraints()
         mapView.delegate = self
@@ -142,28 +138,13 @@ extension MGLMapViewController: MGLMapViewDelegate {
     
     
     func mapView(_ mapView: MGLMapView, calloutViewFor annotation: MGLAnnotation) -> MGLCalloutView? {
-        let title = annotation.title ?? nil
-        let subtitle = (annotation.subtitle ?? nil) ?? ""
-        let pointAnnotation = MGLPointAnnotation()
-        pointAnnotation.title = title
-        pointAnnotation.subtitle = subtitle
-        pointAnnotation.coordinate = annotation.coordinate
-        let callout = CustomCalloutView(annotation: pointAnnotation)
+        let callout = CustomCalloutView(representedObject: annotation)
         callout.delegate = mapView
-        callout.isAnchoredToAnnotation = true
-        callout.dismissesAutomatically = false
         return callout
     }
     
     func mapView(_ mapView: MGLMapView, didSelect annotation: MGLAnnotation) {
-        func showCallout(feature: MGLPointFeature) {
-        let point = MGLPointFeature()
-        point.title = feature.attributes["name"] as? String
-        point.coordinate = feature.coordinate
-            mapView.selectAnnotation(annotation, animated: true) {
-                mapView.setCenter(annotation.coordinate, zoomLevel: 0, animated: true)
-            }
-        }
+        mapView.setCenter(annotation.coordinate, animated: true)
     }
     
 }
@@ -171,16 +152,16 @@ extension MGLMapViewController: MGLMapViewDelegate {
 //MARK: -- CalloutView Delegate Methods
 extension MGLMapView: MGLCalloutViewDelegate {
     public func calloutViewWillAppear(_ calloutView: UIView & MGLCalloutView) {
-        print("I will appear")
+        print("Callout will appear")
         
     }
-
+    
     public func calloutViewDidAppear(_ calloutView: UIView & MGLCalloutView) {
-        print("I appeared")
+        print("Callout did appear")
     }
-
+    
     public func calloutViewTapped(_ calloutView: UIView & MGLCalloutView) {
-        print("I was tapped")
+        print("Callout was tapped")
     }
 }
 
@@ -192,7 +173,6 @@ fileprivate extension MGLMapViewController {
     }
     
     func setConstraints() {
-        setMapViewConstraints()
         setListButtonConstraints()
         setStyleToggleConstraints()
     }
@@ -201,13 +181,6 @@ fileprivate extension MGLMapViewController {
         listButton.snp.makeConstraints { (make) in
             make.leading.equalTo(view).inset(Constants.spacing)
             make.top.equalToSuperview().inset(60.deviceScaled)
-        }
-    }
-    
-    func setMapViewConstraints() {
-        mapView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
-            make.height.width.equalTo(mapView.frame.size)
         }
     }
     

@@ -76,23 +76,20 @@ final class CustomCalloutView: UIView, MGLCalloutView {
     var representedObject: MGLAnnotation
     
     // Allow the callout to remain open during panning.
-    var dismissesAutomatically: Bool = false
-    var isAnchoredToAnnotation: Bool = true
+    let dismissesAutomatically: Bool = false
+    let isAnchoredToAnnotation: Bool = true
     
     // https://github.com/mapbox/mapbox-gl-native/issues/9228
-    override var center: CGPoint {
+   override var center: CGPoint {
         set {
             var newCenter = newValue
-            newCenter.y -= bounds.midY
+            newCenter.y = newCenter.y - bounds.midY
             super.center = newCenter
         }
         get {
             return super.center
         }
     }
-    
-    
-    
     
     let tipHeight: CGFloat = 30.0
     let tipWidth: CGFloat = 40.0
@@ -115,8 +112,8 @@ final class CustomCalloutView: UIView, MGLCalloutView {
         mainBody.layer.cornerRadius = 10.0
     }
     
-    required init(annotation: MGLAnnotation) {
-        representedObject = annotation
+    required init(representedObject: MGLAnnotation) {
+        self.representedObject = representedObject
         mainBody = UIButton(frame: CGRect(
             x: 0,
             y: -15,
@@ -124,9 +121,10 @@ final class CustomCalloutView: UIView, MGLCalloutView {
             height: 180.deviceScaled))
         
         super.init(frame: .zero)
+        
         addSubviews()
         setConstraints()
-        setupUI(from: annotation)
+        setupUI(from: representedObject)
         configureCalloutAppearance()
         mainBody.addTarget(self, action: #selector(CustomCalloutView.calloutTapped), for: .touchUpInside)
     }
