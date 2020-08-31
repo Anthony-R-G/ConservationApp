@@ -75,9 +75,7 @@ final class NewsViewModel {
 extension NewsViewModel {
     
     func fetchNews(fetchType: FetchType) {
-        guard !isFetchInProgress else {
-            return
-        }
+        guard !isFetchInProgress else { return }
         
         isFetchInProgress = true
         
@@ -105,9 +103,9 @@ extension NewsViewModel {
                     guard let self = self else { return }
                     guard let articles = response.articles else { return }
                     switch fetchType {
+                        
                     case .append:
                         self.newsArticles.append(contentsOf: articles)
-                        
                         
                     case .replace:
                         self.firstArticle = articles[0]
