@@ -48,11 +48,16 @@ final class NewsViewController: UIViewController {
     
     //MARK: -- Methods
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        viewModel = NewsViewModel(delegate: self)
+        viewModel.fetchNews(fetchType: .replace)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
-        viewModel = NewsViewModel(delegate: self)
-        viewModel.fetchNews()
         addSubviews()
         setConstraints()
     }
@@ -80,8 +85,8 @@ extension NewsViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         for index in indexPaths {
             if index.row > viewModel.totalNewsArticlesCount - 3 && !viewModel.newsFetchIsUnderway {
-                viewModel.fetchNews()
-                break
+                viewModel.fetchNews(fetchType: .append)
+                
             }
         }
     }
@@ -129,10 +134,10 @@ extension NewsViewController: UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView,
-                           layout collectionViewLayout: UICollectionViewLayout,
-                           minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return Constants.spacing
-       }
+    }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let contentOffsetY = scrollView.contentOffset.y
@@ -165,6 +170,7 @@ extension NewsViewController: NewsViewModelDelegate {
             guard let self = self else { return }
             self.collectionView.reloadData()
             self.headerView.configureHeader(from: self.viewModel.firstArticle)
+            self.headerView.stopRefreshButton()
         }
     }
 }
@@ -184,7 +190,7 @@ extension NewsViewController: NewsHeaderDelegate {
     }
     
     func refreshButtonTapped() {
-        print("refresh")
+        viewModel.fetchNews(fetchType: .replace)
     }
     
     func headerLabelTapped() {
