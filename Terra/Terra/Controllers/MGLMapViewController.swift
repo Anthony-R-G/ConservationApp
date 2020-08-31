@@ -11,8 +11,9 @@ import Mapbox
 
 final class MGLMapViewController: UIViewController {
     
-    private let mapView: MGLMapView = {
+    private lazy var mapView: MGLMapView = {
         let mv = MGLMapView()
+        mv.delegate = self
         mv.styleURL = MGLStyle.satelliteStreetsStyleURL
         mv.tintColor = .darkGray
         mv.showsUserLocation = true
@@ -43,28 +44,13 @@ final class MGLMapViewController: UIViewController {
     var speciesData: [Species] = [] {
         didSet {
             for species in speciesData {
-                var coordinates = [CLLocationCoordinate2D]()
-                
-                let coordinate = CLLocationCoordinate2D(
-                    latitude: species.habitat.latitude,
-                    longitude: species.habitat.longitude)
-                coordinates.append(coordinate)
-                
-                
-                var pointAnnotations = [MGLPointAnnotation]()
-                for coordinate in coordinates {
-                    let point = MGLPointAnnotation()
-                    point.coordinate = coordinate
-                    point.title = species.commonName
-                    point.subtitle = species.habitat.summary
-                    pointAnnotations.append(point)
-                }
-                
-                mapView.addAnnotations(pointAnnotations)
+                var speciesAnnotations = [SpeciesAnnotation]()
+                let annotation = SpeciesAnnotation(species: species)
+                speciesAnnotations.append(annotation)
+                mapView.addAnnotations(speciesAnnotations)
             }
         }
     }
-    
     
     private var userLocation = CLLocationCoordinate2D()
     
@@ -86,7 +72,6 @@ final class MGLMapViewController: UIViewController {
         }
     }
     
-    
     @objc private func backButtonPressed() {
         Utilities.sendHapticFeedback(action: .pageDismissed)
         dismiss(animated: true, completion: nil)
@@ -97,11 +82,6 @@ final class MGLMapViewController: UIViewController {
         mapView.frame = view.bounds
         addSubviews()
         setConstraints()
-        mapView.delegate = self
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) { [weak self] in
-            guard let self = self else { return }
-            self.userLocation = self.mapView.userLocation!.coordinate
-        }
     }
 }
 
@@ -109,8 +89,9 @@ final class MGLMapViewController: UIViewController {
 extension MGLMapViewController: MGLMapViewDelegate {
     
     func mapView(_ mapView: MGLMapView, viewFor annotation: MGLAnnotation) -> MGLAnnotationView? {
-        
-        guard annotation is MGLPointAnnotation else { return nil }
+        guard annotation is SpeciesAnnotation else {
+            return nil
+        }
         
         let reuseIdentifier = "\(annotation.coordinate.longitude)"
         
@@ -118,14 +99,10 @@ extension MGLMapViewController: MGLMapViewDelegate {
         
         if annotationView == nil {
             annotationView = CustomAnnotationView(reuseIdentifier: reuseIdentifier)
-            annotationView!.bounds = CGRect(origin: .zero, size: CGSize(width: 25, height: 25))
+            annotationView!.bounds = CGRect(x: 0, y: 0, width: 25, height: 25)
             
-            let hue = CGFloat(annotation.coordinate.longitude + annotation.coordinate.latitude) / 100
-            annotationView!.backgroundColor = UIColor(
-                hue: hue,
-                saturation: 0.5,
-                brightness: 1,
-                alpha: 1)
+            let hue = CGFloat(annotation.coordinate.longitude) / 100
+            annotationView!.backgroundColor = UIColor(hue: hue, saturation: 0.5, brightness: 1, alpha: 1)
         }
         
         return annotationView
