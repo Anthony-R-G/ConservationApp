@@ -20,26 +20,32 @@ final class CustomCalloutView: UIView, MGLCalloutView {
         iv.layer.borderColor = UIColor.white.cgColor
         iv.layer.borderWidth = Constants.borderWidth
         iv.clipsToBounds = true
+        iv.isUserInteractionEnabled = false
         return iv
     }()
     
     private lazy var titleLabel: UILabel = {
-       return Factory.makeLabel(title: nil,
-                                 weight: .bold,
-                                 size: Constants.FontHierarchy.secondaryContentFontSize,
+        let label = Factory.makeLabel(title: nil,
+                                 fontWeight: .bold,
+                                 fontSize: 18,
+                                 widthAdjustsFontSize: false,
                                  color: Constants.Color.titleLabelColor,
                                  alignment: .left)
+        label.numberOfLines = 0
+        label.isUserInteractionEnabled = false
+        return label
     }()
     
     private lazy var subtitleLabel: UILabel = {
         let label = Factory.makeLabel(title: nil,
-                                      weight: .regular,
-                                      size: 13,
+                                      fontWeight: .regular,
+                                      fontSize: 14,
+                                      widthAdjustsFontSize: false,
                                       color: .white,
                                       alignment: .left)
         label.numberOfLines = 0
-        label.adjustsFontSizeToFitWidth = false
         label.lineBreakMode = .byTruncatingTail
+        label.isUserInteractionEnabled = false
         return label
     }()
     
@@ -47,13 +53,15 @@ final class CustomCalloutView: UIView, MGLCalloutView {
         let button = UIButton()
         button.setImage(UIImage(systemName: "info.circle"), for: .normal)
         button.tintColor = .systemBlue
+        button.isUserInteractionEnabled = false
         return button
     }()
     
-  private lazy var backgroundBlurEffectView: UIVisualEffectView = {
+    private lazy var backgroundBlurEffectView: UIVisualEffectView = {
         let blurEffect = UIBlurEffect(style: .regular)
         let bev = UIVisualEffectView(effect: blurEffect)
         bev.frame = mainBody.bounds
+        bev.isUserInteractionEnabled = false
         return bev
     }()
     
@@ -62,8 +70,8 @@ final class CustomCalloutView: UIView, MGLCalloutView {
     var representedObject: MGLAnnotation
     
     // Allow the callout to remain open during panning.
-    let dismissesAutomatically: Bool = false
-    let isAnchoredToAnnotation: Bool = true
+    var dismissesAutomatically: Bool = false
+    var isAnchoredToAnnotation: Bool = true
     
     // https://github.com/mapbox/mapbox-gl-native/issues/9228
     override var center: CGPoint {
@@ -108,8 +116,8 @@ final class CustomCalloutView: UIView, MGLCalloutView {
         mainBody = UIButton(frame: CGRect(
             x: 0,
             y: -15,
-            width: UIScreen.main.bounds.width * 0.60,
-            height: 160.deviceScaled))
+            width: UIScreen.main.bounds.width * 0.65,
+            height: 180.deviceScaled))
         
         super.init(frame: .zero)
         addSubviews()
@@ -126,6 +134,7 @@ final class CustomCalloutView: UIView, MGLCalloutView {
     func presentCallout(from rect: CGRect, in view: UIView, constrainedTo constrainedRect: CGRect, animated: Bool) {
         
         delegate?.calloutViewWillAppear?(self)
+        
         
         view.addSubview(self)
         
@@ -217,7 +226,7 @@ fileprivate extension CustomCalloutView {
     func addSubviews() {
         addSubview(mainBody)
         mainBody.addSubview(backgroundBlurEffectView)
-    
+        
         [speciesImageView, titleLabel, subtitleLabel, infoButton].forEach { backgroundBlurEffectView.contentView.addSubview($0) }
     }
     
@@ -247,7 +256,7 @@ fileprivate extension CustomCalloutView {
         subtitleLabel.snp.makeConstraints { (make) in
             make.leading.trailing.equalTo(mainBody).inset(10)
             make.top.equalTo(speciesImageView.snp.bottom).offset(5)
-            make.bottom.equalTo(mainBody.snp.bottom)
+            make.bottom.equalTo(mainBody.snp.bottom).inset(5)
         }
     }
     

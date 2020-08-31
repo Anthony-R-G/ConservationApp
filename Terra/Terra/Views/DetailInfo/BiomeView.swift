@@ -27,48 +27,54 @@ final class BiomeView: UIView {
     }()
     private lazy var biomeTitleLabel: UILabel = {
         return Factory.makeLabel(title: "Biome",
-                                 weight: .regular,
-                                 size: 15,
+                                 fontWeight: .regular,
+                                 fontSize: 15,
+                                 widthAdjustsFontSize: true,
                                  color: .lightGray,
                                  alignment: .center)
     }()
     
     private lazy var biomeDataLabel: UILabel = {
         return Factory.makeLabel(title: strategy.species.habitat.biome.rawValue,
-                                 weight: .bold,
-                                 size: 18,
+                                 fontWeight: .bold,
+                                 fontSize: 18,
+                                 widthAdjustsFontSize: true,
                                  color: .white,
                                  alignment: .center)
     }()
     
     private lazy var areaTitleLabel: UILabel = {
         return Factory.makeLabel(title: "Area",
-                                 weight: .regular,
-                                 size: 15,
+                                 fontWeight: .regular,
+                                 fontSize: 15,
+                                 widthAdjustsFontSize: true,
                                  color: .lightGray,
                                  alignment: .center)
     }()
     
     private lazy var areaDataLabel: UILabel = {
         return Factory.makeLabel(title: strategy.species.habitat.area,
-                                 weight: .bold,
-                                 size: 18,
+                                 fontWeight: .bold,
+                                 fontSize: 18,
+                                 widthAdjustsFontSize: true,
                                  color: .white,
                                  alignment: .center)
     }()
     
     private lazy var temperatureTitleLabel: UILabel = {
         return Factory.makeLabel(title: "Average Temperature",
-                                 weight: .regular,
-                                 size: 15,
+                                 fontWeight: .regular,
+                                 fontSize: 15,
+                                 widthAdjustsFontSize: true,
                                  color: .lightGray,
                                  alignment: .center)
     }()
     
     private lazy var temperatureDataLabel: UILabel = {
         return Factory.makeLabel(title: strategy.species.habitat.temperature,
-                                 weight: .bold,
-                                 size: 18,
+                                 fontWeight: .bold,
+                                 fontSize: 18,
+                                 widthAdjustsFontSize: true,
                                  color: .white,
                                  alignment: .center)
     }()
@@ -134,14 +140,14 @@ fileprivate extension BiomeView {
     func setBiomeImageConstraints() {
         biomeImage.snp.makeConstraints { (make) in
             make.leading.trailing.top.equalToSuperview()
-            make.height.equalTo(250)
+            make.height.equalTo(250.deviceScaled)
         }
     }
     
     func setStackConstraints() {
         stackView.snp.makeConstraints { (make) in
             make.leading.trailing.equalToSuperview()
-            make.top.equalTo(biomeImage.snp.bottom).offset(20)
+            make.top.equalTo(biomeImage.snp.bottom).offset(Constants.spacing)
         }
     }
 }

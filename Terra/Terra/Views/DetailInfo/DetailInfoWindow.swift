@@ -13,8 +13,9 @@ final class DetailInfoWindow: UIView {
     
     private lazy var titleLabel: UILabel = {
         return Factory.makeLabel(title: nil,
-                                 weight: .bold,
-                                 size: Constants.FontHierarchy.primaryContentFontSize,
+                                 fontWeight: .bold,
+                                 fontSize: Constants.FontHierarchy.primaryContentFontSize,
+                                 widthAdjustsFontSize: true,
                                  color: Constants.Color.titleLabelColor,
                                  alignment: .left)
     }()

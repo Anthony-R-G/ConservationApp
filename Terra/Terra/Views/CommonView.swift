@@ -14,8 +14,9 @@ final class CommonView: UIView {
     
     private lazy var titleLabel: UILabel = {
         return Factory.makeLabel(title: nil,
-                                 weight: .black,
-                                 size: 36,
+                                 fontWeight: .black,
+                                 fontSize: 36,
+                                 widthAdjustsFontSize: true,
                                  color: .white,
                                  alignment: .left)
         
@@ -23,8 +24,9 @@ final class CommonView: UIView {
     
     private lazy var subtitleLabel: UILabel = {
         let label = Factory.makeLabel(title: nil,
-                                      weight: .bold,
-                                      size: Constants.FontHierarchy.secondaryContentFontSize,
+                                      fontWeight: .bold,
+                                      fontSize: Constants.FontHierarchy.secondaryContentFontSize,
+                                      widthAdjustsFontSize: true,
                                       color: .white,
                                       alignment: .left)
         label.alpha = 0
@@ -33,8 +35,9 @@ final class CommonView: UIView {
     
     private lazy var blurbLabel: UILabel = {
         let label = Factory.makeLabel(title: nil,
-                                      weight: .regular,
-                                      size: Constants.FontHierarchy.secondaryContentFontSize,
+                                      fontWeight: .regular,
+                                      fontSize: Constants.FontHierarchy.secondaryContentFontSize,
+                                      widthAdjustsFontSize: true,
                                       color: .darkGray,
                                       alignment: .left)
         label.lineBreakMode = .byTruncatingTail

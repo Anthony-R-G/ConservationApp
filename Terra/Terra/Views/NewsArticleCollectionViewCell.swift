@@ -22,10 +22,13 @@ final class NewsArticleCollectionViewCell: UICollectionViewCell {
     }()
     
     private lazy var articleTitleLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont(name: FontWeight.bold.rawValue, size: 18)
-        label.textAlignment = .left
-        label.textColor = .white
+        let label = Factory.makeLabel(title: nil,
+                                      fontWeight: .bold,
+                                      fontSize: 18,
+                                      widthAdjustsFontSize: true,
+                                      color: .white,
+                                      alignment: .left)
+       
         label.numberOfLines = 0
         label.lineBreakMode = .byTruncatingTail
         return label
@@ -33,8 +36,9 @@ final class NewsArticleCollectionViewCell: UICollectionViewCell {
     
     private lazy var publishedDateLabel: UILabel = {
         return Factory.makeLabel(title: nil,
-                                 weight: .regular,
-                                 size: 14,
+                                 fontWeight: .regular,
+                                 fontSize: 14,
+                                 widthAdjustsFontSize: true,
                                  color: .lightGray,
                                  alignment: .left)
     }()

@@ -22,8 +22,9 @@ final class ConservationStatusView: UIView {
     
     private lazy var conservationStatusLabel: UILabel = {
         return Factory.makeLabel(title: species.population.conservationStatus.rawValue,
-                                 weight: .medium,
-                                 size: 18,
+                                 fontWeight: .medium,
+                                 fontSize: 18,
+                                 widthAdjustsFontSize: true,
                                  color: .white,
                                  alignment: .center)
     }()

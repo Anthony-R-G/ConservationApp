@@ -143,38 +143,35 @@ extension MGLMapViewController: MGLMapViewDelegate {
     
     
     func mapView(_ mapView: MGLMapView, calloutViewFor annotation: MGLAnnotation) -> MGLCalloutView? {
-        //        let locationOne = CLLocation(latitude: userLocation.latitude, longitude: userLocation.longitude)
-        //        let locationTwo = CLLocation(latitude: speciesLocation.latitude, longitude: speciesLocation.longitude)
-        //
-        //        let distance = locationOne.distance(from: locationTwo) * 0.000621371
-        //
         let title = annotation.title ?? nil
-        //        let subtitle = "Distance from you: \(distance.rounded(toPlaces: 1)) miles"
         let subtitle = (annotation.subtitle ?? nil) ?? ""
         let pointAnnotation = MGLPointAnnotation()
         pointAnnotation.title = title
         pointAnnotation.subtitle = subtitle
         pointAnnotation.coordinate = annotation.coordinate
         let callout = CustomCalloutView(annotation: pointAnnotation)
-        //        callout.delegate = self
+        callout.delegate = mapView
+        callout.isAnchoredToAnnotation = true
+        callout.dismissesAutomatically = false
         return callout
     }
+    
 }
 
 //MARK: -- CalloutView Delegate Methods
-//extension MGLMapViewController: MGLCalloutViewDelegate {
-//    func calloutViewWillAppear(_ calloutView: UIView & MGLCalloutView) {
-//        print("I will appear")
-//    }
-//
-//    func calloutViewDidAppear(_ calloutView: UIView & MGLCalloutView) {
-//        print("I appeared")
-//    }
-//
-//    func calloutViewTapped(_ calloutView: UIView & MGLCalloutView) {
-//        print("I was tapped")
-//    }
-//}
+extension MGLMapView: MGLCalloutViewDelegate {
+    public func calloutViewWillAppear(_ calloutView: UIView & MGLCalloutView) {
+        print("I will appear")
+    }
+
+    public func calloutViewDidAppear(_ calloutView: UIView & MGLCalloutView) {
+        print("I appeared")
+    }
+
+    public func calloutViewTapped(_ calloutView: UIView & MGLCalloutView) {
+        print("I was tapped")
+    }
+}
 
 
 //MARK: -- Add Subviews & Constraints
