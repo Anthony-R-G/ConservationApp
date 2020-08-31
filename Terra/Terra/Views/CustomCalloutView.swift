@@ -53,7 +53,9 @@ final class CustomCalloutView: UIView, MGLCalloutView {
         let button = UIButton()
         button.setImage(UIImage(systemName: "info.circle"), for: .normal)
         button.tintColor = .systemBlue
-        button.isUserInteractionEnabled = false
+        button.contentVerticalAlignment = .fill
+        button.contentHorizontalAlignment = .fill
+        button.addTarget(self, action: #selector(infoButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -99,6 +101,10 @@ final class CustomCalloutView: UIView, MGLCalloutView {
     
     //MARK: -- Methods
     
+    @objc private func infoButtonTapped() {
+        print("HI")
+    }
+    
     private func setupUI(from annotation: MGLAnnotation) {
         titleLabel.text = representedObject.title ?? ""
         subtitleLabel.text = representedObject.subtitle ?? ""
@@ -126,7 +132,6 @@ final class CustomCalloutView: UIView, MGLCalloutView {
         setConstraints()
         setupUI(from: representedObject)
         configureCalloutAppearance()
-        mainBody.addTarget(self, action: #selector(CustomCalloutView.calloutTapped), for: .touchUpInside)
     }
     
     required init?(coder decoder: NSCoder) {
@@ -227,6 +232,7 @@ final class CustomCalloutView: UIView, MGLCalloutView {
 fileprivate extension CustomCalloutView {
     
     func addSubviews() {
+        
         addSubview(mainBody)
         mainBody.addSubview(backgroundBlurEffectView)
         
@@ -267,7 +273,7 @@ fileprivate extension CustomCalloutView {
         infoButton.snp.makeConstraints { (make) in
             make.trailing.equalTo(mainBody).inset(5)
             make.top.equalTo(mainBody).inset(5)
-            make.width.height.equalTo(20)
+            make.width.height.equalTo(25)
         }
     }
 }

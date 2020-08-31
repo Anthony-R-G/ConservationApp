@@ -12,10 +12,10 @@ class SpeciesAnnotation: NSObject, MGLAnnotation {
     var species: Species!
     var coordinate: CLLocationCoordinate2D
     var title: String?
-    var subtitle: String?
-   
+    var subtitle: String?   
     
     init(species: Species) {
+        self.species = species
         self.coordinate = CLLocationCoordinate2D(
             latitude: species.habitat.latitude,
             longitude: species.habitat.longitude)

@@ -37,8 +37,8 @@ class DetailHabitatStrategy: DetailPageStrategy {
             
             DetailInfoWindow(title: "DETAIL",
                              content: Factory.makeDetailInfoWindowLabel(text: species.habitat.summary)),
-        
         ])
+        
         stackView.axis = .vertical
         stackView.spacing = Constants.spacing
         
@@ -52,7 +52,7 @@ class DetailHabitatStrategy: DetailPageStrategy {
     func getDetailViewController() -> UIViewController {
         let detailVC = SpeciesDetailInfoViewController()
         detailVC.strategy = self
-        self.biomeViewDelegate = detailVC
+        biomeViewDelegate = detailVC
         return detailVC
     }
 }

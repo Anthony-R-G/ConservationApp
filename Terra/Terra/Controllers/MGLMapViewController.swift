@@ -6,17 +6,19 @@
 //  Copyright © 2020 Antnee. All rights reserved.
 //
 
-
 import Mapbox
+import UIKit
 
 final class MGLMapViewController: UIViewController {
     
     private lazy var mapView: MGLMapView = {
         let mv = MGLMapView()
         mv.delegate = self
-        mv.styleURL = MGLStyle.satelliteStreetsStyleURL
         mv.tintColor = .darkGray
         mv.showsUserLocation = true
+        mv.styleURL = MGLStyle.satelliteStreetsStyleURL
+        mv.maximumZoomLevel = 12
+        mv.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         return mv
     }()
     
@@ -52,6 +54,8 @@ final class MGLMapViewController: UIViewController {
         }
     }
     
+    private var selectedSpecies: Species!
+    
     private var userLocation = CLLocationCoordinate2D()
     
     override var prefersStatusBarHidden: Bool {
@@ -65,8 +69,12 @@ final class MGLMapViewController: UIViewController {
         switch sender.selectedSegmentIndex {
         case 0:
             mapView.styleURL = MGLStyle.satelliteStreetsStyleURL
+            mapView.maximumZoomLevel = 12
+            
         case 1:
             mapView.styleURL = URL(string: "mapbox://styles/anthonyg5195/ckdkz8h2n0uri1ir58rf4o707")
+            mapView.maximumZoomLevel = 14
+            
         default:
             ()
         }
@@ -104,44 +112,30 @@ extension MGLMapViewController: MGLMapViewDelegate {
             let hue = CGFloat(annotation.coordinate.longitude) / 100
             annotationView!.backgroundColor = UIColor(hue: hue, saturation: 0.5, brightness: 1, alpha: 1)
         }
-        
         return annotationView
     }
-    
     
     func mapView(_ mapView: MGLMapView, annotationCanShowCallout annotation: MGLAnnotation) -> Bool {
         return true
     }
     
-    
     func mapView(_ mapView: MGLMapView, calloutViewFor annotation: MGLAnnotation) -> MGLCalloutView? {
-        let callout = CustomCalloutView(representedObject: annotation)
-        callout.delegate = mapView
-        return callout
+        return CustomCalloutView(representedObject: annotation)
     }
     
     func mapView(_ mapView: MGLMapView, didSelect annotation: MGLAnnotation) {
         mapView.setCenter(annotation.coordinate, animated: true)
     }
     
-}
-
-//MARK: -- CalloutView Delegate Methods
-extension MGLMapView: MGLCalloutViewDelegate {
-    public func calloutViewWillAppear(_ calloutView: UIView & MGLCalloutView) {
-        print("Callout will appear")
-        
-    }
-    
-    public func calloutViewDidAppear(_ calloutView: UIView & MGLCalloutView) {
-        print("Callout did appear")
-    }
-    
-    public func calloutViewTapped(_ calloutView: UIView & MGLCalloutView) {
-        print("Callout was tapped")
+    func mapView(_ mapView: MGLMapView, tapOnCalloutFor annotation: MGLAnnotation) {
+        guard let annotation = annotation as? SpeciesAnnotation else { return }
+        let coverVC = SpeciesCoverViewController()
+        coverVC.viewModel =  DetailPageStrategyViewModel(species: annotation.species)
+        let navVC = NavigationController(rootViewController: coverVC)
+        navVC.modalPresentationStyle = .fullScreen
+        present(navVC, animated: true, completion: nil)
     }
 }
-
 
 //MARK: -- Add Subviews & Constraints
 fileprivate extension MGLMapViewController {
