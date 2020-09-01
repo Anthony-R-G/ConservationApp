@@ -45,12 +45,12 @@ final class MGLMapViewController: UIViewController {
     
     var speciesData: [Species] = [] {
         didSet {
+            var speciesAnnotations = [SpeciesAnnotation]()
             for species in speciesData {
-                var speciesAnnotations = [SpeciesAnnotation]()
                 let annotation = SpeciesAnnotation(species: species)
                 speciesAnnotations.append(annotation)
-                mapView.addAnnotations(speciesAnnotations)
             }
+            mapView.addAnnotations(speciesAnnotations)
         }
     }
     
@@ -83,7 +83,7 @@ final class MGLMapViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    func checkLocationPermission() -> Bool {
+    private func checkLocationPermission() -> Bool {
         var locationPermissionGranted: Bool!
         if CLLocationManager.locationServicesEnabled() {
             switch CLLocationManager.authorizationStatus() {
@@ -98,6 +98,15 @@ final class MGLMapViewController: UIViewController {
             }
         }
         return locationPermissionGranted
+    }
+    
+    private func getDistanceFromUserToSpecies(speciesCoordinate: CLLocationCoordinate2D) -> Double {
+        let userLocation = CLLocation(latitude: (mapView.userLocation?.coordinate.latitude)!, longitude: (mapView.userLocation?.coordinate.longitude)!)
+        
+        let speciesLocation = CLLocation(latitude: speciesCoordinate.latitude, longitude: speciesCoordinate.longitude)
+        
+        let distance = (userLocation.distance(from: speciesLocation) * 0.000621371).rounded(toPlaces: 2)
+        return distance
     }
     
     override func viewDidLoad() {
@@ -140,15 +149,10 @@ extension MGLMapViewController: MGLMapViewDelegate {
         var distance: Double? = nil
         
         if checkLocationPermission() {
-            let userLocation = CLLocation(latitude: (mapView.userLocation?.coordinate.latitude)!, longitude: (mapView.userLocation?.coordinate.longitude)!)
-            
-            let speciesLocation = CLLocation(latitude: annotation.coordinate.latitude, longitude: annotation.coordinate.longitude)
-            
-            distance = (userLocation.distance(from: speciesLocation) * 0.000621371).rounded(toPlaces: 2)
+          distance = getDistanceFromUserToSpecies(speciesCoordinate: annotation.coordinate)
         }
         
         let callout = CustomCalloutView(representedObject: annotation, distance: distance)
-        
         return callout
     }
     
