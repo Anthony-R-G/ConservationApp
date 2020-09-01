@@ -5,7 +5,6 @@
 //  Created by Anthony Gonzalez on 8/6/20.
 //  Copyright © 2020 Antnee. All rights reserved.
 //
-
 import Mapbox
 import UIKit
 
@@ -14,11 +13,11 @@ final class MGLMapViewController: UIViewController {
     private lazy var mapView: MGLMapView = {
         let mv = MGLMapView()
         mv.delegate = self
-        mv.tintColor = .darkGray
         mv.showsUserLocation = true
         mv.styleURL = MGLStyle.satelliteStreetsStyleURL
         mv.maximumZoomLevel = 12
         mv.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        mv.tintColor = .darkGray
         return mv
     }()
     
@@ -85,6 +84,7 @@ final class MGLMapViewController: UIViewController {
     
     private func checkLocationPermission() -> Bool {
         var locationPermissionGranted: Bool!
+        
         if CLLocationManager.locationServicesEnabled() {
             switch CLLocationManager.authorizationStatus() {
             case .notDetermined, .restricted, .denied:
@@ -105,7 +105,7 @@ final class MGLMapViewController: UIViewController {
         
         let speciesLocation = CLLocation(latitude: speciesCoordinate.latitude, longitude: speciesCoordinate.longitude)
         
-        let distance = (userLocation.distance(from: speciesLocation) * 0.000621371).rounded(toPlaces: 2)
+        let distance = (userLocation.distance(from: speciesLocation) * 0.000621371).rounded(toPlaces: 1)
         return distance
     }
     

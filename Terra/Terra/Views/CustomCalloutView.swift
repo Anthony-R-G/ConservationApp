@@ -112,6 +112,7 @@ final class CustomCalloutView: UIView, MGLCalloutView {
         titleLabel.text = representedObject.title ?? ""
         subtitleLabel.text = representedObject.subtitle ?? ""
         FirebaseStorageService.calloutImageManager.getImage(for: annotation.title!, setTo: speciesImageView)
+        
         switch annotation.species.population.conservationStatus {
         case .critical:
             speciesImageView.layer.borderColor = Constants.Color.criticalStatusColor.cgColor
@@ -153,7 +154,6 @@ final class CustomCalloutView: UIView, MGLCalloutView {
     func presentCallout(from rect: CGRect, in view: UIView, constrainedTo constrainedRect: CGRect, animated: Bool) {
         
         delegate?.calloutViewWillAppear?(self)
-        
         
         view.addSubview(self)
         
