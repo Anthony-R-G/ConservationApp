@@ -12,10 +12,11 @@ import FirebaseUI
 final class SpeciesCollectionViewCell: UICollectionViewCell {
     //MARK: -- UI Element Initialization
     
-    private lazy var speciesNameLabel: UILabel = {
+    private lazy var speciesCommonNameLabel: UILabel = {
         let label = Factory.makeLabel(title: nil,
-                                      weight: .bold,
-                                      size: Constants.FontHierarchy.primaryContentFontSize,
+                                      fontWeight: .bold,
+                                      fontSize: Constants.FontHierarchy.primaryContentFontSize,
+                                      widthAdjustsFontSize: true,
                                       color: .white,
                                       alignment: .left)
         label.numberOfLines = 0
@@ -24,8 +25,9 @@ final class SpeciesCollectionViewCell: UICollectionViewCell {
     
     private lazy var speciesScientificNameLabel: UILabel = {
         return Factory.makeLabel(title: nil,
-                                 weight: .lightItalic,
-                                 size: Constants.FontHierarchy.secondaryContentFontSize,
+                                 fontWeight: .lightItalic,
+                                 fontSize: Constants.FontHierarchy.secondaryContentFontSize,
+                                 widthAdjustsFontSize: true,
                                  color: .white,
                                  alignment: .left)
     }()
@@ -42,8 +44,9 @@ final class SpeciesCollectionViewCell: UICollectionViewCell {
     
     private lazy var populationNumbersLabel: UILabel = {
         return Factory.makeLabel(title: nil,
-                                 weight: .regular,
-                                 size: Constants.FontHierarchy.secondaryContentFontSize,
+                                 fontWeight: .regular,
+                                 fontSize: Constants.FontHierarchy.secondaryContentFontSize,
+                                 widthAdjustsFontSize: true,
                                  color: .white,
                                  alignment: .right)
     }()
@@ -65,7 +68,7 @@ final class SpeciesCollectionViewCell: UICollectionViewCell {
     
     public func configureCell(from species: Species) {
         FirebaseStorageService.cellImageManager.getImage(for: species.commonName, setTo: backgroundImageView)
-        speciesNameLabel.text = species.commonName
+        speciesCommonNameLabel.text = species.commonName
         speciesScientificNameLabel.text = species.taxonomy.scientificName
         populationNumbersLabel.text = species.population.numbers.replacingOccurrences(of: "~", with: "")
         
@@ -103,7 +106,7 @@ final class SpeciesCollectionViewCell: UICollectionViewCell {
 
 fileprivate extension SpeciesCollectionViewCell {
     func addSubviews() {
-        [backgroundImageView, backgroundGradientOverlay, speciesNameLabel, conservationStatusLabel, populationNumbersLabel, speciesScientificNameLabel]
+        [backgroundImageView, backgroundGradientOverlay, speciesCommonNameLabel, conservationStatusLabel, populationNumbersLabel, speciesScientificNameLabel]
             .forEach{ contentView.addSubview($0) }
     }
     
@@ -111,7 +114,7 @@ fileprivate extension SpeciesCollectionViewCell {
         setBackgroundImageConstraints()
         setBackgroundGradientOverlayConstraints()
         
-        setSpeciesNameLabelConstraints()
+        setSpeciesCommonNameLabelConstraints()
         setSpeciesScientificNameLabelConstraints()
         
         setConservationStatusLabelConstraints()
@@ -130,8 +133,8 @@ fileprivate extension SpeciesCollectionViewCell {
         }
     }
     
-    func setSpeciesNameLabelConstraints(){
-        speciesNameLabel.snp.makeConstraints { (make) in
+    func setSpeciesCommonNameLabelConstraints(){
+        speciesCommonNameLabel.snp.makeConstraints { (make) in
             make.leading.bottom.equalToSuperview().inset(Constants.spacing)
             make.width.equalToSuperview().multipliedBy(0.8)
             make.height.equalTo(90)
@@ -140,9 +143,9 @@ fileprivate extension SpeciesCollectionViewCell {
     
     func setSpeciesScientificNameLabelConstraints() {
         speciesScientificNameLabel.snp.makeConstraints { (make) in
-            make.leading.equalTo(speciesNameLabel)
+            make.leading.equalTo(speciesCommonNameLabel)
             make.trailing.equalTo(populationNumbersLabel.snp.leading)
-            make.bottom.equalToSuperview().inset(10)
+            make.bottom.equalToSuperview().inset(Constants.spacing/2)
             make.height.equalTo(50)
         }
     }
@@ -150,7 +153,7 @@ fileprivate extension SpeciesCollectionViewCell {
     func setConservationStatusLabelConstraints() {
         conservationStatusLabel.snp.makeConstraints { (make) in
             make.centerY.equalTo(speciesScientificNameLabel)
-            make.trailing.equalToSuperview().inset(20)
+            make.trailing.equalToSuperview().inset(Constants.spacing)
             make.height.width.equalTo(conservationStatusLabel.frame.size)
         }
     }

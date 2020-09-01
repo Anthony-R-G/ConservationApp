@@ -53,16 +53,18 @@ final class SpeciesListViewController: UIViewController {
     
     private lazy var terraTitleLabel: UILabel = {
         return Factory.makeLabel(title: "TERRA",
-                                 weight: .black,
-                                 size: 30,
+                                 fontWeight: .black,
+                                 fontSize: 30,
+                                 widthAdjustsFontSize: true,
                                  color: Constants.Color.titleLabelColor,
                                  alignment: .left)
     }()
     
     private lazy var noResultsFoundLabel: UILabel = {
         let label = Factory.makeLabel(title: "No Species Found",
-                                      weight: .regular,
-                                      size: 16,
+                                      fontWeight: .regular,
+                                      fontSize: Constants.FontHierarchy.secondaryContentFontSize,
+                                      widthAdjustsFontSize: true,
                                       color: .red,
                                       alignment: .center)
         label.frame = CGRect(

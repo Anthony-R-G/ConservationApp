@@ -40,8 +40,9 @@ final class CoverHeaderNameView: UIView {
     
     private lazy var speciesCommonNameLabel: UILabel = {
         let label = Factory.makeLabel(title: species.commonName,
-                                      weight: .bold,
-                                      size: 56,
+                                      fontWeight: .bold,
+                                      fontSize: 56,
+                                      widthAdjustsFontSize: true,
                                       color: .white,
                                       alignment: .left)
         label.numberOfLines = 2
@@ -50,8 +51,9 @@ final class CoverHeaderNameView: UIView {
     
     private lazy var speciesScientificNameLabel: UILabel = {
         return Factory.makeLabel(title: "— \(species.taxonomy.scientificName)",
-            weight: .lightItalic,
-            size: 17,
+            fontWeight: .lightItalic,
+            fontSize: 17,
+            widthAdjustsFontSize: true,
             color: .white,
             alignment: .left)
     }()

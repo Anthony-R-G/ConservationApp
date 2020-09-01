@@ -13,112 +13,126 @@ final class ClassificationView: UIView {
     //MARK: -- UI Element Initialization
     private lazy var kingdomTitleLabel: UILabel = {
         return Factory.makeLabel(title: "Kingdom",
-                                 weight: .regular,
-                                 size: 15,
+                                 fontWeight: .regular,
+                                 fontSize: 15,
+                                 widthAdjustsFontSize: true,
                                  color: .lightGray,
                                  alignment: .left)
     }()
     
     private lazy var kingdomDataLabel: UILabel = {
         return Factory.makeLabel(title: species.taxonomy.kingdom,
-                                 weight: .bold,
-                                 size: 18,
+                                 fontWeight: .bold,
+                                 fontSize: 18,
+                                 widthAdjustsFontSize: true,
                                  color: .white,
                                  alignment: .left)
     }()
     
     private lazy var phylumTitleLabel: UILabel = {
         return Factory.makeLabel(title: "Phylum",
-                                 weight: .regular,
-                                 size: 15,
+                                 fontWeight: .regular,
+                                 fontSize: 15,
+                                 widthAdjustsFontSize: true,
                                  color: .lightGray,
                                  alignment: .left)
     }()
     
     private lazy var phylumDataLabel: UILabel = {
         return Factory.makeLabel(title: species.taxonomy.phylum,
-                                 weight: .bold,
-                                 size: 18,
+                                 fontWeight: .bold,
+                                 fontSize: 18,
+                                 widthAdjustsFontSize: true,
                                  color: .white,
                                  alignment: .left)
     }()
     
     private lazy var classTitleLabel: UILabel = {
         return Factory.makeLabel(title: "Class",
-                                 weight: .regular,
-                                 size: 15,
+                                 fontWeight: .regular,
+                                 fontSize: 15,
+                                 widthAdjustsFontSize: true,
                                  color: .lightGray,
                                  alignment: .left)
     }()
     
     private lazy var classDataLabel: UILabel = {
         return Factory.makeLabel(title: species.taxonomy.classTaxonomy,
-                                 weight: .bold,
-                                 size: 18,
+                                 fontWeight: .bold,
+                                 fontSize: 18,
+                                 widthAdjustsFontSize: true,
                                  color: .white,
                                  alignment: .left)
     }()
     
     private lazy var orderTitleLabel: UILabel = {
         return Factory.makeLabel(title: "Order",
-                                 weight: .regular,
-                                 size: 15,
+                                 fontWeight: .regular,
+                                 fontSize: 15,
+                                 widthAdjustsFontSize: true,
                                  color: .lightGray,
                                  alignment: .left)
     }()
     
     private lazy var orderDataLabel: UILabel = {
         return Factory.makeLabel(title: species.taxonomy.order,
-                                 weight: .bold,
-                                 size: 18,
+                                 fontWeight: .bold,
+                                 fontSize: 18,
+                                 widthAdjustsFontSize: true,
                                  color: .white,
                                  alignment: .left)
     }()
     
     private lazy var familyTitleLabel: UILabel = {
         return Factory.makeLabel(title: "Family",
-                                 weight: .regular,
-                                 size: 15,
+                                 fontWeight: .regular,
+                                 fontSize: 15,
+                                 widthAdjustsFontSize: true,
                                  color: .lightGray,
                                  alignment: .left)
     }()
     
     private lazy var familyDataLabel: UILabel = {
         return Factory.makeLabel(title: species.taxonomy.family,
-                                 weight: .bold,
-                                 size: 18,
+                                 fontWeight: .bold,
+                                 fontSize: 18,
+                                 widthAdjustsFontSize: true,
                                  color: .white,
                                  alignment: .left)
     }()
     
     private lazy var genusTitleLabel: UILabel = {
         return Factory.makeLabel(title: "Genus",
-                                 weight: .regular,
-                                 size: 15,
+                                 fontWeight: .regular,
+                                 fontSize: 15,
+                                 widthAdjustsFontSize: true,
                                  color: .lightGray,
                                  alignment: .left)
     }()
     
     private lazy var genusDataLabel: UILabel = {
         return Factory.makeLabel(title: species.taxonomy.genus,
-                                 weight: .bold,
-                                 size: 18,
+                                 fontWeight: .bold,
+                                 fontSize: 18,
+                                 widthAdjustsFontSize: true,
                                  color: .white,
                                  alignment: .left)
     }()
     
     private lazy var scientificNameTitleLabel: UILabel = {
         return Factory.makeLabel(title: "Scientific Name",
-                                 weight: .regular,
-                                 size: 16,
+                                 fontWeight: .regular,
+                                 fontSize: 16,
+                                 widthAdjustsFontSize: true,
                                  color: .lightGray,
                                  alignment: .center)
     }()
     
     private lazy var scientificNameDataLabel: UILabel = {
         return Factory.makeLabel(title: species.taxonomy.scientificName,
-                                 weight: .italic,
-                                 size: 18,
+                                 fontWeight: .italic,
+                                 fontSize: 18,
+                                 widthAdjustsFontSize: true,
                                  color: .white,
                                  alignment: .center)
     }()

@@ -48,8 +48,8 @@ class TerraTests: XCTestCase {
     func testFactoryLabelWorks() {
         let labelTitle = "ASDF"
         let label = Factory.makeLabel(title: labelTitle,
-                                      weight: .bold,
-                                      size: 15,
+                                      fontWeight: .bold,
+                                      fontSize: 15,
                                       color: .white,
                                       alignment: .left)
         XCTAssert(label.text == labelTitle,
