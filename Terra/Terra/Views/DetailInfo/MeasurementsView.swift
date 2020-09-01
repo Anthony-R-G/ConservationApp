@@ -14,24 +14,27 @@ final class MeasurementsView: UIView {
     
     private lazy var heightTitleLabel: UILabel = {
         return Factory.makeLabel(title: "Height",
-                                 weight: .bold,
-                                 size: 19,
+                                 fontWeight: .bold,
+                                 fontSize: 19,
+                                 widthAdjustsFontSize: true,
                                  color: .white,
                                  alignment: .left)
     }()
     
     private lazy var maleHeightDataLabel: UILabel = {
         return Factory.makeLabel(title: "Male: \(species.measurements.averageMaleHeight)",
-            weight: .regular,
-            size: 17,
+            fontWeight: .regular,
+            fontSize: 17,
+            widthAdjustsFontSize: true,
             color: .white,
             alignment: .left)
     }()
     
     private lazy var femaleHeightDataLabel: UILabel = {
         return Factory.makeLabel(title: "Female: \(species.measurements.averageFemaleHeight)",
-            weight: .regular,
-            size: 17,
+            fontWeight: .regular,
+            fontSize: 17,
+            widthAdjustsFontSize: true,
             color: .white,
             alignment: .left)
     }()
@@ -44,8 +47,9 @@ final class MeasurementsView: UIView {
             measurementType = "Adult, At Shoulder"
         }
         return Factory.makeLabel(title: measurementType,
-                                 weight: .regular,
-                                 size: 15,
+                                 fontWeight: .regular,
+                                 fontSize: 15,
+                                 widthAdjustsFontSize: true,
                                  color: .lightGray,
                                  alignment: .left)
     }()
@@ -56,31 +60,34 @@ final class MeasurementsView: UIView {
         ])
         sv.axis = .vertical
         sv.distribution = .fillEqually
-        sv.spacing = 20
-        sv.setCustomSpacing(10, after: femaleHeightDataLabel)
+        sv.spacing = Constants.spacing
+        sv.setCustomSpacing(Constants.spacing/2, after: femaleHeightDataLabel)
         return sv
     }()
     
     private lazy var weightTitleLabel: UILabel = {
         return Factory.makeLabel(title: "Weight",
-                                 weight: .bold,
-                                 size: 19,
+                                 fontWeight: .bold,
+                                 fontSize: 19,
+                                 widthAdjustsFontSize: true,
                                  color: .white,
                                  alignment: .right)
     }()
     
     private lazy var maleWeightDataLabel: UILabel = {
         return Factory.makeLabel(title: species.measurements.averageMaleWeight,
-            weight: .regular,
-            size: 17,
+            fontWeight: .regular,
+            fontSize: 17,
+            widthAdjustsFontSize: true,
             color: .white,
             alignment: .right)
     }()
     
     private lazy var femaleWeightDataLabel: UILabel = {
         return Factory.makeLabel(title: species.measurements.averageFemaleWeight,
-            weight: .regular,
-            size: 17,
+            fontWeight: .regular,
+            fontSize: 17,
+            widthAdjustsFontSize: true,
             color: .white,
             alignment: .right)
     }()
@@ -91,7 +98,7 @@ final class MeasurementsView: UIView {
         ])
         sv.axis = .vertical
         sv.distribution = .fillEqually
-        sv.spacing = 20
+        sv.spacing = Constants.spacing
         return sv
     }()
     
@@ -131,10 +138,10 @@ fileprivate extension MeasurementsView {
     }
     
     func setConstraints() {
-        setHeightStackConstraints()
+        setStackConstraints()
     }
     
-    func setHeightStackConstraints() {
+    func setStackConstraints() {
         horizontalStack.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }

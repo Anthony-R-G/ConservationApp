@@ -8,17 +8,18 @@
 
 import Mapbox
 
-class SpeciesAnnotation: NSObject, MGLAnnotation {
-
+final class SpeciesAnnotation: NSObject, MGLAnnotation {
+    var species: Species!
     var coordinate: CLLocationCoordinate2D
     var title: String?
     var subtitle: String?
-    var area: String
     
-    init(coordinate: CLLocationCoordinate2D, title: String, subtitle: String, area: String) {
-        self.coordinate = coordinate
-        self.title = title
-        self.subtitle = subtitle
-        self.area = area
+    init(species: Species) {
+        self.species = species
+        self.coordinate = CLLocationCoordinate2D(
+            latitude: species.habitat.latitude,
+            longitude: species.habitat.longitude)
+        self.title = species.commonName
+        self.subtitle = species.habitat.summary
     }
 }

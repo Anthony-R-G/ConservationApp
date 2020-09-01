@@ -8,7 +8,7 @@
 
 import Mapbox
 
-final class SpeciesMapView: UIView {
+final class DistributionView: UIView {
     //MARK: -- UI Element Initialization
     
     private lazy var mapView: MGLMapView = {
@@ -19,10 +19,6 @@ final class SpeciesMapView: UIView {
         mv.tintColor = .white
         mv.layer.cornerRadius = Constants.cornerRadius
         mv.clipsToBounds = true
-        //        mv.zoomLevel = 2.25
-        //        mv.zoomLevel = 8
-        //        mv.minimumZoomLevel = 2
-        //        mv.maximumZoomLevel = 1.8
         mv.delegate = self
         return mv
     }()
@@ -35,12 +31,18 @@ final class SpeciesMapView: UIView {
     //MARK: -- Methods
     
     required init(species: Species) {
-        self.species = species
-        speciesLocation = CLLocationCoordinate2D(latitude: species.habitat.latitude, longitude: species.habitat.longitude)
         super.init(frame: .zero)
-        addSubviews()
-        setConstraints()
+        self.species = species
+        speciesLocation = CLLocationCoordinate2D(
+            latitude: species.habitat.latitude,
+            longitude: species.habitat.longitude)
+        
         heightAnchor.constraint(equalToConstant: 460.deviceScaled).isActive = true
+        
+        addSubview(mapView)
+        mapView.snp.makeConstraints { (make) in
+            make.height.width.edges.equalToSuperview()
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -49,7 +51,7 @@ final class SpeciesMapView: UIView {
 }
 
 //MARK: -- Map View Delegate
-extension SpeciesMapView: MGLMapViewDelegate {
+extension DistributionView: MGLMapViewDelegate {
     func mapViewDidFinishLoadingMap(_ mapView: MGLMapView) {
         
         let camera = MGLMapCamera(lookingAtCenter: speciesLocation,
@@ -61,23 +63,3 @@ extension SpeciesMapView: MGLMapViewDelegate {
                           animationTimingFunction: CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut))
     }
 }
-
-//MARK: -- Add Subviews & Constraints
-
-fileprivate extension SpeciesMapView {
-    func addSubviews() {
-        [mapView].forEach{ addSubview($0) }
-    }
-    
-    func setConstraints() {
-        setMapConstraints()
-    }
-    
-    func setMapConstraints() {
-        mapView.snp.makeConstraints { [weak self] (make) in
-            guard let self = self else { return }
-            make.edges.equalTo(self)
-        }
-    }
-}
-

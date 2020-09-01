@@ -30,15 +30,15 @@ class DetailHabitatStrategy: DetailPageStrategy {
     func arrangedSubviews() -> UIStackView {
         let stackView = UIStackView(arrangedSubviews: [
             DetailInfoWindow(title: "DISTRIBUTION",
-                             content: SpeciesMapView(species: species)),
+                             content: DistributionView(species: species)),
             
             DetailInfoWindow(title: "BIOME",
                              content: BiomeView(strategy: self)),
             
             DetailInfoWindow(title: "DETAIL",
                              content: Factory.makeDetailInfoWindowLabel(text: species.habitat.summary)),
-        
         ])
+        
         stackView.axis = .vertical
         stackView.spacing = Constants.spacing
         
@@ -52,7 +52,7 @@ class DetailHabitatStrategy: DetailPageStrategy {
     func getDetailViewController() -> UIViewController {
         let detailVC = SpeciesDetailInfoViewController()
         detailVC.strategy = self
-        self.biomeViewDelegate = detailVC
+        biomeViewDelegate = detailVC
         return detailVC
     }
 }

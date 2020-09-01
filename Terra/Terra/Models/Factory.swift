@@ -8,29 +8,33 @@
 
 import UIKit
 
-class Factory {
+final class Factory {
     static func makeLabel(
         title: String?,
-        weight: FontWeight,
-        size: CGFloat,
+        fontWeight: FontWeight,
+        fontSize: CGFloat,
+        widthAdjustsFontSize: Bool,
         color: UIColor,
         alignment: NSTextAlignment) -> UILabel {
         
         let label = UILabel()
         label.text = title
-        label.font = UIFont(name: weight.rawValue, size: size.deviceScaled)
+        label.font = UIFont(name: fontWeight.rawValue, size: fontSize.deviceScaled)
         label.textAlignment = alignment
         label.textColor = color
-        label.adjustsFontSizeToFitWidth = true
-        label.sizeToFit()
+        if widthAdjustsFontSize == true {
+            label.adjustsFontSizeToFitWidth = true
+            label.sizeToFit()
+        }
         return label
     }
     
     static func makeDetailInfoWindowLabel(text: String) -> UILabel {
         let label = makeLabel(
             title: text.replacingOccurrences(of: "\\n", with: "\n"),
-            weight: .regular,
-            size: 16,
+            fontWeight: .regular,
+            fontSize: 16,
+            widthAdjustsFontSize: true,
             color: .white,
             alignment: .natural)
         label.numberOfLines = 0

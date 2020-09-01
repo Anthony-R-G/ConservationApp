@@ -17,48 +17,72 @@ final class CustomCalloutView: UIView, MGLCalloutView {
             size: CGSize(width: 80.deviceScaled, height: 80.deviceScaled)))
         iv.contentMode = .scaleAspectFill
         iv.layer.cornerRadius = iv.frame.size.width/2
-        iv.layer.borderColor = UIColor.white.cgColor
         iv.layer.borderWidth = Constants.borderWidth
         iv.clipsToBounds = true
+        iv.isUserInteractionEnabled = false
         return iv
     }()
     
     private lazy var titleLabel: UILabel = {
-       return Factory.makeLabel(title: nil,
-                                 weight: .bold,
-                                 size: Constants.FontHierarchy.secondaryContentFontSize,
-                                 color: Constants.Color.titleLabelColor,
-                                 alignment: .left)
+        let label = Factory.makeLabel(title: nil,
+                                      fontWeight: .bold,
+                                      fontSize: 18,
+                                      widthAdjustsFontSize: false,
+                                      color: Constants.Color.titleLabelColor,
+                                      alignment: .left)
+        label.numberOfLines = 0
+        label.isUserInteractionEnabled = false
+        return label
     }()
     
     private lazy var subtitleLabel: UILabel = {
         let label = Factory.makeLabel(title: nil,
-                                      weight: .regular,
-                                      size: 13,
+                                      fontWeight: .regular,
+                                      fontSize: 14,
+                                      widthAdjustsFontSize: false,
                                       color: .white,
                                       alignment: .left)
         label.numberOfLines = 0
-        label.adjustsFontSizeToFitWidth = false
         label.lineBreakMode = .byTruncatingTail
+        label.isUserInteractionEnabled = false
         return label
     }()
     
-    private lazy var infoButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(systemName: "info.circle"), for: .normal)
-        button.tintColor = .systemBlue
-        return button
+    private lazy var readMoreLabel: UILabel = {
+        let label = Factory.makeLabel(title: "TAP TO LEARN MORE", fontWeight: .light, fontSize: 11, widthAdjustsFontSize: true, color: .lightGray, alignment: .left)
+        return label
     }()
     
-  private lazy var backgroundBlurEffectView: UIVisualEffectView = {
+    private lazy var distanceLabel: UILabel = {
+        let label = Factory.makeLabel(title: nil, fontWeight: .light, fontSize: 13, widthAdjustsFontSize: true, color: .white, alignment: .left)
+        return label
+    }()
+    
+    private lazy var backgroundBlurEffectView: UIVisualEffectView = {
         let blurEffect = UIBlurEffect(style: .regular)
         let bev = UIVisualEffectView(effect: blurEffect)
         bev.frame = mainBody.bounds
+        bev.isUserInteractionEnabled = false
         return bev
     }()
     
+    private lazy var stackView: UIStackView = {
+        let sv = UIStackView(arrangedSubviews: [
+            readMoreLabel, titleLabel, distanceLabel
+        ])
+        sv.spacing = 3.deviceScaled
+        sv.axis = .vertical
+        return sv
+    }()
+    
+    lazy var leftAccessoryView = UIView() /* unused */
+    lazy var rightAccessoryView = UIView() /* unused */
+    
     
     //MARK: -- Properties
+    
+    weak var delegate: MGLCalloutViewDelegate?
+    
     var representedObject: MGLAnnotation
     
     // Allow the callout to remain open during panning.
@@ -69,7 +93,7 @@ final class CustomCalloutView: UIView, MGLCalloutView {
     override var center: CGPoint {
         set {
             var newCenter = newValue
-            newCenter.y -= bounds.midY
+            newCenter.y = newCenter.y - bounds.midY
             super.center = newCenter
         }
         get {
@@ -77,45 +101,49 @@ final class CustomCalloutView: UIView, MGLCalloutView {
         }
     }
     
-    lazy var leftAccessoryView = UIView() /* unused */
-    lazy var rightAccessoryView = UIView() /* unused */
-    
-    weak var delegate: MGLCalloutViewDelegate?
-    
     let tipHeight: CGFloat = 30.0
     let tipWidth: CGFloat = 40.0
     
     let mainBody: UIButton
     
-    
     //MARK: -- Methods
     
-    private func setupUI(from annotation: MGLAnnotation) {
+    private func setupUI(from annotation: SpeciesAnnotation) {
         titleLabel.text = representedObject.title ?? ""
         subtitleLabel.text = representedObject.subtitle ?? ""
-        FirebaseStorageService.calloutImageManager.getImage(for: annotation.title!!, setTo: speciesImageView)
-    }
-    
-    private func configureCalloutAppearance() {
+        FirebaseStorageService.calloutImageManager.getImage(for: annotation.title!, setTo: speciesImageView)
+        
+        switch annotation.species.population.conservationStatus {
+        case .critical:
+            speciesImageView.layer.borderColor = Constants.Color.criticalStatusColor.cgColor
+        case .endangered:
+            speciesImageView.layer.borderColor = Constants.Color.endangeredStatusColor.cgColor
+        case .vulnerable:
+            speciesImageView.layer.borderColor = Constants.Color.vulnerableStatusColor.cgColor
+        }
+        
         backgroundColor = .clear
         mainBody.backgroundColor = .clear
         mainBody.clipsToBounds = true
         mainBody.layer.cornerRadius = 10.0
     }
     
-    required init(annotation: MGLAnnotation) {
-        representedObject = annotation
+    
+    
+    required init(representedObject: SpeciesAnnotation, distance: Double?) {
+        self.representedObject = representedObject
         mainBody = UIButton(frame: CGRect(
             x: 0,
             y: -15,
-            width: UIScreen.main.bounds.width * 0.60,
-            height: 160.deviceScaled))
-        
+            width: UIScreen.main.bounds.width * 0.65,
+            height: 190.deviceScaled))
         super.init(frame: .zero)
         addSubviews()
         setConstraints()
-        setupUI(from: annotation)
-        configureCalloutAppearance()
+        setupUI(from: representedObject)
+        if distance != nil {
+            distanceLabel.text = "\(distance!) miles away"
+        }
     }
     
     required init?(coder decoder: NSCoder) {
@@ -215,17 +243,17 @@ final class CustomCalloutView: UIView, MGLCalloutView {
 fileprivate extension CustomCalloutView {
     
     func addSubviews() {
+        
         addSubview(mainBody)
         mainBody.addSubview(backgroundBlurEffectView)
-    
-        [speciesImageView, titleLabel, subtitleLabel, infoButton].forEach { backgroundBlurEffectView.contentView.addSubview($0) }
+        
+        [speciesImageView, stackView, subtitleLabel].forEach { backgroundBlurEffectView.contentView.addSubview($0) }
     }
     
     func setConstraints() {
         setSpeciesImageConstraints()
         setTitleLabelConstraints()
         setSubtitleLabelConstraints()
-        setInfoButtonConstraints()
     }
     
     func setSpeciesImageConstraints() {
@@ -236,7 +264,7 @@ fileprivate extension CustomCalloutView {
     }
     
     func setTitleLabelConstraints() {
-        titleLabel.snp.makeConstraints { (make) in
+        stackView.snp.makeConstraints { (make) in
             make.centerY.equalTo(speciesImageView)
             make.leading.equalTo(speciesImageView.snp.trailing).offset(10)
             make.trailing.equalTo(mainBody).inset(10)
@@ -247,15 +275,7 @@ fileprivate extension CustomCalloutView {
         subtitleLabel.snp.makeConstraints { (make) in
             make.leading.trailing.equalTo(mainBody).inset(10)
             make.top.equalTo(speciesImageView.snp.bottom).offset(5)
-            make.bottom.equalTo(mainBody.snp.bottom)
-        }
-    }
-    
-    func setInfoButtonConstraints() {
-        infoButton.snp.makeConstraints { (make) in
-            make.trailing.equalTo(mainBody).inset(5)
-            make.top.equalTo(mainBody).inset(5)
-            make.width.height.equalTo(20)
+            make.bottom.equalTo(mainBody.snp.bottom).inset(5)
         }
     }
 }

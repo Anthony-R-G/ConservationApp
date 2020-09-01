@@ -12,11 +12,11 @@ import UIKit
 
 protocol DetailPageStrategy {
     var species: Species { get set }
-    mutating func getDetailViewController() -> UIViewController
     func speciesName() -> String
     func pageName() -> String
     func firebaseStorageManager() -> FirebaseStorageService
     mutating func arrangedSubviews() -> UIStackView
+    mutating func getDetailViewController() -> UIViewController
 }
 
 extension DetailPageStrategy {
