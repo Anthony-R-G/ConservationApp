@@ -305,6 +305,20 @@ PODS:
     - MaterialComponents/Availability
     - MaterialComponents/private/Color
     - MaterialComponents/private/Math
+  - MaterialComponents/FlexibleHeader (113.1.0):
+    - MaterialComponents/Availability
+    - MaterialComponents/Elevation
+    - "MaterialComponents/FlexibleHeader+ShiftBehavior"
+    - "MaterialComponents/FlexibleHeader+ShiftBehaviorEnabledWithStatusBar"
+    - MaterialComponents/private/Application
+    - MaterialComponents/private/Math
+    - MaterialComponents/private/UIMetrics
+    - MaterialComponents/ShadowElevations
+    - MaterialComponents/ShadowLayer
+    - MDFTextAccessibility
+  - "MaterialComponents/FlexibleHeader+ShiftBehavior (113.1.0)"
+  - "MaterialComponents/FlexibleHeader+ShiftBehaviorEnabledWithStatusBar (113.1.0)":
+    - "MaterialComponents/FlexibleHeader+ShiftBehavior"
   - MaterialComponents/Ink (113.1.0):
     - MaterialComponents/Availability
     - MaterialComponents/private/Color
@@ -314,6 +328,8 @@ PODS:
   - MaterialComponents/private/Color (113.1.0):
     - MaterialComponents/Availability
   - MaterialComponents/private/Math (113.1.0)
+  - MaterialComponents/private/UIMetrics (113.1.0):
+    - MaterialComponents/private/Application
   - MaterialComponents/Ripple (113.1.0):
     - MaterialComponents/AnimationTiming
     - MaterialComponents/Availability
@@ -326,7 +342,6 @@ PODS:
     - MaterialComponents/private/Application
     - MaterialComponents/private/Math
     - MDFTextAccessibility
-  - MaterialDesignWidgets (0.1.1)
   - MDFInternationalization (2.0.0)
   - MDFTextAccessibility (2.0.0)
   - nanopb (1.30905.0):
@@ -345,7 +360,7 @@ DEPENDENCIES:
   - FirebaseUI/Storage
   - Mapbox-iOS-SDK (~> 6.0.0)
   - MaterialComponents/BottomNavigation
-  - MaterialDesignWidgets
+  - MaterialComponents/FlexibleHeader
   - SnapKit (~> 5.0.1)
 
 SPEC REPOS:
@@ -367,7 +382,6 @@ SPEC REPOS:
     - Mapbox-iOS-SDK
     - MapboxMobileEvents
     - MaterialComponents
-    - MaterialDesignWidgets
     - MDFInternationalization
     - MDFTextAccessibility
     - nanopb
@@ -393,7 +407,6 @@ SPEC CHECKSUMS:
   Mapbox-iOS-SDK: 48ff7550bd459b8494da8ef4d660a668e9187ef0
   MapboxMobileEvents: 2bc0ca2eedb627b73cf403258dce2b2fa98074a6
   MaterialComponents: 2dd68a6e240ec31c37a4559f176b7bcfe31ef92c
-  MaterialDesignWidgets: 6d02d3fbba2fa89f6e773983346ad2187d7ef8ff
   MDFInternationalization: 010097556d6b09d2c4ea38e0820ea6d37be6a314
   MDFTextAccessibility: 85c09a1bd9c321f494348e632a25063bcda35a53
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
@@ -401,6 +414,6 @@ SPEC CHECKSUMS:
   SDWebImage: cf6922231e95550934da2ada0f20f2becf2ceba9
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
 
-PODFILE CHECKSUM: 8ab55a3aba967057a5c036fa8330106fdc2f28c7
+PODFILE CHECKSUM: 13e2fc6e5cc84d7548c2ec3d9f55c134f8e1895b
 
 COCOAPODS: 1.9.3

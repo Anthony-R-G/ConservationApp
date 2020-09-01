@@ -14,13 +14,21 @@ final class NewsViewController: UIViewController {
     //MARK: -- UI Element Initialization
     
     private lazy var collectionView: UICollectionView = {
-        let cv = UICollectionView(frame: CGRect(origin: .zero, size: CGSize(width: Constants.screenWidth, height: Constants.screenHeight)), collectionViewLayout: StretchyCollectionViewHeaderLayout())
+        let cv = UICollectionView(frame: CGRect(
+            origin: .zero,
+            size: CGSize(
+                width: Constants.screenWidth,
+                height: Constants.screenHeight))
+            , collectionViewLayout: StretchyCollectionViewHeaderLayout())
+        
         if let layout = cv.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.sectionInset = .init(top: Constants.spacing,
-                                        left: Constants.spacing,
-                                        bottom: Constants.spacing,
-                                        right: Constants.spacing)
+            layout.sectionInset = UIEdgeInsets(
+                top: Constants.spacing,
+                left: Constants.spacing,
+                bottom: Constants.spacing,
+                right: Constants.spacing)
         }
+        
         cv.contentInsetAdjustmentBehavior = .never
         cv.register(NewsCollectionViewHeader.self,
                     forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
@@ -41,6 +49,16 @@ final class NewsViewController: UIViewController {
     private var viewModel: NewsViewModel!
     
     private var headerView: NewsCollectionViewHeader!
+    
+    private var previousStatusBarHidden = false
+    
+    override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
+           return .slide
+       }
+       
+//    override var prefersStatusBarHidden: Bool {
+//        return shouldHideStatusBar
+//       }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -99,18 +117,25 @@ extension NewsViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView,
                         viewForSupplementaryElementOfKind kind: String,
                         at indexPath: IndexPath) -> UICollectionReusableView {
-        headerView = (collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerID, for: indexPath) as? NewsCollectionViewHeader)!
+        
+        headerView = (
+            collectionView.dequeueReusableSupplementaryView(
+            ofKind: kind,
+            withReuseIdentifier: headerID,
+            for: indexPath) as? NewsCollectionViewHeader)!
+        
         headerView.delegate = self
         return headerView
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: Constants.screenWidth, height: 290.deviceScaled)
     }
     
     
-    func collectionView(_ collectionView: UICollectionView,
-                        didHighlightItemAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
         Utilities.sendHapticFeedback(action: .itemSelected)
         let cell = collectionView.cellForItem(at: indexPath)
         UIView.animate(withDuration: 0.3) {
@@ -118,8 +143,7 @@ extension NewsViewController: UICollectionViewDelegate {
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView,
-                        didUnhighlightItemAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath)
         UIView.animate(withDuration: 0.3) {
             cell?.transform = CGAffineTransform(scaleX: 1, y: 1)
@@ -139,6 +163,7 @@ extension NewsViewController: UICollectionViewDelegate {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        updateStatusBarVisibility()
         let contentOffsetY = scrollView.contentOffset.y
         
         if contentOffsetY > 0 {
@@ -209,6 +234,30 @@ fileprivate extension NewsViewController {
         collectionView.snp.makeConstraints { (make) in
             make.leading.top.trailing.equalToSuperview()
             make.bottom.equalTo(view.safeAreaLayoutGuide)
+          
         }
     }
 }
+
+/*
+extension NewsViewController {
+    
+    private var shouldHideStatusBar: Bool {
+        let frame = collectionView.convert(collectionView.bounds, to: nil)
+
+        return frame.minY < view.safeAreaInsets.top
+    }
+    
+    private func updateStatusBarVisibility() {
+        if previousStatusBarHidden != shouldHideStatusBar {
+            
+            UIView.animate(withDuration: 0.2, animations: { [weak self] in
+                guard let self = self else { return }
+                self.setNeedsStatusBarAppearanceUpdate()
+            })
+            
+            previousStatusBarHidden = shouldHideStatusBar
+        }
+    }
+}
+*/

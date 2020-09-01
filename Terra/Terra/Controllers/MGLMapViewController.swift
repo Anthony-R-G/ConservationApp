@@ -7,7 +7,6 @@
 //
 import Mapbox
 import UIKit
-import MaterialDesignWidgets
 
 final class MGLMapViewController: UIViewController {
     

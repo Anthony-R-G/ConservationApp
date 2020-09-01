@@ -25,7 +25,7 @@ final class NewsArticleCollectionViewCell: UICollectionViewCell {
         let label = Factory.makeLabel(title: nil,
                                       fontWeight: .bold,
                                       fontSize: 18,
-                                      widthAdjustsFontSize: true,
+                                      widthAdjustsFontSize: false,
                                       color: .white,
                                       alignment: .left)
        

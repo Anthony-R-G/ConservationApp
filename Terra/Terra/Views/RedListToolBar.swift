@@ -46,7 +46,7 @@ final class RedListFilterTabBar: UITabBar {
     
             appearance.stackedLayoutAppearance.normal.titleTextAttributes = [
                 NSAttributedString.Key.font:
-                    UIFont(name: FontWeight.light.rawValue,
+                    UIFont(name: FontWeight.regular.rawValue,
                            size: 12.deviceScaled)!,
                 NSAttributedString.Key.foregroundColor: UIColor.white]
         
@@ -71,7 +71,7 @@ final class RedListFilterTabBar: UITabBar {
             color: .white,
             size: CGSize(
                 width: frame.width/CGFloat(items!.count),
-                height: frame.height), lineWidth: 2.0)
+                height: frame.height), lineWidth: Constants.borderWidth)
     }
     
     required init?(coder: NSCoder) {

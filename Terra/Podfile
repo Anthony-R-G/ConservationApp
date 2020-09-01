@@ -9,9 +9,9 @@ target 'Terra' do
  pod 'Firebase/Firestore'
  pod 'FirebaseUI/Storage'
  pod 'MaterialComponents/BottomNavigation'
+ pod 'MaterialComponents/FlexibleHeader'
  pod 'Mapbox-iOS-SDK', '~> 6.0.0'
  pod 'SnapKit', '~> 5.0.1'
- pod'MaterialDesignWidgets'
 
   target 'TerraTests' do
 
