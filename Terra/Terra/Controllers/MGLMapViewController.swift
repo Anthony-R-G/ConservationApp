@@ -7,6 +7,7 @@
 //
 import Mapbox
 import UIKit
+import MaterialDesignWidgets
 
 final class MGLMapViewController: UIViewController {
     
@@ -28,6 +29,7 @@ final class MGLMapViewController: UIViewController {
     }()
     
     private lazy var styleToggle: UISegmentedControl = {
+
         let sc = UISegmentedControl(items: ["Normal", "Hypsometric"])
         sc.tintColor = #colorLiteral(red: 0.976, green: 0.843, blue: 0.831, alpha: 1.0)
         sc.backgroundColor = Constants.Color.red

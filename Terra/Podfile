@@ -11,6 +11,7 @@ target 'Terra' do
  pod 'MaterialComponents/BottomNavigation'
  pod 'Mapbox-iOS-SDK', '~> 6.0.0'
  pod 'SnapKit', '~> 5.0.1'
+ pod'MaterialDesignWidgets'
 
   target 'TerraTests' do
 

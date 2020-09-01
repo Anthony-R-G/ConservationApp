@@ -169,7 +169,7 @@ extension NewsViewController: NewsViewModelDelegate {
             guard let self = self else { return }
             self.collectionView.reloadData()
             self.headerView.configureHeader(from: self.viewModel.specificArticle(at: 0))
-            self.headerView.stopRefreshButton()
+            self.headerView.stopButtonLoading()
         }
     }
 }
