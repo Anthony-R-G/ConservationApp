@@ -21,31 +21,20 @@ final class NewsViewModel {
     
     private var cancellable: AnyCancellable?
     
+    private var currentPage: Int = 1
+    
     private var newsArticles: [NewsArticle] = []
     
     private var filteredNewsArticles: [NewsArticle] {
         return filterDuplicateArticles(from: newsArticles)
     }
     
-    private var currentPage: Int = 1
-    
-    private var isFetchInProgress: Bool = false {
-        didSet {
-            print(isFetchInProgress)
-        }
-    }
-    
-    var firstArticle: NewsArticle!
+    private(set) var isFetchInProgress: Bool = false 
     
     var totalNewsArticlesCount: Int {
         return filteredNewsArticles.count
     }
-    
-    var newsFetchIsUnderway: Bool {
-        return isFetchInProgress
-    }
-    
-    
+
     //MARK: -- Methods
     
     private func filterDuplicateArticles(from news: [NewsArticle]) -> [NewsArticle] {
@@ -83,7 +72,7 @@ extension NewsViewModel {
             currentPage = 1
         } else {
             //News API has a dev plan cap of 100.
-            guard currentPage <= 5 else {
+            guard currentPage < 5 else {
                 isFetchInProgress = false
                 delegate?.fetchCompleted()
                 return
@@ -108,8 +97,7 @@ extension NewsViewModel {
                         self.newsArticles.append(contentsOf: articles)
                         
                     case .replace:
-                        self.firstArticle = articles[0]
-                        self.newsArticles = Array(articles.dropFirst())
+                        self.newsArticles = articles
                         self.currentPage = 1
                         
                     }

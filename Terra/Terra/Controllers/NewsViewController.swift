@@ -68,14 +68,14 @@ final class NewsViewController: UIViewController {
 extension NewsViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.totalNewsArticlesCount
+        return viewModel.totalNewsArticlesCount - 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let newsCell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.cellReuseIdentifier, for: indexPath) as! NewsArticleCollectionViewCell
         newsCell.delegate = self
         newsCell.shareButton.tag = indexPath.row
-        let specificArticle = viewModel.specificArticle(at: indexPath.row)
+        let specificArticle = viewModel.specificArticle(at: indexPath.row + 1)
         newsCell.configureCell(from: specificArticle)
         return newsCell
     }
@@ -84,7 +84,7 @@ extension NewsViewController: UICollectionViewDataSource {
 extension NewsViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         for index in indexPaths {
-            if index.row > viewModel.totalNewsArticlesCount - 3 && !viewModel.newsFetchIsUnderway {
+            if index.row > viewModel.totalNewsArticlesCount - 3 && !viewModel.isFetchInProgress {
                 viewModel.fetchNews(fetchType: .append)
                 
             }
@@ -129,7 +129,7 @@ extension NewsViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let selectedArticle = viewModel.specificArticle(at: indexPath.row)
+        let selectedArticle = viewModel.specificArticle(at: indexPath.row + 1)
         Utilities.presentWebBrowser(on: self, link: URL(string: selectedArticle.url)!, delegate: self)
     }
     
@@ -169,7 +169,7 @@ extension NewsViewController: NewsViewModelDelegate {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.collectionView.reloadData()
-            self.headerView.configureHeader(from: self.viewModel.firstArticle)
+            self.headerView.configureHeader(from: self.viewModel.specificArticle(at: 0))
             self.headerView.stopRefreshButton()
         }
     }
@@ -185,8 +185,8 @@ extension NewsViewController: NewsCellDelegate {
 
 extension NewsViewController: NewsHeaderDelegate {
     func shareButtonTapped() {
-        let selectedArticle = viewModel.firstArticle
-        Utilities.presentActivityController(on: self, items: [URL(string: selectedArticle!.url)!])
+        let selectedArticle = viewModel.specificArticle(at: 0)
+        Utilities.presentActivityController(on: self, items: [URL(string: selectedArticle.url)!])
     }
     
     func refreshButtonTapped() {
@@ -194,7 +194,7 @@ extension NewsViewController: NewsHeaderDelegate {
     }
     
     func headerLabelTapped() {
-        Utilities.presentWebBrowser(on: self, link: URL(string: viewModel.firstArticle.url)!, delegate: self)
+        Utilities.presentWebBrowser(on: self, link: URL(string: viewModel.specificArticle(at:0).url)!, delegate: self)
     }
 }
 

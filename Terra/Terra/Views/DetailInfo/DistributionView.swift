@@ -12,7 +12,7 @@ final class DistributionView: UIView {
     //MARK: -- UI Element Initialization
     
     private lazy var mapView: MGLMapView = {
-        let mv = MGLMapView(frame: bounds)
+        let mv = MGLMapView()
         let styleURL = URL(string: species.habitat.mapboxStyleURL)
         mv.styleURL = styleURL
         mv.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -31,12 +31,18 @@ final class DistributionView: UIView {
     //MARK: -- Methods
     
     required init(species: Species) {
-        self.species = species
-        speciesLocation = CLLocationCoordinate2D(latitude: species.habitat.latitude, longitude: species.habitat.longitude)
         super.init(frame: .zero)
-        addSubviews()
-    
+        self.species = species
+        speciesLocation = CLLocationCoordinate2D(
+            latitude: species.habitat.latitude,
+            longitude: species.habitat.longitude)
+        
         heightAnchor.constraint(equalToConstant: 460.deviceScaled).isActive = true
+        
+        addSubview(mapView)
+        mapView.snp.makeConstraints { (make) in
+            make.height.width.edges.equalToSuperview()
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -57,12 +63,3 @@ extension DistributionView: MGLMapViewDelegate {
                           animationTimingFunction: CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut))
     }
 }
-
-//MARK: -- Add Subviews & Constraints
-
-fileprivate extension DistributionView {
-    func addSubviews() {
-        [mapView].forEach{ addSubview($0) }
-    }
-}
-

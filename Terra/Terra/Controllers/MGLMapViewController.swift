@@ -15,6 +15,7 @@ final class MGLMapViewController: UIViewController {
         let mv = MGLMapView()
         mv.delegate = self
         mv.tintColor = .darkGray
+        mv.locationManager = locationManager as? MGLLocationManager
         mv.showsUserLocation = true
         mv.styleURL = MGLStyle.satelliteStreetsStyleURL
         mv.maximumZoomLevel = 12
@@ -43,6 +44,10 @@ final class MGLMapViewController: UIViewController {
     
     //MARK: -- Properties
     
+    let locationManager = CLLocationManager()
+    
+    var authorizationStatus: Bool = false
+    
     var speciesData: [Species] = [] {
         didSet {
             for species in speciesData {
@@ -68,7 +73,7 @@ final class MGLMapViewController: UIViewController {
         Utilities.sendHapticFeedback(action: .selectionChanged)
         switch sender.selectedSegmentIndex {
         case 0:
-            mapView.styleURL = MGLStyle.satelliteStreetsStyleURL
+            mapView.styleURL = URL(string: "mapbox://styles/anthonyg5195/ckej68ntm1e9l19p6jlnf4dh5")
             mapView.maximumZoomLevel = 12
             
         case 1:
@@ -90,6 +95,22 @@ final class MGLMapViewController: UIViewController {
         mapView.frame = view.bounds
         addSubviews()
         setConstraints()
+        
+        if CLLocationManager.locationServicesEnabled() {
+            switch CLLocationManager.authorizationStatus() {
+            case .notDetermined, .restricted, .denied:
+                print("No access")
+                authorizationStatus = false
+            case .authorizedAlways, .authorizedWhenInUse:
+                print("Access")
+                authorizationStatus = true
+            @unknown default:
+                break
+            }
+        } else {
+            print("Location services are not enabled")
+        }
+        
     }
 }
 
@@ -120,10 +141,12 @@ extension MGLMapViewController: MGLMapViewDelegate {
     }
     
     func mapView(_ mapView: MGLMapView, calloutViewFor annotation: MGLAnnotation) -> MGLCalloutView? {
-        return CustomCalloutView(representedObject: annotation)
+        guard let speciesAnnotation = annotation as? SpeciesAnnotation else { return nil }
+        return CustomCalloutView(representedObject: speciesAnnotation)
     }
     
     func mapView(_ mapView: MGLMapView, didSelect annotation: MGLAnnotation) {
+        guard let annotation = annotation as? SpeciesAnnotation else { return }
         mapView.setCenter(annotation.coordinate, animated: true)
     }
     

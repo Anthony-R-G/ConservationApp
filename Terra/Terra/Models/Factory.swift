@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Factory {
+final class Factory {
     static func makeLabel(
         title: String?,
         fontWeight: FontWeight,

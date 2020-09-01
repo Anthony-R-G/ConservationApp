@@ -49,22 +49,31 @@ final class CustomCalloutView: UIView, MGLCalloutView {
         return label
     }()
     
-    private lazy var infoButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(systemName: "info.circle"), for: .normal)
-        button.tintColor = .systemBlue
-        button.contentVerticalAlignment = .fill
-        button.contentHorizontalAlignment = .fill
-        button.addTarget(self, action: #selector(infoButtonTapped), for: .touchUpInside)
-        return button
+    private lazy var readMoreLabel: UILabel = {
+        let label = Factory.makeLabel(title: "TAP TO LEARN MORE", fontWeight: .light, fontSize: 11, widthAdjustsFontSize: true, color: .lightGray, alignment: .left)
+        return label
     }()
     
+    private lazy var distanceLabel: UILabel = {
+        let label = Factory.makeLabel(title: nil, fontWeight: .light, fontSize: 13, widthAdjustsFontSize: true, color: .white, alignment: .left)
+        return label
+    }()
+
     private lazy var backgroundBlurEffectView: UIVisualEffectView = {
         let blurEffect = UIBlurEffect(style: .regular)
         let bev = UIVisualEffectView(effect: blurEffect)
         bev.frame = mainBody.bounds
         bev.isUserInteractionEnabled = false
         return bev
+    }()
+    
+    private lazy var stackView: UIStackView = {
+        let sv = UIStackView(arrangedSubviews: [
+        readMoreLabel, titleLabel, distanceLabel
+        ])
+        sv.spacing = 3.deviceScaled
+        sv.axis = .vertical
+        return sv
     }()
     
     lazy var leftAccessoryView = UIView() /* unused */
@@ -101,14 +110,10 @@ final class CustomCalloutView: UIView, MGLCalloutView {
     
     //MARK: -- Methods
     
-    @objc private func infoButtonTapped() {
-        print("HI")
-    }
-    
-    private func setupUI(from annotation: MGLAnnotation) {
+    private func setupUI(from annotation: SpeciesAnnotation) {
         titleLabel.text = representedObject.title ?? ""
         subtitleLabel.text = representedObject.subtitle ?? ""
-        FirebaseStorageService.calloutImageManager.getImage(for: annotation.title!!, setTo: speciesImageView)
+        FirebaseStorageService.calloutImageManager.getImage(for: annotation.title!, setTo: speciesImageView)
     }
     
     private func configureCalloutAppearance() {
@@ -118,16 +123,15 @@ final class CustomCalloutView: UIView, MGLCalloutView {
         mainBody.layer.cornerRadius = 10.0
     }
     
-    required init(representedObject: MGLAnnotation) {
+    required init(representedObject: SpeciesAnnotation) {
         self.representedObject = representedObject
         mainBody = UIButton(frame: CGRect(
             x: 0,
             y: -15,
             width: UIScreen.main.bounds.width * 0.65,
-            height: 180.deviceScaled))
+            height: 190.deviceScaled))
         
         super.init(frame: .zero)
-        
         addSubviews()
         setConstraints()
         setupUI(from: representedObject)
@@ -236,14 +240,13 @@ fileprivate extension CustomCalloutView {
         addSubview(mainBody)
         mainBody.addSubview(backgroundBlurEffectView)
         
-        [speciesImageView, titleLabel, subtitleLabel, infoButton].forEach { backgroundBlurEffectView.contentView.addSubview($0) }
+        [speciesImageView, stackView, subtitleLabel].forEach { backgroundBlurEffectView.contentView.addSubview($0) }
     }
     
     func setConstraints() {
         setSpeciesImageConstraints()
         setTitleLabelConstraints()
         setSubtitleLabelConstraints()
-        setInfoButtonConstraints()
     }
     
     func setSpeciesImageConstraints() {
@@ -254,7 +257,7 @@ fileprivate extension CustomCalloutView {
     }
     
     func setTitleLabelConstraints() {
-        titleLabel.snp.makeConstraints { (make) in
+        stackView.snp.makeConstraints { (make) in
             make.centerY.equalTo(speciesImageView)
             make.leading.equalTo(speciesImageView.snp.trailing).offset(10)
             make.trailing.equalTo(mainBody).inset(10)
@@ -266,14 +269,6 @@ fileprivate extension CustomCalloutView {
             make.leading.trailing.equalTo(mainBody).inset(10)
             make.top.equalTo(speciesImageView.snp.bottom).offset(5)
             make.bottom.equalTo(mainBody.snp.bottom).inset(5)
-        }
-    }
-    
-    func setInfoButtonConstraints() {
-        infoButton.snp.makeConstraints { (make) in
-            make.trailing.equalTo(mainBody).inset(5)
-            make.top.equalTo(mainBody).inset(5)
-            make.width.height.equalTo(25)
         }
     }
 }
