@@ -13,8 +13,6 @@ final class SpeciesAnnotation: NSObject, MGLAnnotation {
     var coordinate: CLLocationCoordinate2D
     var title: String?
     var subtitle: String?
-    private(set) var distance: Double?
- 
     
     init(species: Species) {
         self.species = species

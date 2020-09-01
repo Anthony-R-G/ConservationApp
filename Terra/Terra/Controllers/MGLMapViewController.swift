@@ -46,8 +46,6 @@ final class MGLMapViewController: UIViewController {
     
     let locationManager = CLLocationManager()
     
-    var authorizationStatus: Bool = false
-    
     var speciesData: [Species] = [] {
         didSet {
             for species in speciesData {
@@ -60,8 +58,6 @@ final class MGLMapViewController: UIViewController {
     }
     
     private var selectedSpecies: Species!
-    
-    private var userLocation = CLLocationCoordinate2D()
     
     override var prefersStatusBarHidden: Bool {
         return true
@@ -95,22 +91,6 @@ final class MGLMapViewController: UIViewController {
         mapView.frame = view.bounds
         addSubviews()
         setConstraints()
-        
-        if CLLocationManager.locationServicesEnabled() {
-            switch CLLocationManager.authorizationStatus() {
-            case .notDetermined, .restricted, .denied:
-                print("No access")
-                authorizationStatus = false
-            case .authorizedAlways, .authorizedWhenInUse:
-                print("Access")
-                authorizationStatus = true
-            @unknown default:
-                break
-            }
-        } else {
-            print("Location services are not enabled")
-        }
-        
     }
 }
 
@@ -141,8 +121,28 @@ extension MGLMapViewController: MGLMapViewDelegate {
     }
     
     func mapView(_ mapView: MGLMapView, calloutViewFor annotation: MGLAnnotation) -> MGLCalloutView? {
-        guard let speciesAnnotation = annotation as? SpeciesAnnotation else { return nil }
-        return CustomCalloutView(representedObject: speciesAnnotation)
+        guard let annotation = annotation as? SpeciesAnnotation else { return nil }
+        var distance: Double? = nil
+
+        if CLLocationManager.locationServicesEnabled() {
+                   switch CLLocationManager.authorizationStatus() {
+                   case .notDetermined, .restricted, .denied:
+                       distance = nil
+                       
+                   case .authorizedAlways, .authorizedWhenInUse:
+                       let userLocation = CLLocation(latitude: (mapView.userLocation?.coordinate.latitude)!, longitude: (mapView.userLocation?.coordinate.longitude)!)
+                       
+                       let speciesLocation = CLLocation(latitude: annotation.coordinate.latitude, longitude: annotation.coordinate.longitude)
+                       
+                    distance = (userLocation.distance(from: speciesLocation) * 0.000621371).rounded(toPlaces: 2)
+                      
+                   @unknown default:
+                       break
+                   }
+               }
+        
+        let callout = CustomCalloutView(representedObject: annotation, distance: distance)
+        return callout
     }
     
     func mapView(_ mapView: MGLMapView, didSelect annotation: MGLAnnotation) {

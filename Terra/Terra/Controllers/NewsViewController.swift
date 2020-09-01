@@ -86,7 +86,6 @@ extension NewsViewController: UICollectionViewDataSourcePrefetching {
         for index in indexPaths {
             if index.row > viewModel.totalNewsArticlesCount - 3 && !viewModel.isFetchInProgress {
                 viewModel.fetchNews(fetchType: .append)
-                
             }
         }
     }

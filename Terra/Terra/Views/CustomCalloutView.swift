@@ -106,8 +106,7 @@ final class CustomCalloutView: UIView, MGLCalloutView {
     let tipWidth: CGFloat = 40.0
     
     let mainBody: UIButton
-    
-    
+
     //MARK: -- Methods
     
     private func setupUI(from annotation: SpeciesAnnotation) {
@@ -123,7 +122,7 @@ final class CustomCalloutView: UIView, MGLCalloutView {
         mainBody.layer.cornerRadius = 10.0
     }
     
-    required init(representedObject: SpeciesAnnotation) {
+    required init(representedObject: SpeciesAnnotation, distance: Double?) {
         self.representedObject = representedObject
         mainBody = UIButton(frame: CGRect(
             x: 0,
@@ -135,6 +134,9 @@ final class CustomCalloutView: UIView, MGLCalloutView {
         addSubviews()
         setConstraints()
         setupUI(from: representedObject)
+        if distance != nil {
+            distanceLabel.text = "\(distance!) miles away"
+               }
         configureCalloutAppearance()
     }
     
