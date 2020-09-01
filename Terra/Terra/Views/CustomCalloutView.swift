@@ -17,7 +17,6 @@ final class CustomCalloutView: UIView, MGLCalloutView {
             size: CGSize(width: 80.deviceScaled, height: 80.deviceScaled)))
         iv.contentMode = .scaleAspectFill
         iv.layer.cornerRadius = iv.frame.size.width/2
-        iv.layer.borderColor = UIColor.white.cgColor
         iv.layer.borderWidth = Constants.borderWidth
         iv.clipsToBounds = true
         iv.isUserInteractionEnabled = false
@@ -26,11 +25,11 @@ final class CustomCalloutView: UIView, MGLCalloutView {
     
     private lazy var titleLabel: UILabel = {
         let label = Factory.makeLabel(title: nil,
-                                 fontWeight: .bold,
-                                 fontSize: 18,
-                                 widthAdjustsFontSize: false,
-                                 color: Constants.Color.titleLabelColor,
-                                 alignment: .left)
+                                      fontWeight: .bold,
+                                      fontSize: 18,
+                                      widthAdjustsFontSize: false,
+                                      color: Constants.Color.titleLabelColor,
+                                      alignment: .left)
         label.numberOfLines = 0
         label.isUserInteractionEnabled = false
         return label
@@ -58,7 +57,7 @@ final class CustomCalloutView: UIView, MGLCalloutView {
         let label = Factory.makeLabel(title: nil, fontWeight: .light, fontSize: 13, widthAdjustsFontSize: true, color: .white, alignment: .left)
         return label
     }()
-
+    
     private lazy var backgroundBlurEffectView: UIVisualEffectView = {
         let blurEffect = UIBlurEffect(style: .regular)
         let bev = UIVisualEffectView(effect: blurEffect)
@@ -69,7 +68,7 @@ final class CustomCalloutView: UIView, MGLCalloutView {
     
     private lazy var stackView: UIStackView = {
         let sv = UIStackView(arrangedSubviews: [
-        readMoreLabel, titleLabel, distanceLabel
+            readMoreLabel, titleLabel, distanceLabel
         ])
         sv.spacing = 3.deviceScaled
         sv.axis = .vertical
@@ -91,7 +90,7 @@ final class CustomCalloutView: UIView, MGLCalloutView {
     let isAnchoredToAnnotation: Bool = true
     
     // https://github.com/mapbox/mapbox-gl-native/issues/9228
-   override var center: CGPoint {
+    override var center: CGPoint {
         set {
             var newCenter = newValue
             newCenter.y = newCenter.y - bounds.midY
@@ -106,21 +105,29 @@ final class CustomCalloutView: UIView, MGLCalloutView {
     let tipWidth: CGFloat = 40.0
     
     let mainBody: UIButton
-
+    
     //MARK: -- Methods
     
     private func setupUI(from annotation: SpeciesAnnotation) {
         titleLabel.text = representedObject.title ?? ""
         subtitleLabel.text = representedObject.subtitle ?? ""
         FirebaseStorageService.calloutImageManager.getImage(for: annotation.title!, setTo: speciesImageView)
-    }
-    
-    private func configureCalloutAppearance() {
+        switch annotation.species.population.conservationStatus {
+        case .critical:
+            speciesImageView.layer.borderColor = Constants.Color.criticalStatusColor.cgColor
+        case .endangered:
+            speciesImageView.layer.borderColor = Constants.Color.endangeredStatusColor.cgColor
+        case .vulnerable:
+            speciesImageView.layer.borderColor = Constants.Color.vulnerableStatusColor.cgColor
+        }
+        
         backgroundColor = .clear
         mainBody.backgroundColor = .clear
         mainBody.clipsToBounds = true
         mainBody.layer.cornerRadius = 10.0
     }
+    
+    
     
     required init(representedObject: SpeciesAnnotation, distance: Double?) {
         self.representedObject = representedObject
@@ -129,15 +136,13 @@ final class CustomCalloutView: UIView, MGLCalloutView {
             y: -15,
             width: UIScreen.main.bounds.width * 0.65,
             height: 190.deviceScaled))
-        
         super.init(frame: .zero)
         addSubviews()
         setConstraints()
         setupUI(from: representedObject)
         if distance != nil {
             distanceLabel.text = "\(distance!) miles away"
-               }
-        configureCalloutAppearance()
+        }
     }
     
     required init?(coder decoder: NSCoder) {

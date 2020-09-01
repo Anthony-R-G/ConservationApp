@@ -15,7 +15,6 @@ final class MGLMapViewController: UIViewController {
         let mv = MGLMapView()
         mv.delegate = self
         mv.tintColor = .darkGray
-        mv.locationManager = locationManager as? MGLLocationManager
         mv.showsUserLocation = true
         mv.styleURL = MGLStyle.satelliteStreetsStyleURL
         mv.maximumZoomLevel = 12
@@ -43,8 +42,6 @@ final class MGLMapViewController: UIViewController {
     }()
     
     //MARK: -- Properties
-    
-    let locationManager = CLLocationManager()
     
     var speciesData: [Species] = [] {
         didSet {
@@ -86,6 +83,23 @@ final class MGLMapViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    func checkLocationPermission() -> Bool {
+        var locationPermissionGranted: Bool!
+        if CLLocationManager.locationServicesEnabled() {
+            switch CLLocationManager.authorizationStatus() {
+            case .notDetermined, .restricted, .denied:
+                locationPermissionGranted = false
+                
+            case .authorizedAlways, .authorizedWhenInUse:
+                locationPermissionGranted = true
+                
+            @unknown default:
+                break
+            }
+        }
+        return locationPermissionGranted
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.frame = view.bounds
@@ -93,6 +107,7 @@ final class MGLMapViewController: UIViewController {
         setConstraints()
     }
 }
+
 
 //MARK: -- MapView Delegate Methods
 extension MGLMapViewController: MGLMapViewDelegate {
@@ -123,25 +138,17 @@ extension MGLMapViewController: MGLMapViewDelegate {
     func mapView(_ mapView: MGLMapView, calloutViewFor annotation: MGLAnnotation) -> MGLCalloutView? {
         guard let annotation = annotation as? SpeciesAnnotation else { return nil }
         var distance: Double? = nil
-
-        if CLLocationManager.locationServicesEnabled() {
-                   switch CLLocationManager.authorizationStatus() {
-                   case .notDetermined, .restricted, .denied:
-                       distance = nil
-                       
-                   case .authorizedAlways, .authorizedWhenInUse:
-                       let userLocation = CLLocation(latitude: (mapView.userLocation?.coordinate.latitude)!, longitude: (mapView.userLocation?.coordinate.longitude)!)
-                       
-                       let speciesLocation = CLLocation(latitude: annotation.coordinate.latitude, longitude: annotation.coordinate.longitude)
-                       
-                    distance = (userLocation.distance(from: speciesLocation) * 0.000621371).rounded(toPlaces: 2)
-                      
-                   @unknown default:
-                       break
-                   }
-               }
+        
+        if checkLocationPermission() {
+            let userLocation = CLLocation(latitude: (mapView.userLocation?.coordinate.latitude)!, longitude: (mapView.userLocation?.coordinate.longitude)!)
+            
+            let speciesLocation = CLLocation(latitude: annotation.coordinate.latitude, longitude: annotation.coordinate.longitude)
+            
+            distance = (userLocation.distance(from: speciesLocation) * 0.000621371).rounded(toPlaces: 2)
+        }
         
         let callout = CustomCalloutView(representedObject: annotation, distance: distance)
+        
         return callout
     }
     
