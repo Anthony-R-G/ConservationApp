@@ -118,7 +118,9 @@
 		97D0AB2024ECC84D00D345A4 /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D0AB1F24ECC84D00D345A4 /* UIImageExtensions.swift */; };
 		97D9E24B24C6470700524000 /* Diet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D9E24A24C6470600524000 /* Diet.swift */; };
 		97DC775224EB6C8700111245 /* CoverRoundedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DC775124EB6C8700111245 /* CoverRoundedCell.swift */; };
-		97DC797824FF1CB30098D11B /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DC797724FF1CB30098D11B /* OnboardingViewController.swift */; };
+		97DC797C24FF1D2D0098D11B /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DC797B24FF1D2D0098D11B /* OnboardingViewController.swift */; };
+		97DC797E24FF1D420098D11B /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DC797D24FF1D420098D11B /* PageViewController.swift */; };
+		97DC798B24FF2AE20098D11B /* Dolphin.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 97DC798A24FF2AE20098D11B /* Dolphin.mp4 */; };
 		97E22D8A24EC7701008B76E2 /* RedListToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E22D8924EC7701008B76E2 /* RedListToolBar.swift */; };
 		97E61B8024CE54A100E83691 /* Habitat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977D877124CD7BFF00AE5E51 /* Habitat.swift */; };
 		97E61B8124CE54A800E83691 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977D876F24CD6A1200AE5E51 /* Group.swift */; };
@@ -241,7 +243,9 @@
 		97D0AB1F24ECC84D00D345A4 /* UIImageExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtensions.swift; sourceTree = "<group>"; };
 		97D9E24A24C6470600524000 /* Diet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diet.swift; sourceTree = "<group>"; };
 		97DC775124EB6C8700111245 /* CoverRoundedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverRoundedCell.swift; sourceTree = "<group>"; };
-		97DC797724FF1CB30098D11B /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		97DC797B24FF1D2D0098D11B /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		97DC797D24FF1D420098D11B /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
+		97DC798A24FF2AE20098D11B /* Dolphin.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = Dolphin.mp4; path = ../../../../../../Downloads/Dolphin.mp4; sourceTree = "<group>"; };
 		97E22D8924EC7701008B76E2 /* RedListToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedListToolBar.swift; sourceTree = "<group>"; };
 		97E9450324BE10C800550824 /* ConservationStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConservationStatus.swift; sourceTree = "<group>"; };
 		97EA493B24E3BEC200C0FE64 /* DetailInfoWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInfoWindow.swift; sourceTree = "<group>"; };
@@ -458,6 +462,7 @@
 		979C191223DE43E900651B2B /* Terra */ = {
 			isa = PBXGroup;
 			children = (
+				97DC797F24FF1DF50098D11B /* Onboarding Clips */,
 				972BBF7A24C0256400B6F7C0 /* Fonts */,
 				979492EC23F46ACE00B636A4 /* Models */,
 				97452E4423E1E6A9005636E0 /* Views */,
@@ -486,6 +491,8 @@
 		97BF745123DF42CC0058F2D7 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				97DC797D24FF1D420098D11B /* PageViewController.swift */,
+				97DC797B24FF1D2D0098D11B /* OnboardingViewController.swift */,
 				975742EA24F648A100D203B8 /* RootTabBarController.swift */,
 				976F68CB24E8B01E00277F79 /* NavigationController.swift */,
 				97BF745223DF42F90058F2D7 /* SpeciesListViewController.swift */,
@@ -493,7 +500,6 @@
 				976F68C324E8AADD00277F79 /* SpeciesDetailInfoViewController.swift */,
 				97FAD4E824D75DBD007FEFD8 /* NewsViewController.swift */,
 				97997F2B24DCE18B00981087 /* MGLMapViewController.swift */,
-				97DC797724FF1CB30098D11B /* OnboardingViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -508,6 +514,14 @@
 				9743BAB524F036C20090A2E4 /* DetailHowToHelpStrategy.swift */,
 			);
 			path = DetailPageStrategies;
+			sourceTree = "<group>";
+		};
+		97DC797F24FF1DF50098D11B /* Onboarding Clips */ = {
+			isa = PBXGroup;
+			children = (
+				97DC798A24FF2AE20098D11B /* Dolphin.mp4 */,
+			);
+			path = "Onboarding Clips";
 			sourceTree = "<group>";
 		};
 		97FAD4EA24D7783F007FEFD8 /* Supporting Files */ = {
@@ -631,6 +645,7 @@
 				976FB55324D367AE00848E35 /* Roboto-Regular.ttf in Resources */,
 				972BBF7F24C026CF00B6F7C0 /* Roboto-Medium.ttf in Resources */,
 				972BBF7E24C026CD00B6F7C0 /* Roboto-Bold.ttf in Resources */,
+				97DC798B24FF2AE20098D11B /* Dolphin.mp4 in Resources */,
 				978E5CF223FB5CBC007BCD25 /* GoogleService-Info.plist in Resources */,
 				9794EF7D24E66EA700B72246 /* Roboto-Black.ttf in Resources */,
 				979C192023DE43EF00651B2B /* LaunchScreen.storyboard in Resources */,
@@ -785,7 +800,7 @@
 				97E22D8A24EC7701008B76E2 /* RedListToolBar.swift in Sources */,
 				9767D04C24C3EA9200384FCD /* CoverSubheaderInfoView.swift in Sources */,
 				976F68C424E8AADD00277F79 /* SpeciesDetailInfoViewController.swift in Sources */,
-				97DC797824FF1CB30098D11B /* OnboardingViewController.swift in Sources */,
+				97DC797C24FF1D2D0098D11B /* OnboardingViewController.swift in Sources */,
 				97947F5324DD1F560047052B /* CustomCalloutView.swift in Sources */,
 				97BF745323DF42F90058F2D7 /* SpeciesListViewController.swift in Sources */,
 				979C191623DE43E900651B2B /* SceneDelegate.swift in Sources */,
@@ -794,6 +809,7 @@
 				97F0CCA924C56F5C00C581D3 /* UIScrollViewExtensions.swift in Sources */,
 				97EA493C24E3BEC200C0FE64 /* DetailInfoWindow.swift in Sources */,
 				973DF94224FB3F970082E122 /* StretchyCollectionViewHeaderLayout.swift in Sources */,
+				97DC797E24FF1D420098D11B /* PageViewController.swift in Sources */,
 				975C8E5424E4F11500A0EB9D /* DetailThreatsStrategy.swift in Sources */,
 				977D877024CD6A1200AE5E51 /* Group.swift in Sources */,
 				97A24D2024E445A800958AB9 /* DetailHabitatStrategy.swift in Sources */,
