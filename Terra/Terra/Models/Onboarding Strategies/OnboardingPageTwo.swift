@@ -1,5 +1,5 @@
 //
-//  OnboardingPageOne.swift
+//  OnboardingPageTwo.swift
 //  Terra
 //
 //  Created by Anthony Gonzalez on 9/1/20.
@@ -8,14 +8,13 @@
 
 import Foundation
 
-struct OnboardingPageOne: OnboardingStrategy {
-    
+struct OnboardingPageTwo: OnboardingStrategy {
+
     func videoFileName() -> String {
-        return "Dolphin"
+        return "kenyalion"
     }
     
     func displayedText() -> String {
-        return "By 2050, half of Earth's species may become extinct"
+        return "This is the worst mass-extinction since the Permian period, 250 million years ago"
     }
-    
 }

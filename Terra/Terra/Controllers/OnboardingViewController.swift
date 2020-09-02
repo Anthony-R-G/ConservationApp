@@ -13,7 +13,7 @@ final class OnboardingViewController: UIViewController {
     //MARK: -- UI Element Initialization
     private lazy var bodyLabel: UILabel = {
         let label = Factory.makeLabel(
-            title: "By 2050, half of Earth's species may become extinct.",
+            title: strategy.displayedText(),
             fontWeight: .medium,
             fontSize: 30,
             widthAdjustsFontSize: false,
@@ -99,7 +99,7 @@ final class OnboardingViewController: UIViewController {
         addSubviews()
         setConstraints()
         playVideo()
-        playSound()
+//        playSound()
         fadeInText()
     }
 }
