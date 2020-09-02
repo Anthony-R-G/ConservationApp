@@ -6,10 +6,10 @@
 //  Copyright © 2020 Antnee. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 protocol OnboardingStrategy {
     func videoFileName() -> String
     func displayedText() -> String
-    func startButtonHidden() -> Bool
+    func isLastPage() -> Bool
 }

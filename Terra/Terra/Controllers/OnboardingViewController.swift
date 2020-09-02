@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import TransitionButton
 
 final class OnboardingViewController: UIViewController {
     //MARK: -- UI Element Initialization
@@ -36,16 +37,13 @@ final class OnboardingViewController: UIViewController {
         return view
     }()
     
-    lazy var startButton: UIButton = {
-        let button = UIButton()
+    lazy var startButton: TransitionButton = {
+        let button = TransitionButton()
         button.setTitle("START", for: .normal)
-        button.backgroundColor = .clear
         button.layer.cornerRadius = 25
-        button.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        button.layer.borderWidth = 1.0
-        button.setTitleColor(.white, for: .normal)
-        button.isHidden = strategy.startButtonHidden()
-        button.addTarget(self, action: #selector(startButtonPressed), for: .touchUpInside)
+        button.backgroundColor = #colorLiteral(red: 1, green: 0.2, blue: 0.4, alpha: 1)
+        button.alpha = 0.0
+        button.addTarget(self, action: #selector(startButtonPressed(sender:)), for: .touchUpInside)
         return button
     }()
     
@@ -53,21 +51,28 @@ final class OnboardingViewController: UIViewController {
     private var strategy: OnboardingStrategy!
     private var videoLooper: AVPlayerLooper!
     private var audioPlayer: AVAudioPlayer?
+    private lazy var isLastPage: Bool = strategy.isLastPage()
     
     //MARK: -- Methods
     
-     func resetWindow(_ vc: UIViewController) {
-            guard let scene = UIApplication.shared.connectedScenes.first,
-                let sceneDelegate = scene.delegate as? SceneDelegate,
-                let window = sceneDelegate.window else {
-                fatalError("Could not reset scene.window's rootViewController")
-            }
-            window.rootViewController = vc
-        }
     
-    @objc private func startButtonPressed() {
+    @objc private func startButtonPressed(sender: TransitionButton) {
         let tabVC = RootTabBarController()
-        resetWindow(tabVC)
+        sender.startAnimation()
+        let qualityOfServiceClass = DispatchQoS.QoSClass.background
+        let backgroundQueue = DispatchQueue.global(qos: qualityOfServiceClass)
+        backgroundQueue.async(execute: {
+            
+            sleep(3) //Networking/background task done here
+            
+            DispatchQueue.main.async(execute: { () -> Void in
+                
+                sender.stopAnimation(animationStyle: .expand, completion: {
+                    guard let window = UIApplication.shared.windows.first(where: \.isKeyWindow) else { return }
+                    window.setRootViewController(tabVC, options: .init(direction: .fade, style: .easeInOut))
+                })
+            })
+        })
     }
     
     private func playSound() {
@@ -113,6 +118,9 @@ final class OnboardingViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             UIView.animate(withDuration: 2.0) { [weak self] in
                 guard let self = self else { return }
+                if self.isLastPage {
+                    self.startButton.alpha = 1
+                }
                 self.bodyLabel.alpha = 1
             }
         }

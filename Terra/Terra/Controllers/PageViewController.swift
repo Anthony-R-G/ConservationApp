@@ -67,7 +67,7 @@ extension PageViewController: UIPageViewControllerDataSource {
             index - 1 >= 0 else { return nil }
         
         return onboardingPages[index - 1]
-
+        
     }
     
     func pageViewController(_ pageViewController: UIPageViewController,
@@ -75,17 +75,21 @@ extension PageViewController: UIPageViewControllerDataSource {
         
         guard let index = onboardingPages.firstIndex(of: viewController),
             index + 1 < onboardingPages.count else { return nil }
-
+        
         return onboardingPages[index + 1]
     }
+    
     
     func presentationCount(for pageViewController: UIPageViewController) -> Int {
         return onboardingPages.count
     }
+    
     
     func presentationIndex(for pageViewController: UIPageViewController) -> Int {
         return 0
     }
 }
 
-
+extension PageViewController: UIPageViewControllerDelegate {
+    
+}

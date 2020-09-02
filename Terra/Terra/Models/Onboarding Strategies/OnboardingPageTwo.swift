@@ -6,7 +6,7 @@
 //  Copyright © 2020 Antnee. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 struct OnboardingPageTwo: OnboardingStrategy {
 
@@ -18,7 +18,7 @@ struct OnboardingPageTwo: OnboardingStrategy {
         return "This is the worst mass-extinction since the Permian period, 250 million years ago"
     }
     
-    func startButtonHidden() -> Bool {
-        return false
+    func isLastPage() -> Bool {
+        return true
     }
 }

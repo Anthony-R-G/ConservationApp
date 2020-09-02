@@ -12,6 +12,7 @@ target 'Terra' do
  pod 'MaterialComponents/FlexibleHeader'
  pod 'Mapbox-iOS-SDK', '~> 6.0.0'
  pod 'SnapKit', '~> 5.0.1'
+ pod 'TransitionButton'
 
   target 'TerraTests' do
 
