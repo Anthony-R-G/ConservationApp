@@ -9,7 +9,13 @@
 import UIKit
 import AVFoundation
 
-class OnboardingViewController: UIViewController {
+protocol OnboardingStrategy {
+    func videoFileName() -> String
+}
+
+
+
+final class OnboardingViewController: UIViewController {
     //MARK: -- UI Element Initialization
     private lazy var bodyLabel: UILabel = {
         let label = Factory.makeLabel(
@@ -37,8 +43,28 @@ class OnboardingViewController: UIViewController {
     //MARK: -- Properties
     
     private var videoLooper: AVPlayerLooper!
+    private var audioPlayer: AVAudioPlayer?
     
     //MARK: -- Methods
+    
+    func playSound() {
+        guard let url = Bundle.main.url(forResource: "sea", withExtension: "wav") else { return }
+
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+            try AVAudioSession.sharedInstance().setActive(true)
+
+
+            audioPlayer = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.mp3.rawValue)
+
+            guard let audioPlayer = audioPlayer else { return }
+
+            audioPlayer.play()
+
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
     
     private func playVideo() {
         guard let filePath = Bundle.main.path(forResource: "Dolphin", ofType: "mp4") else { return }
@@ -56,7 +82,7 @@ class OnboardingViewController: UIViewController {
     }
     
     private func fadeInText() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             UIView.animate(withDuration: 2.0) { [weak self] in
                 guard let self = self else { return }
                 self.bodyLabel.alpha = 1
@@ -70,6 +96,7 @@ class OnboardingViewController: UIViewController {
         addSubviews()
         setConstraints()
         playVideo()
+        playSound()
         fadeInText()
     }
 }

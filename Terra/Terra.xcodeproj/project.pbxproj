@@ -121,6 +121,7 @@
 		97DC797C24FF1D2D0098D11B /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DC797B24FF1D2D0098D11B /* OnboardingViewController.swift */; };
 		97DC797E24FF1D420098D11B /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DC797D24FF1D420098D11B /* PageViewController.swift */; };
 		97DC798B24FF2AE20098D11B /* Dolphin.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 97DC798A24FF2AE20098D11B /* Dolphin.mp4 */; };
+		97DC798D24FF2E530098D11B /* sea.wav in Resources */ = {isa = PBXBuildFile; fileRef = 97DC798C24FF2E530098D11B /* sea.wav */; };
 		97E22D8A24EC7701008B76E2 /* RedListToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E22D8924EC7701008B76E2 /* RedListToolBar.swift */; };
 		97E61B8024CE54A100E83691 /* Habitat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977D877124CD7BFF00AE5E51 /* Habitat.swift */; };
 		97E61B8124CE54A800E83691 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977D876F24CD6A1200AE5E51 /* Group.swift */; };
@@ -246,6 +247,7 @@
 		97DC797B24FF1D2D0098D11B /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		97DC797D24FF1D420098D11B /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		97DC798A24FF2AE20098D11B /* Dolphin.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = Dolphin.mp4; path = ../../../../../../Downloads/Dolphin.mp4; sourceTree = "<group>"; };
+		97DC798C24FF2E530098D11B /* sea.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = sea.wav; path = ../../../../../../Downloads/sea.wav; sourceTree = "<group>"; };
 		97E22D8924EC7701008B76E2 /* RedListToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedListToolBar.swift; sourceTree = "<group>"; };
 		97E9450324BE10C800550824 /* ConservationStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConservationStatus.swift; sourceTree = "<group>"; };
 		97EA493B24E3BEC200C0FE64 /* DetailInfoWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInfoWindow.swift; sourceTree = "<group>"; };
@@ -520,6 +522,7 @@
 			isa = PBXGroup;
 			children = (
 				97DC798A24FF2AE20098D11B /* Dolphin.mp4 */,
+				97DC798C24FF2E530098D11B /* sea.wav */,
 			);
 			path = "Onboarding Clips";
 			sourceTree = "<group>";
@@ -639,6 +642,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				97DC798D24FF2E530098D11B /* sea.wav in Resources */,
 				976FB55524D367E400848E35 /* Roboto-Light-Italic.ttf in Resources */,
 				9794EF7C24E66EA700B72246 /* Roboto-Italic.ttf in Resources */,
 				972BBF8024C026D100B6F7C0 /* Roboto-Light.ttf in Resources */,
