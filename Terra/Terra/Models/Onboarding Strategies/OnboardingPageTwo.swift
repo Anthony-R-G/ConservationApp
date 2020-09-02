@@ -17,4 +17,8 @@ struct OnboardingPageTwo: OnboardingStrategy {
     func displayedText() -> String {
         return "This is the worst mass-extinction since the Permian period, 250 million years ago"
     }
+    
+    func startButtonHidden() -> Bool {
+        return false
+    }
 }

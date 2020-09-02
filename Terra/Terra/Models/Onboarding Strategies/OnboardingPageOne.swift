@@ -18,4 +18,7 @@ struct OnboardingPageOne: OnboardingStrategy {
         return "By 2050, half of Earth's species may become extinct"
     }
     
+    func startButtonHidden() -> Bool {
+        return true
+    }
 }

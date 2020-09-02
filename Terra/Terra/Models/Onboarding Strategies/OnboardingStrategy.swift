@@ -11,4 +11,5 @@ import Foundation
 protocol OnboardingStrategy {
     func videoFileName() -> String
     func displayedText() -> String
+    func startButtonHidden() -> Bool
 }

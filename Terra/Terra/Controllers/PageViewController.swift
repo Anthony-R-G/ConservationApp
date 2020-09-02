@@ -16,23 +16,29 @@ final class PageViewController: UIPageViewController {
         OnboardingViewController(strategy: OnboardingPageTwo())
     ]
     
+    private let pageControl = UIPageControl.appearance()
+    
+    
     //MARK: -- Methods
     
     private func setViewControllers() {
+        let initialPage = 0
+        
         setViewControllers(
-            [onboardingPages[0]],
+            [onboardingPages[initialPage]],
             direction: .forward,
             animated: true,
             completion: nil)
+        
         dataSource = self
     }
     
+    
     private func customizePageControl() {
-        let pageControl = UIPageControl.appearance()
-        pageControl.backgroundColor = .black
         pageControl.pageIndicatorTintColor = .darkGray
         pageControl.currentPageIndicatorTintColor = Constants.Color.titleLabelColor
     }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,16 +63,19 @@ extension PageViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController,
                             viewControllerBefore viewController: UIViewController) -> UIViewController? {
         
-        guard let index = onboardingPages.firstIndex(of: viewController) else { return nil }
-        guard index - 1 >= 0 else { return nil }
+        guard let index = onboardingPages.firstIndex(of: viewController),
+            index - 1 >= 0 else { return nil }
+        
         return onboardingPages[index - 1]
+
     }
     
     func pageViewController(_ pageViewController: UIPageViewController,
                             viewControllerAfter viewController: UIViewController) -> UIViewController? {
         
-        guard let index = onboardingPages.firstIndex(of: viewController) else { return nil }
-        guard index + 1 < onboardingPages.count else { return nil }
+        guard let index = onboardingPages.firstIndex(of: viewController),
+            index + 1 < onboardingPages.count else { return nil }
+
         return onboardingPages[index + 1]
     }
     
