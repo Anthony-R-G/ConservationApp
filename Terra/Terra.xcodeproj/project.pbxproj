@@ -122,6 +122,8 @@
 		97DC797E24FF1D420098D11B /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DC797D24FF1D420098D11B /* PageViewController.swift */; };
 		97DC798B24FF2AE20098D11B /* Dolphin.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 97DC798A24FF2AE20098D11B /* Dolphin.mp4 */; };
 		97DC798D24FF2E530098D11B /* sea.wav in Resources */ = {isa = PBXBuildFile; fileRef = 97DC798C24FF2E530098D11B /* sea.wav */; };
+		97DC799024FF32760098D11B /* OnboardingStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DC798F24FF32760098D11B /* OnboardingStrategy.swift */; };
+		97DC799224FF32A10098D11B /* OnboardingPageOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DC799124FF32A10098D11B /* OnboardingPageOne.swift */; };
 		97E22D8A24EC7701008B76E2 /* RedListToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E22D8924EC7701008B76E2 /* RedListToolBar.swift */; };
 		97E61B8024CE54A100E83691 /* Habitat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977D877124CD7BFF00AE5E51 /* Habitat.swift */; };
 		97E61B8124CE54A800E83691 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977D876F24CD6A1200AE5E51 /* Group.swift */; };
@@ -248,6 +250,8 @@
 		97DC797D24FF1D420098D11B /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		97DC798A24FF2AE20098D11B /* Dolphin.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = Dolphin.mp4; path = ../../../../../../Downloads/Dolphin.mp4; sourceTree = "<group>"; };
 		97DC798C24FF2E530098D11B /* sea.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = sea.wav; path = ../../../../../../Downloads/sea.wav; sourceTree = "<group>"; };
+		97DC798F24FF32760098D11B /* OnboardingStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingStrategy.swift; sourceTree = "<group>"; };
+		97DC799124FF32A10098D11B /* OnboardingPageOne.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageOne.swift; sourceTree = "<group>"; };
 		97E22D8924EC7701008B76E2 /* RedListToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedListToolBar.swift; sourceTree = "<group>"; };
 		97E9450324BE10C800550824 /* ConservationStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConservationStatus.swift; sourceTree = "<group>"; };
 		97EA493B24E3BEC200C0FE64 /* DetailInfoWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInfoWindow.swift; sourceTree = "<group>"; };
@@ -425,6 +429,7 @@
 		979492EC23F46ACE00B636A4 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				97DC798E24FF32570098D11B /* Onboarding Strategies */,
 				9729736D24DC95AA00123C86 /* Custom Delegates */,
 				971FD0CE24C61ABE003ED029 /* Extensions Built-In Types */,
 				9764D12C24D7DE380050AF37 /* Networking */,
@@ -525,6 +530,15 @@
 				97DC798C24FF2E530098D11B /* sea.wav */,
 			);
 			path = "Onboarding Clips";
+			sourceTree = "<group>";
+		};
+		97DC798E24FF32570098D11B /* Onboarding Strategies */ = {
+			isa = PBXGroup;
+			children = (
+				97DC798F24FF32760098D11B /* OnboardingStrategy.swift */,
+				97DC799124FF32A10098D11B /* OnboardingPageOne.swift */,
+			);
+			path = "Onboarding Strategies";
 			sourceTree = "<group>";
 		};
 		97FAD4EA24D7783F007FEFD8 /* Supporting Files */ = {
@@ -737,6 +751,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				97DC799224FF32A10098D11B /* OnboardingPageOne.swift in Sources */,
 				972BBF7924C0204600B6F7C0 /* UIViewExtensions.swift in Sources */,
 				97B7C79724E440CE008BD6AD /* DetailOverviewStrategy.swift in Sources */,
 				9764D12E24D7E46E0050AF37 /* NewsArticleCollectionViewCell.swift in Sources */,
@@ -814,6 +829,7 @@
 				97EA493C24E3BEC200C0FE64 /* DetailInfoWindow.swift in Sources */,
 				973DF94224FB3F970082E122 /* StretchyCollectionViewHeaderLayout.swift in Sources */,
 				97DC797E24FF1D420098D11B /* PageViewController.swift in Sources */,
+				97DC799024FF32760098D11B /* OnboardingStrategy.swift in Sources */,
 				975C8E5424E4F11500A0EB9D /* DetailThreatsStrategy.swift in Sources */,
 				977D877024CD6A1200AE5E51 /* Group.swift in Sources */,
 				97A24D2024E445A800958AB9 /* DetailHabitatStrategy.swift in Sources */,

@@ -9,12 +9,6 @@
 import UIKit
 import AVFoundation
 
-protocol OnboardingStrategy {
-    func videoFileName() -> String
-}
-
-
-
 final class OnboardingViewController: UIViewController {
     //MARK: -- UI Element Initialization
     private lazy var bodyLabel: UILabel = {
@@ -41,7 +35,7 @@ final class OnboardingViewController: UIViewController {
     }()
     
     //MARK: -- Properties
-    
+    private var strategy: OnboardingStrategy!
     private var videoLooper: AVPlayerLooper!
     private var audioPlayer: AVAudioPlayer?
     
@@ -67,7 +61,7 @@ final class OnboardingViewController: UIViewController {
     }
     
     private func playVideo() {
-        guard let filePath = Bundle.main.path(forResource: "Dolphin", ofType: "mp4") else { return }
+        guard let filePath = Bundle.main.path(forResource: strategy.videoFileName(), ofType: "mp4") else { return }
         let videoURL = URL(fileURLWithPath: filePath)
         
         let asset = AVAsset(url: videoURL)
@@ -88,6 +82,15 @@ final class OnboardingViewController: UIViewController {
                 self.bodyLabel.alpha = 1
             }
         }
+    }
+    
+    required init(strategy: OnboardingStrategy) {
+        self.strategy = strategy
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     

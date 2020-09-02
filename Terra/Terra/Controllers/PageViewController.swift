@@ -8,8 +8,9 @@
 
 import UIKit
 
-class PageViewController: UIPageViewController {
-
+final class PageViewController: UIPageViewController {
+    
+    private let onboardingControllers: [UIViewController] = [OnboardingViewController]
     override func viewDidLoad() {
         super.viewDidLoad()
     }
