@@ -113,7 +113,7 @@ Planned:
 
 | Amur Leopard | Blue-throated Macaw | Lion | Mountain Gorilla |
 | :------: | :------: | :------: | :------: |
-|![screen 1](https://i.imgur.com/UGxu8N4.png) | ![screen 2](https://i.imgur.com/FOooSOV.png) |![screen 3](https://i.imgur.com/WNEXt1V.png)|![screen 4](https://i.imgur.com/EWpVHnI.png)| 
+|![screen 1](https://i.imgur.com/UGxu8N4.png) | ![screen 2](https://i.imgur.com/9Ln3A4F.png) |![screen 3](https://i.imgur.com/WNEXt1V.png)|![screen 4](https://i.imgur.com/EWpVHnI.png)| 
 
 •Each animal has its own cover page when selected from the list or map.
 
