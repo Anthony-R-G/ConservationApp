@@ -123,7 +123,7 @@ Planned:
 
 •Blur effects and light transparency are used so that the color from the background image leaks through, making each page feel more aesthetically unique. 
 
-![gif 1](https://media.giphy.com/media/hs0ClwPZRKGOw4UPy3/giphy.gif)
+![gif 1](https://media.giphy.com/media/fYTg0za05ZizNSayYV/giphy.gif)
 ![gif 2](https://media.giphy.com/media/WTFRv9qAXxonVmHHA7/giphy.gif)
 
 
