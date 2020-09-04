@@ -91,7 +91,7 @@ Planned:
 
 | Blue-Throated Macaw | Bornean Orangutan | Cheetah Hypsometric | Great White Shark |
 | :------: | :------: | :------: | :------: |
-|![screen 1](https://i.imgur.com/ZHzTsSj.png) | ![screen 2](https://i.imgur.com/F0eVnTl.png) |![screen 3](https://i.imgur.com/jD50BwP.png)|![screen 4](https://i.imgur.com/O8uLfRB.png)|
+|![screen 1](https://i.imgur.com/DfHrBMs.png) | ![screen 2](https://i.imgur.com/FHy0gU5.png) |![screen 3](https://i.imgur.com/mek7zEi.png)|![screen 4](https://i.imgur.com/DbpVGbn.png)|
 
 
 
