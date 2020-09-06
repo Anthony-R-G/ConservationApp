@@ -10,10 +10,6 @@ import UIKit
 import SafariServices
 import FirebaseUI
 
-
-//fileprivate typealias DetailPageStrategyDataSource = UICollectionViewDiffableDataSource<SpeciesCoverViewController.Section, DetailPageStrategy>
-//fileprivate typealias DetailPageStrategySnapShot = NSDiffableDataSourceSnapshot<SpeciesCoverViewController.Section, DetailPageStrategy>
-
 final class SpeciesCoverViewController: UIViewController {
     
     //MARK: -- UI Element Initialization
@@ -154,9 +150,7 @@ final class SpeciesCoverViewController: UIViewController {
     
     //MARK: -- Properties
     
-    var viewModel: DetailPageStrategyViewModel!
-    
-//    private var dataSource: DetailPageStrategyDataSource!
+    private var viewModel: DetailPageStrategyViewModel
     
     private var pageState: State = .collapsed
     
@@ -195,7 +189,6 @@ final class SpeciesCoverViewController: UIViewController {
     }
     
     @objc private func dismissPage() {
-        Utilities.sendHapticFeedback(action: .pageDismissed)
         dismiss(animated: true, completion: nil)
     }
     
@@ -215,9 +208,6 @@ final class SpeciesCoverViewController: UIViewController {
             repeatCount: .infinity) }
     }
     
-//    private func makeDataSource() -> DetailPageStrategyDataSource {
-//        let dataSource =
-//    }
     
     //MARK: -- Life Cycle Methods
     
@@ -231,6 +221,15 @@ final class SpeciesCoverViewController: UIViewController {
         addSubviews()
         setConstraints()
         addGestureRecognizers()
+    }
+    
+    init(viewModel: DetailPageStrategyViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
 
@@ -568,11 +567,5 @@ extension State {
         case .collapsed: return .expanded
         case .expanded: return .collapsed
         }
-    }
-}
-
-extension SpeciesCoverViewController {
-    fileprivate enum Section {
-        case main
     }
 }

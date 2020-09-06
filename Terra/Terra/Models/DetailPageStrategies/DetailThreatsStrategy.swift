@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct DetailThreatsStrategy: DetailPageStrategy {
+final class DetailThreatsStrategy: DetailPageStrategy {
     var species: Species
     
     var pageName: String {
@@ -19,7 +19,7 @@ struct DetailThreatsStrategy: DetailPageStrategy {
         return FirebaseStorageService.detailThreatsImageManager
     }
     
-    mutating func arrangedSubviews() -> UIStackView {
+     func arrangedSubviews() -> UIStackView {
         let stackView = UIStackView(arrangedSubviews: [
             
             DetailInfoWindow(title: "CONSERVATION STATUS", content: ConservationStatusView(species: species)),
@@ -30,12 +30,19 @@ struct DetailThreatsStrategy: DetailPageStrategy {
         
         for threat in species.population.threats {
             let threatsComponents = threat.components(separatedBy: "%title")
-            stackView.addArrangedSubview(DetailInfoWindow(title: threatsComponents[0], content: Factory.makeDetailInfoWindowLabel(text: threatsComponents[1])))
+            stackView.addArrangedSubview(
+                DetailInfoWindow(
+                    title: threatsComponents[0],
+                    content: Factory.makeDetailInfoWindowLabel(text: threatsComponents[1])))
         }
         
         stackView.axis = .vertical
         stackView.spacing = Constants.spacing
         return stackView
+    }
+    
+    init(species: Species) {
+        self.species = species
     }
 }
 

@@ -25,7 +25,7 @@ final class NewsViewModel {
     
     private var newsArticles: [NewsArticle] = []
     
-    private var filteredNewsArticles: [NewsArticle] {
+    var filteredNewsArticles: [NewsArticle] {
         return filterDuplicateArticles(from: newsArticles)
     }
     

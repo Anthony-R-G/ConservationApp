@@ -55,8 +55,8 @@ class SpeciesDetailInfoViewController: UIViewController {
         return strategy.arrangedSubviews()
     }()
     
-  private lazy var closeButton: CircleBlurButton = {
-    let btn = Factory.makeBlurredCircleButton(image: .close, style: .light, size: .regular)
+    private lazy var closeButton: CircleBlurButton = {
+        let btn = Factory.makeBlurredCircleButton(image: .close, style: .light, size: .regular)
         btn.addTarget(self, action: #selector(dismissPage), for: .touchUpInside)
         return btn
     }()
@@ -84,7 +84,6 @@ class SpeciesDetailInfoViewController: UIViewController {
     //MARK: -- Methods
     
     @objc private func dismissPage() {
-        Utilities.sendHapticFeedback(action: .pageDismissed)
         navigationController?.popViewController(animated: true)
     }
     
@@ -153,7 +152,7 @@ extension SpeciesDetailInfoViewController {
     func setMaskViewConstraints() {
         maskView.snp.makeConstraints { (make) in
             make.edges.equalTo(shadowView)
-             
+            
         }
     }
     

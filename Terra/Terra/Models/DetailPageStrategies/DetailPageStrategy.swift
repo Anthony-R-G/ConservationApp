@@ -16,6 +16,7 @@ protocol DetailPageStrategy {
     var firebaseStorageManager: FirebaseStorageService? { get }
     mutating func arrangedSubviews() -> UIStackView
     mutating func getDetailViewController() -> UIViewController
+//    func hash()
 }
 
 extension DetailPageStrategy {
@@ -25,5 +26,15 @@ extension DetailPageStrategy {
         return detailVC
     }
 }
+
+//extension DetailPageStrategy {
+//    mutating func hash(into hasher: inout Hasher) {
+//    hasher.combine(species)
+//    hasher.combine(pageName)
+//    hasher.combine(firebaseStorageManager)
+//    hasher.combine(arrangedSubviews())
+//  }
+//}
+
 
 

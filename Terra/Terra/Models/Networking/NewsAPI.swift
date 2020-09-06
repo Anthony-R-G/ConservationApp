@@ -24,7 +24,7 @@ extension NewsAPI {
         urlComponents.queryItems = [
             URLQueryItem(name: "apiKey", value: Secrets.newsAPIKey),
             URLQueryItem(name: "q", value: "animal+endangered+conservation+wildlife"),
-            URLQueryItem(name: "sortBy", value: "popularity"),
+            URLQueryItem(name: "sortBy", value: "publishedAt"),
             URLQueryItem(name: "language", value: "en"),
             URLQueryItem(name: "pageSize", value: "20"),
             URLQueryItem(name: "page", value: "\(page)")

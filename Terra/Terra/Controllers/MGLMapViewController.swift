@@ -79,7 +79,6 @@ final class MGLMapViewController: UIViewController {
     }
     
     @objc private func backButtonPressed() {
-        Utilities.sendHapticFeedback(action: .pageDismissed)
         dismiss(animated: true, completion: nil)
     }
     
@@ -164,8 +163,8 @@ extension MGLMapViewController: MGLMapViewDelegate {
     
     func mapView(_ mapView: MGLMapView, tapOnCalloutFor annotation: MGLAnnotation) {
         guard let annotation = annotation as? SpeciesAnnotation else { return }
-        let coverVC = SpeciesCoverViewController()
-        coverVC.viewModel =  DetailPageStrategyViewModel(species: annotation.species)
+        let coverVC = SpeciesCoverViewController(viewModel: DetailPageStrategyViewModel(species: annotation.species))
+       
         let navVC = NavigationController(rootViewController: coverVC)
         navVC.modalPresentationStyle = .fullScreen
         present(navVC, animated: true, completion: nil)

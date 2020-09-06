@@ -29,12 +29,10 @@ struct Utilities {
     
     static func sendHapticFeedback(action: UserAction) {
         let itemSelectedFeedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
-        let pageDismissedFeedbackGenerator = UIImpactFeedbackGenerator(style: .light)
         let changedSelectionFeedbackGenerator = UISelectionFeedbackGenerator()
         
         switch action {
         case .itemSelected: itemSelectedFeedbackGenerator.impactOccurred()
-        case .pageDismissed: pageDismissedFeedbackGenerator.impactOccurred()
         case .selectionChanged: changedSelectionFeedbackGenerator.selectionChanged()
         }
     }
@@ -57,6 +55,5 @@ struct Utilities {
 
 enum UserAction {
     case itemSelected
-    case pageDismissed
     case selectionChanged
 }

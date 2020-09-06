@@ -9,7 +9,7 @@
 import UIKit
 
 fileprivate typealias SpeciesDataSource = UICollectionViewDiffableDataSource<SpeciesListViewController.Section, Species>
-fileprivate typealias SpeciesSnapShot = NSDiffableDataSourceSnapshot<SpeciesListViewController.Section, Species>
+fileprivate typealias SpeciesSnapshot = NSDiffableDataSourceSnapshot<SpeciesListViewController.Section, Species>
 
 final class SpeciesListViewController: UIViewController {
     
@@ -225,8 +225,8 @@ final class SpeciesListViewController: UIViewController {
         return dataSource
     }
     
-    private func createSnapshot(from species: [Species]) {
-        var snapshot = SpeciesSnapShot()
+    private func makeSnapshot(from species: [Species]) {
+        var snapshot = SpeciesSnapshot()
         
         snapshot.appendSections([.main])
         snapshot.appendItems(species)
@@ -275,8 +275,7 @@ extension SpeciesListViewController: UICollectionViewDelegate {
                            didSelectItemAt indexPath: IndexPath) {
            
            guard let selectedSpecies = dataSource.itemIdentifier(for: indexPath) else { return }
-           let coverVC = SpeciesCoverViewController()
-           coverVC.viewModel =  DetailPageStrategyViewModel(species: selectedSpecies)
+           let coverVC = SpeciesCoverViewController(viewModel: DetailPageStrategyViewModel(species: selectedSpecies))
            let navVC = NavigationController(rootViewController: coverVC)
            navVC.modalPresentationStyle = .fullScreen
            present(navVC, animated: true, completion: nil)
@@ -309,7 +308,7 @@ extension SpeciesListViewController: UITabBarDelegate {
 //MARK: -- Custom Delegate Implementations
 extension SpeciesListViewController: SpeciesViewModelDelegate {
     func fetchCompleted() {
-        createSnapshot(from: viewModel.searchFilteredSpecies)
+        makeSnapshot(from: viewModel.searchFilteredSpecies)
     }
 }
 

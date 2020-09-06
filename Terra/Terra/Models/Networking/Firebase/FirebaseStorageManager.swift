@@ -10,7 +10,7 @@ import Foundation
 import FirebaseUI
 
 
-class FirebaseStorageService {
+final class FirebaseStorageService {
     enum imageType {
         case cell
         case cover
