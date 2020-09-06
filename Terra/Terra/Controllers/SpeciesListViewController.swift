@@ -157,7 +157,6 @@ final class SpeciesListViewController: UIViewController {
     
     @objc private func earthButtonPressed() {
         let mapVC = MGLMapViewController(speciesData: viewModel.allSpecies)
-//        mapVC.speciesData = viewModel.allSpecies
         mapVC.modalPresentationStyle = .fullScreen
         Utilities.sendHapticFeedback(action: .itemSelected)
         present(mapVC, animated: true, completion: nil)
@@ -230,7 +229,11 @@ final class SpeciesListViewController: UIViewController {
         
         snapshot.appendSections([.main])
         snapshot.appendItems(species)
+        
+        noResultsFoundLabel.isHidden = snapshot.numberOfItems > 0 ? true: false
+       
         dataSource.apply(snapshot, animatingDifferences: true)
+       
     }
     
     private func addGestureRecognizers() {
