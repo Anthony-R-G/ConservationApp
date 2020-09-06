@@ -9,13 +9,10 @@
 import UIKit
 
 final class DetailHabitatStrategy: DetailPageStrategy {
-    var species: Species
     
     weak var biomeViewDelegate: BiomeViewDelegate?
     
-    var speciesName: String {
-        return species.commonName
-    }
+    var species: Species
     
     var pageName: String {
         return "HABITAT"

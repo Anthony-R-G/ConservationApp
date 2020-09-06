@@ -11,10 +11,6 @@ import UIKit
 struct DetailThreatsStrategy: DetailPageStrategy {
     var species: Species
     
-    var speciesName: String {
-        return species.commonName
-    }
-    
     var pageName: String {
         return "THREATS"
     }

@@ -10,11 +10,7 @@ import UIKit
 
 struct DetailOverviewStrategy: DetailPageStrategy {
     var species: Species
-    
-    var speciesName: String {
-        return species.commonName
-    }
-    
+        
     var pageName: String {
         return "OVERVIEW"
     }

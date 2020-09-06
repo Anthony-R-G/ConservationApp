@@ -11,10 +11,6 @@ import UIKit
 struct DetailHowToHelpStrategy: DetailPageStrategy {
     var species: Species
     
-    var speciesName: String {
-        return species.commonName
-    }
-    
     var pageName: String {
         return "HOW TO HELP"
     }
