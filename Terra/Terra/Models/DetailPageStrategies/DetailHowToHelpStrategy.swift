@@ -19,8 +19,8 @@ struct DetailHowToHelpStrategy: DetailPageStrategy {
         return "HOW TO HELP"
     }
     
-    var firebaseStorageManager: FirebaseStorageService {
-        return FirebaseStorageService.howToHelpImageManager
+    var firebaseStorageManager: FirebaseStorageService? {
+        return nil
     }
     
     mutating func arrangedSubviews() -> UIStackView {

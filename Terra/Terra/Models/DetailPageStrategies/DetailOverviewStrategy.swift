@@ -19,7 +19,7 @@ struct DetailOverviewStrategy: DetailPageStrategy {
         return "OVERVIEW"
     }
     
-    var firebaseStorageManager: FirebaseStorageService {
+    var firebaseStorageManager: FirebaseStorageService? {
         return FirebaseStorageService.detailOverviewImageManager
     }
     

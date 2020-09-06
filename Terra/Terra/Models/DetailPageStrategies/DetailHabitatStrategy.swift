@@ -21,7 +21,7 @@ final class DetailHabitatStrategy: DetailPageStrategy {
         return "HABITAT"
     }
     
-    var firebaseStorageManager: FirebaseStorageService {
+    var firebaseStorageManager: FirebaseStorageService? {
         return FirebaseStorageService.detailHabitatImageManager
     }
     

@@ -14,7 +14,7 @@ protocol DetailPageStrategy {
     var species: Species { get set }
     var speciesName: String { get }
     var pageName: String { get }
-    var firebaseStorageManager: FirebaseStorageService { get }
+    var firebaseStorageManager: FirebaseStorageService? { get }
     mutating func arrangedSubviews() -> UIStackView
     mutating func getDetailViewController() -> UIViewController
 }

@@ -19,7 +19,7 @@ struct DetailThreatsStrategy: DetailPageStrategy {
         return "THREATS"
     }
     
-    var firebaseStorageManager: FirebaseStorageService {
+    var firebaseStorageManager: FirebaseStorageService? {
         return FirebaseStorageService.detailThreatsImageManager
     }
     
