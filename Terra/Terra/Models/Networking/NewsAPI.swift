@@ -24,13 +24,13 @@ extension NewsAPI {
         urlComponents.queryItems = [
             URLQueryItem(name: "apiKey", value: Secrets.newsAPIKey),
             URLQueryItem(name: "q", value: "animal+endangered+conservation+wildlife"),
-            URLQueryItem(name: "sortBy", value: "publishedAt"),
+            URLQueryItem(name: "sortBy", value: "popularity"),
+            URLQueryItem(name: "language", value: "en"),
             URLQueryItem(name: "pageSize", value: "20"),
             URLQueryItem(name: "page", value: "\(page)")
         ]
         
         let request = URLRequest(url: urlComponents.url!.absoluteURL)
-        print(request)
         return apiClient.run(request)
             .map(\.value)
             .eraseToAnyPublisher() 

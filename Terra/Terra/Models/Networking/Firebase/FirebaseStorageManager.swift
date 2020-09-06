@@ -69,10 +69,16 @@ class FirebaseStorageService {
     }
     
     func getImage(for speciesName: String, setTo imageView: UIImageView) {
-        let cleanedStr = speciesName.lowercased().replacingOccurrences(of: " ", with: "")
-        let animalImageReference = imagesFolderReference.child("\(cleanedStr).png")
+        
+        let animalImageReference = imagesFolderReference.child("\(speciesName.lowercaseAlphaNumericsOnly).png")
         imageView.sd_imageTransition = .fade(duration: 1.2)
         imageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
-        imageView.sd_setImage(with: animalImageReference, placeholderImage: UIImage(named: "black"))
+    
+        //TODO: -- Change SDWebImageOptions in release build
+        imageView.sd_setImage(with: animalImageReference,
+                              maxImageSize: 11 * 1024 * 1024,
+                              placeholderImage: UIImage(named: "black"),
+                              options: [.scaleDownLargeImages],
+                              completion: nil)
     }
 }

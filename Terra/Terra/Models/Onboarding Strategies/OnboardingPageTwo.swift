@@ -11,11 +11,11 @@ import UIKit
 struct OnboardingPageTwo: OnboardingStrategy {
 
     func videoFileName() -> String {
-        return "kenyalion"
+        return "lion"
     }
     
     func displayedText() -> String {
-        return "This is the worst mass-extinction since the Permian period, 250 million years ago"
+        return "PLACEHOLDER TEXT FOR PAGE 2"
     }
     
     func isLastPage() -> Bool {

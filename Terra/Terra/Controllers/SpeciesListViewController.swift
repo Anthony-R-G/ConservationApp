@@ -282,6 +282,8 @@ extension SpeciesListViewController: UICollectionViewDelegateFlowLayout {
         let navVC = NavigationController(rootViewController: coverVC)
         navVC.modalPresentationStyle = .fullScreen
         present(navVC, animated: true, completion: nil)
+        
+        
     }
     
     func collectionView(_ collectionView: UICollectionView,

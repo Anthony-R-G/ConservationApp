@@ -11,7 +11,7 @@ import UIKit
 struct OnboardingPageOne: OnboardingStrategy {
     
     func videoFileName() -> String {
-        return "Dolphin"
+        return "earthFromSpace"
     }
     
     func displayedText() -> String {
