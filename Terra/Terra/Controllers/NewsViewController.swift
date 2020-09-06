@@ -86,7 +86,7 @@ final class NewsViewController: UIViewController {
 extension NewsViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.totalNewsArticlesCount - 1
+        return viewModel.filteredNewsArticles.count - 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -102,7 +102,7 @@ extension NewsViewController: UICollectionViewDataSource {
 extension NewsViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         for index in indexPaths {
-            if index.row > viewModel.totalNewsArticlesCount - 3 && !viewModel.isFetchInProgress {
+            if index.row > viewModel.filteredNewsArticles.count - 3 && !viewModel.isFetchInProgress {
                 viewModel.fetchNews(fetchType: .append)
             }
         }

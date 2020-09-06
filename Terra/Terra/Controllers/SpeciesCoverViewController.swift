@@ -19,7 +19,7 @@ final class SpeciesCoverViewController: UIViewController {
         iv.contentMode = .scaleAspectFill
         iv.backgroundColor = .black
         FirebaseStorageService.coverImageManager.getImage(
-            for: viewModel.selectedSpecies.commonName,
+            for: viewModel.species.commonName,
             setTo: iv)
         return iv
     }()
@@ -32,11 +32,11 @@ final class SpeciesCoverViewController: UIViewController {
     }()
     
     private lazy var headerNameView: CoverHeaderNameView = {
-        return CoverHeaderNameView(species: viewModel.selectedSpecies, delegate: self)
+        return CoverHeaderNameView(species: viewModel.species, delegate: self)
     }()
     
     private lazy var subheaderInfoView: CoverSubheaderInfoView = {
-        return CoverSubheaderInfoView(species: viewModel.selectedSpecies)
+        return CoverSubheaderInfoView(species: viewModel.species)
     }()
     
     private lazy var backgroundVisualEffectBlur: UIVisualEffectView = {
@@ -417,7 +417,7 @@ extension SpeciesCoverViewController: UICollectionViewDelegate {
 
 extension SpeciesCoverViewController: DonateButtonDelegate {
     func donateButtonPressed() {
-        guard let donationURL = URL(string: viewModel.selectedSpecies.donationLink) else { return }
+        guard let donationURL = URL(string: viewModel.species.donationLink) else { return }
         Utilities.sendHapticFeedback(action: .itemSelected)
         Utilities.presentWebBrowser(on: self, link: donationURL, delegate: nil)
     }

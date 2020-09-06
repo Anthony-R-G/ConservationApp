@@ -11,7 +11,7 @@ import Foundation
 final class DetailPageStrategyViewModel {
     
     //MARK: -- Properties
-    private var species: Species!
+    private(set) var species: Species!
     
     private(set) lazy var detailPageStrategies: [DetailPageStrategy] = [
         DetailOverviewStrategy(species: species),
@@ -19,10 +19,6 @@ final class DetailPageStrategyViewModel {
         DetailThreatsStrategy(species: species),
         DetailHowToHelpStrategy(species: species)
     ]
-    
-    var selectedSpecies: Species {
-        return species
-    }
     
     //MARK: -- Methods
     

@@ -9,11 +9,6 @@
 import Foundation
 import Combine
 
-enum FetchType {
-    case replace
-    case append
-}
-
 final class NewsViewModel {
     //MARK: -- Properties
     
@@ -29,10 +24,11 @@ final class NewsViewModel {
         return filterDuplicateArticles(from: newsArticles)
     }
     
-    private(set) var isFetchInProgress: Bool = false 
+    private(set) var isFetchInProgress: Bool = false
     
-    var totalNewsArticlesCount: Int {
-        return filteredNewsArticles.count
+    enum FetchType {
+        case replace
+        case append
     }
 
     //MARK: -- Methods
