@@ -38,18 +38,11 @@ final class SpeciesViewModel {
         return animalData
     }
     
-    var totalSpeciesCount: Int {
-        return searchFilteredSpecies.count
-    }
-    
     
     //MARK: -- Methods
     
     //Public Accessors
-    func specificSpecies(at index: Int) -> Species {
-        return searchFilteredSpecies[index]
-    }
-    
+   
     func updateRedListCategoryFilteredAnimals(from selectedTabTag: Int) {
         Utilities.sendHapticFeedback(action: .selectionChanged)
         switch selectedTabTag {

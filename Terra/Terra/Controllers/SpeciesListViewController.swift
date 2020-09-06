@@ -8,6 +8,9 @@
 
 import UIKit
 
+fileprivate typealias SpeciesDataSource = UICollectionViewDiffableDataSource<SpeciesListViewController.Section, Species>
+fileprivate typealias SpeciesSnapShot = NSDiffableDataSourceSnapshot<SpeciesListViewController.Section, Species>
+
 final class SpeciesListViewController: UIViewController {
     
     //MARK: -- UI Element Initialization
@@ -28,8 +31,8 @@ final class SpeciesListViewController: UIViewController {
     
     private lazy var filterTabBar: RedListFilterTabBar = {
         let tb = RedListFilterTabBar(frame: CGRect(origin: .zero, size: CGSize(
-                                                   width: view.frame.width,
-                                                   height: 30.deviceScaled)))
+            width: view.frame.width,
+            height: 30.deviceScaled)))
         tb.selectedItem = tb.items![0]
         tb.delegate = self
         return tb
@@ -81,6 +84,8 @@ final class SpeciesListViewController: UIViewController {
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
+        layout.itemSize = CGSize(width: view.frame.width, height: 227.deviceScaled)
+        layout.minimumLineSpacing = 0
         
         let cv = UICollectionView(
             frame: .zero,
@@ -88,7 +93,8 @@ final class SpeciesListViewController: UIViewController {
         
         cv.backgroundColor = .clear
         cv.register(SpeciesCollectionViewCell.self, forCellWithReuseIdentifier: Constants.cellReuseIdentifier)
-//        cv.dataSource = self
+        //        cv.dataSource = self
+        
         cv.delegate = self
         return cv
     }()
@@ -141,8 +147,8 @@ final class SpeciesListViewController: UIViewController {
     
     private var selectedTab = 0
     
-    private var dataSource: UICollectionViewDiffableDataSource<Section, Species>!
-        
+    private var dataSource: SpeciesDataSource!
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -151,7 +157,7 @@ final class SpeciesListViewController: UIViewController {
     
     @objc private func earthButtonPressed() {
         let mapVC = MGLMapViewController()
-        mapVC.speciesData = viewModel.species
+        mapVC.speciesData = viewModel.searchFilteredSpecies
         mapVC.modalPresentationStyle = .fullScreen
         Utilities.sendHapticFeedback(action: .itemSelected)
         present(mapVC, animated: true, completion: nil)
@@ -208,15 +214,18 @@ final class SpeciesListViewController: UIViewController {
     }
     
     private func configureDataSource() {
-        dataSource = UICollectionViewDiffableDataSource<Section, Species>(collectionView: collectionView, cellProvider: { (collectionView, indexPath, species) -> UICollectionViewCell? in
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.cellReuseIdentifier, for: indexPath) as? SpeciesCollectionViewCell else { return UICollectionViewCell() }
+        dataSource = SpeciesDataSource(collectionView: collectionView,
+                                       cellProvider: { (collectionView, indexPath, species) -> UICollectionViewCell? in
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: Constants.cellReuseIdentifier,
+                for: indexPath) as? SpeciesCollectionViewCell else { return UICollectionViewCell() }
             cell.configureCell(from: species)
             return cell
         })
     }
     
-     func createSnapshot(from species: [Species]) {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, Species>()
+    private func createSnapshot(from species: [Species]) {
+        var snapshot = SpeciesSnapShot()
         
         snapshot.appendSections([.main])
         snapshot.appendItems(species)
@@ -243,27 +252,6 @@ final class SpeciesListViewController: UIViewController {
     }
 }
 
-//MARK: -- CollectionView DataSource Methods
-
-//extension SpeciesListViewController: UICollectionViewDataSource {
-//
-//    func collectionView(_ collectionView: UICollectionView,
-//                        numberOfItemsInSection section: Int) -> Int {
-//        noResultsFoundLabel.isHidden = viewModel.totalSpeciesCount == 0 && isSearching ? false : true
-//        return viewModel.totalSpeciesCount
-//    }
-//
-//
-//    func collectionView(_ collectionView: UICollectionView,
-//                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//
-//        let speciesCell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.cellReuseIdentifier, for: indexPath) as! SpeciesCollectionViewCell
-//        let specificAnimal = viewModel.specificSpecies(at: indexPath.row)
-//        speciesCell.configureCell(from: specificAnimal)
-//        return speciesCell
-//    }
-//}
-
 //MARK: -- CollectionView Delegate Methods
 
 extension SpeciesListViewController: UICollectionViewDelegate {
@@ -283,36 +271,18 @@ extension SpeciesListViewController: UICollectionViewDelegate {
             cell?.transform = CGAffineTransform(scaleX: 1, y: 1)
         }
     }
-}
-
-extension SpeciesListViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        return CGSize(width: view.frame.width, height: 227.deviceScaled)
-    }
     
     func collectionView(_ collectionView: UICollectionView,
-                        didSelectItemAt indexPath: IndexPath) {
-        
-        let selectedSpecies = viewModel.specificSpecies(at: indexPath.row)
-        let coverVC = SpeciesCoverViewController()
-        coverVC.viewModel =  DetailPageStrategyViewModel(species: selectedSpecies)
-        let navVC = NavigationController(rootViewController: coverVC)
-        navVC.modalPresentationStyle = .fullScreen
-        present(navVC, animated: true, completion: nil)
-        
-        
-    }
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
+                           didSelectItemAt indexPath: IndexPath) {
+           
+           guard let selectedSpecies = dataSource.itemIdentifier(for: indexPath) else { return }
+           let coverVC = SpeciesCoverViewController()
+           coverVC.viewModel =  DetailPageStrategyViewModel(species: selectedSpecies)
+           let navVC = NavigationController(rootViewController: coverVC)
+           navVC.modalPresentationStyle = .fullScreen
+           present(navVC, animated: true, completion: nil)
+       }
 }
-
 
 //MARK: --SearchBar Delegate Methods
 extension SpeciesListViewController: UISearchBarDelegate {
@@ -340,7 +310,7 @@ extension SpeciesListViewController: UITabBarDelegate {
 //MARK: -- Custom Delegate Implementations
 extension SpeciesListViewController: SpeciesViewModelDelegate {
     func fetchCompleted() {
-        createSnapshot(from: viewModel.redListCategoryFilteredSpecies)
+        createSnapshot(from: viewModel.searchFilteredSpecies)
     }
 }
 
