@@ -8,6 +8,9 @@
 
 import Foundation
 
-final class OnboardingModel {
+final class OnboardingViewModel {
+    
+    private(set) var onboardingPages: [OnboardingViewController] = []
+    
     
 }

@@ -21,7 +21,7 @@ final class SpeciesViewModel {
         }
     }
     
-    private var searchFilteredSpecies: [Species] {
+    var searchFilteredSpecies: [Species] {
         get {
             guard let searchString = searchString, !searchString.isEmpty else { return redListCategoryFilteredSpecies }
             return Species.getFilteredSpeciesByName(arr: redListCategoryFilteredSpecies, searchString: searchString)

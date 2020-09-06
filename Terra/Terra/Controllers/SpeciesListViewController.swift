@@ -88,7 +88,7 @@ final class SpeciesListViewController: UIViewController {
         
         cv.backgroundColor = .clear
         cv.register(SpeciesCollectionViewCell.self, forCellWithReuseIdentifier: Constants.cellReuseIdentifier)
-        cv.dataSource = self
+//        cv.dataSource = self
         cv.delegate = self
         return cv
     }()
@@ -140,6 +140,8 @@ final class SpeciesListViewController: UIViewController {
     private var isSearching: Bool = false
     
     private var selectedTab = 0
+    
+    private var dataSource: UICollectionViewDiffableDataSource<Section, Species>!
         
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -205,6 +207,22 @@ final class SpeciesListViewController: UIViewController {
         isSearching = false
     }
     
+    private func configureDataSource() {
+        dataSource = UICollectionViewDiffableDataSource<Section, Species>(collectionView: collectionView, cellProvider: { (collectionView, indexPath, species) -> UICollectionViewCell? in
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.cellReuseIdentifier, for: indexPath) as? SpeciesCollectionViewCell else { return UICollectionViewCell() }
+            cell.configureCell(from: species)
+            return cell
+        })
+    }
+    
+     func createSnapshot(from species: [Species]) {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Species>()
+        
+        snapshot.appendSections([.main])
+        snapshot.appendItems(species)
+        dataSource.apply(snapshot, animatingDifferences: true, completion: nil)
+    }
+    
     private func addGestureRecognizers() {
         collectionView.addGestureRecognizer(rightSwipeGesture)
         collectionView.addGestureRecognizer(leftSwipeGesture)
@@ -217,32 +235,34 @@ final class SpeciesListViewController: UIViewController {
         view.backgroundColor = .black
         viewModel = SpeciesViewModel(delegate: self)
         viewModel.fetchSpeciesData()
+        configureDataSource()
         addSubviews()
         setConstraints()
         addGestureRecognizers()
+        
     }
 }
 
 //MARK: -- CollectionView DataSource Methods
 
-extension SpeciesListViewController: UICollectionViewDataSource {
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        numberOfItemsInSection section: Int) -> Int {
-        noResultsFoundLabel.isHidden = viewModel.totalSpeciesCount == 0 && isSearching ? false : true
-        return viewModel.totalSpeciesCount
-    }
-    
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let speciesCell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.cellReuseIdentifier, for: indexPath) as! SpeciesCollectionViewCell
-        let specificAnimal = viewModel.specificSpecies(at: indexPath.row)
-        speciesCell.configureCell(from: specificAnimal)
-        return speciesCell
-    }
-}
+//extension SpeciesListViewController: UICollectionViewDataSource {
+//
+//    func collectionView(_ collectionView: UICollectionView,
+//                        numberOfItemsInSection section: Int) -> Int {
+//        noResultsFoundLabel.isHidden = viewModel.totalSpeciesCount == 0 && isSearching ? false : true
+//        return viewModel.totalSpeciesCount
+//    }
+//
+//
+//    func collectionView(_ collectionView: UICollectionView,
+//                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//
+//        let speciesCell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.cellReuseIdentifier, for: indexPath) as! SpeciesCollectionViewCell
+//        let specificAnimal = viewModel.specificSpecies(at: indexPath.row)
+//        speciesCell.configureCell(from: specificAnimal)
+//        return speciesCell
+//    }
+//}
 
 //MARK: -- CollectionView Delegate Methods
 
@@ -320,10 +340,7 @@ extension SpeciesListViewController: UITabBarDelegate {
 //MARK: -- Custom Delegate Implementations
 extension SpeciesListViewController: SpeciesViewModelDelegate {
     func fetchCompleted() {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.collectionView.reloadData()
-        }
+        createSnapshot(from: viewModel.redListCategoryFilteredSpecies)
     }
 }
 
@@ -404,5 +421,10 @@ fileprivate extension SpeciesListViewController {
     }
 }
 
+extension SpeciesListViewController {
+    fileprivate enum Section {
+        case main
+    }
+}
 
 
