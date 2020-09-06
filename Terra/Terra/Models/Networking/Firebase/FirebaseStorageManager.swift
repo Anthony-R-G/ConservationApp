@@ -65,7 +65,7 @@ final class FirebaseStorageService {
     func getImage(for speciesName: String, setTo imageView: UIImageView) {
         
         let animalImageReference = imagesFolderReference.child("\(speciesName.lowercaseAlphaNumericsOnly).png")
-        imageView.sd_imageTransition = .fade(duration: 1.2)
+        imageView.sd_imageTransition = .fade(duration: 1)
         imageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
     
         //TODO: -- Change SDWebImageOptions in release build

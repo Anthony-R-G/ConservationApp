@@ -156,8 +156,8 @@ final class SpeciesListViewController: UIViewController {
     //MARK: -- Methods
     
     @objc private func earthButtonPressed() {
-        let mapVC = MGLMapViewController()
-        mapVC.speciesData = viewModel.allSpecies
+        let mapVC = MGLMapViewController(speciesData: viewModel.allSpecies)
+//        mapVC.speciesData = viewModel.allSpecies
         mapVC.modalPresentationStyle = .fullScreen
         Utilities.sendHapticFeedback(action: .itemSelected)
         present(mapVC, animated: true, completion: nil)
@@ -247,7 +247,6 @@ final class SpeciesListViewController: UIViewController {
         addSubviews()
         setConstraints()
         addGestureRecognizers()
-        
     }
 }
 

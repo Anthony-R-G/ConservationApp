@@ -13,16 +13,12 @@ final class DetailPageStrategyViewModel {
     //MARK: -- Properties
     private var species: Species!
     
-    private lazy var detailPageStrategies: [DetailPageStrategy] = [
+    private(set) lazy var detailPageStrategies: [DetailPageStrategy] = [
         DetailOverviewStrategy(species: species),
         DetailHabitatStrategy(species: species),
         DetailThreatsStrategy(species: species),
         DetailHowToHelpStrategy(species: species)
     ]
-    
-    var totalStrategiesCount: Int {
-        return detailPageStrategies.count
-    }
     
     var selectedSpecies: Species {
         return species

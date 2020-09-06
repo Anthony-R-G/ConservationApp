@@ -50,7 +50,7 @@ final class SpeciesCoverViewController: UIViewController {
         btn.setImage(UIImage(systemName: "chevron.down"), for: .normal)
         btn.contentVerticalAlignment = .fill
         btn.contentHorizontalAlignment = .fill
-        btn.addTarget(self, action: #selector(handlePageTransitionGesture), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(changePageState), for: .touchUpInside)
         btn.tintColor = .white
         btn.alpha = 0.6
         return btn
@@ -61,7 +61,7 @@ final class SpeciesCoverViewController: UIViewController {
         btn.setImage(UIImage(systemName: "chevron.up"), for: .normal)
         btn.contentVerticalAlignment = .fill
         btn.contentHorizontalAlignment = .fill
-        btn.addTarget(self, action: #selector(handlePageTransitionGesture), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(changePageState), for: .touchUpInside)
         btn.tintColor = .white
         btn.alpha = 0
         return btn
@@ -136,7 +136,7 @@ final class SpeciesCoverViewController: UIViewController {
     }()
     
     private lazy var pageStateSwipeGesture: UISwipeGestureRecognizer = {
-        let recognizer = UISwipeGestureRecognizer(target: self, action: #selector(handlePageTransitionGesture))
+        let recognizer = UISwipeGestureRecognizer(target: self, action: #selector(changePageState))
         recognizer.direction = .up
         return recognizer
     }()
@@ -192,7 +192,7 @@ final class SpeciesCoverViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    @objc private func handlePageTransitionGesture() {
+    @objc private func changePageState() {
         animatePageStateTransition()
     }
     
@@ -368,7 +368,7 @@ extension SpeciesCoverViewController {
 extension SpeciesCoverViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.totalStrategiesCount
+        return viewModel.detailPageStrategies.count
     }
     
     func collectionView(_ collectionView: UICollectionView,
