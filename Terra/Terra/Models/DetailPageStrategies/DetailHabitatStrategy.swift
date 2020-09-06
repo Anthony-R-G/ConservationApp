@@ -8,24 +8,23 @@
 
 import UIKit
 
-class DetailHabitatStrategy: DetailPageStrategy {
+final class DetailHabitatStrategy: DetailPageStrategy {
     var species: Species
     
     weak var biomeViewDelegate: BiomeViewDelegate?
     
-    func speciesName() -> String {
+    var speciesName: String {
         return species.commonName
     }
     
-    func pageName() -> String {
+    var pageName: String {
         return "HABITAT"
     }
     
-    func firebaseStorageManager() -> FirebaseStorageService {
-        
+    var firebaseStorageManager: FirebaseStorageService {
         return FirebaseStorageService.detailHabitatImageManager
     }
-
+    
     
     func arrangedSubviews() -> UIStackView {
         let stackView = UIStackView(arrangedSubviews: [

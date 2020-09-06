@@ -147,7 +147,7 @@ final class SpeciesListViewController: UIViewController {
     
     private var selectedTab = 0
     
-    private var dataSource: SpeciesDataSource!
+    private lazy var dataSource = makeDataSource()
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -157,7 +157,7 @@ final class SpeciesListViewController: UIViewController {
     
     @objc private func earthButtonPressed() {
         let mapVC = MGLMapViewController()
-        mapVC.speciesData = viewModel.searchFilteredSpecies
+        mapVC.speciesData = viewModel.allSpecies
         mapVC.modalPresentationStyle = .fullScreen
         Utilities.sendHapticFeedback(action: .itemSelected)
         present(mapVC, animated: true, completion: nil)
@@ -213,8 +213,8 @@ final class SpeciesListViewController: UIViewController {
         isSearching = false
     }
     
-    private func configureDataSource() {
-        dataSource = SpeciesDataSource(collectionView: collectionView,
+    private func makeDataSource() -> SpeciesDataSource {
+        let dataSource = SpeciesDataSource(collectionView: collectionView,
                                        cellProvider: { (collectionView, indexPath, species) -> UICollectionViewCell? in
             guard let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: Constants.cellReuseIdentifier,
@@ -222,6 +222,7 @@ final class SpeciesListViewController: UIViewController {
             cell.configureCell(from: species)
             return cell
         })
+        return dataSource
     }
     
     private func createSnapshot(from species: [Species]) {
@@ -229,7 +230,7 @@ final class SpeciesListViewController: UIViewController {
         
         snapshot.appendSections([.main])
         snapshot.appendItems(species)
-        dataSource.apply(snapshot, animatingDifferences: true, completion: nil)
+        dataSource.apply(snapshot, animatingDifferences: true)
     }
     
     private func addGestureRecognizers() {
@@ -241,10 +242,8 @@ final class SpeciesListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .black
         viewModel = SpeciesViewModel(delegate: self)
         viewModel.fetchSpeciesData()
-        configureDataSource()
         addSubviews()
         setConstraints()
         addGestureRecognizers()

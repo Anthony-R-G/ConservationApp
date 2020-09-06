@@ -13,7 +13,7 @@ final class SpeciesViewModel {
     
     private weak var delegate: SpeciesViewModelDelegate?
     
-    private var animalData: [Species] = []
+    private(set) var allSpecies: [Species] = []
     
     private var redListCategoryFilteredSpecies: [Species] = [] {
         didSet {
@@ -34,11 +34,6 @@ final class SpeciesViewModel {
         }
     }
     
-    var species: [Species] {
-        return animalData
-    }
-    
-    
     //MARK: -- Methods
     
     //Public Accessors
@@ -47,16 +42,16 @@ final class SpeciesViewModel {
         Utilities.sendHapticFeedback(action: .selectionChanged)
         switch selectedTabTag {
         case 0:
-            redListCategoryFilteredSpecies = animalData
+            redListCategoryFilteredSpecies = allSpecies
             
         case 1:
-            redListCategoryFilteredSpecies = Species.getFilteredSpeciesByConservationStatus(arr: animalData, by: .critical)
+            redListCategoryFilteredSpecies = Species.getFilteredSpeciesByConservationStatus(arr: allSpecies, by: .critical)
             
         case 2:
-            redListCategoryFilteredSpecies = Species.getFilteredSpeciesByConservationStatus(arr: animalData, by: .endangered)
+            redListCategoryFilteredSpecies = Species.getFilteredSpeciesByConservationStatus(arr: allSpecies, by: .endangered)
             
         case 3:
-            redListCategoryFilteredSpecies =  Species.getFilteredSpeciesByConservationStatus(arr: animalData, by: .vulnerable)
+            redListCategoryFilteredSpecies =  Species.getFilteredSpeciesByConservationStatus(arr: allSpecies, by: .vulnerable)
             
         default: ()
         }
@@ -78,7 +73,7 @@ extension SpeciesViewModel {
             FirestoreService.manager.getAllSpeciesData() { (result) in
                 switch result {
                 case .success(let speciesData):
-                    self.animalData = speciesData
+                    self.allSpecies = speciesData
                     self.redListCategoryFilteredSpecies = speciesData
                     
                 case .failure(let error):

@@ -11,15 +11,15 @@ import UIKit
 struct DetailOverviewStrategy: DetailPageStrategy {
     var species: Species
     
-    func speciesName() -> String {
+    var speciesName: String {
         return species.commonName
     }
     
-    func pageName() -> String {
+    var pageName: String {
         return "OVERVIEW"
     }
     
-    func firebaseStorageManager() -> FirebaseStorageService {
+    var firebaseStorageManager: FirebaseStorageService {
         return FirebaseStorageService.detailOverviewImageManager
     }
     

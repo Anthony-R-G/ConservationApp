@@ -12,9 +12,9 @@ import UIKit
 
 protocol DetailPageStrategy {
     var species: Species { get set }
-    func speciesName() -> String
-    func pageName() -> String
-    func firebaseStorageManager() -> FirebaseStorageService
+    var speciesName: String { get }
+    var pageName: String { get }
+    var firebaseStorageManager: FirebaseStorageService { get }
     mutating func arrangedSubviews() -> UIStackView
     mutating func getDetailViewController() -> UIViewController
 }
@@ -26,3 +26,5 @@ extension DetailPageStrategy {
         return detailVC
     }
 }
+
+

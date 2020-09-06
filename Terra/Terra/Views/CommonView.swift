@@ -93,9 +93,9 @@ final class CommonView: UIView {
     
     
     func configureView(from strategy: DetailPageStrategy) {
-        titleLabel.text = strategy.pageName()
-        strategy.firebaseStorageManager().getImage(for: strategy.species.commonName, setTo: backgroundImage)
-        subtitleLabel.text = strategy.speciesName()
+        titleLabel.text = strategy.pageName
+        strategy.firebaseStorageManager.getImage(for: strategy.species.commonName, setTo: backgroundImage)
+        subtitleLabel.text = strategy.speciesName
     }
     
     override init(frame: CGRect) {

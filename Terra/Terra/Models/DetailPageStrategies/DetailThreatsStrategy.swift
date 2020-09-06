@@ -11,15 +11,15 @@ import UIKit
 struct DetailThreatsStrategy: DetailPageStrategy {
     var species: Species
     
-    func speciesName() -> String {
+    var speciesName: String {
         return species.commonName
     }
     
-    func pageName() -> String {
+    var pageName: String {
         return "THREATS"
     }
     
-    func firebaseStorageManager() -> FirebaseStorageService {
+    var firebaseStorageManager: FirebaseStorageService {
         return FirebaseStorageService.detailThreatsImageManager
     }
     

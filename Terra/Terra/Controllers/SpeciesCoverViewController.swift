@@ -10,6 +10,10 @@ import UIKit
 import SafariServices
 import FirebaseUI
 
+
+//fileprivate typealias DetailPageStrategyDataSource = UICollectionViewDiffableDataSource<SpeciesCoverViewController.Section, DetailPageStrategy>
+//fileprivate typealias DetailPageStrategySnapShot = NSDiffableDataSourceSnapshot<SpeciesCoverViewController.Section, DetailPageStrategy>
+
 final class SpeciesCoverViewController: UIViewController {
     
     //MARK: -- UI Element Initialization
@@ -152,6 +156,8 @@ final class SpeciesCoverViewController: UIViewController {
     
     var viewModel: DetailPageStrategyViewModel!
     
+//    private var dataSource: DetailPageStrategyDataSource!
+    
     private var pageState: State = .collapsed
     
     private var selectedCell: UICollectionViewCell?
@@ -208,6 +214,10 @@ final class SpeciesCoverViewController: UIViewController {
             direction: .leftToRight,
             repeatCount: .infinity) }
     }
+    
+//    private func makeDataSource() -> DetailPageStrategyDataSource {
+//        let dataSource =
+//    }
     
     //MARK: -- Life Cycle Methods
     
@@ -558,5 +568,11 @@ extension State {
         case .collapsed: return .expanded
         case .expanded: return .collapsed
         }
+    }
+}
+
+extension SpeciesCoverViewController {
+    fileprivate enum Section {
+        case main
     }
 }
