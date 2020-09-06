@@ -21,8 +21,7 @@ protocol DetailPageStrategy {
 
 extension DetailPageStrategy {
      func getDetailViewController() -> UIViewController {
-        let detailVC = SpeciesDetailInfoViewController()
-        detailVC.strategy = self
+        let detailVC = SpeciesDetailInfoViewController(strategy: self)
         return detailVC
     }
 }

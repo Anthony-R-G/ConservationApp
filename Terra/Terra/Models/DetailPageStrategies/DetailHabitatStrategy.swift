@@ -22,7 +22,6 @@ final class DetailHabitatStrategy: DetailPageStrategy {
         return FirebaseStorageService.detailHabitatImageManager
     }
     
-    
     func arrangedSubviews() -> UIStackView {
         let stackView = UIStackView(arrangedSubviews: [
             DetailInfoWindow(title: "DISTRIBUTION",
@@ -46,8 +45,7 @@ final class DetailHabitatStrategy: DetailPageStrategy {
     }
     
     func getDetailViewController() -> UIViewController {
-        let detailVC = SpeciesDetailInfoViewController()
-        detailVC.strategy = self
+        let detailVC = SpeciesDetailInfoViewController(strategy: self)
         biomeViewDelegate = detailVC
         return detailVC
     }

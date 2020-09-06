@@ -63,7 +63,7 @@ class SpeciesDetailInfoViewController: UIViewController {
     
     //MARK: -- Properties
     
-    var strategy: DetailPageStrategy! {
+    private var strategy: DetailPageStrategy {
         didSet {
             commonView.configureView(from: strategy)
         }
@@ -111,6 +111,15 @@ class SpeciesDetailInfoViewController: UIViewController {
         addSubviews()
         setConstraints()
         commonView.fadeSubtitleIn()
+    }
+    
+    init(strategy: DetailPageStrategy) {
+        self.strategy = strategy
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
 
