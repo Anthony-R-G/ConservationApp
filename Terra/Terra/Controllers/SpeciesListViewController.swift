@@ -95,8 +95,6 @@ final class SpeciesListViewController: UIViewController {
         
         cv.backgroundColor = .clear
         cv.register(SpeciesCollectionViewCell.self, forCellWithReuseIdentifier: Constants.cellReuseIdentifier)
-        //        cv.dataSource = self
-        
         cv.delegate = self
         return cv
     }()
@@ -143,16 +141,20 @@ final class SpeciesListViewController: UIViewController {
     
     //MARK: -- Properties
     
-    private lazy var viewModel: SpeciesViewModel = {
-        let viewModel = SpeciesViewModel()
+    private lazy var viewModel: SpeciesListViewModel = {
+        let viewModel = SpeciesListViewModel()
         return viewModel
     }()
     
     private var isSearching: Bool = false
     
+    private var selectedTab: Int = 0
+    
     private lazy var dataSource = makeDataSource()
     
     private var subscriptions: Set<AnyCancellable> = []
+    
+    private let search = PassthroughSubject<String, Never>()
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -167,21 +169,21 @@ final class SpeciesListViewController: UIViewController {
         present(mapVC, animated: true, completion: nil)
     }
     
+    private func incrementSelectedTab() {
+        selectedTab += 1
+        if selectedTab == 4 { selectedTab = 0 }
+    }
+    
+    private func decrementSelectedTab() {
+        selectedTab -= 1
+        if selectedTab == -1 { selectedTab = 3 }
+    }
+    
     @objc private func handleCollectionViewSwipe(_ sender: UISwipeGestureRecognizer) {
         Utilities.sendHapticFeedback(action: .selectionChanged)
-        switch sender.direction {
-        case .left:
-            viewModel.selectedTab += 1
-            if viewModel.selectedTab == 4 { viewModel.selectedTab = 0 }
-            
-        case .right:
-            viewModel.selectedTab -= 1
-            if viewModel.selectedTab == -1 { viewModel.selectedTab = 3 }
-            
-        default: ()
-        }
-        
-        filterTabBar.selectedItem = filterTabBar.items![viewModel.selectedTab]
+        sender.direction == .left ? incrementSelectedTab() : decrementSelectedTab()
+        filterTabBar.selectedItem = filterTabBar.items![selectedTab]
+        viewModel.updateConservationStatus(from: selectedTab)
     }
     
     @objc private func expandSearchBar() {
@@ -217,13 +219,14 @@ final class SpeciesListViewController: UIViewController {
     }
     
     private func makeDataSource() -> SpeciesDataSource {
-        let dataSource = SpeciesDataSource(collectionView: collectionView,
-                                           cellProvider: { (collectionView, indexPath, species) -> UICollectionViewCell? in
-                                            guard let cell = collectionView.dequeueReusableCell(
-                                                withReuseIdentifier: Constants.cellReuseIdentifier,
-                                                for: indexPath) as? SpeciesCollectionViewCell else { return UICollectionViewCell() }
-                                            cell.configureCell(from: species)
-                                            return cell
+        let dataSource = SpeciesDataSource(
+            collectionView: collectionView,
+            cellProvider: { (collectionView, indexPath, species) -> UICollectionViewCell? in
+                guard let cell = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: Constants.cellReuseIdentifier,
+                    for: indexPath) as? SpeciesCollectionViewCell else { return UICollectionViewCell() }
+                cell.configureCell(from: species)
+                return cell
         })
         return dataSource
     }
@@ -307,22 +310,17 @@ extension SpeciesListViewController: UISearchBarDelegate {
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        viewModel.updateSearchText(newText: searchText)
+        search.send(searchText)
+        viewModel.performSearch(searchText)
     }
 }
 
 //MARK: -- Tab Bar Delegate
 extension SpeciesListViewController: UITabBarDelegate {
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        viewModel.selectedTab = item.tag
         Utilities.sendHapticFeedback(action: .selectionChanged)
-    }
-}
-
-//MARK: -- Custom Delegate Implementations
-extension SpeciesListViewController: SpeciesViewModelDelegate {
-    func fetchCompleted() {
-        //        makeSnapshot(from: viewModel.searchFilteredSpecies)
+        selectedTab = item.tag
+        viewModel.updateConservationStatus(from: selectedTab)
     }
 }
 

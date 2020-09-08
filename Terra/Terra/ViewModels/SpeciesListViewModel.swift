@@ -9,14 +9,14 @@
 import Foundation
 import Combine
 
-final class SpeciesViewModel: ObservableObject {
+final class SpeciesListViewModel: ObservableObject {
     //MARK: -- Properties
     
     private(set) var allSpecies: [Species] = []
     
     private var redListFilteredSpecies: [Species] = [] {
         didSet {
-            searchFilteredSpecies = redListFilteredSpecies
+            searchFilteredSpecies = Species.filterSpeciesByName(arr: redListFilteredSpecies, searchString: searchText)
         }
     }
     
@@ -33,47 +33,54 @@ final class SpeciesViewModel: ObservableObject {
     
     @Published private(set) var searchFilteredSpecies: [Species] = []
     
+    private var publisher: AnyCancellable?
     
-    var selectedTab: Int = 0 {
+    @Published private var searchText = "" {
         didSet {
-            switch selectedTab {
+            searchFilteredSpecies = Species.filterSpeciesByName(arr: redListFilteredSpecies, searchString: searchText)
+        }
+    }
+    
+    //MARK: -- Methods
+
+    
+    func performSearch(_ searchText: String) {
+        self.searchText = searchText
+    }
+    
+    func updateConservationStatus(from value: Int) {
+        switch value {
             case 0: currentConservationStatusFilter = nil
             case 1: currentConservationStatusFilter = .critical
             case 2: currentConservationStatusFilter = .endangered
             case 3: currentConservationStatusFilter = .vulnerable
             default:
-                ()
-            }
+                currentConservationStatusFilter = nil
         }
     }
     
-    private var publisher: AnyCancellable?
+//    private func setUpSearchTextBinding() {
+//        self.publisher = $searchText
+//            .receive(on: RunLoop.main)
+//            .sink(receiveValue: { [weak self] (str) in
+//                guard let self = self else { return }
+//                if !self.searchText.isEmpty {
+//                    self.searchFilteredSpecies = self.redListFilteredSpecies
+//                        .filter { $0.commonName.contains(str) }
+//                } else {
+//                    self.searchFilteredSpecies = Species.filterByConservationStatus(arr: self.redListFilteredSpecies, status: self.currentConservationStatusFilter)
+//                }
+//            })
+//    }
     
-   @Published private var searchText = ""
     
-    //MARK: -- Methods
-    
-    
-    func updateSearchText(newText: String) {
-        searchText = newText
-        
-    }
     
     init() {
-        self.publisher = $searchText
-        .receive(on: RunLoop.main)
-        .sink(receiveValue: { (str) in
-            if !self.searchText.isEmpty {
-                self.searchFilteredSpecies = self.redListFilteredSpecies
-                    .filter { $0.commonName.contains(str) }
-            } else {
-                self.searchFilteredSpecies = Species.filterByConservationStatus(arr: self.redListFilteredSpecies, status: self.currentConservationStatusFilter)
-            }
-        })
+//        setUpSearchTextBinding()
     }
 }
 
-extension SpeciesViewModel {
+extension SpeciesListViewModel {
     func fetchSpeciesData() {
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             guard let self = self else { return }

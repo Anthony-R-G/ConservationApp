@@ -20,7 +20,7 @@ struct Species: FirebaseConvertible {
     let habitat: Habitat
     let population: Population
     
-    static func getFilteredSpeciesByName(arr: [Species], searchString: String) -> [Species] {
+    static func filterSpeciesByName(arr: [Species], searchString: String) -> [Species] {
         guard searchString != "" else { return arr }
         return arr.filter{$0.commonName.lowercased().contains(searchString.lowercased())}
     }
