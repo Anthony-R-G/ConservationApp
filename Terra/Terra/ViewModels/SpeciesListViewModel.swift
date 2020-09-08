@@ -33,50 +33,32 @@ final class SpeciesListViewModel: ObservableObject {
     
     @Published private(set) var searchFilteredSpecies: [Species] = []
     
-    private var publisher: AnyCancellable?
+    private var subscriptions: Set<AnyCancellable> = []
     
-    @Published private var searchText = "" {
-        didSet {
-            searchFilteredSpecies = Species.filterSpeciesByName(arr: redListFilteredSpecies, searchString: searchText)
-        }
-    }
+    
+    private var searchSubscriber: PassthroughSubject<String, Never>
     
     //MARK: -- Methods
-
-    
-    func performSearch(_ searchText: String) {
-        self.searchText = searchText
-    }
     
     func updateConservationStatus(from value: Int) {
         switch value {
-            case 0: currentConservationStatusFilter = nil
-            case 1: currentConservationStatusFilter = .critical
-            case 2: currentConservationStatusFilter = .endangered
-            case 3: currentConservationStatusFilter = .vulnerable
-            default:
-                currentConservationStatusFilter = nil
+        case 0: currentConservationStatusFilter = nil
+        case 1: currentConservationStatusFilter = .critical
+        case 2: currentConservationStatusFilter = .endangered
+        case 3: currentConservationStatusFilter = .vulnerable
+        default:
+            currentConservationStatusFilter = nil
         }
     }
     
-//    private func setUpSearchTextBinding() {
-//        self.publisher = $searchText
-//            .receive(on: RunLoop.main)
-//            .sink(receiveValue: { [weak self] (str) in
-//                guard let self = self else { return }
-//                if !self.searchText.isEmpty {
-//                    self.searchFilteredSpecies = self.redListFilteredSpecies
-//                        .filter { $0.commonName.contains(str) }
-//                } else {
-//                    self.searchFilteredSpecies = Species.filterByConservationStatus(arr: self.redListFilteredSpecies, status: self.currentConservationStatusFilter)
-//                }
-//            })
-//    }
-    
-    
-    
-    init() {
-//        setUpSearchTextBinding()
+    init(search: PassthroughSubject<String, Never>) {
+        self.searchSubscriber = search
+        searchSubscriber
+            .receive(on: RunLoop.main)
+            .sink { [weak self] (searchText) in
+                guard let self = self else { return }
+                self.searchFilteredSpecies = Species.filterSpeciesByName(arr: self.redListFilteredSpecies, searchString: searchText)
+        }.store(in: &subscriptions)
     }
 }
 

@@ -142,10 +142,10 @@ final class SpeciesListViewController: UIViewController {
     //MARK: -- Properties
     
     private lazy var viewModel: SpeciesListViewModel = {
-        let viewModel = SpeciesListViewModel()
+        let viewModel = SpeciesListViewModel(search: search)
         return viewModel
     }()
-    
+   
     private var isSearching: Bool = false
     
     private var selectedTab: Int = 0
@@ -311,7 +311,6 @@ extension SpeciesListViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         search.send(searchText)
-        viewModel.performSearch(searchText)
     }
 }
 
