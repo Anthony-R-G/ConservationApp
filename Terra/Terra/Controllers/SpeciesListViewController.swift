@@ -154,7 +154,7 @@ final class SpeciesListViewController: UIViewController {
     
     private var subscriptions: Set<AnyCancellable> = []
     
-    private let search = PassthroughSubject<String, Never>()
+    private let search = CurrentValueSubject<String, Never>("")
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent

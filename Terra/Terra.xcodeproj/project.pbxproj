@@ -42,7 +42,6 @@
 		974B752224E002AF006C3D1D /* NewsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9772515A24DF800C0052A3F6 /* NewsViewModel.swift */; };
 		974B752324E002B2006C3D1D /* SpeciesListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976DA46524DFCAF9003F3197 /* SpeciesListViewModel.swift */; };
 		974B752424E0053F006C3D1D /* NewsViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9772516124DFA6C40052A3F6 /* NewsViewModelDelegate.swift */; };
-		974B752524E00544006C3D1D /* SpeciesViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976DA46724DFCB5F003F3197 /* SpeciesViewModelDelegate.swift */; };
 		974B752624E00562006C3D1D /* NewsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9772515E24DF814A0052A3F6 /* NewsAPI.swift */; };
 		974B752824E00583006C3D1D /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9772515C24DF80FB0052A3F6 /* APIClient.swift */; };
 		974B752924E0058E006C3D1D /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9764D12A24D7DD820050AF37 /* Secrets.swift */; };
@@ -68,7 +67,6 @@
 		97682CC824D5EB79000E5B30 /* Population.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97682CC624D5EAA3000E5B30 /* Population.swift */; };
 		976D585924CFA04400FC7458 /* UIButtonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976D585824CFA04400FC7458 /* UIButtonExtensions.swift */; };
 		976DA46624DFCAF9003F3197 /* SpeciesListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976DA46524DFCAF9003F3197 /* SpeciesListViewModel.swift */; };
-		976DA46824DFCB5F003F3197 /* SpeciesViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976DA46724DFCB5F003F3197 /* SpeciesViewModelDelegate.swift */; };
 		976F68C224E8A62C00277F79 /* SpeciesCoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976F68C124E8A62C00277F79 /* SpeciesCoverViewController.swift */; };
 		976F68C424E8AADD00277F79 /* SpeciesDetailInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976F68C324E8AADD00277F79 /* SpeciesDetailInfoViewController.swift */; };
 		976F68C824E8AE2500277F79 /* CommonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976F68C724E8AE2500277F79 /* CommonView.swift */; };
@@ -205,7 +203,6 @@
 		97682CC624D5EAA3000E5B30 /* Population.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Population.swift; sourceTree = "<group>"; };
 		976D585824CFA04400FC7458 /* UIButtonExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtensions.swift; sourceTree = "<group>"; };
 		976DA46524DFCAF9003F3197 /* SpeciesListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesListViewModel.swift; sourceTree = "<group>"; };
-		976DA46724DFCB5F003F3197 /* SpeciesViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesViewModelDelegate.swift; sourceTree = "<group>"; };
 		976F68C124E8A62C00277F79 /* SpeciesCoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesCoverViewController.swift; sourceTree = "<group>"; };
 		976F68C324E8AADD00277F79 /* SpeciesDetailInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesDetailInfoViewController.swift; sourceTree = "<group>"; };
 		976F68C724E8AE2500277F79 /* CommonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonView.swift; sourceTree = "<group>"; };
@@ -343,7 +340,6 @@
 			children = (
 				97F7B42724C56886007AEE97 /* DonateButtonDelegate.swift */,
 				9772516124DFA6C40052A3F6 /* NewsViewModelDelegate.swift */,
-				976DA46724DFCB5F003F3197 /* SpeciesViewModelDelegate.swift */,
 				9743BAB724F03FE10090A2E4 /* ConservationStatusDelegate.swift */,
 				973DF94524FB4F640082E122 /* NewsCellDelegate.swift */,
 				973DF94724FB50260082E122 /* NewsHeaderDelegate.swift */,
@@ -838,7 +834,6 @@
 				97EA494124E43FC500C0FE64 /* DetailPageStrategy.swift in Sources */,
 				97D9E24B24C6470700524000 /* Diet.swift in Sources */,
 				97452E4623E1E6C7005636E0 /* SpeciesCollectionViewCell.swift in Sources */,
-				976DA46824DFCB5F003F3197 /* SpeciesViewModelDelegate.swift in Sources */,
 				975CBFC924EFA9CE00951CD3 /* MeasurementsView.swift in Sources */,
 				976F68D024E8B21A00277F79 /* CustomTransitionAnimation.swift in Sources */,
 				979C191423DE43E900651B2B /* AppDelegate.swift in Sources */,
@@ -878,7 +873,6 @@
 				972A615024C94C6800A59AB6 /* Species.swift in Sources */,
 				972A615324C94C6E00A59AB6 /* Diet.swift in Sources */,
 				974B752324E002B2006C3D1D /* SpeciesListViewModel.swift in Sources */,
-				974B752524E00544006C3D1D /* SpeciesViewModelDelegate.swift in Sources */,
 				972A615424C94C7000A59AB6 /* PopulationTrend.swift in Sources */,
 				97947D4D24F38ABF00470402 /* Measurements.swift in Sources */,
 				974B752A24E00595006C3D1D /* NewsResponse.swift in Sources */,

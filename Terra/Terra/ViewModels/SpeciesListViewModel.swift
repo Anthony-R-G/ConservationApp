@@ -16,7 +16,10 @@ final class SpeciesListViewModel: ObservableObject {
     
     private var redListFilteredSpecies: [Species] = [] {
         didSet {
-            searchFilteredSpecies = Species.filterSpeciesByName(arr: redListFilteredSpecies, searchString: searchText)
+            searchFilteredSpecies = Species.filterSpeciesByName(
+                arr: redListFilteredSpecies,
+                searchString: searchSubscriber.value
+            )
         }
     }
     
@@ -34,24 +37,21 @@ final class SpeciesListViewModel: ObservableObject {
     @Published private(set) var searchFilteredSpecies: [Species] = []
     
     private var subscriptions: Set<AnyCancellable> = []
-    
-    
-    private var searchSubscriber: PassthroughSubject<String, Never>
+        
+    private var searchSubscriber: CurrentValueSubject<String, Never>
     
     //MARK: -- Methods
     
     func updateConservationStatus(from value: Int) {
         switch value {
-        case 0: currentConservationStatusFilter = nil
         case 1: currentConservationStatusFilter = .critical
         case 2: currentConservationStatusFilter = .endangered
         case 3: currentConservationStatusFilter = .vulnerable
-        default:
-            currentConservationStatusFilter = nil
+        default: currentConservationStatusFilter = nil
         }
     }
-    
-    init(search: PassthroughSubject<String, Never>) {
+   
+    init(search: CurrentValueSubject<String, Never>) {
         self.searchSubscriber = search
         searchSubscriber
             .receive(on: RunLoop.main)
@@ -71,7 +71,6 @@ extension SpeciesListViewModel {
                 case .success(let speciesData):
                     self.allSpecies = speciesData
                     self.redListFilteredSpecies = self.allSpecies
-                    self.searchFilteredSpecies = self.redListFilteredSpecies
                     
                 case .failure(let error):
                     print(error)
