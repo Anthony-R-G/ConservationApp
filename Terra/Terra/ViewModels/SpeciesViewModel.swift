@@ -7,62 +7,69 @@
 //
 
 import Foundation
+import Combine
 
-final class SpeciesViewModel {
+final class SpeciesViewModel: ObservableObject {
     //MARK: -- Properties
-    
-    private weak var delegate: SpeciesViewModelDelegate?
     
     private(set) var allSpecies: [Species] = []
     
-    private var redListCategoryFilteredSpecies: [Species] = [] {
+    private var redListFilteredSpecies: [Species] = [] {
         didSet {
-            delegate?.fetchCompleted()
+            searchFilteredSpecies = redListFilteredSpecies
         }
     }
     
-    var searchFilteredSpecies: [Species] {
-        get {
-            guard let searchString = searchString, !searchString.isEmpty else { return redListCategoryFilteredSpecies }
-            return Species.getFilteredSpeciesByName(arr: redListCategoryFilteredSpecies, searchString: searchString)
+    private var currentConservationStatusFilter: ConservationStatus? {
+        didSet {
+            guard let status = currentConservationStatusFilter else {
+                redListFilteredSpecies = allSpecies
+                return
+            }
+            
+            redListFilteredSpecies = Species.filterByConservationStatus(arr: allSpecies, status: status)
         }
     }
     
-    private var searchString: String? = nil {
+    @Published private(set) var searchFilteredSpecies: [Species] = []
+    
+    
+    var selectedTab: Int = 0 {
         didSet {
-            delegate?.fetchCompleted()
+            switch selectedTab {
+            case 0: currentConservationStatusFilter = nil
+            case 1: currentConservationStatusFilter = .critical
+            case 2: currentConservationStatusFilter = .endangered
+            case 3: currentConservationStatusFilter = .vulnerable
+            default:
+                ()
+            }
         }
     }
+    
+    private var publisher: AnyCancellable?
+    
+   @Published private var searchText = ""
     
     //MARK: -- Methods
     
-    //Public Accessors
-   
-    func updateRedListCategoryFilteredAnimals(from selectedTabTag: Int) {
-        Utilities.sendHapticFeedback(action: .selectionChanged)
-        switch selectedTabTag {
-        case 0:
-            redListCategoryFilteredSpecies = allSpecies
-            
-        case 1:
-            redListCategoryFilteredSpecies = Species.getFilteredSpeciesByConservationStatus(arr: allSpecies, by: .critical)
-            
-        case 2:
-            redListCategoryFilteredSpecies = Species.getFilteredSpeciesByConservationStatus(arr: allSpecies, by: .endangered)
-            
-        case 3:
-            redListCategoryFilteredSpecies =  Species.getFilteredSpeciesByConservationStatus(arr: allSpecies, by: .vulnerable)
-            
-        default: ()
-        }
+    
+    func updateSearchText(newText: String) {
+        searchText = newText
+        
     }
     
-    func updateSearchString(newString: String) {
-        searchString = newString
-    }
-    
-    init(delegate: SpeciesViewModelDelegate) {
-        self.delegate = delegate
+    init() {
+        self.publisher = $searchText
+        .receive(on: RunLoop.main)
+        .sink(receiveValue: { (str) in
+            if !self.searchText.isEmpty {
+                self.searchFilteredSpecies = self.redListFilteredSpecies
+                    .filter { $0.commonName.contains(str) }
+            } else {
+                self.searchFilteredSpecies = Species.filterByConservationStatus(arr: self.redListFilteredSpecies, status: self.currentConservationStatusFilter)
+            }
+        })
     }
 }
 
@@ -74,7 +81,8 @@ extension SpeciesViewModel {
                 switch result {
                 case .success(let speciesData):
                     self.allSpecies = speciesData
-                    self.redListCategoryFilteredSpecies = speciesData
+                    self.redListFilteredSpecies = self.allSpecies
+                    self.searchFilteredSpecies = self.redListFilteredSpecies
                     
                 case .failure(let error):
                     print(error)

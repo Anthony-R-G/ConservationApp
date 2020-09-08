@@ -37,6 +37,7 @@
 		9743BAB824F03FE10090A2E4 /* ConservationStatusDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9743BAB724F03FE10090A2E4 /* ConservationStatusDelegate.swift */; };
 		97452E4623E1E6C7005636E0 /* SpeciesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97452E4523E1E6C7005636E0 /* SpeciesCollectionViewCell.swift */; };
 		97452E4823E1EEE9005636E0 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97452E4723E1EEE9005636E0 /* GradientView.swift */; };
+		9748AE732504A5EE009B7710 /* SpeciesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9748AE722504A5EE009B7710 /* SpeciesListView.swift */; };
 		974B752124DFFC72006C3D1D /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F4E00924D757C600509694 /* StringExtensions.swift */; };
 		974B752224E002AF006C3D1D /* NewsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9772515A24DF800C0052A3F6 /* NewsViewModel.swift */; };
 		974B752324E002B2006C3D1D /* SpeciesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976DA46524DFCAF9003F3197 /* SpeciesViewModel.swift */; };
@@ -185,6 +186,7 @@
 		9743BAB724F03FE10090A2E4 /* ConservationStatusDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConservationStatusDelegate.swift; sourceTree = "<group>"; };
 		97452E4523E1E6C7005636E0 /* SpeciesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesCollectionViewCell.swift; sourceTree = "<group>"; };
 		97452E4723E1EEE9005636E0 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		9748AE722504A5EE009B7710 /* SpeciesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesListView.swift; sourceTree = "<group>"; };
 		974CC98324C64F0E00E4EF85 /* PopulationTrend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopulationTrend.swift; sourceTree = "<group>"; };
 		975742E824F61A8700D203B8 /* CircleBlurButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleBlurButton.swift; sourceTree = "<group>"; };
 		975742EA24F648A100D203B8 /* RootTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabBarController.swift; sourceTree = "<group>"; };
@@ -396,6 +398,7 @@
 				973DF94124FB3F970082E122 /* StretchyCollectionViewHeaderLayout.swift */,
 				973DF94324FB3FEF0082E122 /* NewsCollectionViewHeader.swift */,
 				970358EA24FEEED80077199C /* LoadingButton.swift */,
+				9748AE722504A5EE009B7710 /* SpeciesListView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -858,6 +861,7 @@
 				97A24D2024E445A800958AB9 /* DetailHabitatStrategy.swift in Sources */,
 				97591FE324CCDC48002EAC96 /* FontWeight.swift in Sources */,
 				97928F7924CD11BF00AF90C5 /* FirestoreError.swift in Sources */,
+				9748AE732504A5EE009B7710 /* SpeciesListView.swift in Sources */,
 				9701B4EA24EAEAFB0083CFDC /* DistributionView.swift in Sources */,
 				970358EB24FEEED80077199C /* LoadingButton.swift in Sources */,
 				97DC799824FF5C380098D11B /* UIWindowExtensions.swift in Sources */,

@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Combine
+
 
 fileprivate typealias SpeciesDataSource = UICollectionViewDiffableDataSource<SpeciesListViewController.Section, Species>
 fileprivate typealias SpeciesSnapshot = NSDiffableDataSourceSnapshot<SpeciesListViewController.Section, Species>
@@ -141,13 +143,16 @@ final class SpeciesListViewController: UIViewController {
     
     //MARK: -- Properties
     
-    private var viewModel: SpeciesViewModel!
+    private lazy var viewModel: SpeciesViewModel = {
+        let viewModel = SpeciesViewModel()
+        return viewModel
+    }()
     
     private var isSearching: Bool = false
     
-    private var selectedTab = 0
-    
     private lazy var dataSource = makeDataSource()
+    
+    private var subscriptions: Set<AnyCancellable> = []
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -163,21 +168,20 @@ final class SpeciesListViewController: UIViewController {
     }
     
     @objc private func handleCollectionViewSwipe(_ sender: UISwipeGestureRecognizer) {
-        
+        Utilities.sendHapticFeedback(action: .selectionChanged)
         switch sender.direction {
         case .left:
-            selectedTab += 1
-            if selectedTab == 4 { selectedTab = 0 }
+            viewModel.selectedTab += 1
+            if viewModel.selectedTab == 4 { viewModel.selectedTab = 0 }
             
         case .right:
-            selectedTab -= 1
-            if selectedTab == -1 { selectedTab = 3 }
+            viewModel.selectedTab -= 1
+            if viewModel.selectedTab == -1 { viewModel.selectedTab = 3 }
             
         default: ()
         }
         
-        filterTabBar.selectedItem = filterTabBar.items![selectedTab]
-        viewModel.updateRedListCategoryFilteredAnimals(from: filterTabBar.selectedItem!.tag)
+        filterTabBar.selectedItem = filterTabBar.items![viewModel.selectedTab]
     }
     
     @objc private func expandSearchBar() {
@@ -214,12 +218,12 @@ final class SpeciesListViewController: UIViewController {
     
     private func makeDataSource() -> SpeciesDataSource {
         let dataSource = SpeciesDataSource(collectionView: collectionView,
-                                       cellProvider: { (collectionView, indexPath, species) -> UICollectionViewCell? in
-            guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: Constants.cellReuseIdentifier,
-                for: indexPath) as? SpeciesCollectionViewCell else { return UICollectionViewCell() }
-            cell.configureCell(from: species)
-            return cell
+                                           cellProvider: { (collectionView, indexPath, species) -> UICollectionViewCell? in
+                                            guard let cell = collectionView.dequeueReusableCell(
+                                                withReuseIdentifier: Constants.cellReuseIdentifier,
+                                                for: indexPath) as? SpeciesCollectionViewCell else { return UICollectionViewCell() }
+                                            cell.configureCell(from: species)
+                                            return cell
         })
         return dataSource
     }
@@ -230,10 +234,18 @@ final class SpeciesListViewController: UIViewController {
         snapshot.appendSections([.main])
         snapshot.appendItems(species)
         
-        noResultsFoundLabel.isHidden = snapshot.numberOfItems > 0 ? true: false
-       
+        noResultsFoundLabel.isHidden = isSearching && snapshot.numberOfItems == 0 ? false: true
         dataSource.apply(snapshot, animatingDifferences: true)
-       
+    }
+    
+    private func bindViewModel() {
+        viewModel.$searchFilteredSpecies
+            .sink(receiveCompletion: { _ in },
+                  receiveValue: { [weak self] (species) in
+                    guard let self = self else { return }
+                    self.makeSnapshot(from: species)
+            })
+            .store(in: &subscriptions)
     }
     
     private func addGestureRecognizers() {
@@ -245,8 +257,8 @@ final class SpeciesListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel = SpeciesViewModel(delegate: self)
         viewModel.fetchSpeciesData()
+        bindViewModel()
         addSubviews()
         setConstraints()
         addGestureRecognizers()
@@ -274,14 +286,14 @@ extension SpeciesListViewController: UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView,
-                           didSelectItemAt indexPath: IndexPath) {
-           
-           guard let selectedSpecies = dataSource.itemIdentifier(for: indexPath) else { return }
-           let coverVC = SpeciesCoverViewController(viewModel: DetailPageStrategyViewModel(species: selectedSpecies))
-           let navVC = NavigationController(rootViewController: coverVC)
-           navVC.modalPresentationStyle = .fullScreen
-           present(navVC, animated: true, completion: nil)
-       }
+                        didSelectItemAt indexPath: IndexPath) {
+        
+        guard let selectedSpecies = dataSource.itemIdentifier(for: indexPath) else { return }
+        let coverVC = SpeciesCoverViewController(viewModel: DetailPageStrategyViewModel(species: selectedSpecies))
+        let navVC = NavigationController(rootViewController: coverVC)
+        navVC.modalPresentationStyle = .fullScreen
+        present(navVC, animated: true, completion: nil)
+    }
 }
 
 //MARK: --SearchBar Delegate Methods
@@ -291,26 +303,26 @@ extension SpeciesListViewController: UISearchBarDelegate {
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        dismissSearchBar()
+        searchBar.resignFirstResponder()
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        viewModel.updateSearchString(newString: searchText)
+        viewModel.updateSearchText(newText: searchText)
     }
 }
 
 //MARK: -- Tab Bar Delegate
 extension SpeciesListViewController: UITabBarDelegate {
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        selectedTab = item.tag
-        viewModel.updateRedListCategoryFilteredAnimals(from: item.tag)
+        viewModel.selectedTab = item.tag
+        Utilities.sendHapticFeedback(action: .selectionChanged)
     }
 }
 
 //MARK: -- Custom Delegate Implementations
 extension SpeciesListViewController: SpeciesViewModelDelegate {
     func fetchCompleted() {
-        makeSnapshot(from: viewModel.searchFilteredSpecies)
+        //        makeSnapshot(from: viewModel.searchFilteredSpecies)
     }
 }
 

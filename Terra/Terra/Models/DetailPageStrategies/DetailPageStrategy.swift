@@ -26,14 +26,6 @@ extension DetailPageStrategy {
     }
 }
 
-//extension DetailPageStrategy {
-//    mutating func hash(into hasher: inout Hasher) {
-//    hasher.combine(species)
-//    hasher.combine(pageName)
-//    hasher.combine(firebaseStorageManager)
-//    hasher.combine(arrangedSubviews())
-//  }
-//}
 
 
 

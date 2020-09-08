@@ -19,6 +19,7 @@ final class DetailThreatsStrategy: DetailPageStrategy {
         return FirebaseStorageService.detailThreatsImageManager
     }
     
+    
      func arrangedSubviews() -> UIStackView {
         let stackView = UIStackView(arrangedSubviews: [
             
@@ -28,14 +29,15 @@ final class DetailThreatsStrategy: DetailPageStrategy {
                              content: Factory.makeDetailInfoWindowLabel(text: species.population.summary)),
         ])
         
-        for threat in species.population.threats {
-            let threatsComponents = threat.components(separatedBy: "%title")
+       
+        _ = species.population.threats.map ({
+            let threatComponents = $0.components(separatedBy: "%title")
             stackView.addArrangedSubview(
                 DetailInfoWindow(
-                    title: threatsComponents[0],
-                    content: Factory.makeDetailInfoWindowLabel(text: threatsComponents[1])))
-        }
-        
+                    title: threatComponents[0],
+                    content: Factory.makeDetailInfoWindowLabel(text: threatComponents[1])))
+        })
+     
         stackView.axis = .vertical
         stackView.spacing = Constants.spacing
         return stackView
