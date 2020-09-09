@@ -11,6 +11,7 @@ import Combine
 
 
 fileprivate typealias SpeciesDataSource = UICollectionViewDiffableDataSource<SpeciesListViewController.Section, Species>
+
 fileprivate typealias SpeciesSnapshot = NSDiffableDataSourceSnapshot<SpeciesListViewController.Section, Species>
 
 final class SpeciesListViewController: UIViewController {
@@ -32,9 +33,10 @@ final class SpeciesListViewController: UIViewController {
     }()
     
     private lazy var filterTabBar: RedListFilterTabBar = {
-        let tb = RedListFilterTabBar(frame: CGRect(origin: .zero, size: CGSize(
-            width: view.frame.width,
-            height: 30.deviceScaled)))
+        let tb = RedListFilterTabBar(frame: CGRect(
+            origin: .zero, size: CGSize(
+                width: view.frame.width,
+                height: 30.deviceScaled)))
         tb.selectedItem = tb.items![0]
         tb.delegate = self
         return tb
@@ -142,17 +144,17 @@ final class SpeciesListViewController: UIViewController {
     //MARK: -- Properties
     
     private lazy var viewModel: SpeciesListViewModel = {
-        let viewModel = SpeciesListViewModel(search: search)
+        let viewModel = SpeciesListViewModel(searchPublisher: search, selectedFilterPublisher: selectedTab)
         return viewModel
     }()
-   
-    private var isSearching: Bool = false
     
-    private var selectedTab: Int = 0
+    private var isSearching: Bool = false
     
     private lazy var dataSource = makeDataSource()
     
     private var subscriptions: Set<AnyCancellable> = []
+    
+    private let selectedTab = CurrentValueSubject<Int, Never>(0)
     
     private let search = CurrentValueSubject<String, Never>("")
     
@@ -170,20 +172,19 @@ final class SpeciesListViewController: UIViewController {
     }
     
     private func incrementSelectedTab() {
-        selectedTab += 1
-        if selectedTab == 4 { selectedTab = 0 }
+        selectedTab.value += 1
+        if selectedTab.value == 4 { selectedTab.value = 0 }
     }
     
     private func decrementSelectedTab() {
-        selectedTab -= 1
-        if selectedTab == -1 { selectedTab = 3 }
+        selectedTab.value -= 1
+        if selectedTab.value == -1 { selectedTab.value = 3 }
     }
     
     @objc private func handleCollectionViewSwipe(_ sender: UISwipeGestureRecognizer) {
         Utilities.sendHapticFeedback(action: .selectionChanged)
         sender.direction == .left ? incrementSelectedTab() : decrementSelectedTab()
-        filterTabBar.selectedItem = filterTabBar.items![selectedTab]
-        viewModel.updateConservationStatus(from: selectedTab)
+        filterTabBar.selectedItem = filterTabBar.items![selectedTab.value]
     }
     
     @objc private func expandSearchBar() {
@@ -244,9 +245,9 @@ final class SpeciesListViewController: UIViewController {
     private func bindViewModel() {
         viewModel.$searchFilteredSpecies
             .sink(receiveCompletion: { _ in },
-                  receiveValue: { [weak self] (species) in
+                  receiveValue: { [weak self] (speciesData) in
                     guard let self = self else { return }
-                    self.makeSnapshot(from: species)
+                    self.makeSnapshot(from: speciesData)
             })
             .store(in: &subscriptions)
     }
@@ -302,6 +303,7 @@ extension SpeciesListViewController: UICollectionViewDelegate {
 //MARK: --SearchBar Delegate Methods
 extension SpeciesListViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        search.send("")
         dismissSearchBar()
     }
     
@@ -318,8 +320,7 @@ extension SpeciesListViewController: UISearchBarDelegate {
 extension SpeciesListViewController: UITabBarDelegate {
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         Utilities.sendHapticFeedback(action: .selectionChanged)
-        selectedTab = item.tag
-        viewModel.updateConservationStatus(from: selectedTab)
+        selectedTab.value = item.tag
     }
 }
 

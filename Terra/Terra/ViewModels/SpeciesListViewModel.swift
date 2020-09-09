@@ -18,7 +18,7 @@ final class SpeciesListViewModel: ObservableObject {
         didSet {
             searchFilteredSpecies = Species.filterSpeciesByName(
                 arr: redListFilteredSpecies,
-                searchString: searchSubscriber.value
+                searchString: search.value
             )
         }
     }
@@ -37,8 +37,8 @@ final class SpeciesListViewModel: ObservableObject {
     @Published private(set) var searchFilteredSpecies: [Species] = []
     
     private var subscriptions: Set<AnyCancellable> = []
-        
-    private var searchSubscriber: CurrentValueSubject<String, Never>
+    
+    private var search: CurrentValueSubject<String, Never>
     
     //MARK: -- Methods
     
@@ -50,15 +50,29 @@ final class SpeciesListViewModel: ObservableObject {
         default: currentConservationStatusFilter = nil
         }
     }
-   
-    init(search: CurrentValueSubject<String, Never>) {
-        self.searchSubscriber = search
-        searchSubscriber
+    
+    init(searchPublisher: CurrentValueSubject<String, Never>,
+         selectedFilterPublisher: CurrentValueSubject<Int, Never>) {
+        self.search = searchPublisher
+        
+        search
             .receive(on: RunLoop.main)
             .sink { [weak self] (searchText) in
                 guard let self = self else { return }
-                self.searchFilteredSpecies = Species.filterSpeciesByName(arr: self.redListFilteredSpecies, searchString: searchText)
-        }.store(in: &subscriptions)
+                self.searchFilteredSpecies = Species.filterSpeciesByName(
+                    arr: self.redListFilteredSpecies,
+                    searchString: searchText)
+        }
+        .store(in: &subscriptions)
+        
+        
+        selectedFilterPublisher
+            .receive(on: RunLoop.main)
+            .sink { [weak self] (value) in
+                guard let self = self else { return }
+                self.updateConservationStatus(from: value)
+        }
+        .store(in: &subscriptions)
     }
 }
 
@@ -79,3 +93,4 @@ extension SpeciesListViewModel {
         }
     }
 }
+

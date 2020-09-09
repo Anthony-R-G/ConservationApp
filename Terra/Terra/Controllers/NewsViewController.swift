@@ -163,7 +163,6 @@ extension NewsViewController: UICollectionViewDelegate {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        updateStatusBarVisibility()
         let contentOffsetY = scrollView.contentOffset.y
         
         if contentOffsetY > 0 {

@@ -9,7 +9,7 @@ target 'Terra' do
  pod 'Firebase/Firestore'
  pod 'FirebaseUI/Storage'
  pod 'MaterialComponents/BottomNavigation'
- pod 'MaterialComponents/FlexibleHeader'
+ pod 'CombineCocoa'
  pod 'Mapbox-iOS-SDK', '~> 6.0.0'
  pod 'SnapKit', '~> 5.0.1'
  pod 'TransitionButton'
