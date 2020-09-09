@@ -50,7 +50,7 @@ final class SpeciesCoverViewController: UIViewController {
         btn.setImage(UIImage(systemName: "chevron.down"), for: .normal)
         btn.contentVerticalAlignment = .fill
         btn.contentHorizontalAlignment = .fill
-        btn.addTarget(self, action: #selector(changePageState), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(togglePageState), for: .touchUpInside)
         btn.tintColor = .white
         btn.alpha = 0.6
         return btn
@@ -61,7 +61,7 @@ final class SpeciesCoverViewController: UIViewController {
         btn.setImage(UIImage(systemName: "chevron.up"), for: .normal)
         btn.contentVerticalAlignment = .fill
         btn.contentHorizontalAlignment = .fill
-        btn.addTarget(self, action: #selector(changePageState), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(togglePageState), for: .touchUpInside)
         btn.tintColor = .white
         btn.alpha = 0
         return btn
@@ -136,7 +136,7 @@ final class SpeciesCoverViewController: UIViewController {
     }()
     
     private lazy var pageStateSwipeGesture: UISwipeGestureRecognizer = {
-        let recognizer = UISwipeGestureRecognizer(target: self, action: #selector(changePageState))
+        let recognizer = UISwipeGestureRecognizer(target: self, action: #selector(togglePageState))
         recognizer.direction = .up
         return recognizer
     }()
@@ -192,7 +192,7 @@ final class SpeciesCoverViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    @objc private func changePageState() {
+    @objc private func togglePageState() {
         animatePageStateTransition()
     }
     
@@ -259,7 +259,7 @@ extension SpeciesCoverViewController {
                     self.dismissPageSwipeGesture.isEnabled = false
                     self.resizeHeader(state: state)
                     self.toggleContainerInteractability(state: state)
-                    self.animateInfoOptionsVisibility(state: state)
+                    self.animateDetailInfoOptionsVisibility(state: state)
                     self.animateButtonControlsVisibility(state: state)
                     
                 case .collapsed:
@@ -270,7 +270,7 @@ extension SpeciesCoverViewController {
                     self.resizeHeader(state: state)
                     self.toggleContainerInteractability(state: state)
                     self.animateButtonControlsVisibility(state: state)
-                    self.animateInfoOptionsVisibility(state: state)
+                    self.animateDetailInfoOptionsVisibility(state: state)
                 }
                 
                 self.view.layoutIfNeeded()
@@ -334,7 +334,7 @@ extension SpeciesCoverViewController {
         }
     }
     
-    private func animateInfoOptionsVisibility(state: State) {
+    private func animateDetailInfoOptionsVisibility(state: State) {
         let newAlpha: CGFloat = state == .expanded ? 1.0 : 0.0
         let reverseAlpha: CGFloat = state == .expanded ? 0.0 : 1.0
         let duration: TimeInterval = state == .expanded ? 0.9 : 0.3

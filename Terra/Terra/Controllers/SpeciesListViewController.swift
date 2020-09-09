@@ -9,7 +9,6 @@
 import UIKit
 import Combine
 
-
 fileprivate typealias SpeciesDataSource = UICollectionViewDiffableDataSource<SpeciesListViewController.Section, Species>
 
 fileprivate typealias SpeciesSnapshot = NSDiffableDataSourceSnapshot<SpeciesListViewController.Section, Species>
@@ -138,6 +137,7 @@ final class SpeciesListViewController: UIViewController {
             for: .touchUpInside)
         btn.alpha = 1.0
         btn.tintColor = .systemBlue
+        
         return btn
     }()
     
@@ -171,6 +171,12 @@ final class SpeciesListViewController: UIViewController {
         present(mapVC, animated: true, completion: nil)
     }
     
+    @objc private func handleCollectionViewSwipe(_ sender: UISwipeGestureRecognizer) {
+        Utilities.sendHapticFeedback(action: .selectionChanged)
+        sender.direction == .left ? incrementSelectedTab() : decrementSelectedTab()
+        filterTabBar.selectedItem = filterTabBar.items![selectedTab.value]
+    }
+    
     private func incrementSelectedTab() {
         selectedTab.value += 1
         if selectedTab.value == 4 { selectedTab.value = 0 }
@@ -179,12 +185,6 @@ final class SpeciesListViewController: UIViewController {
     private func decrementSelectedTab() {
         selectedTab.value -= 1
         if selectedTab.value == -1 { selectedTab.value = 3 }
-    }
-    
-    @objc private func handleCollectionViewSwipe(_ sender: UISwipeGestureRecognizer) {
-        Utilities.sendHapticFeedback(action: .selectionChanged)
-        sender.direction == .left ? incrementSelectedTab() : decrementSelectedTab()
-        filterTabBar.selectedItem = filterTabBar.items![selectedTab.value]
     }
     
     @objc private func expandSearchBar() {
@@ -329,7 +329,8 @@ extension SpeciesListViewController: UITabBarDelegate {
 fileprivate extension SpeciesListViewController {
     
     func addSubviews() {
-        [headerImageView, earthButton, terraTitleLabel, searchBarButton, searchBar, collectionView, filterTabBar].forEach { view.addSubview($0) }
+        [headerImageView, earthButton, terraTitleLabel, searchBarButton, searchBar, collectionView, filterTabBar]
+            .forEach { view.addSubview($0) }
     }
     
     func setConstraints() {
