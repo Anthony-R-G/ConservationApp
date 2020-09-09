@@ -18,11 +18,14 @@ final class NewsViewModel {
     
     private var currentPage: Int = 1
     
-    private var newsArticles: [NewsArticle] = []
-    
-    var filteredNewsArticles: [NewsArticle] {
-        return filterDuplicateArticles(from: newsArticles)
+    private var newsArticles: [NewsArticle] = [] {
+        didSet {
+            
+            filteredNewsArticles = filterDuplicateArticles(from: newsArticles)
+        }
     }
+    
+   @Published private(set) var filteredNewsArticles: [NewsArticle] = []
     
     private(set) var isFetchInProgress: Bool = false
     

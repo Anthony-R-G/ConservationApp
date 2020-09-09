@@ -8,6 +8,7 @@
 
 import UIKit
 import SafariServices
+import Combine
 
 final class NewsViewController: UIViewController {
     
@@ -46,19 +47,20 @@ final class NewsViewController: UIViewController {
     
     fileprivate let headerID = "headerID"
     
-    private var viewModel: NewsViewModel!
+    private lazy var viewModel: NewsViewModel = {
+        let viewModel = NewsViewModel(delegate: self)
+        return viewModel
+    }()
     
     private var headerView: NewsCollectionViewHeader!
+    
+    private var subscriptions: Set<AnyCancellable> = []
     
     private var previousStatusBarHidden = false
     
     override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
-           return .slide
-       }
-       
-//    override var prefersStatusBarHidden: Bool {
-//        return shouldHideStatusBar
-//       }
+        return .slide
+    }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -66,16 +68,30 @@ final class NewsViewController: UIViewController {
     
     //MARK: -- Methods
     
+    private func bindViewModel() {
+        viewModel.$filteredNewsArticles
+            .sink(receiveCompletion: { _ in },
+                  receiveValue: { [weak self] (newsArticleData) in
+                    guard let self = self else { return }
+                    self.collectionView.reloadData()
+                    self.headerView.configureHeader(from: self.viewModel.specificArticle(at: 0))
+                    self.headerView.stopButtonLoading()
+                    
+            })
+            .store(in: &subscriptions)
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         viewModel = NewsViewModel(delegate: self)
+//        bindViewModel()
         viewModel.fetchNews(fetchType: .replace)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
+        
         addSubviews()
         setConstraints()
     }
@@ -120,9 +136,9 @@ extension NewsViewController: UICollectionViewDelegate {
         
         headerView = (
             collectionView.dequeueReusableSupplementaryView(
-            ofKind: kind,
-            withReuseIdentifier: headerID,
-            for: indexPath) as? NewsCollectionViewHeader)!
+                ofKind: kind,
+                withReuseIdentifier: headerID,
+                for: indexPath) as? NewsCollectionViewHeader)!
         
         headerView.delegate = self
         return headerView
@@ -153,7 +169,8 @@ extension NewsViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let selectedArticle = viewModel.specificArticle(at: indexPath.row + 1)
-        Utilities.presentWebBrowser(on: self, link: URL(string: selectedArticle.url)!, delegate: self)
+        guard let url = URL(string: selectedArticle.url) else { return }
+        Utilities.presentWebBrowser(on: self, link: url, delegate: self)
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -233,30 +250,30 @@ fileprivate extension NewsViewController {
         collectionView.snp.makeConstraints { (make) in
             make.leading.top.trailing.equalToSuperview()
             make.bottom.equalTo(view.safeAreaLayoutGuide)
-          
+            
         }
     }
 }
 
 /*
-extension NewsViewController {
-    
-    private var shouldHideStatusBar: Bool {
-        let frame = collectionView.convert(collectionView.bounds, to: nil)
-
-        return frame.minY < view.safeAreaInsets.top
-    }
-    
-    private func updateStatusBarVisibility() {
-        if previousStatusBarHidden != shouldHideStatusBar {
-            
-            UIView.animate(withDuration: 0.2, animations: { [weak self] in
-                guard let self = self else { return }
-                self.setNeedsStatusBarAppearanceUpdate()
-            })
-            
-            previousStatusBarHidden = shouldHideStatusBar
-        }
-    }
-}
-*/
+ extension NewsViewController {
+ 
+ private var shouldHideStatusBar: Bool {
+ let frame = collectionView.convert(collectionView.bounds, to: nil)
+ 
+ return frame.minY < view.safeAreaInsets.top
+ }
+ 
+ private func updateStatusBarVisibility() {
+ if previousStatusBarHidden != shouldHideStatusBar {
+ 
+ UIView.animate(withDuration: 0.2, animations: { [weak self] in
+ guard let self = self else { return }
+ self.setNeedsStatusBarAppearanceUpdate()
+ })
+ 
+ previousStatusBarHidden = shouldHideStatusBar
+ }
+ }
+ }
+ */
