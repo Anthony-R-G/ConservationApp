@@ -143,12 +143,12 @@ final class SpeciesListViewController: UIViewController {
     
     //MARK: -- Properties
     
+    private var isSearching: Bool = false
+    
     private lazy var viewModel: SpeciesListViewModel = {
         let viewModel = SpeciesListViewModel(searchPublisher: search, selectedFilterPublisher: selectedTab)
         return viewModel
     }()
-    
-    private var isSearching: Bool = false
     
     private lazy var dataSource = makeDataSource()
     
@@ -225,7 +225,8 @@ final class SpeciesListViewController: UIViewController {
             cellProvider: { (collectionView, indexPath, species) -> UICollectionViewCell? in
                 guard let cell = collectionView.dequeueReusableCell(
                     withReuseIdentifier: Constants.cellReuseIdentifier,
-                    for: indexPath) as? SpeciesCollectionViewCell else { return UICollectionViewCell() }
+                    for: indexPath) as? SpeciesCollectionViewCell
+                    else { return UICollectionViewCell() }
                 cell.configureCell(from: species)
                 return cell
         })

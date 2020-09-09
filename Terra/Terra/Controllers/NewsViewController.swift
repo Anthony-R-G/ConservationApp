@@ -10,9 +10,14 @@ import UIKit
 import SafariServices
 import Combine
 
+fileprivate typealias NewsDataSource = UICollectionViewDiffableDataSource<NewsViewController.Section, NewsArticle>
+
+fileprivate typealias NewsSnapshot = NSDiffableDataSourceSnapshot<NewsViewController.Section, NewsArticle>
+
 final class NewsViewController: UIViewController {
     
     //MARK: -- UI Element Initialization
+      private var sections = Section.main
     
     private lazy var collectionView: UICollectionView = {
         let cv = UICollectionView(frame: CGRect(
@@ -33,11 +38,12 @@ final class NewsViewController: UIViewController {
         cv.contentInsetAdjustmentBehavior = .never
         cv.register(NewsCollectionViewHeader.self,
                     forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-                    withReuseIdentifier: headerID)
+                    withReuseIdentifier: NewsCollectionViewHeader.reuseIdentifier)
         cv.register(NewsArticleCollectionViewCell.self,
                     forCellWithReuseIdentifier: Constants.cellReuseIdentifier)
+        
         cv.scrollsToTop = true
-        cv.dataSource = self
+       
         cv.prefetchDataSource = self
         cv.delegate = self
         return cv
@@ -45,14 +51,14 @@ final class NewsViewController: UIViewController {
     
     //MARK: -- Properties
     
-    fileprivate let headerID = "headerID"
-    
     private lazy var viewModel: NewsViewModel = {
         let viewModel = NewsViewModel(delegate: self)
         return viewModel
     }()
     
-    private var headerView: NewsCollectionViewHeader!
+    private lazy var dataSource: NewsDataSource = makeDataSource()
+    
+    private var headerView: NewsCollectionViewHeader?
     
     private var subscriptions: Set<AnyCancellable> = []
     
@@ -68,30 +74,66 @@ final class NewsViewController: UIViewController {
     
     //MARK: -- Methods
     
+    private func makeDataSource() -> NewsDataSource {
+        let dataSource = NewsDataSource(
+            collectionView: collectionView,
+            cellProvider: { (collectionView, indexPath, newsArticle) -> UICollectionViewCell? in
+                guard let cell = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: Constants.cellReuseIdentifier,
+                    for: indexPath) as? NewsArticleCollectionViewCell
+                    else { return UICollectionViewCell() }
+                cell.configureCell(from: newsArticle)
+                
+                return cell
+        })
+        
+        dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
+            
+            guard kind == UICollectionView.elementKindSectionHeader else {
+                return nil
+            }
+          
+            self.headerView = collectionView.dequeueReusableSupplementaryView(
+                ofKind: kind,
+                withReuseIdentifier: NewsCollectionViewHeader.reuseIdentifier,
+                for: indexPath) as? NewsCollectionViewHeader
+            
+            guard let headerView = self.headerView else { return UICollectionReusableView() }
+    
+            return headerView
+            
+        }
+        return dataSource
+    }
+    
+    private func makeSnapshot(from newsData: [NewsArticle]) {
+        var snapshot = NewsSnapshot()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(Array(newsData.dropFirst()))
+    
+        dataSource.apply(snapshot, animatingDifferences: false, completion: nil)
+    }
+    
     private func bindViewModel() {
         viewModel.$filteredNewsArticles
             .sink(receiveCompletion: { _ in },
                   receiveValue: { [weak self] (newsArticleData) in
                     guard let self = self else { return }
-                    self.collectionView.reloadData()
-                    self.headerView.configureHeader(from: self.viewModel.specificArticle(at: 0))
-                    self.headerView.stopButtonLoading()
-                    
+                    self.makeSnapshot(from: newsArticleData)
+                    self.headerView?.configureHeader(from: self.viewModel.firstArticle!)
             })
             .store(in: &subscriptions)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        viewModel = NewsViewModel(delegate: self)
-//        bindViewModel()
         viewModel.fetchNews(fetchType: .replace)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
-        
+        bindViewModel()
         addSubviews()
         setConstraints()
     }
@@ -99,6 +141,7 @@ final class NewsViewController: UIViewController {
 
 //MARK: -- Collection View Data Source Methods
 
+/*
 extension NewsViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -115,6 +158,7 @@ extension NewsViewController: UICollectionViewDataSource {
     }
 }
 
+ */
 extension NewsViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         for index in indexPaths {
@@ -129,7 +173,7 @@ extension NewsViewController: UICollectionViewDataSourcePrefetching {
 //MARK: -- Collection View Delegate Methods
 
 extension NewsViewController: UICollectionViewDelegate {
-    
+    /*
     func collectionView(_ collectionView: UICollectionView,
                         viewForSupplementaryElementOfKind kind: String,
                         at indexPath: IndexPath) -> UICollectionReusableView {
@@ -138,11 +182,13 @@ extension NewsViewController: UICollectionViewDelegate {
             collectionView.dequeueReusableSupplementaryView(
                 ofKind: kind,
                 withReuseIdentifier: headerID,
-                for: indexPath) as? NewsCollectionViewHeader)!
-        
+                for: indexPath) as? NewsCollectionViewHeader)
+        guard let headerView = headerView else { return UICollectionReusableView() }
         headerView.delegate = self
         return headerView
     }
+ */
+    
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
@@ -179,16 +225,16 @@ extension NewsViewController: UICollectionViewDelegate {
         return Constants.spacing
     }
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let contentOffsetY = scrollView.contentOffset.y
-        
-        if contentOffsetY > 0 {
-            headerView.animator.fractionComplete = 0
-            return
-        }
-        
-        headerView.animator.fractionComplete = abs(contentOffsetY) / 100
-    }
+    //    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    //        let contentOffsetY = scrollView.contentOffset.y
+    //
+    //        if contentOffsetY > 0 {
+    //            headerView.animator.fractionComplete = 0
+    //            return
+    //        }
+    //
+    //        headerView.animator.fractionComplete = abs(contentOffsetY) / 100
+    //    }
 }
 
 extension NewsViewController: UICollectionViewDelegateFlowLayout {
@@ -208,9 +254,9 @@ extension NewsViewController: NewsViewModelDelegate {
     func fetchCompleted() {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            self.collectionView.reloadData()
-            self.headerView.configureHeader(from: self.viewModel.specificArticle(at: 0))
-            self.headerView.stopButtonLoading()
+            //            self.collectionView.reloadData()
+            //            self.headerView?.configureHeader(from: self.viewModel.specificArticle(at: 0))
+            //            self.headerView?.stopButtonLoading()
         }
     }
 }
@@ -255,25 +301,8 @@ fileprivate extension NewsViewController {
     }
 }
 
-/*
- extension NewsViewController {
- 
- private var shouldHideStatusBar: Bool {
- let frame = collectionView.convert(collectionView.bounds, to: nil)
- 
- return frame.minY < view.safeAreaInsets.top
- }
- 
- private func updateStatusBarVisibility() {
- if previousStatusBarHidden != shouldHideStatusBar {
- 
- UIView.animate(withDuration: 0.2, animations: { [weak self] in
- guard let self = self else { return }
- self.setNeedsStatusBarAppearanceUpdate()
- })
- 
- previousStatusBarHidden = shouldHideStatusBar
- }
- }
- }
- */
+extension NewsViewController {
+    fileprivate enum Section {
+        case main
+    }
+}

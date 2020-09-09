@@ -20,10 +20,12 @@ final class NewsViewModel {
     
     private var newsArticles: [NewsArticle] = [] {
         didSet {
-            
+            firstArticle = newsArticles[0]
             filteredNewsArticles = filterDuplicateArticles(from: newsArticles)
         }
     }
+    
+    var firstArticle: NewsArticle?
     
    @Published private(set) var filteredNewsArticles: [NewsArticle] = []
     
