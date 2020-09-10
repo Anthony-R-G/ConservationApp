@@ -57,7 +57,7 @@ final class NewsViewModel: ObservableObject {
         }
     }
     
-    func specificArticle(at index: Int) -> NewsArticle {
+    func specificArticle(at index: Int) -> NewsArticle? {
         return filteredNewsArticles[index]
     }
     

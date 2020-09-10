@@ -83,7 +83,7 @@ final class NewsViewController: UIViewController {
                     for: indexPath) as? NewsArticleCollectionViewCell
                     else { return UICollectionViewCell() }
                 cell.configureCell(from: newsArticle)
-                cell.shareButton.tag = indexPath.row + 1
+                cell.shareButton.tag = indexPath.row
                 cell.delegate = self
                 return cell
         })
@@ -186,9 +186,10 @@ extension NewsViewController: UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        let selectedArticle = viewModel.specificArticle(at: indexPath.row + 1)
-        guard let url = URL(string: selectedArticle.url) else { return }
+        guard
+            let selectedArticle = dataSource.itemIdentifier(for: indexPath),
+            let url = URL(string: selectedArticle.url)
+            else { return }
         Utilities.presentWebBrowser(on: self, link: url, delegate: self)
     }
     
@@ -216,15 +217,21 @@ extension NewsViewController: SFSafariViewControllerDelegate {
 extension NewsViewController: NewsCellDelegate {
     func shareButtonTapped(sender: UIButton) {
         let cellIndex = sender.tag
-        let selectedArticle = viewModel.specificArticle(at: cellIndex)
-        Utilities.presentActivityController(on: self, items: [URL(string: selectedArticle.url)!])
+        guard
+            let selectedArticle = viewModel.specificArticle(at: cellIndex),
+            let selectedArticleUrl = URL(string: selectedArticle.url)
+            else { return }
+        Utilities.presentActivityController(on: self, items: [selectedArticleUrl])
     }
 }
 
 extension NewsViewController: NewsHeaderDelegate {
     func shareButtonTapped() {
-        let selectedArticle = viewModel.specificArticle(at: 0)
-        Utilities.presentActivityController(on: self, items: [URL(string: selectedArticle.url)!])
+        guard
+            let firstArticle = viewModel.firstNewsArticle,
+            let firstArticleUrl = URL(string: firstArticle.url)
+            else { return }
+        Utilities.presentActivityController(on: self, items: [firstArticleUrl])
     }
     
     func refreshButtonTapped() {
@@ -232,7 +239,11 @@ extension NewsViewController: NewsHeaderDelegate {
     }
     
     func headerLabelTapped() {
-        Utilities.presentWebBrowser(on: self, link: URL(string: viewModel.specificArticle(at:0).url)!, delegate: self)
+        guard
+            let firstArticle = viewModel.firstNewsArticle,
+            let firstArticleUrl = URL(string: firstArticle.url)
+            else { return }
+        Utilities.presentWebBrowser(on: self, link: firstArticleUrl, delegate: self)
     }
 }
 
@@ -248,7 +259,6 @@ fileprivate extension NewsViewController {
         collectionView.snp.makeConstraints { (make) in
             make.leading.top.trailing.equalToSuperview()
             make.bottom.equalTo(view.safeAreaLayoutGuide)
-            
         }
     }
 }
