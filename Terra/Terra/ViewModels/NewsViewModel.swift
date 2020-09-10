@@ -9,25 +9,29 @@
 import Foundation
 import Combine
 
-final class NewsViewModel {
+final class NewsViewModel: ObservableObject {
     //MARK: -- Properties
-    
-    private weak var delegate: NewsViewModelDelegate?
-    
+ 
     private var cancellable: AnyCancellable?
     
     private var currentPage: Int = 1
     
     private var newsArticles: [NewsArticle] = [] {
         didSet {
-            firstArticle = newsArticles[0]
-            filteredNewsArticles = filterDuplicateArticles(from: newsArticles)
+            let filteredArticles = filterDuplicateArticles(from: newsArticles)
+            
+            guard let firstArticle = filteredArticles.first else { return }
+            firstNewsArticle = firstArticle
+            
+            filteredNewsArticles = Array(filteredArticles[1..<filteredArticles.count])
+
         }
     }
     
-    var firstArticle: NewsArticle?
     
-   @Published private(set) var filteredNewsArticles: [NewsArticle] = []
+    @Published private(set) var firstNewsArticle: NewsArticle!
+    
+    @Published private(set) var filteredNewsArticles: [NewsArticle] = []
     
     private(set) var isFetchInProgress: Bool = false
     
@@ -35,7 +39,7 @@ final class NewsViewModel {
         case replace
         case append
     }
-
+    
     //MARK: -- Methods
     
     private func filterDuplicateArticles(from news: [NewsArticle]) -> [NewsArticle] {
@@ -57,9 +61,7 @@ final class NewsViewModel {
         return filteredNewsArticles[index]
     }
     
-    init(delegate: NewsViewModelDelegate) {
-        self.delegate = delegate
-    }
+    init() {}
 }
 
 extension NewsViewModel {
@@ -75,7 +77,6 @@ extension NewsViewModel {
             //News API has a dev plan cap of 100.
             guard currentPage < 5 else {
                 isFetchInProgress = false
-                delegate?.fetchCompleted()
                 return
             }
             currentPage += 1
@@ -100,9 +101,8 @@ extension NewsViewModel {
                     case .replace:
                         self.newsArticles = articles
                         self.currentPage = 1
-                        
                     }
-                    self.delegate?.fetchCompleted()
+                   
                     self.isFetchInProgress = false
             })
     }

@@ -12,5 +12,4 @@ final class OnboardingViewModel {
     
     private(set) var onboardingPages: [OnboardingViewController] = []
     
-    
 }

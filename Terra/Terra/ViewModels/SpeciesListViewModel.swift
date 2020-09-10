@@ -51,26 +51,19 @@ final class SpeciesListViewModel: ObservableObject {
         }
     }
     
-    init(searchPublisher: CurrentValueSubject<String, Never>,
-         selectedFilterPublisher: CurrentValueSubject<Int, Never>) {
+    init(searchPublisher: CurrentValueSubject<String, Never>, selectedFilterPublisher: CurrentValueSubject<Int, Never>) {
         self.search = searchPublisher
         
-        search
+        Publishers.CombineLatest(search, selectedFilterPublisher)
             .receive(on: RunLoop.main)
-            .sink { [weak self] (searchText) in
+            .eraseToAnyPublisher()
+            .sink { [weak self] (response) in
                 guard let self = self else { return }
                 self.searchFilteredSpecies = Species.filterSpeciesByName(
                     arr: self.redListFilteredSpecies,
-                    searchString: searchText)
-        }
-        .store(in: &subscriptions)
-        
-        
-        selectedFilterPublisher
-            .receive(on: RunLoop.main)
-            .sink { [weak self] (value) in
-                guard let self = self else { return }
-                self.updateConservationStatus(from: value)
+                    searchString: response.0)
+                
+                self.updateConservationStatus(from: response.1)
         }
         .store(in: &subscriptions)
     }

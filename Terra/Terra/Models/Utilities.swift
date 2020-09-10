@@ -28,7 +28,7 @@ struct Utilities {
     }
     
     static func sendHapticFeedback(action: UserAction) {
-        let itemSelectedFeedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
+        let itemSelectedFeedbackGenerator = UIImpactFeedbackGenerator(style: .light)
         let changedSelectionFeedbackGenerator = UISelectionFeedbackGenerator()
         
         switch action {

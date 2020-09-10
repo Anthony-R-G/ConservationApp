@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SpeciesDetailInfoViewController: UIViewController {
+final class SpeciesDetailInfoViewController: UIViewController {
     //MARK: -- UI Element Initialization
     
     private lazy var shadowView: ShadowView = {

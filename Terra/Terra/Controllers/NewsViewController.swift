@@ -14,10 +14,10 @@ fileprivate typealias NewsDataSource = UICollectionViewDiffableDataSource<NewsVi
 
 fileprivate typealias NewsSnapshot = NSDiffableDataSourceSnapshot<NewsViewController.Section, NewsArticle>
 
+
 final class NewsViewController: UIViewController {
     
     //MARK: -- UI Element Initialization
-      private var sections = Section.main
     
     private lazy var collectionView: UICollectionView = {
         let cv = UICollectionView(frame: CGRect(
@@ -43,8 +43,9 @@ final class NewsViewController: UIViewController {
                     forCellWithReuseIdentifier: Constants.cellReuseIdentifier)
         
         cv.scrollsToTop = true
-       
+        
         cv.prefetchDataSource = self
+        
         cv.delegate = self
         return cv
     }()
@@ -52,8 +53,7 @@ final class NewsViewController: UIViewController {
     //MARK: -- Properties
     
     private lazy var viewModel: NewsViewModel = {
-        let viewModel = NewsViewModel(delegate: self)
-        return viewModel
+        return NewsViewModel()
     }()
     
     private lazy var dataSource: NewsDataSource = makeDataSource()
@@ -83,46 +83,55 @@ final class NewsViewController: UIViewController {
                     for: indexPath) as? NewsArticleCollectionViewCell
                     else { return UICollectionViewCell() }
                 cell.configureCell(from: newsArticle)
-                
+                cell.shareButton.tag = indexPath.row + 1
+                cell.delegate = self
                 return cell
         })
         
-        dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
+        dataSource.supplementaryViewProvider = { [weak self] collectionView, kind, indexPath in
+            guard
+                let self = self,
+                kind == UICollectionView.elementKindSectionHeader
+                else { return nil }
             
-            guard kind == UICollectionView.elementKindSectionHeader else {
-                return nil
-            }
-          
             self.headerView = collectionView.dequeueReusableSupplementaryView(
                 ofKind: kind,
                 withReuseIdentifier: NewsCollectionViewHeader.reuseIdentifier,
                 for: indexPath) as? NewsCollectionViewHeader
             
             guard let headerView = self.headerView else { return UICollectionReusableView() }
-    
+            headerView.delegate = self
             return headerView
-            
         }
+        
         return dataSource
     }
     
     private func makeSnapshot(from newsData: [NewsArticle]) {
         var snapshot = NewsSnapshot()
         snapshot.appendSections([.main])
-        snapshot.appendItems(Array(newsData.dropFirst()))
-    
+        snapshot.appendItems(newsData)
         dataSource.apply(snapshot, animatingDifferences: false, completion: nil)
     }
     
+    
     private func bindViewModel() {
         viewModel.$filteredNewsArticles
-            .sink(receiveCompletion: { _ in },
-                  receiveValue: { [weak self] (newsArticleData) in
-                    guard let self = self else { return }
-                    self.makeSnapshot(from: newsArticleData)
-                    self.headerView?.configureHeader(from: self.viewModel.firstArticle!)
-            })
-            .store(in: &subscriptions)
+            .receive(on: RunLoop.main)
+            .sink{ [unowned self] (newsArticleData) in
+                self.makeSnapshot(from: newsArticleData)
+        }
+        .store(in: &subscriptions)
+        
+        viewModel.$firstNewsArticle
+            .receive(on: RunLoop.main)
+            .sink { [unowned self] (newsArticleResponse) in
+                if let firstArticle = newsArticleResponse {
+                    self.headerView?.configureHeader(from: firstArticle)
+                    self.headerView?.stopButtonLoading()
+                }
+        }
+        .store(in: &subscriptions)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -132,33 +141,13 @@ final class NewsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .black
         bindViewModel()
         addSubviews()
         setConstraints()
     }
 }
 
-//MARK: -- Collection View Data Source Methods
-
-/*
-extension NewsViewController: UICollectionViewDataSource {
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.filteredNewsArticles.count - 1
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let newsCell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.cellReuseIdentifier, for: indexPath) as! NewsArticleCollectionViewCell
-        newsCell.delegate = self
-        newsCell.shareButton.tag = indexPath.row
-        let specificArticle = viewModel.specificArticle(at: indexPath.row + 1)
-        newsCell.configureCell(from: specificArticle)
-        return newsCell
-    }
-}
-
- */
+//MARK: -- Collection View Prefetching
 extension NewsViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         for index in indexPaths {
@@ -173,22 +162,6 @@ extension NewsViewController: UICollectionViewDataSourcePrefetching {
 //MARK: -- Collection View Delegate Methods
 
 extension NewsViewController: UICollectionViewDelegate {
-    /*
-    func collectionView(_ collectionView: UICollectionView,
-                        viewForSupplementaryElementOfKind kind: String,
-                        at indexPath: IndexPath) -> UICollectionReusableView {
-        
-        headerView = (
-            collectionView.dequeueReusableSupplementaryView(
-                ofKind: kind,
-                withReuseIdentifier: headerID,
-                for: indexPath) as? NewsCollectionViewHeader)
-        guard let headerView = headerView else { return UICollectionReusableView() }
-        headerView.delegate = self
-        return headerView
-    }
- */
-    
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
@@ -199,16 +172,16 @@ extension NewsViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
         Utilities.sendHapticFeedback(action: .itemSelected)
-        let cell = collectionView.cellForItem(at: indexPath)
+        guard let cell = collectionView.cellForItem(at: indexPath) else { return }
         UIView.animate(withDuration: 0.3) {
-            cell?.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
+            cell.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath)
+        guard let cell = collectionView.cellForItem(at: indexPath) else { return }
         UIView.animate(withDuration: 0.3) {
-            cell?.transform = CGAffineTransform(scaleX: 1, y: 1)
+            cell.transform = CGAffineTransform(scaleX: 1, y: 1)
         }
     }
     
@@ -224,17 +197,6 @@ extension NewsViewController: UICollectionViewDelegate {
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return Constants.spacing
     }
-    
-    //    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-    //        let contentOffsetY = scrollView.contentOffset.y
-    //
-    //        if contentOffsetY > 0 {
-    //            headerView.animator.fractionComplete = 0
-    //            return
-    //        }
-    //
-    //        headerView.animator.fractionComplete = abs(contentOffsetY) / 100
-    //    }
 }
 
 extension NewsViewController: UICollectionViewDelegateFlowLayout {
@@ -250,16 +212,6 @@ extension NewsViewController: SFSafariViewControllerDelegate {
 }
 
 //MARK: -- Custom Delegates
-extension NewsViewController: NewsViewModelDelegate {
-    func fetchCompleted() {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            //            self.collectionView.reloadData()
-            //            self.headerView?.configureHeader(from: self.viewModel.specificArticle(at: 0))
-            //            self.headerView?.stopButtonLoading()
-        }
-    }
-}
 
 extension NewsViewController: NewsCellDelegate {
     func shareButtonTapped(sender: UIButton) {
