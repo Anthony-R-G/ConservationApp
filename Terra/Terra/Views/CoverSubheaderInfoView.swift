@@ -11,18 +11,18 @@ import UIKit
 final class CoverSubheaderInfoView: UIView {
     //MARK: -- UI Element Initialization
     
-    private lazy var numbersTitleLabel: UILabel = {
+    private lazy var populationTitleLabel: UILabel = {
         return Factory.makeLabel(title: "Population",
                                  fontWeight: .light,
-                                 fontSize: 16,
+                                 fontSize: 15,
                                  widthAdjustsFontSize: true,
                                  color: .white,
                                  alignment: .left)
     }()
     
-    private lazy var numbersDataLabel: UILabel = {
+    private lazy var populationDataLabel: UILabel = {
         return Factory.makeLabel(title: species.population.numbers,
-                                 fontWeight: .medium,
+                                 fontWeight: .regular,
                                  fontSize: 18,
                                  widthAdjustsFontSize: true,
                                  color: .white,
@@ -32,7 +32,7 @@ final class CoverSubheaderInfoView: UIView {
     private lazy var trendTitleLabel: UILabel = {
         return Factory.makeLabel(title: "Trend",
                                  fontWeight: .light,
-                                 fontSize: 16,
+                                 fontSize: 15,
                                  widthAdjustsFontSize: true,
                                  color: .white,
                                  alignment: .left)
@@ -40,7 +40,7 @@ final class CoverSubheaderInfoView: UIView {
     
     private lazy var trendDataLabel: UILabel = {
         return Factory.makeLabel(title: species.population.trend.rawValue,
-                                 fontWeight: .medium,
+                                 fontWeight: .regular,
                                  fontSize: 18,
                                  widthAdjustsFontSize: true,
                                  color: species.population.trend == .decreasing ? #colorLiteral(red: 1, green: 0.4507741928, blue: 0.5112823844, alpha: 1) : #colorLiteral(red: 0.7970843911, green: 1, blue: 0.5273691416, alpha: 1),
@@ -50,7 +50,7 @@ final class CoverSubheaderInfoView: UIView {
     private lazy var lastAssessedTitleLabel: UILabel = {
         return Factory.makeLabel(title: "Last Assessed",
                                  fontWeight: .light,
-                                 fontSize: 16,
+                                 fontSize: 15,
                                  widthAdjustsFontSize: true,
                                  color: .white,
                                  alignment: .left)
@@ -58,7 +58,7 @@ final class CoverSubheaderInfoView: UIView {
     
     private lazy var lastAssessedDataLabel: UILabel = {
         return Factory.makeLabel(title: "\(species.population.assessmentDate)",
-                                 fontWeight: .medium,
+                                 fontWeight: .regular,
                                  fontSize: 18,
                                  widthAdjustsFontSize: true,
                                  color: .white,
@@ -67,7 +67,7 @@ final class CoverSubheaderInfoView: UIView {
     
     private lazy var numbersStack: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [
-            numbersTitleLabel, numbersDataLabel
+            populationTitleLabel, populationDataLabel
         ])
         stackView.axis = .vertical
         return stackView

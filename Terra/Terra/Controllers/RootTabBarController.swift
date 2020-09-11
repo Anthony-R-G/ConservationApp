@@ -16,7 +16,7 @@ final class RootTabBarController: UITabBarController {
         let navBar = MDCBottomNavigationBar()
         navBar.delegate = self
         navBar.backgroundColor = .black
-        navBar.selectedItemTintColor = #colorLiteral(red: 0.9257398248, green: 1, blue: 0.7623538375, alpha: 1)
+        navBar.selectedItemTintColor = .white
         navBar.unselectedItemTintColor = .darkGray
         return navBar
     }()

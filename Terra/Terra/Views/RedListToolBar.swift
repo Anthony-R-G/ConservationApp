@@ -47,13 +47,14 @@ final class RedListFilterTabBar: UITabBar {
             appearance.stackedLayoutAppearance.normal.titleTextAttributes = [
                 NSAttributedString.Key.font:
                     UIFont(name: FontWeight.regular.rawValue,
-                           size: 12.deviceScaled)!,
-                NSAttributedString.Key.foregroundColor: UIColor.white]
+                           size: 13.deviceScaled)!,
+                NSAttributedString.Key.foregroundColor: UIColor.lightGray]
         
             appearance.stackedLayoutAppearance.selected.titleTextAttributes = [
                 NSAttributedString.Key.font:
                     UIFont(name: FontWeight.regular.rawValue,
-                           size: 13.deviceScaled)!]
+                           size: 13.deviceScaled)!,
+            NSAttributedString.Key.foregroundColor: UIColor.white]
             
             appearance.stackedLayoutAppearance.normal.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: -5)
             appearance.stackedLayoutAppearance.selected.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: -5)

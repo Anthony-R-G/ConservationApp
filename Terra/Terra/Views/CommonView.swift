@@ -151,8 +151,6 @@ fileprivate extension CommonView {
         }
     }
     
-    
-    
     func setBlurbLabelConstraints() {
         blurbLabel.snp.makeConstraints { [weak self] (make) in
             guard let self = self else { return }
@@ -171,7 +169,7 @@ fileprivate extension CommonView {
     func setBackgroundImageTopGradientConstraints() {
         backgroundImageTopGradient.snp.makeConstraints { (make) in
             make.top.left.right.equalTo(backgroundImage)
-            make.height.equalTo(backgroundImage.snp.height).multipliedBy(0.35)
+            make.height.equalTo(backgroundImage.snp.height).multipliedBy(0.40)
         }
     }
 }
