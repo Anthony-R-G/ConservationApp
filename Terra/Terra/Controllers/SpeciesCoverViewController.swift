@@ -163,6 +163,7 @@ final class SpeciesCoverViewController: UIViewController {
         stackView.axis = .vertical
         stackView.spacing = Constants.spacing
         stackView.distribution = .equalSpacing
+        stackView.alpha = 0
         return stackView
     }()
     
@@ -229,6 +230,7 @@ final class SpeciesCoverViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+//        scrollView.contentSize = .init(width: Constants.screenWidth, height: Constants.screenHeight + 300)
         scrollView.scrollIndicatorInsets = view.safeAreaInsets
         scrollView.contentInset = UIEdgeInsets(top: 0,
                                                left: 0,
@@ -368,6 +370,7 @@ extension SpeciesCoverViewController {
         DispatchQueue.main.async {
             UIView.animate(withDuration: duration) { [weak self] in
                 guard let self = self else { return }
+                self.stackView.alpha = newAlpha
                 self.collectionView.alpha = newAlpha
                 self.donateButton.alpha = newAlpha
                 self.backgroundVisualEffectBlur.alpha = newAlpha
@@ -573,7 +576,7 @@ fileprivate extension SpeciesCoverViewController {
     
     func setCollectionViewConstraints() {
         collectionView.snp.makeConstraints { (make) in
-            make.height.width.equalTo(collectionView.frame.size)
+            make.height.equalTo(collectionView.frame.height)
            
         }
     }
