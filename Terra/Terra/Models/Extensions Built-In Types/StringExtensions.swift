@@ -18,8 +18,8 @@ extension String {
         }
     }
     
-    var removingNonAlphabetChars: String {
-        let characters = Set("abcdefghijklmnopqrstuvwxyz")
+    var lowercaseAlphaNumericsOnly: String {
+        let characters = Set("abcdefghijklmnopqrstuvwxyz1234567890")
         var newStr = String()
         for char in self.lowercased() {
             if characters.contains(char) {

@@ -209,7 +209,7 @@ final class ClassificationView: UIView {
         addSubviews()
         setConstraints()
         speechSynthesizer.delegate = self
-        self.snp.makeConstraints { (make) in
+        snp.makeConstraints { (make) in
             make.height.equalTo(260.deviceScaled)
         }
     }

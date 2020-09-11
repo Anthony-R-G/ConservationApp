@@ -188,9 +188,11 @@ final class CustomCalloutView: UIView, MGLCalloutView {
         if (superview != nil) {
             if animated {
                 UIView.animate(withDuration: 0.2, animations: { [weak self] in
-                    self?.alpha = 0
+                    guard let self = self else { return }
+                    self.alpha = 0
                     }, completion: { [weak self] _ in
-                        self?.removeFromSuperview()
+                        guard let self = self else { return }
+                        self.removeFromSuperview()
                 })
             } else {
                 removeFromSuperview()
@@ -202,7 +204,7 @@ final class CustomCalloutView: UIView, MGLCalloutView {
     
     func isCalloutTappable() -> Bool {
         if let delegate = delegate {
-            if delegate.responds(to: #selector(MGLCalloutViewDelegate.calloutViewShouldHighlight)) {
+            if delegate.responds(to: #selector(MGLCalloutViewDelegate.calloutViewShouldHighlight)) { 
                 return delegate.calloutViewShouldHighlight!(self)
             }
         }

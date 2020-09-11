@@ -8,22 +8,19 @@
 
 import UIKit
 
-struct DetailThreatsStrategy: DetailPageStrategy {
+final class DetailThreatsStrategy: DetailPageStrategy {
     var species: Species
     
-    func speciesName() -> String {
-        return species.commonName
-    }
-    
-    func pageName() -> String {
+    var pageName: String {
         return "THREATS"
     }
     
-    func firebaseStorageManager() -> FirebaseStorageService {
+    var firebaseStorageManager: FirebaseStorageService? {
         return FirebaseStorageService.detailThreatsImageManager
     }
     
-    mutating func arrangedSubviews() -> UIStackView {
+    
+     func arrangedSubviews() -> UIStackView {
         let stackView = UIStackView(arrangedSubviews: [
             
             DetailInfoWindow(title: "CONSERVATION STATUS", content: ConservationStatusView(species: species)),
@@ -32,14 +29,22 @@ struct DetailThreatsStrategy: DetailPageStrategy {
                              content: Factory.makeDetailInfoWindowLabel(text: species.population.summary)),
         ])
         
-        for threat in species.population.threats {
-            let threatsComponents = threat.components(separatedBy: "%title")
-            stackView.addArrangedSubview(DetailInfoWindow(title: threatsComponents[0], content: Factory.makeDetailInfoWindowLabel(text: threatsComponents[1])))
-        }
-        
+       
+        _ = species.population.threats.map ({
+            let threatComponents = $0.components(separatedBy: "%title")
+            stackView.addArrangedSubview(
+                DetailInfoWindow(
+                    title: threatComponents[0],
+                    content: Factory.makeDetailInfoWindowLabel(text: threatComponents[1])))
+        })
+     
         stackView.axis = .vertical
         stackView.spacing = Constants.spacing
         return stackView
+    }
+    
+    init(species: Species) {
+        self.species = species
     }
 }
 

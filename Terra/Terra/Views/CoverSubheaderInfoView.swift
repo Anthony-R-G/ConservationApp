@@ -12,7 +12,7 @@ final class CoverSubheaderInfoView: UIView {
     //MARK: -- UI Element Initialization
     
     private lazy var numbersTitleLabel: UILabel = {
-        return Factory.makeLabel(title: "Numbers",
+        return Factory.makeLabel(title: "Population",
                                  fontWeight: .light,
                                  fontSize: 16,
                                  widthAdjustsFontSize: true,

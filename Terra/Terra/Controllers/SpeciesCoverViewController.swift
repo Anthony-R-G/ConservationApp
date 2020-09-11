@@ -19,7 +19,7 @@ final class SpeciesCoverViewController: UIViewController {
         iv.contentMode = .scaleAspectFill
         iv.backgroundColor = .black
         FirebaseStorageService.coverImageManager.getImage(
-            for: viewModel.selectedSpecies.commonName,
+            for: viewModel.species.commonName,
             setTo: iv)
         return iv
     }()
@@ -32,11 +32,11 @@ final class SpeciesCoverViewController: UIViewController {
     }()
     
     private lazy var headerNameView: CoverHeaderNameView = {
-        return CoverHeaderNameView(species: viewModel.selectedSpecies, delegate: self)
+        return CoverHeaderNameView(species: viewModel.species, delegate: self)
     }()
     
     private lazy var subheaderInfoView: CoverSubheaderInfoView = {
-        return CoverSubheaderInfoView(species: viewModel.selectedSpecies)
+        return CoverSubheaderInfoView(species: viewModel.species)
     }()
     
     private lazy var backgroundVisualEffectBlur: UIVisualEffectView = {
@@ -50,7 +50,7 @@ final class SpeciesCoverViewController: UIViewController {
         btn.setImage(UIImage(systemName: "chevron.down"), for: .normal)
         btn.contentVerticalAlignment = .fill
         btn.contentHorizontalAlignment = .fill
-        btn.addTarget(self, action: #selector(handlePageTransitionGesture), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(togglePageState), for: .touchUpInside)
         btn.tintColor = .white
         btn.alpha = 0.6
         return btn
@@ -61,7 +61,7 @@ final class SpeciesCoverViewController: UIViewController {
         btn.setImage(UIImage(systemName: "chevron.up"), for: .normal)
         btn.contentVerticalAlignment = .fill
         btn.contentHorizontalAlignment = .fill
-        btn.addTarget(self, action: #selector(handlePageTransitionGesture), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(togglePageState), for: .touchUpInside)
         btn.tintColor = .white
         btn.alpha = 0
         return btn
@@ -136,7 +136,7 @@ final class SpeciesCoverViewController: UIViewController {
     }()
     
     private lazy var pageStateSwipeGesture: UISwipeGestureRecognizer = {
-        let recognizer = UISwipeGestureRecognizer(target: self, action: #selector(handlePageTransitionGesture))
+        let recognizer = UISwipeGestureRecognizer(target: self, action: #selector(togglePageState))
         recognizer.direction = .up
         return recognizer
     }()
@@ -150,7 +150,7 @@ final class SpeciesCoverViewController: UIViewController {
     
     //MARK: -- Properties
     
-    var viewModel: DetailPageStrategyViewModel!
+    private var viewModel: DetailPageStrategyViewModel
     
     private var pageState: State = .collapsed
     
@@ -189,11 +189,10 @@ final class SpeciesCoverViewController: UIViewController {
     }
     
     @objc private func dismissPage() {
-        Utilities.sendHapticFeedback(action: .pageDismissed)
         dismiss(animated: true, completion: nil)
     }
     
-    @objc private func handlePageTransitionGesture() {
+    @objc private func togglePageState() {
         animatePageStateTransition()
     }
     
@@ -209,6 +208,7 @@ final class SpeciesCoverViewController: UIViewController {
             repeatCount: .infinity) }
     }
     
+    
     //MARK: -- Life Cycle Methods
     
     override func viewWillAppear(_ animated: Bool) {
@@ -221,6 +221,15 @@ final class SpeciesCoverViewController: UIViewController {
         addSubviews()
         setConstraints()
         addGestureRecognizers()
+    }
+    
+    init(viewModel: DetailPageStrategyViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
 
@@ -250,7 +259,7 @@ extension SpeciesCoverViewController {
                     self.dismissPageSwipeGesture.isEnabled = false
                     self.resizeHeader(state: state)
                     self.toggleContainerInteractability(state: state)
-                    self.animateInfoOptionsVisibility(state: state)
+                    self.animateDetailInfoOptionsVisibility(state: state)
                     self.animateButtonControlsVisibility(state: state)
                     
                 case .collapsed:
@@ -261,7 +270,7 @@ extension SpeciesCoverViewController {
                     self.resizeHeader(state: state)
                     self.toggleContainerInteractability(state: state)
                     self.animateButtonControlsVisibility(state: state)
-                    self.animateInfoOptionsVisibility(state: state)
+                    self.animateDetailInfoOptionsVisibility(state: state)
                 }
                 
                 self.view.layoutIfNeeded()
@@ -325,7 +334,7 @@ extension SpeciesCoverViewController {
         }
     }
     
-    private func animateInfoOptionsVisibility(state: State) {
+    private func animateDetailInfoOptionsVisibility(state: State) {
         let newAlpha: CGFloat = state == .expanded ? 1.0 : 0.0
         let reverseAlpha: CGFloat = state == .expanded ? 0.0 : 1.0
         let duration: TimeInterval = state == .expanded ? 0.9 : 0.3
@@ -359,7 +368,7 @@ extension SpeciesCoverViewController {
 extension SpeciesCoverViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.totalStrategiesCount
+        return viewModel.detailPageStrategies.count
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -408,7 +417,7 @@ extension SpeciesCoverViewController: UICollectionViewDelegate {
 
 extension SpeciesCoverViewController: DonateButtonDelegate {
     func donateButtonPressed() {
-        guard let donationURL = URL(string: viewModel.selectedSpecies.donationLink) else { return }
+        guard let donationURL = URL(string: viewModel.species.donationLink) else { return }
         Utilities.sendHapticFeedback(action: .itemSelected)
         Utilities.presentWebBrowser(on: self, link: donationURL, delegate: nil)
     }

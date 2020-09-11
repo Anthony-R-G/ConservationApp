@@ -9,32 +9,35 @@
 import Foundation
 import Combine
 
-enum FetchType {
-    case replace
-    case append
-}
-
-final class NewsViewModel {
+final class NewsViewModel: ObservableObject {
     //MARK: -- Properties
-    
-    private weak var delegate: NewsViewModelDelegate?
     
     private var cancellable: AnyCancellable?
     
     private var currentPage: Int = 1
     
-    private var newsArticles: [NewsArticle] = []
-    
-    private var filteredNewsArticles: [NewsArticle] {
-        return filterDuplicateArticles(from: newsArticles)
+    private var newsArticles: [NewsArticle] = [] {
+        didSet {
+            let filteredArticles = filterDuplicateArticles(from: newsArticles)
+            
+            guard let firstArticle = filteredArticles.first else { return }
+            firstNewsArticle = firstArticle
+            filteredNewsArticles = Array(filteredArticles[1..<filteredArticles.count])
+            
+        }
     }
     
-    private(set) var isFetchInProgress: Bool = false 
+    @Published private(set) var firstNewsArticle: NewsArticle!
     
-    var totalNewsArticlesCount: Int {
-        return filteredNewsArticles.count
+    @Published private(set) var filteredNewsArticles: [NewsArticle] = []
+    
+    private(set) var isFetchInProgress: Bool = false
+    
+    enum FetchType {
+        case replace
+        case append
     }
-
+    
     //MARK: -- Methods
     
     private func filterDuplicateArticles(from news: [NewsArticle]) -> [NewsArticle] {
@@ -52,13 +55,11 @@ final class NewsViewModel {
         }
     }
     
-    func specificArticle(at index: Int) -> NewsArticle {
+    func specificArticle(at index: Int) -> NewsArticle? {
         return filteredNewsArticles[index]
     }
     
-    init(delegate: NewsViewModelDelegate) {
-        self.delegate = delegate
-    }
+    init() {}
 }
 
 extension NewsViewModel {
@@ -74,7 +75,6 @@ extension NewsViewModel {
             //News API has a dev plan cap of 100.
             guard currentPage < 5 else {
                 isFetchInProgress = false
-                delegate?.fetchCompleted()
                 return
             }
             currentPage += 1
@@ -99,9 +99,8 @@ extension NewsViewModel {
                     case .replace:
                         self.newsArticles = articles
                         self.currentPage = 1
-                        
                     }
-                    self.delegate?.fetchCompleted()
+                    
                     self.isFetchInProgress = false
             })
     }

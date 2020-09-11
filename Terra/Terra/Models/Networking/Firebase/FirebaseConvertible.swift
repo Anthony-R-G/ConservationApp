@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol FirebaseConvertible: Codable {
+protocol FirebaseConvertible: Codable, Hashable {
     func fieldsDict() -> [String: Any]
     init?(fromFirebaseDict dict: [String: Any])
 }
