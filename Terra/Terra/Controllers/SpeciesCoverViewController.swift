@@ -385,9 +385,9 @@ extension SpeciesCoverViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(
+        guard let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: Constants.cellReuseIdentifier,
-            for: indexPath) as! CoverRoundedCell
+            for: indexPath) as? CoverRoundedCell else { return UICollectionViewCell() }
         
         let specificStrategy = viewModel.specificStrategy(at: indexPath.row)
         cell.strategy = specificStrategy
