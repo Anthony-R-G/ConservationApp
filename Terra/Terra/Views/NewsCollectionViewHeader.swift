@@ -9,7 +9,7 @@
 import UIKit
 
 final class NewsCollectionViewHeader: UICollectionReusableView {
-    static var reuseIdentifier: String {
+    static var reuseIdentifier: String { 
         return String(describing: NewsCollectionViewHeader.self)
     }
     //MARK: UI Element Initialization

@@ -62,8 +62,6 @@ final class NewsViewController: UIViewController {
     
     private var subscriptions: Set<AnyCancellable> = []
     
-    private var previousStatusBarHidden = false
-    
     override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
         return .slide
     }
@@ -88,11 +86,8 @@ final class NewsViewController: UIViewController {
                 return cell
         })
         
-        dataSource.supplementaryViewProvider = { [weak self] collectionView, kind, indexPath in
-            guard
-                let self = self,
-                kind == UICollectionView.elementKindSectionHeader
-                else { return nil }
+        dataSource.supplementaryViewProvider = { [unowned self] collectionView, kind, indexPath in
+            guard kind == UICollectionView.elementKindSectionHeader else { return nil }
             
             self.headerView = collectionView.dequeueReusableSupplementaryView(
                 ofKind: kind,
@@ -116,17 +111,11 @@ final class NewsViewController: UIViewController {
     
     
     private func bindViewModel() {
-        viewModel.$filteredNewsArticles
+        Publishers.CombineLatest(viewModel.$firstNewsArticle, viewModel.$filteredNewsArticles)
             .receive(on: RunLoop.main)
-            .sink{ [unowned self] (newsArticleData) in
-                self.makeSnapshot(from: newsArticleData)
-        }
-        .store(in: &subscriptions)
-        
-        viewModel.$firstNewsArticle
-            .receive(on: RunLoop.main)
-            .sink { [unowned self] (newsArticleResponse) in
-                if let firstArticle = newsArticleResponse {
+            .sink{ [unowned self] (newsArticleResponse) in
+                self.makeSnapshot(from: newsArticleResponse.1)
+                if let firstArticle = newsArticleResponse.0 {
                     self.headerView?.configureHeader(from: firstArticle)
                     self.headerView?.stopButtonLoading()
                 }

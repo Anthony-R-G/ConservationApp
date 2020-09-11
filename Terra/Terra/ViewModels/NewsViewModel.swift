@@ -11,7 +11,7 @@ import Combine
 
 final class NewsViewModel: ObservableObject {
     //MARK: -- Properties
- 
+    
     private var cancellable: AnyCancellable?
     
     private var currentPage: Int = 1
@@ -22,12 +22,10 @@ final class NewsViewModel: ObservableObject {
             
             guard let firstArticle = filteredArticles.first else { return }
             firstNewsArticle = firstArticle
-            
             filteredNewsArticles = Array(filteredArticles[1..<filteredArticles.count])
-
+            
         }
     }
-    
     
     @Published private(set) var firstNewsArticle: NewsArticle!
     
@@ -102,7 +100,7 @@ extension NewsViewModel {
                         self.newsArticles = articles
                         self.currentPage = 1
                     }
-                   
+                    
                     self.isFetchInProgress = false
             })
     }

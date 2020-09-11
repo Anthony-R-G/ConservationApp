@@ -150,7 +150,7 @@ final class SpeciesListViewController: UIViewController {
         return viewModel
     }()
     
-    private lazy var dataSource = makeDataSource()
+    private lazy var dataSource: SpeciesDataSource = makeDataSource()
     
     private var subscriptions: Set<AnyCancellable> = []
     

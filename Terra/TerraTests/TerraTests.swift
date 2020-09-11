@@ -49,7 +49,7 @@ class TerraTests: XCTestCase {
         let labelTitle = "ASDF"
         let label = Factory.makeLabel(title: labelTitle,
                                       fontWeight: .bold,
-                                      fontSize: 15,
+                                      fontSize: 15, widthAdjustsFontSize: <#Bool#>,
                                       color: .white,
                                       alignment: .left)
         XCTAssert(label.text == labelTitle,
@@ -72,8 +72,8 @@ class TerraTests: XCTestCase {
         
         let expectedString = "jurongbirdparksconservationbreedingeffortssoarwithmorethannewhatchlings"
         
-        XCTAssertEqual(testString.removingNonAlphabetChars,  expectedString,
-                       "Expected '\(expectedString)', but returned '\(testString.removingNonAlphabetChars)' instead")
+        XCTAssertEqual(testString.lowercaseAlphaNumericsOnly,  expectedString,
+                       "Expected '\(expectedString)', but returned '\(testString.lowercaseAlphaNumericsOnly)' instead")
     }
     
 //    func testNewsArticleDuplicateRemoval() {
