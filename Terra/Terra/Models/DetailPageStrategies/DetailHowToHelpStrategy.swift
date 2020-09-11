@@ -8,22 +8,18 @@
 
 import UIKit
 
-struct DetailHowToHelpStrategy: DetailPageStrategy {
+final class DetailHowToHelpStrategy: DetailPageStrategy {
     var species: Species
     
-    func speciesName() -> String {
-        return species.commonName
-    }
-    
-    func pageName() -> String {
+    var pageName: String {
         return "HOW TO HELP"
     }
     
-    func firebaseStorageManager() -> FirebaseStorageService {
-        return FirebaseStorageService.howToHelpImageManager
+    var firebaseStorageManager: FirebaseStorageService? {
+        return nil
     }
     
-    mutating func arrangedSubviews() -> UIStackView {
+    func arrangedSubviews() -> UIStackView {
         let stackView = UIStackView(arrangedSubviews: [
             DetailInfoWindow(title: "ADOPT", content: Factory.makeDetailInfoWindowLabel(text: "From wild animals to wild places, there’s an option for everyone. Get together with classmates to adopt an animal from a wildlife conservation organization such as the World Wildlife Fund (WWF). Symbolic adoptions help fund organizations.")),
             
@@ -50,5 +46,9 @@ struct DetailHowToHelpStrategy: DetailPageStrategy {
         stackView.axis = .vertical
         stackView.spacing = Constants.spacing
         return stackView
+    }
+    
+    init(species: Species) {
+        self.species = species
     }
 }

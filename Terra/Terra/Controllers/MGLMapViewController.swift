@@ -28,6 +28,7 @@ final class MGLMapViewController: UIViewController {
     }()
     
     private lazy var styleToggle: UISegmentedControl = {
+        
         let sc = UISegmentedControl(items: ["Normal", "Hypsometric"])
         sc.tintColor = #colorLiteral(red: 0.976, green: 0.843, blue: 0.831, alpha: 1.0)
         sc.backgroundColor = Constants.Color.red
@@ -42,18 +43,7 @@ final class MGLMapViewController: UIViewController {
     
     //MARK: -- Properties
     
-    var speciesData: [Species] = [] {
-        didSet {
-            var speciesAnnotations = [SpeciesAnnotation]()
-            for species in speciesData {
-                let annotation = SpeciesAnnotation(species: species)
-                speciesAnnotations.append(annotation)
-            }
-            mapView.addAnnotations(speciesAnnotations)
-        }
-    }
-    
-    private var selectedSpecies: Species!
+    private var speciesData: [Species] = []
     
     override var prefersStatusBarHidden: Bool {
         return true
@@ -78,7 +68,6 @@ final class MGLMapViewController: UIViewController {
     }
     
     @objc private func backButtonPressed() {
-        Utilities.sendHapticFeedback(action: .pageDismissed)
         dismiss(animated: true, completion: nil)
     }
     
@@ -109,11 +98,30 @@ final class MGLMapViewController: UIViewController {
         return distance
     }
     
+    private func addAnnotations() {
+        var speciesAnnotations = [SpeciesAnnotation]()
+        for species in speciesData {
+            let annotation = SpeciesAnnotation(species: species)
+            speciesAnnotations.append(annotation)
+        }
+        mapView.addAnnotations(speciesAnnotations)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.frame = view.bounds
         addSubviews()
         setConstraints()
+        addAnnotations()
+    }
+    
+    init(speciesData: [Species]) {
+        self.speciesData = speciesData
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
 
@@ -149,7 +157,7 @@ extension MGLMapViewController: MGLMapViewDelegate {
         var distance: Double? = nil
         
         if checkLocationPermission() {
-          distance = getDistanceFromUserToSpecies(speciesCoordinate: annotation.coordinate)
+            distance = getDistanceFromUserToSpecies(speciesCoordinate: annotation.coordinate)
         }
         
         let callout = CustomCalloutView(representedObject: annotation, distance: distance)
@@ -163,8 +171,8 @@ extension MGLMapViewController: MGLMapViewDelegate {
     
     func mapView(_ mapView: MGLMapView, tapOnCalloutFor annotation: MGLAnnotation) {
         guard let annotation = annotation as? SpeciesAnnotation else { return }
-        let coverVC = SpeciesCoverViewController()
-        coverVC.viewModel =  DetailPageStrategyViewModel(species: annotation.species)
+        let coverVC = SpeciesCoverViewController(viewModel: DetailPageStrategyViewModel(species: annotation.species))
+        
         let navVC = NavigationController(rootViewController: coverVC)
         navVC.modalPresentationStyle = .fullScreen
         present(navVC, animated: true, completion: nil)

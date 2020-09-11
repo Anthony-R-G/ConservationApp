@@ -9,6 +9,9 @@
 import UIKit
 
 final class NewsCollectionViewHeader: UICollectionReusableView {
+    static var reuseIdentifier: String { 
+        return String(describing: NewsCollectionViewHeader.self)
+    }
     //MARK: UI Element Initialization
     
     private lazy var backgroundImageView: UIImageView = {
@@ -29,11 +32,11 @@ final class NewsCollectionViewHeader: UICollectionReusableView {
     
     private lazy var todayLabel: UILabel = {
         return Factory.makeLabel(title: "TODAY",
-                                      fontWeight: .black,
-                                      fontSize: 36,
-                                      widthAdjustsFontSize: false,
-                                      color: Constants.Color.titleLabelColor,
-                                      alignment: .left)
+                                 fontWeight: .black,
+                                 fontSize: 36,
+                                 widthAdjustsFontSize: false,
+                                 color: Constants.Color.titleLabelColor,
+                                 alignment: .left)
     }()
     
     private lazy var separatorLine: UIView = {
@@ -75,11 +78,9 @@ final class NewsCollectionViewHeader: UICollectionReusableView {
         return btn
     }()
     
-    private lazy var refreshButton: UIButton = {
-       let btn = UIButton()
+    private lazy var refreshButton: LoadingButton = {
+        let btn = LoadingButton()
         btn.setImage(UIImage(systemName: "arrow.clockwise"), for: .normal)
-        btn.contentVerticalAlignment = .fill
-        btn.contentHorizontalAlignment = .fill
         btn.tintColor = .white
         btn.addTarget(self, action: #selector(refreshButtonTapped), for: .touchUpInside)
         return btn
@@ -97,28 +98,19 @@ final class NewsCollectionViewHeader: UICollectionReusableView {
     
     //MARK: -- Methods
     
+    @objc private func refreshButtonTapped() {
+        refreshButton.showLoader()
+        delegate?.refreshButtonTapped()
+    }
+    
+    func stopButtonLoading() {
+        refreshButton.hideLoader()
+    }
+    
     @objc private func shareButtonTapped() {
         delegate?.shareButtonTapped()
     }
     
-    @objc private func refreshButtonTapped() {
-        animateRefreshButton()
-        delegate?.refreshButtonTapped()
-    }
-    
-    func animateRefreshButton() {
-        let rotateAnimation = CABasicAnimation(keyPath: "transform.rotation")
-        rotateAnimation.fromValue = 0.0
-        rotateAnimation.toValue = CGFloat(.pi * 2.0)
-        rotateAnimation.duration = 0.3
-        rotateAnimation.repeatCount = Float.greatestFiniteMagnitude
-
-        refreshButton.layer.add(rotateAnimation, forKey: "rotate")
-    }
-    
-    func stopRefreshButton() {
-       refreshButton.layer.removeAnimation(forKey: "rotate")
-    }
     
     @objc private func headerTapped() {
         delegate?.headerLabelTapped()
@@ -248,7 +240,8 @@ fileprivate extension NewsCollectionViewHeader {
         refreshButton.snp.makeConstraints { (make) in
             make.trailing.equalToSuperview().inset(Constants.spacing)
             make.centerY.equalTo(todayLabel)
-            make.height.width.equalTo(30)
+            make.height.equalTo(40)
+            make.width.equalTo(40)
         }
     }
 }

@@ -10,7 +10,7 @@ import Foundation
 import FirebaseUI
 
 
-class FirebaseStorageService {
+final class FirebaseStorageService {
     enum imageType {
         case cell
         case cover
@@ -18,7 +18,6 @@ class FirebaseStorageService {
         case detailOverview
         case detailHabitat
         case detailThreats
-        case howToHelp
     }
     
     static var cellImageManager = FirebaseStorageService(type: .cell)
@@ -32,8 +31,6 @@ class FirebaseStorageService {
     static var detailHabitatImageManager = FirebaseStorageService(type: .detailHabitat)
     
     static var detailThreatsImageManager = FirebaseStorageService(type: .detailThreats)
-    
-    static var howToHelpImageManager = FirebaseStorageService(type: .howToHelp)
     
     
     private let storage: Storage!
@@ -62,17 +59,20 @@ class FirebaseStorageService {
             
         case .detailThreats:
             imagesFolderReference = storageReference.child("Detail Threats Images")
-    
-        case .howToHelp:
-            imagesFolderReference = storageReference.child("How To Help")
         }
     }
     
     func getImage(for speciesName: String, setTo imageView: UIImageView) {
-        let cleanedStr = speciesName.lowercased().replacingOccurrences(of: " ", with: "")
-        let animalImageReference = imagesFolderReference.child("\(cleanedStr).png")
-        imageView.sd_imageTransition = .fade(duration: 1.2)
+        
+        let animalImageReference = imagesFolderReference.child("\(speciesName.lowercaseAlphaNumericsOnly).png")
+        imageView.sd_imageTransition = .fade(duration: 1)
         imageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
-        imageView.sd_setImage(with: animalImageReference, placeholderImage: UIImage(named: "black"))
+    
+        //TODO: -- Change SDWebImageOptions in release build
+        imageView.sd_setImage(with: animalImageReference,
+                              maxImageSize: 11 * 1024 * 1024,
+                              placeholderImage: UIImage(named: "black"),
+                              options: [.scaleDownLargeImages],
+                              completion: nil)
     }
 }

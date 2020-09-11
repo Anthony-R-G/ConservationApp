@@ -8,22 +8,19 @@
 
 import UIKit
 
-struct DetailOverviewStrategy: DetailPageStrategy {
+final class DetailOverviewStrategy: DetailPageStrategy {
+ 
     var species: Species
-    
-    func speciesName() -> String {
-        return species.commonName
-    }
-    
-    func pageName() -> String {
+        
+    var pageName: String {
         return "OVERVIEW"
     }
     
-    func firebaseStorageManager() -> FirebaseStorageService {
+    var firebaseStorageManager: FirebaseStorageService? {
         return FirebaseStorageService.detailOverviewImageManager
     }
     
-    mutating func arrangedSubviews() -> UIStackView {
+     func arrangedSubviews() -> UIStackView {
         let stackView = UIStackView(arrangedSubviews: [
             DetailInfoWindow(title: "DESCRIPTION",
                              content: Factory.makeDetailInfoWindowLabel(text: species.overview)),
@@ -39,5 +36,9 @@ struct DetailOverviewStrategy: DetailPageStrategy {
         stackView.axis = .vertical
         stackView.spacing = Constants.spacing
         return stackView
+    }
+    
+    init(species: Species) {
+        self.species = species
     }
 }

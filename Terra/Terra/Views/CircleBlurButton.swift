@@ -49,7 +49,7 @@ final class CircleBlurButton: UIButton {
     
     required init(frame: CGRect, image: UIImage, style: ButtonStyle) {
         super.init(frame: frame)
-        self.buttonImage.image = image
+        buttonImage.image = image
         configureAppearance()
         addSubviews()
         setConstraints()

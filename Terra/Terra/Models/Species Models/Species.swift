@@ -20,11 +20,14 @@ struct Species: FirebaseConvertible {
     let habitat: Habitat
     let population: Population
     
-    static func getFilteredSpeciesByName(arr: [Species], searchString: String) -> [Species] {
+    static func filterSpeciesByName(arr: [Species], searchString: String) -> [Species] {
+        guard searchString != "" else { return arr }
         return arr.filter{$0.commonName.lowercased().contains(searchString.lowercased())}
     }
     
-    static func getFilteredSpeciesByConservationStatus(arr: [Species], by status: ConservationStatus) -> [Species] {
+    static func filterByConservationStatus(arr: [Species], status: ConservationStatus?) -> [Species] {
+        guard let status = status else { return arr }
+       
         return arr.filter{$0.population.conservationStatus == status}
     }
 }
