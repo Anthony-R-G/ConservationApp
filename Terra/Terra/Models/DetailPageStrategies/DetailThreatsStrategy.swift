@@ -12,7 +12,7 @@ final class DetailThreatsStrategy: DetailPageStrategy {
     var species: Species
     
     var pageName: String {
-        return "THREATS"
+        return "Threats"
     }
     
     var firebaseStorageManager: FirebaseStorageService? {

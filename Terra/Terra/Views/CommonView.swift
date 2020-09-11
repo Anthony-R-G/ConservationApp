@@ -13,13 +13,14 @@ final class CommonView: UIView {
     //MARK: -- UI Element Initialization
     
     private lazy var titleLabel: UILabel = {
-        return Factory.makeLabel(title: nil,
-                                 fontWeight: .black,
-                                 fontSize: 36,
-                                 widthAdjustsFontSize: true,
-                                 color: .white,
-                                 alignment: .left)
+        let label = Factory.makeLabel(title: nil,
+                                      fontWeight: .black,
+                                      fontSize: 36,
+                                      widthAdjustsFontSize: true,
+                                      color: .white,
+                                      alignment: .left)
         
+        return label
     }()
     
     private lazy var subtitleLabel: UILabel = {
@@ -31,7 +32,10 @@ final class CommonView: UIView {
                                       alignment: .left)
         label.alpha = 0
         return label
+        
     }()
+    
+    
     
     private lazy var blurbLabel: UILabel = {
         let label = Factory.makeLabel(title: nil,
@@ -65,15 +69,15 @@ final class CommonView: UIView {
     
     var strategy: DetailPageStrategy!
     
-    private lazy var subtitleTopConstraint: NSLayoutConstraint = {
-        return subtitleLabel.topAnchor.constraint(
+    private lazy var titleTopConstraint: NSLayoutConstraint = {
+        return titleLabel.topAnchor.constraint(
             equalTo: topAnchor,
             constant: Constants.spacing)
     }()
     
     var topConstraintValue: CGFloat {
-        get { return subtitleTopConstraint.constant }
-        set { subtitleTopConstraint.constant = newValue }
+        get { return titleTopConstraint.constant }
+        set { titleTopConstraint.constant = newValue }
     }
     //MARK: -- Methods
     
@@ -135,17 +139,19 @@ fileprivate extension CommonView {
     func setTitleLabelConstraints() {
         titleLabel.snp.makeConstraints { [weak self] (make) in
             guard let self = self else { return }
-            make.top.equalTo(subtitleLabel.snp.bottom).offset(Constants.spacing/2)
+            titleTopConstraint.isActive = true
             make.leading.trailing.equalTo(self).inset(Constants.spacing)
         }
     }
     
     func setSubtitleLabelConstraints() {
-        subtitleLabel.snp.makeConstraints { (make) in 
+        subtitleLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(titleLabel.snp.bottom).offset(Constants.spacing/2)
             make.leading.equalTo(titleLabel).inset(3.5)
-            subtitleTopConstraint.isActive = true
         }
     }
+    
+    
     
     func setBlurbLabelConstraints() {
         blurbLabel.snp.makeConstraints { [weak self] (make) in

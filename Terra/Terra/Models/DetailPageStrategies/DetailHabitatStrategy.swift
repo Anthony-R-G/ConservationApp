@@ -15,7 +15,7 @@ final class DetailHabitatStrategy: DetailPageStrategy {
     var species: Species
     
     var pageName: String {
-        return "HABITAT"
+        return "Habitat"
     }
     
     var firebaseStorageManager: FirebaseStorageService? {

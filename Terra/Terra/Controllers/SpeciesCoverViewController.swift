@@ -79,7 +79,7 @@ final class SpeciesCoverViewController: UIViewController {
     
     private lazy var donateButton: DonateButton = {
         let btn = DonateButton(
-            gradientColors: [#colorLiteral(red: 1, green: 0.2914688587, blue: 0.3886995912, alpha: 0.9019156678), #colorLiteral(red: 0.3837335624, green: 0.1666001081, blue: 0.1801935414, alpha: 0.8952536387)],
+            gradientColors: [#colorLiteral(red: 1, green: 0.2914688587, blue: 0.3886995912, alpha: 1), #colorLiteral(red: 0.3837335624, green: 0.1666001081, blue: 0.1801935414, alpha: 1)],
             startPoint: CGPoint(x: 0, y: 0),
             endPoint: CGPoint(x: 1, y: 1))
         btn.alpha = 0
@@ -88,7 +88,7 @@ final class SpeciesCoverViewController: UIViewController {
     }()
     
     private lazy var collectionView: UICollectionView = {
-        
+         
         let collectionViewFrame = CGRect(
             origin: .zero,
             size: CGSize(
@@ -558,13 +558,13 @@ fileprivate extension SpeciesCoverViewController {
     func setCollectionViewConstraints() {
         collectionView.snp.makeConstraints { (make) in
             make.height.equalTo(collectionView.frame.height)
-           
         }
     }
     
     func setDonateButtonConstraints() {
         donateButton.snp.makeConstraints { (make) in
-            make.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide).inset(Constants.spacing)
+            make.leading.trailing.equalToSuperview().inset(Constants.spacing)
+            make.bottom.equalTo(view.safeAreaLayoutGuide)
             make.height.equalTo(50.deviceScaled)
         }
     }
