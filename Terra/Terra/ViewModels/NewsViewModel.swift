@@ -23,7 +23,6 @@ final class NewsViewModel: ObservableObject {
             guard let firstArticle = filteredArticles.first else { return }
             firstNewsArticle = firstArticle
             filteredNewsArticles = Array(filteredArticles[1..<filteredArticles.count])
-            
         }
     }
     

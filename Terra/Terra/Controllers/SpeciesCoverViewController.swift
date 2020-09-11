@@ -14,6 +14,10 @@ final class SpeciesCoverViewController: UIViewController {
     
     //MARK: -- UI Element Initialization
     
+    private lazy var scrollView: UIScrollView = {
+        return UIScrollView()
+    }()
+    
     private lazy var backgroundImageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
@@ -67,12 +71,6 @@ final class SpeciesCoverViewController: UIViewController {
         return btn
     }()
     
-    //Sets donate button centerY between view bottom & collectionview
-    private lazy var donateButtonContainer: UIView = {
-        let view = UIView()
-        view.isUserInteractionEnabled = false
-        return view
-    }()
     
     //Sets chevron centerY between view bottom & subheader
     private lazy var downChevronContainer: UIView = {
@@ -147,6 +145,27 @@ final class SpeciesCoverViewController: UIViewController {
         return recognizer
     }()
     
+    private lazy var stackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [
+            DetailInfoWindow(title: "DESCRIPTION",
+                             content: Factory.makeDetailInfoWindowLabel(text: viewModel.species.overview)),
+            
+            collectionView,
+            
+            DetailInfoWindow(title: "CLASSIFICATION",
+                             content: ClassificationView(species: viewModel.species)),
+            
+            DetailInfoWindow(title: "MEASUREMENTS", content: MeasurementsView(species: viewModel.species)),
+            
+            DetailInfoWindow(title: "AVERAGE LIFESPAN", content: Factory.makeDetailInfoWindowLabel(text: "\(viewModel.species.averageLifespan) in the wild"))
+            
+        ])
+        stackView.axis = .vertical
+        stackView.spacing = Constants.spacing
+        stackView.distribution = .equalSpacing
+        return stackView
+    }()
+    
     
     //MARK: -- Properties
     
@@ -208,6 +227,14 @@ final class SpeciesCoverViewController: UIViewController {
             repeatCount: .infinity) }
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        scrollView.scrollIndicatorInsets = view.safeAreaInsets
+        scrollView.contentInset = UIEdgeInsets(top: 0,
+                                               left: 0,
+                                               bottom: view.safeAreaInsets.bottom,
+                                               right: 0)
+    }
     
     //MARK: -- Life Cycle Methods
     
@@ -352,11 +379,11 @@ extension SpeciesCoverViewController {
     private func toggleContainerInteractability(state: State) {
         switch state {
         case .expanded:
-            donateButtonContainer.isUserInteractionEnabled = true
+            
             downChevronContainer.isUserInteractionEnabled = false
             
         case .collapsed:
-            donateButtonContainer.isUserInteractionEnabled = false
+            
             downChevronContainer.isUserInteractionEnabled = true
         }
     }
@@ -433,15 +460,18 @@ extension SpeciesCoverViewController: ConservationStatusDelegate {
 
 fileprivate extension SpeciesCoverViewController {
     func addSubviews() {
-        [backgroundImageView, backgroundGradientOverlay, subheaderInfoView, downChevronContainer, upChevron, donateButtonContainer, headerNameView, collectionView, augmentedRealityButton, closeButton]
+        [backgroundImageView, backgroundGradientOverlay, subheaderInfoView, downChevronContainer, upChevron, headerNameView, scrollView, augmentedRealityButton, closeButton, donateButton]
             .forEach { view.addSubview($0) }
         
+        scrollView.addSubview(stackView)
+        
         backgroundImageView.addSubview(backgroundVisualEffectBlur)
-        donateButtonContainer.addSubview(donateButton)
+        
         downChevronContainer.addSubview(downChevron)
     }
     
     func setConstraints() {
+        
         setBackgroundImageViewConstraints()
         setBackgroundVisualEffectBlurConstraints()
         setBackgroundGradientOverlayConstraints()
@@ -452,14 +482,23 @@ fileprivate extension SpeciesCoverViewController {
         setHeaderInfoViewConstraints()
         setSubheaderInfoViewConstraints()
         
+        setScrollViewConstraints()
+        setContainerStackView()
+        
         setDownChevronContainerConstraints()
         setDownChevronConstraints()
         setUpChevronConstraints()
         
         setCollectionViewConstraints()
-        setDonateButtonContainerConstraints()
         setDonateButtonConstraints()
         
+    }
+    
+    func setScrollViewConstraints() {
+        scrollView.snp.makeConstraints { (make) in
+            make.leading.trailing.bottom.equalToSuperview()
+            make.top.equalTo(subheaderInfoView.snp.bottom).offset(Constants.spacing)
+        }
     }
     
     func setBackgroundImageViewConstraints() {
@@ -534,24 +573,23 @@ fileprivate extension SpeciesCoverViewController {
     
     func setCollectionViewConstraints() {
         collectionView.snp.makeConstraints { (make) in
-            make.height.equalTo(collectionView.frame.height)
-            make.leading.trailing.equalToSuperview()
-            make.centerY.equalToSuperview().offset(70.deviceScaled)
-        }
-    }
-    
-    func setDonateButtonContainerConstraints() {
-        donateButtonContainer.snp.makeConstraints { (make) in
-            make.leading.trailing.bottom.equalToSuperview()
-            make.top.equalTo(collectionView.snp.bottom).inset(Constants.spacing)
+            make.height.width.equalTo(collectionView.frame.size)
+           
         }
     }
     
     func setDonateButtonConstraints() {
         donateButton.snp.makeConstraints { (make) in
-            make.centerX.centerY.equalTo(donateButtonContainer)
-            make.leading.trailing.equalToSuperview().inset(Constants.spacing)
+            make.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide).inset(Constants.spacing)
             make.height.equalTo(50.deviceScaled)
+        }
+    }
+    
+    func setContainerStackView() {
+        stackView.snp.makeConstraints { (make) in
+            make.top.equalToSuperview()
+            make.leading.trailing.equalTo(view).inset(Constants.spacing)
+            make.bottom.greaterThanOrEqualTo(scrollView)
         }
     }
 }
