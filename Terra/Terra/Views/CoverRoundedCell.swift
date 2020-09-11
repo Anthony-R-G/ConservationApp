@@ -48,12 +48,12 @@ final class CoverRoundedCell: UICollectionViewCell {
 //MARK: -- Add Subviews & Constraints
 fileprivate extension CoverRoundedCell {
     func addSubviews() {
-        contentView.addSubview(shadowView)
-        shadowView.addSubview(commonView)
+        contentView.addSubview(commonView)
+//        shadowView.addSubview(commonView)
     }
     
     func setConstraints() {
-        setShadowViewConstraints()
+//        setShadowViewConstraints()
         setCommonViewConstraints()
     }
     
@@ -65,8 +65,9 @@ fileprivate extension CoverRoundedCell {
     }
     
     func setCommonViewConstraints() {
-        commonView.snp.makeConstraints {(make) in
-            make.edges.equalTo(shadowView)
+        commonView.snp.makeConstraints { [weak self] (make) in
+            guard let self = self else { return }
+            make.edges.equalTo(self)
         }
     }
 }

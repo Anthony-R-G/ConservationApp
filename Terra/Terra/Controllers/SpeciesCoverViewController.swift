@@ -93,20 +93,14 @@ final class SpeciesCoverViewController: UIViewController {
             origin: .zero,
             size: CGSize(
                 width: Constants.screenWidth,
-                height: Constants.screenHeight * 0.468))
+                height: Constants.screenHeight * 0.25))
         
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(
-            width: 345.deviceScaled,
-            height:  collectionViewFrame.height * 0.89)
+            width: 315.deviceScaled,
+            height:  collectionViewFrame.height * 0.95)
         
         layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 30.deviceScaled
-        layout.sectionInset = UIEdgeInsets(
-            top: Constants.spacing / 2,
-            left: Constants.spacing,
-            bottom: Constants.spacing / 2,
-            right: Constants.spacing)
         
         let cv = UICollectionView(
             frame: collectionViewFrame,
@@ -230,7 +224,6 @@ final class SpeciesCoverViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-//        scrollView.contentSize = .init(width: Constants.screenWidth, height: Constants.screenHeight + 300)
         scrollView.scrollIndicatorInsets = view.safeAreaInsets
         scrollView.contentInset = UIEdgeInsets(top: 0,
                                                left: 0,
@@ -287,7 +280,7 @@ extension SpeciesCoverViewController {
                 case .expanded:
                     self.dismissPageSwipeGesture.isEnabled = false
                     self.resizeHeader(state: state)
-                    self.toggleContainerInteractability(state: state)
+                    self.downChevronContainer.isUserInteractionEnabled = false
                     self.animateDetailInfoOptionsVisibility(state: state)
                     self.animateButtonControlsVisibility(state: state)
                     
@@ -297,7 +290,7 @@ extension SpeciesCoverViewController {
                         self.dismissPageSwipeGesture.isEnabled = true
                     }
                     self.resizeHeader(state: state)
-                    self.toggleContainerInteractability(state: state)
+                    self.downChevronContainer.isUserInteractionEnabled = true
                     self.animateButtonControlsVisibility(state: state)
                     self.animateDetailInfoOptionsVisibility(state: state)
                 }
@@ -314,7 +307,7 @@ extension SpeciesCoverViewController {
             case .end:
                 self.pageStateSwipeGesture.direction = self.pageStateSwipeGesture.direction.opposite
                 self.pageState = state
-                self.toggleContainerInteractability(state: state)
+                
                 
             case .current:
                 ()
@@ -376,18 +369,6 @@ extension SpeciesCoverViewController {
                 self.backgroundVisualEffectBlur.alpha = newAlpha
                 self.backgroundGradientOverlay.alpha = reverseAlpha
             }
-        }
-    }
-    
-    private func toggleContainerInteractability(state: State) {
-        switch state {
-        case .expanded:
-            
-            downChevronContainer.isUserInteractionEnabled = false
-            
-        case .collapsed:
-            
-            downChevronContainer.isUserInteractionEnabled = true
         }
     }
 }
