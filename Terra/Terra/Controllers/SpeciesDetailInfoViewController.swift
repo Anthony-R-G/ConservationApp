@@ -41,7 +41,7 @@ final class SpeciesDetailInfoViewController: UIViewController {
     }()
     
     private lazy var backgroundBlurEffectView: UIVisualEffectView = {
-        let blurEffect = UIBlurEffect(style: .systemUltraThinMaterialDark)
+        let blurEffect = UIBlurEffect(style: .dark)
         let bev = UIVisualEffectView(effect: blurEffect)
         bev.frame = view.bounds
         return bev

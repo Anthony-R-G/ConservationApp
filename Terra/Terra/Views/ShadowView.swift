@@ -20,8 +20,8 @@ final class ShadowView: UIView {
     }
     
     func commonInit() {
-        layer.shadowRadius = 8
-        layer.shadowOffset = CGSize(width: 0, height: 8)
+        layer.shadowRadius = 4
+        layer.shadowOffset = CGSize(width: 0, height: 2)
         layer.shadowOpacity = 0.25
         layer.masksToBounds = false
     }

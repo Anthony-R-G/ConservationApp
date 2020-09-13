@@ -93,12 +93,12 @@ final class SpeciesCoverViewController: UIViewController {
             origin: .zero,
             size: CGSize(
                 width: Constants.screenWidth,
-                height: Constants.screenHeight * 0.25))
+                height: Constants.screenHeight * 0.30))
         
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(
             width: 315.deviceScaled,
-            height:  collectionViewFrame.height * 0.95)
+            height:  collectionViewFrame.height)
         
         layout.scrollDirection = .horizontal
         
@@ -227,7 +227,7 @@ final class SpeciesCoverViewController: UIViewController {
         scrollView.scrollIndicatorInsets = view.safeAreaInsets
         scrollView.contentInset = UIEdgeInsets(top: 0,
                                                left: 0,
-                                               bottom: view.safeAreaInsets.bottom,
+                                               bottom: view.safeAreaInsets.bottom + 40,
                                                right: 0)
     }
     
@@ -254,6 +254,7 @@ final class SpeciesCoverViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
 
 //MARK: -- Animatable
 extension SpeciesCoverViewController: Animatable {
