@@ -101,10 +101,22 @@ final class SpeciesListViewController: UIViewController {
         return cv
     }()
     
-    private lazy var searchBarLeadingAnchorConstraint: NSLayoutConstraint = {
+    private lazy var searchBarDisabledLeadingAnchor: NSLayoutConstraint = {
         return searchBar.leadingAnchor.constraint(
             equalTo: view.trailingAnchor,
             constant: -Constants.spacing)
+    }()
+    
+    private lazy var searchBarEnabledLeadingAnchor: NSLayoutConstraint = {
+        return searchBar.leadingAnchor.constraint(
+            equalTo: view.leadingAnchor,
+            constant: Constants.spacing)
+    }()
+    
+    private lazy var searchBarEnabledTrailingAnchor: NSLayoutConstraint = {
+        return searchBar.trailingAnchor.constraint(
+            equalTo: earthButton.leadingAnchor,
+            constant: -20)
     }()
     
     private lazy var terraTitleLabelLeadingAnchorConstraint: NSLayoutConstraint = {
@@ -189,7 +201,9 @@ final class SpeciesListViewController: UIViewController {
     }
     
     @objc private func expandSearchBar() {
-        searchBarLeadingAnchorConstraint.constant = -400.deviceScaled
+        searchBarDisabledLeadingAnchor.isActive = false
+        searchBarEnabledLeadingAnchor.isActive = true
+        searchBarEnabledTrailingAnchor.isActive = true
         terraTitleLabelLeadingAnchorConstraint.constant = -200.deviceScaled
         searchBar.alpha = 1
         searchBarButton.alpha = 0
@@ -205,7 +219,10 @@ final class SpeciesListViewController: UIViewController {
     }
     
     private func dismissSearchBar() {
-        searchBarLeadingAnchorConstraint.constant = -Constants.spacing
+        
+        searchBarEnabledLeadingAnchor.isActive = false
+        searchBarEnabledTrailingAnchor.isActive = false
+        searchBarDisabledLeadingAnchor.isActive = true
         terraTitleLabelLeadingAnchorConstraint.constant = Constants.spacing
         searchBar.alpha = 0
         searchBarButton.alpha = 1
@@ -350,7 +367,7 @@ fileprivate extension SpeciesListViewController {
         terraTitleLabel.snp.makeConstraints { (make) in
             terraTitleLabelLeadingAnchorConstraint.isActive = true
             make.top.equalToSuperview().inset(50.deviceScaled)
-            make.height.equalTo(25.deviceScaled)
+            make.height.equalTo(20.deviceScaled)
             make.width.equalTo(100.deviceScaled)
         }
     }
@@ -358,7 +375,7 @@ fileprivate extension SpeciesListViewController {
     func setEarthButtonConstraints() {
         earthButton.snp.makeConstraints { (make) in
             make.trailing.equalToSuperview().inset(Constants.spacing)
-            make.height.width.equalTo(25.deviceScaled)
+            make.height.width.equalTo(40.deviceScaled)
             make.centerY.equalTo(terraTitleLabel)
         }
     }
@@ -373,15 +390,14 @@ fileprivate extension SpeciesListViewController {
     
     func setSearchBarConstraints() {
         searchBar.snp.makeConstraints { (make) in
-            searchBarLeadingAnchorConstraint.isActive = true
-            make.trailing.equalTo(searchBarButton)
+            searchBarDisabledLeadingAnchor.isActive = true
             make.centerY.equalTo(searchBarButton)
         }
     }
     
     func setFilterTabBarConstraints() {
         redListTabBar.snp.makeConstraints { (make) in
-            make.top.equalTo(terraTitleLabel.snp.bottom).offset(10.deviceScaled)
+            make.top.equalTo(terraTitleLabel.snp.bottom).offset(5.deviceScaled)
             make.centerX.equalToSuperview()
             make.height.width.equalTo(redListTabBar.frame.size)
         }
