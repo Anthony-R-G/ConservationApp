@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class CoverSubheaderInfoView: UIView {
+final class CoverSpeciesStatsView: UIView {
     //MARK: -- UI Element Initialization
     
     private lazy var populationTitleLabel: UILabel = {
@@ -114,7 +114,7 @@ final class CoverSubheaderInfoView: UIView {
     }
 }
 
-fileprivate extension CoverSubheaderInfoView {
+fileprivate extension CoverSpeciesStatsView {
     
     func setHorizontalStackConstraints() {
         horizontalStack.snp.makeConstraints { (make) in

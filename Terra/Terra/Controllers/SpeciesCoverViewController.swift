@@ -35,12 +35,12 @@ final class SpeciesCoverViewController: UIViewController {
         return gv
     }()
     
-    private lazy var headerNameView: CoverHeaderNameView = {
-        return CoverHeaderNameView(species: viewModel.species, delegate: self)
+    private lazy var speciesNameView: CoverSpeciesNameView = {
+        return CoverSpeciesNameView(species: viewModel.species, delegate: self)
     }()
     
-    private lazy var subheaderInfoView: CoverSubheaderInfoView = {
-        return CoverSubheaderInfoView(species: viewModel.species)
+    private lazy var speciesStatsView: CoverSpeciesStatsView = {
+        return CoverSpeciesStatsView(species: viewModel.species)
     }()
     
     private lazy var backgroundVisualEffectBlur: UIVisualEffectView = {
@@ -72,8 +72,10 @@ final class SpeciesCoverViewController: UIViewController {
     }()
     
     
-    //Sets chevron centerY between view bottom & subheader
+    //Sets chevron centerY between view bottom & statsView
     private lazy var downChevronContainer: UIView = {
+        let viewC = UIView()
+        viewC.backgroundColor = .blue
         return UIView()
     }()
     
@@ -111,7 +113,7 @@ final class SpeciesCoverViewController: UIViewController {
         cv.dataSource = self
         cv.delegate = self
         
-        cv.register(CoverRoundedCell.self, forCellWithReuseIdentifier: Constants.cellReuseIdentifier)
+        cv.register(CoverDetailCell.self, forCellWithReuseIdentifier: Constants.cellReuseIdentifier)
         return cv
     }()
     
@@ -170,28 +172,28 @@ final class SpeciesCoverViewController: UIViewController {
     
     private var selectedCell: UICollectionViewCell?
     
-    private let headerNameViewEnlargedHeight: CGFloat = Constants.screenHeight * 0.30
+    private let speciesNameViewEnlargedHeightValue: CGFloat = Constants.screenHeight * 0.30
     
-    private let headerNameViewShrinkHeight: CGFloat = Constants.screenHeight * 0.10
+    private let speciesNameViewCollapsedHeightValue: CGFloat = Constants.screenHeight * 0.10
     
-    private let headerNameViewEnlargedTopAnchor: CGFloat = Constants.screenHeight * 0.48
+    private let speciesNameViewEnlargedTopAnchorValue: CGFloat = Constants.screenHeight * 0.48
     
-    private let headerNameViewShrinkTopAnchor: CGFloat = Constants.screenHeight * 0.135
+    private let speciesNameViewCollapsedTopAnchorValue: CGFloat = Constants.screenHeight * 0.135
     
-    private lazy var subheaderInfoViewEnlargedHeight: CGFloat = headerNameViewEnlargedHeight * 0.30
+    private lazy var speciesStatsViewEnlargedHeightValue: CGFloat = speciesNameViewEnlargedHeightValue * 0.30
     
-    private let subheaderInfoViewShrinkHeight: CGFloat = 60.deviceScaled
+    private let speciesStatsViewCollapsedHeightValue: CGFloat = 60.deviceScaled
     
-    private lazy var headerNameViewHeightConstraint: NSLayoutConstraint = {
-        return headerNameView.heightAnchor.constraint(equalToConstant: headerNameViewEnlargedHeight)
+    private lazy var speciesNameViewHeightConstraint: NSLayoutConstraint = {
+        return speciesNameView.heightAnchor.constraint(equalToConstant: speciesNameViewEnlargedHeightValue)
     }()
     
-    private lazy var headerNameViewTopAnchorConstraint: NSLayoutConstraint = {
-        return headerNameView.topAnchor.constraint(equalTo: view.topAnchor, constant: headerNameViewEnlargedTopAnchor)
+    private lazy var speciesNameViewTopAnchorConstraint: NSLayoutConstraint = {
+        return speciesNameView.topAnchor.constraint(equalTo: view.topAnchor, constant: speciesNameViewEnlargedTopAnchorValue)
     }()
     
-    private lazy var subheaderInfoViewHeightConstraint: NSLayoutConstraint = {
-        return subheaderInfoView.heightAnchor.constraint(equalToConstant: subheaderInfoViewEnlargedHeight)
+    private lazy var speciesStatsViewHeightAnchorConstraint: NSLayoutConstraint = {
+        return speciesStatsView.heightAnchor.constraint(equalToConstant: speciesStatsViewEnlargedHeightValue)
     }()
     
     override var prefersStatusBarHidden: Bool { return true }
@@ -322,16 +324,16 @@ extension SpeciesCoverViewController {
     private func resizeHeader(state: State) {
         switch state {
         case .expanded:
-            headerNameView.shrinkCommonNameLabel()
-            headerNameViewTopAnchorConstraint.constant = headerNameViewShrinkHeight
-            headerNameViewHeightConstraint.constant = headerNameViewShrinkTopAnchor
-            subheaderInfoViewHeightConstraint.constant = subheaderInfoViewShrinkHeight
+            speciesNameView.shrinkCommonNameLabel()
+            speciesNameViewTopAnchorConstraint.constant = speciesNameViewCollapsedHeightValue
+            speciesNameViewHeightConstraint.constant = speciesNameViewCollapsedTopAnchorValue
+            speciesStatsViewHeightAnchorConstraint.constant = speciesStatsViewCollapsedHeightValue
             
         case .collapsed:
-            headerNameView.enlargeCommonNameLabel()
-            headerNameViewTopAnchorConstraint.constant = headerNameViewEnlargedTopAnchor
-            headerNameViewHeightConstraint.constant = headerNameViewEnlargedHeight
-            subheaderInfoViewHeightConstraint.constant = subheaderInfoViewEnlargedHeight
+            speciesNameView.enlargeCommonNameLabel()
+            speciesNameViewTopAnchorConstraint.constant = speciesNameViewEnlargedTopAnchorValue
+            speciesNameViewHeightConstraint.constant = speciesNameViewEnlargedHeightValue
+            speciesStatsViewHeightAnchorConstraint.constant = speciesStatsViewEnlargedHeightValue
         }
     }
     
@@ -388,7 +390,7 @@ extension SpeciesCoverViewController: UICollectionViewDataSource {
         
         guard let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: Constants.cellReuseIdentifier,
-            for: indexPath) as? CoverRoundedCell else { return UICollectionViewCell() }
+            for: indexPath) as? CoverDetailCell else { return UICollectionViewCell() }
         
         let specificStrategy = viewModel.specificStrategy(at: indexPath.row)
         cell.strategy = specificStrategy
@@ -445,7 +447,7 @@ extension SpeciesCoverViewController: ConservationStatusDelegate {
 
 fileprivate extension SpeciesCoverViewController {
     func addSubviews() {
-        [backgroundImageView, backgroundGradientOverlay, subheaderInfoView, downChevronContainer, upChevron, headerNameView, scrollView, augmentedRealityButton, closeButton, donateButton]
+        [backgroundImageView, backgroundGradientOverlay, speciesStatsView, upChevron, speciesNameView, scrollView, downChevronContainer, augmentedRealityButton, closeButton, donateButton]
             .forEach { view.addSubview($0) }
         
         scrollView.addSubview(stackView)
@@ -464,8 +466,8 @@ fileprivate extension SpeciesCoverViewController {
         setCloseButtonConstraints()
         setARButtonConstraints()
         
-        setHeaderInfoViewConstraints()
-        setSubheaderInfoViewConstraints()
+        setSpeciesNameViewConstraints()
+        setSpeciesStatsViewConstraints()
         
         setScrollViewConstraints()
         setContainerStackView()
@@ -482,7 +484,7 @@ fileprivate extension SpeciesCoverViewController {
     func setScrollViewConstraints() {
         scrollView.snp.makeConstraints { (make) in
             make.leading.trailing.bottom.equalToSuperview()
-            make.top.equalTo(subheaderInfoView.snp.bottom).offset(Constants.padding)
+            make.top.equalTo(speciesStatsView.snp.bottom).offset(Constants.padding)
         }
     }
     
@@ -516,28 +518,28 @@ fileprivate extension SpeciesCoverViewController {
         }
     }
     
-    func setHeaderInfoViewConstraints() {
-        headerNameView.snp.makeConstraints { (make) in
+    func setSpeciesNameViewConstraints() {
+        speciesNameView.snp.makeConstraints { (make) in
             make.leading.equalToSuperview().inset(Constants.padding)
             make.trailing.equalToSuperview()
-            headerNameViewTopAnchorConstraint.isActive = true
-            headerNameViewHeightConstraint.isActive = true
+            speciesNameViewTopAnchorConstraint.isActive = true
+            speciesNameViewHeightConstraint.isActive = true
         }
     }
     
-    func setSubheaderInfoViewConstraints() {
-        subheaderInfoView.snp.makeConstraints { (make) in
-            make.leading.equalTo(headerNameView)
+    func setSpeciesStatsViewConstraints() {
+        speciesStatsView.snp.makeConstraints { (make) in
+            make.leading.equalTo(speciesNameView)
             make.trailing.equalToSuperview()
-            make.top.equalTo(headerNameView.snp.bottom).offset(Constants.padding)
-            subheaderInfoViewHeightConstraint.isActive = true
+            make.top.equalTo(speciesNameView.snp.bottom).offset(Constants.padding)
+            speciesStatsViewHeightAnchorConstraint.isActive = true
         }
     }
     
     func setDownChevronContainerConstraints() {
         downChevronContainer.snp.makeConstraints { (make) in
             make.leading.trailing.bottom.equalToSuperview()
-            make.top.equalTo(subheaderInfoView.snp.bottom).inset(Constants.padding)
+            make.top.equalTo(speciesStatsView.snp.bottom).inset(Constants.padding)
         }
     }
     

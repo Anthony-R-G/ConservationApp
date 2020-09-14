@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class CoverRoundedCell: UICollectionViewCell {
+final class CoverDetailCell: UICollectionViewCell {
     //MARK: -- UI Element Initialization
     
     private lazy var shadowView: ShadowView = {
@@ -46,7 +46,7 @@ final class CoverRoundedCell: UICollectionViewCell {
 
 
 //MARK: -- Add Subviews & Constraints
-fileprivate extension CoverRoundedCell {
+fileprivate extension CoverDetailCell {
     func addSubviews() {
         contentView.addSubview(shadowView)
         shadowView.addSubview(commonView)

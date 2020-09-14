@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class CoverHeaderNameView: UIView {
+final class CoverSpeciesNameView: UIView {
     //MARK: -- UI Element Initialization
     
     private lazy var conservationStatusButton: UIButton = {
@@ -104,7 +104,7 @@ final class CoverHeaderNameView: UIView {
 
 //MARK: -- Add Subviews & Constraints
 
-fileprivate extension CoverHeaderNameView {
+fileprivate extension CoverSpeciesNameView {
     
     func addSubviews() {
         [conservationStatusButton, speciesCommonNameLabel, speciesScientificNameLabel].forEach { addSubview($0) }
