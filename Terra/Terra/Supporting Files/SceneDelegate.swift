@@ -16,7 +16,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.windowScene = scene
-        window?.rootViewController = PageViewController()
+        if !UserDefaults.standard.bool(forKey: "LaunchedBefore") {
+            window?.rootViewController = PageViewController()
+            UserDefaults.standard.set(true, forKey: "LaunchedBefore")
+        } else {
+            window?.rootViewController = RootTabBarController()
+        }
         window?.makeKeyAndVisible()
     }
 

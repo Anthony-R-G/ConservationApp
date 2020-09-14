@@ -41,7 +41,6 @@ final class OnboardingViewController: UIViewController {
         let button = TransitionButton()
         button.setTitle("START", for: .normal)
         button.layer.cornerRadius = 25
-//        button.backgroundColor = #colorLiteral(red: 1, green: 0.2, blue: 0.4, alpha: 1)
         button.backgroundColor = .black
         button.alpha = 0.0
         button.addTarget(self, action: #selector(startButtonPressed(sender:)), for: .touchUpInside)
