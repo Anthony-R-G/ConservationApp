@@ -11,14 +11,14 @@ import UIKit
 struct OnboardingPageTwo: OnboardingStrategy {
 
     func videoFileName() -> String {
-        return "lion"
+        return "trash"
     }
     
     func displayedText() -> String {
-        return "PLACEHOLDER TEXT FOR PAGE 2"
+        return "Extinction is as old as life itself, but we have magnified the issue tenfold"
     }
     
     func isLastPage() -> Bool {
-        return true
+        return false
     }
 }

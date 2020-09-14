@@ -33,7 +33,7 @@ final class OnboardingViewController: UIViewController {
     
     private lazy var darkOverlay: UIView = {
         let view = UIView()
-        view.backgroundColor = #colorLiteral(red: 0.09672493488, green: 0.09615758806, blue: 0.09716594964, alpha: 0.347067637)
+        view.backgroundColor = #colorLiteral(red: 0.09672493488, green: 0.09615758806, blue: 0.09716594964, alpha: 0.4509845891)
         return view
     }()
     
@@ -41,7 +41,8 @@ final class OnboardingViewController: UIViewController {
         let button = TransitionButton()
         button.setTitle("START", for: .normal)
         button.layer.cornerRadius = 25
-        button.backgroundColor = #colorLiteral(red: 1, green: 0.2, blue: 0.4, alpha: 1)
+//        button.backgroundColor = #colorLiteral(red: 1, green: 0.2, blue: 0.4, alpha: 1)
+        button.backgroundColor = .black
         button.alpha = 0.0
         button.addTarget(self, action: #selector(startButtonPressed(sender:)), for: .touchUpInside)
         return button

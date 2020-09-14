@@ -13,7 +13,10 @@ final class PageViewController: UIPageViewController {
     //MARK: -- Properties
     private let onboardingPages: [UIViewController]  = [
         OnboardingViewController(strategy: OnboardingPageOne()),
-        OnboardingViewController(strategy: OnboardingPageTwo())
+        OnboardingViewController(strategy: OnboardingPageTwo()),
+        OnboardingViewController(strategy: OnboardingPageThree()),
+        OnboardingViewController(strategy: OnboardingPageFour()),
+        OnboardingViewController(strategy: OnboardingPageFive())
     ]
     
     private let pageControl = UIPageControl.appearance()

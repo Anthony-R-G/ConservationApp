@@ -63,6 +63,13 @@
 		97682CC524D550BB000E5B30 /* Biome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975812F424D539D500C09D56 /* Biome.swift */; };
 		97682CC724D5EAA3000E5B30 /* Population.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97682CC624D5EAA3000E5B30 /* Population.swift */; };
 		97682CC824D5EB79000E5B30 /* Population.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97682CC624D5EAA3000E5B30 /* Population.swift */; };
+		97686EA2251010F8009B5D08 /* fire.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 97686EA1251010F7009B5D08 /* fire.mp4 */; };
+		97686EA425101195009B5D08 /* trash.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 97686EA325101194009B5D08 /* trash.mp4 */; };
+		97686EA625101201009B5D08 /* OnboardingPageThree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97686EA525101201009B5D08 /* OnboardingPageThree.swift */; };
+		97686EA825101433009B5D08 /* OnboardingPageFour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97686EA725101433009B5D08 /* OnboardingPageFour.swift */; };
+		97686EAA25101556009B5D08 /* bird.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 97686EA925101556009B5D08 /* bird.mp4 */; };
+		97686EAC25101567009B5D08 /* OnboardingPageFive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97686EAB25101567009B5D08 /* OnboardingPageFive.swift */; };
+		97686EAE251017BD009B5D08 /* elephant.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 97686EAD251017BD009B5D08 /* elephant.mp4 */; };
 		976D585924CFA04400FC7458 /* UIButtonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976D585824CFA04400FC7458 /* UIButtonExtensions.swift */; };
 		976DA46624DFCAF9003F3197 /* SpeciesListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976DA46524DFCAF9003F3197 /* SpeciesListViewModel.swift */; };
 		976F68C224E8A62C00277F79 /* SpeciesCoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976F68C124E8A62C00277F79 /* SpeciesCoverViewController.swift */; };
@@ -119,8 +126,6 @@
 		97DC775224EB6C8700111245 /* CoverRoundedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DC775124EB6C8700111245 /* CoverRoundedCell.swift */; };
 		97DC797C24FF1D2D0098D11B /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DC797B24FF1D2D0098D11B /* OnboardingViewController.swift */; };
 		97DC797E24FF1D420098D11B /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DC797D24FF1D420098D11B /* PageViewController.swift */; };
-		97DC798B24FF2AE20098D11B /* dolphin.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 97DC798A24FF2AE20098D11B /* dolphin.mp4 */; };
-		97DC798D24FF2E530098D11B /* sea.wav in Resources */ = {isa = PBXBuildFile; fileRef = 97DC798C24FF2E530098D11B /* sea.wav */; };
 		97DC799024FF32760098D11B /* OnboardingStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DC798F24FF32760098D11B /* OnboardingStrategy.swift */; };
 		97DC799224FF32A10098D11B /* OnboardingPageOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DC799124FF32A10098D11B /* OnboardingPageOne.swift */; };
 		97DC799424FF348B0098D11B /* OnboardingPageTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DC799324FF348B0098D11B /* OnboardingPageTwo.swift */; };
@@ -197,6 +202,13 @@
 		97677BDC24E6FC4600AB400A /* ISO8601DateFormatted.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISO8601DateFormatted.swift; sourceTree = "<group>"; };
 		9767D04B24C3EA9200384FCD /* CoverSubheaderInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverSubheaderInfoView.swift; sourceTree = "<group>"; };
 		97682CC624D5EAA3000E5B30 /* Population.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Population.swift; sourceTree = "<group>"; };
+		97686EA1251010F7009B5D08 /* fire.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = fire.mp4; path = ../../../../../../Downloads/fire.mp4; sourceTree = "<group>"; };
+		97686EA325101194009B5D08 /* trash.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = trash.mp4; path = ../../../../../../Downloads/trash.mp4; sourceTree = "<group>"; };
+		97686EA525101201009B5D08 /* OnboardingPageThree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageThree.swift; sourceTree = "<group>"; };
+		97686EA725101433009B5D08 /* OnboardingPageFour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageFour.swift; sourceTree = "<group>"; };
+		97686EA925101556009B5D08 /* bird.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = bird.mp4; path = ../../../../../../Downloads/bird.mp4; sourceTree = "<group>"; };
+		97686EAB25101567009B5D08 /* OnboardingPageFive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageFive.swift; sourceTree = "<group>"; };
+		97686EAD251017BD009B5D08 /* elephant.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = elephant.mp4; path = ../../../../../../Downloads/elephant.mp4; sourceTree = "<group>"; };
 		976D585824CFA04400FC7458 /* UIButtonExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtensions.swift; sourceTree = "<group>"; };
 		976DA46524DFCAF9003F3197 /* SpeciesListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesListViewModel.swift; sourceTree = "<group>"; };
 		976F68C124E8A62C00277F79 /* SpeciesCoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesCoverViewController.swift; sourceTree = "<group>"; };
@@ -250,8 +262,6 @@
 		97DC775124EB6C8700111245 /* CoverRoundedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverRoundedCell.swift; sourceTree = "<group>"; };
 		97DC797B24FF1D2D0098D11B /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		97DC797D24FF1D420098D11B /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
-		97DC798A24FF2AE20098D11B /* dolphin.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = dolphin.mp4; path = ../../../../../../Downloads/dolphin.mp4; sourceTree = "<group>"; };
-		97DC798C24FF2E530098D11B /* sea.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = sea.wav; path = ../../../../../../Downloads/sea.wav; sourceTree = "<group>"; };
 		97DC798F24FF32760098D11B /* OnboardingStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingStrategy.swift; sourceTree = "<group>"; };
 		97DC799124FF32A10098D11B /* OnboardingPageOne.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageOne.swift; sourceTree = "<group>"; };
 		97DC799324FF348B0098D11B /* OnboardingPageTwo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageTwo.swift; sourceTree = "<group>"; };
@@ -537,9 +547,11 @@
 			isa = PBXGroup;
 			children = (
 				97DC799524FF35040098D11B /* lion.mp4 */,
-				97DC798A24FF2AE20098D11B /* dolphin.mp4 */,
 				977BD02D2500252500606718 /* earthFromSpace.mp4 */,
-				97DC798C24FF2E530098D11B /* sea.wav */,
+				97686EA1251010F7009B5D08 /* fire.mp4 */,
+				97686EAD251017BD009B5D08 /* elephant.mp4 */,
+				97686EA325101194009B5D08 /* trash.mp4 */,
+				97686EA925101556009B5D08 /* bird.mp4 */,
 			);
 			path = "Onboarding Clips";
 			sourceTree = "<group>";
@@ -550,6 +562,9 @@
 				97DC798F24FF32760098D11B /* OnboardingStrategy.swift */,
 				97DC799124FF32A10098D11B /* OnboardingPageOne.swift */,
 				97DC799324FF348B0098D11B /* OnboardingPageTwo.swift */,
+				97686EA525101201009B5D08 /* OnboardingPageThree.swift */,
+				97686EA725101433009B5D08 /* OnboardingPageFour.swift */,
+				97686EAB25101567009B5D08 /* OnboardingPageFive.swift */,
 			);
 			path = "Onboarding Strategies";
 			sourceTree = "<group>";
@@ -669,19 +684,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				97DC798D24FF2E530098D11B /* sea.wav in Resources */,
 				976FB55524D367E400848E35 /* Roboto-Light-Italic.ttf in Resources */,
 				9794EF7C24E66EA700B72246 /* Roboto-Italic.ttf in Resources */,
 				972BBF8024C026D100B6F7C0 /* Roboto-Light.ttf in Resources */,
+				97686EAA25101556009B5D08 /* bird.mp4 in Resources */,
 				976FB55324D367AE00848E35 /* Roboto-Regular.ttf in Resources */,
 				972BBF7F24C026CF00B6F7C0 /* Roboto-Medium.ttf in Resources */,
 				97DC799624FF35040098D11B /* lion.mp4 in Resources */,
+				97686EAE251017BD009B5D08 /* elephant.mp4 in Resources */,
 				977BD02E2500252600606718 /* earthFromSpace.mp4 in Resources */,
 				972BBF7E24C026CD00B6F7C0 /* Roboto-Bold.ttf in Resources */,
-				97DC798B24FF2AE20098D11B /* dolphin.mp4 in Resources */,
+				97686EA425101195009B5D08 /* trash.mp4 in Resources */,
 				978E5CF223FB5CBC007BCD25 /* GoogleService-Info.plist in Resources */,
 				9794EF7D24E66EA700B72246 /* Roboto-Black.ttf in Resources */,
 				979C192023DE43EF00651B2B /* LaunchScreen.storyboard in Resources */,
+				97686EA2251010F8009B5D08 /* fire.mp4 in Resources */,
 				979C191D23DE43EF00651B2B /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -801,6 +818,7 @@
 				976DA46624DFCAF9003F3197 /* SpeciesListViewModel.swift in Sources */,
 				9772515924DF7F9C0052A3F6 /* NewsResponse.swift in Sources */,
 				973DF94824FB50260082E122 /* NewsHeaderDelegate.swift in Sources */,
+				97686EA825101433009B5D08 /* OnboardingPageFour.swift in Sources */,
 				9743BAB324F026710090A2E4 /* BiomeView.swift in Sources */,
 				97997F2C24DCE18B00981087 /* MGLMapViewController.swift in Sources */,
 				97DC799424FF348B0098D11B /* OnboardingPageTwo.swift in Sources */,
@@ -822,6 +840,7 @@
 				972D5CDC24FC5CB7000BC184 /* BiomeViewDelegate.swift in Sources */,
 				976F68C824E8AE2500277F79 /* CommonView.swift in Sources */,
 				976F68C224E8A62C00277F79 /* SpeciesCoverViewController.swift in Sources */,
+				97686EAC25101567009B5D08 /* OnboardingPageFive.swift in Sources */,
 				9743BAB824F03FE10090A2E4 /* ConservationStatusDelegate.swift in Sources */,
 				9764D12B24D7DD820050AF37 /* Secrets.swift in Sources */,
 				9794EF8524E68FD700B72246 /* Utilities.swift in Sources */,
@@ -848,6 +867,7 @@
 				97DC799024FF32760098D11B /* OnboardingStrategy.swift in Sources */,
 				975C8E5424E4F11500A0EB9D /* DetailThreatsStrategy.swift in Sources */,
 				977D877024CD6A1200AE5E51 /* Group.swift in Sources */,
+				97686EA625101201009B5D08 /* OnboardingPageThree.swift in Sources */,
 				97A24D2024E445A800958AB9 /* DetailHabitatStrategy.swift in Sources */,
 				97591FE324CCDC48002EAC96 /* FontWeight.swift in Sources */,
 				97928F7924CD11BF00AF90C5 /* FirestoreError.swift in Sources */,

@@ -93,12 +93,12 @@ final class SpeciesCoverViewController: UIViewController {
             origin: .zero,
             size: CGSize(
                 width: Constants.screenWidth,
-                height: Constants.screenHeight * 0.30))
+                height: Constants.screenHeight * 0.31))
         
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(
             width: 315.deviceScaled,
-            height:  collectionViewFrame.height)
+            height:  collectionViewFrame.height * 0.99)
         
         layout.scrollDirection = .horizontal
         

@@ -15,7 +15,7 @@ struct OnboardingPageOne: OnboardingStrategy {
     }
     
     func displayedText() -> String {
-        return "By 2050, half of Earth's species may become extinct"
+        return "It's estimated that by 2050, over 1 million species will become extinct \n \n This is 1 in every 10 animals and plants"
     }
     
     func isLastPage() -> Bool {

@@ -50,12 +50,17 @@ final class SpeciesListViewController: UIViewController {
         return btn
     }()
     
-    private lazy var headerImageView: UIImageView = {
-        let iv = UIImageView()
-        iv.image = #imageLiteral(resourceName: "Species List Header")
-        iv.contentMode = .scaleAspectFill
-        iv.clipsToBounds = true
-        return iv
+    private lazy var earthButton: UIButton = {
+        let btn = UIButton()
+        btn.setImage(#imageLiteral(resourceName: "MapVCGlyph"), for: .normal)
+        btn.addTarget(
+            self,
+            action: #selector(earthButtonPressed),
+            for: .touchUpInside)
+        btn.alpha = 1.0
+        btn.tintColor = .white
+        
+        return btn
     }()
     
     private lazy var terraTitleLabel: UILabel = {
@@ -139,19 +144,6 @@ final class SpeciesListViewController: UIViewController {
             action: #selector(handleCollectionViewSwipe(_:)))
         gesture.direction = .left
         return gesture
-    }()
-    
-    private lazy var earthButton: UIButton = {
-        let btn = UIButton()
-        btn.setImage(#imageLiteral(resourceName: "MapVCGlyph"), for: .normal)
-        btn.addTarget(
-            self,
-            action: #selector(earthButtonPressed),
-            for: .touchUpInside)
-        btn.alpha = 1.0
-        btn.tintColor = .white
-        
-        return btn
     }()
     
     //MARK: -- Properties
@@ -353,7 +345,6 @@ fileprivate extension SpeciesListViewController {
     }
     
     func setConstraints() {
-        
         setEarthButtonConstraints()
         setTerraTitleLabelConstraints()
         setSearchBarButtonConstraints()
@@ -375,7 +366,7 @@ fileprivate extension SpeciesListViewController {
     func setEarthButtonConstraints() {
         earthButton.snp.makeConstraints { (make) in
             make.trailing.equalToSuperview().inset(Constants.spacing)
-            make.height.width.equalTo(40.deviceScaled)
+            make.height.width.equalTo(35.deviceScaled)
             make.centerY.equalTo(terraTitleLabel)
         }
     }
