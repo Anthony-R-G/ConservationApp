@@ -155,7 +155,7 @@ final class SpeciesCoverViewController: UIViewController {
             
         ])
         stackView.axis = .vertical
-        stackView.spacing = Constants.spacing
+        stackView.spacing = Constants.padding
         stackView.distribution = .equalSpacing
         stackView.alpha = 0
         return stackView
@@ -482,7 +482,7 @@ fileprivate extension SpeciesCoverViewController {
     func setScrollViewConstraints() {
         scrollView.snp.makeConstraints { (make) in
             make.leading.trailing.bottom.equalToSuperview()
-            make.top.equalTo(subheaderInfoView.snp.bottom).offset(Constants.spacing)
+            make.top.equalTo(subheaderInfoView.snp.bottom).offset(Constants.padding)
         }
     }
     
@@ -506,19 +506,19 @@ fileprivate extension SpeciesCoverViewController {
     
     func setCloseButtonConstraints() {
         closeButton.snp.makeConstraints { (make) in
-            make.top.trailing.equalToSuperview().inset(Constants.spacing)
+            make.top.trailing.equalToSuperview().inset(Constants.padding)
         }
     }
     
     func setARButtonConstraints() {
         augmentedRealityButton.snp.makeConstraints { (make) in
-            make.top.leading.equalToSuperview().inset(Constants.spacing)
+            make.top.leading.equalToSuperview().inset(Constants.padding)
         }
     }
     
     func setHeaderInfoViewConstraints() {
         headerNameView.snp.makeConstraints { (make) in
-            make.leading.equalToSuperview().inset(Constants.spacing)
+            make.leading.equalToSuperview().inset(Constants.padding)
             make.trailing.equalToSuperview()
             headerNameViewTopAnchorConstraint.isActive = true
             headerNameViewHeightConstraint.isActive = true
@@ -529,7 +529,7 @@ fileprivate extension SpeciesCoverViewController {
         subheaderInfoView.snp.makeConstraints { (make) in
             make.leading.equalTo(headerNameView)
             make.trailing.equalToSuperview()
-            make.top.equalTo(headerNameView.snp.bottom).offset(Constants.spacing)
+            make.top.equalTo(headerNameView.snp.bottom).offset(Constants.padding)
             subheaderInfoViewHeightConstraint.isActive = true
         }
     }
@@ -537,7 +537,7 @@ fileprivate extension SpeciesCoverViewController {
     func setDownChevronContainerConstraints() {
         downChevronContainer.snp.makeConstraints { (make) in
             make.leading.trailing.bottom.equalToSuperview()
-            make.top.equalTo(subheaderInfoView.snp.bottom).inset(Constants.spacing)
+            make.top.equalTo(subheaderInfoView.snp.bottom).inset(Constants.padding)
         }
     }
     
@@ -552,7 +552,7 @@ fileprivate extension SpeciesCoverViewController {
         upChevron.snp.makeConstraints { (make) in
             make.height.width.equalTo(upChevron.frame.size)
             make.centerX.equalTo(view)
-            make.top.equalTo(view.safeAreaLayoutGuide).inset(Constants.spacing)
+            make.top.equalTo(view.safeAreaLayoutGuide).inset(Constants.padding)
         }
     }
     
@@ -564,7 +564,7 @@ fileprivate extension SpeciesCoverViewController {
     
     func setDonateButtonConstraints() {
         donateButton.snp.makeConstraints { (make) in
-            make.leading.trailing.equalToSuperview().inset(Constants.spacing)
+            make.leading.trailing.equalToSuperview().inset(Constants.padding)
             make.bottom.equalTo(view.safeAreaLayoutGuide)
             make.height.equalTo(50.deviceScaled)
         }
@@ -573,7 +573,7 @@ fileprivate extension SpeciesCoverViewController {
     func setContainerStackView() {
         stackView.snp.makeConstraints { (make) in
             make.top.equalToSuperview()
-            make.leading.trailing.equalTo(view).inset(Constants.spacing)
+            make.leading.trailing.equalTo(view).inset(Constants.padding)
             make.bottom.greaterThanOrEqualTo(scrollView)
         }
     }

@@ -27,7 +27,7 @@ final class DetailInfoWindow: UIView {
     private func setBottomConstraint() {
         if let lastSubview = subviews.last {
             bottomAnchor.constraint(equalTo: lastSubview.bottomAnchor,
-                                    constant: Constants.spacing).isActive = true
+                                    constant: Constants.padding).isActive = true
         }
     }
     
@@ -62,15 +62,15 @@ fileprivate extension DetailInfoWindow {
     
     func setTitleLabelConstraints() {
         titleLabel.snp.makeConstraints { (make) in
-            make.leading.trailing.equalToSuperview().inset(Constants.spacing)
-            make.top.equalToSuperview().inset(Constants.spacing)
+            make.leading.trailing.equalToSuperview().inset(Constants.padding)
+            make.top.equalToSuperview().inset(Constants.padding)
         }
     }
     
     func setContentViewConstraints() {
         contentView.snp.makeConstraints { (make) in
-            make.top.equalTo(titleLabel.snp.bottom).offset(Constants.spacing/2)
-            make.leading.trailing.equalToSuperview().inset(Constants.spacing)
+            make.top.equalTo(titleLabel.snp.bottom).offset(Constants.padding/2)
+            make.leading.trailing.equalToSuperview().inset(Constants.padding)
         }
     }
 }

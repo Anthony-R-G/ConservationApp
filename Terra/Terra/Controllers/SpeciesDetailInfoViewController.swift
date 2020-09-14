@@ -181,15 +181,15 @@ extension SpeciesDetailInfoViewController {
     
     func setContainerStackView() {
         containerStackView.snp.makeConstraints { (make) in
-            make.top.equalTo(commonView.snp.bottom).offset(Constants.spacing)
-            make.leading.trailing.equalTo(view).inset(Constants.spacing)
+            make.top.equalTo(commonView.snp.bottom).offset(Constants.padding)
+            make.leading.trailing.equalTo(view).inset(Constants.padding)
             make.bottom.greaterThanOrEqualTo(scrollView)
         }
     }
     
     func setCloseButtonConstraints() {
         closeButton.snp.makeConstraints { (make) in
-            make.top.trailing.equalToSuperview().inset(Constants.spacing)
+            make.top.trailing.equalToSuperview().inset(Constants.padding)
         }
     }
     
@@ -235,7 +235,7 @@ extension SpeciesDetailInfoViewController: Animatable {
             .compactMap({$0})
             .first?.windows
             .filter({$0.isKeyWindow}).first?.safeAreaInsets.top ?? .zero
-        commonView.topConstraintValue = safeAreaTop + Constants.spacing
+        commonView.topConstraintValue = safeAreaTop + Constants.padding
         
         // Animate the common view to a height of 500 points
         commonViewHeightConstraint.constant = Constants.commonViewSize.height
@@ -271,7 +271,7 @@ extension SpeciesDetailInfoViewController: Animatable {
         }
         
         // Common view does not need to worry about the safe area anymore. Just restore the original value.
-        commonView.topConstraintValue = Constants.spacing
+        commonView.topConstraintValue = Constants.padding
         
         // Animate the height of the common view to be the same size as the TO frame.
         // Also animate hiding the close button

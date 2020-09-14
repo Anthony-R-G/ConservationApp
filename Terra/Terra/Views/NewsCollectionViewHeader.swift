@@ -195,25 +195,25 @@ fileprivate extension NewsCollectionViewHeader {
     
     func setTodayLabelConstraints() {
         todayLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(safeAreaLayoutGuide).inset(Constants.spacing)
-            make.leading.equalToSuperview().inset(Constants.spacing)
+            make.top.equalTo(safeAreaLayoutGuide).inset(Constants.padding)
+            make.leading.equalToSuperview().inset(Constants.padding)
             make.height.equalTo(30)
         }
     }
     
     func setSeparatorLineConstraints() {
         separatorLine.snp.makeConstraints { (make) in
-            make.leading.trailing.equalToSuperview().inset(Constants.spacing)
+            make.leading.trailing.equalToSuperview().inset(Constants.padding)
             make.height.equalTo(1)
-            make.top.equalTo(todayLabel.snp.bottom).offset(Constants.spacing/2)
+            make.top.equalTo(todayLabel.snp.bottom).offset(Constants.padding/2)
         }
     }
     
     func setHeadlineContainerConstraints() {
         headlineTitleContainer.snp.makeConstraints { (make) in
-            make.leading.trailing.equalToSuperview().inset(Constants.spacing)
+            make.leading.trailing.equalToSuperview().inset(Constants.padding)
             make.top.equalTo(separatorLine.snp.bottom)
-            make.bottom.equalTo(headlinePublishedDateLabel.snp.top).inset(-Constants.spacing/2)
+            make.bottom.equalTo(headlinePublishedDateLabel.snp.top).inset(-Constants.padding/2)
         }
     }
     
@@ -225,20 +225,20 @@ fileprivate extension NewsCollectionViewHeader {
     
     func setHeadlinePublishedDateLabelConstraints() {
         headlinePublishedDateLabel.snp.makeConstraints { (make) in
-            make.leading.bottom.equalToSuperview().inset(Constants.spacing)
+            make.leading.bottom.equalToSuperview().inset(Constants.padding)
         }
     }
     
     func setShareButtonConstraints() {
         shareButton.snp.makeConstraints { (make) in
-            make.leading.equalTo(headlinePublishedDateLabel.snp.trailing).offset(Constants.spacing)
+            make.leading.equalTo(headlinePublishedDateLabel.snp.trailing).offset(Constants.padding)
             make.centerY.equalTo(headlinePublishedDateLabel)
         }
     }
     
     func setRefreshButtonConstraints() {
         refreshButton.snp.makeConstraints { (make) in
-            make.trailing.equalToSuperview().inset(Constants.spacing)
+            make.trailing.equalToSuperview().inset(Constants.padding)
             make.centerY.equalTo(todayLabel)
             make.height.equalTo(40)
             make.width.equalTo(40)

@@ -35,7 +35,7 @@ final class DetailHabitatStrategy: DetailPageStrategy {
         ])
         
         stackView.axis = .vertical
-        stackView.spacing = Constants.spacing
+        stackView.spacing = Constants.padding
         
         return stackView
     }

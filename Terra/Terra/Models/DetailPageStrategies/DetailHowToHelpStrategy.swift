@@ -63,7 +63,7 @@ final class DetailHowToHelpStrategy: DetailPageStrategy {
             
         ])
         stackView.axis = .vertical
-        stackView.spacing = Constants.spacing
+        stackView.spacing = Constants.padding
         return stackView
     }
     

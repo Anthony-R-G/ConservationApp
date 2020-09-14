@@ -121,9 +121,9 @@ fileprivate extension NewsArticleCollectionViewCell {
     
     func setArticleTitleContainerConstraints() {
         articleTitleContainer.snp.makeConstraints { (make) in
-            make.leading.equalTo(articleThumbImageView.snp.trailing).offset(Constants.spacing/2)
-            make.top.trailing.equalToSuperview().inset(Constants.spacing/2)
-            make.bottom.equalTo(publishedDateLabel.snp.top).inset(-Constants.spacing/2)
+            make.leading.equalTo(articleThumbImageView.snp.trailing).offset(Constants.padding/2)
+            make.top.trailing.equalToSuperview().inset(Constants.padding/2)
+            make.bottom.equalTo(publishedDateLabel.snp.top).inset(-Constants.padding/2)
         }
     }
     
@@ -139,13 +139,13 @@ fileprivate extension NewsArticleCollectionViewCell {
         publishedDateLabel.snp.makeConstraints { (make) in
             make.leading.trailing.equalTo(articleTitleContainer)
             make.height.equalTo(20)
-            make.bottom.equalToSuperview().inset(Constants.spacing/2)
+            make.bottom.equalToSuperview().inset(Constants.padding/2)
         }
     }
     
     func setShareButtonConstraints() {
         shareButton.snp.makeConstraints { (make) in
-            make.trailing.equalToSuperview().inset(Constants.spacing)
+            make.trailing.equalToSuperview().inset(Constants.padding)
             make.centerY.equalTo(publishedDateLabel)
         }
     }

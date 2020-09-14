@@ -192,7 +192,7 @@ fileprivate extension MGLMapViewController {
     
     func setListButtonConstraints() {
         listButton.snp.makeConstraints { (make) in
-            make.leading.equalTo(view).inset(Constants.spacing)
+            make.leading.equalTo(view).inset(Constants.padding)
             make.top.equalToSuperview().inset(60.deviceScaled)
         }
     }

@@ -29,10 +29,10 @@ final class NewsViewController: UIViewController {
         
         if let layout = cv.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.sectionInset = UIEdgeInsets(
-                top: Constants.spacing,
-                left: Constants.spacing,
-                bottom: Constants.spacing,
-                right: Constants.spacing)
+                top: Constants.padding,
+                left: Constants.padding,
+                bottom: Constants.padding,
+                right: Constants.padding)
         }
         
         cv.contentInsetAdjustmentBehavior = .never
@@ -185,13 +185,13 @@ extension NewsViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return Constants.spacing
+        return Constants.padding
     }
 }
 
 extension NewsViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width - 2 * Constants.spacing, height: 160.deviceScaled)
+        return CGSize(width: collectionView.frame.width - 2 * Constants.padding, height: 160.deviceScaled)
     }
 }
 

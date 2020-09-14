@@ -60,8 +60,8 @@ final class MeasurementsView: UIView {
         ])
         sv.axis = .vertical
         sv.distribution = .fillEqually
-        sv.spacing = Constants.spacing
-        sv.setCustomSpacing(Constants.spacing/2, after: femaleHeightDataLabel)
+        sv.spacing = Constants.padding
+        sv.setCustomSpacing(Constants.padding/2, after: femaleHeightDataLabel)
         return sv
     }()
     
@@ -98,7 +98,7 @@ final class MeasurementsView: UIView {
         ])
         sv.axis = .vertical
         sv.distribution = .fillEqually
-        sv.spacing = Constants.spacing
+        sv.spacing = Constants.padding
         return sv
     }()
     
@@ -106,7 +106,7 @@ final class MeasurementsView: UIView {
         let sv = UIStackView(arrangedSubviews: [
             heightStackView, weightStackView
         ])
-        sv.spacing = Constants.spacing/2
+        sv.spacing = Constants.padding/2
         sv.alignment = .leading
         return sv
     }()

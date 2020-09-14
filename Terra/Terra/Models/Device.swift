@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 final class Device {
     //Width of iPhone 11 Pro Max
@@ -32,5 +33,11 @@ extension Double {
 extension Int {
     var deviceScaled: CGFloat {
         return CGFloat(self) * Device.ratio
+    }
+}
+
+extension UIDevice {
+    static func vibrate() {
+        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
     }
 }

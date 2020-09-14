@@ -69,6 +69,7 @@ final class OnboardingViewController: UIViewController {
             DispatchQueue.main.async(execute: { () -> Void in
                 
                 sender.stopAnimation(animationStyle: .expand, completion: {
+                    UIDevice.vibrate()
                     guard let window = UIApplication.shared.windows.first(where: \.isKeyWindow) else { return }
                     window.setRootViewController(tabVC, options: .init(direction: .fade, style: .easeInOut))
                 })
@@ -174,7 +175,7 @@ fileprivate extension OnboardingViewController {
     
     func setBodyLabelConstraints() {
         bodyLabel.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview().inset(Constants.spacing)
+            make.edges.equalToSuperview().inset(Constants.padding)
         }
     }
     

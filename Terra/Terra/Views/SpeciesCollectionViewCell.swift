@@ -135,7 +135,7 @@ fileprivate extension SpeciesCollectionViewCell {
     
     func setSpeciesCommonNameLabelConstraints(){
         speciesCommonNameLabel.snp.makeConstraints { (make) in
-            make.leading.bottom.equalToSuperview().inset(Constants.spacing)
+            make.leading.bottom.equalToSuperview().inset(Constants.padding)
             make.width.equalToSuperview().multipliedBy(0.8)
             make.height.equalTo(90)
         }
@@ -145,7 +145,7 @@ fileprivate extension SpeciesCollectionViewCell {
         speciesScientificNameLabel.snp.makeConstraints { (make) in
             make.leading.equalTo(speciesCommonNameLabel)
             make.trailing.equalTo(populationNumbersLabel.snp.leading)
-            make.bottom.equalToSuperview().inset(Constants.spacing/2)
+            make.bottom.equalToSuperview().inset(Constants.padding/2)
             make.height.equalTo(50)
         }
     }
@@ -153,7 +153,7 @@ fileprivate extension SpeciesCollectionViewCell {
     func setConservationStatusLabelConstraints() {
         conservationStatusLabel.snp.makeConstraints { (make) in
             make.centerY.equalTo(speciesScientificNameLabel)
-            make.trailing.equalToSuperview().inset(Constants.spacing)
+            make.trailing.equalToSuperview().inset(Constants.padding)
             make.height.width.equalTo(conservationStatusLabel.frame.size)
         }
     }

@@ -72,7 +72,7 @@ final class CommonView: UIView {
     private lazy var titleTopConstraint: NSLayoutConstraint = {
         return titleLabel.topAnchor.constraint(
             equalTo: topAnchor,
-            constant: Constants.spacing)
+            constant: Constants.padding)
     }()
     
     var topConstraintValue: CGFloat {
@@ -140,13 +140,13 @@ fileprivate extension CommonView {
         titleLabel.snp.makeConstraints { [weak self] (make) in
             guard let self = self else { return }
             titleTopConstraint.isActive = true
-            make.leading.trailing.equalTo(self).inset(Constants.spacing)
+            make.leading.trailing.equalTo(self).inset(Constants.padding)
         }
     }
     
     func setSubtitleLabelConstraints() {
         subtitleLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(titleLabel.snp.bottom).offset(Constants.spacing/2)
+            make.top.equalTo(titleLabel.snp.bottom).offset(Constants.padding/2)
             make.leading.equalTo(titleLabel).inset(3.5)
         }
     }
@@ -154,7 +154,7 @@ fileprivate extension CommonView {
     func setBlurbLabelConstraints() {
         blurbLabel.snp.makeConstraints { [weak self] (make) in
             guard let self = self else { return }
-            make.leading.bottom.trailing.equalTo(self).inset(Constants.spacing)
+            make.leading.bottom.trailing.equalTo(self).inset(Constants.padding)
         }
     }
     

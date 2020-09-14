@@ -86,9 +86,9 @@ final class BiomeView: UIView {
             temperatureTitleLabel, temperatureDataLabel
         ])
         sv.axis = .vertical
-        sv.spacing = Constants.spacing/2
-        sv.setCustomSpacing(Constants.spacing, after: biomeDataLabel)
-        sv.setCustomSpacing(Constants.spacing, after: areaDataLabel)
+        sv.spacing = Constants.padding/2
+        sv.setCustomSpacing(Constants.padding, after: biomeDataLabel)
+        sv.setCustomSpacing(Constants.padding, after: areaDataLabel)
         return sv
     }()
     
@@ -147,7 +147,7 @@ fileprivate extension BiomeView {
     func setStackConstraints() {
         stackView.snp.makeConstraints { (make) in
             make.leading.trailing.equalToSuperview()
-            make.top.equalTo(biomeImage.snp.bottom).offset(Constants.spacing)
+            make.top.equalTo(biomeImage.snp.bottom).offset(Constants.padding)
         }
     }
 }

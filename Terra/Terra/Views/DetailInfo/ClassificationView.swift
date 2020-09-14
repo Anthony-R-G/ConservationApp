@@ -144,9 +144,9 @@ final class ClassificationView: UIView {
             familyTitleLabel, familyDataLabel
         ])
         sv.axis = .vertical
-        sv.spacing = Constants.spacing/2
-        sv.setCustomSpacing(Constants.spacing, after: kingdomDataLabel)
-        sv.setCustomSpacing(Constants.spacing, after: classDataLabel)
+        sv.spacing = Constants.padding/2
+        sv.setCustomSpacing(Constants.padding, after: kingdomDataLabel)
+        sv.setCustomSpacing(Constants.padding, after: classDataLabel)
         return sv
     }()
     
@@ -157,9 +157,9 @@ final class ClassificationView: UIView {
             genusTitleLabel, genusDataLabel
         ])
         sv.axis = .vertical
-        sv.spacing = Constants.spacing/2
-        sv.setCustomSpacing(Constants.spacing, after: phylumDataLabel)
-        sv.setCustomSpacing(Constants.spacing, after: orderDataLabel)
+        sv.spacing = Constants.padding/2
+        sv.setCustomSpacing(Constants.padding, after: phylumDataLabel)
+        sv.setCustomSpacing(Constants.padding, after: orderDataLabel)
         return sv
     }()
     
@@ -167,7 +167,7 @@ final class ClassificationView: UIView {
         let sv = UIStackView(arrangedSubviews: [
             leftStack, rightStack
         ])
-        sv.spacing = Constants.spacing/2
+        sv.spacing = Constants.padding/2
         sv.alignment = .center
         return sv
     }()

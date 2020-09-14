@@ -10,7 +10,7 @@ import UIKit
 
 struct Constants {
     static let cellReuseIdentifier = "cellId"
-    static let spacing: CGFloat = 20.deviceScaled
+    static let padding: CGFloat = 20.deviceScaled
     static let cornerRadius: CGFloat = 20.deviceScaled
     static let borderWidth: CGFloat = 2.0
     static let screenHeight = UIScreen.main.bounds.size.height

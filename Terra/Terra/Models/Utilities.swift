@@ -8,8 +8,10 @@
 
 import UIKit
 import SafariServices
+import AVFoundation
 
 struct Utilities {
+    static let synth = AVSpeechSynthesizer()
     
     static func addParallaxToView(view: UIView) {
         let amount = 40
