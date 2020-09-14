@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class CircleBlurButton: UIButton {
+final class BlurredCircleButton: UIButton {
     //MARK: -- UI Element Initialization
     private lazy var visualEffectView: UIVisualEffectView = {
         let blur = UIVisualEffectView(effect: UIBlurEffect(style: .extraLight))
@@ -66,7 +66,7 @@ final class CircleBlurButton: UIButton {
 
 //MARK: -- Add Subviews & Constraints
 
-fileprivate extension CircleBlurButton {
+fileprivate extension BlurredCircleButton {
     
     func addSubviews() {
         addSubview(visualEffectView)

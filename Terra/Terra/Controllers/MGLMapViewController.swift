@@ -21,7 +21,7 @@ final class MGLMapViewController: UIViewController {
         return mv
     }()
     
-    private lazy var listButton: CircleBlurButton = {
+    private lazy var listButton: BlurredCircleButton = {
         let btn = Factory.makeBlurredCircleButton(image: .list, style: .dark, size: .regular)
         btn.addTarget(self, action: #selector(backButtonPressed), for: .touchUpInside)
         return btn

@@ -42,9 +42,9 @@ final class Factory {
     }
     
         
-    static func makeBlurredCircleButton(image: systemImage, style: ButtonStyle, size: ButtonSize ) -> CircleBlurButton {
+    static func makeBlurredCircleButton(image: systemImage, style: ButtonStyle, size: ButtonSize ) -> BlurredCircleButton {
         let size: CGSize = size == .regular ? Constants.buttonSizeRegular : Constants.buttonSizeSmall
-        let button = CircleBlurButton(
+        let button = BlurredCircleButton(
             frame: CGRect(
                 origin: .zero,
                 size: size),

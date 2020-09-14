@@ -15,7 +15,9 @@ final class SpeciesCoverViewController: UIViewController {
     //MARK: -- UI Element Initialization
     
     private lazy var scrollView: UIScrollView = {
-        return UIScrollView()
+        let sv = UIScrollView()
+        sv.delegate = self
+        return sv
     }()
     
     private lazy var backgroundImageView: UIImageView = {
@@ -74,8 +76,6 @@ final class SpeciesCoverViewController: UIViewController {
     
     //Sets chevron centerY between view bottom & statsView
     private lazy var downChevronContainer: UIView = {
-        let viewC = UIView()
-        viewC.backgroundColor = .blue
         return UIView()
     }()
     
@@ -117,7 +117,7 @@ final class SpeciesCoverViewController: UIViewController {
         return cv
     }()
     
-    private lazy var closeButton: CircleBlurButton = {
+    private lazy var closeButton: BlurredCircleButton = {
         let btn = Factory.makeBlurredCircleButton(image: .close, style: .light, size: .regular)
         btn.addTarget(self, action: #selector(dismissPage), for: .touchUpInside)
         return btn
@@ -276,7 +276,7 @@ extension SpeciesCoverViewController {
     private func animatePageStateTransition() {
         let state = pageState.opposite
         let animator = UIViewPropertyAnimator(
-            duration: 1.3,
+            duration: 1.2,
             dampingRatio: 0.75,
             animations: { [weak self] in guard let self = self else { return }
                 switch state {
@@ -423,6 +423,15 @@ extension SpeciesCoverViewController: UICollectionViewDelegate {
         selectedCell = collectionView.cellForItem(at: indexPath)
         UIView.animate(withDuration: 0.3) { [weak self] in guard let self = self else { return }
             self.selectedCell?.transform = CGAffineTransform(scaleX: 1, y: 1)
+        }
+    }
+}
+
+extension SpeciesCoverViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offset = scrollView.contentOffset.y
+        if offset < -20.deviceScaled && scrollView.isTracking && pageState == .expanded {
+            togglePageState()
         }
     }
 }
