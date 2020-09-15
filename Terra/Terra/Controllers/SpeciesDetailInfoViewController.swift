@@ -34,7 +34,7 @@ final class SpeciesDetailInfoViewController: UIViewController {
     private lazy var backgroundImageView: UIImageView = {
         let iv = UIImageView()
         FirebaseStorageService.coverImageManager.getImage(
-            for: strategy.species.commonName,
+            for: strategy.viewModel.speciesCommonName,
             setTo: iv)
         iv.contentMode = .scaleAspectFill
         return iv

@@ -13,7 +13,7 @@ final class DistributionView: UIView {
     
     private lazy var mapView: MGLMapView = {
         let mv = MGLMapView()
-        let styleURL = URL(string: species.habitat.mapboxStyleURL)
+        let styleURL = URL(string: viewModel.speciesMapboxStyleURL)
         mv.styleURL = styleURL
         mv.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         mv.tintColor = .white
@@ -24,18 +24,18 @@ final class DistributionView: UIView {
     }()
     
     //MARK: -- Properties
-    private var species: Species!
+    private var viewModel: SpeciesDetailViewModel
     
     private var speciesLocation = CLLocationCoordinate2D()
     
     //MARK: -- Methods
     
-    required init(species: Species) {
+    required init(viewModel: SpeciesDetailViewModel) {
+        self.viewModel = viewModel
         super.init(frame: .zero)
-        self.species = species
         speciesLocation = CLLocationCoordinate2D(
-            latitude: species.habitat.latitude,
-            longitude: species.habitat.longitude)
+            latitude: viewModel.speciesLatitudeCoordinate,
+            longitude: viewModel.speciesLongitudeCoordinate)
         
         heightAnchor.constraint(equalToConstant: 460.deviceScaled).isActive = true
         
@@ -55,7 +55,7 @@ extension DistributionView: MGLMapViewDelegate {
     func mapViewDidFinishLoadingMap(_ mapView: MGLMapView) {
         
         let camera = MGLMapCamera(lookingAtCenter: speciesLocation,
-                                  altitude: species.habitat.mapboxZoomAltitude,
+                                  altitude: viewModel.speciesMapboxZoomAltitude,
                                   pitch: 15,
                                   heading: 0)
         mapView.setCamera(camera,

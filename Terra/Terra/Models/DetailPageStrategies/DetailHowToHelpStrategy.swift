@@ -9,7 +9,7 @@
 import UIKit
 
 final class DetailHowToHelpStrategy: DetailPageStrategy {
-    var species: Species
+    var viewModel: SpeciesDetailViewModel
     
     var pageName: String {
         return "How To Help"
@@ -67,7 +67,7 @@ final class DetailHowToHelpStrategy: DetailPageStrategy {
         return stackView
     }
     
-    init(species: Species) {
-        self.species = species
+    init(viewModel: SpeciesDetailViewModel) {
+        self.viewModel = viewModel
     }
 }

@@ -13,7 +13,7 @@ final class ConservationStatusView: UIView {
     
     private lazy var redListImage: UIImageView = {
         let iv = UIImageView()
-        iv.image = UIImage(named: species.population.conservationStatus.rawValue)
+        iv.image = UIImage(named: viewModel.speciesConservationStatus.rawValue)
         iv.contentMode = .scaleAspectFill
         iv.backgroundColor = .clear
         iv.isUserInteractionEnabled = true
@@ -21,7 +21,7 @@ final class ConservationStatusView: UIView {
     }()
     
     private lazy var conservationStatusLabel: UILabel = {
-        return Factory.makeLabel(title: species.population.conservationStatus.rawValue,
+        return Factory.makeLabel(title: viewModel.speciesConservationStatus.rawValue,
                                  fontWeight: .medium,
                                  fontSize: 18,
                                  widthAdjustsFontSize: true,
@@ -32,7 +32,7 @@ final class ConservationStatusView: UIView {
 
     
     //MARK: -- Properties
-    private var species: Species
+    private var viewModel: SpeciesDetailViewModel
     
     //MARK: -- Methods
     
@@ -42,8 +42,8 @@ final class ConservationStatusView: UIView {
           }
       }
     
-    required init(species: Species) {
-        self.species = species
+    required init(viewModel: SpeciesDetailViewModel) {
+        self.viewModel = viewModel
         super.init(frame: .zero)
         addSubviews()
         setConstraints()

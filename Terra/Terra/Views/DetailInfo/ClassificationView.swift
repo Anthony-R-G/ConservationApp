@@ -21,7 +21,7 @@ final class ClassificationView: UIView {
     }()
     
     private lazy var kingdomDataLabel: UILabel = {
-        return Factory.makeLabel(title: species.taxonomy.kingdom,
+        return Factory.makeLabel(title: viewModel.speciesKingdom,
                                  fontWeight: .bold,
                                  fontSize: 18,
                                  widthAdjustsFontSize: true,
@@ -39,7 +39,7 @@ final class ClassificationView: UIView {
     }()
     
     private lazy var phylumDataLabel: UILabel = {
-        return Factory.makeLabel(title: species.taxonomy.phylum,
+        return Factory.makeLabel(title: viewModel.speciesPhylum,
                                  fontWeight: .bold,
                                  fontSize: 18,
                                  widthAdjustsFontSize: true,
@@ -57,7 +57,7 @@ final class ClassificationView: UIView {
     }()
     
     private lazy var classDataLabel: UILabel = {
-        return Factory.makeLabel(title: species.taxonomy.classTaxonomy,
+        return Factory.makeLabel(title: viewModel.speciesClass,
                                  fontWeight: .bold,
                                  fontSize: 18,
                                  widthAdjustsFontSize: true,
@@ -75,7 +75,7 @@ final class ClassificationView: UIView {
     }()
     
     private lazy var orderDataLabel: UILabel = {
-        return Factory.makeLabel(title: species.taxonomy.order,
+        return Factory.makeLabel(title: viewModel.speciesOrder,
                                  fontWeight: .bold,
                                  fontSize: 18,
                                  widthAdjustsFontSize: true,
@@ -93,7 +93,7 @@ final class ClassificationView: UIView {
     }()
     
     private lazy var familyDataLabel: UILabel = {
-        return Factory.makeLabel(title: species.taxonomy.family,
+        return Factory.makeLabel(title: viewModel.speciesFamily,
                                  fontWeight: .bold,
                                  fontSize: 18,
                                  widthAdjustsFontSize: true,
@@ -111,7 +111,7 @@ final class ClassificationView: UIView {
     }()
     
     private lazy var genusDataLabel: UILabel = {
-        return Factory.makeLabel(title: species.taxonomy.genus,
+        return Factory.makeLabel(title: viewModel.speciesGenus,
                                  fontWeight: .bold,
                                  fontSize: 18,
                                  widthAdjustsFontSize: true,
@@ -129,7 +129,7 @@ final class ClassificationView: UIView {
     }()
     
     private lazy var scientificNameDataLabel: UILabel = {
-        return Factory.makeLabel(title: species.taxonomy.scientificName,
+        return Factory.makeLabel(title: viewModel.speciesScientificName,
                                  fontWeight: .italic,
                                  fontSize: 18,
                                  widthAdjustsFontSize: true,
@@ -190,21 +190,21 @@ final class ClassificationView: UIView {
     
     private let speechSynthesizer = AVSpeechSynthesizer()
     
-    private var species: Species!
+    private var viewModel: SpeciesDetailViewModel
     
     
     //MARK: -- Methods
 
     @objc private func audioButtonPressed() {
-        let speechUtterance: AVSpeechUtterance = AVSpeechUtterance(string: species.taxonomy.scientificName)
+        let speechUtterance: AVSpeechUtterance = AVSpeechUtterance(string: viewModel.speciesScientificName)
         speechUtterance.rate = AVSpeechUtteranceMaximumSpeechRate / 2.0
         audioButton.isUserInteractionEnabled = false
         audioButton.tintColor = .darkGray
         speechSynthesizer.speak(speechUtterance)
     }
     
-    required init(species: Species) {
-        self.species = species
+    required init(viewModel: SpeciesDetailViewModel) {
+        self.viewModel = viewModel
         super.init(frame: .zero)
         addSubviews()
         setConstraints()

@@ -22,7 +22,7 @@ final class MeasurementsView: UIView {
     }()
     
     private lazy var maleHeightDataLabel: UILabel = {
-        return Factory.makeLabel(title: "Male: \(species.measurements.averageMaleHeight)",
+        return Factory.makeLabel(title: "Male: \(viewModel.speciesMaleHeight)",
             fontWeight: .regular,
             fontSize: 17,
             widthAdjustsFontSize: true,
@@ -31,7 +31,7 @@ final class MeasurementsView: UIView {
     }()
     
     private lazy var femaleHeightDataLabel: UILabel = {
-        return Factory.makeLabel(title: "Female: \(species.measurements.averageFemaleHeight)",
+        return Factory.makeLabel(title: "Female: \(viewModel.speciesFemaleHeight)",
             fontWeight: .regular,
             fontSize: 17,
             widthAdjustsFontSize: true,
@@ -41,7 +41,7 @@ final class MeasurementsView: UIView {
     
     private lazy var heightReferenceTitleLabel: UILabel = {
         var measurementType = String()
-        if species.commonName == "Blue Whale" || species.commonName  == "Great White Shark" {
+        if viewModel.speciesCommonName == "Blue Whale" || viewModel.speciesCommonName  == "Great White Shark" {
             measurementType = "Body length"
         } else {
             measurementType = "Adult, At Shoulder"
@@ -75,7 +75,7 @@ final class MeasurementsView: UIView {
     }()
     
     private lazy var maleWeightDataLabel: UILabel = {
-        return Factory.makeLabel(title: species.measurements.averageMaleWeight,
+        return Factory.makeLabel(title: viewModel.speciesMaleWeight,
             fontWeight: .regular,
             fontSize: 17,
             widthAdjustsFontSize: true,
@@ -84,7 +84,7 @@ final class MeasurementsView: UIView {
     }()
     
     private lazy var femaleWeightDataLabel: UILabel = {
-        return Factory.makeLabel(title: species.measurements.averageFemaleWeight,
+        return Factory.makeLabel(title: viewModel.speciesFemaleWeight,
             fontWeight: .regular,
             fontSize: 17,
             widthAdjustsFontSize: true,
@@ -113,12 +113,12 @@ final class MeasurementsView: UIView {
     
     //MARK: -- Properties
     
-    private var species: Species!
+    private var viewModel: SpeciesDetailViewModel
     
     //MARK: -- Methods
     
-    required init(species: Species) {
-        self.species = species
+    required init(viewModel: SpeciesDetailViewModel) {
+        self.viewModel = viewModel
         super.init(frame: .zero)
         heightAnchor.constraint(equalToConstant: 140.deviceScaled).isActive = true
         addSubviews()

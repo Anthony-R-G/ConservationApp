@@ -12,7 +12,7 @@ final class BiomeView: UIView {
     //MARK: -- UI Element Initialization
     private lazy var biomeImage: UIImageView = {
         let iv = UIImageView()
-        iv.image = UIImage(named: strategy.species.habitat.biome.rawValue)
+        iv.image = UIImage(named: strategy.viewModel.speciesBiome.rawValue)
         iv.contentMode = .scaleAspectFill
         iv.backgroundColor = .clear
         iv.layer.cornerRadius = 10
@@ -35,7 +35,7 @@ final class BiomeView: UIView {
     }()
     
     private lazy var biomeDataLabel: UILabel = {
-        return Factory.makeLabel(title: strategy.species.habitat.biome.rawValue,
+        return Factory.makeLabel(title: strategy.viewModel.speciesBiome.rawValue,
                                  fontWeight: .bold,
                                  fontSize: 18,
                                  widthAdjustsFontSize: true,
@@ -53,7 +53,7 @@ final class BiomeView: UIView {
     }()
     
     private lazy var areaDataLabel: UILabel = {
-        return Factory.makeLabel(title: strategy.species.habitat.area,
+        return Factory.makeLabel(title: strategy.viewModel.speciesArea,
                                  fontWeight: .bold,
                                  fontSize: 18,
                                  widthAdjustsFontSize: true,
@@ -71,7 +71,7 @@ final class BiomeView: UIView {
     }()
     
     private lazy var temperatureDataLabel: UILabel = {
-        return Factory.makeLabel(title: strategy.species.habitat.temperature,
+        return Factory.makeLabel(title: strategy.viewModel.speciesTemperature,
                                  fontWeight: .bold,
                                  fontSize: 18,
                                  widthAdjustsFontSize: true,

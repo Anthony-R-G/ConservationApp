@@ -25,7 +25,7 @@ final class SpeciesCoverViewController: UIViewController {
         iv.contentMode = .scaleAspectFill
         iv.backgroundColor = .black
         FirebaseStorageService.coverImageManager.getImage(
-            for: viewModel.species.commonName,
+            for: viewModel.speciesCommonName,
             setTo: iv)
         return iv
     }()
@@ -38,11 +38,11 @@ final class SpeciesCoverViewController: UIViewController {
     }()
     
     private lazy var speciesNameView: CoverSpeciesNameView = {
-        return CoverSpeciesNameView(species: viewModel.species, delegate: self)
+        return CoverSpeciesNameView(viewModel: viewModel, delegate: self)
     }()
     
     private lazy var speciesStatsView: CoverSpeciesStatsView = {
-        return CoverSpeciesStatsView(species: viewModel.species)
+        return CoverSpeciesStatsView(viewModel: viewModel)
     }()
     
     private lazy var backgroundVisualEffectBlur: UIVisualEffectView = {
@@ -142,18 +142,21 @@ final class SpeciesCoverViewController: UIViewController {
     }()
     
     private lazy var stackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [
-            DetailInfoWindow(title: "DESCRIPTION",
-                             content: Factory.makeDetailInfoWindowLabel(text: viewModel.species.overview)),
-            
-            collectionView,
-            
-            DetailInfoWindow(title: "CLASSIFICATION",
-                             content: ClassificationView(species: viewModel.species)),
-            
-            DetailInfoWindow(title: "MEASUREMENTS", content: MeasurementsView(species: viewModel.species)),
-            
-            DetailInfoWindow(title: "AVERAGE LIFESPAN", content: Factory.makeDetailInfoWindowLabel(text: "\(viewModel.species.averageLifespan) in the wild"))
+        let stackView = UIStackView(
+            arrangedSubviews: [
+                DetailInfoWindow(
+                    title: "DESCRIPTION",
+                    content: Factory.makeDetailInfoWindowLabel(text: viewModel.speciesOverviewDescription)),
+                collectionView,
+                DetailInfoWindow(
+                    title: "CLASSIFICATION",
+                    content: ClassificationView(viewModel: viewModel)),
+                DetailInfoWindow(
+                    title: "MEASUREMENTS",
+                    content: MeasurementsView(viewModel: viewModel)),
+                DetailInfoWindow(
+                    title: "AVERAGE LIFESPAN",
+                    content: Factory.makeDetailInfoWindowLabel(text: "\(viewModel.speciesAverageLifespan) in the wild"))
             
         ])
         stackView.axis = .vertical
@@ -166,7 +169,7 @@ final class SpeciesCoverViewController: UIViewController {
     
     //MARK: -- Properties
     
-    private var viewModel: DetailPageStrategyViewModel
+    private var viewModel: SpeciesDetailViewModel
     
     private var pageState: State = .collapsed
     
@@ -189,7 +192,9 @@ final class SpeciesCoverViewController: UIViewController {
     }()
     
     private lazy var speciesNameViewTopAnchorConstraint: NSLayoutConstraint = {
-        return speciesNameView.topAnchor.constraint(equalTo: view.topAnchor, constant: speciesNameViewEnlargedTopAnchorValue)
+        return speciesNameView.topAnchor.constraint(
+            equalTo: view.topAnchor,
+            constant: speciesNameViewEnlargedTopAnchorValue)
     }()
     
     private lazy var speciesStatsViewHeightAnchorConstraint: NSLayoutConstraint = {
@@ -247,7 +252,7 @@ final class SpeciesCoverViewController: UIViewController {
         addGestureRecognizers()
     }
     
-    init(viewModel: DetailPageStrategyViewModel) {
+    init(viewModel: SpeciesDetailViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -440,7 +445,7 @@ extension SpeciesCoverViewController: UIScrollViewDelegate {
 
 extension SpeciesCoverViewController: DonateButtonDelegate {
     func donateButtonPressed() {
-        guard let donationURL = URL(string: viewModel.species.donationLink) else { return }
+        guard let donationURL = URL(string: viewModel.speciesDonationURL) else { return }
         Utilities.sendHapticFeedback(action: .itemSelected)
         Utilities.presentWebBrowser(on: self, link: donationURL, delegate: nil)
     }

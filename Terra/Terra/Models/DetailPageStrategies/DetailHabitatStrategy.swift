@@ -12,7 +12,7 @@ final class DetailHabitatStrategy: DetailPageStrategy {
     
     weak var biomeViewDelegate: BiomeViewDelegate?
     
-    var species: Species
+    var viewModel: SpeciesDetailViewModel
     
     var pageName: String {
         return "Habitat"
@@ -25,13 +25,13 @@ final class DetailHabitatStrategy: DetailPageStrategy {
     func arrangedSubviews() -> UIStackView {
         let stackView = UIStackView(arrangedSubviews: [
             DetailInfoWindow(title: "DISTRIBUTION",
-                             content: DistributionView(species: species)),
+                             content: DistributionView(viewModel: viewModel)),
             
             DetailInfoWindow(title: "BIOME",
                              content: BiomeView(strategy: self)),
             
             DetailInfoWindow(title: "DETAIL",
-                             content: Factory.makeDetailInfoWindowLabel(text: species.habitat.summary)),
+                             content: Factory.makeDetailInfoWindowLabel(text: viewModel.speciesHabitatSummary)),
         ])
         
         stackView.axis = .vertical
@@ -40,8 +40,8 @@ final class DetailHabitatStrategy: DetailPageStrategy {
         return stackView
     }
     
-    init(species: Species) {
-        self.species = species
+    init(viewModel: SpeciesDetailViewModel) {
+        self.viewModel = viewModel
     }
     
     func getDetailViewController() -> UIViewController {

@@ -14,15 +14,14 @@ final class CoverSpeciesNameView: UIView {
     private lazy var conservationStatusButton: UIButton = {
         let button = UIButton()
         button.titleLabel?.font = UIFont(name: FontWeight.regular.rawValue, size: 16.deviceScaled)
-        button.setTitle(species.population.conservationStatus.rawValue.uppercased(), for: .normal)
+        button.setTitle(viewModel.speciesConservationStatus.rawValue.uppercased(), for: .normal)
         
-        switch species.population.conservationStatus {
+        switch viewModel.speciesConservationStatus {
         case .critical:
             button.layer.borderColor = Constants.Color.criticalStatusColor.cgColor
             
         case .endangered:
             button.layer.borderColor = Constants.Color.endangeredStatusColor.cgColor
-            
             
         case .vulnerable:
             button.layer.borderColor = Constants.Color.vulnerableStatusColor.cgColor
@@ -39,7 +38,7 @@ final class CoverSpeciesNameView: UIView {
     
     
     private lazy var speciesCommonNameLabel: UILabel = {
-        let label = Factory.makeLabel(title: species.commonName,
+        let label = Factory.makeLabel(title: viewModel.speciesCommonName,
                                       fontWeight: .bold,
                                       fontSize: 56,
                                       widthAdjustsFontSize: true,
@@ -50,7 +49,7 @@ final class CoverSpeciesNameView: UIView {
     }()
     
     private lazy var speciesScientificNameLabel: UILabel = {
-        return Factory.makeLabel(title: "— \(species.taxonomy.scientificName)",
+        return Factory.makeLabel(title: "— \(viewModel.speciesScientificName)",
             fontWeight: .lightItalic,
             fontSize: 17,
             widthAdjustsFontSize: true,
@@ -65,7 +64,7 @@ final class CoverSpeciesNameView: UIView {
     
     weak var delegate: ConservationStatusDelegate?
     
-    var species: Species!
+    private var viewModel: SpeciesDetailViewModel!
     
     //MARK: -- Methods
     
@@ -89,8 +88,8 @@ final class CoverSpeciesNameView: UIView {
             withDuration: 1.3)
     }
     
-    required init(species: Species, delegate: ConservationStatusDelegate) {
-        self.species = species
+    required init(viewModel: SpeciesDetailViewModel, delegate: ConservationStatusDelegate) {
+        self.viewModel = viewModel
         self.delegate = delegate
         super.init(frame: .zero)
         addSubviews()

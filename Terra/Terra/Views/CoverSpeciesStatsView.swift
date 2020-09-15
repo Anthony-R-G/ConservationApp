@@ -21,7 +21,7 @@ final class CoverSpeciesStatsView: UIView {
     }()
     
     private lazy var populationDataLabel: UILabel = {
-        return Factory.makeLabel(title: species.population.numbers,
+        return Factory.makeLabel(title: viewModel.speciesPopulationNumbers,
                                  fontWeight: .regular,
                                  fontSize: 18,
                                  widthAdjustsFontSize: true,
@@ -39,11 +39,11 @@ final class CoverSpeciesStatsView: UIView {
     }()
     
     private lazy var trendDataLabel: UILabel = {
-        return Factory.makeLabel(title: species.population.trend.rawValue,
+        return Factory.makeLabel(title: viewModel.speciesPopulationTrend.rawValue,
                                  fontWeight: .regular,
                                  fontSize: 18,
                                  widthAdjustsFontSize: true,
-                                 color: species.population.trend == .decreasing ? #colorLiteral(red: 1, green: 0.4507741928, blue: 0.5112823844, alpha: 1) : #colorLiteral(red: 0.7970843911, green: 1, blue: 0.5273691416, alpha: 1),
+                                 color: viewModel.speciesPopulationTrend == .decreasing ? #colorLiteral(red: 1, green: 0.4507741928, blue: 0.5112823844, alpha: 1) : #colorLiteral(red: 0.7970843911, green: 1, blue: 0.5273691416, alpha: 1),
                                  alignment: .left)
     }()
     
@@ -57,7 +57,7 @@ final class CoverSpeciesStatsView: UIView {
     }()
     
     private lazy var lastAssessedDataLabel: UILabel = {
-        return Factory.makeLabel(title: "\(species.population.assessmentDate)",
+        return Factory.makeLabel(title: "\(viewModel.speciesLastAssessedDate)",
                                  fontWeight: .regular,
                                  fontSize: 18,
                                  widthAdjustsFontSize: true,
@@ -99,11 +99,11 @@ final class CoverSpeciesStatsView: UIView {
     
     //MARK: -- Properties
     
-    private var species: Species!
+    private var viewModel: SpeciesDetailViewModel!
     
     //MARK: -- Methods
-    required init(species: Species) {
-        self.species = species
+    required init(viewModel: SpeciesDetailViewModel) {
+        self.viewModel = viewModel
         super.init(frame: .zero)
         addSubview(horizontalStack)
         setHorizontalStackConstraints()

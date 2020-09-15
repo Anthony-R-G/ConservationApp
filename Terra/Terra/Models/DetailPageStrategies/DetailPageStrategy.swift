@@ -11,12 +11,11 @@ import UIKit
 //Controls what's presented in the DetailInfoVC
 
 protocol DetailPageStrategy {
-    var species: Species { get set }
+    var viewModel: SpeciesDetailViewModel { get set }
     var pageName: String { get }
     var firebaseStorageManager: FirebaseStorageService? { get }
     mutating func arrangedSubviews() -> UIStackView
     mutating func getDetailViewController() -> UIViewController
-//    func hash()
 }
 
 extension DetailPageStrategy {

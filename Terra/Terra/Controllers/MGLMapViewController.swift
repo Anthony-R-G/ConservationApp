@@ -171,7 +171,7 @@ extension MGLMapViewController: MGLMapViewDelegate {
     
     func mapView(_ mapView: MGLMapView, tapOnCalloutFor annotation: MGLAnnotation) {
         guard let annotation = annotation as? SpeciesAnnotation else { return }
-        let coverVC = SpeciesCoverViewController(viewModel: DetailPageStrategyViewModel(species: annotation.species))
+        let coverVC = SpeciesCoverViewController(viewModel: SpeciesDetailViewModel(species: annotation.species))
         
         let navVC = NavigationController(rootViewController: coverVC)
         navVC.modalPresentationStyle = .fullScreen

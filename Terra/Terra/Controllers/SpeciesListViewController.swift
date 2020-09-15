@@ -304,7 +304,7 @@ extension SpeciesListViewController: UICollectionViewDelegate {
                         didSelectItemAt indexPath: IndexPath) {
         
         guard let selectedSpecies = dataSource.itemIdentifier(for: indexPath) else { return }
-        let coverVC = SpeciesCoverViewController(viewModel: DetailPageStrategyViewModel(species: selectedSpecies))
+        let coverVC = SpeciesCoverViewController(viewModel: SpeciesDetailViewModel(species: selectedSpecies))
         let navVC = NavigationController(rootViewController: coverVC)
         navVC.modalPresentationStyle = .fullScreen
         present(navVC, animated: true, completion: nil)

@@ -9,7 +9,7 @@
 import UIKit
 
 final class DetailThreatsStrategy: DetailPageStrategy {
-    var species: Species
+    var viewModel: SpeciesDetailViewModel
     
     var pageName: String {
         return "Threats"
@@ -23,14 +23,14 @@ final class DetailThreatsStrategy: DetailPageStrategy {
      func arrangedSubviews() -> UIStackView {
         let stackView = UIStackView(arrangedSubviews: [
             
-            DetailInfoWindow(title: "CONSERVATION STATUS", content: ConservationStatusView(species: species)),
+            DetailInfoWindow(title: "CONSERVATION STATUS", content: ConservationStatusView(viewModel: viewModel)),
             
             DetailInfoWindow(title: "POPULATION SUMMARY",
-                             content: Factory.makeDetailInfoWindowLabel(text: species.population.summary)),
+                             content: Factory.makeDetailInfoWindowLabel(text: viewModel.speciesPopulationSummary)),
         ])
         
        
-        _ = species.population.threats.map ({
+        _ = viewModel.speciesThreats.map ({
             let threatComponents = $0.components(separatedBy: "%title")
             stackView.addArrangedSubview(
                 DetailInfoWindow(
@@ -43,8 +43,8 @@ final class DetailThreatsStrategy: DetailPageStrategy {
         return stackView
     }
     
-    init(species: Species) {
-        self.species = species
+    init(viewModel: SpeciesDetailViewModel) {
+        self.viewModel = viewModel
     }
 }
 
