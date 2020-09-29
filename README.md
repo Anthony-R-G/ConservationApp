@@ -1,7 +1,7 @@
 # Terra
 
 ### Status: 
-*Active. Planned September release.*
+*On hold. Planned October release.*
 
 
 ## Introduction
