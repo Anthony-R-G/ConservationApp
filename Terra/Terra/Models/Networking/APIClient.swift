@@ -25,5 +25,6 @@ struct APIClient {
         }
         .receive(on: DispatchQueue.main) 
         .eraseToAnyPublisher()
+        
     }
 }

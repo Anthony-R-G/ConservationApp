@@ -11,7 +11,7 @@ import SafariServices
 import AVFoundation
 
 struct Utilities {
-    static let synth = AVSpeechSynthesizer()
+    private static let synth = AVSpeechSynthesizer()
     
     static func addParallaxToView(view: UIView) {
         let amount = 40
@@ -51,8 +51,6 @@ struct Utilities {
         let activityVC = UIActivityViewController(activityItems: items, applicationActivities: nil)
         viewController.present(activityVC, animated: true)
     }
-    
-    private init() {}
 }
 
 enum UserAction {

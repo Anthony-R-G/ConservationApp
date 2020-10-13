@@ -57,9 +57,6 @@ final class CoverSpeciesNameView: UIView {
             alignment: .left)
     }()
     
- 
-    
-    
     //MARK: -- Properties
     
     weak var delegate: ConservationStatusDelegate?
