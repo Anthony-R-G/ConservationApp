@@ -1,7 +1,7 @@
 # Terra
 
 ### Status: 
-*On hold. Planned October release.*
+*On hold*
 
 
 ## Introduction
